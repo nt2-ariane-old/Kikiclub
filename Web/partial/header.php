@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Kikiclub</title>
 
+	<script src="javascript/jquery.js"></script>
 	<script src="javascript/users.js"></script>
 </head>
 <body>

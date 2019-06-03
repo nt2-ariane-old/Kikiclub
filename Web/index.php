@@ -5,6 +5,7 @@
 	$action->execute();
 
 	require_once("partial/header.php");
+
 ?>
 
 <?php
