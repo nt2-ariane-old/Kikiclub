@@ -1,13 +1,12 @@
 <?php
 	session_start();
-
+	require_once("action/constante.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
-		public static $VISIBILITY_MEMBERS = 1;
-		public static $VISIBILITY_MODERATORS = 2;
-		public static $VISIBILITY_ADMINISTRATORS = 3;
-		public static $VISIBILITY_OWNER = 4;
+		public static $VISIBILITY_FAMILY_MEMBER = 1;
+		public static $VISIBILITY_CUSTOMER_USER = 2;
+		public static $VISIBILITY_ADMIN_USER = 4;
 
 		public $page_visibility;
 		public $page_name;
@@ -16,6 +15,41 @@
 		{
 			$this->page_visibility = $page_visibility;
 			$this->page_name = $page_name;
+		}
+
+		public function generateFormToken($form) {
+			 $token = md5(uniqid(microtime(), true));
+			 $_SESSION[$form.'_token'] = $token;
+
+			 return $token;
+		}
+
+		public function checkPost()
+		{
+			$whitelist = array('token','req-name','req-email','typeOfChange','urgency','URL-main','addURLS', 'curText', 'newText', 'save-stuff');
+			foreach ($_POST as $key=>$item) {
+				if (!in_array($key, $whitelist)) {
+					die("Hack-Attempt detected. Please use only the fields in the form");
+				}
+			}
+		}
+
+		public function verifyFormToken($form) {
+			$valide = true;
+
+			if(!isset($_SESSION[$form.'_token'])) {
+				$valide = false;
+			}
+
+			if(!isset($_POST['token'])) {
+				$valide = false;
+			}
+
+			if ($_SESSION[$form.'_token'] !== $_POST['token']) {
+				$valide = false;
+			}
+
+			return $valide;
 		}
 
 		public function execute()

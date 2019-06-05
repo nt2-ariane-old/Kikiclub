@@ -6,11 +6,19 @@
 
 	require_once("partial/header.php");
 ?>
-<form name="login" action="login.php" onsubmit="return validateForm()" method="post">
-	<input type="email" name="email" id="email">
-	<input type="password" name="password" id="password">
-	<button type="submit">Se Connecter</button>
 
-</form>
+	<div class="logo"></div>
+
+	<div class="logo-nom"></div>
+	<div class="login-block">
+	<form action="login.php" method="post" onsubmit="return(logIn());">
+		<input type="email" name="email" id="email" placeholder="Email">
+		<input type="password" name="psswd" id="password" placeholder="Password">
+		<button type="submit">Login</button>
+	</form>
+	<?php
+		//header('Location: '."https://kikinumerique.wixsite.com/kikiclubsandbox/account/kikiclub");
+	?>
+	</div>
 <?php
 	require_once("partial/footer.php");
