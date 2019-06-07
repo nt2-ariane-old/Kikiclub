@@ -14,15 +14,14 @@
 		if($action->isLoggedIn())
 		{
 			?>
-
+				<script>window.location = "users.php";</script>
 			<?php
 		}
 		else
 		{
-			if(!$_SESSION["executed"])
-			{
-				header('Location: '."login.php");
-			}
+			?>
+				<script>window.location = "login.php";</script>
+			<?php
 		}
 	?>
 <?php

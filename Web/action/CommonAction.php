@@ -6,8 +6,9 @@
 		public static $VISIBILITY_PUBLIC = 0;
 		public static $VISIBILITY_FAMILY_MEMBER = 1;
 		public static $VISIBILITY_CUSTOMER_USER = 2;
-		public static $VISIBILITY_ADMIN_USER = 4;
+		public static $VISIBILITY_ADMIN_USER = 3;
 
+		public $default_visibility;
 		public $page_visibility;
 		public $page_name;
 
@@ -15,6 +16,7 @@
 		{
 			$this->page_visibility = $page_visibility;
 			$this->page_name = $page_name;
+			$this->default_visibility = 1;
 		}
 
 		public function generateFormToken($form) {

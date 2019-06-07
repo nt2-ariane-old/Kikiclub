@@ -1,6 +1,6 @@
 <?php
 	require_once("action/CommonAction.php");
-	require_once("action/DAO/UsersDAO.php");
+	require_once("action/DAO/FamilyDAO.php");
 
 	class FamilyAjaxAction extends CommonAction {
 		public $results;
@@ -10,10 +10,9 @@
 		}
 
 		protected function executeAction() {
-			if(!empty($_SESSION["ID"]))
-			{
-				$parent = UsersDAO::getParent($_SESSION["ID"]);
-				$this->results = UsersDAO::getFamily($parent["ID"]);
-			}
+			if(!empty($_SESSION["id"]))
+				$this->results["family"] = FamilyDAO::selectFamilyMembers($_SESSION["id"]);
+				$this->results["avatars"] = FamilyDAO::loadAvatar();
+
 		}
 	}
