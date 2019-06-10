@@ -79,7 +79,7 @@ const loadChildrenManage = () => {
 				}
 			}
 			node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-
+			node.querySelector(".child-stateLogo").style.display = 'block';
 			node.querySelector(".child-name").innerHTML = family[i]["firstname"];
 			node.querySelector(".child-nbalert").style.display = 'none';
 

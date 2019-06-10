@@ -24,22 +24,32 @@ const signOut = () =>
 		 });
 	}
 
-	let auth2 = gapi.auth2.getAuthInstance();
-	FB.getLoginStatus(function(response) {
-		if (response.status === 'connected') {
-			if (FB.getAccessToken() != null) {
+	// FB.getLoginStatus(function(response) {
+	// 	if (response.status === 'connected') {
+	// 		if (FB.getAccessToken() != null) {
 
-				FB.logout(function(response) {
+	// 			FB.logout(function(response) {
 
-				});
-			}
-		}
-	});
+	// 			});
+	// 		}
+	// 	}
+	// });
+
+	console.log(gapi)
+	console.log(gapi.auth2)
+	if(gapi.auth2 != null)
+	{
+		let auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then( () => {
+			auth2.disconnect();
+		});
+	}
+
+
 
 	//will not work from localhost
-    auth2.signOut().then( () => {
-		auth2.disconnect();
-    });
+
+
 	window.location = "index.php?logout=true";
 
 }

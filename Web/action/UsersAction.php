@@ -4,8 +4,11 @@
 
 	class UsersAction extends CommonAction {
 		public $create;
-		public $avatars;
 		public $manage;
+		public $modify;
+
+		public $avatars;
+
 		public $error;
 		public $errorMsg;
 		public function __construct() {
@@ -30,6 +33,10 @@
 					$_SESSION["mode"] = "manage";
 				}
 			}
+			if(empty($_SESSION["mode"]))
+			{
+				$_SESSION["mode"] = "normal";
+			}
 			if($_SESSION["mode"] == "manage")
 			{
 				$this->manage = true;
@@ -38,15 +45,17 @@
 			{
 				$this->create = true;
 				$this->avatars = FamilyDAO::loadAvatar();
+
 				if(!empty($_POST["form"]))
 				{
 					var_dump($_POST);
-					if( !empty($_POST["firstname"]))
+					if( !empty($_POST["firstname"]) &&
+						!empty($_POST["lastname"]) &&
+						!empty($_POST["birth"]))
 						{
-							echo("test");
 							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
 							$_SESSION["mode"] = "normal";
-							header("location:users.php");
+							header("Location:users.php");
 						}
 						else
 						{

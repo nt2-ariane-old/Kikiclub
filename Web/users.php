@@ -6,12 +6,16 @@
 
 	require_once("partial/header.php");
 ?>
-	<link rel="stylesheet" href="./css/users.css">
+	<link rel="stylesheet" href="./css/users.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
+
 	<script src="javascript/users.js"></script>
 
 	<template id="child-template">
 		<div class='child-info'>
+
 			<a href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></a>
+
 			<h2 class='child-name'></h2>
 			<h2 class='child-age'></h2>
 			<p class='child-nbWorkshops'></p>
@@ -86,6 +90,10 @@
 
 					<script>loadChildrenManage()</script>
 				<?php
+
+			}
+			else if($action->modify)
+			{
 
 			}
 			else
