@@ -28,6 +28,7 @@ function signInFacebook() {
 		})
 		.then(response => response.json())
 		.then(data => {
+			console.log(data);
 			if(data == true)
 			{
 				window.location = "users.php";
@@ -54,6 +55,7 @@ function onSignIn(googleUser) {
 	})
 	.then(response => response.json())
 	.then(data => {
+		console.log(data);
 		if(data == true)
 		{
 			window.location = "users.php";

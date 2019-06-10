@@ -31,7 +31,19 @@
 
 <nav>
 	<ul>
-		<li><button onclick="signOut()">Sign out</button></li>
+		<?php
+			if($action->isLoggedIn())
+			{
+				?>
+					<li><button onclick="signOut()">Sign out</button></li>
+				<?php
+			}
+			if($action->isAdmin()){
+				?>
+					<li><button onclick="window.location.href='console.php'">Admin Console</button></li>
+				<?php
+			}
+		?>
 
 	</ul>
 </nav>

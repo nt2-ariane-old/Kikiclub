@@ -46,12 +46,12 @@ a{
 	background-color: transparent;
 	display: block;
 	margin : auto;
-}
-button{
+
 	background-color: #F8FD79;
 	padding: 5px 40px;
 	margin: auto;
 }
+
 h1
 {
 	font-size: 128px;
@@ -126,6 +126,7 @@ h1
 	text-align: center;
 	padding:1em;
 }
+
 
 @media only screen and (min-width: 768px) {
 

@@ -81,4 +81,7 @@
 		public function isLoggedIn() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}
+		public function isAdmin() {
+			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_CUSTOMER_USER;
+		}
 	}

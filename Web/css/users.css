@@ -104,20 +104,23 @@
 }
 .register-contents
 {
-	background-color:rgb(208, 223, 126);
 	width:70vw;
 	height:70vh;
 	margin:15vh auto;
 	padding: 1em;
-
+	background-color: #ADB30F;
+	border : 6px solid black;
 }
-.register-contents input{
+.register-contents input[type=text],.register-contents select,.register-contents p {
 	display: block;
+	width:80%;
+	margin: 1em auto;
+	padding:4px;
 }
 
 .avatars-list{
 	background-color: antiquewhite;
-	width:50%;
+	width:80%;
 	overflow-y: scroll;
 	height: 130px;
 	margin:auto;
@@ -134,6 +137,62 @@
 	opacity: 0;
  }
 
+ .tab {
+	overflow: hidden;
+	border: 1px solid #878C00;
+	background-color: #E8EE4D;
+	padding:0px;
+	width:80%;
+	margin:auto;
+  }
+
+  .tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	margin:0px;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+  }
+  .tab button:hover {
+	background-color: #ADB30F;
+  }
+  .tab button.active {
+	background-color: rgb(148, 153, 13);
+  }
+  .tabcontent {
+	background-color: #ADB30F;
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #878C00;
+	border-top: none;
+	height:400px;
+	width:80%;
+	overflow-y:scroll;
+	margin:auto;
+  }
+.forms-btns{
+	margin:auto;
+	width:250px;
+}
+.submit-btn{
+	padding:1em 2em;
+	border: 3px solid black;
+	box-shadow: black 5px 5px 2.5px 2.5px;
+	background-color: chartreuse;
+	margin: 5em auto;
+	float: left;
+}
+.delete-btn{
+	padding:1em 2em;
+	border: 3px solid black;
+	box-shadow: black 5px 5px 2.5px 2.5px;
+	background-color: red;
+	margin: 5em auto;
+	float: left;
+}
  @media only screen and (min-width: 768px) {
 	#family{
 		width:40vw;
@@ -162,8 +221,8 @@
 		left: calc((30vw - 20vw) / 2);
 
 	}
-	#manage-button{
-		bottom:3vh;
+	#manage-btn{
+		bottom:5em;
 	}
 	.child-age,.child-nbWorkshops, .child-nbPTS
 	{

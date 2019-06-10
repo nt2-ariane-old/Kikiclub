@@ -1,10 +1,10 @@
 <?php
 	require_once("action/CommonAction.php");
 
-	class ConsoleAdminAction extends CommonAction {
+	class WorkshopsAction extends CommonAction {
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER);
+			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER);
 		}
 
 		protected function executeAction() {

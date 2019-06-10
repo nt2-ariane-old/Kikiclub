@@ -15,6 +15,25 @@ window.onload = () =>
 
 
 }
+
+const openTab = (evt, tab) => {
+
+	let tabcontent = document.querySelectorAll(".tabcontent");
+	for ( let i = 0; i < tabcontent.length; i++) {
+	  tabcontent[i].style.display = "none";
+	  console.log(tabcontent[i])
+	}
+
+	let tablinks = document.querySelectorAll(".tablinks");
+	for ( let i = 0; i < tablinks.length; i++) {
+	  tablinks[i].className = tablinks[i].className.replace(" active", "");
+	  console.log(tablinks[i])
+	}
+
+	document.getElementById(tab).style.display = "block";
+	evt.currentTarget.classList.add("active");
+  }
+
 const signOut = () =>
 {
 	if(FB.getLoginStatus() == 'connected')

@@ -3,6 +3,8 @@ window.onload = () =>
 	$( "#datepicker" ).datepicker();
 }
 
+
+
 const loadChildren = (state = "normal") => {
 
 	let childHTML = document.querySelector("#child-template").innerHTML;

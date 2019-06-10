@@ -42,39 +42,40 @@
 								<div class="error"><?= $action->errorMsg?></div>
 							<?php
 						}
-					?>
-					<form action="users.php" method="post">
-						<input type="hidden" name="form" value="create">
-							<div class="avatars-list">
-							<?php
-								foreach( $action->avatars as $avatar)
-								{
-									?>
-									<label>
-										<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
-										<img src="<?=$avatar["PATH"]?>">
-									</label>
+					?><form action="users.php" method="post">
+					<input type="hidden" name="form" value="create">
 
-									<?php
-								}
-							?>
-							</div>
+					<input type="text" name="firstname" id="firstname" placeholder="First Name">
+					<input type="text" name="lastname" id="lasttname" placeholder="Last Name">
+					<input type="text" name="birth" id="datepicker" placeholder="Birthday">
+					<select name="gender" id="">
+						<option value="0">Male</option>
+						<option value="1">Female</option>
+						<option value="2">Other</option>
+						<option value="3">Do not specify</option>
+					</select>
 
+					<p>Select Avatar :</p>
+					<div class="avatars-list">
+						<?php
+							foreach( $action->avatars as $avatar)
+							{
+								?>
+								<label>
+									<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
+									<img src="<?=$avatar["PATH"]?>">
+								</label>
 
-						<input type="text" name="firstname" id="firstname" placeholder="First Name">
-						<input type="text" name="lastname" id="lasttname" placeholder="Last Name">
-						<p>Birthday: <input type="text" name="birth" id="datepicker"></p>
-						<select name="gender" id="">
-							<option value="0">Male</option>
-							<option value="1">Female</option>
-							<option value="2">Other</option>
-							<option value="3">Do not specify</option>
-						</select>
-						<button type="submit">Create</button>
-					</form>
+								<?php
+							}
+						?>
 					</div>
-					<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
 
+					<div class="forms-btns">
+						<button type="submit" class="submit-btn">Update</button>
+					</div>
+				</form>
+					<button class="delete-btn" onclick="location.href='?mode=normal';" >Go Back</button>
 				<?php
 			}
 			else if($action->manage)
@@ -104,25 +105,46 @@
 							<?php
 						}
 					?>
-					<form action="users.php" method="post">
-						<input type="hidden" name="form" value="modify">
-							<div class="avatars-list">
+
+					<div class="tab">
+						<button class="tablinks" onclick="openTab(event, 'profil')">Profil</button>
+						<button class="tablinks" onclick="openTab(event, 'stats')">Statistiques</button>
+						<button class="tablinks" onclick="openTab(event, 'workshops')">Workshops</button>
+					</div>
+					<div id="profil" class="tabcontent">
+						<h2>Profil</h2>
+						<form action="users.php" method="post">
+						<input type="hidden" name="form" value="create">
+
+						<input type="text" name="firstname" id="firstname" placeholder="First Name" value=<?= $action->family_member["firstname"]  ?>>
+						<input type="text" name="lastname" id="lasttname" placeholder="Last Name"  value=<?= $action->family_member["lastname"]  ?>>
+						<input type="text" name="birth" id="datepicker" placeholder="Birthday"  value=<?= $action->family_member["birthday"]  ?>>
+						<select name="gender" id="">
+							<option <?php if($action->family_member["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
+							<option <?php if($action->family_member["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
+							<option <?php if($action->family_member["gender_id"] == 2) echo 'selected' ;?> value="2">Other</option>
+							<option <?php if($action->family_member["gender_id"] == 3) echo 'selected' ; ?>  value="3">Do not specify</option>
+						</select>
+
+						<p>Select Avatar :</p>
+						<div class="avatars-list">
 							<?php
 								foreach( $action->avatars as $avatar)
 								{
 									?>
 									<label>
 										<?php
-											if($avatar["ID"] == $action->family_member["id_avatar"])
-											{
+											if($action->family_member["id_avatar"] ==  $avatar["ID"]){
 												?>
 													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>" checked>
+
 												<?php
 											}
 											else
 											{
 												?>
 													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
+
 												<?php
 											}
 										?>
@@ -132,24 +154,23 @@
 									<?php
 								}
 							?>
-							</div>
-
-
-						<input type="text" name="firstname" id="firstname" placeholder="First Name" value=<?= $action->family_member["firstname"]  ?>>
-						<input type="text" name="lastname" id="lasttname" placeholder="Last Name" value=<?= $action->family_member["lastname"]  ?>>
-						<p>Birthday: <input type="text" name="birth" id="datepicker" value=<?= $action->family_member["birthday"]  ?>></p>
-						<select name="gender" id="">
-							<option value="0" <?php if ($action->family_member["gender_id"] == 0 ) echo 'selected' ; ?>>Male</option>
-							<option value="1" <?php if ($action->family_member["gender_id"] == 1 ) echo 'selected' ; ?>>Female</option>
-							<option value="2" <?php if ($action->family_member["gender_id"] == 2 ) echo 'selected' ; ?>>Other</option>
-							<option value="3" <?php if ($action->family_member["gender_id"] == 3 ) echo 'selected' ; ?>>Do not specify</option>
-						</select>
-						<button type="submit">Update</button>
-						<a href="?delete=true"> delete </a>
+						</div>
+						<div class="forms-btns">
+							<button type="submit" class="submit-btn">Update</button>
+						</div>
 					</form>
+					<button class="delete-btn" onclick="location.href='?delete=true';">Delete</button>
+					</div>
+
+
+					<div id="stats" class="tabcontent">
+						<h2>Statistiques</h2>
+					</div>
+
+					<div id="workshops" class="tabcontent">
+						<h2>Workshops</h2>
 					</div>
 					<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
-
 
 				<?php
 			}
