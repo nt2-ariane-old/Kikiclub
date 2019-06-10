@@ -10,11 +10,13 @@
 		public $avatars;
 
 		public $error;
+		public $family_member;
 		public $errorMsg;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"Users");
 			$this->createFamily = false;
 			$this->management = false;
+			$this->modify = false;
 		}
 
 		protected function executeAction() {
@@ -32,7 +34,17 @@
 				{
 					$_SESSION["mode"] = "manage";
 				}
+				else if($_GET["mode"] == "modify")
+				{
+					$_SESSION["mode"] = "modify";
+				}
 			}
+
+			if(!empty($_GET["id"]))
+			{
+				$_SESSION["id_member"] = $_GET["id"];
+			}
+
 			if(empty($_SESSION["mode"]))
 			{
 				$_SESSION["mode"] = "normal";
@@ -63,6 +75,38 @@
 							$this->errorMsg = "You need to fill all Feeld...";
 						}
 				}
+
+			} else if($_SESSION["mode"] == "modify")
+			{
+				$this->modify = true;
+				$this->avatars = FamilyDAO::loadAvatar();
+				if(!empty($_SESSION["id_member"]))
+				{
+					$this->family_member = FamilyDAO::selectMember($_SESSION["id_member"]);
+					if(!empty($_POST["form"]))
+					{
+						if( !empty($_POST["firstname"]) &&
+							!empty($_POST["lastname"]) &&
+							!empty($_POST["birth"]))
+							{
+								FamilyDAO::updateFamilyMember($_SESSION["id_member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+								$_SESSION["mode"] = "normal";
+								header("Location:users.php");
+							}
+							else
+							{
+								$this->error=true;
+								$this->errorMsg = "You need to fill all Feeld...";
+							}
+					}
+					if(!empty($_GET["delete"]))
+					{
+						FamilyDAO::deleteFamilyMember($_SESSION["id_member"]);
+						$_SESSION["mode"] = "normal";
+						header("Location:users.php");
+					}
+				}
+
 
 			}
 

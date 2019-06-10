@@ -32,7 +32,7 @@
 		public static function updateFamilyMember($id,$firstname,$lastname,$birthday,$gender,$id_avatar)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE family SET(firstname=?,lastname=?,birthday=?,gender_id=?,id_avatar=?) WHERE id=?");
+			$statement = $connection->prepare("UPDATE family SET firstname=?,lastname=?,birthday=STR_TO_DATE(?, '%d/%m/%Y'),gender_id=?,id_avatar=? WHERE id=?");
 
 			$statement->bindParam(1, $firstname);
 			$statement->bindParam(2, $lastname);
@@ -46,10 +46,25 @@
 
 		}
 
+		public static function selectMember($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,DATE_FORMAT(birthday,'%d/%m/%Y') birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE id=?");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = [];
+
+			if ($row = $statement->fetch()) {
+				$contents = $row;
+			}
+			return $contents;
+		}
 		public static function selectFamilyMembers($id_parent)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE id_user=?");
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE id_user=?");
 			$statement->bindParam(1, $id_parent);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();

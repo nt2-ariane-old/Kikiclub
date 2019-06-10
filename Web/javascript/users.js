@@ -35,7 +35,7 @@ const loadChildren = (state = "normal") => {
 
 			if(state==="manage")
 			{
-				addManageButton(node);
+				addManageButton(node,family[i] );
 			}
 
 			node.querySelector(".child-name").innerHTML = family[i]["firstname"];
@@ -54,7 +54,9 @@ const loadChildren = (state = "normal") => {
 
 }
 
-const addManageButton = (node) => {
+const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
+	node.querySelector("a").href = "?mode=modify&id=" + member["ID"];
+
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

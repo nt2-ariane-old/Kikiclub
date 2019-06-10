@@ -94,7 +94,64 @@
 			}
 			else if($action->modify)
 			{
+				?>
+<div class="register-contents">
+					<?php
+						if($action->error)
+						{
+							?>
+								<div class="error"><?= $action->errorMsg?></div>
+							<?php
+						}
+					?>
+					<form action="users.php" method="post">
+						<input type="hidden" name="form" value="modify">
+							<div class="avatars-list">
+							<?php
+								foreach( $action->avatars as $avatar)
+								{
+									?>
+									<label>
+										<?php
+											if($avatar["ID"] == $action->family_member["id_avatar"])
+											{
+												?>
+													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>" checked>
+												<?php
+											}
+											else
+											{
+												?>
+													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
+												<?php
+											}
+										?>
+										<img src="<?=$avatar["PATH"]?>">
+									</label>
 
+									<?php
+								}
+							?>
+							</div>
+
+
+						<input type="text" name="firstname" id="firstname" placeholder="First Name" value=<?= $action->family_member["firstname"]  ?>>
+						<input type="text" name="lastname" id="lasttname" placeholder="Last Name" value=<?= $action->family_member["lastname"]  ?>>
+						<p>Birthday: <input type="text" name="birth" id="datepicker" value=<?= $action->family_member["birthday"]  ?>></p>
+						<select name="gender" id="">
+							<option value="0" <?php if ($action->family_member["gender_id"] == 0 ) echo 'selected' ; ?>>Male</option>
+							<option value="1" <?php if ($action->family_member["gender_id"] == 1 ) echo 'selected' ; ?>>Female</option>
+							<option value="2" <?php if ($action->family_member["gender_id"] == 2 ) echo 'selected' ; ?>>Other</option>
+							<option value="3" <?php if ($action->family_member["gender_id"] == 3 ) echo 'selected' ; ?>>Do not specify</option>
+						</select>
+						<button type="submit">Update</button>
+						<a href="?delete=true"> delete </a>
+					</form>
+					</div>
+					<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
+
+
+				<?php
 			}
 			else
 			{
