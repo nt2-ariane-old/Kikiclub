@@ -88,7 +88,7 @@
 				</div>
 				<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
 
-					<script>loadChildrenManage()</script>
+					<script>loadChildren("manage")</script>
 				<?php
 
 			}
