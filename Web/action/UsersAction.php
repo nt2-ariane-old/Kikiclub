@@ -3,9 +3,9 @@
 	require_once("action/DAO/FamilyDAO.php");
 
 	class UsersAction extends CommonAction {
-		public $createFamily;
+		public $create;
 		public $avatars;
-		public $management;
+		public $manage;
 		public $error;
 		public $errorMsg;
 		public function __construct() {
@@ -15,37 +15,46 @@
 		}
 
 		protected function executeAction() {
-			if(!empty($_GET["manage"]))
+			if(!empty($_GET["mode"]))
 			{
-				if($_GET["manage"] == "true")
+				if($_GET["mode"] == "normal")
+				{
+					$_SESSION["mode"] = "normal";
+				}
+				else if($_GET["mode"] == "create")
+				{
+					$_SESSION["mode"] = "create";
+				}
+				else if($_GET["mode"] == "manage")
 				{
 					$_SESSION["mode"] = "manage";
 				}
 			}
-			if($_SESSION["mode"] = "manage")
+			if($_SESSION["mode"] == "manage")
 			{
-				$this->management = true;
+				$this->manage = true;
 			}
-			if(!empty($_GET["user"]))
+			else if($_SESSION["mode"] == "create")
 			{
-				if($_GET["user"]=="new")
+				$this->create = true;
+				$this->avatars = FamilyDAO::loadAvatar();
+				if(!empty($_POST["form"]))
 				{
-					$this->createFamily = true;
-					$this->avatars = FamilyDAO::loadAvatar();
-					if(!empty($_POST["firstname"]) &&
-						!empty($_POST["lasttname"]) &&
-						!empty($_POST["avatar"]) &&
-						!empty($_POST["gender"]) &&
-						!empty($_POST["birth"]))
+					var_dump($_POST);
+					if( !empty($_POST["firstname"]))
 						{
-							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lasttname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
+							echo("test");
+							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
+							$_SESSION["mode"] = "normal";
+							header("location:users.php");
 						}
-					else
+						else
 						{
 							$this->error=true;
 							$this->errorMsg = "You need to fill all Feeld...";
 						}
 				}
+
 			}
 
 

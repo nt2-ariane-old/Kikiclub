@@ -40,7 +40,7 @@
 		{
 			?>
 			<!-- <form action="login.php?signup=true" method="post" onsubmit="signup()"> -->
-			<form action="login.php?signup=true" method="post">
+			<form action="login.php" method="post">
 				<input type="hidden" name="type" value="signup">
 				<input type="text" name="firstname" id="firstname" placeholder="First Name">
 				<input type="text" name="lastname" id="lastname" placeholder="Last Name">

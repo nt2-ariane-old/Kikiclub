@@ -38,6 +38,20 @@
 	background-repeat: no-repeat;
 	line-height: 20vw;
 }
+.child-stateLogo
+{
+	width:20vw;
+	height:20vw;
+	margin: 1em auto;
+	background-color: beige;
+	border-radius: 100%;
+	border: 6px solid black;
+	text-align: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	line-height: 20vw;
+	opacity: 0.4;
+}
 
 .child-logo:hover
 {

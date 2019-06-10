@@ -11,7 +11,7 @@
 
 	<template id="child-template">
 		<div class='child-info'>
-			<a href="#"><div class='child-logo'></div></a>
+			<a href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></a>
 			<h2 class='child-name'></h2>
 			<h2 class='child-age'></h2>
 			<p class='child-nbWorkshops'></p>
@@ -26,7 +26,7 @@
 
 	<main>
 		<?php
-			if($action->createFamily)
+			if($action->create)
 			{
 
 				?>
@@ -39,7 +39,8 @@
 							<?php
 						}
 					?>
-					<form action="users.php?user=new" method="post">
+					<form action="users.php" method="post">
+						<input type="hidden" name="form" value="create">
 							<div class="avatars-list">
 							<?php
 								foreach( $action->avatars as $avatar)
@@ -57,7 +58,7 @@
 
 
 						<input type="text" name="firstname" id="firstname" placeholder="First Name">
-						<input type="text" name="lasttname" id="lasttname" placeholder="Last Name">
+						<input type="text" name="lastname" id="lasttname" placeholder="Last Name">
 						<p>Birthday: <input type="text" name="birth" id="datepicker"></p>
 						<select name="gender" id="">
 							<option value="0">Male</option>
@@ -68,23 +69,20 @@
 						<button type="submit">Create</button>
 					</form>
 					</div>
+					<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
 
 				<?php
 			}
-			else if($action->management)
+			else if($action->manage)
 			{
 				?>
 				<div id="family">
 					<div class='child-info' >
-						<a href="?user=new"><div class='child-logo' id="addLogo"></div></a>
+						<a href="?mode=create"><div class='child-logo' id="addLogo"></div></a>
 						<h2 class='child-name'>Add Family Member</h2>
-						<h5 class='child-age'>7 years old</h5>
-						<p class='child-nbWorkshops'>1 Workshops completed</p>
-						<p class='child-nbPTS'>85 points cumulated</p>
-						<div class='child-nbalert'>7</div>
 					</div>
 				</div>
-				<div id="manage-btn"><a href="?manage=false">Return to Profiles</a></div>
+				<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
 
 					<script>loadChildrenManage()</script>
 				<?php
@@ -100,7 +98,7 @@
 
 				</div>
 
-				<div id="manage-btn"><a href="?manage=true">Manage Profiles</a></div>
+				<div id="manage-btn"><a href="?mode=manage">Manage Profiles</a></div>
 
 
 				<?php

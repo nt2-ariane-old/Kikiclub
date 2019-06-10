@@ -3,7 +3,6 @@ window.onload = () =>
 	$( "#datepicker" ).datepicker();
 }
 
-
 const loadChildren = () => {
 
 	let childHTML = document.querySelector("#child-template").innerHTML;
@@ -20,6 +19,7 @@ const loadChildren = () => {
 		let avatars = data["avatars"]
 		for (let i = 0; i < family.length; i++) {
 
+			let one_year=1000*60*60*24*365;
 			console.log(family[i]);
 			let node = document.createElement("div");
 			node.innerHTML = childHTML;
@@ -40,9 +40,9 @@ const loadChildren = () => {
 			node.querySelector(".child-nbPTS").innerHTML = family[i]["score"] + " points cumulated";
 			let birth = new Date(family[i]["birthday"]);
 			let today = new Date();
-			let age = (today-birth).getFullYear();
+			let age = Math.floor(new Date( today.getTime() - birth.getTime()) / one_year);
 
-			node.querySelector(".child-age").innerHTML =age ;
+			node.querySelector(".child-age").innerHTML = age + " years old";
 
 			document.getElementById("family").appendChild(node);
 		}
@@ -66,8 +66,7 @@ const loadChildrenManage = () => {
 		let avatars = data["avatars"]
 		for (let i = 0; i < family.length; i++) {
 
-			let one_day=1000*60*60*24;
-			console.log(family[i]);
+			let one_year=1000*60*60*24*365;
 			let node = document.createElement("div");
 			node.innerHTML = childHTML;
 			let id_logo =  family[i]["id_avatar"];
@@ -79,7 +78,7 @@ const loadChildrenManage = () => {
 					node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
 				}
 			}
-
+			node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
 
 			node.querySelector(".child-name").innerHTML = family[i]["firstname"];
 			node.querySelector(".child-nbalert").style.display = 'none';
@@ -87,9 +86,9 @@ const loadChildrenManage = () => {
 			node.querySelector(".child-nbPTS").innerHTML = family[i]["score"] + " points cumulated";
 			let birth = new Date(family[i]["birthday"]);
 			let today = new Date();
-			let age = new Date(birth.getTime() - today.getTime());
+			let age = Math.floor(new Date( today.getTime() - birth.getTime()) / one_year);
 
-			node.querySelector(".child-age").innerHTML =age ;
+			node.querySelector(".child-age").innerHTML = age + " years old";
 
 			document.getElementById("family").appendChild(node);
 		}
