@@ -1,6 +1,10 @@
 *{
 	margin: 0;
 	padding: 0;
+	max-width: 100%;
+}
+HTML {
+	width: 100vw;
 }
 body
 {
@@ -24,16 +28,15 @@ a{
 {
 	background-color: transparent;
 	padding : 50px;
-
 	position: absolute;
-	left: calc((100vw - 300px - (50px * 2)) / 2);
-	top:calc((100vh - 300px ) / 2);
+	left: calc((100vw - 80% - (50px)) / 2);
+	top:calc((100vh - 80% + 150px + (1em * 2)) / 2);
 }
 .login-block input
 {
 	display: block;
 	margin : 1em;
-	width:300px;
+	width:80%;
 	background-color: white;
 	padding: 0.5em;
 }
@@ -122,4 +125,8 @@ h1
 {
 	text-align: center;
 	padding:1em;
+}
+
+@media only screen and (min-width: 768px) {
+
 }
