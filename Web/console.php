@@ -6,6 +6,7 @@
 
 	require_once("partial/header.php");
 ?>
+	<link rel="stylesheet" href="css/console.css">
 	<div class="tab">
 		<button class="tablinks" onclick="openTab(event, 'workshops')">Workshops</button>
 		<button class="tablinks" onclick="openTab(event, 'users')">Users</button>
@@ -18,6 +19,7 @@
 			if($action->add)
 			{
 				?>
+				<div class="form-workshops">
 					<form action="console.php" method="post">
 						<input type="hidden" name="add">
 						<input type="text" name="name" placeholder="Title">
@@ -28,8 +30,10 @@
 							<option value="1">Intermediate</option>
 							<option value="2">Hard</option>
 						</select>
-						<button onclick="window.location.href='?mode=normal'">Back</button>
+						<button type="submit" name="back">Back</button>
 					</form>
+				</div>
+
 				<?php
 			}
 			else if($action->modify)
@@ -40,20 +44,29 @@
 			{
 				?>
 					<form action="console.php" method="post">
+					<table style="width:100%">
+					<tr>
+						<th>Select</th>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Content</th>
+						<th>Difficulty</th>
+					</tr>
 						<?php
 							foreach($action->workshops as $workshop)
 							{
 								?>
-									<div class="workshop-line">
-										<input type="checkbox" name="workshop_id" value="<?=$workshop["ID"]?>">
-										<img src=<?=$workshop["IMAGE_PATH"]?> alt="">
-										<h5><?=$workshop["NAME"]?></h5>
-										<p><?=$workshop["CONTENT"]?></p>
-									</div>
+									<tr>
+										<td><input type="checkbox" name="workshops_list[]" value="<?=$workshop["ID"]?>"></td>
+										<td><img style="width:100px;" src=<?=$workshop["IMAGE_PATH"]?> alt=""></td>
+										<td><h5><?=$workshop["NAME"]?></h5></td>
+										<td><p><?=$workshop["CONTENT"]?></p></td>
+										<td><?=$workshop["DIFFICULTY"]?></td>
+									</tr>
 								<?php
 							}
 						?>
-
+					</table>
 						<button type="submit" name="add" value="true">Add</button>
 						<button type="submit" name="modify" value="true">Modify</button>
 						<button type="submit" name="delete" value="true">Delete</button>

@@ -19,7 +19,7 @@
 			return $content;
 		}
 
-		public static function addWorkshops($name, $content, $image_path, $difficulty){
+		public static function addWorkshop($name, $content, $image_path, $difficulty){
 			$connection = Connection::getConnection();
 
 			$statement = $connection->prepare("INSERT INTO WORKSHOPS(NAME,CONTENT,IMAGE_PATH, DIFFICULTY) VALUES (?,?,?,?)");
@@ -30,7 +30,7 @@
 			$statement->bindParam(4, $difficulty);
 			$statement->execute();
 		}
-		public static function updateWorkshops($id,$name, $content, $image_path, $difficulty){
+		public static function updateWorkshop($id,$name, $content, $image_path, $difficulty){
 			$connection = Connection::getConnection();
 
 			$statement = $connection->prepare("UPDATE WORKSHOPS SET NAME=?,CONTENT=?,IMAGE_PATH=?, DIFFICULTY=? WHERE id=?");
@@ -42,12 +42,29 @@
 			$statement->bindParam(5, $id);
 			$statement->execute();
 		}
-		public static function deleteWorkshops($id){
+		public static function deleteWorkshop($id){
 			$connection = Connection::getConnection();
 
 			$statement = $connection->prepare("DELETE FROM WORKSHOPS WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();
+		}
+		public static function selectWorkshop($id)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, IMAGE_PATH, DIFFICULTY FROM WORKSHOPS WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+			$statement->execute();
+
+			$content = [];
+
+			if ($row = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
 		}
 	}
