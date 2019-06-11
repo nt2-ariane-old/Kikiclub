@@ -14,15 +14,17 @@
 
 		protected function executeAction() {
 			$this->workshops = WorkshopDAO::getWorkshops();
-			if(!isset($_POST['add']))
+			var_dump($_POST);
+			if(!empty($_POST['add']))
 			{
+				echo("hello");
 				$this->add = true;
 			}
-			else if(!isset($_POST['delete']))
+			else if(!empty($_POST['delete']))
 			{
 
 			}
-			else if(!isset($_POST['modify']))
+			else if(!empty($_POST['modify']))
 			{
 				$this->modify = true;
 			}

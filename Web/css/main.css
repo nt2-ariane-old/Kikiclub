@@ -29,8 +29,18 @@ a{
 	background-color: transparent;
 	padding : 50px;
 	position: absolute;
+
+	width:100%;
 	left: calc((100vw - 80% - (50px)) / 2);
 	top:calc((100vh - 80% + 150px + (1em * 2)) / 2);
+}
+#spinner{
+	background: #4267b2;
+    border-radius: 5px;
+	color: white;
+    height: 40px;
+    text-align: center;
+    width: 80%;
 }
 .login-block input
 {
@@ -91,6 +101,7 @@ h1
 .signinButton{
 	padding:0.5em;
 	color:black;
+	margin:auto;
 
 }
 .error
@@ -129,5 +140,12 @@ h1
 
 
 @media only screen and (min-width: 768px) {
-
+	.login-block{
+		width:400px;
+		left: calc((100vw - 400px - (50px)) / 2);
+		top:calc((100vh - 400px + 150px + (1em * 2)) / 2);
+	}
+	#spinner{
+		width: 400px;
+	}
 }

@@ -1,19 +1,32 @@
 window.onload = () =>
 {
 	gapi.load('auth2', function(){
-        /**
-         * Retrieve the singleton for the GoogleAuth library and set up the
-         * client.
-         */
         auth2 = gapi.auth2.init({
             client_id: '704832246976-9gtrh525ke8s7p8kp9vatgals73l22ud.apps.googleusercontent.com'
-        });
+						//client_id: '704832246976-7qoem5fnkn8um3566973uoeg7pmpp3pv.apps.googleusercontent.com'
+				});
 
         // Attach the click handler to the sign-in button
         auth2.attachClickHandler('signin-button', {}, null, null);
 	});
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		js.src = "https://connect.facebook.net/en_US/sdk.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 
+}
 
+window.fbAsyncInit = function() {
+	FB.init({
+		appId      : 670117443417077,
+		cookie     : true,
+		xfbml      : true,
+		version    : 3.3
+	});
+	FB.AppEvents.logPageView();
 }
 
 const openTab = (evt, tab) => {
@@ -32,7 +45,8 @@ const openTab = (evt, tab) => {
 
 	document.getElementById(tab).style.display = "block";
 	evt.currentTarget.classList.add("active");
-  }
+
+}
 
 const signOut = () =>
 {
@@ -43,19 +57,7 @@ const signOut = () =>
 		 });
 	}
 
-	// FB.getLoginStatus(function(response) {
-	// 	if (response.status === 'connected') {
-	// 		if (FB.getAccessToken() != null) {
-
-	// 			FB.logout(function(response) {
-
-	// 			});
-	// 		}
-	// 	}
-	// });
-
-	console.log(gapi)
-	console.log(gapi.auth2)
+	//will not work from localhost
 	if(gapi.auth2 != null)
 	{
 		let auth2 = gapi.auth2.getAuthInstance();
@@ -64,11 +66,5 @@ const signOut = () =>
 		});
 	}
 
-
-
-	//will not work from localhost
-
-
 	window.location = "index.php?logout=true";
-
 }

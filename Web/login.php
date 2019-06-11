@@ -58,7 +58,8 @@
 		else
 		{
 			?>
-				<div class="signinButton"><div class="fb-login-button" data-width="" data-size="large"  onlogin="checkLoginState();" data-scope="email" data-auto-logout-link="true" data-use-continue-as="false"></div></div>
+
+				<div class="signinButton"><div id="spinner">Loading<div class="fb-login-button" data-width="" data-size="large"  onlogin="checkLoginState();" data-scope="email" data-auto-logout-link="true" data-use-continue-as="false"></div></div></div>
 				<div class="signinButton"><div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-width="290px"></div></div>
 				<div class="separator">OR</div>
 				<div class="signinButton other"><a href="?other=true">Connect with your email</a></div>

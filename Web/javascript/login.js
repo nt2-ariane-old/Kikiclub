@@ -1,4 +1,5 @@
 //FB FUNCtiONS
+
 const checkLoginState = () =>
 {
 	FB.getLoginStatus((response) => {
@@ -10,6 +11,12 @@ const statusChangeCallback = response => {
     if (response.status === 'connected') {
       signInFacebook();
     }
+}
+
+let finished_rendering = function() {
+  let spinner = document.getElementById("spinner");
+  spinner.removeAttribute("style");
+  spinner.removeChild(spinner.childNodes[0]);
 }
 
 function signInFacebook() {

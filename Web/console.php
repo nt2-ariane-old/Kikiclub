@@ -21,8 +21,13 @@
 					<form action="console.php" method="post">
 						<input type="hidden" name="add">
 						<input type="text" name="name" placeholder="Title">
-						<textarea name="content" id="" cols="50" rows="10" style="width:80%;"></textarea>
+						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;"></textarea>
 						<button type="submit" name="push">Add</button>
+						<select name="difficulty">
+							<option value="0">Easy</option>
+							<option value="1">Intermediate</option>
+							<option value="2">Hard</option>
+						</select>
 						<button onclick="window.location.href='?mode=normal'">Back</button>
 					</form>
 				<?php
@@ -48,9 +53,10 @@
 								<?php
 							}
 						?>
-						<button type="submit" name="add">Add</button>
-						<button type="submit" name="modify">Modify</button>
-						<button type="submit" name="delete">Delete</button>
+
+						<button type="submit" name="add" value="true">Add</button>
+						<button type="submit" name="modify" value="true">Modify</button>
+						<button type="submit" name="delete" value="true">Delete</button>
 					</form>
 				<?php
 			}

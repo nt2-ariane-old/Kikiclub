@@ -6,7 +6,7 @@
 		public static function getWorkshops() { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,NAME,CONTENT,IMAGE_PATH FROM WORKSHOPS ");
+			$statement = $connection->prepare("SELECT ID,NAME,CONTENT,IMAGE_PATH, DIFFICULTY FROM WORKSHOPS ");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -17,5 +17,37 @@
 			}
 
 			return $content;
+		}
+
+		public static function addWorkshops($name, $content, $image_path, $difficulty){
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("INSERT INTO WORKSHOPS(NAME,CONTENT,IMAGE_PATH, DIFFICULTY) VALUES (?,?,?,?)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $content);
+			$statement->bindParam(3, $image_path);
+			$statement->bindParam(4, $difficulty);
+			$statement->execute();
+		}
+		public static function updateWorkshops($id,$name, $content, $image_path, $difficulty){
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("UPDATE WORKSHOPS SET NAME=?,CONTENT=?,IMAGE_PATH=?, DIFFICULTY=? WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $content);
+			$statement->bindParam(3, $image_path);
+			$statement->bindParam(4, $difficulty);
+			$statement->bindParam(5, $id);
+			$statement->execute();
+		}
+		public static function deleteWorkshops($id){
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("DELETE FROM WORKSHOPS WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+			$statement->execute();
 		}
 	}
