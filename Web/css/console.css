@@ -1,7 +1,19 @@
-.form-workshops{
-	background-color: greenyellow;
+.form-workshops
+{
+	background-color: #ADB30F;
+	padding: 1em;
+	width:80vw;
+	border: 5px solid black;
+	margin:auto;
 }
 
-.form-workshops input {
+.form-workshops input, .form-workshops textarea,.form-workshops button,.form-workshops select
+{
 	display: block;
+	width:80%;
+	margin: 1em auto;
+}
+.form-workshops img
+{
+	border:2px solid black;
 }

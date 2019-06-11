@@ -50,6 +50,23 @@
 			$statement->bindParam(1, $id);
 			$statement->execute();
 		}
+		public static function selectMemberWorkshop($id_member)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID_MEMBER, ID_WORKSHOP, STATUT, LAST_MODIFICATION FROM FAMILY_WORKSHOPS WHERE ID_MEMBER=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_member);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+			return $content;
+		}
 		public static function selectWorkshop($id)
 		{
 			$connection = Connection::getConnection();

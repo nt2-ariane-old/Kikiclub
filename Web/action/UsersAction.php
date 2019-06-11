@@ -60,7 +60,6 @@
 
 				if(!empty($_POST["form"]))
 				{
-					var_dump($_POST);
 					if( !empty($_POST["firstname"]) &&
 						!empty($_POST["lastname"]) &&
 						!empty($_POST["birth"]))
