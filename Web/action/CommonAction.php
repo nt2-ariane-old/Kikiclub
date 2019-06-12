@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	require_once("action/constante.php");
+	require_once("action/Tools/Translator.php");
+	require_once("action/constante.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
@@ -11,6 +13,10 @@
 		public $default_visibility;
 		public $page_visibility;
 		public $page_name;
+
+		public $trans;
+
+
 
 		public function __construct($page_visibility,$page_name)
 		{
@@ -72,6 +78,25 @@
 			{
 				header("location:index.php");
 				exit;
+			}
+
+			if(empty($_SESSION["language"]))
+			{
+				$_SESSION["language"] = "fr";
+			}
+
+			if (isset($_GET["lang"]) && strlen($_GET["lang"]) > 0) {
+				$_SESSION["language"] = $_GET["lang"];
+			}
+
+			$currentLang = $_SESSION["language"];
+
+			$this->trans = new Translator($currentLang);
+
+
+			if(!empty($_GET["member"]))
+			{
+				$_SESSION["member"] = $_GET["member"];
 			}
 			$this->executeAction();
 		}

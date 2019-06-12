@@ -29,7 +29,7 @@
 					if($infos === null)
 					{
 						$this->error = true;
-						$this->errorMsg = "Email or Password not valid";
+						$this->errorMsg = $this->trans->read("loginpage", "errorEntry");
 					} else
 					{
 						$_SESSION["visibility"] = $infos["VISIBILITY"];
@@ -39,7 +39,7 @@
 					}
 				} else {
 					$this->error = true;
-					$this->errorMsg = "Please fill all Feeld";
+					$this->errorMsg =$this->trans->read("loginpage", "errorFeeld");
 				}
 			}
 			else if(!empty($_GET["signup"]))
@@ -65,17 +65,17 @@
 						else
 						{
 							$this->error = true;
-							$this->errorMsg = "User already exist";
+							$this->errorMsg = $this->trans->read("loginpage", "errorExist");
 						}
 					} else {
 						$this->error = true;
-						$this->errorMsg = "You didn't entered the same password";
+						$this->errorMsg = $this->trans->read("loginpage", "errorPassword");
 					}
 				}
 				else
 				{
 					$this->error = true;
-					$this->errorMsg = "Please fill all Feeld";
+					$this->errorMsg = $this->trans->read("loginpage", "errorFeeld");
 				}
 			}
 			if($this->isLoggedIn())

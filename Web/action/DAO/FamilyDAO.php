@@ -92,4 +92,49 @@
 			}
 			return $contents;
 		}
+
+		public static function getUsers()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID, EMAIL, FIRSTNAME, LASTNAME FROM users");
+			$statement->bindParam(1, $id_user);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = [];
+
+			while ($row = $statement->fetch()) {
+				$contents[] = $row;
+			}
+			return $contents;
+		}
+		public static function getUserFamily($id_user)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID, EMAIL, FIRSTNAME, LASTNAME FROM users WHERE id=?");
+			$statement2->bindParam(1, $id_user);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = [];
+
+			if ($row = $statement->fetch()) {
+				$temp = [];
+				$temp["USER"] = $row;
+
+				$statement2 = $connection->prepare("SELECT ID, FIRSTNAME, LASTNAME, BIRTHDAY, SCORE, ID_AVATAR, GENDER_ID FROM family WHERE id_user = ?");
+				$statement2->bindParam(1, $row["ID"]);
+
+				$statement2->setFetchMode(PDO::FETCH_ASSOC);
+				$statement2->execute();
+
+				$family = [];
+				while ($rowFam = $statement2->fetch()) {
+					$family[] = $rowFam;
+				}
+				$temp["FAMILY"] = $family;
+				$contents[] = $temp;
+			}
+			return $contents;
+		}
 	}

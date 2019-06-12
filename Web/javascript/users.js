@@ -1,9 +1,12 @@
 window.onload = () =>
 {
-	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "1900:2019",
+		dateFormat: 'dd/mm/yy'
+	  });
 }
-
-
 
 const loadChildren = (state = "normal") => {
 
@@ -34,7 +37,7 @@ const loadChildren = (state = "normal") => {
 					node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
 				}
 			}
-
+			node.querySelector('a').href = "workshops.php?member=" +family[i]["id"];
 			if(state==="manage")
 			{
 				addManageButton(node,family[i] );
@@ -58,7 +61,7 @@ const loadChildren = (state = "normal") => {
 
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector("a").href = "?mode=modify&id=" + member["ID"];
+	node.querySelector("a").href = "?mode=modify&member=" + member["ID"];
 
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

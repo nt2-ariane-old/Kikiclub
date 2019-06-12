@@ -40,11 +40,6 @@
 				}
 			}
 
-			if(!empty($_GET["id"]))
-			{
-				$_SESSION["id_member"] = $_GET["id"];
-			}
-
 			if(empty($_SESSION["mode"]))
 			{
 				$_SESSION["mode"] = "normal";
@@ -79,7 +74,7 @@
 			{
 				$this->modify = true;
 				$this->avatars = FamilyDAO::loadAvatar();
-				if(!empty($_SESSION["id_member"]))
+				if(!empty($_SESSION["member"]))
 				{
 					$this->family_member = FamilyDAO::selectMember($_SESSION["id_member"]);
 					if(!empty($_POST["form"]))

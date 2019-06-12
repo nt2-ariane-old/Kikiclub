@@ -84,4 +84,22 @@
 
 			return $content;
 		}
+
+		public static function selectWorkshopQuestions($id_workshop)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID, QUESTION, ANSWER FROM WORKSHOPS_QUESTION WHERE id_workshop=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_workshop);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row[] = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
+		}
 	}

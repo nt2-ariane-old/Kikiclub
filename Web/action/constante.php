@@ -15,3 +15,4 @@
 
 
 	define("DEFAULT_LANGUAGE", "FR");
+	define("CURRENT_LANGUAGE", "FR");

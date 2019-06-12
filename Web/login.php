@@ -26,14 +26,14 @@
 				<!-- <form action="login.php?other=true" method="post" onsubmit="return(login());"> -->
 				<form action="login.php?other=true" method="post">
 					<input type="hidden" name="type" value="signin">
-					<input type="email" name="email" id="email" placeholder="Email">
-					<input type="password" name="psswd" id="password" placeholder="Password">
-					<button type="submit">Login</button>
+					<input type="email" name="email" id="email" placeholder="<?= $action->trans->read("loginpage", "emailInput") ?>">
+					<input type="password" name="psswd" id="password" placeholder="<?= $action->trans->read("loginpage", "passwordInput") ?>">
+					<button type="submit"><?=  $action->trans->read("loginpage", "login") ?></button>
 				</form>
-				<div class="separator">OR</div>
-				<div class="signinButton other"><a href="?other=false">Connect with Facebook or Google</a></div>
-				<div class="separator">OR</div>
-				<div class="signinButton other"><a href="?signup=true">Sign up</a></div>
+				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
+				<div class="signinButton other"><a href="?other=false"><?=  $action->trans->read("loginpage", "signIn-Fb") ?></a></div>
+				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
+				<div class="signinButton other"><a href="?signup=true"><?=  $action->trans->read("loginpage", "signUp") ?></a></div>
 			<?php
 		}
 		else if ($action->signup)
@@ -42,29 +42,29 @@
 			<!-- <form action="login.php?signup=true" method="post" onsubmit="signup()"> -->
 			<form action="login.php" method="post">
 				<input type="hidden" name="type" value="signup">
-				<input type="text" name="firstname" id="firstname" placeholder="First Name">
-				<input type="text" name="lastname" id="lastname" placeholder="Last Name">
-				<input type="email" name="email" id="email" placeholder="Email">
-				<input type="password" name="psswd1" id="password1" placeholder="Password">
-				<input type="password" name="psswd2" id="password2" placeholder="Confirm Password">
-				<button type="submit">Login</button>
+				<input type="text" name="firstname" id="firstname" placeholder="<?=  $action->trans->read("loginpage", "firstnameInput") ?>">
+				<input type="text" name="lastname" id="lastname" placeholder="<?=  $action->trans->read("loginpage", "lastnameInput") ?>">
+				<input type="email" name="email" id="email" placeholder="<?=  $action->trans->read("loginpage", "emailInput") ?>">
+				<input type="password" name="psswd1" id="password1" placeholder="<?=  $action->trans->read("loginpage", "passwordInput") ?>">
+				<input type="password" name="psswd2" id="password2" placeholder="<?=  $action->trans->read("loginpage", "confirmPasswordInput") ?>">
+				<button type="submit"><?=  $action->trans->read("loginpage", "login") ?></button>
 			</form>
-			<div class="separator">OR</div>
-			<div class="signinButton other"><a href="?other=false">Connect with Facebook or Google</a></div>
-			<div class="separator">OR</div>
-			<div class="signinButton other"><a href="?other=true">Connect with your email</a></div>
+			<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
+			<div class="signinButton other"><a href="?other=false"><?=  $action->trans->read("loginpage", "signIn-Fb") ?></a></div>
+			<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
+			<div class="signinButton other"><a href="?other=true"><?=  $action->trans->read("loginpage", "signIn-E") ?></a></div>
 		<?php
 		}
 		else
 		{
 			?>
 
-				<div class="signinButton"><div id="spinner">Loading<div class="fb-login-button" data-width="" data-size="large"  onlogin="checkLoginState();" data-scope="email" data-auto-logout-link="true" data-use-continue-as="false"></div></div></div>
+				<div class="signinButton"><div id="spinner"><?=  $action->trans->read("loginpage", "loading") ?><div class="fb-login-button" data-width="" data-size="large"  onlogin="checkLoginState();" data-scope="email" data-auto-logout-link="true" data-use-continue-as="false"></div></div></div>
 				<div class="signinButton"><div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-width="290px"></div></div>
-				<div class="separator">OR</div>
-				<div class="signinButton other"><a href="?other=true">Connect with your email</a></div>
-				<div class="separator">OR</div>
-				<div class="signinButton other"><a href="?signup=true">Sign up</a></div>
+				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
+				<div class="signinButton other"><a href="?other=true"><?=  $action->trans->read("loginpage", "signIn-E") ?></a></div>
+				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
+				<div class="signinButton other"><a href="?signup=true"><?=  $action->trans->read("loginpage", "signUp") ?></a></div>
 			<?php
 		}
 

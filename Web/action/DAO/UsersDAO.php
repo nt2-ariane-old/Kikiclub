@@ -3,39 +3,6 @@
 
 	class UsersDAO {
 
-		//PAGE
-
-		public static function getParent($email) { //RECEVOIR TOUTES LES PAGES
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT ID,NAME,SCORE FROM PARENTS WHERE EMAIL=?");
-			$statement->bindParam(1, $email);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content = $row;
-			}
-			return $content;
-		}
-
-		public static function getFamily($id) { //RECEVOIR TOUTES LES PAGES
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME,SCORE FROM FAMILY WHERE ID_PARENT=?");
-			$statement->bindParam(1, $id);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
-			}
-			return $content;
-		}
-
 		public static function UserExist($email)
 		{
 			$connection = Connection::getConnection();

@@ -1,0 +1,65 @@
+.workshops-list{
+	width:40vw;
+	overflow-x: scroll;
+	overflow-y:auto;
+	position: absolute;
+	top: calc( ( 100% - 40vw ) / 2);
+	height:100vw;
+	transform-origin: right top;
+	transform:rotate(-90deg) translateY(-40vw);
+}
+
+.workshop{
+	width:40vw;
+	height: 40vw;
+	float:left;
+	transform: rotate(90deg) translateX(40vw);
+	transform-origin: right top;
+
+	padding:1em;
+
+}
+.workshop img{
+	width:30vw;
+	margin: auto;
+	border:2px solid black;
+}
+
+.workshop h2{
+	text-align: left;
+	color:brown;
+}
+
+.workshop .stars{
+	background-color: white;
+	padding: 0.5em;
+	width:200px;
+}
+.workshop .description
+{
+	height:60px;
+	width:40vw;
+	overflow: hidden;
+}
+
+.workshop-section{
+	width:50vw;
+	margin:auto;
+}
+
+.workshop-section img{
+	width:60%;
+	display: block;
+	margin: 1em auto;
+	border:3px solid white;
+}
+
+.question {
+	-webkit-transform: skew(30deg);
+    -moz-transform: skew(30deg);
+    -o-transform: skew(30deg);
+	transform: skew(30deg);
+
+	background-color:greenyellow;
+	border : 3px solid blue;
+}

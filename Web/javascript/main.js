@@ -19,6 +19,17 @@ window.onload = () =>
 
 }
 
+
+const limitText = (limitField, limitNum) => {
+	let node = document.getElementById("countdown");
+	if (limitField.value.length > limitNum) {
+		limitField.value = limitField.value.substring(0, limitNum);
+	} else {
+		let value =  (limitNum - limitField.value.length);
+		node.innerHTML = value + "";
+	}
+}
+
 window.fbAsyncInit = function() {
 	FB.init({
 		appId      : 670117443417077,
