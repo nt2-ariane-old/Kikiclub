@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "javascript"
+		},
+		{
+			"path": "lang"
+		},
+		{
+			"path": "partial"
+		},
+		{
+			"path": "css"
+		},
+		{
+			"path": "functions"
+		},
+		{
+			"path": "action"
+		}
+	]
+}

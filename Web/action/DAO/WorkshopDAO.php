@@ -6,7 +6,7 @@
 		public static function getWorkshops() { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,DIFFICULTY FROM WORKSHOPS ");
+			$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM WORKSHOPS ");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -19,10 +19,42 @@
 			return $content;
 		}
 
+		public static function getWorkshopsScoreValue($id_robot, $id_difficulty)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT score FROM WORKSHOP_SCORE WHERE ID_WORKSHOP = ? AND ID_DIFFICULTY=?");
+			$statement->bindParam(1, $id_workshop);
+			$statement->bindParam(2, $id_difficulty);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$value = [];
+
+			if ($row = $statement->fetch()) {
+				$value = $row["score"];
+			}
+
+			return $value;
+		}
+		public static function getDifficulties()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT * FROM DIFFICULTY");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+			return $content;
+		}
 		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$difficulty){
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("INSERT INTO WORKSHOPS(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,DIFFICULTY) VALUES (?,?,?,?,?)");
+			$statement = $connection->prepare("INSERT INTO WORKSHOPS(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_ROBOT,ID_DIFFICULTY) VALUES (?,?,?,?,?)");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
@@ -34,7 +66,7 @@
 		public static function updateWorkshop($id,$name, $content, $MEDIA_PATH, $MEDIA_TYPE, $difficulty){
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("UPDATE WORKSHOPS SET NAME=?,CONTENT=?,MEDIA_PATH=? , MEDIA_TYPE=?, DIFFICULTY=? WHERE id=?");
+			$statement = $connection->prepare("UPDATE WORKSHOPS SET NAME=?,CONTENT=?,MEDIA_PATH=? , MEDIA_TYPE=?, ID_DIFFICULTY=? WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
@@ -73,7 +105,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE , DIFFICULTY FROM WORKSHOPS WHERE ID NOT IN (SELECT ID_WORKSHOP FROM FAMILY_WORKSHOPS WHERE ID_MEMBER=?)");
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM WORKSHOPS WHERE ID NOT IN (SELECT ID_WORKSHOP FROM FAMILY_WORKSHOPS WHERE ID_MEMBER=?)");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
@@ -112,7 +144,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE , DIFFICULTY FROM WORKSHOPS WHERE id=?");
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM WORKSHOPS WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();

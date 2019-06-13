@@ -38,11 +38,30 @@
 						<input type="text" name="name" placeholder="Title">
 						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onKeyDown="limitText(this.form.content,125);" onKeyUp="limitText(this.form.content,125);"></textarea>
 						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
+
+						<br>
+						Difficulty:
 						<select name="difficulty">
-							<option value="0">Easy</option>
-							<option value="1">Intermediate</option>
-							<option value="2">Hard</option>
-						</select>
+							<?php
+								foreach ($action->difficulties as $difficulty) {
+									?>
+										<option value=<?= $difficulty["ID"]?>><?= $difficulty["NAME"]?></option>
+									<?php
+								}
+							?>
+							</select>
+
+							Robot:
+							<select name="robot">
+							<?php
+								foreach ($action->robots as $robot) {
+									?>
+										<option value=<?= $robot["ID"]?>><?= $robot["NAME"]?></option>
+									<?php
+								}
+							?>
+							</select>
+
 
 						Choose Workshop Image: <input name="workshopFile" type="file" /><br />
 
@@ -68,12 +87,29 @@
 						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onKeyDown="limitText(this.form.content,125);" onKeyUp="limitText(this.form.content,125);"><?= $action->workshopMod["CONTENT"]?></textarea>
 						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
 
+						<br>
+						Difficulty:
 						<select name="difficulty">
-							<option value="0" <?php if($action->workshopMod["DIFFICULTY"] == 0) echo 'selected' ;?>>Easy</option>
-							<option value="1" <?php if($action->workshopMod["DIFFICULTY"] == 1) echo 'selected' ;?>>Intermediate</option>
-							<option value="2" <?php if($action->workshopMod["DIFFICULTY"] == 2) echo 'selected' ;?>>Hard</option>
-						</select>
+							<?php
+								foreach ($action->difficulties as $difficulty) {
+									?>
+										<option value=<?= $difficulty["ID"]?> <?php if($action->workshopMod["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
 
+									<?php
+								}
+							?>
+							</select>
+
+							Robot:
+							<select name="robot">
+							<?php
+								foreach ($action->robots as $robot) {
+									?>
+										<option value=<?= $robot["ID"]?> <?php if($action->workshopMod["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
+									<?php
+								}
+							?>
+							</select>
 						<div id="questions">
 							<input type="hidden" name="nbQuestions" value=0 id="nbQuestions">
 						</div>
@@ -138,7 +174,7 @@
 										?></td>
 										<td><h5><?=$workshop["NAME"]?></h5></td>
 										<td><p><?=$workshop["CONTENT"]?></p></td>
-										<td><?=$workshop["DIFFICULTY"]?></td>
+										<td><?=$workshop["ID_DIFFICULTY"]?></td>
 									</tr>
 								<?php
 							}

@@ -3,6 +3,7 @@
 	require_once("action/DAO/WorkshopDAO.php");
 	require_once("action/DAO/FamilyDAO.php");
 	require_once("action/DAO/UsersDAO.php");
+	require_once("action/DAO/RobotDAO.php");
 	class ConsoleAction extends CommonAction {
 		//liste d'objets et objet individuel a modifier
 		public $workshops;
@@ -17,6 +18,8 @@
 
 		public $avatars;
 
+		public $difficulties;
+		public $robots;
 		//differentes fonctions d'administrations (true si utiliser, false si non)
 		public $modify;
 		public $add;
@@ -56,6 +59,8 @@
 			}
 			$this->workshops = WorkshopDAO::getWorkshops();
 			$this->users = FamilyDAO::getUsers();
+			$this->difficulties = WorkshopDAO::getDifficulties();
+			$this->robots = RobotDAO::getRobots();
 			if(isset($_POST["users"]))
 			{
 				$this->pageUsers=true;
