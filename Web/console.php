@@ -202,16 +202,39 @@
 			else if ($action->assignFamily)
 			{
 				?>
-					<div id="workshops-list"></div>
+					<div id="workshops-list">
+					<h2>Non assigné</h2>
+					<?php
+							foreach ($action->workshops as $workshop) {
+								$valide = true;
+								foreach ($action->familyWorkshops as $famWork) {
+									if($famWork["ID_WORKSHOP"] == $workshop["ID"] )
+									{
+										$valide = false;
+
+									}
+								}
+								if($valide == true)
+								{
+
+									?>
+										<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
+									<?php
+								}
+							}
+						?>
+					</div>
 
 					<div id="in-progress" class="droppable">
+					<h2>In Progress</h2>
+
 						<?php
 							foreach ($action->workshops as $workshop) {
 								foreach ($action->familyWorkshops as $famWork) {
-									if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATE"] == "in progress" )
+									if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 1 )
 									{
 										?>
-											<div class="workshop-object"><?= $workshop["NAME"] ?></div>
+											<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
 
 										<?php
 									}
@@ -222,26 +245,32 @@
 						?>
 					</div>
 					<div id="not-started" class="droppable">
+					<h2>Not Started</h2>
+
 					<?php
 							foreach ($action->workshops as $workshop) {
-								if(!in_array($workshop["ID"], $action->familyWorkshops))
-								{
-									?>
-										<div class="workshop-object"><?= $workshop["NAME"] ?></div>
+								foreach ($action->familyWorkshops as $famWork) {
+									if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 0 )
+									{
+										?>
+											<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
 
-									<?php
+										<?php
+									}
 								}
 							}
 						?>
 					</div>
 					<div id="complete" class="droppable">
+					<h2>Complete</h2>
+
 						<?php
 							foreach ($action->workshops as $workshop) {
 								foreach ($action->familyWorkshops as $famWork) {
-									if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATE"] == "complete" )
+									if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 2 )
 									{
 										?>
-											<div class="workshop-object"><?= $workshop["NAME"] ?></div>
+											<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
 
 										<?php
 									}
@@ -256,7 +285,11 @@
 			}
 			else if($action->modFamily)
 			{
-				loadProfil();
+				loadProfil($action->familyMod,$action);
+			}
+			else if($action->addFamily)
+			{
+				loadProfil(null,$action);
 			}
 			else
 			{

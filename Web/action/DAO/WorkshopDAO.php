@@ -64,10 +64,31 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[] = $row;
+				$content[$row["ID_WORKSHOP"]] = $row;
 			}
 
 			return $content;
+		}
+		public static function addMemberWorkshop($id_member,$id_workshop, $statut)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("INSERT INTO FAMILY_WORKSHOPS(ID_MEMBER, ID_WORKSHOP, STATUT) VALUES (?,?,?)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_member);
+			$statement->bindParam(2, $id_workshop);
+			$statement->bindParam(3, $statut);
+			$statement->execute();
+		}
+		public static function updateMemberWorkshop($id_member,$id_workshop, $statut)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("UPDATE FAMILY_WORKSHOPS SET STATUT = ?, LAST_MODIFICATION=CURRENT_TIMESTAMP WHERE ID_MEMBER = ? AND ID_WORKSHOP=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $statut);
+			$statement->bindParam(2, $id_member);
+			$statement->bindParam(3, $id_workshop);
+			$statement->execute();
 		}
 		public static function selectWorkshop($id)
 		{

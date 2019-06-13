@@ -15,6 +15,8 @@
 		public $familyMod;
 		public $familyWorkshops;
 
+		public $avatars;
+
 		//differentes fonctions d'administrations (true si utiliser, false si non)
 		public $modify;
 		public $add;
@@ -32,7 +34,7 @@
 		public $errorMsg;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"Console");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console");
 			$this->add = false;
 			$this->modify=false;
 
@@ -48,6 +50,11 @@
 
 		protected function executeAction() {
 			var_dump($_POST);
+
+			if(!empty($_POST['members_list']))
+			{
+				$_SESSION["member"] = $_POST['members_list'][0];
+			}
 			$this->workshops = WorkshopDAO::getWorkshops();
 			$this->users = FamilyDAO::getUsers();
 			if(isset($_POST["users"]))
@@ -126,8 +133,34 @@
 			else if(isset($_POST['modify']) && !isset($_POST['back']))
 			{
 				$this->modify = true;
+				if(!empty($_POST['members_list']))
+				{
+					$this->modify = false;
+					$this->modFamily = true;
+					$this->familyMod = FamilyDAO::selectMember($_POST['members_list'][0]);
+					$this->avatars = FamilyDAO::loadAvatar();
+					if(!empty($_POST["form"]))
+					{
+						if( !empty($_POST["firstname"]) &&
+							!empty($_POST["lastname"]) &&
+							!empty($_POST["birth"]))
+							{
+								FamilyDAO::updateFamilyMember(intval($_POST['members_list'][0]),$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+								header('location:console.php');
+							}
+							else
+							{
+								$this->error=true;
+								$this->errorMsg = "You need to fill all Feeld...";
+							}
+					}
+					if(!empty($_GET["delete"]))
+					{
+						FamilyDAO::deleteFamilyMember(intval($_POST['members_list'][0]));
 
-				if($this->pageWorkshops)
+					}
+				}
+				else if($this->pageWorkshops)
 				{
 					if(!empty($_POST['workshops_list']))
 					{
@@ -147,8 +180,6 @@
 
 							WorkshopDAO::updateWorkshop(intval($_POST['workshops_list'][0]),$_POST['name'],$_POST['content'],$target_path,$type,$_POST['difficulty']);
 							header('location:console.php');
-
-
 
 						}
 
@@ -170,16 +201,36 @@
 
 
 
+
 			}
 			else if($this->pageUsers && isset($_POST['assign']) && !isset($_POST['back']) && !empty($_POST['members_list']))
 			{
 
 				$this->assignFamily = true;
 				$this->familyWorkshops = WorkshopDAO::selectMemberWorkshop($_POST['members_list'][0]);
+
 			}
-			else if($this->pageUsers && isset($_POST['modFamily'])) && !isset($_POST['back']  && !empty($_POST['members_list']))
+			else if($this->pageUsers && isset($_POST['addFamily']) && !isset($_POST['back']) && !empty($_POST['users_list']))
 			{
-				$this->familyMod = FamilyDAO::selectMember($_POST['members_list'][0]);
+				$this->userMod = $_POST['users_list'][0];
+				$this->addFamily = true;
+				$this->avatars = FamilyDAO::loadAvatar();
+				echo("test");
+				if(!empty($_POST["form"]))
+				{
+					if( !empty($_POST["firstname"]) &&
+						!empty($_POST["lastname"]) &&
+						!empty($_POST["birth"]))
+						{
+							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_POST['users_list'][0]);
+							header('location:console.php');
+						}
+						else
+						{
+							$this->error=true;
+							$this->errorMsg = "You need to fill all Feeld...";
+						}
+				}
 			}
 		}
 	}

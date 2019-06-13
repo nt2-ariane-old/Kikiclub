@@ -74,9 +74,33 @@ function loadProfil($user,$action)
 			<?php
 			}
 			?>
-				<form action="users.php" method="post">
-						<input type="hidden" name="form" value="create">
 
+				<form action="<?=$action->page_name?>.php" method="post">
+						<input type="hidden" name="form" value="create">
+						<?php
+							if($action->page_name=='console')
+							{
+								?>
+									<input type="hidden" name="users">
+								<?php
+								if($action->modify)
+								{
+									?>
+										<input type="hidden" name="modify">
+										<input type="hidden" name="members_list[]" value="<?=$user["ID"]?>">
+
+									<?php
+								}
+								else
+								{
+									?>
+										<input type="hidden" name="addFamily">
+										<input type="hidden" name="users_list[]" value="<?=$action->userMod?>">
+
+									<?php
+								}
+							}
+						?>
 						<input type="text" name="firstname" id="firstname" placeholder="First Name" value="<?php if($userExist) echo $user["firstname"]  ?>">
 						<input type="text" name="lastname" id="lasttname" placeholder="Last Name"  value="<?php if($userExist) echo $user["lastname"]  ?>">
 						<input type="text" name="birth" id="datepicker" placeholder="Birthday"  value="<?php if($userExist) echo $user["birthday"]  ?>">
@@ -131,4 +155,26 @@ function loadProfil($user,$action)
 
 					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?mode=manage';} ?>';"><?php if($userExist){echo 'Delete';} else{echo 'Back';} ?></button>
 	<?php
+}
+
+function loadWorkshops($list)
+{
+	foreach($list as $workshop)
+	{
+		?>
+
+			<a href="?workshop=<?= $workshop["ID"] ?>"><div class="workshop">
+				<?php
+					loadMedia($workshop);
+				?>
+				<h2><?=$workshop["NAME"]?></h2>
+				<div class="description"><p><?=$workshop["CONTENT"]?></p></div>
+
+				<?php
+					loadStars($workshop);
+				?>
+
+			</div></a>
+		<?php
+	}
 }

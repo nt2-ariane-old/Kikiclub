@@ -13,7 +13,7 @@
 		public $family_member;
 		public $errorMsg;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"Users");
+			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"users");
 			$this->createFamily = false;
 			$this->management = false;
 			$this->modify = false;

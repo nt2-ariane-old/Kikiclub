@@ -33,17 +33,75 @@ const activateDraggable = () => {
 	  accept: ".workshop-object",
 	  hoverClass: ".workshop-object-hover",
 	  activeClass: "ui-state-highlight",
+	  snap: ".workshop-object",
+      snapMode: "inner",
 	  classes: {
 		"ui-droppable-active": "ui-state-active",
 		"ui-droppable-hover": "ui-state-hover"
 	  },
 	  drop: function( event, ui ) {
 		this.style.backgroundColor = "red";
+		console.log(ui.draggable[0].id);
+		console.log(event.target.id);
+		setWorkshopToCategory(ui.draggable[0].id,event.target.id,true);
+		},
+		out: function(event,ui) {
+			this.style.backgroundColor = "gray";
 
-	}
+		}
 	});
 }
 
+const setWorkshopToCategory = (id_workshop, category, adding) =>
+{
+	let formData = new FormData();
+	formData.append('id_workshop', id_workshop);
+	formData.append('category',category );
+	formData.append('adding', adding);
+
+	fetch("familyWorkshops-ajax.php", {
+		method: "POST",
+		credentials: 'include',
+		body: formData
+	})
+	.then(response => response.text())
+	.then(data => {
+		console.log(data);
+		if(data = 'valide')
+		{
+			console.log('deplacement accepter')
+		}
+		else
+		{
+			console.log('il y a eu une erreur...')
+		}
+	})
+
+	if(adding)
+	{
+		switch(category)
+		{
+			case 'in-progress':
+			break;
+			case 'not-started':
+			break;
+			case 'complete':
+			break;
+		}
+	}
+	else
+	{
+		switch(category)
+		{
+			case 'in-progress':
+			break;
+			case 'not-started':
+			break;
+			case 'complete':
+			break;
+		}
+	}
+}
 
 const addquestion = () =>
 {

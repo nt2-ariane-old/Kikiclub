@@ -41,28 +41,41 @@
 		else
 		{
 			?>
-			<div class="workshops-list">
-			<?php
-			foreach($action->workshops_list as $workshop)
-			{
-				?>
 
-					<a href="?workshop=<?= $workshop["ID"] ?>"><div class="workshop">
-						<?php
-							loadMedia($workshop);
-						?>
-						<h2><?=$workshop["NAME"]?></h2>
-						<div class="description"><p><?=$workshop["CONTENT"]?></p></div>
-
-						<?php
-							loadStars($workshop);
-						?>
-
-					</div></a>
-				<?php
-			}
-			?>
+			<div id="new">
+				<h3>New</h3>
+				<div class="workshops-list">
+					<?php
+						loadWorkshops($action->new);
+					?>
+				</div>
 			</div>
+			<div id="completed">
+				<h3>Completed</h3>
+				<div class="workshops-list">
+					<?php
+						loadWorkshops($action->completed);
+					?>
+				</div>
+			</div>
+			<div id="in-progress">
+				<h3>In Progress</h3>
+				<div class="workshops-list">
+					<?php
+						loadWorkshops($action->inProgress);
+					?>
+				</div>
+			</div>
+			<div id="not-started">
+				<h3>Not Started</h3>
+				<div class="workshops-list">
+					<?php
+						loadWorkshops($action->notStarted);
+					?>
+				</div>
+			</div>
+
+
 			<a id="manage-btn" href="users.php">Return to Profiles</a>
 			<?php
 		}

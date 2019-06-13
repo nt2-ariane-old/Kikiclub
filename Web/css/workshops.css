@@ -2,13 +2,26 @@
 	width:40vw;
 	overflow-x: scroll;
 	overflow-y:auto;
-	position: absolute;
-	top: calc( ( 100% - 40vw ) / 2);
 	height:100vw;
 	transform-origin: right top;
 	transform:rotate(-90deg) translateY(-40vw);
 }
 
+#completed
+{
+	position: relative;
+	top:calc(-100vw + 40vw);
+}
+#in-progress
+{
+	position: relative;
+	top:calc(-100vw - 20vw);
+}
+#not-started
+{
+	position: relative;
+	top:calc(-100vw - 80vw);
+}
 .workshop{
 	width:40vw;
 	height: 40vw;
@@ -89,4 +102,9 @@ video{
 
 .media audio{
 	margin: auto;
+}
+
+#manage-btn
+{
+	top:0;
 }
