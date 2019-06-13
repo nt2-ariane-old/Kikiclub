@@ -13,41 +13,62 @@
 		{
 			?>
 			<div class="workshop-section">
-				<img src="<?=  $action->workshop["IMAGE_PATH"]?>" alt="">
+			<?php
+				if($action->workshop["MEDIA_TYPE"] == "mp4")
+				{
+			?>
+					<video width="600" height="400" controls>
+						<source src="<?= $action->workshop["MEDIA_PATH"] ?>" type="video/<?= $action->workshop["MEDIA_TYPE"] ?>">
+						Your browser does not support the video tag.
+					</video>
+			<?php
+				} else if ($action->workshop["MEDIA_TYPE"] == "png" ||
+					$action->workshop["MEDIA_TYPE"] == "jpg")
+				{
+			?>
+					<img style="width:100px;" src=<?=$action->workshop["MEDIA_PATH"]?> alt="">
+			<?php
+				}
+				else if($action->workshop["MEDIA_TYPE"] == "mp3")
+				{
+			?>
+					<audio src="<?=$action->workshop["MEDIA_PATH"]?>" controls="controls">
+						Your browser does not support the audio element.
+					</audio>
+			<?php
+				}
+			?>
 				<h2><?=  $action->workshop["NAME"]?></h2>
 				<div class="stars">
-								Difficulty :
-							<?php
-
-								for($i = 0 ; $i < 3; $i++)
-								{
-
-									if( $i <= $action->workshop["DIFFICULTY"])
-									{
-										?>
-											<span class="fa fa-star checked"></span>
-										<?php
-									}
-									else
-									{
-										?>
-											<span class="fa fa-star"></span>
-										<?php
-									}
-								}
+					Difficulty :
+					<?php
+						for($i = 0 ; $i < 3; $i++)
+						{
+							if( $i <= $action->workshop["DIFFICULTY"])
+							{
 							?>
-							</div>
+								<span class="fa fa-star checked"></span>
+							<?php
+							}
+							else
+							{
+							?>
+								<span class="fa fa-star"></span>
+							<?php
+							}
+						}
+					?>
+				</div>
 				<p><?=  $action->workshop["CONTENT"]?></p>
 				<form action="workshops" method="post"></form>
 				<?php
 					foreach ($action->questions as $question) {
-
-						?>
-							<div class="question">
-								<p><?= $question["QUESTION"] ?></p>
-								<input type="text" name="<?=$question["ID"]?>">
-							</div>
-						<?php
+					?>
+						<div class="question">
+							<p><?= $question["QUESTION"] ?></p>
+							<input type="text" name="<?=$question["ID"]?>">
+						</div>
+					<?php
 					}
 				?>
 			</div>
@@ -64,7 +85,33 @@
 			{
 				?>
 					<a href="?workshop=<?= $workshop["ID"] ?>"><div class="workshop">
-						<img src="<?=$workshop["IMAGE_PATH"]?>">
+						<div class="media">
+						<?php
+							if($workshop["MEDIA_TYPE"] == "mp4")
+							{
+						?>
+								<video width="500" height="350" controls>
+									<source src="<?= $workshop["MEDIA_PATH"] ?>" type="video/<?= $workshop["MEDIA_TYPE"] ?>">
+									Your browser does not support the video tag.
+								</video>
+						<?php
+							} else if ($workshop["MEDIA_TYPE"] == "png" ||
+								$workshop["MEDIA_TYPE"] == "jpg")
+							{
+						?>
+								<img src=<?=$workshop["MEDIA_PATH"]?> alt="">
+						<?php
+							}
+							else if($workshop["MEDIA_TYPE"] == "mp3")
+							{
+						?>
+								<audio src="<?=$workshop["MEDIA_PATH"]?>" controls="controls">
+									Your browser does not support the audio element.
+								</audio>
+						<?php
+							}
+						?>
+						</div>
 						<h2><?=$workshop["NAME"]?></h2>
 						<div class="description"><p><?=$workshop["CONTENT"]?></p></div>
 						<div class="stars">

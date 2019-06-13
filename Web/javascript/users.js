@@ -1,4 +1,4 @@
-window.onload = () =>
+const onPageLoad = () =>
 {
 	$( "#datepicker" ).datepicker({
 		changeMonth: true,
@@ -25,7 +25,6 @@ const loadChildren = (state = "normal") => {
 		for (let i = 0; i < family.length; i++) {
 
 			let one_year=1000*60*60*24*365;
-			console.log(family[i]);
 			let node = document.createElement("div");
 			node.innerHTML = childHTML;
 			let id_logo =  family[i]["id_avatar"];
@@ -33,7 +32,6 @@ const loadChildren = (state = "normal") => {
 			{
 				if(x == id_logo)
 				{
-					console.log(avatars[x])
 					node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
 				}
 			}

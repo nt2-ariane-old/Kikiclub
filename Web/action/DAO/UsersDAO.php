@@ -19,6 +19,23 @@
 			return $exist;
 
 		}
+
+		public static function selectUser($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT * FROM USERS WHERE id=?");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = [];
+
+			if ($row = $statement->fetch()) {
+				$contents = $row;
+			}
+			return $contents;
+
+		}
 		public static function login($email, $password)
 		{
 			$connection = Connection::getConnection();
@@ -58,5 +75,17 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
+		}
+		public static function updateUser($id,$email,$firstname,$lastname)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("UPDATE USERS SET email=?,firstname=?,lastname=? WHERE id=?");
+			$statement->bindParam(1, $email);
+			$statement->bindParam(2, $firstname);
+			$statement->bindParam(3, $lastname);
+			$statement->bindParam(4, $id);
+
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
 		}
 	}

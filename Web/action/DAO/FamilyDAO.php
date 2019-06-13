@@ -21,9 +21,18 @@
 		}
 		public static function deleteFamilyMember($id)
 		{
-			$password = password_hash($password, PASSWORD_BCRYPT);
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("DELETE FROM family WHERE id = ?");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+		}
+
+		public static function deleteUsers($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("DELETE FROM users WHERE id = ?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -104,7 +113,21 @@
 			$contents = [];
 
 			while ($row = $statement->fetch()) {
-				$contents[] = $row;
+				$temp = [];
+				$temp["USER"] = $row;
+
+				$statement2 = $connection->prepare("SELECT ID, FIRSTNAME, LASTNAME, BIRTHDAY, SCORE, ID_AVATAR, GENDER_ID FROM family WHERE id_user = ?");
+				$statement2->bindParam(1, $row["ID"]);
+
+				$statement2->setFetchMode(PDO::FETCH_ASSOC);
+				$statement2->execute();
+
+				$family = [];
+				while ($rowFam = $statement2->fetch()) {
+					$family[] = $rowFam;
+				}
+				$temp["FAMILY"] = $family;
+				$contents[] = $temp;
 			}
 			return $contents;
 		}

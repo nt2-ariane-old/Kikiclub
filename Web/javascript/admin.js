@@ -1,15 +1,49 @@
-window.onload = () =>{
+const onPageLoad = () =>
+{
 	ClassicEditor
-		.create( document.querySelector( '#editor' ), {
-			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-		} )
-		.then( editor => {
-			window.editor = editor;
-		} )
-		.catch( err => {
-			console.error( err.stack );
-		} );
+	.create( document.querySelector( '#editor' ), {
+		// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+	} )
+	.then( editor => {
+		window.editor = editor;
+	} )
+	.catch( err => {
+		console.error( err.stack );
+	} );
+
+	$('table.memberTable th') .click(
+		function() {
+			$(this) .parents('table.memberTable') .children('tbody') .toggle();
+		}
+	)
+
+	$('table.usersTable tr.rowMember th') .click(
+		function() {
+			$(this) .parents('table.usersTable') .children('tbody') .toggle();
+		}
+	)
+
+	activateDraggable();
+
 }
+
+const activateDraggable = () => {
+	$( ".workshop-object" ).draggable();
+	$( ".droppable").droppable({
+	  accept: ".workshop-object",
+	  hoverClass: ".workshop-object-hover",
+	  activeClass: "ui-state-highlight",
+	  classes: {
+		"ui-droppable-active": "ui-state-active",
+		"ui-droppable-hover": "ui-state-hover"
+	  },
+	  drop: function( event, ui ) {
+		this.style.backgroundColor = "red";
+
+	}
+	});
+}
+
 
 const addquestion = () =>
 {

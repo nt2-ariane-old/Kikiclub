@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	max-width: 100%;
+
 }
 #manage-btn{
 	box-shadow: 5px 5px green;
@@ -20,9 +21,6 @@
 
 HTML {
 	width: 100vw;
-}
-body
-{
 	background-color: #D8DF23;
 }
 
@@ -127,6 +125,7 @@ h1
 	background-color: white;
 	border: 3px solid black;
 	text-align: center;
+	height:30px;
 	color:red;
 	font-weight: bolder;
 }

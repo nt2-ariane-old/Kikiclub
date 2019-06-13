@@ -63,3 +63,11 @@
 	background-color:greenyellow;
 	border : 3px solid blue;
 }
+
+.media{
+	width: 400px;
+	height: 400px;
+}
+.media audio{
+	margin: auto;
+}

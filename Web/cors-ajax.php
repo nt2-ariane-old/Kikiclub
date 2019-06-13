@@ -4,4 +4,4 @@
 	$action = new CorsAjaxAction();
 	$action->execute();
 
-	echo $action->result;
+	echo json_encode($action->result);

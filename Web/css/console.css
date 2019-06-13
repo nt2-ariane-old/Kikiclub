@@ -17,3 +17,46 @@
 {
 	border:2px solid black;
 }
+.workshop-object{
+	width:15vw;
+	height: 15vw;
+	float: left;
+	background-color:white;
+	border:3px solid black;
+
+}
+.workshop-object-hover{
+	width:15vw;
+	height: 15vw;
+	float: left;
+	background-color:red;
+	border:3px solid black;
+
+}
+#workshops-list
+{
+	width:100vw;
+	height:20vw;
+	background-color: chartreuse;
+	border:1px solid black;
+}
+
+
+#complete,#not-started,#in-progress{
+
+	float: left;
+	background-color: bisque;
+	width:33%;
+	margin:0.1em;
+	border: 1px solid black;
+	height: 70%;
+}
+.tabcontent
+ {
+	 display: none;
+ }
+
+ .tabcontent.selected
+ {
+	 display: block;
+ }
