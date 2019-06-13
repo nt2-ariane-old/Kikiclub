@@ -32,51 +32,7 @@
 		<?php
 			if($action->create)
 			{
-
-				?>
-					<div class="register-contents">
-					<?php
-						if($action->error)
-						{
-							?>
-								<div class="error"><?= $action->errorMsg?></div>
-							<?php
-						}
-					?><form action="users.php" method="post">
-					<input type="hidden" name="form" value="create">
-
-					<input type="text" name="firstname" id="firstname" placeholder="First Name">
-					<input type="text" name="lastname" id="lasttname" placeholder="Last Name">
-					<input type="text" name="birth" id="datepicker" placeholder="Birthday">
-					<select name="gender" id="">
-						<option value="0">Male</option>
-						<option value="1">Female</option>
-						<option value="2">Other</option>
-						<option value="3">Do not specify</option>
-					</select>
-
-					<p>Select Avatar :</p>
-					<div class="avatars-list">
-						<?php
-							foreach( $action->avatars as $avatar)
-							{
-								?>
-								<label>
-									<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
-									<img src="<?=$avatar["PATH"]?>">
-								</label>
-
-								<?php
-							}
-						?>
-					</div>
-
-					<div class="forms-btns">
-						<button type="submit" class="submit-btn">Update</button>
-					</div>
-				</form>
-					<button class="delete-btn" onclick="location.href='?mode=normal';" >Go Back</button>
-				<?php
+				loadProfil(null,$action);
 			}
 			else if($action->manage)
 			{
@@ -113,53 +69,9 @@
 					</div>
 					<div id="profil" class="tabcontent">
 						<h2>Profil</h2>
-						<form action="users.php" method="post">
-						<input type="hidden" name="form" value="create">
-
-						<input type="text" name="firstname" id="firstname" placeholder="First Name" value=<?= $action->family_member["firstname"]  ?>>
-						<input type="text" name="lastname" id="lasttname" placeholder="Last Name"  value=<?= $action->family_member["lastname"]  ?>>
-						<input type="text" name="birth" id="datepicker" placeholder="Birthday"  value=<?= $action->family_member["birthday"]  ?>>
-						<select name="gender" id="">
-							<option <?php if($action->family_member["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
-							<option <?php if($action->family_member["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
-							<option <?php if($action->family_member["gender_id"] == 2) echo 'selected' ;?> value="2">Other</option>
-							<option <?php if($action->family_member["gender_id"] == 3) echo 'selected' ; ?>  value="3">Do not specify</option>
-						</select>
-
-						<p>Select Avatar :</p>
-						<div class="avatars-list">
-							<?php
-								foreach( $action->avatars as $avatar)
-								{
-									?>
-									<label>
-										<?php
-											if($action->family_member["id_avatar"] ==  $avatar["ID"]){
-												?>
-													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>" checked>
-
-												<?php
-											}
-											else
-											{
-												?>
-													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
-
-												<?php
-											}
-										?>
-										<img src="<?=$avatar["PATH"]?>">
-									</label>
-
-									<?php
-								}
-							?>
-						</div>
-						<div class="forms-btns">
-							<button type="submit" class="submit-btn">Update</button>
-						</div>
-					</form>
-					<button class="delete-btn" onclick="location.href='?delete=true';">Delete</button>
+						<?php
+							loadProfil($action->family_member,$action);
+						?>
 					</div>
 
 

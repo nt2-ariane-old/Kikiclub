@@ -20,9 +20,9 @@
 
 }
 .workshop img{
-	width:30vw;
-	margin: auto;
+	width:100%;
 	border:2px solid black;
+	max-height: 100%;
 }
 
 .workshop h2{
@@ -37,18 +37,41 @@
 }
 .workshop .description
 {
-	height:60px;
+	height:80px;
 	width:40vw;
 	overflow: hidden;
 }
 
+.workshops-list a {
+	color:inherit;
+	text-decoration: none;
+}
+video{
+	margin: auto;
+}
+.workshops-list .media{
+	border: 2px solid black;
+	margin:auto 0;
+	padding: 0;
+	width: 80%;
+	height: 65%;
+
+}
+
+.workshop-section .media{
+	margin:auto;
+	padding: 0;
+	width: 70%;
+
+}
 .workshop-section{
 	width:50vw;
 	margin:auto;
+	background-color: transparent;
+	height: 100vh;
 }
 
 .workshop-section img{
-	width:60%;
 	display: block;
 	margin: 1em auto;
 	border:3px solid white;
@@ -64,10 +87,6 @@
 	border : 3px solid blue;
 }
 
-.media{
-	width: 400px;
-	height: 400px;
-}
 .media audio{
 	margin: auto;
 }

@@ -1,3 +1,7 @@
+<?php
+	require_once("functions/functionsIndex.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +42,8 @@
 		<!-- BOOTSTRAP -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+		<!-- STARS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- META -->
 		<!-- GOOGLE -->
 		<meta name="google-signin-client_id" content="704832246976-9gtrh525ke8s7p8kp9vatgals73l22ud.apps.googleusercontent.com">
@@ -61,7 +67,7 @@
 		<meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
 		<meta name="theme-color" content="#D8DF23">
 </head>
-<body onload="loadModules();onPageLoad();">
+<body onload="loadModules(); onPageLoad();">
 <div id="fb-root"></div>
 
 

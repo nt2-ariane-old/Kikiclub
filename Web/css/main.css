@@ -4,26 +4,16 @@
 	max-width: 100%;
 
 }
-#manage-btn{
-	box-shadow: 5px 5px green;
-	background-color: greenyellow;
-	width:200px;
-	height:30px;
-	text-align: center;
-	position: absolute;
-
-	left: calc(( 100vw - 200px ) / 2)
-}
-
-#manage-btn:hover{
-	box-shadow: 3px 3px green;
-}
 
 HTML {
 	width: 100vw;
 	background-color: #D8DF23;
+
 }
 
+body{
+	background-color: #D8DF23 !important;
+}
 nav{
 	float: right;
 	width:100px;
@@ -175,6 +165,7 @@ a:hover {
 	text-decoration: black;
 	color:inherit;
 }
+
 @media only screen and (min-width: 768px) {
 	.login-block{
 		width:400px;
@@ -187,4 +178,18 @@ a:hover {
 	#manage-btn{
 		bottom:5em;
 	}
+}
+#manage-btn{
+	box-shadow: 5px 5px green;
+	background-color: greenyellow;
+	width:200px;
+	height:30px;
+	text-align: center;
+	position: absolute;
+
+	left: calc(( 100vw - 200px ) / 2)
+}
+
+#manage-btn:hover{
+	box-shadow: 3px 3px green;
 }

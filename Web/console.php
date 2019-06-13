@@ -254,7 +254,12 @@
 					<a id="manage-btn" onclick="sendWorkshopState()">Send</a>
 				<?php
 			}
-			else {
+			else if($action->modFamily)
+			{
+				loadProfil();
+			}
+			else
+			{
 				?>
 				<div class='form-workshops'>
 					<form action="console.php" method="post">

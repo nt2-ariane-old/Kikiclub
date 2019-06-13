@@ -35,6 +35,7 @@
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"Console");
 			$this->add = false;
 			$this->modify=false;
+
 			$this->addFamily=false;
 			$this->modFamily=false;
 			$this->assignFamily=false;
@@ -175,6 +176,10 @@
 
 				$this->assignFamily = true;
 				$this->familyWorkshops = WorkshopDAO::selectMemberWorkshop($_POST['members_list'][0]);
+			}
+			else if($this->pageUsers && isset($_POST['modFamily'])) && !isset($_POST['back']  && !empty($_POST['members_list']))
+			{
+				$this->familyMod = FamilyDAO::selectMember($_POST['members_list'][0]);
 			}
 		}
 	}

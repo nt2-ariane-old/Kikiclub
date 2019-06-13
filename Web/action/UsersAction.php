@@ -61,7 +61,7 @@
 						{
 							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
 							$_SESSION["mode"] = "normal";
-							header("Location:users.php");
+							header("Location:users.php?mode=manage");
 						}
 						else
 						{
@@ -76,16 +76,16 @@
 				$this->avatars = FamilyDAO::loadAvatar();
 				if(!empty($_SESSION["member"]))
 				{
-					$this->family_member = FamilyDAO::selectMember($_SESSION["id_member"]);
+					$this->family_member = FamilyDAO::selectMember($_SESSION["member"]);
 					if(!empty($_POST["form"]))
 					{
 						if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))
 							{
-								FamilyDAO::updateFamilyMember($_SESSION["id_member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+								FamilyDAO::updateFamilyMember($_SESSION["member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
 								$_SESSION["mode"] = "normal";
-								header("Location:users.php");
+								header("Location:users.php?mode=manage");
 							}
 							else
 							{
@@ -95,9 +95,9 @@
 					}
 					if(!empty($_GET["delete"]))
 					{
-						FamilyDAO::deleteFamilyMember($_SESSION["id_member"]);
+						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
 						$_SESSION["mode"] = "normal";
-						header("Location:users.php");
+						header("Location:users.php?mode=manage");
 					}
 				}
 
