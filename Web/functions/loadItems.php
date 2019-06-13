@@ -149,7 +149,7 @@ function loadProfil($user,$action)
 							?>
 						</div>
 						<div class="forms-btns">
-							<button type="submit" class="submit-btn">Update</button>
+							<button type="submit" class="submit-btn"><?php if($userExist){echo "Update";} else{echo 'Add';} ?></button>
 						</div>
 					</form>
 

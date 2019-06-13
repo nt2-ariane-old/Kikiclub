@@ -74,6 +74,7 @@
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE id_user=? ORDER BY birthday DESC");
+
 			$statement->bindParam(1, $id_parent);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();

@@ -49,7 +49,6 @@
 		}
 
 		protected function executeAction() {
-			var_dump($_POST);
 
 			if(!empty($_POST['members_list']))
 			{

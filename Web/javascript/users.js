@@ -42,19 +42,27 @@ const loadChildren = (state = "normal") => {
 			}
 
 			node.querySelector(".child-name").innerHTML = family[i]["firstname"];
-			node.querySelector(".child-nbalert").style.display = 'none';
+			console.log(family[i]["alert"].length);
+			if(family[i]["alert"].length > 0)
+			{
+				node.querySelector(".child-nbalert").style.display = 'block';
+				node.querySelector(".child-nbalert").innerHTML = family[i]["alert"].length;
+
+			}
+			else
+			{
+				node.querySelector(".child-nbalert").style.display = 'none';
+			}
 
 			node.querySelector(".child-nbPTS").innerHTML = family[i]["score"] + " points cumulated";
 
 			let count = 0;
-			console.log( )
 			for (const key in family[i]["workshops"]) {
 				if (family[i]["workshops"].hasOwnProperty(key)) {
 					const element = family[i]["workshops"][key];
 					if(element["STATUT"]==2)
 					{
 						count++;
-						console.log(count);
 					}
 				}
 			}

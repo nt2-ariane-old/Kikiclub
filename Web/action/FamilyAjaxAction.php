@@ -16,7 +16,7 @@
 				$this->results["avatars"] = FamilyDAO::loadAvatar();
 				foreach ($this->results["family"] as $key => $value) {
 					$this->results["family"][$key]["workshops"] = WorkshopDAO::selectMemberWorkshop($this->results["family"][$key]["ID"]);
-
+					$this->results["family"][$key]["alert"] = WorkshopDAO::selectMemberNewWorkshop($this->results["family"][$key]["ID"]);
 				}
 		}
 	}

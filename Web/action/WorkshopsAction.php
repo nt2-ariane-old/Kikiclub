@@ -25,15 +25,14 @@
 
 		protected function executeAction() {
 			$this->workshops_list = WorkshopDAO::getWorkshops();
+
 			if(!empty($_SESSION["member"]))
 			{
 				$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
 				foreach ($this->workshops_list as $workshop) {
-					$existe = false;
 					foreach ($this->member_workshops as $memberWorkshop) {
 						if($workshop["ID"] == $memberWorkshop["ID_WORKSHOP"])
 						{
-							$existe = true;
 							switch ($memberWorkshop["STATUT"]) {
 								case 0:
 									$this->notStarted[] = $workshop;
@@ -48,22 +47,29 @@
 							}
 						}
 					}
-					if($existe == false)
-					{
-						$this->new[] = $workshop;
+				}
+				$this->new = WorkshopDAO::selectMemberNewWorkshop($_SESSION["member"]);
+				if(!empty($_GET["workshop"]))
+				{
+					$id = intval($_GET["workshop"]);
+					$this->show_workshop = true;
+					$this->workshop = WorkshopDAO::selectWorkshop($id);
+					$this->questions = WorkshopDAO::selectWorkshopQuestions($id);
+					foreach ($this->new as $item) {
+						if($id == $item["ID"])
+						{
+							WorkshopDAO::addMemberWorkshop($_SESSION["member"],$id,0);
+						}
+
 					}
+
+
 				}
 			}
 			else
 			{
 				header('Location:users.php');
 			}
-			if(!empty($_GET["workshop"]))
-			{
-				$id = intval($_GET["workshop"]);
-				$this->show_workshop = true;
-				$this->workshop = WorkshopDAO::selectWorkshop($id);
-				$this->questions = WorkshopDAO::selectWorkshopQuestions($id);
-			}
+
 		}
 	}

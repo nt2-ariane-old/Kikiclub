@@ -1,7 +1,6 @@
 <?php
 	require_once("action/CommonAction.php");
 	require_once("action/DAO/FamilyDAO.php");
-
 	class UsersAction extends CommonAction {
 		public $create;
 		public $manage;
