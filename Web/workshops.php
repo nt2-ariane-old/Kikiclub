@@ -42,36 +42,45 @@
 		{
 			?>
 
-			<div id="new">
+			<div>
 				<h3>New</h3>
-				<div class="workshops-list">
+				<div class="container">
+					<div class="row">
 					<?php
 						loadWorkshops($action->new);
 					?>
+					</div>
 				</div>
+
 			</div>
-			<div id="completed">
+			<div>
 				<h3>Completed</h3>
-				<div class="workshops-list">
-					<?php
-						loadWorkshops($action->completed);
-					?>
+				<div class="container">
+					<div class="row">
+						<?php
+							loadWorkshops($action->completed);
+						?>
+					</div>
 				</div>
 			</div>
-			<div id="in-progress">
+			<div>
 				<h3>In Progress</h3>
-				<div class="workshops-list">
+				<div class="container">
+					<div class="row">
 					<?php
 						loadWorkshops($action->inProgress);
 					?>
+					</div>
 				</div>
 			</div>
-			<div id="not-started">
+			<div>
 				<h3>Not Started</h3>
-				<div class="workshops-list">
+				<div class="container">
+					<div class="row">
 					<?php
 						loadWorkshops($action->notStarted);
 					?>
+					</div>
 				</div>
 			</div>
 

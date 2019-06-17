@@ -53,14 +53,13 @@
 
 		protected function executeAction() {
 
-			if(!empty($_POST['members_list']))
-			{
-				$_SESSION["member"] = $_POST['members_list'][0];
-			}
+			var_dump($_POST);
+
 			$this->workshops = WorkshopDAO::getWorkshops();
 			$this->users = FamilyDAO::getUsers();
 			$this->difficulties = WorkshopDAO::getDifficulties();
 			$this->robots = RobotDAO::getRobots();
+
 			if(isset($_POST["users"]))
 			{
 				$this->pageUsers=true;
@@ -70,9 +69,13 @@
 				$this->pageWorkshops=true;
 			}
 
+			if(!empty($_POST['members_list']))
+			{
+				$_SESSION["member"] = $_POST['members_list'][0];
+			}
+
 			if(isset($_POST['add']) && !isset($_POST['back']))
 			{
-
 				$this->add = true;
 				if(isset($_POST['push']))
 				{
@@ -89,7 +92,7 @@
 						$type =  pathinfo($target_path, PATHINFO_EXTENSION);
 						move_uploaded_file($_FILES['workshopFile']['tmp_name'], $target_path);
 
-						WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$target_path, $type,$_POST['difficulty']);
+						WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$target_path, $type,$_POST['difficulty'],$_POST['robot']);
 					}
 					else if($this->pageUsers)
 					{
@@ -182,7 +185,7 @@
 							}
 							move_uploaded_file($_FILES['workshopFile']['tmp_name'], $target_path);
 
-							WorkshopDAO::updateWorkshop(intval($_POST['workshops_list'][0]),$_POST['name'],$_POST['content'],$target_path,$type,$_POST['difficulty']);
+							WorkshopDAO::updateWorkshop(intval($_POST['workshops_list'][0]),$_POST['name'],$_POST['content'],$target_path,$type,$_POST['difficulty'],$_POST['robot']);
 							header('location:console.php');
 
 						}
@@ -195,6 +198,7 @@
 					if(!empty($_POST['users_list']))
 					{
 						$this->userMod = UsersDAO::selectUser(intval($_POST['users_list'][0]));
+
 						if(isset($_POST['push']))
 						{
 							UsersDAO::updateUser(intval($_POST['users_list'][0]),$_POST['email'],$_POST['firstname'],$_POST['lastname']);

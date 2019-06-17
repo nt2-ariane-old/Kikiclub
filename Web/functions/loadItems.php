@@ -8,7 +8,7 @@ function loadMedia( $workshop ){
 				{
 			?>
 				<video width="100%" height="100%" controls>
-					<source src="<?= $workshop["MEDIA_PATH"] ?>" type="video/<?= $workshop["MEDIA_TYPE"] ?>">
+					<source src="<?=$workshop["MEDIA_PATH"]?>" type="video/<?= $workshop["MEDIA_TYPE"] ?>">
 						Your browser does not support the video tag.
 					</video>
 			<?php
@@ -41,7 +41,7 @@ function loadStars( $workshop ){
 	for($i = 0 ; $i < 3; $i++)
 	{
 
-		if( $i <= $workshop["DIFFICULTY"])
+		if( $i <= $workshop["ID_DIFFICULTY"])
 		{
 			?>
 				<span class="fa fa-star checked"></span>
@@ -83,7 +83,7 @@ function loadProfil($user,$action)
 								?>
 									<input type="hidden" name="users">
 								<?php
-								if($action->modify)
+								if($action->modFamily)
 								{
 									?>
 										<input type="hidden" name="modify">
@@ -163,18 +163,84 @@ function loadWorkshops($list)
 	{
 		?>
 
-			<a href="?workshop=<?= $workshop["ID"] ?>"><div class="workshop">
-				<?php
-					loadMedia($workshop);
-				?>
-				<h2><?=$workshop["NAME"]?></h2>
-				<div class="description"><p><?=$workshop["CONTENT"]?></p></div>
+			<div  class="col-sm-3 workshop"><a onclick="showWorkshop(<?= $workshop['ID'] ?>,this)" >
 
-				<?php
-					loadStars($workshop);
-				?>
-
-			</div></a>
+					<?php
+						loadMedia($workshop);
+					?>
+					<h2><?=$workshop["NAME"]?></h2>
+			</a></div>
 		<?php
 	}
+
+}
+
+function loadWorkshopsCreator($workshop, $action)
+{
+	$workshopExist = false;
+	if($workshop != null)
+		$workshopExist = true;
+	?>
+		<div class="form-workshops">
+			<form action="console.php" method="post" enctype="multipart/form-data">
+				<?php
+					if($workshopExist)
+					{
+						?>
+							<input type="hidden" name="modify">
+						<?php
+					}
+					else
+					{
+						?>
+							<input type="hidden" name="add">
+						<?php
+					}
+				?>
+
+				<input type="hidden" name="workshops">
+				<input type="hidden" name="workshops_list[]" value="<?=$workshop["ID"]?>"></td>
+
+						<input type="text" name="name" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
+						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onKeyDown="limitText(this.form.content,125);" onKeyUp="limitText(this.form.content,125);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
+						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
+
+						<br>
+						Difficulty:
+						<select name="difficulty">
+							<?php
+								foreach ($action->difficulties as $difficulty) {
+									?>
+										<option value=<?= $difficulty["ID"]?> <?php if($workshopExist && $workshop["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
+
+									<?php
+								}
+							?>
+							</select>
+
+							Robot:
+							<select name="robot">
+							<?php
+								foreach ($action->robots as $robot) {
+									?>
+										<option value=<?= $robot["ID"]?> <?php if($workshop["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
+									<?php
+								}
+							?>
+							</select>
+						<div id="questions">
+							<input type="hidden" name="nbQuestions" value=0 id="nbQuestions">
+						</div>
+						<a onclick="addquestion()">Add Question</a>
+
+
+						<!-- <input type="hidden" name="MAX_FILE_SIZE" value="100000" /> -->
+						Choose Workshop Image: <input name="workshopFile" type="file" /><br />
+
+						<button type="submit" name="push"><?php if($workshopExist) echo 'Modify'; else echo 'Add'; ?></button>
+						<button type="submit" name="back">Back</button>
+					</form>
+				</div>
+	<?php
+
 }

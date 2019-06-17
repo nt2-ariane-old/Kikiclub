@@ -20,6 +20,40 @@
 
 		}
 
+		public static function getUsersLikeName($name)
+		{
+			$connection = Connection::getConnection();
+			$name = '%'.$name.'%';
+			$statement = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL FROM USERS WHERE EMAIL LIKE ? OR FIRSTNAME LIKE ? OR LASTNAME LIKE ?");
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $name);
+			$statement->bindParam(3, $name);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = [];
+
+
+			while ($row = $statement->fetch()) {
+				$temp = [];
+				$temp["USER"] = $row;
+
+				$statement2 = $connection->prepare("SELECT ID, FIRSTNAME, LASTNAME, BIRTHDAY, SCORE, ID_AVATAR, GENDER_ID FROM family WHERE id_user = ?");
+				$statement2->bindParam(1, $row["ID"]);
+
+				$statement2->setFetchMode(PDO::FETCH_ASSOC);
+				$statement2->execute();
+
+				$family = [];
+				while ($rowFam = $statement2->fetch()) {
+					$family[] = $rowFam;
+				}
+				$temp["FAMILY"] = $family;
+				$contents[] = $temp;
+			}
+
+			return $contents;
+		}
 		public static function selectUser($id)
 		{
 			$connection = Connection::getConnection();

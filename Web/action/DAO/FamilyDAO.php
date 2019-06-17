@@ -70,6 +70,26 @@
 			}
 			return $contents;
 		}
+		public static function getFamilyLikeName($name)
+		{
+			$connection = Connection::getConnection();
+			$name = '%' . $name . '%';
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE firstname LIKE ? OR lastname LIKE ?");
+
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $name);
+			$statement->bindParam(3, $name);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+			return $content;
+		}
 		public static function selectFamilyMembers($id_parent)
 		{
 			$connection = Connection::getConnection();

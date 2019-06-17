@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/console.css">
 	<script src="javascript/admin.js"></script>
 
+
 	<?php
 		if($action->error)
 		{
@@ -20,110 +21,26 @@
 
 
 	<div class="tab">
-		<button class="tablinks" onclick="openTab(event, 'workshops')">Workshops</button>
-		<button class="tablinks" onclick="openTab(event, 'users')">Users</button>
+		<form action="console.php" method="post">
+			<button class="tablinks" name="workshops">Workshops</button>
+			<button class="tablinks" name="users">Users</button>
+		</form>
+
 	</div>
 
 	<div id="workshops" class="tabcontent <?php if($action->pageWorkshops) echo "selected" ?>">
 		<h2>Workshops Management</h2>
-
+		<div class="bar">
+			<input type="text" name="research" id="research-bar" placeholder="Research" onkeyup="researchWorkshop()">
+		</div>
 		<?php
 			if($action->add)
 			{
-				?>
-				<div class="form-workshops">
-					<form action="console.php" method="post"  enctype="multipart/form-data">
-						<input type="hidden" name="add">
-						<input type="hidden" name="workshops">
-						<input type="text" name="name" placeholder="Title">
-						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onKeyDown="limitText(this.form.content,125);" onKeyUp="limitText(this.form.content,125);"></textarea>
-						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
-
-						<br>
-						Difficulty:
-						<select name="difficulty">
-							<?php
-								foreach ($action->difficulties as $difficulty) {
-									?>
-										<option value=<?= $difficulty["ID"]?>><?= $difficulty["NAME"]?></option>
-									<?php
-								}
-							?>
-							</select>
-
-							Robot:
-							<select name="robot">
-							<?php
-								foreach ($action->robots as $robot) {
-									?>
-										<option value=<?= $robot["ID"]?>><?= $robot["NAME"]?></option>
-									<?php
-								}
-							?>
-							</select>
-
-
-						Choose Workshop Image: <input name="workshopFile" type="file" /><br />
-
-						<button type="submit" name="push">Add</button>
-						<button type="submit" name="back">Back</button>
-					</form>
-				</div>
-
-				<?php
+				loadWorkshopsCreator(null,$action);
 			}
 			else if($action->modify)
 			{
-
-				?>
-				<div class="form-workshops">
-					<form action="console.php" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="modify">
-						<input type="hidden" name="workshops">
-
-						<input type="hidden" name="workshops_list[]" value="<?=$action->workshopMod["ID"]?>"></td>
-
-						<input type="text" name="name" placeholder="Title" value="<?= $action->workshopMod["NAME"]  ?>">
-						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onKeyDown="limitText(this.form.content,125);" onKeyUp="limitText(this.form.content,125);"><?= $action->workshopMod["CONTENT"]?></textarea>
-						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
-
-						<br>
-						Difficulty:
-						<select name="difficulty">
-							<?php
-								foreach ($action->difficulties as $difficulty) {
-									?>
-										<option value=<?= $difficulty["ID"]?> <?php if($action->workshopMod["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
-
-									<?php
-								}
-							?>
-							</select>
-
-							Robot:
-							<select name="robot">
-							<?php
-								foreach ($action->robots as $robot) {
-									?>
-										<option value=<?= $robot["ID"]?> <?php if($action->workshopMod["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
-									<?php
-								}
-							?>
-							</select>
-						<div id="questions">
-							<input type="hidden" name="nbQuestions" value=0 id="nbQuestions">
-						</div>
-						<a onclick="addquestion()">Add Question</a>
-
-
-						<!-- <input type="hidden" name="MAX_FILE_SIZE" value="100000" /> -->
-						Choose Workshop Image: <input name="workshopFile" type="file" /><br />
-
-						<button type="submit" name="push">Modify</button>
-						<button type="submit" name="back">Back</button>
-					</form>
-				</div>
-				<?php
+				loadWorkshopsCreator($action->workshopMod,$action);
 			}
 			else
 			{
@@ -134,51 +51,20 @@
 					<input type="hidden" name="workshops">
 
 					<table style="width:100%" id="workshops-table">
-					<tr>
-						<th >Select</th>
-						<th>Image</th>
-						<th onclick="sortingTable('workshops-table',2)">Name</th>
-						<th onclick="sortingTable('workshops-table',3)">Content</th>
-						<th onclick="sortingTable('workshops-table',4)">Difficulty</th>
-					</tr>
-						<?php
-							foreach($action->workshops as $workshop)
-							{
-								?>
-									<tr>
-										<td><input type="checkbox" name="workshops_list[]" value="<?=$workshop["ID"]?>"></td>
-										<td><?php
-											if($workshop["MEDIA_TYPE"] == "mp4")
-											{
-												?>
-													<video width="100" height="100" controls>
-														<source src="<?= $workshop["MEDIA_PATH"] ?>" type="video/<?= $workshop["MEDIA_TYPE"] ?>">
-														Your browser does not support the video tag.
-													</video>
-												<?php
-											} else if ($workshop["MEDIA_TYPE"] == "png" ||
-														$workshop["MEDIA_TYPE"] == "jpg")
-														{
-															?>
-															<img style="width:100px;" src=<?=$workshop["MEDIA_PATH"]?> alt="">
-															<?php
-														}
-											else if($workshop["MEDIA_TYPE"] == "mp3")
-											{
-												?>
-												<audio src="<?=$workshop["MEDIA_PATH"]?>" controls="controls">
-													Your browser does not support the audio element.
-												</audio>
-												<?php
-											}
-										?></td>
-										<td><h5><?=$workshop["NAME"]?></h5></td>
-										<td><p><?=$workshop["CONTENT"]?></p></td>
-										<td><?=$workshop["ID_DIFFICULTY"]?></td>
-									</tr>
-								<?php
-							}
-						?>
+						<thead>
+							<tr>
+								<th >Select</th>
+								<th>Image</th>
+								<th onclick="sortingTable('workshops-table',2)">Name</th>
+								<th onclick="sortingTable('workshops-table',3)">Content</th>
+								<th onclick="sortingTable('workshops-table',4)">Difficulty</th>
+								<th onclick="sortingTable('workshops-table',5)">Robot</th>
+							</tr>
+						</thead>
+						<tbody class='tableValue'>
+
+							<script>researchWorkshop()</script>
+						</tbody>
 					</table>
 						<button type="submit" name="add" value="true">Add</button>
 						<button type="submit" name="modify" value="true">Modify</button>
@@ -194,6 +80,9 @@
 
 	<div id="users" class="tabcontent <?php if($action->pageUsers) echo "selected" ?>" >
 		<h2>Users Management</h2>
+		<div class="bar">
+			<input type="text" name="research" id="research-barUsers" placeholder="Research" onkeyup="researchMember()">
+		</div>
 		<?php
 			if($action->add)
 			{
@@ -344,61 +233,8 @@
 								<th style="width:50%;">Family</th>
 							</tr>
 							</thead>
-							<tbody>
-							<?php
-								foreach($action->users as $user)
-								{
-							?>
-								<tr>
-									<td><input type="checkbox" name="users_list[]" value="<?=$user["USER"]["ID"]?>"></td>
-									<td><?=$user["USER"]["ID"]?></td>
-									<td><?=$user["USER"]["FIRSTNAME"]?></td>
-									<td><?=$user["USER"]["LASTNAME"]?></td>
-									<td><?=$user["USER"]["EMAIL"]?></td>
-									<td>
-									<?php
-										if(sizeof($user["FAMILY"]) > 0){
-									?>
-									<table style="width:100%" class="memberTable">
-										<thead>
-										<tr >
-											<th style="width:5%;">Select</th>
-											<th style="width:10%;">ID</th>
-											<th style="width:25%;">First Name</th>
-											<th style="width:25%;">Last Name</th>
-											<th style="width:25%;">Birthday</th>
-											<th style="width:10%;">Score</th>
-
-										</tr>
-										</thead>
-
-										<tbody>
-										<?php
-											foreach($user["FAMILY"] as $member)
-											{
-										?>
-											<tr>
-
-												<td><input type="checkbox" name="members_list[]" value="<?=$member["ID"]?>"></td>
-												<td><?=$member["ID"]?></td>
-												<td><?=$member["FIRSTNAME"]?></td>
-												<td><?=$member["LASTNAME"]?></td>
-												<td><?=$member["BIRTHDAY"]?></td>
-												<td><?=$member["SCORE"]?></td>
-											</tr>
-										<?php
-											}
-										?>
-										</table>
-										<?php
-											}
-										?>
-									</td>
-									</tbody>
-								</tr>
-							<?php
-								}
-							?>
+							<tbody id="table-users">
+								<script>researchMember()</script>
 							</tbody>
 						</table>
 

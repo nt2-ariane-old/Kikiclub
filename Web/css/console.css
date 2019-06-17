@@ -116,3 +116,15 @@
 	margin: 5em auto;
 	float: left;
 }
+
+.bar
+{
+	padding:1em;
+	height:60px;
+	background-color: beige;
+}
+#research-bar
+{
+	float:right;
+	width:300px;
+}
