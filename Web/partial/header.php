@@ -31,6 +31,10 @@
 		<!-- FACEBOOK -->
 		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_CA/sdk.js#xfbml=1&version=v3.3&appId=670117443417077&autoLogAppEvents=1"></script>
 
+		<!-- DIY SLIDER -->
+		<script src="jquery.diyslider.min.js"></script>
+
+
 	<!-- CSS -->
 		<!-- CUSTOM -->
 		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen" />
@@ -44,9 +48,13 @@
 
 		<!-- STARS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 	<!-- META -->
 		<!-- GOOGLE -->
 		<meta name="google-signin-client_id" content="704832246976-9gtrh525ke8s7p8kp9vatgals73l22ud.apps.googleusercontent.com">
+
+
 	<!-- FAVICON -->
 		<link rel="apple-touch-icon" sizes="57x57" href="images/favicon/apple-icon-57x57.png">
 		<link rel="apple-touch-icon" sizes="60x60" href="images/favicon/apple-icon-60x60.png">
@@ -71,8 +79,11 @@
 <div id="fb-root"></div>
 
 
+
 <nav>
+	<div id="setting-button" onclick="showProfiles()"></div>
 	<ul>
+
 		<?php
 			if($action->isLoggedIn())
 			{

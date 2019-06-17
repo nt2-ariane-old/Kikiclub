@@ -39,6 +39,13 @@ window.fbAsyncInit = function() {
 		version    : 'v3.3'
 	});
 	FB.AppEvents.logPageView();
+
+	$( "#datepicker" ).datepicker({
+		changeMonth: true,
+		changeYear: true,
+		yearRange: "1900:2019",
+		dateFormat: 'dd/mm/yy'
+	  });
 }
 
 const openTab = (evt, tab) => {
@@ -58,6 +65,11 @@ const openTab = (evt, tab) => {
 
 }
 
+const showProfiles = () =>
+{
+		 let node = document.getElementById("profile-box");
+		 node.style.display = "block";
+}
 function signOut() {
 	let auth2 = gapi.auth2.getAuthInstance();
 	auth2.signOut().then(function () {

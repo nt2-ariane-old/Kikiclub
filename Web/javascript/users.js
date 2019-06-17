@@ -1,13 +1,3 @@
-const onPageLoad = () =>
-{
-	$( "#datepicker" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "1900:2019",
-		dateFormat: 'dd/mm/yy'
-	  });
-}
-
 const loadChildren = (state = "normal") => {
 
 	let childHTML = document.querySelector("#child-template").innerHTML;

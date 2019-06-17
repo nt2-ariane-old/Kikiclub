@@ -63,9 +63,12 @@ const loadMedia = (workshop,container ) => {
 
 	container.appendChild(media);
   }
-const hideWorkshop = (container) =>
+const hideWorkshop = (container,id) =>
 {
-	removeHeightToContainer(container);
+	container.previousSibling.style.height = 0;
+	container.previousSibling.style.display = "block";
+
+	removeHeightToContainer(container,id);
 
 }
 const showWorkshop = (id,element) =>
@@ -85,11 +88,9 @@ const showWorkshop = (id,element) =>
 	container.style.height = 0;
 	container.innerHTML = "";
 	container.style.display = "block";
-	container.setAttribute('onclick','hideWorkshop(this)');
 
 	element.parentNode.parentNode.insertBefore(container,element.parentNode.nextSibling);
-	element.parentNode.style.display = "none";
-	console.log(element);
+	container.previousSibling.removeAttribute('onclick');
 
 	let formData = new FormData();
 		formData.append('id', id);
@@ -121,38 +122,57 @@ const showWorkshop = (id,element) =>
 			loadStars(workshop,container);
 			loadMedia(workshop,container);
 
-			addHeightToContainer(container);
+			addHeightToContainer(container,id);
 		})
 
 
 }
 
-const removeHeightToContainer= (container) =>
+const removeHeightToContainer= (container,id) =>
 {
-
+	let sibling =container.previousSibling;
+	console.log(sibling);
 	if(container.offsetHeight >= 10)
 	{
 		let newHeight = container.offsetHeight - 1;
+		let newSiblingHeight = sibling.offsetHeight + 1;
+		console.log('==REM=========')
+		console.log(newHeight);
+		console.log(newSiblingHeight);
 		container.style.height = newHeight + "px";
+		sibling.style.height = newSiblingHeight + "px";
+
 		setTimeout(()=>removeHeightToContainer(container),1);
 	}
 	else
 	{
 		container.innerHTML = "";
 		container.style.display = "none";
-		container.previousSibling.style.display = "block";
 		container.parentNode.removeChild(container);
+		sibling.setAttribute('onclick','showWorkshop('+id+',this)');
 	}
 
 }
 
-const addHeightToContainer= (container) =>
+const addHeightToContainer= (container,id) =>
 {
+	let sibling =container.previousSibling;
+	console.log(id);
 	if(container.offsetHeight < 300)
 	{
 		let newHeight = container.offsetHeight + 1;
+		let newSiblingHeight = sibling.offsetHeight - 1;
 		container.style.height = newHeight + "px";
-		setTimeout(()=>addHeightToContainer(container),1);
+		sibling.style.height = newSiblingHeight + "px";
+
+		setTimeout(()=>addHeightToContainer(container,id),1);
+	}
+	else
+	{
+		sibling.style.display = "none";
+		console.log(id);
+		container.setAttribute('onclick','hideWorkshop(this,'+id+')');
+
 	}
 
 }
