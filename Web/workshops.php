@@ -43,45 +43,22 @@
 			?>
 
 			<div>
-				<h3>New</h3>
-				<div class="container">
-					<div class="row">
-					<?php
-						loadWorkshops($action->new);
-					?>
-					</div>
-				</div>
+				<?php
 
-			</div>
-			<div>
-				<h3>Completed</h3>
-				<div class="container">
-					<div class="row">
-						<?php
-							loadWorkshops($action->completed);
-						?>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h3>In Progress</h3>
-				<div class="container">
-					<div class="row">
-					<?php
-						loadWorkshops($action->inProgress);
-					?>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h3>Not Started</h3>
-				<div class="container">
-					<div class="row">
-					<?php
-						loadWorkshops($action->notStarted);
-					?>
-					</div>
-				</div>
+					if(sizeof($action->new) > 0)
+						loadWorkshopsCarousel($action->new,'new-workshops',$action,"New");
+
+					loadWorkshopsCarousel($action->recommandations,'new-recommandations',$action,"Recommandated");
+
+					if(sizeof($action->completed) > 0)
+						loadWorkshopsCarousel($action->completed,'completed-workshops',$action,"Completed");
+
+					if(sizeof($action->inProgress) > 0)
+						loadWorkshopsCarousel($action->inProgress,'in-progress-workshops',$action,"In Progress");
+
+					if(sizeof($action->notStarted) > 0)
+						loadWorkshopsCarousel($action->notStarted,'not-started-workshops',$action,"Not Started");
+				?>
 			</div>
 
 

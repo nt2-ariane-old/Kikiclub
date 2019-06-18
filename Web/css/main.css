@@ -150,22 +150,6 @@ h1
 table{
 	background-color: beige;
 }
-/*
-table, th, td {
-	border: 1px solid black;
-	margin: auto;
-	padding: auto;
-	text-align: center;
-	padding:0.5em;
-  } */
-
-/* td{
-	background-color: #D8DF23;
-}
-
-th{
-	background-color: #878C00;
-} */
 
 a:hover {
 	text-decoration: black;
@@ -185,8 +169,6 @@ a:hover {
 
 #setting-button
 {
-	height: 50px;
-
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -220,6 +202,7 @@ a:hover {
 		bottom:5em;
 	}
 }
+
 #manage-btn{
 	box-shadow: 5px 5px green;
 	background-color: greenyellow;

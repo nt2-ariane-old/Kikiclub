@@ -1,6 +1,8 @@
 <?php
 	require_once("action/CommonAction.php");
 	require_once("action/DAO/WorkshopDAO.php");
+	require_once("action/DAO/RobotDAO.php");
+
 	class WorkshopsAction extends CommonAction {
 		public $workshops_list;
 
@@ -9,10 +11,12 @@
 		public $new;
 		public $Inprogress;
 		public $notStarted;
-
+		public $recommandations;
 		public $workshop;
 		public $show_workshop;
 		public $questions;
+
+		public $robots;
 
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"Workshops");
@@ -21,11 +25,16 @@
 			$this->new = [];
 			$this->inProgress = [];
 			$this->notStarted = [];
+			$this->recommandations = [];
 		}
-
+		private function checkRecommandations()
+		{
+			$this->recommandations =array_merge($this->notStarted,$this->new);
+			$this->recommandations = array_merge($this->recommandations,$this->inProgress);
+		}
 		protected function executeAction() {
 			$this->workshops_list = WorkshopDAO::getWorkshops();
-
+			$this->robots = RobotDAO::GetRobots();
 			if(!empty($_SESSION["member"]))
 			{
 				$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
@@ -70,6 +79,7 @@
 			{
 				header('Location:users.php');
 			}
+			$this->checkRecommandations();
 
 		}
 	}

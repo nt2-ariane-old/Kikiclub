@@ -157,24 +157,6 @@ function loadProfil($user,$action)
 	<?php
 }
 
-function loadWorkshops($list)
-{
-	foreach($list as $workshop)
-	{
-		?>
-
-			<div  class="col-sm-3 workshop"><a onclick="showWorkshop(<?= $workshop['ID'] ?>,this)" >
-
-					<?php
-						loadMedia($workshop);
-					?>
-					<h2><?=$workshop["NAME"]?></h2>
-			</a></div>
-		<?php
-	}
-
-}
-
 function loadWorkshopsCreator($workshop, $action)
 {
 	$workshopExist = false;
@@ -243,4 +225,90 @@ function loadWorkshopsCreator($workshop, $action)
 				</div>
 	<?php
 
+}
+
+function loadWorkshopsCarousel($workshops,$name,$action,$title)
+{
+
+	?>
+		<div id="<?= $name  ?>" class="carousel slide border" data-ride="carousel">
+		   <!-- Indicators -->
+		   <ol class="carousel-indicators">
+				<?php
+					$i=0;
+					foreach ($workshops as $workshop) {
+				?>
+
+					<li data-target="#<?= $name  ?>" data-slide-to="<?= $i ?>"	<?php if($i == 0) echo 'class="active"';?>></li>
+				<?php
+					}
+				?>
+		   </ol>
+			<!-- Content -->
+			<div class="carousel-inner">
+			<?php
+				$i=0;
+				foreach ($workshops as $workshop) {
+					?>
+
+						<div class="workshop carousel-item <?php if($i == 0) echo 'active';?>" style="background-image:url(<?= $workshop["MEDIA_PATH"] ?>);">
+							<h4><?= $title ?> workshop</h3>
+							<h2><?= $workshop["NAME"] ?></h4>
+							<?php
+								loadStars($workshop);
+							?>
+							<?php
+								loadMedia($workshop);
+							?>
+							<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
+							<div class="description"><?= $workshop["CONTENT"]?></div>
+						</div>
+					<?php
+					$i++;
+				}
+
+			?>
+		   </div>
+		   <!-- Controls -->
+		   <a class="carousel-control-prev" href="#<?= $name  ?>" role="button" data-slide="prev">
+		     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		     <span class="sr-only">Previous</span>
+		   </a>
+		   <a class="carousel-control-next" href="#<?= $name  ?>" role="button" data-slide="next">
+		     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		     <span class="sr-only">Next</span>
+		   </a>
+		</div>
+	<?php
+}
+
+
+function loadWorkshopsLine($list,$name,$action,$title)
+{
+	?>
+	<h3><?= $title ?></h3>
+	<div class="container">
+		<div class="row">
+
+		<?php
+		foreach($list as $workshop)
+		{
+			?>
+
+				<div  class="col-sm-3 workshop"><a onclick="showWorkshop(<?= $workshop['ID'] ?>,this)" >
+
+						<?php
+							loadMedia($workshop);
+						?>
+						<h2><?=$workshop["NAME"]?></h2>
+						<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
+
+				</a></div>
+			<?php
+		}
+		?>
+
+		</div>
+	</div>
+	<?php
 }
