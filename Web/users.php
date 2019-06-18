@@ -5,5 +5,7 @@
 	$action->execute();
 
 	require_once("partial/header.php");
-	require_once("partial/show-users.php");
+
+	require_once("show-users.php");
+
 	require_once("partial/footer.php");

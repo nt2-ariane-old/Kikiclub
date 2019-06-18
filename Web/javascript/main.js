@@ -65,9 +65,44 @@ const openTab = (evt, tab) => {
 
 }
 
+const openConfirmBox = () =>
+{
+	let confirmBox = document.createElement('div');
+			confirmBox.setAttribute('class','confirm-box');
+
+	let text = document.createElement('p');
+			text.innerHTML = 'Are you sure you want to do this?';
+
+	let yesBtn = document.createElement('button');
+			yesBtn.setAttribute('onclick','accept()');
+			yesBtn.setAttribute('class','yes-btn');
+			yesBtn.innerHTML = "Yes";
+
+	let noBtn = document.createElement('button');
+			noBtn.setAttribute('onclick','refuse()');
+			noBtn.setAttribute('class','no-btn');
+			noBtn.innerHTML = "No";
+
+		confirmBox.appendChild(text);
+		confirmBox.appendChild(yesBtn);
+		confirmBox.appendChild(noBtn);
+
+	document.appendChild(confirmBox);
+}
+
+const accept = () =>
+{
+	return true;
+}
+const refuse = () =>
+{
+	return false;
+}
+
 const showProfiles = () =>
 {
 		 let node = document.getElementById("profile-box");
+		 console.log(node);
 		 node.style.display = "block";
 }
 function signOut() {

@@ -6,7 +6,7 @@
 		public static function UserExist($email)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT * FROM USERS WHERE email=?");
+			$statement = $connection->prepare("SELECT * FROM users WHERE email=?");
 			$statement->bindParam(1, $email);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -24,7 +24,7 @@
 		{
 			$connection = Connection::getConnection();
 			$name = '%'.$name.'%';
-			$statement = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL FROM USERS WHERE EMAIL LIKE ? OR FIRSTNAME LIKE ? OR LASTNAME LIKE ?");
+			$statement = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL FROM users WHERE EMAIL LIKE ? OR FIRSTNAME LIKE ? OR LASTNAME LIKE ?");
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $name);
 			$statement->bindParam(3, $name);
@@ -57,7 +57,7 @@
 		public static function selectUser($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT * FROM USERS WHERE id=?");
+			$statement = $connection->prepare("SELECT * FROM users WHERE id=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -74,7 +74,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL,VISIBILITY,PASSWORD FROM USERS WHERE email = ?");
+			$statement = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL,VISIBILITY,PASSWORD FROM users WHERE email = ?");
 			$statement->bindParam(1, $email);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -100,7 +100,7 @@
 		{
 			$password = password_hash($password, PASSWORD_BCRYPT);
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("INSERT INTO USERS(email,password,firstname,lastname,visibility) VALUES(?,?,?,?,?)");
+			$statement = $connection->prepare("INSERT INTO users(email,password,firstname,lastname,visibility) VALUES(?,?,?,?,?)");
 			$statement->bindParam(1, $email);
 			$statement->bindParam(2, $password);
 			$statement->bindParam(3, $firstname);
@@ -113,7 +113,7 @@
 		public static function updateUser($id,$email,$firstname,$lastname)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE USERS SET email=?,firstname=?,lastname=? WHERE id=?");
+			$statement = $connection->prepare("UPDATE users SET email=?,firstname=?,lastname=? WHERE id=?");
 			$statement->bindParam(1, $email);
 			$statement->bindParam(2, $firstname);
 			$statement->bindParam(3, $lastname);

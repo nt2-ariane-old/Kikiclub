@@ -21,7 +21,7 @@
 
 
 	<div class="tab">
-		<form action="console.php" method="post">
+		<form action="console.php" method="post" onSubmit="return openConfirmBox()">
 			<button class="tablinks" name="workshops">Workshops</button>
 			<button class="tablinks" name="users">Users</button>
 		</form>
@@ -47,7 +47,7 @@
 				?>
 				<div class='form-workshops'>
 
-					<form action="console.php" method="post">
+					<form action="console.php" method="post" onSubmit="return openConfirmBox()">
 					<input type="hidden" name="workshops">
 
 					<table style="width:100%" id="workshops-table">
@@ -88,7 +88,7 @@
 			{
 				?>
 				<div class="form-workshops">
-					<form action="console.php" method="post">
+					<form action="console.php" method="post" onSubmit="return openConfirmBox()">
 						<input type="hidden" name="add">
 						<input type="hidden" name="users">
 
@@ -108,7 +108,7 @@
 
 				?>
 				<div class="form-workshops">
-					<form action="console.php" method="post">
+					<form action="console.php" method="post" onSubmit="return openConfirmBox()">
 						<input type="hidden" name="modify">
 						<input type="hidden" name="users">
 						<input type="hidden" name="users_list[]" value="<?=$action->userMod["ID"]?>"></td>
@@ -220,7 +220,7 @@
 			{
 				?>
 				<div class='form-workshops'>
-					<form action="console.php" method="post">
+					<form action="console.php" method="post" onSubmit="return openConfirmBox()">
 						<input type="hidden" name="users">
 						<table style="width:100%" class="usersTable">
 							<thead>

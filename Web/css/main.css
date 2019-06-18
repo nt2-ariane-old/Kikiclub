@@ -168,8 +168,10 @@ a:hover {
 
 #profile-box
 {
-	background-color: rgba(0, 0, 0, 0.25);
+	background-color: rgba(0, 0, 0, 0.8);
 	position: fixed;
+	top:0;
+	left:0;
 	width: 100vw;
 	height: 100vh;
 	display: none;
@@ -182,6 +184,16 @@ a:hover {
 
 	background-size: cover;
 	background-image: url("../images/setting.png");
+}
+
+.confirm-box{
+	position: fixed;
+	width:600px;
+	height: 300px;
+	left:calc((100% - 600px) / 2);
+	top:calc((100% - 300px) / 2);
+	background-color: wheat;
+	border: 3px solid brown;
 }
 @media only screen and (min-width: 768px) {
 	.login-block{
