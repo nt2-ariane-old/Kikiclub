@@ -85,7 +85,6 @@
 			</div>
 
 
-			<a id="manage-btn" href="users.php">Return to Profiles</a>
 			<?php
 		}
 		?>

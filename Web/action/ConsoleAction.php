@@ -52,19 +52,16 @@
 		}
 
 		protected function executeAction() {
-
-			var_dump($_POST);
-
 			$this->workshops = WorkshopDAO::getWorkshops();
 			$this->users = FamilyDAO::getUsers();
 			$this->difficulties = WorkshopDAO::getDifficulties();
 			$this->robots = RobotDAO::getRobots();
 
-			if(isset($_POST["users"]))
+			if(isset($_GET["users"]))
 			{
 				$this->pageUsers=true;
 			}
-			else if (isset($_POST["workshops"]))
+			else if (isset($_GET["workshops"]))
 			{
 				$this->pageWorkshops=true;
 			}

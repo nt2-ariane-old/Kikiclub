@@ -1,8 +1,8 @@
 <?php
 	require_once("action/ShowUsersAction.php");
 
-	$action = new ShowUsersAction();
-	$action->execute();
+	$actionUser = new ShowUsersAction();
+	$actionUser->execute();
 ?>
 	<link rel="stylesheet" href="./css/users.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
@@ -27,11 +27,11 @@
 
 	<main>
 		<?php
-			if($action->create)
+			if($actionUser->create)
 			{
-				loadProfil(null,$action);
+				loadProfil(null,$actionUser);
 			}
-			else if($action->manage)
+			else if($actionUser->manage)
 			{
 				?>
 				<div id="family">
@@ -46,15 +46,15 @@
 				<?php
 
 			}
-			else if($action->modify)
+			else if($actionUser->modify)
 			{
 				?>
 <div class="register-contents">
 					<?php
-						if($action->error)
+						if($actionUser->error)
 						{
 							?>
-								<div class="error"><?= $action->errorMsg?></div>
+								<div class="error"><?= $actionUser->errorMsg?></div>
 							<?php
 						}
 					?>
@@ -67,7 +67,7 @@
 					<div id="profil" class="tabcontent">
 						<h2>Profil</h2>
 						<?php
-							loadProfil($action->family_member,$action);
+							loadProfil($actionUser->family_member,$actionUser);
 						?>
 					</div>
 

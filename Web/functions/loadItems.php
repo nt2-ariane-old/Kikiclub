@@ -2,12 +2,12 @@
 
 function loadMedia( $workshop ){
   ?>
-    <div class="media">
+    <div class="img-rounded">
 			<?php
 				if($workshop["MEDIA_TYPE"] == "mp4")
 				{
 			?>
-				<video width="100%" height="100%" controls>
+				<video class="img-rounded" width="100%" height="100%" controls>
 					<source src="<?=$workshop["MEDIA_PATH"]?>" type="video/<?= $workshop["MEDIA_TYPE"] ?>">
 						Your browser does not support the video tag.
 					</video>
@@ -16,13 +16,13 @@ function loadMedia( $workshop ){
 					        $workshop["MEDIA_TYPE"] == "jpg")
 				{
 			?>
-					<img src=<?=$workshop["MEDIA_PATH"]?> alt="">
+					<img class="img-rounded" src=<?=$workshop["MEDIA_PATH"]?> alt="">
 			<?php
 				}
 				else if($workshop["MEDIA_TYPE"] == "mp3")
 				{
 			?>
-					<audio src="<?=$workshop["MEDIA_PATH"]?>" controls="controls">
+					<audio class="img-rounded" src="<?=$workshop["MEDIA_PATH"]?>" controls="controls">
 						Your browser does not support the audio element.
 					</audio>
 			<?php

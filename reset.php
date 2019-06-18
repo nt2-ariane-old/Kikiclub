@@ -19,7 +19,7 @@
 			?>
 				<h3>Entrez votre courriel pour changer votre mot de passe :</h3>
 
-				<form action="reset.php" method="post" onSubmit="return openConfirmBox()">
+				<form action="reset.php" method="post">
 					<input type="email" name="email">
 					<button type="submit">Envoyer</button>
 				</form>

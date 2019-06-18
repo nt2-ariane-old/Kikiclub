@@ -1,10 +1,14 @@
 .form-workshops
 {
-	background-color: #ADB30F;
-	padding: 1em;
-	width:80vw;
-	border: 5px solid black;
-	margin:auto;
+	background-color: rgb(212, 212, 170);
+	padding: 3em;
+	width:100%;
+	border-top: 5px solid black;
+	border-bottom: 5px solid black;
+	box-shadow: 5px 10px #888888;
+	text-align: center;
+	margin: auto;
+
 }
 
 .form-workshops input, .form-workshops textarea,.form-workshops button,.form-workshops select
@@ -51,15 +55,6 @@
 	border: 1px solid black;
 	height: 70%;
 }
-.tabcontent
- {
-	 display: none;
- }
-
- .tabcontent.selected
- {
-	 display: block;
- }
 
  .avatars-list{
 	background-color: antiquewhite;
@@ -121,10 +116,51 @@
 {
 	padding:1em;
 	height:60px;
-	background-color: beige;
+	background-color: white;
+	border-top : 2px solid black;
+	border-bottom : 2px solid black;
+	width:100%;
+	margin: 1em auto;
+
 }
-#research-bar
+#research-bar,#research-barUsers
 {
 	float:right;
+	text-align: right;
 	width:300px;
+}
+
+#nav-console
+{
+	margin:1em 0 0 0;
+}
+
+.nav-item, .nav-link
+{
+	background-color: rgb(239, 245, 84);
+	color: black;
+
+}
+
+.active
+{
+	background-color: rgba(235, 221, 193, 0.623);
+	text-align: center;
+	color: black;
+}
+table
+{
+	width:100%;
+}
+.nav-tabs .nav-link.active
+{
+	background-color: rgb(235, 221, 193);
+	border-color: rgb(235, 214, 174);
+}
+.management-tab
+{
+	padding:3em;
+	background-color: rgb(235, 221, 193);
+	width:90%;
+	margin: auto;
 }

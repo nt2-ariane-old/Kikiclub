@@ -65,37 +65,52 @@ const openTab = (evt, tab) => {
 
 }
 
-const openConfirmBox = () =>
+let clicked;
+const openConfirmBox = (form) =>
 {
 	let confirmBox = document.createElement('div');
-			confirmBox.setAttribute('class','confirm-box');
+			confirmBox.setAttribute('class','alert alert-warning');
+			confirmBox.setAttribute('id','confirm-box');
 
 	let text = document.createElement('p');
 			text.innerHTML = 'Are you sure you want to do this?';
 
 	let yesBtn = document.createElement('button');
-			yesBtn.setAttribute('onclick','accept()');
-			yesBtn.setAttribute('class','yes-btn');
+			yesBtn.onclick = () => {accept(form)};
+			yesBtn.setAttribute('class','btn btn-success');
 			yesBtn.innerHTML = "Yes";
+			console.log(form);
 
 	let noBtn = document.createElement('button');
 			noBtn.setAttribute('onclick','refuse()');
-			noBtn.setAttribute('class','no-btn');
+			noBtn.setAttribute('class','btn btn-danger');
 			noBtn.innerHTML = "No";
 
 		confirmBox.appendChild(text);
 		confirmBox.appendChild(yesBtn);
 		confirmBox.appendChild(noBtn);
 
-	document.appendChild(confirmBox);
+	document.getElementById("box").appendChild(confirmBox);
+
+	return false;
 }
 
-const accept = () =>
+const accept = (form) =>
 {
-	return true;
+	let typeInput = document.createElement('input');
+			typeInput.type = 'hidden';
+			typeInput.name = clicked;
+
+	form.appendChild(typeInput)
+
+	form.onsubmit = 'return true';
+	form.submit();
 }
 const refuse = () =>
 {
+	let confirmBox = document.getElementById('confirm-box');
+	confirmBox.parentElement.removeChild(confirmBox);
+
 	return false;
 }
 

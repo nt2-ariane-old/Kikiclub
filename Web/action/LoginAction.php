@@ -8,7 +8,7 @@
 		public $error;
 		public $errorMsg;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "Login");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "login");
 			$this->otherlogin = false;
 			$this->error = false;
 		}

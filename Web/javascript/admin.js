@@ -161,6 +161,7 @@ const researchWorkshop = () =>
 				checkbox.setAttribute("type", "checkbox");
 				checkbox.setAttribute("name", "workshops_list[]");
 				checkbox.setAttribute("value", workshop["ID"]);
+				checkbox.setAttribute("class","checkbox");
 				checkCase.appendChild(checkbox);
 
 			//Add Media

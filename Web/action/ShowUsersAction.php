@@ -1,7 +1,6 @@
 <?php
-	require_once("action/CommonAction.php");
 	require_once("action/DAO/FamilyDAO.php");
-	class ShowUsersAction extends CommonAction {
+	class ShowUsersAction {
 		public $create;
 		public $manage;
 		public $modify;
@@ -11,14 +10,27 @@
 		public $error;
 		public $family_member;
 		public $errorMsg;
+		public $page_name = 'show-users';
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"show-users");
 			$this->createFamily = false;
 			$this->management = false;
 			$this->modify = false;
 		}
 
-		protected function executeAction() {
+		public function execute() {
+			if(isset($_GET["normal"]))
+			{
+				$_SESSION["mode"] = "normal";
+			}
+			$script = $_SERVER['SCRIPT_NAME'];
+
+			if($script == "/kikiclub/web/show-users.php")
+			{
+				header('Location:users.php');
+			} else if($script == "/show-users.php")
+			{
+				header('Location:users.php');
+			}
 			if(!empty($_GET["mode"]))
 			{
 				if($_GET["mode"] == "normal")
