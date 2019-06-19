@@ -20,59 +20,59 @@
 		public function execute() {
 			if(isset($_GET["normal"]))
 			{
-				$_SESSION["mode"] = "normal";
+				$_SESSION["usermode"] = "normal";
 			}
 			$script = $_SERVER['SCRIPT_NAME'];
 
-			if($script == "/kikiclub/web/show-users.php")
+			 if($script == "/kikiclub/web/show-users.php")
+			 {
+			 	header('Location:users.php');
+			 } else if($script == "/show-users.php")
+			 {
+			 	header('Location:users.php');
+			 }
+			if(!empty($_GET["usermode"]))
 			{
-				header('Location:users.php');
-			} else if($script == "/show-users.php")
-			{
-				header('Location:users.php');
-			}
-			if(!empty($_GET["mode"]))
-			{
-				if($_GET["mode"] == "normal")
+				if($_GET["usermode"] == "normal")
 				{
-					$_SESSION["mode"] = "normal";
+					$_SESSION["usermode"] = "normal";
 				}
-				else if($_GET["mode"] == "create")
+				else if($_GET["usermode"] == "create")
 				{
-					$_SESSION["mode"] = "create";
+					$_SESSION["usermode"] = "create";
 				}
-				else if($_GET["mode"] == "manage")
+				else if($_GET["usermode"] == "manage")
 				{
-					$_SESSION["mode"] = "manage";
+					$_SESSION["usermode"] = "manage";
 				}
-				else if($_GET["mode"] == "modify")
+				else if($_GET["usermode"] == "modify")
 				{
-					$_SESSION["mode"] = "modify";
+					$_SESSION["usermode"] = "modify";
 				}
 			}
 
-			if(empty($_SESSION["mode"]))
+			if(empty($_SESSION["usermode"]))
 			{
-				$_SESSION["mode"] = "normal";
+				$_SESSION["usermode"] = "normal";
 			}
-			if($_SESSION["mode"] == "manage")
-			{
-				$this->manage = true;
-			}
-			else if($_SESSION["mode"] == "create")
+			if($_SESSION["usermode"] == "create")
 			{
 				$this->create = true;
 				$this->avatars = FamilyDAO::loadAvatar();
+				var_dump($_POST);
 
-				if(!empty($_POST["form"]))
+				if(isset($_POST["form"]))
 				{
+
 					if( !empty($_POST["firstname"]) &&
 						!empty($_POST["lastname"]) &&
 						!empty($_POST["birth"]))
 						{
 							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
-							$_SESSION["mode"] = "normal";
-							header("Location:users.php?mode=manage");
+							$_SESSION["usermode"] = "normal";
+							?>
+								<script>window.location.replace("users.php?usermode=manage");</script>
+							<?php
 						}
 						else
 						{
@@ -81,7 +81,7 @@
 						}
 				}
 
-			} else if($_SESSION["mode"] == "modify")
+			} else if($_SESSION["usermode"] == "modify")
 			{
 				$this->modify = true;
 				$this->avatars = FamilyDAO::loadAvatar();
@@ -95,8 +95,10 @@
 							!empty($_POST["birth"]))
 							{
 								FamilyDAO::updateFamilyMember($_SESSION["member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
-								$_SESSION["mode"] = "normal";
-								header("Location:users.php?mode=manage");
+								$_SESSION["usermode"] = "normal";
+								?>
+									<script>window.location.replace("users.php?usermode=manage");</script>
+								<?php
 							}
 							else
 							{
@@ -107,8 +109,11 @@
 					if(!empty($_GET["delete"]))
 					{
 						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
-						$_SESSION["mode"] = "normal";
-						header("Location:users.php?mode=manage");
+						$_SESSION["usermode"] = "normal";
+						?>
+							<script>window.location.replace("users.php?usermode=manage");</script>
+						<?php
+
 					}
 				}
 

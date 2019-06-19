@@ -31,25 +31,11 @@
 			{
 				loadProfil(null,$actionUser);
 			}
-			else if($actionUser->manage)
-			{
-				?>
-				<div id="family">
-					<div class='child-info' >
-						<a href="?mode=create"><div class='child-logo' id="addLogo"></div></a>
-						<h2 class='child-name'>Add Family Member</h2>
-					</div>
-				</div>
-				<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
-
-					<script>loadChildren("manage")</script>
-				<?php
-
-			}
 			else if($actionUser->modify)
 			{
 				?>
-<div class="register-contents">
+
+					<div class="register-contents">
 					<?php
 						if($actionUser->error)
 						{
@@ -79,7 +65,7 @@
 					<div id="workshops" class="tabcontent">
 						<h2>Workshops</h2>
 					</div>
-					<div id="manage-btn"><a href="?mode=normal">Return to Profiles</a></div>
+					<div id="manage-btn"><a href="?usermode=normal">Return to Profiles</a></div>
 
 				<?php
 			}
@@ -88,12 +74,11 @@
 
 				?>
 				<div id="family">
-
 					<script>loadChildren()</script>
-
 				</div>
 
-				<div id="manage-btn"><a href="?mode=manage">Manage Profiles</a></div>
+
+				<div id="manage-btn" onclick="loadChildren()">Manage Profiles</div>
 
 
 				<?php

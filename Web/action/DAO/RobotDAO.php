@@ -6,7 +6,7 @@
 		public static function getRobots()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT * FROM ROBOT");
+			$statement = $connection->prepare("SELECT * FROM robot");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

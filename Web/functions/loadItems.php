@@ -75,8 +75,8 @@ function loadProfil($user,$action)
 			}
 			?>
 
-				<form action="<?=$action->page_name?>.php" method="post">
-						<input type="hidden" name="form" value="create">
+				<form action="users.php" method="post">
+						<input type="hidden" name="form">
 						<?php
 							if($action->page_name=='console')
 							{
@@ -97,6 +97,21 @@ function loadProfil($user,$action)
 										<input type="hidden" name="addFamily">
 										<input type="hidden" name="users_list[]" value="<?=$action->userMod?>">
 
+									<?php
+								}
+							}
+							else
+							{
+								if($action->modify)
+								{
+									?>
+										<input type="hidden" name="modify">
+									<?php
+								}
+								else
+								{
+									?>
+										<input type="hidden" name="add">
 									<?php
 								}
 							}
@@ -153,7 +168,7 @@ function loadProfil($user,$action)
 						</div>
 					</form>
 
-					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?mode=manage';} ?>';"><?php if($userExist){echo 'Delete';} else{echo 'Back';} ?></button>
+					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?usermode=manage';} ?>';"><?php if($userExist){echo 'Delete';} else{echo 'Back';} ?></button>
 	<?php
 }
 

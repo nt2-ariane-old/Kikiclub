@@ -57,11 +57,11 @@
 			$this->difficulties = WorkshopDAO::getDifficulties();
 			$this->robots = RobotDAO::getRobots();
 
-			if(isset($_GET["users"]))
+			if(isset($_GET["users"]) || isset($_POST["users"]))
 			{
 				$this->pageUsers=true;
 			}
-			else if (isset($_GET["workshops"]))
+			else if (isset($_GET["workshops"]) || isset($_POST["workshops"]))
 			{
 				$this->pageWorkshops=true;
 			}

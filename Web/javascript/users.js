@@ -1,6 +1,29 @@
-const loadChildren = (state = "normal") => {
+let previousState = "manage";
+let states = ["normal","manage"]
+const loadChildren = () => {
 
+	let state;
+	for (let i = 0; i < states.length; i++) {
+		const element = states[i];
+		if(element == previousState)
+		{
+			if(i == states.length - 1)
+			{
+				state = states[0];
+				break;
+			}
+			else
+			{
+				state = states[i+1];
+				break;
+			}
+		}
+	}
+
+	previousState = state;
 	let childHTML = document.querySelector("#child-template").innerHTML;
+	let parent = document.getElementById("family");
+	parent.innerHTML = "";
 	let formData = new FormData();
 
 	fetch("family-ajax.php", {
@@ -12,6 +35,10 @@ const loadChildren = (state = "normal") => {
 	.then(data => {
 		let family = data["family"];
 		let avatars = data["avatars"]
+		if(state==="manage")
+		{
+			addNewMember(parent);
+		}
 		for (let i = 0; i < family.length; i++) {
 
 			let one_year=1000*60*60*24*365;
@@ -65,17 +92,36 @@ const loadChildren = (state = "normal") => {
 
 			node.querySelector(".child-age").innerHTML = age + " years old";
 
-			document.getElementById("family").appendChild(node);
-
-			console.log();
+			parent.appendChild(node);
 		}
 	})
 
 }
 
+const addNewMember = (parent) => {
+	let divNew = document.createElement('div');
+	divNew.setAttribute('class','child-info');
+
+	let aNew = document.createElement('a');
+		aNew.href = "users.php?usermode=create";
+
+		let divLogo = document.createElement('div');
+			divLogo.setAttribute('class','child-logo');
+			divLogo.setAttribute('id','addLogo');
+
+		let h2Name = document.createElement('h2');
+			h2Name.innerHTML = "Add Family Member";
+			h2Name.setAttribute('class','child-name');
+
+
+		aNew.appendChild(divLogo);
+		aNew.appendChild(divLogo);
+	divNew.appendChild(aNew);
+	parent.appendChild(divNew);
+}
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector("a").href = "?mode=modify&member=" + member["ID"];
+	node.querySelector("a").href = "users.php?usermode=modify&member=" + member["ID"];
 
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

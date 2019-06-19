@@ -58,7 +58,7 @@
 		public static function selectMember($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,DATE_FORMAT(birthday,'%d/%m/%Y') birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE id=?");
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,DATE_FORMAT(birthday,'%d/%m/%Y') birthday,gender_id,id_avatar,id_user,id,score FROM family WHERE id=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -74,7 +74,7 @@
 		{
 			$connection = Connection::getConnection();
 			$name = '%' . $name . '%';
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE firstname LIKE ? OR lastname LIKE ?");
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM family WHERE firstname LIKE ? OR lastname LIKE ?");
 
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $name);
@@ -93,7 +93,7 @@
 		public static function selectFamilyMembers($id_parent)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM FAMILY WHERE id_user=? ORDER BY birthday DESC");
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM family WHERE id_user=? ORDER BY birthday DESC");
 
 			$statement->bindParam(1, $id_parent);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -110,7 +110,7 @@
 		public static function loadAvatar()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME,PATH FROM AVATAR");
+			$statement = $connection->prepare("SELECT ID,NAME,PATH FROM avatar");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
