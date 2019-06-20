@@ -186,12 +186,16 @@ const researchWorkshop = () =>
 				media.style.width = "100px";
 				media.src =workshop["MEDIA_PATH"];
 			}
-			else if($workshop["MEDIA_TYPE"] == "mp3")
+			else if(workshop["MEDIA_TYPE"] == "mp3")
 			{
 				media = document.createElement("audio");
-				media.src = $workshop["MEDIA_PATH"];
+				media.src = workshop["MEDIA_PATH"];
 				media.controls="controls";
 				media.innerHTML = "Your browser does not support the audio element.";
+			}
+			else
+			{
+				media = document.createElement("div");
 			}
 			caseMedia.appendChild(media);
 
@@ -235,6 +239,7 @@ const researchMember = () =>
 	let node= document.querySelector("#research-barUsers");
 	let table = document.querySelector("#table-users");
 	let formData = new FormData();
+
 	formData.append('name', node.value);
 	formData.append('user',true);
 
@@ -245,10 +250,8 @@ const researchMember = () =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
-
 		table.innerHTML = "";
-
+		console.log(data);
 		data.forEach(user => {
 			let line = document.createElement("TR");
 

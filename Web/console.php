@@ -23,9 +23,7 @@
 		{
 			?>
 				<div class="management-tab">
-					<div class="bar">
-						<input type="text" name="research" id="research-bar" placeholder="Research" onkeyup="researchWorkshop()">
-					</div>
+
 					<?php
 						if($action->add)
 						{
@@ -38,9 +36,12 @@
 						else
 						{
 							?>
+							<div class="bar">
+								<input type="text" name="research" id="research-bar" placeholder="Research" onkeyup="researchWorkshop()">
+							</div>
 							<div class='form-workshops'>
 
-								<form action="console.php" method="post" onSubmt="return validTab(this.form)">
+								<form action="console.php" method="post" onSubmit="return validTab(this)">
 								<input type="hidden" name="workshops">
 
 								<table class='table table-striped table-hover' style="width:100%">
@@ -74,9 +75,7 @@
 		{
 			?>
 				<div class="management-tab">
-					<div class="bar">
-						<input type="text" name="research" id="research-barUsers" placeholder="Research" onkeyup="researchMember()">
-					</div>
+
 					<?php
 						if($action->add)
 						{
@@ -199,22 +198,31 @@
 										}
 									?>
 								</div>
-								<a id="manage-btn" onclick="sendWorkshopState()">Send</a>
+								<a id="manage-btn" href="console.php">Back</a>
 							<?php
 						}
 						else if($action->modFamily)
 						{
 							loadProfil($action->familyMod,$action);
+							?>
+								<a id="manage-btn" href="console.php">Back</a>
+							<?php
 						}
 						else if($action->addFamily)
 						{
 							loadProfil(null,$action);
+							?>
+							<a id="manage-btn" href="console.php">Back</a>
+						<?php
 						}
 						else
 						{
 							?>
+							<div class="bar">
+								<input type="text" name="research" id="research-barUsers" placeholder="Research" onkeyup="researchMember()">
+							</div>
 							<div class='form-workshops'>
-								<form action="console.php" method="post" onSubmit="return validTab(this.form)">
+								<form action="console.php" method="post" onSubmit="return validTab(this)">
 									<input type="hidden" name="users">
 									<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
 										<thead>

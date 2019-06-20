@@ -34,6 +34,7 @@
 		}
 		protected function executeAction() {
 			$this->workshops_list = WorkshopDAO::getWorkshops();
+
 			$this->robots = RobotDAO::GetRobots();
 			if(!empty($_SESSION["member"]))
 			{

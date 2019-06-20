@@ -47,8 +47,8 @@
 
 					if(sizeof($action->new) > 0)
 						loadWorkshopsCarousel($action->new,'new-workshops',$action,"New");
-
-					loadWorkshopsCarousel($action->recommandations,'new-recommandations',$action,"Recommandated");
+					if(sizeof($action->recommandations) > 0)
+						loadWorkshopsCarousel($action->recommandations,'new-recommandations',$action,"Recommandated");
 
 					if(sizeof($action->completed) > 0)
 						loadWorkshopsCarousel($action->completed,'completed-workshops',$action,"Completed");

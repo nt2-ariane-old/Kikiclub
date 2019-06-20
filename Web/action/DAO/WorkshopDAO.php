@@ -21,6 +21,7 @@
 		public static function getWorkshopsLikeName($name) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 			$name = '%' . $name . '%';
+
 			$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE NAME LIKE ?");
 			$statement->bindParam(1, $name);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);

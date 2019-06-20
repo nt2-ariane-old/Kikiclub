@@ -42,12 +42,20 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: right;
-	padding:3em;
 	position: relative;
-
+	border: 3px solid black;
 }
 .workshop * {
 	position: relative;
+
+}
+.workshop .title
+{
+	display: flex;
+	align-items: center;
+	height: 40%;
+	width: 100%;
+	text-align: center;
 }
 .workshop h4{
 	text-align: left;
@@ -61,7 +69,8 @@
 
 	padding: 0.5em;
 	width:200px;
-	margin:1em 0;
+	margin: 1em 0;
+	align-self: left;
 }
 .workshop .description
 {
@@ -72,6 +81,7 @@
 	overflow: hidden;
 	margin:1em 0;
 }
+
 
 .workshops-list a {
 	color:inherit;
@@ -85,14 +95,30 @@
 }
 
 .workshop .media{
-	max-height: 100%;
-	max-width: 100%;
+	height: 100%;
+	width: 100%;
 	position: absolute;
 	left: 0;
 	bottom:0;
 	border: none;
 	z-index: 0;
+	opacity: 0.4;
+	display: flex;
+}
 
+.workshop .media video,.workshop .media audio
+{
+	width:100%;
+	height: auto;
+	display: block;
+	align-self: flex-end;
+}
+.workshop .media img
+{
+	width:100%;
+	height: auto;
+	display: block;
+	align-self: center;
 }
 
 .workshop-section .media{

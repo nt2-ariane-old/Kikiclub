@@ -75,7 +75,7 @@ function loadProfil($user,$action)
 			}
 			?>
 
-				<form action="users.php" method="post">
+				<form action="<?php if($action->page_name == 'console') echo 'console'; else echo 'users' ?>.php" method="post">
 						<input type="hidden" name="form">
 						<?php
 							if($action->page_name=='console')
@@ -88,7 +88,6 @@ function loadProfil($user,$action)
 									?>
 										<input type="hidden" name="modify">
 										<input type="hidden" name="members_list[]" value="<?=$user["ID"]?>">
-
 									<?php
 								}
 								else
@@ -96,7 +95,6 @@ function loadProfil($user,$action)
 									?>
 										<input type="hidden" name="addFamily">
 										<input type="hidden" name="users_list[]" value="<?=$action->userMod?>">
-
 									<?php
 								}
 							}
@@ -169,6 +167,7 @@ function loadProfil($user,$action)
 					</form>
 
 					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?usermode=manage';} ?>';"><?php if($userExist){echo 'Delete';} else{echo 'Back';} ?></button>
+			</div>
 	<?php
 }
 
@@ -280,12 +279,13 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 										loadMedia($workshop);
 									?>
 									<h4><?= $title ?> workshop</h3>
-									<h2><?= $workshop["NAME"] ?></h4>
+									<div class="title"><h2><?= $workshop["NAME"] ?></h4></div>
+
+									<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
 									<?php
 										loadStars($workshop);
 									?>
 
-									<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
 								</div>
 							<?php
 

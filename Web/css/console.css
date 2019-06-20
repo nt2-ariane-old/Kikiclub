@@ -157,3 +157,11 @@ table
 	width:90%;
 	margin: auto;
 }
+
+#manage-btn
+{
+	position: initial;
+	width: 100%;
+
+	margin: auto;
+}
