@@ -83,6 +83,32 @@
 	if( $action->page_name != 'index' && $action->page_name != 'login')
 	{
 ?>
+<header>
+
+<h1>KIKICLUB</h1>
+		<h2><?php
+			if($action->page_name == 'console')
+			{
+				if($action->pageUsers)
+				{
+					 echo "Users Management";
+				}
+				else if($action->pageWorkshops)
+				{
+					echo "Workshops Management";
+				}
+				else
+				{
+					echo "Console";
+				}
+
+			}
+			else
+			{
+				echo $action->page_name;
+			}
+		?></h2>
+</header>
 <nav id="menu" class="navbar navbar-inverse navbar-static-top" >
 
 	<div class="container">
@@ -94,7 +120,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
 			</a>
-    </div>
+		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -152,31 +178,6 @@
 		?>
       </ul>
     </div>
-	</div>
-	<div class="web-title">
-		<h1>KIKICLUB</h1>
-		<h2><?php
-			if($action->page_name == 'console')
-			{
-				if($action->pageUsers)
-				{
-					 echo "Users Management";
-				}
-				else if($action->pageWorkshops)
-				{
-					echo "Workshops Management";
-				}
-				else
-				{
-					echo "Console";
-				}
-
-			}
-			else
-			{
-				echo $action->page_name;
-			}
-		?></h2>
 	</div>
 
 </nav>

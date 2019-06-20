@@ -7,7 +7,7 @@
 	require_once("partial/header.php");
 ?>
 	<script src="javascript/login.js"></script>
-
+	<link rel="stylesheet" href="css/login.css">
 	<div class="logo"></div>
 
 	<div class="logo-nom"></div>

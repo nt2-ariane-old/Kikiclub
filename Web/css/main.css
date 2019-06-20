@@ -1,3 +1,4 @@
+/* DEFAULT */
 *{
 	margin: 0;
 	padding: 0;
@@ -14,49 +15,82 @@ HTML {
 body{
 	background-color: #D8DF23 !important;
 }
-#hamburger{
-	background-image: url('../images/hamburger.png');
-	background-size: contain;
-	width: 30px;
-	height: 30px;
-	background-color: rgb(73, 90, 61);
-	float: left;
 
+table{
+	background-color: beige;
 }
-.btn-link {
+
+a:hover {
+	text-decoration: black;
+	color:inherit;
+}
+
+.btn-link { /* Button that look like a link*/
 	background-color: transparent;
 	box-shadow: none;
 	border: none;
 }
-.nav-item, .nav-link
+
+li{
+	list-style-type: none;
+}
+
+a{
+	text-decoration: none;
+	color:black;
+
+}
+
+h1
 {
-	color: black;
+	font-size: 128px;
+	text-align:center;
+	color:#878C00;
 }
-#menu{
-	position: sticky;
-	z-index: 19;
-	right: 0;
+
+.error
+{
+	background-color: white;
+	border: 3px solid black;
+	text-align: center;
+	height:30px;
+	color:red;
+	font-weight: bolder;
 }
-nav .container {
-	width:25%;
-	float: left;
+
+.separator
+{
+	text-align: center;
+	padding:1em;
 }
-nav .web-title {
-	width:75%;
+
+#setting-button /* Bouton principal pour changer de pages */
+{
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: left;
+	background-image: url("../images/user.png");
+}
+
+
+/* HEADER */
+header {
+	width:100%;
 	text-align: center;
 	float: left;
 	color: black;
+	background-color: white;
 }
-nav .web-title h1{
+header h1{
 	color:black;
 	border-bottom: 5px solid black;
 	width: 10em;
 	margin: auto;
 }
-nav .web-title h2{
+header h2{
 	color:rgb(70, 70, 70);
 }
-
+/* NAV */
 nav{
 	width:100%;
 	position: fixed;
@@ -64,6 +98,22 @@ nav{
 	left:0;
 	background-color: white;
 }
+
+#menu{ /* main nav Id */
+	position: sticky;
+	z-index: 19;
+	right: 0;
+}
+
+#hamburger{ /* Hamburger menu button */
+	background-image: url('../images/hamburger.png');
+	background-size: contain;
+	width: 30px;
+	height: 30px;
+	background-color: rgb(73, 90, 61);
+	float: left;
+}
+
 nav ul {
 	width: 100%;
 	background-color: white;
@@ -77,62 +127,18 @@ nav ul li {
 	margin: auto;
 }
 
-li{
-	list-style-type: none;
-}
-a{
-	text-decoration: none;
-	color:black;
-
-}
-.login-block
-{
-	background-color: transparent;
-	padding : 50px;
-	position: absolute;
-
-	width:100%;
-	left: calc((100vw - 80% - (50px)) / 2);
-	top:calc((100vh - 80% + 150px + (1em * 2)) / 2);
-}
-#spinner{
-	background: #4267b2;
-    border-radius: 5px;
-	color: white;
-    height: 40px;
-    text-align: center;
-    width: 80%;
-}
-.login-block input
-{
-	display: block;
-	margin : 1em;
-	width:80%;
-	background-color: white;
-	padding: 0.5em;
-}
-.checked {
-  color: rgb(117, 4, 93);
-}
-.login-block button
-{
-	border: 3px solid #ADB30F;
-	background-color: transparent;
-	display: block;
-	margin : auto;
-
-	background-color: #F8FD79;
-	padding: 5px 40px;
-	margin: auto;
+nav .container {
+	width:25%;
+	float: left;
 }
 
-h1
+.nav-item, .nav-link
 {
-	font-size: 128px;
-	text-align:center;
-	color:#878C00;
+	color: black;
 }
-.logo-nom
+
+/* LOGO */
+.logo-nom  /* logo avec nom */
 {
 	background-image: url("../images/logoNom.png");
 	background-size: 100%;
@@ -145,7 +151,7 @@ h1
 	top:calc((100vh - 450px ) / 2 );
 }
 
-.logo
+.logo  /* logo sur le long */
 {
 	background-image: url("../images/logo.png");
 	width:30%;
@@ -157,60 +163,8 @@ h1
 	height: 100%;
 }
 
-.logo img
-{
-	height: 100%;
-}
 
-.signinButton{
-	padding:0.5em;
-	color:black;
-	margin:auto;
-
-}
-.error
-{
-	background-color: white;
-	border: 3px solid black;
-	text-align: center;
-	height:30px;
-	color:red;
-	font-weight: bolder;
-}
-.signinButton.other
-{
-	border: 2px solid rgb(63, 73, 66);
-	text-align: center;
-}
-
-.signinButton.other a,
-.signinButton.other a:hover
-{
-	color:black;
-	text-decoration: none;
-}
-.signinButton.other:hover
-{
-	border: 2px solid black;
-	box-shadow: 3px 3px black;
-	text-decoration: none;
-
-}
-
-.separator
-{
-	text-align: center;
-	padding:1em;
-}
-
-table{
-	background-color: beige;
-}
-
-a:hover {
-	text-decoration: black;
-	color:inherit;
-}
+/* Afficheur de Profiles */
 #x-btn
 {
 	background-color: red;
@@ -236,14 +190,8 @@ a:hover {
 	z-index: 30;
 }
 
-#setting-button
-{
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: left;
-	background-image: url("../images/user.png");
-}
 
+/* Box de confirmation de formulaire */
 #confirm-box{
 	position: fixed;
 	width:200x;
@@ -258,20 +206,8 @@ a:hover {
 	width:60px;
 
 }
-@media only screen and (min-width: 768px) {
-	.login-block{
-		width:400px;
-		left: calc((100vw - 400px - (50px)) / 2);
-		top:calc((100vh - 400px + 150px + (1em * 2)) / 2);
-	}
-	#spinner{
-		width: 400px;
-	}
-	#manage-btn{
-		bottom:5em;
-	}
-}
 
+/* Bouton pour modifier */
 #manage-btn{
 	border: 5px solid black;
 	width:200px;
@@ -284,4 +220,12 @@ a:hover {
 
 #manage-btn:hover{
 	border: 5px solid rgba(0, 0, 0, 0.425);
+}
+
+
+/* Version Web */
+@media only screen and (min-width: 768px) {
+	#manage-btn{
+		bottom:5em;
+	}
 }
