@@ -2,7 +2,7 @@
 
 function loadMedia( $workshop ){
   ?>
-    <div class="img-rounded">
+    <div class="media">
 			<?php
 				if($workshop["MEDIA_TYPE"] == "mp4")
 				{
@@ -244,14 +244,13 @@ function loadWorkshopsCreator($workshop, $action)
 
 function loadWorkshopsCarousel($workshops,$name,$action,$title)
 {
-
+	$nbWorkshops = 4;
 	?>
 		<div id="<?= $name  ?>" class="carousel slide border" data-ride="carousel">
 		   <!-- Indicators -->
 		   <ol class="carousel-indicators">
 				<?php
-					$i=0;
-					foreach ($workshops as $workshop) {
+					for ($i=0; $i < sizeof($workshops) / $nbWorkshops; $i++) {
 				?>
 
 					<li data-target="#<?= $name  ?>" data-slide-to="<?= $i ?>"	<?php if($i == 0) echo 'class="active"';?>></li>
@@ -262,24 +261,40 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 			<!-- Content -->
 			<div class="carousel-inner">
 			<?php
-				$i=0;
-				foreach ($workshops as $workshop) {
-					?>
 
-						<div class="workshop carousel-item <?php if($i == 0) echo 'active';?>" style="background-image:url(<?= $workshop["MEDIA_PATH"] ?>);">
-							<h4><?= $title ?> workshop</h3>
-							<h2><?= $workshop["NAME"] ?></h4>
+				$i=0;
+				for ($i=0; $i < sizeof($workshops); $i++) {
+					?>
+					<div class="carousel-item <?php if($i == 0) echo 'active';?>">
+						<div class="container">
+							<div class="row">
 							<?php
-								loadStars($workshop);
+								$j = $i;
+								for($i; $i < $j + $nbWorkshops  && $i < sizeof($workshops); $i++)
+								{
+									$workshop = $workshops[$i];
 							?>
+
+									<div class="workshop col-sm-<?= 12/$nbWorkshops ?>" >
+									<?php
+										loadMedia($workshop);
+									?>
+									<h4><?= $title ?> workshop</h3>
+									<h2><?= $workshop["NAME"] ?></h4>
+									<?php
+										loadStars($workshop);
+									?>
+
+									<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
+								</div>
 							<?php
-								loadMedia($workshop);
+
+							}
 							?>
-							<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
-							<div class="description"><?= $workshop["CONTENT"]?></div>
+							</div>
 						</div>
+					</div>
 					<?php
-					$i++;
 				}
 
 			?>

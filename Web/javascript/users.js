@@ -1,5 +1,7 @@
 let previousState = "manage";
 let states = ["normal","manage"]
+let one_year=1000*60*60*24*365;
+
 const loadChildren = () => {
 
 	let state;
@@ -21,9 +23,9 @@ const loadChildren = () => {
 	}
 
 	previousState = state;
-	let childHTML = document.querySelector("#child-template").innerHTML;
-	let parent = document.getElementById("family");
-	parent.innerHTML = "";
+	let memberHTML = document.querySelector("#child-template").innerHTML;
+	let container = document.getElementById("family");
+	container.innerHTML = "";
 	let formData = new FormData();
 
 	fetch("family-ajax.php", {
@@ -35,70 +37,70 @@ const loadChildren = () => {
 	.then(data => {
 		let family = data["family"];
 		let avatars = data["avatars"]
-		if(state==="manage")
-		{
-			addNewMember(parent);
-		}
+		addNewMember(container);
+
 		for (let i = 0; i < family.length; i++) {
-
-			let one_year=1000*60*60*24*365;
-			let node = document.createElement("div");
-			node.innerHTML = childHTML;
-			let id_logo =  family[i]["id_avatar"];
-			for (x in avatars)
-			{
-				if(x == id_logo)
-				{
-					node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
-				}
-			}
-			node.querySelector('a').href = "workshops.php?member=" +family[i]["id"];
-			if(state==="manage")
-			{
-				addManageButton(node,family[i] );
-			}
-
-			node.querySelector(".child-name").innerHTML = family[i]["firstname"];
-			console.log(family[i]["alert"].length);
-			if(family[i]["alert"].length > 0)
-			{
-				node.querySelector(".child-nbalert").style.display = 'block';
-				node.querySelector(".child-nbalert").innerHTML = family[i]["alert"].length;
-
-			}
-			else
-			{
-				node.querySelector(".child-nbalert").style.display = 'none';
-			}
-
-			node.querySelector(".child-nbPTS").innerHTML = family[i]["score"] + " points cumulated";
-
-			let count = 0;
-			for (const key in family[i]["workshops"]) {
-				if (family[i]["workshops"].hasOwnProperty(key)) {
-					const element = family[i]["workshops"][key];
-					if(element["STATUT"]==2)
-					{
-						count++;
-					}
-				}
-			}
-
-			node.querySelector(".child-nbWorkshops").innerHTML = count + " workshops completed";
-
-			let birth = new Date(family[i]["birthday"]);
-			let today = new Date();
-			let age = Math.floor(new Date( today.getTime() - birth.getTime()) / one_year);
-
-			node.querySelector(".child-age").innerHTML = age + " years old";
-
-			parent.appendChild(node);
+			addMember(family[i], memberHTML,container,state, avatars);
 		}
 	})
 
 }
+const addMember = (member, memberHTML, container, state ,avatars) =>
+{
+	let node = document.createElement("div");
+	node.innerHTML = memberHTML;
+	let id_logo =  member["id_avatar"];
+	for (x in avatars)
+	{
+		if(x == id_logo)
+		{
+			node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
+		}
+	}
+	node.querySelector('a').href = "workshops.php?member=" +member["id"];
+	if(state==="manage")
+	{
+		addManageButton(node,member );
+	}
 
-const addNewMember = (parent) => {
+	node.querySelector(".child-name").innerHTML = member["firstname"];
+	console.log(member["alert"].length);
+	if(member["alert"].length > 0)
+	{
+		node.querySelector(".child-nbalert").style.display = 'block';
+		node.querySelector(".child-nbalert").innerHTML = member["alert"].length;
+
+	}
+	else
+	{
+		node.querySelector(".child-nbalert").style.display = 'none';
+	}
+
+	node.querySelector(".child-nbPTS").innerHTML = member["score"] + " points cumulated";
+
+	let count = 0;
+	for (const key in member["workshops"]) {
+		if (member["workshops"].hasOwnProperty(key)) {
+			const element = member["workshops"][key];
+			if(element["STATUT"]==2)
+			{
+				count++;
+			}
+		}
+	}
+
+	node.querySelector(".child-nbWorkshops").innerHTML = count + " workshops completed";
+
+	let birth = new Date(member["birthday"]);
+	let today = new Date();
+	let age = Math.floor(new Date( today.getTime() - birth.getTime()) / one_year);
+
+	node.querySelector(".child-age").innerHTML = age + " years old";
+
+	container.appendChild(node);
+}
+
+const addNewMember = (container) => {
 	let divNew = document.createElement('div');
 	divNew.setAttribute('class','child-info');
 
@@ -115,9 +117,9 @@ const addNewMember = (parent) => {
 
 
 		aNew.appendChild(divLogo);
-		aNew.appendChild(divLogo);
+		aNew.appendChild(h2Name);
 	divNew.appendChild(aNew);
-	parent.appendChild(divNew);
+	container.appendChild(divNew);
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";

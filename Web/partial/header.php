@@ -80,41 +80,58 @@
 
 <div id="box"></div>
 
-<nav class="nav nav-pills nav-justified" >
-		<?php
+<nav class="navbar navbar-inverse navbar-static-top" >
+	<a href="#" class="btn btn-info btn-sm">
+		<span class="glyphicon glyphicon-menu-hamburger"></span>
+	</a>
+	<div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+	 	<?php
 			if(!($action->page_name == 'users' ||
 				$action->page_name == 'console' ||
 				$action->page_name == 'login'))
 			{
 				?>
-					<a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a>
+					<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
 
 				<?php
 			}
 		?>
-		<?php
+       <?php
 			if($action->isLoggedIn())
 			{
 				?>
-					<a class="nav-item nav-link" onclick="signOut()">Sign out</a>
+					<li><a class="nav-item nav-link" onclick="signOut()">Sign out</a></li>
 				<?php
 			}
 			if($action->isAdmin()){
 				if( $action->page_name != 'console')
 				{
 					?>
-						<a class="nav-item nav-link" onclick="window.location.href='console.php'">Admin Console</a>
+						<li><a class="nav-item nav-link" onclick="window.location.href='console.php'">Admin Console</a></li>
 					<?php
 				}
 				else
 				{
 					?>
-						<a class="nav-item nav-link" onclick="window.location.href='users.php?normal'">Normal Mode</a>
+						<li><a class="nav-item nav-link" onclick="window.location.href='users.php?normal'">Normal Mode</a></li>
 					<?php
 				}
 
 			}
 		?>
-
-	</ul>
+      </ul>
+    </div>
+  </div>
 </nav>

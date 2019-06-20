@@ -46,12 +46,9 @@
 	position: relative;
 
 }
-.workshop img{
-	max-width:100%;
-	border:2px solid black;
-	max-height: 100%;
+.workshop * {
+	position: relative;
 }
-
 .workshop h4{
 	text-align: left;
 	color:yellowgreen;
@@ -86,20 +83,15 @@
 	width: 100%;
 	margin:0;
 }
-.workshop video, .workshop img, .workshop audio{
+
+.workshop .media{
 	max-height: 100%;
-	max-width: 50%;
+	max-width: 100%;
 	position: absolute;
-	right: 0;
-	top:0;
+	left: 0;
+	bottom:0;
 	border: none;
-}
-.workshops-list .media{
-	border: 2px solid black;
-	margin:auto 0;
-	padding: 0;
-	width: 80%;
-	height: 65%;
+	z-index: 0;
 
 }
 
