@@ -64,7 +64,11 @@ const openTab = (evt, tab) => {
 	evt.currentTarget.classList.add("active");
 
 }
-
+let closeProfilesBox = () =>
+{
+	let box = document.querySelector("#profile-box");
+	box.style.display = "none";
+}
 let clicked;
 const openConfirmBox = (form) =>
 {

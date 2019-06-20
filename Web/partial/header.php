@@ -80,21 +80,21 @@
 
 <div id="box"></div>
 
-<nav class="navbar navbar-inverse navbar-static-top" >
-	<a href="#" class="btn btn-info btn-sm">
-		<span class="glyphicon glyphicon-menu-hamburger"></span>
-	</a>
+<nav id="menu" class="navbar navbar-inverse navbar-static-top" >
+
 	<div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+			<a id="hamburger" href="#" class="btn btn-info btn-sm navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="glyphicon glyphicon-menu-hamburger"></span>
+				<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+			</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+		<!-- Collect the nav links, forms, and other content for toggling -->
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 	 	<?php
