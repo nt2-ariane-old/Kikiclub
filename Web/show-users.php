@@ -15,7 +15,6 @@
 			<a href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></a>
 
 			<h2 class='child-name'></h2>
-			<h2 class='child-age'></h2>
 			<p class='child-nbWorkshops'></p>
 			<p class='child-nbPTS'></p>
 			<div class='child-nbalert'></div>

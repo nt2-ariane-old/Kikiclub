@@ -1,6 +1,5 @@
 let previousState = "manage";
 let states = ["normal","manage"]
-let one_year=1000*60*60*24*365;
 
 const loadChildren = () => {
 
@@ -93,9 +92,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 
 	let birth = new Date(member["birthday"]);
 	let today = new Date();
-	let age = Math.floor(new Date( today.getTime() - birth.getTime()) / one_year);
 
-	node.querySelector(".child-age").innerHTML = age + " years old";
 
 	container.appendChild(node);
 }

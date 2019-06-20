@@ -375,3 +375,14 @@ const researchMember = () =>
 		});
 	});
 }
+
+const validTab = (form) =>
+{
+	let valide = true;
+	if(clicked=='delete')
+	{
+
+		valide = false;
+	}
+	return valide;
+}

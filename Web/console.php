@@ -40,7 +40,7 @@
 							?>
 							<div class='form-workshops'>
 
-								<form action="console.php" method="post" onSubmit="return openConfirmBox(this)">
+								<form action="console.php" method="post" onSubmt="return validTab(this.form)">
 								<input type="hidden" name="workshops">
 
 								<table class='table table-striped table-hover' style="width:100%">
@@ -61,7 +61,7 @@
 								</table>
 									<button type="submit" name="add" onclick="clicked=this.name" value="true">Add</button>
 									<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
-									<button type="submit" name="delete" onclick="clicked=this.name" value="true">Delete</button>
+									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
 								</form>
 							</div>
 							<?php
@@ -82,7 +82,7 @@
 						{
 							?>
 							<div class="form-workshops">
-								<form action="console.php" method="post" onSubmit="return openConfirmBox(this)">
+								<form action="console.php" method="post">
 									<input type="hidden" name="add">
 									<input type="hidden" name="users">
 
@@ -102,7 +102,7 @@
 
 							?>
 							<div class="form-workshops">
-								<form action="console.php" method="post" onSubmit="return openConfirmBox(this)">
+								<form action="console.php" method="post">
 									<input type="hidden" name="modify">
 									<input type="hidden" name="users">
 									<input type="hidden" name="users_list[]" value="<?=$action->userMod["ID"]?>"></td>
@@ -214,7 +214,7 @@
 						{
 							?>
 							<div class='form-workshops'>
-								<form action="console.php" method="post" onSubmit="return openConfirmBox(this)">
+								<form action="console.php" method="post" onSubmit="return validTab(this.form)">
 									<input type="hidden" name="users">
 									<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
 										<thead>
@@ -236,7 +236,7 @@
 									<button type="submit" name="add" onclick="clicked=this.name">Add Users</button>
 									<button type="submit" name="addFamily" onclick="clicked=this.name">Add Family Member</button>
 									<button type="submit" name="modify" onclick="clicked=this.name">Modify</button>
-									<button type="submit" name="delete" onclick="clicked=this.name">Delete</button>
+									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement)">Delete</button>
 								</form>
 							</div>
 						<?php
