@@ -20,18 +20,49 @@ body{
 	width: 30px;
 	height: 30px;
 	background-color: green;
-	z-index: 25;
+	float: left;
+
+}
+.btn-link {
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+}
+.nav-item, .nav-link
+{
+	color: black;
+}
+#menu{
+	position: sticky;
+	z-index: 19;
+	right: 0;
+}
+nav .container {
+	width:25%;
+	float: left;
+}
+nav .web-title {
+	width:75%;
+	text-align: center;
+	float: left;
+	color: black;
+}
+nav .web-title h1{
+	color:black;
+	border-bottom: 5px solid black;
+	width: 10em;
+	margin: auto;
+}
+nav .web-title h2{
+	color:rgb(70, 70, 70);
 }
 
-#menu{
-	position: fixed;
-	z-index: 2;
-}
 nav{
-	width:25%;
+	width:100%;
 	position: fixed;
 	top: 0;
 	left:0;
+	background-color: white;
 }
 nav ul {
 	width: 100%;

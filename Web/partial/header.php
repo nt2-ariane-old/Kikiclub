@@ -79,7 +79,10 @@
 <div id="fb-root"></div>
 
 <div id="box"></div>
-
+<?php
+	if( $action->page_name != 'index' && $action->page_name != 'login')
+	{
+?>
 <nav id="menu" class="navbar navbar-inverse navbar-static-top" >
 
 	<div class="container">
@@ -119,13 +122,29 @@
 				if( $action->page_name != 'console')
 				{
 					?>
-						<li><a class="nav-item nav-link" onclick="window.location.href='console.php'">Admin Console</a></li>
+						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Console</a>
+								<ul class="dropdown-menu">
+									<form action="console.php" method="post">
+										<li> <button class="btn-link" name="users">Users</button></li>
+										<li> <button class="btn-link" name="workshops">Workshops</button></li>
+									</form>
+								</ul>
+						</li>
+
 					<?php
 				}
 				else
 				{
 					?>
-						<li><a class="nav-item nav-link" onclick="window.location.href='users.php?normal'">Normal Mode</a></li>
+						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Console</a>
+								<ul class="dropdown-menu">
+									<form action="console.php" method="post">
+										<li> <button class="btn-link" name="users">Users</button></li>
+										<li> <button class="btn-link" name="workshops">Workshops</button></li>
+									</form>
+								</ul>
+						</li>
+						<li><a class="nav-item nav-link" onclick="window.location.href='users.php?normal'">Back to User Console</a></li>
 					<?php
 				}
 
@@ -133,5 +152,34 @@
 		?>
       </ul>
     </div>
-  </div>
+	</div>
+	<div class="web-title">
+		<h1>KIKICLUB</h1>
+		<h2><?php
+			if($action->page_name == 'console')
+			{
+				if($action->pageUsers)
+				{
+					 echo "Users Management";
+				}
+				else if($action->pageWorkshops)
+				{
+					echo "Workshops Management";
+				}
+				else
+				{
+					echo "Console";
+				}
+
+			}
+			else
+			{
+				echo $action->page_name;
+			}
+		?></h2>
+	</div>
+
 </nav>
+<?php
+	}
+?>
