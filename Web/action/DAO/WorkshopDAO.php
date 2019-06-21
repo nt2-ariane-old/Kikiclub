@@ -5,16 +5,16 @@
 
 		public static function getWorkshops($orderby="none",$ascendant=false) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
-
-			if($orderby != "none")
+			if($orderby == "NAME")
 			{
 				if($ascendant)
-					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY ? ASC ");
+					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY NAME ASC ");
 				else
-					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY ? DESC ");
-
-				$statement->bindParam(1, $orderby);
-
+					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY NAME DESC ");
+			}
+			else if($orderby == "ID")
+			{
+				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY ID DESC ");
 			}
 			else
 			{
@@ -28,7 +28,6 @@
 			while ($row = $statement->fetch()) {
 				$content[] = $row;
 			}
-
 			return $content;
 		}
 		public static function getWorkshopsLikeName($name) { //RECEVOIR TOUTES LES PAGES
@@ -64,6 +63,29 @@
 			}
 
 			return $value;
+		}
+		public static function searchWorkshops($request=null, $value=null)
+		{
+
+			$connection = Connection::getConnection();
+			if($request == "difficulty")
+			{
+				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE ID_DIFFICULTY=?");
+				$statement->bindParam(1, $value);
+			}
+			else
+			{
+				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ");
+			}
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+			return $content;
 		}
 		public static function getDifficulties()
 		{

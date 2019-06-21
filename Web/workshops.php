@@ -55,10 +55,13 @@
 						<div id="collapseDifficulty" class="collapse show" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
 						<div class="card-body">
 							<ul>
-								<li>Débutant</li>
-								<li>Intérmédiaire</li>
-								<li>Avancé</li>
-								<li>Expert</li>
+								<?php
+									foreach ($action->difficulty as $diff) {
+										?>
+											<li onclick="setSearchParams('difficulty',<?=$diff['ID'] ?>,this)"><?= $diff["NAME"] ?></li>
+										<?php
+									}
+								?>
 							</ul>
 						</div>
 					</div>
@@ -76,12 +79,12 @@
 						<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
 						<div class="card-body">
 							<ul>
-								<li>1st Grade</li>
-								<li>2nd Grade</li>
-								<li>3rd Grade</li>
-								<li>4th Grage</li>
-								<li>5th Grage</li>
-								<li>6th Grage</li>
+								<li onclick="setSearchParams('age',1,this)">1st Grade</li>
+								<li onclick="setSearchParams('age',2,this)">2nd Grade</li>
+								<li onclick="setSearchParams('age',3,this)">3rd Grade</li>
+								<li onclick="setSearchParams('age',4,this)">4th Grage</li>
+								<li onclick="setSearchParams('age',5,this)">5th Grage</li>
+								<li onclick="setSearchParams('age',6,this)">6th Grage</li>
 							</ul>
 						</div>
 					</div>
@@ -98,10 +101,33 @@
 						<div id="collapseState" class="collapse show" aria-labelledby="headingState" data-parent="#workshop-menu">
 						<div class="card-body">
 							<ul>
-								<li>Completed</li>
-								<li>In Progress</li>
-								<li>Not Started</li>
-								<li>New</li>
+								<li onclick="setSearchParams('state',2,this)">Completed</li>
+								<li onclick="setSearchParams('state',1,this)">In Progress</li>
+								<li onclick="setSearchParams('state',0,this)">Not Started</li>
+								<li onclick="setSearchParams('state',-1,this)">New</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingRobot">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="true" aria-controls="collapseRobots">
+							Robots
+							</button>
+						</h5>
+						</div>
+
+						<div id="collapseRobots" class="collapse show" aria-labelledby="headingRobot" data-parent="#workshop-menu">
+						<div class="card-body">
+							<ul>
+								<?php
+									foreach ($action->robots as $robot) {
+										?>
+											<li onclick="setSearchParams('robot',<?=$robot['ID'] ?>,this)"><?= $robot["NAME"] ?></li>
+										<?php
+									}
+								?>
 							</ul>
 						</div>
 					</div>
@@ -116,7 +142,7 @@
 					<option value="descName">Name Z-A</option>
 				</select>
 			</div>
-			<div>
+			<div id='workshops-list'>
 				<?php
 					loadWorkshopsLine($action->workshops_list,'workshops',$action,"Workshops");
 				?>

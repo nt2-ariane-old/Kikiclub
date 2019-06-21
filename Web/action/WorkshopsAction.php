@@ -17,7 +17,7 @@
 		public $questions;
 
 		public $robots;
-
+		public $difficulty;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"workshops","Workshops");
 			$this->show_workshop = false;
@@ -36,6 +36,8 @@
 			$this->workshops_list = WorkshopDAO::getWorkshops();
 
 			$this->robots = RobotDAO::GetRobots();
+
+			$this->difficulty = WorkshopDAO::getDifficulties() ;
 			if(!empty($_SESSION["member"]))
 			{
 				$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);

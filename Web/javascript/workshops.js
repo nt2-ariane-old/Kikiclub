@@ -128,11 +128,40 @@ const showWorkshop = (id,element) =>
 
 }
 
-const sortWorkshops = (select) =>
+let searchParams = [];
+	searchParams["difficulty"] = [];
+	searchParams["age"] = [];
+	searchParams["state"] = [];
+	searchParams["robot"] = [];
+const setSearchParams = (name, value,node) =>
+{
+	if(searchParams[name].indexOf(value) > -1)
+	{
+		searchParams[name].splice(searchParams[name].indexOf(value),1);
+		node.style.border = "none";
+	}
+	else
+	{
+		searchParams[name].push(value);
+		node.style.border = "1px solid black";
+	}
+
+	searchWorkshops();
+}
+const searchWorkshops = () =>
 {
 	let formData = new FormData();
-	formData.append('sort', select.value);
-
+	formData.append('search',true);
+	for (const key in searchParams) {
+		if (searchParams.hasOwnProperty(key)) {
+			const element = searchParams[key];
+			if(element.length > 0)
+			{
+				let json_arr = JSON.stringify(element);
+				formData.append(key,json_arr);
+			}
+		}
+	}
 	fetch("workshops-ajax.php", {
 		method: "POST",
 		credentials: 'include', // Pour envoyer les cookies avec la requête!
@@ -140,54 +169,85 @@ const sortWorkshops = (select) =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
+		loadWorkshopsList(data["workshops"],["member_workshops"]);
 	});
 }
-const removeHeightToContainer= (container,id) =>
+const sortWorkshops = (select) =>
 {
-	let sibling =container.previousSibling;
-	console.log(sibling);
-	if(container.offsetHeight >= 10)
-	{
-		let newHeight = container.offsetHeight - 1;
-		let newSiblingHeight = sibling.offsetHeight + 1;
-		console.log('==REM=========')
-		console.log(newHeight);
-		console.log(newSiblingHeight);
-		container.style.height = newHeight + "px";
-		sibling.style.height = newSiblingHeight + "px";
-
-		setTimeout(()=>removeHeightToContainer(container),1);
-	}
-	else
-	{
-		container.innerHTML = "";
-		container.style.display = "none";
-		container.parentNode.removeChild(container);
-		sibling.setAttribute('onclick','showWorkshop('+id+',this)');
-	}
-
+	let formData = new FormData();
+	formData.append('sort', select.value);
+	fetch("workshops-ajax.php", {
+		method: "POST",
+		credentials: 'include', // Pour envoyer les cookies avec la requête!
+		body: formData
+	})
+	.then(response => response.json())
+	.then(data => {
+		loadWorkshopsList(data["workshops"],["member_workshops"]);
+	});
 }
 
-const addHeightToContainer= (container,id) =>
+let nbWorkshops = 4;
+const loadWorkshopsList = (workshops,member) =>
 {
-	let sibling =container.previousSibling;
-	console.log(id);
-	if(container.offsetHeight < 300)
-	{
-		let newHeight = container.offsetHeight + 1;
-		let newSiblingHeight = sibling.offsetHeight - 1;
-		container.style.height = newHeight + "px";
-		sibling.style.height = newSiblingHeight + "px";
 
-		setTimeout(()=>addHeightToContainer(container,id),1);
-	}
-	else
-	{
-		sibling.style.display = "none";
-		console.log(id);
-		container.setAttribute('onclick','hideWorkshop(this,'+id+')');
+	let workshops = document.getElementById('workshops-list');
+	workshops.innerHTML ="";
 
-	}
+		let container = document.createElement('div');
+			container.setAttribute('class','container');
 
+			let row = document.createElement('div');
+				row.setAttribute('class','row');
+
+			for (let i = 0; i < workshops.length; i++) {
+				const workshop = workshops[i];
+				let divWorkshop = document.createElement('div');
+					divWorkshop.setAttribute('class', 'workshop col-sm-'+ 12/nbWorkshops )
+
+					let divType = document.createElement('div');
+						divType.setAttribute('class','type');
+
+						let ancien = false;
+						member.forEach(m_workshop => {
+							if(m_workshop["ID_WORKSHOP"] == workshop["ID"])
+							{
+								ancien = true;
+								switch (m_workshop["state"]) {
+									case 0:
+										divType.innerHTML = "Not Started";
+										break;
+									case 1:
+										divType.innerHTML = "In Progress";
+										break;
+									case 2:
+										divType.innerHTML = "Complete";
+										break;
+									default:
+										break;
+								}
+							}
+						});
+						if(!ancien)
+						{
+							divType.innerHTML = "New";
+						}
+						divType.innerHTML = "New"; //Modifier selon état
+
+					let divTitle = document.createElement('div');
+						divTitle.setAttribute('class','title');
+
+						let h2Title = document.createElement('h2');
+							h2Title.innerHTML = workshop["NAME"];
+						divTitle.appendChild(h2Title);
+
+					divWorkshop.appendChild(divType);
+					loadMedia(workshop,divWorkshop);
+					divWorkshop.appendChild(divTitle);
+
+				row.appendChild(divWorkshop);
+			}
+
+			container.appendChild(row);
+		workshops.appendChild(container);
 }
