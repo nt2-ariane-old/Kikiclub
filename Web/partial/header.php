@@ -80,41 +80,18 @@
 
 <div id="box"></div>
 <?php
-	if( $action->page_name != 'index' && $action->page_name != 'login')
+	if($action->isLoggedIn())
 	{
 ?>
 <header>
-
-<h1>KIKICLUB</h1>
-		<h2><?php
-			if($action->page_name == 'console')
-			{
-				if($action->pageUsers)
-				{
-					 echo "Users Management";
-				}
-				else if($action->pageWorkshops)
-				{
-					echo "Workshops Management";
-				}
-				else
-				{
-					echo "Console";
-				}
-
-			}
-			else
-			{
-				echo $action->page_name;
-			}
-		?></h2>
+	<h1><span class="colored-kikicode">Kiki</span>club</h1>
 </header>
 <nav id="menu" class="navbar navbar-inverse navbar-static-top" >
 
 	<div class="container">
     <div class="navbar-header">
-			<a id="hamburger" href="#" class="btn btn-info btn-sm navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span class="glyphicon glyphicon-menu-hamburger"></span>
+			<a href="#" class="btn btn-info btn-sm navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span	> <?= $action->complete_name ?></span>
 				<span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -126,27 +103,40 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-	 	<?php
+		 <?php
 			if(!($action->page_name == 'users' ||
-				$action->page_name == 'console' ||
-				$action->page_name == 'login'))
+			$action->page_name == 'console' ))
 			{
 				?>
 					<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
 
 				<?php
 			}
-		?>
-       <?php
-			if($action->isLoggedIn())
+			if($action->page_name != 'users')
 			{
 				?>
-					<li><a class="nav-item nav-link" onclick="signOut()">Sign out</a></li>
+					<li><a class="nav-item nav-link" href="users.php">Home</a></li>
 				<?php
 			}
+			if($action->page_name != 'workshops' && $action->isFamilyMember())
+			{
+				?>
+					<li><a class="nav-item nav-link" href="workshops.php">Workshops</a></li>
+				<?php
+			}
+			if($action->page_name != 'workshops-research' && $action->isFamilyMember())
+			{
+				?>
+					<li><a class="nav-item nav-link" href="workshops-research.php">Workshops Research</a></li>
+				<?php
+			}
+
+			?>
+				<form action="users.php" method="post">
+					<li> <button class="btn-link" name="manage">Manage Profile</button></li>
+				</form>
+			<?php
 			if($action->isAdmin()){
-				if( $action->page_name != 'console')
-				{
 					?>
 						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Console</a>
 								<ul class="dropdown-menu">
@@ -158,28 +148,30 @@
 						</li>
 
 					<?php
-				}
-				else
-				{
-					?>
-						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Console</a>
-								<ul class="dropdown-menu">
-									<form action="console.php" method="post">
-										<li> <button class="btn-link" name="users">Users</button></li>
-										<li> <button class="btn-link" name="workshops">Workshops</button></li>
-									</form>
-								</ul>
-						</li>
-						<li><a class="nav-item nav-link" onclick="window.location.href='users.php?normal'">Back to User Console</a></li>
-					<?php
-				}
 
 			}
+			?>
+				<li><a class="nav-item nav-link" onclick="signOut()">Sign out</a></li>
+			<?php
 		?>
+
       </ul>
     </div>
 	</div>
-
+	<?php
+		?>
+		<div class="member-name">
+			<?php
+					if($action->isFamilyMember())
+					{
+						?>
+							<h3>Welcome <?= $action->member_name ?></h3>
+						<?php
+					}
+			?>
+		</div>
+		<?php
+	?>
 </nav>
 <?php
 	}

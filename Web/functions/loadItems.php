@@ -240,28 +240,15 @@ function loadWorkshopsCreator($workshop, $action)
 	<?php
 
 }
-
+$nbWorkshops = 4;
 function loadWorkshopsCarousel($workshops,$name,$action,$title)
 {
-	$nbWorkshops = 4;
-	?>
-		<div id="<?= $name  ?>" class="carousel slide border" data-ride="carousel">
-		   <!-- Indicators -->
-		   <ol class="carousel-indicators">
-				<?php
-					for ($i=0; $i < sizeof($workshops) / $nbWorkshops; $i++) {
-				?>
 
-					<li data-target="#<?= $name  ?>" data-slide-to="<?= $i ?>"	<?php if($i == 0) echo 'class="active"';?>></li>
-				<?php
-					}
-				?>
-		   </ol>
+	?>
+		<div id="<?= $name  ?>" class="carousel slide" data-ride="carousel">
 			<!-- Content -->
 			<div class="carousel-inner">
 			<?php
-
-				$i=0;
 				for ($i=0; $i < sizeof($workshops); $i++) {
 					?>
 					<div class="carousel-item <?php if($i == 0) echo 'active';?>">
@@ -313,31 +300,33 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 }
 
 
-function loadWorkshopsLine($list,$name,$action,$title)
+function loadWorkshopsLine($workshops,$name,$action,$title)
 {
+	$nbWorkshops = 4;
 	?>
-	<h3><?= $title ?></h3>
 	<div class="container">
 		<div class="row">
-
-		<?php
-		foreach($list as $workshop)
-		{
-			?>
-
-				<div  class="col-sm-3 workshop"><a onclick="showWorkshop(<?= $workshop['ID'] ?>,this)" >
-
+			<?php
+			for ($i=0; $i < sizeof($workshops); $i++) {
+				$workshop = $workshops[$i];
+				?>
+					<div class="workshop col-sm-<?= 12/$nbWorkshops ?>" >
+						<div class="type">
+							<?php
+								if(in_array($workshop, $action->new) ) echo 'New';
+								else if(in_array($workshop, $action->completed) ) echo 'Complete';
+							 	else if(in_array($workshop, $action->notStarted) ) echo 'Not Started';
+								else if(in_array($workshop, $action->inProgress) ) echo 'In Progress';
+							?>
+						</div>
 						<?php
 							loadMedia($workshop);
 						?>
-						<h2><?=$workshop["NAME"]?></h2>
-						<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
-
-				</a></div>
-			<?php
-		}
-		?>
-
+						<div class="title"><h2><?= $workshop["NAME"] ?></h4></div>
+					</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 	<?php

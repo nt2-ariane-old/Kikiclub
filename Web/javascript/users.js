@@ -56,7 +56,9 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 			node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
 		}
 	}
-	node.querySelector('a').href = "workshops.php?member=" +member["id"];
+	// node.querySelector('a').href = "workshops.php?member=" +member["id"];
+	node.querySelector('a').setAttribute("onclick",'post("workshops.php",{"member":'+member["id"]+'})');
+
 	if(state==="manage")
 	{
 		addManageButton(node,member );
@@ -120,7 +122,8 @@ const addNewMember = (container) => {
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector("a").href = "users.php?usermode=modify&member=" + member["ID"];
+	// node.querySelector("a").href = "users.php?usermode=modify&member=" + member["ID"];
+	node.querySelector('a').onclick = post("workshops.php",{"member":member["id"],"usermode":"modify"});
 
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

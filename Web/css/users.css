@@ -184,11 +184,59 @@
 /* FOR WEB */
  @media only screen and (min-width: 768px) {
 	#family{
+		width:60vh;
+		overflow-x: scroll;
+		overflow-y:auto;
+		position: absolute;
+		top: calc( ( 100% - 60vw + 8em ) / 2);
+		height:100vw;
+		transform: rotate(-90deg);
+		transform-origin: right top;
+		transform:rotate(-90deg) translateY(-60vw);
+
+	}
+	.child-info{
+		width:50vh;
+		height:50vh;
+		transform: rotate(90deg) translateX(50vh) translateY(-5vw);
+		transform-origin: right top;
+	}
+	.child-logo,.child-stateLogo
+	{
+		width:40vh;
+		height:40vh;
+	}
+	.child-stateLogo{
+		left: calc((30vw - 20vw) / 2);
+
+	}
+
+	.child-age,.child-nbWorkshops, .child-nbPTS
+	{
+		font-size: 1.5vw;
+	}
+	.child-name
+	{
+		font-size: 3vw;
+	}
+	.child-nbalert{
+		right: calc( (30vw - 20vw) / 2);
+		font-size: 3vw;
+		line-height: 5vw;
+		top: 1vw;
+		width : 5vw;
+		height: 5vw;
+
+	}
+ }
+
+ @media only screen and (min-width: 900px) {
+	#family{
 		width:40vw;
 		overflow-x: scroll;
 		overflow-y:auto;
 		position: absolute;
-		top: calc( ( 100% - 40vw ) / 2);
+		top: calc( ( 100% - 40vw + 8em ) / 2);
 		height:100vw;
 		transform: rotate(-90deg);
 		transform-origin: right top;

@@ -10,7 +10,7 @@
 		public $err500 = false;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'error');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'error',"Error Page");
 		}
 
 		protected function executeAction() {

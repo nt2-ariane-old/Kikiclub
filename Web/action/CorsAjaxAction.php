@@ -4,7 +4,7 @@
 	class CorsAjaxAction extends CommonAction {
 		public $result;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"Cors-Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"cors-ajax","Cors,Ajax");
 
 		}
 

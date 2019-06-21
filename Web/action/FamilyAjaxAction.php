@@ -7,7 +7,7 @@
 		public $results;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"family ajax");
+			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"family-ajax", "Family,Ajax");
 		}
 
 		protected function executeAction() {

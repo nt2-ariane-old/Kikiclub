@@ -128,6 +128,21 @@ const showWorkshop = (id,element) =>
 
 }
 
+const sortWorkshops = (select) =>
+{
+	let formData = new FormData();
+	formData.append('sort', select.value);
+
+	fetch("workshops-ajax.php", {
+		method: "POST",
+		credentials: 'include', // Pour envoyer les cookies avec la requête!
+		body: formData
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+	});
+}
 const removeHeightToContainer= (container,id) =>
 {
 	let sibling =container.previousSibling;

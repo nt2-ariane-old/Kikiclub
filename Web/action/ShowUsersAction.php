@@ -18,7 +18,7 @@
 		}
 
 		public function execute() {
-			if(isset($_GET["normal"]))
+			if(isset($_POST["normal"]))
 			{
 				$_SESSION["usermode"] = "normal";
 			}
@@ -31,21 +31,21 @@
 			 {
 			 	header('Location:users.php');
 			 }
-			if(!empty($_GET["usermode"]))
+			if(!empty($_POST["usermode"]))
 			{
-				if($_GET["usermode"] == "normal")
+				if($_POST["usermode"] == "normal")
 				{
 					$_SESSION["usermode"] = "normal";
 				}
-				else if($_GET["usermode"] == "create")
+				else if($_POST["usermode"] == "create")
 				{
 					$_SESSION["usermode"] = "create";
 				}
-				else if($_GET["usermode"] == "manage")
+				else if($_POST["usermode"] == "manage")
 				{
 					$_SESSION["usermode"] = "manage";
 				}
-				else if($_GET["usermode"] == "modify")
+				else if($_POST["usermode"] == "modify")
 				{
 					$_SESSION["usermode"] = "modify";
 				}
@@ -106,7 +106,7 @@
 								$this->errorMsg = "You need to fill all Feeld...";
 							}
 					}
-					if(!empty($_GET["delete"]))
+					if(!empty($_POST["delete"]))
 					{
 						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
 						$_SESSION["usermode"] = "normal";

@@ -19,7 +19,7 @@
 		public $robots;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"Workshops");
+			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"workshops","Workshops");
 			$this->show_workshop = false;
 			$this->completed = [];
 			$this->new = [];

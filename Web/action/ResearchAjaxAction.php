@@ -8,7 +8,7 @@
 	class ResearchAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"research-ajax");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"research-ajax","Research,Ajax");
 		}
 
 		protected function executeAction() {

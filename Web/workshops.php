@@ -42,22 +42,83 @@
 		{
 			?>
 
+			<div id="workshop-menu">
+				<div class="card">
+					<div class="card-header" id="headingDifficulty">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
+							Difficulty
+							</button>
+						</h5>
+						</div>
+
+						<div id="collapseDifficulty" class="collapse show" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
+						<div class="card-body">
+							<ul>
+								<li>Débutant</li>
+								<li>Intérmédiaire</li>
+								<li>Avancé</li>
+								<li>Expert</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header" id="headingAge">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseAge" aria-expanded="true" aria-controls="collapseAge">
+							Suggested Scholar Level
+							</button>
+						</h5>
+						</div>
+
+						<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
+						<div class="card-body">
+							<ul>
+								<li>1st Grade</li>
+								<li>2nd Grade</li>
+								<li>3rd Grade</li>
+								<li>4th Grage</li>
+								<li>5th Grage</li>
+								<li>6th Grage</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingState">
+						<h5 class="mb-0">
+							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseState" aria-expanded="true" aria-controls="collapseState">
+							Workshop State
+							</button>
+						</h5>
+						</div>
+
+						<div id="collapseState" class="collapse show" aria-labelledby="headingState" data-parent="#workshop-menu">
+						<div class="card-body">
+							<ul>
+								<li>Completed</li>
+								<li>In Progress</li>
+								<li>Not Started</li>
+								<li>New</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="sort">
+				<select onchange="sortWorkshops(this)">
+					<option value="none" selected>Sort by</option>
+					<option value="recents">Most Recents</option>
+					<option value="ascName">Name A-Z</option>
+					<option value="descName">Name Z-A</option>
+				</select>
+			</div>
 			<div>
 				<?php
-
-					if(sizeof($action->new) > 0)
-						loadWorkshopsCarousel($action->new,'new-workshops',$action,"New");
-					if(sizeof($action->recommandations) > 0)
-						loadWorkshopsCarousel($action->recommandations,'new-recommandations',$action,"Recommandated");
-
-					if(sizeof($action->completed) > 0)
-						loadWorkshopsCarousel($action->completed,'completed-workshops',$action,"Completed");
-
-					if(sizeof($action->inProgress) > 0)
-						loadWorkshopsCarousel($action->inProgress,'in-progress-workshops',$action,"In Progress");
-
-					if(sizeof($action->notStarted) > 0)
-						loadWorkshopsCarousel($action->notStarted,'not-started-workshops',$action,"Not Started");
+					loadWorkshopsLine($action->workshops_list,'workshops',$action,"Workshops");
 				?>
 			</div>
 

@@ -3,6 +3,7 @@
 	require_once("action/constante.php");
 	require_once("action/Tools/Translator.php");
 	require_once("action/constante.php");
+	require_once("action/DAO/FamilyDAO.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
@@ -13,15 +14,19 @@
 		public $default_visibility;
 		public $page_visibility;
 		public $page_name;
+		public $complete_name;
+
+		public $member_name;
 
 		public $trans;
 
 
 
-		public function __construct($page_visibility,$page_name)
+		public function __construct($page_visibility,$page_name,$complete_name)
 		{
 			$this->page_visibility = $page_visibility;
 			$this->page_name = $page_name;
+			$this->complete_name = $complete_name;
 			$this->default_visibility = 1;
 		}
 
@@ -60,6 +65,18 @@
 			return $valide;
 		}
 
+
+		public function isLoggedIn() {
+			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
+		}
+		public function isFamilyMember()
+		{
+			return !empty($_SESSION["member"]);
+		}
+		public function isAdmin() {
+			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_CUSTOMER_USER;
+		}
+
 		public function execute()
 		{
 			if(!empty($_GET["logout"]))
@@ -94,19 +111,19 @@
 			$this->trans = new Translator($currentLang);
 
 
-			if(!empty($_GET["member"]))
+			if(!empty($_POST["member"]))
 			{
-				$_SESSION["member"] = $_GET["member"];
+				$_SESSION["member"] = $_POST["member"];
+			}
+
+			if($this->isFamilyMember())
+			{
+				$member = FamilyDAO::selectMember($_SESSION["member"]);
+			 	$this->member_name = $member["firstname"];
 			}
 			$this->executeAction();
 		}
 
 		protected abstract function executeAction();
 
-		public function isLoggedIn() {
-			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
-		}
-		public function isAdmin() {
-			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_CUSTOMER_USER;
-		}
 	}

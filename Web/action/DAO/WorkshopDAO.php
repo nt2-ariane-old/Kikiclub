@@ -3,10 +3,23 @@
 
 	class WorkshopDAO {
 
-		public static function getWorkshops() { //RECEVOIR TOUTES LES PAGES
+		public static function getWorkshops($orderby="none",$ascendant=false) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ");
+			if($orderby != "none")
+			{
+				if($ascendant)
+					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY ? ASC ");
+				else
+					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY ? DESC ");
+
+				$statement->bindParam(1, $orderby);
+
+			}
+			else
+			{
+				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ");
+			}
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

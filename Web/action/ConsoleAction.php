@@ -37,7 +37,7 @@
 		public $errorMsg;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console", "Admin Console");
 			$this->add = false;
 			$this->modify=false;
 
@@ -201,7 +201,6 @@
 			$this->avatars = FamilyDAO::loadAvatar();
 			if(isset($_POST["form"]))
 			{
-				var_dump($_POST);
 				if( !empty($_POST["firstname"]) &&
 					!empty($_POST["lastname"]) &&
 					!empty($_POST["birth"]))
@@ -253,10 +252,8 @@
 			$this->userMod = $_POST['users_list'][0];
 					$this->addFamily = true;
 					$this->avatars = FamilyDAO::loadAvatar();
-					echo("test");
 					if(isset($_POST["form"]))
 					{
-						var_dump($_POST);
 						if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))

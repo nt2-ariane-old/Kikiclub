@@ -24,12 +24,24 @@ a:hover {
 	text-decoration: black;
 	color:inherit;
 }
-
+a {
+	color: black;
+}
 .btn-link { /* Button that look like a link*/
 	background-color: transparent;
 	box-shadow: none;
 	border: none;
+	color: black !important;
 }
+.btn-link:hover { /* Button that look like a link*/
+	text-decoration: black;
+	color:inherit;
+}
+.nav-link:hover
+{
+	color:grey;
+}
+
 
 li{
 	list-style-type: none;
@@ -43,9 +55,9 @@ a{
 
 h1
 {
-	font-size: 128px;
 	text-align:center;
 	color:#878C00;
+	font-weight: bolder;
 }
 
 .error
@@ -64,6 +76,13 @@ h1
 	padding:1em;
 }
 
+.colored-kikicode{
+	color: #D8DF23;
+}
+.colored-kikicode.background{
+	color: black;
+	background-color:#D8DF23;
+}
 #setting-button /* Bouton principal pour changer de pages */
 {
 	background-size: contain;
@@ -83,9 +102,10 @@ header {
 }
 header h1{
 	color:black;
-	border-bottom: 5px solid black;
-	width: 10em;
+	font-size: 80px;
+	width: 100%;
 	margin: auto;
+	text-align: center;
 }
 header h2{
 	color:rgb(70, 70, 70);
@@ -134,7 +154,7 @@ nav .container {
 	position: sticky;
 	top:10px;
 	left:10px;
-	width: 25%;
+	width: 100%;
 	margin: 0;
 
 }
@@ -169,6 +189,28 @@ nav .container {
 	height: 100%;
 }
 
+/* Footer */
+footer {
+	background-color: white;
+	padding: 2em 20em;
+	width: 100%;
+	text-align: center;
+	display: flex !important;
+	flex-direction: row;
+	justify-content: space-between;
+	text-align: center;
+	line-height: 75px;
+}
+
+footer a {
+	display: block;
+	width:75px;
+	height: 75px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	border-radius: 25%
+}
 
 /* Afficheur de Profiles */
 #x-btn
@@ -228,10 +270,21 @@ nav .container {
 	border: 5px solid rgba(0, 0, 0, 0.425);
 }
 
-
+.member-name {
+	position: absolute;
+	right: 1em;
+}
 /* Version Web */
 @media only screen and (min-width: 768px) {
 	#manage-btn{
-		bottom:5em;
+		bottom:2em;
 	}
+	nav .container {
+		width: 25%;
+
+	}
+	header h1{
+		font-size: 100px;
+	}
+
 }
