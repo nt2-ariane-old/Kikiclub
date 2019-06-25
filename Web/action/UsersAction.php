@@ -8,5 +8,6 @@
 		}
 
 		protected function executeAction() {
+			$this->complete_name = $this->trans->read("main","home");
 		}
 	}

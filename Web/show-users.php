@@ -48,7 +48,7 @@
 						?>
 					</div>
 
-					<div id="manage-btn"><a href="?usermode=normal"><?= $action->trans->read("users","return") ?></a></div>
+					<div id="manage-btn" class="users-page"><a onclick="post('users.php',{'usermode':'manage'})"><?= $action->trans->read("users","return") ?></a></div>
 
 				<?php
 			}
@@ -60,9 +60,7 @@
 					<script>loadChildren()</script>
 				</div>
 
-
-				<div id="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></div>
-
+				<div class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></div>
 
 				<?php
 			}

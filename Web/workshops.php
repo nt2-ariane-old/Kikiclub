@@ -6,55 +6,22 @@
 
 	require_once("partial/header.php");
 ?>
+	<div class="sort">
+		<select id="sort_select" onchange="sortAndSearchWorkshops()">
+			<option value="none" selected>Sort by</option>
+			<option value="recents">Most Recents</option>
+			<option value="ascName">Name A-Z</option>
+			<option value="descName">Name Z-A</option>
+		</select>
+	</div>
 
-		<?php
-		if($action->show_workshop)
-		{
-			?>
-			<div class="workshop-section">
-			<?php
-				loadMedia($action->workshop)
-			?>
-				<h2><?=  $action->workshop["NAME"]?></h2>
-
-					<?php
-						loadStars($action->workshop);
-					?>
-				<p><?=  $action->workshop["CONTENT"]?></p>
-				<form action="workshops" method="post"></form>
-				<?php
-					foreach ($action->questions as $question) {
-					?>
-						<div class="question">
-							<p><?= $question["QUESTION"] ?></p>
-							<input type="text" name="<?=$question["ID"]?>">
-						</div>
-					<?php
-					}
-				?>
-			</div>
-
-			<a id="manage-btn" href="workshops.php">Return to Workshops</a>
-			<?php
-		}
-		else
-		{
-			?>
-			<div class="sort">
-				<select id="sort_select" onchange="sortAndSearchWorkshops()">
-					<option value="none" selected>Sort by</option>
-					<option value="recents">Most Recents</option>
-					<option value="ascName">Name A-Z</option>
-					<option value="descName">Name Z-A</option>
-				</select>
-			</div>
-			<div id="workshop-menu">
-				<div class="card">
-					<div class="card-header" id="headingDifficulty">
-						<h5 class="mb-0">
-							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
-							Difficulty
-							</button>
+	<div id="workshop-menu">
+		<div class="card">
+			<div class="card-header" id="headingDifficulty">
+				<h5 class="mb-0">
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
+						<?= $action->trans->read('workshops','difficulty') ?>
+					</button>
 						</h5>
 						</div>
 
@@ -77,7 +44,7 @@
 					<div class="card-header" id="headingAge">
 						<h5 class="mb-0">
 							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseAge" aria-expanded="true" aria-controls="collapseAge">
-							Suggested Scholar Level
+							<?= $action->trans->read('workshops','scholar') ?>
 							</button>
 						</h5>
 						</div>
@@ -85,12 +52,13 @@
 						<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
 						<div class="card-body">
 							<ul>
-								<li onclick="setSearchParams('age',1,this)">1st Grade</li>
-								<li onclick="setSearchParams('age',2,this)">2nd Grade</li>
-								<li onclick="setSearchParams('age',3,this)">3rd Grade</li>
-								<li onclick="setSearchParams('age',4,this)">4th Grage</li>
-								<li onclick="setSearchParams('age',5,this)">5th Grage</li>
-								<li onclick="setSearchParams('age',6,this)">6th Grage</li>
+								<?php
+									foreach ($action->grades as $grade) {
+										?>
+											<li onclick="setSearchParams('age',<?=$grade['ID'] ?>,this)"><?= $grade["NAME"] ?></li>
+										<?php
+									}
+								?>
 							</ul>
 						</div>
 					</div>
@@ -99,7 +67,8 @@
 					<div class="card-header" id="headingState">
 						<h5 class="mb-0">
 							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseState" aria-expanded="true" aria-controls="collapseState">
-							Workshop State
+
+							<?= $action->trans->read('workshops','state') ?>
 							</button>
 						</h5>
 						</div>
@@ -107,10 +76,13 @@
 						<div id="collapseState" class="collapse show" aria-labelledby="headingState" data-parent="#workshop-menu">
 						<div class="card-body">
 							<ul>
-								<li onclick="setSearchParams('state',2,this)">Completed</li>
-								<li onclick="setSearchParams('state',1,this)">In Progress</li>
-								<li onclick="setSearchParams('state',0,this)">Not Started</li>
-								<li onclick="setSearchParams('state',-1,this)">New</li>
+								<?php
+									foreach ($action->workshopStates as $state) {
+										?>
+											<li onclick="setSearchParams('state',<?=$state['ID'] ?>,this)"><?= $state["NAME"] ?></li>
+										<?php
+									}
+								?>
 							</ul>
 						</div>
 					</div>
@@ -119,7 +91,7 @@
 					<div class="card-header" id="headingRobot">
 						<h5 class="mb-0">
 							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="true" aria-controls="collapseRobots">
-							Robots
+							<?= $action->trans->read('workshops','robots') ?>
 							</button>
 						</h5>
 						</div>
@@ -138,18 +110,13 @@
 						</div>
 					</div>
 				</div>
-				<a onclick="deleteSearchParams()">Delete Filters</a>
+				<a onclick="deleteSearchParams()"><?= $action->trans->read("workshops","deleteFilter") ?></a>
 			</div>
 
 
 			<div id='workshops-list'>
 				<script>deleteSearchParams();</script>
 			</div>
-
-
-			<?php
-		}
-		?>
 
 <?php
 	require_once("partial/footer.php");

@@ -13,8 +13,6 @@
 			"emailInput" => "Email",
 			"passwordInput" => "Password",
 			"confirmPasswordInput" => "Confirm password",
-			"firstnameInput" => "First Name",
-			"lastnameInput" => "Last Name",
 
 			"errorFeeld" => "Please fill all Feeld",
 			"errorEntry" => "Email or Password not valid",
@@ -28,11 +26,33 @@
 			"manage" => "Manage Profiles",
 			"return" => "Return to Profiles",
 			"profil" => "Profil",
+			"selectAvatar" => "Select Avatar",
+		],
+		"workshops" => [
+			"difficulty" => "Difficulty",
+			"scholar" => "Suggested Scholar Level",
+			"state" => "Workshop State",
+			"robots" => "Robots",
+			"deleteFilter" => "Delete Filter",
 		],
 		"main" => [
 			"delete" => "Delete",
 			"update" => "Update",
 			"add" => "Add",
 			"back" => "Back",
+			"difficulty" => "Difficulty",
+
+			"firstnameInput" => "First Name",
+			"lastnameInput" => "Last Name",
+			"birthInput" => "Birthday",
+
+			"welcome" => "Welcome",
+
+			"signout" => "Sign Out",
+			"workshops" => "Workshops",
+			"users" => "Users",
+			"admin" => "Admin Console",
+			"home" => "Home",
+
 		],
 	];

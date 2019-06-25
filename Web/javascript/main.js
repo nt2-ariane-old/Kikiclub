@@ -104,7 +104,7 @@ const read = (page, node) => {
 const loadStars = (workshop,container) => {
 	let stars = document.createElement('div');
 		stars.setAttribute('class','stars');
-		stars.innerHTML = "Difficulty :";
+		stars.innerHTML = read('workshops','difficulty') + " : ";
 
 	for (let i = 1; i <= 3; i++) {
 		let star = document.createElement('span');

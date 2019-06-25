@@ -83,7 +83,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	for (const key in member["workshops"]) {
 		if (member["workshops"].hasOwnProperty(key)) {
 			const element = member["workshops"][key];
-			if(element["STATUT"]==2)
+			if(element["STATUT"]==4)
 			{
 				count++;
 			}
@@ -122,7 +122,6 @@ const addNewMember = (container) => {
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	// node.querySelector("a").href = "users.php?usermode=modify&member=" + member["ID"];
 	node.querySelector('a').onclick = post("workshops.php",{"member":member["id"],"usermode":"modify"});
 
 	node.querySelector(".child-stateLogo").style.display = 'block';

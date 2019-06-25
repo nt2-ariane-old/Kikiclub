@@ -36,6 +36,7 @@
 			 }
 			if(!empty($_POST["usermode"]))
 			{
+				echo "test";
 				if($_POST["usermode"] == "normal")
 				{
 					$_SESSION["usermode"] = "normal";
@@ -66,14 +67,15 @@
 				if(isset($_POST["form"]))
 				{
 
+
 					if( !empty($_POST["firstname"]) &&
 						!empty($_POST["lastname"]) &&
 						!empty($_POST["birth"]))
 						{
 							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
-							$_SESSION["usermode"] = "normal";
+							$_SESSION["usermode"] = "manage";
 							?>
-								<script>window.location.replace("users.php?usermode=manage");</script>
+								<script>window.location = "users.php"</script>
 							<?php
 						}
 						else
@@ -89,17 +91,20 @@
 				$this->avatars = FamilyDAO::loadAvatar();
 				if(!empty($_SESSION["member"]))
 				{
+
 					$this->family_member = FamilyDAO::selectMember($_SESSION["member"]);
-					if(!empty($_POST["form"]))
+					if(isset($_POST["form"]))
 					{
+						echo 'form';
 						if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))
 							{
+								echo 'test';
 								FamilyDAO::updateFamilyMember($_SESSION["member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
-								$_SESSION["usermode"] = "normal";
+								$_SESSION["usermode"] = "manage";
 								?>
-									<script>window.location.replace("users.php?usermode=manage");</script>
+									<script>window.location = 'users.php'</script>
 								<?php
 							}
 							else
@@ -108,12 +113,12 @@
 								$this->errorMsg = "You need to fill all Feeld...";
 							}
 					}
-					if(!empty($_POST["delete"]))
+					if(isset($_POST["delete"]))
 					{
 						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
-						$_SESSION["usermode"] = "normal";
+						$_SESSION["usermode"] = "manage";
 						?>
-							<script>window.location.replace("users.php?usermode=manage");</script>
+							<script>window.location="users.php";</script>
 						<?php
 
 					}

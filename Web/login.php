@@ -41,8 +41,8 @@
 			<!-- <form action="login.php?signup=true" method="post" onsubmit="signup()"> -->
 			<form action="login.php" method="post">
 				<input type="hidden" name="type" value="signup">
-				<input type="text" name="firstname" id="firstname" placeholder="<?=  $action->trans->read("loginpage", "firstnameInput") ?>">
-				<input type="text" name="lastname" id="lastname" placeholder="<?=  $action->trans->read("loginpage", "lastnameInput") ?>">
+				<input type="text" name="firstname" id="firstname" placeholder="<?=  $action->trans->read("main", "firstnameInput") ?>">
+				<input type="text" name="lastname" id="lastname" placeholder="<?=  $action->trans->read("main", "lastnameInput") ?>">
 				<input type="email" name="email" id="email" placeholder="<?=  $action->trans->read("loginpage", "emailInput") ?>">
 				<input type="password" name="psswd1" id="password1" placeholder="<?=  $action->trans->read("loginpage", "passwordInput") ?>">
 				<input type="password" name="psswd2" id="password2" placeholder="<?=  $action->trans->read("loginpage", "confirmPasswordInput") ?>">

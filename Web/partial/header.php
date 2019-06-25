@@ -36,18 +36,6 @@
 		<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
 		<script src="javascript/users.js"></script>
 
-	<?php
-		if(!empty($action->page_name))
-		{
-			?>
-
-				<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
-				<script src="javascript/<?= $action->page_name ?>.js"></script>
-			<?php
-		}
-
-
-	?>
 	<!-- CSS -->
 		<!-- FONTS -->
 		<link rel="stylesheet" href="css/fonts.css">
@@ -55,6 +43,25 @@
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/main-mobile.css" type="text/css" media="handheld" />
 
+		<?php
+			if($action->page_name == 'users')
+			{
+				?>
+					<link rel="stylesheet" href="css/home.css" type="text/css" media="handheld" />
+				<?php
+			}
+			else
+			{
+				if(!empty($action->page_name))
+				{
+					?>
+
+						<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
+						<script src="javascript/<?= $action->page_name ?>.js"></script>
+					<?php
+				}
+			}
+		?>
 		<!-- JQUERY -->
 		<link rel="stylesheet" href="css/jquery-ui.css">
 
@@ -138,34 +145,23 @@
 			if($action->page_name != 'users')
 			{
 				?>
-					<li><a class="nav-item nav-link" href="users.php">Home</a></li>
+					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
 				<?php
 			}
 			if($action->page_name != 'workshops' && $action->isFamilyMember())
 			{
 				?>
-					<li><a class="nav-item nav-link" href="workshops.php">Workshops</a></li>
-				<?php
-			}
-			if($action->page_name != 'workshops-research' && $action->isFamilyMember())
-			{
-				?>
-					<li><a class="nav-item nav-link" href="workshops-research.php">Workshops Research</a></li>
+					<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
 				<?php
 			}
 
-			?>
-				<form action="users.php" method="post">
-					<li> <button class="btn-link" name="manage">Manage Profile</button></li>
-				</form>
-			<?php
 			if($action->isAdmin()){
 					?>
-						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin Console</a>
+						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
 								<ul class="dropdown-menu">
 									<form action="console.php" method="post">
-										<li> <button class="btn-link" name="users">Users</button></li>
-										<li> <button class="btn-link" name="workshops">Workshops</button></li>
+										<li> <button class="btn-link" name="users"><?= $action->trans->read("main","users") ?></button></li>
+										<li> <button class="btn-link" name="workshops"><?= $action->trans->read("main","workshops") ?></button></li>
 									</form>
 								</ul>
 						</li>
@@ -174,7 +170,7 @@
 
 			}
 			?>
-				<li><a class="nav-item nav-link" onclick="signOut()">Sign out</a></li>
+				<li><a class="nav-item nav-link" onclick="signOut()"><?= $action->trans->read("main","signout") ?></a></li>
 			<?php
 		?>
 
@@ -187,7 +183,7 @@
 			if($action->isFamilyMember())
 			{
 				?>
-					<h3>Welcome <?= $action->member_name ?></h3>
+					<h3> <?= $action->trans->read("main","welcome") ." " . $action->member_name ?></h3>
 				<?php
 			}
 		?>

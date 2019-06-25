@@ -57,14 +57,14 @@ const sortAndSearchWorkshops = () =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		loadWorkshopsList(data["workshops"],data["member_workshops"]);
+		loadWorkshopsList(data["workshops"],data["member_workshops"],data["states"]);
 	});
 }
 
 let nbWorkshops = 4;
-const loadWorkshopsList = (workshops,memberWorkshops) =>
+const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 {
-
+	console.log(states);
 	let divWorkshops = document.getElementById('workshops-list');
 	divWorkshops.innerHTML ="";
 		let container = document.createElement('div');
@@ -92,26 +92,14 @@ const loadWorkshopsList = (workshops,memberWorkshops) =>
 									{
 
 										ancien = true;
-
-										switch (m_workshop["STATUT"]) {
-											case 0:
-												divType.innerHTML = "Not Started";
-												break;
-											case 1:
-												divType.innerHTML = "In Progress";
-												break;
-											case 2:
-												divType.innerHTML = "Complete";
-												break;
-											default:
-												break;
-										}
+										console.log(m_workshop["STATUT"]);
+										divType.innerHTML = states[m_workshop["STATUT"]]["NAME"];
 									}
 								}
 							}
 							if(!ancien)
 							{
-								divType.innerHTML = "New";
+								divType.innerHTML = states[1]["NAME"];
 							}
 
 						let divTitle = document.createElement('div');

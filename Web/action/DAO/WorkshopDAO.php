@@ -87,21 +87,98 @@
 			}
 			return $content;
 		}
-		public static function getDifficulties()
+		public static function getDifficultiesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT * FROM difficulty");
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM difficulty");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[] = $row;
+				$content[$row["ID"]] = $row;
 			}
 
 			return $content;
 		}
+		public static function getDifficultiesEN()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME FROM difficulty");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
+		public static function getWorkshopStatesFR()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM workshop_statut");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
+		public static function getWorkshopStatesEN()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME FROM workshop_statut");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
+		public static function getGradesEN()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM scholar_level");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
+		public static function getGradesFR()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM scholar_level");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
+
+
 		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$difficulty,$id_robot){
 			$connection = Connection::getConnection();
 
@@ -137,6 +214,7 @@
 			$statement->bindParam(1, $id);
 			$statement->execute();
 		}
+
 		public static function selectMemberWorkshop($id_member)
 		{
 			$connection = Connection::getConnection();

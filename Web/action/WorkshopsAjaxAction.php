@@ -9,7 +9,16 @@
 		}
 
 		protected function executeAction() {
+			if($_SESSION["language"] == 'en')
+			{
+				$this->results["states"] = WorkshopDAO::getWorkshopStatesEN();
 
+			}
+			else
+			{
+				$this->results["states"] = WorkshopDAO::getWorkshopStatesFR();
+
+			}
 			if(!empty($_SESSION["member"]))
 			{
 				$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);

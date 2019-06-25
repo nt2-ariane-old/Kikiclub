@@ -49,7 +49,7 @@
 											<th>Image</th>
 											<th onclick="sortingTable('workshops-table',2)">Name</th>
 											<th onclick="sortingTable('workshops-table',3)">Content</th>
-											<th onclick="sortingTable('workshops-table',4)">Difficulty</th>
+											<th onclick="sortingTable('workshops-table',4)"><?= $action->trans->read('workshops','difficulty') ?></th>
 											<th onclick="sortingTable('workshops-table',5)">Robot</th>
 										</tr>
 									</thead>

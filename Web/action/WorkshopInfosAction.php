@@ -30,7 +30,7 @@
 				}
 				if(!$existe)
 				{
-					WorkshopDAO::addMemberWorkshop($_SESSION["member"],$id,0);
+					WorkshopDAO::addMemberWorkshop($_SESSION["member"],$id,2);
 				}
 			}
 		}

@@ -10,8 +10,7 @@
 			"emailInput" => "Courriel",
 			"passwordInput" => "Mot de passe",
 			"confirmPasswordInput" => "Confirmer Mot de passe",
-			"firstnameInput" => "Prénom",
-			"lastnameInput" => "Nom",
+
 
 			"errorFeeld" => "SVP, Remplir tout les champs",
 			"errorEntry" => "Courriel ou Mot de passe invalide",
@@ -25,12 +24,34 @@
 			"manage" => "Modifier les Profils",
 			"return" => "Retourner au Profils",
 			"profil" => "Profil",
+			"selectAvatar" => "Selectionner l'Avatar",
+		],
+		"workshops" => [
+			"difficulty" => "Difficulté",
+			"scholar" => "Niveau Scolaire Suggéré",
+			"state" => "États de l'atelier",
+			"robots" => "Robots",
+			"deleteFilter" => "Supprimer les filtres",
 		],
 		"main" => [
 			"delete" => "Supprimer",
-			"update" => "modifier",
-			"add" => "ajouter",
+			"update" => "Modifier",
+			"add" => "Ajouter",
 			"back" => "Retour",
+			"difficulty" => "Difficulté",
+
+			"firstnameInput" => "Prénom",
+			"lastnameInput" => "Nom",
+			"birthInput" => "Anniversaire",
+
+			"welcome" => "Bienvenue",
+
+			"signout" => "Se déconneccter",
+			"workshops" => "Ateliers",
+			"users" => "Utilisateurs",
+			"admin" => "Console d'Admin",
+			"home" => "Accueil",
+
 		],
 
 	];

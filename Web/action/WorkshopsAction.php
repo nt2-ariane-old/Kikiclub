@@ -16,6 +16,9 @@
 		public $show_workshop;
 		public $questions;
 
+		public $workshopStates;
+		public $grades;
+
 		public $robots;
 		public $difficulty;
 		public function __construct() {
@@ -33,40 +36,24 @@
 			$this->recommandations = array_merge($this->recommandations,$this->inProgress);
 		}
 		protected function executeAction() {
+			$this->complete_name = $this->trans->read("main","workshops");
 			$this->workshops_list = WorkshopDAO::getWorkshops();
 
 			$this->robots = RobotDAO::GetRobots();
 
-			$this->difficulty = WorkshopDAO::getDifficulties() ;
-			if(!empty($_SESSION["member"]))
+			if($_SESSION["language"] == "en")
 			{
-				$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
-				foreach ($this->workshops_list as $workshop) {
-					foreach ($this->member_workshops as $memberWorkshop) {
-						if($workshop["ID"] == $memberWorkshop["ID_WORKSHOP"])
-						{
-							switch ($memberWorkshop["STATUT"]) {
-								case 0:
-									$this->notStarted[] = $workshop;
-									break;
-								case 1:
-									$this->inProgress[] = $workshop;
-									break;
-
-								case 2:
-									$this->completed[] = $workshop;
-									break;
-							}
-						}
-					}
-				}
-				$this->new = WorkshopDAO::selectMemberNewWorkshop($_SESSION["member"]);
-
+				$this->difficulty = WorkshopDAO::getDifficultiesEN();
+				$this->workshopStates = WorkshopDAO::getWorkshopStatesEN();
+				$this->grades = WorkshopDAO::getGradesEN();
 			}
 			else
 			{
-				header('Location:users.php');
+				$this->difficulty = WorkshopDAO::getDifficultiesFR();
+				$this->workshopStates = WorkshopDAO::getWorkshopStatesFR();
+				$this->grades = WorkshopDAO::getGradesFR();
 			}
+
 			$this->checkRecommandations();
 
 		}

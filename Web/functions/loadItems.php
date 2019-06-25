@@ -32,11 +32,11 @@ function loadMedia( $workshop ){
   <?php
 }
 
-function loadStars( $workshop ){
+function loadStars($workshop,$action ){
 
 	?>
 	<div class="stars">
-		Difficulty :
+		<?= $action->trans->read("workshops","difficulty")?> :
 	<?php
 	for($i = 0 ; $i < 3; $i++)
 	{
@@ -75,7 +75,7 @@ function loadProfil($user,$action)
 			}
 			?>
 
-				<form action="<?= $action->page_name ?>.php" method="post">
+				<form action="<?php if($action->page_name == 'show-users') echo 'users'; else $action->page_name; ?>.php" method="post">
 						<input type="hidden" name="form">
 						<?php
 							if($action->page_name=='console')
@@ -114,16 +114,16 @@ function loadProfil($user,$action)
 								}
 							}
 						?>
-						<input type="text" name="firstname" id="firstname" placeholder="First Name" value="<?php if($userExist) echo $user["firstname"]  ?>">
-						<input type="text" name="lastname" id="lasttname" placeholder="Last Name"  value="<?php if($userExist) echo $user["lastname"]  ?>">
-						<input type="text" name="birth" id="datepicker" placeholder="Birthday"  value="<?php if($userExist) echo $user["birthday"]  ?>">
+						<input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("main","firstnameInput") ?>" value="<?php if($userExist) echo $user["firstname"]  ?>">
+						<input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("main","lastnameInput") ?>"  value="<?php if($userExist) echo $user["lastname"]  ?>">
+						<input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("main","birthInput") ?>"  value="<?php if($userExist) echo $user["birthday"]  ?>">
 						<select name="gender" id="">
 							<option <?php if($userExist)if($user["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
 							<option <?php if($userExist)if($user["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
 							<option <?php if($userExist)if($user["gender_id"] == 2) echo 'selected' ; ?>  value="2">Do not specify</option>
 						</select>
 
-						<p>Select Avatar :</p>
+						<p><?= $action->trans->read("users","selectAvatar") ?></p>
 						<div class="avatars-list">
 							<?php
 								foreach( $action->avatars as $avatar)
@@ -165,7 +165,7 @@ function loadProfil($user,$action)
 						</div>
 					</form>
 
-					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?usermode=manage';} ?>';"><?php if($userExist){echo $action->trans->read("main","delete");} else{echo $action->trans->read("main","back");} ?></button>
+					<button class="delete-btn" onclick="post('users.php',{'users':'<?php if($userExist){ echo 'delete';} else { echo 'manage';} ?>'});"><?php if($userExist){echo $action->trans->read("main","delete");} else{echo $action->trans->read("main","back");} ?></button>
 			</div>
 	<?php
 }
@@ -201,7 +201,7 @@ function loadWorkshopsCreator($workshop, $action)
 						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
 
 						<br>
-						Difficulty:
+						<?= $action->trans->read('workshops','difficulty') ?>
 						<select name="difficulty">
 							<?php
 								foreach ($action->difficulties as $difficulty) {

@@ -62,7 +62,16 @@
 		{
 			$this->workshops = WorkshopDAO::getWorkshops();
 			$this->users = FamilyDAO::getUsers();
-			$this->difficulties = WorkshopDAO::getDifficulties();
+			if($_SESSION["language"] == 'en')
+			{
+				$this->difficulties = WorkshopDAO::getDifficultiesEN();
+
+			}
+			else
+			{
+				$this->difficulties = WorkshopDAO::getDifficultiesFR();
+
+			}
 			$this->robots = RobotDAO::getRobots();
 
 			if(isset($_POST["users"]))
