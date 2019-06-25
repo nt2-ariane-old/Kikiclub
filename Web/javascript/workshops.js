@@ -74,11 +74,9 @@ const hideWorkshop = (container,id) =>
 const showWorkshop = (id,element) =>
 {
 	let previousContainers = document.querySelectorAll(".workshops-info");
-	console.log(previousContainers);
 	if(previousContainers.length > 0)
 	{
 		previousContainers.forEach(element => {
-			console.log(element);
 			hideWorkshop(element);
 		});
 	}
@@ -129,10 +127,19 @@ const showWorkshop = (id,element) =>
 }
 
 let searchParams = [];
+
+const deleteSearchParams = () =>
+{
 	searchParams["difficulty"] = [];
 	searchParams["age"] = [];
 	searchParams["state"] = [];
 	searchParams["robot"] = [];
+	let filters = document.querySelectorAll(".card-body ul li");
+	filters.forEach(filter => {
+		filter.style.border = "none";
+	});
+	sortAndSearchWorkshops();
+}
 const setSearchParams = (name, value,node) =>
 {
 	if(searchParams[name].indexOf(value) > -1)
@@ -146,11 +153,14 @@ const setSearchParams = (name, value,node) =>
 		node.style.border = "1px solid black";
 	}
 
-	searchWorkshops();
+	sortAndSearchWorkshops();
 }
-const searchWorkshops = () =>
+
+const sortAndSearchWorkshops = () =>
 {
+	let select = document.getElementById("sort_select");
 	let formData = new FormData();
+	formData.append('sort', select.value);
 	formData.append('search',true);
 	for (const key in searchParams) {
 		if (searchParams.hasOwnProperty(key)) {
@@ -169,31 +179,16 @@ const searchWorkshops = () =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		loadWorkshopsList(data["workshops"],["member_workshops"]);
-	});
-}
-const sortWorkshops = (select) =>
-{
-	let formData = new FormData();
-	formData.append('sort', select.value);
-	fetch("workshops-ajax.php", {
-		method: "POST",
-		credentials: 'include', // Pour envoyer les cookies avec la requête!
-		body: formData
-	})
-	.then(response => response.json())
-	.then(data => {
-		loadWorkshopsList(data["workshops"],["member_workshops"]);
+		loadWorkshopsList(data["workshops"],data["member_workshops"]);
 	});
 }
 
 let nbWorkshops = 4;
-const loadWorkshopsList = (workshops,member) =>
+const loadWorkshopsList = (workshops,memberWorkshops) =>
 {
 
-	let workshops = document.getElementById('workshops-list');
-	workshops.innerHTML ="";
-
+	let divWorkshops = document.getElementById('workshops-list');
+	divWorkshops.innerHTML ="";
 		let container = document.createElement('div');
 			container.setAttribute('class','container');
 
@@ -209,30 +204,35 @@ const loadWorkshopsList = (workshops,member) =>
 						divType.setAttribute('class','type');
 
 						let ancien = false;
-						member.forEach(m_workshop => {
-							if(m_workshop["ID_WORKSHOP"] == workshop["ID"])
-							{
-								ancien = true;
-								switch (m_workshop["state"]) {
-									case 0:
-										divType.innerHTML = "Not Started";
-										break;
-									case 1:
-										divType.innerHTML = "In Progress";
-										break;
-									case 2:
-										divType.innerHTML = "Complete";
-										break;
-									default:
-										break;
+						for (const key in memberWorkshops) {
+							if (memberWorkshops.hasOwnProperty(key)) {
+								const m_workshop = memberWorkshops[key];
+
+								if(m_workshop["ID_WORKSHOP"] == workshop["ID"])
+								{
+
+									ancien = true;
+
+									switch (m_workshop["STATUT"]) {
+										case 0:
+											divType.innerHTML = "Not Started";
+											break;
+										case 1:
+											divType.innerHTML = "In Progress";
+											break;
+										case 2:
+											divType.innerHTML = "Complete";
+											break;
+										default:
+											break;
+									}
 								}
 							}
-						});
+						}
 						if(!ancien)
 						{
 							divType.innerHTML = "New";
 						}
-						divType.innerHTML = "New"; //Modifier selon état
 
 					let divTitle = document.createElement('div');
 						divTitle.setAttribute('class','title');
@@ -249,5 +249,5 @@ const loadWorkshopsList = (workshops,member) =>
 			}
 
 			container.appendChild(row);
-		workshops.appendChild(container);
+		divWorkshops.appendChild(container);
 }

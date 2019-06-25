@@ -6,8 +6,6 @@
 
 	require_once("partial/header.php");
 ?>
-	<link rel="stylesheet" href="css/console.css">
-	<script src="javascript/admin.js"></script>
 
 
 	<?php

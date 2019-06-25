@@ -39,7 +39,6 @@
 			}
 			if(!empty($_POST["search"]))
 			{
-				$this->results["workshops"] = WorkshopDAO::searchWorkshops();
 				if(!empty($_POST["difficulty"]))
 				{
 					$difficulties = json_decode($_POST["difficulty"]);

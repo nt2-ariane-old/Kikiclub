@@ -31,10 +31,36 @@
 		<!-- FACEBOOK -->
 		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_CA/sdk.js#xfbml=1&version=v3.3&appId=670117443417077&autoLogAppEvents=1"></script>
 
-		<!-- DIY SLIDER -->
-		<script src="jquery.diyslider.min.js"></script>
+	<!-- PAGE CUSTOM -->
+		<link rel="stylesheet" href="./css/users.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
+		<script src="javascript/users.js"></script>
+
+	<?php
+		if($action->page_name == 'workshops')
+		{
+			?>
+				<link rel="stylesheet" href="css/workshops.css">
+				<script src="javascript/workshops.js"></script>
+			<?php
+		}
+		if($action->page_name == 'login')
+		{
+			?>
+				<link rel="stylesheet" href="css/login.css">
+				<script src="javascript/login.js"></script>
+			<?php
+		}
+		if($action->page_name == 'console')
+		{
+			?>
+				<link rel="stylesheet" href="css/console.css">
+				<script src="javascript/admin.js"></script>
+			<?php
+		}
 
 
+	?>
 	<!-- CSS -->
 		<!-- CUSTOM -->
 		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen" />

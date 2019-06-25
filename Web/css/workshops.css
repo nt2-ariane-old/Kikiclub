@@ -126,11 +126,47 @@
 {
 	width:25%;
 	float: left;
+	padding:3em;
 }
+#workshop-menu .card
+{
+	background-color: transparent;
+	border: none;
+	border-top: 5px solid black;
+	border-bottom: 5px solid black;
+
+}
+
+#workshop-menu .card-header
+{
+	border-bottom: 2px solid black;
+
+}
+
+.sort
+{
+	width: 100%;
+	position: relative;
+	height: calc(30px + 1em );
+}
+#sort_select
+{
+	background-color: transparent;
+	border: 2px solid black;
+	box-shadow: none;
+	position: absolute;
+	width: 200px;
+	height: 30px;
+	top: 1em;
+	right: 1em;
+}
+
+
 .workshops-list
 {
 	width: 75%;
 	float: left;
+	clear: both;
 }
 .workshop-section .media{
 	margin:auto;

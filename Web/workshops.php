@@ -6,8 +6,7 @@
 
 	require_once("partial/header.php");
 ?>
-	<link rel="stylesheet" href="css/workshops.css">
-	<script src="javascript/workshops.js"></script>
+
 		<?php
 		if($action->show_workshop)
 		{
@@ -41,7 +40,14 @@
 		else
 		{
 			?>
-
+			<div class="sort">
+				<select id="sort_select" onchange="sortAndSearchWorkshops()">
+					<option value="none" selected>Sort by</option>
+					<option value="recents">Most Recents</option>
+					<option value="ascName">Name A-Z</option>
+					<option value="descName">Name Z-A</option>
+				</select>
+			</div>
 			<div id="workshop-menu">
 				<div class="card">
 					<div class="card-header" id="headingDifficulty">
@@ -124,7 +130,7 @@
 								<?php
 									foreach ($action->robots as $robot) {
 										?>
-											<li onclick="setSearchParams('robot',<?=$robot['ID'] ?>,this)"><?= $robot["NAME"] ?></li>
+								<li onclick="setSearchParams('robot',<?=$robot['ID'] ?>,this)"><?= $robot["NAME"] ?></li>
 										<?php
 									}
 								?>
@@ -132,20 +138,12 @@
 						</div>
 					</div>
 				</div>
+				<a onclick="deleteSearchParams()">Delete Filters</a>
 			</div>
 
-			<div class="sort">
-				<select onchange="sortWorkshops(this)">
-					<option value="none" selected>Sort by</option>
-					<option value="recents">Most Recents</option>
-					<option value="ascName">Name A-Z</option>
-					<option value="descName">Name Z-A</option>
-				</select>
-			</div>
+
 			<div id='workshops-list'>
-				<?php
-					loadWorkshopsLine($action->workshops_list,'workshops',$action,"Workshops");
-				?>
+				<script>deleteSearchParams();</script>
 			</div>
 
 

@@ -4,10 +4,6 @@
 	$actionUser = new ShowUsersAction();
 	$actionUser->execute();
 ?>
-	<link rel="stylesheet" href="./css/users.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
-
-	<script src="javascript/users.js"></script>
 
 	<template id="child-template">
 		<div class='child-info'>
