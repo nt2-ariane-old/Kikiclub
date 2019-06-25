@@ -189,6 +189,11 @@ nav .container {
 	height: 100%;
 }
 
+.btn-info
+{
+	background-color: transparent;
+}
+
 /* Footer */
 footer {
 	background-color: white;
