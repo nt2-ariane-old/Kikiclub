@@ -1,6 +1,6 @@
 <?php
 	class Translator {
-		private $langData;
+		public $langData;
 
 		public function __construct($lang) {
 			$sanitizedLang = "fr";
@@ -9,6 +9,7 @@
 				$sanitizedLang = $lang;
 			}
 			require_once("lang/" . $sanitizedLang . ".php");
+
 
 			$this->langData = $langData;
 		}

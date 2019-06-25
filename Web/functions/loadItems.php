@@ -75,7 +75,7 @@ function loadProfil($user,$action)
 			}
 			?>
 
-				<form action="<?php if($action->page_name == 'console') echo 'console'; else echo 'users' ?>.php" method="post">
+				<form action="<?= $action->page_name ?>.php" method="post">
 						<input type="hidden" name="form">
 						<?php
 							if($action->page_name=='console')
@@ -120,8 +120,7 @@ function loadProfil($user,$action)
 						<select name="gender" id="">
 							<option <?php if($userExist)if($user["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
 							<option <?php if($userExist)if($user["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
-							<option <?php if($userExist)if($user["gender_id"] == 2) echo 'selected' ;?> value="2">Other</option>
-							<option <?php if($userExist)if($user["gender_id"] == 3) echo 'selected' ; ?>  value="3">Do not specify</option>
+							<option <?php if($userExist)if($user["gender_id"] == 2) echo 'selected' ; ?>  value="2">Do not specify</option>
 						</select>
 
 						<p>Select Avatar :</p>
@@ -162,11 +161,11 @@ function loadProfil($user,$action)
 							?>
 						</div>
 						<div class="forms-btns">
-							<button type="submit" class="submit-btn"><?php if($userExist){echo "Update";} else{echo 'Add';} ?></button>
+							<button type="submit" class="submit-btn"><?php if($userExist){echo $action->trans->read("main","update");} else{echo $action->trans->read("main","add");} ?></button>
 						</div>
 					</form>
 
-					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?usermode=manage';} ?>';"><?php if($userExist){echo 'Delete';} else{echo 'Back';} ?></button>
+					<button class="delete-btn" onclick="location.href='<?php if($userExist){echo '?delete=true';} else{echo '?usermode=manage';} ?>';"><?php if($userExist){echo $action->trans->read("main","delete");} else{echo $action->trans->read("main","back");} ?></button>
 			</div>
 	<?php
 }

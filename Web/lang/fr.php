@@ -12,15 +12,25 @@
 			"confirmPasswordInput" => "Confirmer Mot de passe",
 			"firstnameInput" => "Prénom",
 			"lastnameInput" => "Nom",
-			
+
 			"errorFeeld" => "SVP, Remplir tout les champs",
 			"errorEntry" => "Courriel ou Mot de passe invalide",
 			"errorExist" => "L'utilisateur existe déjà",
 			"errorPassword" => "Les mots de passes ne sont pas les mêmes",
 		],
-		"services" => [
-			"pageTitle" => "Nos services | roger.com",
-			"mainTitle" => "Nos services",
-			"text" => "Lorem ipsum...",
+		"users" => [
+			"nbWorkshops" => " ateliers terminés",
+			"nbPts" => " points accumulés",
+			"new" => "Ajouter Membre",
+			"manage" => "Modifier les Profils",
+			"return" => "Retourner au Profils",
+			"profil" => "Profil",
 		],
+		"main" => [
+			"delete" => "Supprimer",
+			"update" => "modifier",
+			"add" => "ajouter",
+			"back" => "Retour",
+		],
+
 	];

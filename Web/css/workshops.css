@@ -48,17 +48,19 @@
 {
 	text-align: center;
 
+
 }
-.workshop .type
+
+.type
 {
-	position: absolute;
-	background-color: black;
-	width:50%;
+	position: relative;
+	background-color: black ;
+	width:90%;
 	color: white;
-	top: 1em;
+	transform: translateY(100%);
+
 	font-size: 1.3em;
 	font-weight: bolder;
-
 	z-index: 1;
 }
 .workshop h4{

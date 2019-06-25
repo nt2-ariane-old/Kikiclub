@@ -8,6 +8,5 @@
 		}
 
 		protected function executeAction() {
-
 		}
 	}

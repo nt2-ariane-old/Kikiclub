@@ -2,6 +2,7 @@
 	require_once("action/ShowUsersAction.php");
 
 	$actionUser = new ShowUsersAction();
+	$actionUser->trans = $action->trans;
 	$actionUser->execute();
 ?>
 
@@ -30,7 +31,7 @@
 			{
 				?>
 
-					<div class="register-contents">
+
 					<?php
 						if($actionUser->error)
 						{
@@ -40,27 +41,14 @@
 						}
 					?>
 
-					<div class="tab">
-						<button class="tablinks" onclick="openTab(event, 'profil')">Profil</button>
-						<button class="tablinks" onclick="openTab(event, 'stats')">Statistiques</button>
-						<button class="tablinks" onclick="openTab(event, 'workshops')">Workshops</button>
-					</div>
-					<div id="profil" class="tabcontent">
-						<h2>Profil</h2>
+					<div id="profil">
+						<h2><?= $action->trans->read("users","profil") ?></h2>
 						<?php
 							loadProfil($actionUser->family_member,$actionUser);
 						?>
 					</div>
 
-
-					<div id="stats" class="tabcontent">
-						<h2>Statistiques</h2>
-					</div>
-
-					<div id="workshops" class="tabcontent">
-						<h2>Workshops</h2>
-					</div>
-					<div id="manage-btn"><a href="?usermode=normal">Return to Profiles</a></div>
+					<div id="manage-btn"><a href="?usermode=normal"><?= $action->trans->read("users","return") ?></a></div>
 
 				<?php
 			}
@@ -73,7 +61,7 @@
 				</div>
 
 
-				<div id="manage-btn" onclick="loadChildren()">Manage Profiles</div>
+				<div id="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></div>
 
 
 				<?php

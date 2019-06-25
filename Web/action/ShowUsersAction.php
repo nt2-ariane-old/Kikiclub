@@ -1,11 +1,14 @@
 <?php
 	require_once("action/DAO/FamilyDAO.php");
 	class ShowUsersAction {
+
 		public $create;
 		public $manage;
 		public $modify;
 
 		public $avatars;
+
+		public $trans;
 
 		public $error;
 		public $family_member;
@@ -59,7 +62,6 @@
 			{
 				$this->create = true;
 				$this->avatars = FamilyDAO::loadAvatar();
-				var_dump($_POST);
 
 				if(isset($_POST["form"]))
 				{

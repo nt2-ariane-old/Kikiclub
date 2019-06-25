@@ -77,7 +77,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 		node.querySelector(".child-nbalert").style.display = 'none';
 	}
 
-	node.querySelector(".child-nbPTS").innerHTML = member["score"] + " points cumulated";
+	node.querySelector(".child-nbPTS").innerHTML = member["score"] + read("users","nbPts");
 
 	let count = 0;
 	for (const key in member["workshops"]) {
@@ -90,7 +90,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 		}
 	}
 
-	node.querySelector(".child-nbWorkshops").innerHTML = count + " workshops completed";
+	node.querySelector(".child-nbWorkshops").innerHTML = count + read("users","nbWorkshops");
 
 	let birth = new Date(member["birthday"]);
 	let today = new Date();
@@ -111,7 +111,7 @@ const addNewMember = (container) => {
 			divLogo.setAttribute('id','addLogo');
 
 		let h2Name = document.createElement('h2');
-			h2Name.innerHTML = "Add Family Member";
+			h2Name.innerHTML = read("users","new");
 			h2Name.setAttribute('class','child-name');
 
 

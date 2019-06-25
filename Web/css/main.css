@@ -3,7 +3,7 @@
 	margin: 0;
 	padding: 0;
 	max-width: 100%;
-
+	font-family: "Calling Code";
 }
 
 HTML {
@@ -76,13 +76,6 @@ h1
 	padding:1em;
 }
 
-.colored-kikicode{
-	color: #D8DF23;
-}
-.colored-kikicode.background{
-	color: black;
-	background-color:#D8DF23;
-}
 #setting-button /* Bouton principal pour changer de pages */
 {
 	background-size: contain;
@@ -91,6 +84,74 @@ h1
 	background-image: url("../images/user.png");
 }
 
+/* LINK */
+.link.normal
+{
+	text-decoration: none;
+	color:inherit;
+
+}
+/* KIKICODE COLORING */
+.colored-kikicode{
+	color: #D8DF23;
+}
+.colored-kikicode.large{
+	font-size: 1.5em;
+}
+.colored-kikicode.hover{
+	color: black;
+	color: #D8DF23;
+	background-color:transparent;
+	border:none;
+	font-weight: bolder;
+	border-color: transparent;
+}
+.colored-kikicode.hover:hover{
+	color: black;
+	background-color:#D8DF23;
+	border:none;
+	border-color: transparent;
+}
+.colored-kikicode.background{
+	color: black;
+	background-color:#D8DF23;
+}
+.colored-kikicode.background.hover:hover{
+	color: #D8DF23;
+	background:transparent;
+
+}
+
+
+
+/* Arrows */
+i {
+	border: solid black;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+	margin: auto;
+  }
+
+  .right {
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+  }
+
+  .left {
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+  }
+
+  .up {
+	transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+  }
+
+  .down {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+  }
 
 /* HEADER */
 header {
@@ -192,6 +253,7 @@ nav .container {
 .btn-info
 {
 	background-color: transparent;
+	border: none;
 }
 
 /* Footer */
@@ -266,9 +328,8 @@ footer a {
 	width:200px;
 	height:40px;
 	text-align: center;
-	position: absolute;
-
-	left: calc(( 100vw - 200px ) / 2)
+	margin:auto;
+	position: static;
 }
 
 #manage-btn:hover{
@@ -277,6 +338,11 @@ footer a {
 
 .member-name {
 	position: absolute;
+	right: 1em;
+}
+.lang {
+	position: absolute;
+	top: 1.8em;
 	right: 1em;
 }
 /* Version Web */

@@ -277,7 +277,6 @@
 		private function addWorkshop()
 		{
 			$target_path = "uploads/";
-			var_dump($_FILES);
 			$target_path = $target_path . basename( $_FILES['workshopFile']['name']);
 			if($_FILES['workshopFile']['error'] == 2)
 			{

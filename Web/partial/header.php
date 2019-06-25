@@ -37,34 +37,23 @@
 		<script src="javascript/users.js"></script>
 
 	<?php
-		if($action->page_name == 'workshops')
+		if(!empty($action->page_name))
 		{
 			?>
-				<link rel="stylesheet" href="css/workshops.css">
-				<script src="javascript/workshops.js"></script>
-			<?php
-		}
-		if($action->page_name == 'login')
-		{
-			?>
-				<link rel="stylesheet" href="css/login.css">
-				<script src="javascript/login.js"></script>
-			<?php
-		}
-		if($action->page_name == 'console')
-		{
-			?>
-				<link rel="stylesheet" href="css/console.css">
-				<script src="javascript/admin.js"></script>
+
+				<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
+				<script src="javascript/<?= $action->page_name ?>.js"></script>
 			<?php
 		}
 
 
 	?>
 	<!-- CSS -->
+		<!-- FONTS -->
+		<link rel="stylesheet" href="css/fonts.css">
 		<!-- CUSTOM -->
-		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="./css/main-mobile.css" type="text/css" media="handheld" />
+		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/main-mobile.css" type="text/css" media="handheld" />
 
 		<!-- JQUERY -->
 		<link rel="stylesheet" href="css/jquery-ui.css">
@@ -105,6 +94,8 @@
 <div id="fb-root"></div>
 
 <div id="box"></div>
+
+<script>let langData = <?= json_encode($action->trans->langData) ?></script>
 <?php
 	if($action->isLoggedIn())
 	{
@@ -112,20 +103,26 @@
 <header>
 	<h1><span class="colored-kikicode">Kiki</span>club</h1>
 </header>
-<nav id="menu" class="navbar navbar-inverse navbar-static-top" >
+<?php
+	}
+	?>
 
+<nav id="menu" class="navbar navbar-inverse navbar-static-top" >
+	<?php
+		if($action->isLoggedIn())
+		{
+	?>
 	<div class="container">
     <div class="navbar-header">
-			<a href="#" class="btn btn-info btn-sm navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<a href="#" class="btn btn-info btn-sm navbar-toggle collapsed colored-kikicode hover" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 				<span	> <?= $action->complete_name ?></span>
 				<span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<i class="arrow down"></i>
 			</a>
 		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -184,21 +181,22 @@
       </ul>
     </div>
 	</div>
-	<?php
-		?>
-		<div class="member-name">
-			<?php
-					if($action->isFamilyMember())
-					{
-						?>
-							<h3>Welcome <?= $action->member_name ?></h3>
-						<?php
-					}
-			?>
-		</div>
+
+	<div class="member-name">
 		<?php
-	?>
+			if($action->isFamilyMember())
+			{
+				?>
+					<h3>Welcome <?= $action->member_name ?></h3>
+				<?php
+			}
+		?>
+	</div>
+
+	<?php
+		}
+		?>
+	<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
+
+
 </nav>
-<?php
-	}
-?>

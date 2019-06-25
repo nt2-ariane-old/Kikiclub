@@ -20,5 +20,19 @@
 			"errorEntry" => "Email or Password not valid",
 			"errorExist" => "User already exist",
 			"errorPassword" => "Passwords aren't the same",
-		]
+		],
+		"users" => [
+			"nbWorkshops" => " workshops completed",
+			"nbPts" => " points cumulated",
+			"new" => "Add Family Member",
+			"manage" => "Manage Profiles",
+			"return" => "Return to Profiles",
+			"profil" => "Profil",
+		],
+		"main" => [
+			"delete" => "Delete",
+			"update" => "Update",
+			"add" => "Add",
+			"back" => "Back",
+		],
 	];

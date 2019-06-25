@@ -19,8 +19,6 @@ const loadModules = () =>
 
 }
 
-
-
 const limitText = (limitField, limitNum) => {
 	let node = document.getElementById("countdown");
 	if (limitField.value.length > limitNum) {
@@ -89,6 +87,81 @@ let post = (path, params, method='post') => {
   document.body.appendChild(form);
   form.submit();
 }
+
+const read = (page, node) => {
+	value = "TEXT_NOT_FOUND";
+
+	if(page in langData)
+	{
+		if (node in langData[page])
+		{
+			value = langData[page][node];
+		}
+	}
+
+	return value;
+}
+const loadStars = (workshop,container) => {
+	let stars = document.createElement('div');
+		stars.setAttribute('class','stars');
+		stars.innerHTML = "Difficulty :";
+
+	for (let i = 1; i <= 3; i++) {
+		let star = document.createElement('span');
+		if(i <= workshop["ID_DIFFICULTY"])
+		{
+			star.setAttribute('class','fa fa-star checked');
+		}
+		else
+		{
+			star.setAttribute('class','fa fa-star');
+		}
+		stars.appendChild(star);
+	}
+	container.appendChild(stars);
+}
+const loadMedia = (workshop,container ) => {
+
+	let media = document.createElement("div");
+		media.setAttribute('class','media');
+
+
+		if(workshop["MEDIA_TYPE"] == "mp4")
+		{
+			let video = document.createElement('video');
+				video.width = '100%';
+				video.height = '100%';
+				video.controls ='controls';
+				video.innerHTML = "Your browser does not support the video tag.";
+
+				let source = document.createElement('source');
+				source.src = workshop["MEDIA_PATH"];
+				source.type = "video/" + workshop["MEDIA_TYPE"];
+				video.appendChild(source);
+
+			media.appendChild(video);
+
+		}
+		else if(workshop["MEDIA_TYPE"] == "png" ||
+				workshop["MEDIA_TYPE"] == "jpg")
+		{
+			let image = document.createElement('img');
+				image.src = workshop["MEDIA_PATH"];
+
+			media.appendChild(image);
+		}
+		else if(workshop["MEDIA_TYPE"] == "mp3")
+		{
+			let audio = document.createElement('audio');
+			audio.src = workshop["MEDIA_PATH"];
+			audio.controls = 'controls';
+			audio.innerHTML = "Your browser does not support the audio element.";
+
+			media.appendChild(audio);
+		}
+
+	container.appendChild(media);
+	}
 
 let clicked;
 const openConfirmBox = (form) =>

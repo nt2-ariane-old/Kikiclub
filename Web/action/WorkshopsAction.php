@@ -61,22 +61,7 @@
 					}
 				}
 				$this->new = WorkshopDAO::selectMemberNewWorkshop($_SESSION["member"]);
-				if(!empty($_GET["workshop"]))
-				{
-					$id = intval($_GET["workshop"]);
-					$this->show_workshop = true;
-					$this->workshop = WorkshopDAO::selectWorkshop($id);
-					$this->questions = WorkshopDAO::selectWorkshopQuestions($id);
-					foreach ($this->new as $item) {
-						if($id == $item["ID"])
-						{
-							WorkshopDAO::addMemberWorkshop($_SESSION["member"],$id,0);
-						}
 
-					}
-
-
-				}
 			}
 			else
 			{
