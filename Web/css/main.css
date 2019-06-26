@@ -160,6 +160,7 @@ header {
 	float: left;
 	color: black;
 	background-color: white;
+	height: 130px;
 }
 header h1{
 	color:black;
@@ -186,6 +187,7 @@ nav{
 	top: 0;
 	left:0;
 	margin: 0;
+	height: 50px;
 }
 
 
@@ -305,6 +307,31 @@ footer a {
 	z-index: 30;
 }
 
+#profile-box #family
+{
+	background-color: rgba(0, 0, 0, 0.350);
+	border-color: rgba(222, 184, 135, 0.350);
+
+}
+
+#profile-box #family-carousel
+{
+	position: absolute;
+	top: calc((100% - 500px) / 2);
+	width:100%;
+}
+#profile-box .users-footer
+{
+	position: absolute;
+	bottom: 1em;
+	width:100%;
+	height: 100px;
+	background-color: transparent;
+}
+#profile-box  .manage-btn
+{
+	background-color: whitesmoke;
+}
 
 /* Box de confirmation de formulaire */
 #confirm-box{
@@ -319,12 +346,9 @@ footer a {
 {
 	border: 5px solid black;
 	width:200px;
-	height:40px;
 	text-align: center;
-	position: absolute;
-	bottom:1em;
-	left: calc((100% - 200px) / 2);
-
+	margin: 1em auto;
+	padding: 1em;
 }
 #confirm-box button{
 	margin: 0 calc( ( 200px - ( 2 * 60px ) ) / 3) ;

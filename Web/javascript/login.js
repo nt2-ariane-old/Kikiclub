@@ -1,6 +1,7 @@
 //FB FUNCtiONS
 const onPageLoad = () =>
 {
+	FB.Event.subscribe('xfbml.render', finished_rendering);
 
 }
 const checkLoginState = () =>
@@ -51,14 +52,16 @@ function signInFacebook() {
 			}
 		})
 		});
-		FB.Event.subscribe('xfbml.render', finished_rendering);
-
 }
 //FACEBOOK FUNCTIONS
 var finished_rendering = function() {
-  var spinner = document.getElementById("spinner");
-  spinner.removeAttribute("style");
-  spinner.removeChild(spinner.childNodes[0]);
+	var spinner = document.getElementById("spinner");
+	if(spinner.childNodes.length>1)
+	{
+		spinner.removeAttribute("style");
+		spinner.removeChild(spinner.childNodes[0]);
+	}
+	console.log("finished");
 }
 
 //GOOGLE FUNCTIONS
@@ -74,7 +77,7 @@ function onSignIn(googleUser) {
 	formData.append('password_confirm',null);
 	formData.append('type', "Google");
 	formData.append('isLoggedIn', true);
-		
+
 	fetch("login-ajax.php", {
 		method: "POST",
 		credentials: 'include', // Pour envoyer les cookies avec la requête!

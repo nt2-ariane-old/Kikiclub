@@ -36,7 +36,6 @@
 			 }
 			if(!empty($_POST["usermode"]))
 			{
-				echo "test";
 				if($_POST["usermode"] == "normal")
 				{
 					$_SESSION["usermode"] = "normal";
@@ -95,12 +94,10 @@
 					$this->family_member = FamilyDAO::selectMember($_SESSION["member"]);
 					if(isset($_POST["form"]))
 					{
-						echo 'form';
 						if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))
 							{
-								echo 'test';
 								FamilyDAO::updateFamilyMember($_SESSION["member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
 								$_SESSION["usermode"] = "manage";
 								?>

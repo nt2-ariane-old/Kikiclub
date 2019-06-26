@@ -28,9 +28,6 @@
 		<!-- GOOGLE -->
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 
-		<!-- FACEBOOK -->
-		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_CA/sdk.js#xfbml=1&version=v3.3&appId=670117443417077&autoLogAppEvents=1"></script>
-
 	<!-- PAGE CUSTOM -->
 		<link rel="stylesheet" href="./css/users.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
@@ -99,6 +96,7 @@
 </head>
 <body onload="loadModules(); onPageLoad();">
 <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
 
 <div id="box"></div>
 

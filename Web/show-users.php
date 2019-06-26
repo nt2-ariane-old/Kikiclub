@@ -20,12 +20,15 @@
 
 		</div>
 	</template>
-
-	<main>
 		<?php
 			if($actionUser->create)
 			{
 				loadProfil(null,$actionUser);
+				?>
+					<div class="users-footer">
+						<a class="manage-btn" onclick="post('users.php',{'usermode':'manage'})"><?= $action->trans->read("users","return") ?></a>
+					</div>
+				<?php
 			}
 			else if($actionUser->modify)
 			{
@@ -42,25 +45,38 @@
 					?>
 
 					<div id="profil">
-						<h2><?= $action->trans->read("users","profil") ?></h2>
 						<?php
 							loadProfil($actionUser->family_member,$actionUser);
 						?>
 					</div>
-
-					<div id="manage-btn" class="users-page"><a onclick="post('users.php',{'usermode':'manage'})"><?= $action->trans->read("users","return") ?></a></div>
+					<div class="users-footer">
+						<a class="manage-btn" onclick="post('users.php',{'usermode':'manage'})"><?= $action->trans->read("users","return") ?></a>
+					</div>
 
 				<?php
 			}
 			else
 			{
-
 				?>
-				<div id="family">
-					<script>loadChildren()</script>
+				<div id="family-carousel" class="carousel slide" data-ride="carousel">
+					<!-- Content -->
+					<div class="carousel-inner" id="family">
+						<script>loadChildren()</script>
+				   	</div>
+				   	<!-- Controls -->
+				   	<a class="carousel-control-prev" href="#family-carousel" role="button" data-slide="prev">
+				     	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				     	<span class="sr-only">Previous</span>
+				   	</a>
+				   	<a class="carousel-control-next" href="#family-carousel" role="button" data-slide="next">
+				    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				     	<span class="sr-only">Next</span>
+				   	</a>
 				</div>
 
-				<div class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></div>
+				<div class="users-footer">
+					<a class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></a>
+				</div>
 
 				<?php
 			}

@@ -1,6 +1,6 @@
 .form-workshops
 {
-	background-color: rgb(212, 212, 170);
+	background-color: #D8DF23;
 	padding: 3em;
 	width:100%;
 	border-top: 5px solid black;
@@ -75,21 +75,7 @@
 	opacity: 0;
  }
 
- .register-contents
-{
-	width:70vw;
-	height:600px;
-	margin:15vh auto;
-	padding: 1em;
-	background-color: #ADB30F;
-	border : 6px solid black;
-}
-.register-contents input[type=text],.register-contents select,.register-contents p {
-	display: block;
-	width:80%;
-	margin: 1em auto;
-	padding:4px;
-}
+
 
 .forms-btns{
 	margin:auto;
@@ -152,9 +138,9 @@ table
 }
 .management-tab
 {
-	padding:3em;
-	background-color: rgb(235, 221, 193);
-	width:90%;
+	padding: 1em 6em 6em 6em;
+	background-color: rgba(0, 0, 0, 0.700);
+	width:100%;
 	margin: auto;
 }
 

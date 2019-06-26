@@ -60,8 +60,7 @@
 		else
 		{
 			?>
-
-				<div class="signinButton"><div id="spinner"><?=  $action->trans->read("loginpage", "loading") ?><div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div></div></div>
+				<div class="signinButton"><div id="spinner"><p><?=  $action->trans->read("loginpage", "loading") ?></p><div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="false"></div></div></div>
 				<div class="signinButton"><div class="g-signin2" data-onsuccess="onSignIn" data-longtitle="true" data-width="290px"></div></div>
 				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
 				<div class="signinButton other"><a href="?other=true"><?=  $action->trans->read("loginpage", "signIn-E") ?></a></div>

@@ -21,12 +21,14 @@ const loadChildren = () => {
 		}
 	}
 
+
 	previousState = state;
 	let memberHTML = document.querySelector("#child-template").innerHTML;
 	let container = document.getElementById("family");
 	container.innerHTML = "";
 	let formData = new FormData();
 
+	let nbMembers = 4;
 	fetch("family-ajax.php", {
 		method: "POST",
 		credentials: 'include',
@@ -36,11 +38,50 @@ const loadChildren = () => {
 	.then(data => {
 		let family = data["family"];
 		let avatars = data["avatars"]
-		addNewMember(container);
 
-		for (let i = 0; i < family.length; i++) {
-			addMember(family[i], memberHTML,container,state, avatars);
+		for (let i=-1; i < family.length; i++) {
+			let divCarouselItem = document.createElement('div');
+			if(i==-1)
+			{
+				divCarouselItem.setAttribute('class','carousel-item active');
+			}
+			else
+			{
+				divCarouselItem.setAttribute('class','carousel-item');
+			}
+				let divContainer = document.createElement('div');
+					divContainer.setAttribute('class','container');
+
+					let divRow = document.createElement('div');
+						divRow.setAttribute('class','row');
+
+					let min = i;
+					let max = i + nbMembers;
+
+					for (let j = min; j < max && j < family.length; j++)
+					{
+						if(j==-1)
+						{
+							let divNewMember = document.createElement('div');
+								divNewMember.setAttribute('class','col-sm-' + 12/nbMembers);
+								addNewMember(divNewMember);
+							divRow.appendChild(divNewMember);
+						}
+						else
+						{
+							let divMember = document.createElement('div');
+								divMember.setAttribute('class','col-sm-' + 12/nbMembers);
+								addMember(family[j], memberHTML,divMember,state, avatars);
+
+							divRow.appendChild(divMember);
+						}
+						i = j;
+					}
+					divContainer.appendChild(divRow);
+				divCarouselItem.appendChild(divContainer);
+			container.appendChild(divCarouselItem);
 		}
+
 	})
 
 }
@@ -64,7 +105,6 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	}
 
 	node.querySelector(".child-name").innerHTML = member["firstname"];
-	console.log(member["alert"].length);
 	if(member["alert"].length > 0)
 	{
 		node.querySelector(".child-nbalert").style.display = 'block';

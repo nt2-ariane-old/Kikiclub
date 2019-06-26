@@ -1,14 +1,17 @@
 const loadModules = () =>
 {
-	gapi.load('auth2', function(){
-        auth2 = gapi.auth2.init({
-            client_id: '704832246976-9gtrh525ke8s7p8kp9vatgals73l22ud.apps.googleusercontent.com'
-						//client_id: '704832246976-7qoem5fnkn8um3566973uoeg7pmpp3pv.apps.googleusercontent.com'
-				});
-        // Attach the click handler to the sign-in button
-        auth2.attachClickHandler('signin-button', {}, null, null);
-	});
+	// gapi.load('auth2', function(){
+  //       auth2 = gapi.auth2.init({
+  //           client_id: '704832246976-9gtrh525ke8s7p8kp9vatgals73l22ud.apps.googleusercontent.com'
+	// 					//client_id: '704832246976-7qoem5fnkn8um3566973uoeg7pmpp3pv.apps.googleusercontent.com'
+	// 			});
+  //       // Attach the click handler to the sign-in button
+  //       auth2.attachClickHandler('signin-button', {}, null, null);
+	// });
 
+	gapi.load('auth2', function() {
+		gapi.auth2.init();
+	});
   (function(d, s, id){
      var js, fjs = d.getElementsByTagName(s)[0];
      if (d.getElementById(id)) {return;}
@@ -30,6 +33,7 @@ const limitText = (limitField, limitNum) => {
 }
 
 window.fbAsyncInit = function() {
+	console.log("test");
 	FB.init({
 		appId      : '670117443417077',
 		cookie     : true,
@@ -219,15 +223,18 @@ const showProfiles = () =>
 		 node.style.display = "block";
 }
 function signOut() {
-	let auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function () {
+	var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+		 auth2.disconnect();
+		 console.log("worked GOOGLE");
 	});
+
 
 	if(FB.getLoginStatus() == 'connected')
 	{
-		FB.logout(function(response) {
-			// Person is now logged out
-		 });
+				FB.logout(function(response) {
+					console.log("worked FB");
+				});
 	}
 
 	window.location = "index.php?logout=true";

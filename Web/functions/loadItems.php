@@ -65,7 +65,7 @@ function loadProfil($user,$action)
 	if($user != null)
 		$userExist = true;
 	?>
-		<div class="register-contents">
+		<div class="users-contents">
 			<?php
 			if($action->error)
 			{
@@ -165,7 +165,14 @@ function loadProfil($user,$action)
 						</div>
 					</form>
 
-					<button class="delete-btn" onclick="post('users.php',{<?php if($userExist){ ?> 'delete':true <?php ;} else { ?> 'usermode':'manage' <?php } ?>});"><?php if($userExist){echo $action->trans->read("main","delete");} else{echo $action->trans->read("main","back");} ?></button>
+					<?php
+						if($userExist)
+						{
+							?>
+								<button class="delete-btn" onclick="post('users.php',{ 'delete':true});"><?= $action->trans->read("main","delete")?></button>
+							<?php
+						}
+					?>
 			</div>
 	<?php
 }
