@@ -117,6 +117,7 @@
 					{
 						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
 						$_SESSION["usermode"] = "manage";
+						unset($_SESSION["member"]);
 						?>
 							<script>window.location="users.php";</script>
 						<?php

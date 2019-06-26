@@ -16,67 +16,68 @@
 		protected function executeAction() {
 			if(!empty($_GET["other"]))
 			{
-				if($_GET["other"] == "true")
+				$id_type = UsersDAO::getLoginTypeIdByName("Kikiclub");
+				$this->otherlogin = true;
+				
+				if(isset($_POST["form"]))
 				{
-					$this->otherlogin = true;
-				}
-
-
-				if(!empty($_POST["email"]) &&
-				!empty($_POST["psswd"]))
-				{
-					$infos = UsersDAO::login($_POST["email"],$_POST["psswd"]);
-					if($infos === null)
+					if(!empty($_POST["email"]) &&
+					!empty($_POST["psswd"]))
 					{
-						$this->error = true;
-						$this->errorMsg = $this->trans->read("loginpage", "errorEntry");
-					} else
-					{
-						$_SESSION["visibility"] = $infos["VISIBILITY"];
-						$_SESSION["id"] = $infos["ID"];
-						$_SESSION["firstname"] = $infos["firstname"];
-						$_SESSION["lastname"] = $infos["lastname"];
-					}
-				} else {
-					$this->error = true;
-					$this->errorMsg =$this->trans->read("loginpage", "errorFeeld");
-				}
-			}
-			else if(!empty($_GET["signup"]))
-			{
-				if($_GET["signup"] == "true")
-				{
-					$this->signup = true;
-				}
-				if(!empty($_POST["email"]) &&
-				!empty($_POST["psswd1"]) &&
-				!empty($_POST["psswd2"])  &&
-				!empty($_POST["firstname"])  &&
-				!empty($_POST["lastname"]))
-				{
-					if($_POST["psswd1"] === $_POST["psswd2"])
-					{
-						if(!UsersDAO::UserExist($_POST["email"]))
-						{
-
-							UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility);
-							$_SESSION["visibility"] =$this->default_visibility;
-						}
-						else
+						$infos = UsersDAO::loginUserWithEmail($_POST["email"],$_POST["psswd"],$id_type);
+						if(is_string($infos))
 						{
 							$this->error = true;
-							$this->errorMsg = $this->trans->read("loginpage", "errorExist");
+							$this->errorMsg = $infos;
+						} 
+						else
+						{
+							$_SESSION["visibility"] = $infos["VISIBILITY"];
+							$_SESSION["id"] = $infos["ID"];
+							$_SESSION["firstname"] = $infos["firstname"];
+							$_SESSION["lastname"] = $infos["lastname"];
 						}
 					} else {
 						$this->error = true;
-						$this->errorMsg = $this->trans->read("loginpage", "errorPassword");
+						$this->errorMsg =$this->trans->read("loginpage", "errorFeeld");
 					}
 				}
 				else
 				{
 					$this->error = true;
-					$this->errorMsg = $this->trans->read("loginpage", "errorFeeld");
+					$this->errorMsg = 'not yet...';
 				}
+				
+			}
+			else if(!empty($_GET["signup"]))
+			{
+				$this->signup = true;
+				
+				if(isset($_POST["form"]))
+				{
+					if(!empty($_POST["email"]) &&
+					!empty($_POST["psswd1"]) &&
+					!empty($_POST["psswd2"])  &&
+					!empty($_POST["firstname"])  &&
+					!empty($_POST["lastname"]))
+					{
+						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type))
+						{
+							$_SESSION["visibility"] =$this->default_visibility;
+						}
+					}
+					else
+					{
+						$this->error = true;
+						$this->errorMsg = $this->trans->read("loginpage", "errorFeeld");
+					}
+				}
+				else
+				{
+					$this->error = true;
+					$this->errorMsg = 'not yet...';
+				}
+				
 			}
 			if($this->isLoggedIn())
 			{

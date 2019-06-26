@@ -25,6 +25,7 @@
 				<!-- <form action="login.php?other=true" method="post" onsubmit="return(login());"> -->
 				<form action="login.php?other=true" method="post">
 					<input type="hidden" name="type" value="signin">
+					<input type="hidden" name="form">
 					<input type="email" name="email" id="email" placeholder="<?= $action->trans->read("loginpage", "emailInput") ?>">
 					<input type="password" name="psswd" id="password" placeholder="<?= $action->trans->read("loginpage", "passwordInput") ?>">
 					<button type="submit"><?=  $action->trans->read("loginpage", "login") ?></button>
@@ -41,6 +42,8 @@
 			<!-- <form action="login.php?signup=true" method="post" onsubmit="signup()"> -->
 			<form action="login.php" method="post">
 				<input type="hidden" name="type" value="signup">
+				<input type="hidden" name="form">
+
 				<input type="text" name="firstname" id="firstname" placeholder="<?=  $action->trans->read("main", "firstnameInput") ?>">
 				<input type="text" name="lastname" id="lastname" placeholder="<?=  $action->trans->read("main", "lastnameInput") ?>">
 				<input type="email" name="email" id="email" placeholder="<?=  $action->trans->read("loginpage", "emailInput") ?>">

@@ -23,6 +23,9 @@ function signInFacebook() {
 		let formData = new FormData();
 		formData.append('name', response.name);
 		formData.append('email', response.email);
+		formData.append('password', null);
+		formData.append('password_confirm',null);
+		formData.append('type', "Facebook");
 		formData.append('isLoggedIn', true);
 		fetch("login-ajax.php", {
 			method: "POST",
@@ -31,9 +34,20 @@ function signInFacebook() {
 		})
 		.then(response => response.json())
 		.then(data => {
-			if(data == true)
+			if (typeof data === 'string' || data instanceof String)
 			{
-				window.location = "users.php";
+				console.log(data);
+			}
+			else
+			{
+				if(data === true)
+				{
+					window.location = 'users.php';
+				}
+				else
+				{
+					console.log(data);
+				}
 			}
 		})
 		});
@@ -56,8 +70,11 @@ function onSignIn(googleUser) {
 	let formData = new FormData();
 	formData.append('name', profile.getName());
 	formData.append('email', profile.getEmail());
+	formData.append('password', null);
+	formData.append('password_confirm',null);
+	formData.append('type', "Google");
 	formData.append('isLoggedIn', true);
-
+		
 	fetch("login-ajax.php", {
 		method: "POST",
 		credentials: 'include', // Pour envoyer les cookies avec la requête!
@@ -65,10 +82,21 @@ function onSignIn(googleUser) {
 	})
 	.then(response => response.json())
 	.then(data => {
-		if(data == true)
-		{
-			window.location = "users.php";
-		}
+		if (typeof data === 'string' || data instanceof String)
+			{
+				console.log(data);
+			}
+			else
+			{
+				if(data === true)
+				{
+					window.location = 'users.php';
+				}
+				else
+				{
+					console.log(data);
+				}
+			}
 	})
 
 }

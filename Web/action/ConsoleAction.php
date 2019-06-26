@@ -280,7 +280,7 @@
 
 		private function addUser()
 		{
-			UsersDAO::registerUser($_POST['email'],null,$_POST['firstname'],$_POST['lastname'],CommonAction::$VISIBILITY_CUSTOMER_USER);
+			UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],CommonAction::$VISIBILITY_CUSTOMER_USER,null);
 		}
 
 		private function addWorkshop()

@@ -56,7 +56,6 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 			node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
 		}
 	}
-	// node.querySelector('a').href = "workshops.php?member=" +member["id"];
 	node.querySelector('a').setAttribute("onclick",'post("workshops.php",{"member":'+member["id"]+'})');
 
 	if(state==="manage")
@@ -104,7 +103,8 @@ const addNewMember = (container) => {
 	divNew.setAttribute('class','child-info');
 
 	let aNew = document.createElement('a');
-		aNew.href = "users.php?usermode=create";
+		aNew.setAttribute("onclick",'post("users.php",{"usermode":"create"})');
+
 
 		let divLogo = document.createElement('div');
 			divLogo.setAttribute('class','child-logo');
@@ -122,7 +122,6 @@ const addNewMember = (container) => {
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector('a').onclick = post("workshops.php",{"member":member["id"],"usermode":"modify"});
-
+	node.querySelector('a').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"usermode":"modify"})');
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

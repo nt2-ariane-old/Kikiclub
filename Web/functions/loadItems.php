@@ -165,7 +165,7 @@ function loadProfil($user,$action)
 						</div>
 					</form>
 
-					<button class="delete-btn" onclick="post('users.php',{'users':'<?php if($userExist){ echo 'delete';} else { echo 'manage';} ?>'});"><?php if($userExist){echo $action->trans->read("main","delete");} else{echo $action->trans->read("main","back");} ?></button>
+					<button class="delete-btn" onclick="post('users.php',{<?php if($userExist){ ?> 'delete':true <?php ;} else { ?> 'usermode':'manage' <?php } ?>});"><?php if($userExist){echo $action->trans->read("main","delete");} else{echo $action->trans->read("main","back");} ?></button>
 			</div>
 	<?php
 }

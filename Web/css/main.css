@@ -315,7 +315,17 @@ footer a {
 	top:calc((100% - 100px) / 2);
 
 }
+.manage-btn
+{
+	border: 5px solid black;
+	width:200px;
+	height:40px;
+	text-align: center;
+	position: absolute;
+	bottom:1em;
+	left: calc((100% - 200px) / 2);
 
+}
 #confirm-box button{
 	margin: 0 calc( ( 200px - ( 2 * 60px ) ) / 3) ;
 	width:60px;
