@@ -19,7 +19,7 @@
 			return $contents;
 
 		}
-		
+
 		public static function getUsersLikeName($name)
 		{
 			$connection = Connection::getConnection();
@@ -56,7 +56,7 @@
 
 			return $contents;
 		}
-		
+
 		public static function getUserWithID($id)
 		{
 			$connection = Connection::getConnection();
@@ -73,7 +73,7 @@
 			return $contents;
 
 		}
-		
+
 		public static function getUserWithEmail($email)
 		{
 			$connection = Connection::getConnection();
@@ -128,7 +128,7 @@
 								break;
 						}
 					}
-						
+
 				}
 				else
 				{
@@ -139,60 +139,60 @@
 			{
 				$infos = "Invalid Email. Please Register";
 			}
-			
+
 			return $infos;
 		}
-		
+
 		public static function getAllLoginType()
 		{
 			$connection = Connection::getConnection();
-			
+
 			$statement= $connection->prepare("SELECT ID,NAME FROM login_type");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
-			
+
 			$contents = [];
-			
+
 			while ($row = $statement->fetch()) {
-				$contents[] = $row;	
+				$contents[] = $row;
 			}
 			return $contents;
 		}
 		public static function getLoginTypeIdByName($name)
 		{
 			$connection = Connection::getConnection();
-			
+
 			$statement = $connection->prepare("SELECT ID FROM login_type WHERE NAME=?");
 			$statement->bindParam(1, $name);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
-			
+
 			$id = -1;
-			
+
 			if ($row = $statement->fetch()) {
-				$id = $row["ID"];	
+				$id = $row["ID"];
 			}
 			return $id;
 		}
-		
+
 		public static function getLoginTypeById($id)
 		{
 			$connection = Connection::getConnection();
-			
+
 			$statement = $connection->prepare("SELECT ID,NAME FROM login_type WHERE ID=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
-			
+
 			$contents = [];
-			
+
 			if ($row = $statement->fetch()) {
-				$contents = $row;	
+				$contents = $row;
 			}
-			
+
 			return $contents;
 		}
-		
+
 		public static function addLoginInfosForUser($id_user,$id_type,$password)
 		{
 			$connection = Connection::getConnection();
@@ -207,13 +207,13 @@
 		public static function getLoginInfosForUserByType($id_user,$id_type)
 		{
 			$connection = Connection::getConnection();
-			
+
 			$statementLogin = $connection->prepare("SELECT ID_USER,ID_LOGIN_TYPE,PASSWORD FROM users_login WHERE ID_USER=? AND ID_LOGIN_TYPE =?");
 			$statementLogin->bindParam(1, $id_user);
 			$statementLogin->bindParam(2, $id_type);
 			$statementLogin->setFetchMode(PDO::FETCH_ASSOC);
 			$statementLogin->execute();
-			
+
 			$contents = [];
 			if($row = $statementLogin->fetch())
 			{
@@ -221,11 +221,11 @@
 			}
 			return $contents;
 		}
-		
+
 		public static function addUser($email,$firstname,$lastname,$visibility)
 		{
 			$connection = Connection::getConnection();
-			
+
 			$statement = $connection->prepare("INSERT INTO users(email,firstname,lastname,visibility) VALUES(?,?,?,?)");
 			$statement->bindParam(1, $email);
 			$statement->bindParam(2, $firstname);
@@ -234,10 +234,10 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
-		
+
 		public static function registerUser($email,$password, $password_confirm,$firstname,$lastname,$visibility,$id_type)
 		{
-			
+
 			$connection = Connection::getConnection();
 
 			$valide = false;
@@ -255,23 +255,26 @@
 				}
 			}
 
-			if(!empty($password) && $id_type == UsersDAO::getLoginTypeIdByName("Kikiclub"))
+			if($id_type == UsersDAO::getLoginTypeIdByName("Kikiclub"))
 			{
-				if($password === $password_confirm)
+				if(!empty($password))
 				{
-					$password = password_hash($password, PASSWORD_BCRYPT);
-				}
-				else
-				{
-					$password = null;
-					$valide = false;
+					if($password === $password_confirm)
+					{
+						$password = password_hash($password, PASSWORD_BCRYPT);
+					}
+					else
+					{
+						$password = null;
+						$valide = false;
+					}
 				}
 			}
-			
+
 			if(!empty($id_type) && $valide)
 			{
-				$user = UsersDAO::getUserWithEmail($email);	
-				UsersDAO::addLoginInfosForUser($user["ID"],$id_type,null);
+				$user = UsersDAO::getUserWithEmail($email);
+				UsersDAO::addLoginInfosForUser($user["ID"],$id_type,$password);
 			}
 
 			return $valide;

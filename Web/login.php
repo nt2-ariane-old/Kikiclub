@@ -40,7 +40,7 @@
 		{
 			?>
 			<!-- <form action="login.php?signup=true" method="post" onsubmit="signup()"> -->
-			<form action="login.php" method="post">
+			<form action="login.php?signup=true" method="post">
 				<input type="hidden" name="type" value="signup">
 				<input type="hidden" name="form">
 

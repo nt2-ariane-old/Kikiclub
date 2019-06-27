@@ -18,7 +18,7 @@
 			{
 				$id_type = UsersDAO::getLoginTypeIdByName("Kikiclub");
 				$this->otherlogin = true;
-				
+
 				if(isset($_POST["form"]))
 				{
 					if(!empty($_POST["email"]) &&
@@ -29,7 +29,7 @@
 						{
 							$this->error = true;
 							$this->errorMsg = $infos;
-						} 
+						}
 						else
 						{
 							$_SESSION["visibility"] = $infos["VISIBILITY"];
@@ -47,12 +47,13 @@
 					$this->error = true;
 					$this->errorMsg = 'not yet...';
 				}
-				
+
 			}
 			else if(!empty($_GET["signup"]))
 			{
 				$this->signup = true;
-				
+				$id_type = UsersDAO::getLoginTypeIdByName("Kikiclub");
+
 				if(isset($_POST["form"]))
 				{
 					if(!empty($_POST["email"]) &&
@@ -61,9 +62,16 @@
 					!empty($_POST["firstname"])  &&
 					!empty($_POST["lastname"]))
 					{
-						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type))
+						echo "ok";
+						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["psswd2"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type))
 						{
+							echo "registered";
 							$_SESSION["visibility"] =$this->default_visibility;
+						}
+						else
+						{
+							$this->error = true;
+							$this->errorMsg = "Not working";
 						}
 					}
 					else
@@ -77,7 +85,7 @@
 					$this->error = true;
 					$this->errorMsg = 'not yet...';
 				}
-				
+
 			}
 			if($this->isLoggedIn())
 			{
