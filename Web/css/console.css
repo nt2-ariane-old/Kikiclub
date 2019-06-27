@@ -10,12 +10,25 @@
 	margin: auto;
 
 }
-
+.input_name
+{
+	width: 25%;
+	display: inline-block;
+}
 .form-workshops input, .form-workshops textarea,.form-workshops button,.form-workshops select
 {
 	display: block;
 	width:80%;
 	margin: 1em auto;
+}
+.form-workshops p
+  {
+	  text-align: left;
+  }
+.form-workshops p input,.form-workshops p select
+{
+	width: 70%;
+	display: inline-block;
 }
 .form-workshops img
 {

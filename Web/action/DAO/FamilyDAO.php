@@ -19,6 +19,28 @@
 			$statement->execute();
 
 		}
+
+		public static function addScore($id,$newPts)
+		{
+			$connection = Connection::getConnection();
+			$statementMember = $connection->prepare("SELECT SCORE FROM family WHERE ID=?");
+
+			$statementMember->bindParam(1, $id);
+
+			$statementMember->setFetchMode(PDO::FETCH_ASSOC);
+			$statementMember->execute();
+
+			if($row = $statementMember->fetch())
+			{
+				$score = $row["SCORE"] + $newPts;
+
+				$statementScore = $connection->prepare("UPDATE family SET score=? WHERE id=?");
+				$statementScore->bindParam(1, $score);
+				$statementScore->bindParam(2, $id);
+				$statementScore->execute();
+
+			}
+		}
 		public static function deleteFamilyMember($id)
 		{
 			$connection = Connection::getConnection();

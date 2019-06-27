@@ -119,6 +119,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	node.querySelector(".child-nbPTS").innerHTML = member["score"] + read("users","nbPts");
 
 	let count = 0;
+	console.log(member);
 	for (const key in member["workshops"]) {
 		if (member["workshops"].hasOwnProperty(key)) {
 			const element = member["workshops"][key];

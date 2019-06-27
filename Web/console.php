@@ -126,7 +126,10 @@
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] )
 												{
-													$valide = false;
+													if($famWork["STATUT"] != 1)
+													{
+														$valide = false;
+													}
 
 												}
 											}
@@ -142,12 +145,29 @@
 								</div>
 
 								<div id="in-progress" class="droppable">
+								<div id="not-started" class="droppable">
+								<h2>Not Started</h2>
+
+								<?php
+										foreach ($action->workshops as $workshop) {
+											foreach ($action->familyWorkshops as $famWork) {
+												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 2 )
+												{
+													?>
+														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
+
+													<?php
+												}
+											}
+										}
+									?>
+								</div>
 								<h2>In Progress</h2>
 
 									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
-												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 1 )
+												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 3 )
 												{
 													?>
 														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
@@ -160,30 +180,14 @@
 										}
 									?>
 								</div>
-								<div id="not-started" class="droppable">
-								<h2>Not Started</h2>
 
-								<?php
-										foreach ($action->workshops as $workshop) {
-											foreach ($action->familyWorkshops as $famWork) {
-												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 0 )
-												{
-													?>
-														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
-
-													<?php
-												}
-											}
-										}
-									?>
-								</div>
 								<div id="complete" class="droppable">
 								<h2>Complete</h2>
 
 									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
-												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 2 )
+												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 4 )
 												{
 													?>
 														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
@@ -251,8 +255,119 @@
 				</div>
 			<?php
 		}
+		else if($action->pageRobots)
+		{
+			if($action->add)
+			{
+				?>
+				<div class="form-workshops">
+					<form action="console.php" method="post">
+						<input type="hidden" name="add">
+						<input type="hidden" name="robots">
 
-	?>
+						<input type="text" name="name" placeholder="Name">
 
+						<p> <span class="input_name"> Age Recommanded :</span>
+						<select name="grade_recommanded">
+							<?php
+								foreach ($action->grades as $grade) {
+									?>
+										<option value="<?= $grade["ID"]?>"><?= $grade["NAME"]?></option>
+									<?php
+								}
+							?>
+
+						</select>
+						</p>
+
+						<?php
+							foreach ($action->difficulties as $difficulty) {
+								?>
+									<p><span class="input_name"><?= $difficulty["NAME"]?></span><input type="number" name="score_<?= $difficulty["ID"]?>" placeholder="Score"></p>
+								<?php
+							}
+						?>
+						<button type="submit" name="push" onclick="clicked=this.name">Add</button>
+						<button type="submit" name="back" onclick="clicked=this.name">Back</button>
+					</form>
+				</div>
+				<?php
+			}
+			else if($action->modify)
+			{
+				?>
+				<div class="form-workshops">
+					<form action="console.php" method="post">
+						<?php
+							var_dump($action->robotMod);
+						?>
+						<input type="hidden" name="modify">
+						<input type="hidden" name="robots">
+						<input type="hidden" name="robots_list[]" value="<?=$action->robotMod["ROBOTS"]["ID"]?>"></td>
+
+
+						<input type="text" name="name" placeholder="Name" value="<?=$action->robotMod["ROBOTS"]["NAME"]?>">
+
+						<p> <span class="input_name"> Age Recommanded :</span>
+						<select name="grade_recommanded">
+							<?php
+								foreach ($action->grades as $grade) {
+									?>
+										<option value="<?= $grade["ID"]?>"><?= $grade["NAME"]?></option>
+									<?php
+								}
+							?>
+
+						</select>
+						</p>
+
+						<?php
+							foreach ($action->robotMod["SCORES"] as $score) {
+								?>
+									<p><span class="input_name"><?= $score["DIFFICULTY"]?></span><input type="number" name="score_<?= $score["ID_DIFFICULTY"]?>" placeholder="Score" value="<?= $score["SCORE"]?>"></p>
+								<?php
+							}
+						?>
+						<button type="submit" name="push" onclick="clicked=this.name">Modify</button>
+						<button type="submit" name="back" onclick="clicked=this.name">Back</button>
+					</form>
+				</div>
+				<?php
+			}
+			else
+			{
+			?>
+				<div class="management-tab">
+					<div class="bar">
+						<input type="text" name="research" id="research-barRobots" placeholder="Research" onkeyup="researchWorkshop()">
+					</div>
+					<div class='form-workshops'>
+						<form action="console.php" method="post" onSubmit="return validTab(this)">
+							<input type="hidden" name="robots">
+
+							<table class='table table-striped table-hover' style="width:100%">
+								<thead>
+									<tr>
+										<th >Select</th>
+										<th onclick="sortingTable('workshops-table',1)">ID</th>
+										<th onclick="sortingTable('workshops-table',2)">Name</th>
+										<th>Scores By Difficulties</th>
+									</tr>
+								</thead>
+								<tbody id='table-robots'>
+									<script>researchRobots()</script>
+								</tbody>
+							</table>
+
+							<button type="submit" name="add" onclick="clicked=this.name" value="true">Add</button>
+							<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
+							<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
+						</form>
+					</div>
+				</div>
+			<?php
+			}
+		}
+		?>
 <?php
 	require_once("partial/footer.php");

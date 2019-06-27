@@ -52,6 +52,7 @@
 			"workshops" => "Workshops",
 			"users" => "Users",
 			"admin" => "Admin Console",
+			"robots" => "Robots",
 			"home" => "Home",
 
 		],

@@ -27,6 +27,99 @@ const onPageLoad = () =>
 
 }
 
+const researchRobots = () =>
+{
+	let node= document.querySelector("#research-barRobots");
+	let table = document.querySelector("#table-robots");
+	let formData = new FormData();
+
+	formData.append('name', node.value);
+	formData.append('robots',true);
+
+	fetch("research-ajax.php", {
+		method: "POST",
+		credentials: 'include',
+		body: formData
+	})
+	.then(response => response.json())
+	.then(data => {
+		table.innerHTML = "";
+		console.log(data);
+		data.forEach(robot => {
+			let line = document.createElement("TR");
+
+			//Add Checkbox
+			let checkCase = document.createElement("TD");
+
+			let checkbox = document.createElement("INPUT");
+				checkbox.setAttribute("type", "checkbox");
+				checkbox.setAttribute("name", "robots_list[]");
+				checkbox.setAttribute("value", robot["ROBOTS"]["ID"]);
+				checkCase.appendChild(checkbox);
+
+			//ID
+			let caseId = document.createElement("TD");
+				caseId.innerHTML =robot["ROBOTS"]["ID"];
+
+			//NAME
+			let casename= document.createElement("TD");
+				casename.innerHTML =robot["ROBOTS"]["NAME"];
+
+			//SCORES
+			let caseScores = document.createElement("TD");
+			console.log(robot["SCORES"].length)
+			if(robot["SCORES"].length > 0){
+				//CREATION OF TABLE
+				let tableScores = document.createElement("table");
+				tableScores.style.width = '100%';
+				tableScores.setAttribute("class", "scoresTable");
+
+				//HEAD OF TABLE OF FAMILY MEMBER
+				let head = document.createElement("thead");
+					let ScoreLine = document.createElement("tr");
+						let thFirst = document.createElement("th");
+							thFirst.innerHTML = "Difficulty";
+							thFirst.style.width = '50%';
+							ScoreLine.appendChild(thFirst);
+
+						let thLast = document.createElement("th");
+							thLast.innerHTML = "Score";
+							thLast.style.width = '50%';
+							ScoreLine.appendChild(thLast);
+					head.appendChild(ScoreLine);
+					tableScores.appendChild(head);
+
+				let body = document.createElement("tbody");
+					robot["SCORES"].forEach(difficulty => {
+						Scoreline = document.createElement("tr");
+						//DIFFICULTY
+						let tdDiff =document.createElement("td");
+							tdDiff.innerHTML =difficulty["DIFFICULTY"];
+						//SCORES
+						let tdScore =document.createElement("td");
+							tdScore.innerHTML =difficulty["SCORE"];
+
+							Scoreline.appendChild(tdDiff);
+							Scoreline.appendChild(tdScore);
+						body.appendChild(Scoreline);
+					});
+
+					tableScores.appendChild(body);
+
+					caseScores.appendChild(tableScores);
+					line.appendChild(caseScores);
+			}
+
+			line.appendChild(checkCase);
+			line.appendChild(caseId);
+			line.appendChild(casename);
+			line.appendChild(caseScores);
+
+			table.appendChild(line);
+		});
+	});
+}
+
 const activateDraggable = () => {
 	$( ".workshop-object" ).draggable();
 	$( ".droppable").droppable({

@@ -47,6 +47,22 @@
 
 			return $content;
 		}
+		public static function getWorkshopsWithID($id) { //RECEVOIR TOUTES LES PAGES
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID,ID_ROBOT,ID_DIFFICULTY FROM workshops WHERE ID=?");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			if ($row = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
+		}
 		public static function getWorkshopsScoreValue($id_robot, $id_difficulty)
 		{
 			$connection = Connection::getConnection();

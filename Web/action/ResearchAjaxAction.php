@@ -4,6 +4,7 @@
 	require_once("action/DAO/WorkshopDAO.php");
 	require_once("action/DAO/FamilyDAO.php");
 	require_once("action/DAO/UsersDAO.php");
+	require_once("action/DAO/RobotDAO.php");
 
 	class ResearchAjaxAction extends CommonAction {
 		public $results;
@@ -26,6 +27,10 @@
 				if(isset($_POST["family"]))
 				{
 					$this->results = FamilyDAO::getFamilyLikeName($name);
+				}
+				if(isset($_POST["robots"]))
+				{
+					$this->results = RobotDAO::getRobotsAndDifficultiesByNAME($name);
 
 				}
 			}

@@ -16,6 +16,8 @@
 		public $familyMod;
 		public $familyWorkshops;
 
+		public $robotMod;
+
 		public $avatars;
 
 		public $difficulties;
@@ -28,14 +30,17 @@
 		public $assignFamily;
 
 
+
 		//Page en cours
 		public $pageWorkshops;
 		public $pageUsers;
+		public $pageRobots;
 
 		//Error infos
 		public $error;
 		public $errorMsg;
 
+		public $grades;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console", "Admin Console");
 			$this->add = false;
@@ -65,11 +70,12 @@
 			if($_SESSION["language"] == 'en')
 			{
 				$this->difficulties = WorkshopDAO::getDifficultiesEN();
-
+				$this->grades = WorkshopDAO::getGradesEN();
 			}
 			else
 			{
 				$this->difficulties = WorkshopDAO::getDifficultiesFR();
+				$this->grades = WorkshopDAO::getGradesFR();
 
 			}
 			$this->robots = RobotDAO::getRobots();
@@ -78,11 +84,19 @@
 			{
 				$_SESSION["users"] = true;
 				unset($_SESSION['workshops']);
+				unset($_SESSION['robots']);
 			}
 			else if (isset($_POST["workshops"]))
 			{
 				$_SESSION["workshops"] = true;
 				unset($_SESSION['users']);
+				unset($_SESSION['robots']);
+			}
+			else if(isset($_POST["robots"]))
+			{
+				$_SESSION["robots"] = true;
+				unset($_SESSION['users']);
+				unset($_SESSION['workshops']);
 			}
 
 			if(isset($_SESSION["users"]))
@@ -92,6 +106,10 @@
 			else if (isset($_SESSION["workshops"]))
 			{
 				$this->pageWorkshops=true;
+			}
+			else if(isset($_SESSION["robots"]))
+			{
+				$this->pageRobots = true;
 			}
 
 			if(!empty($_POST['members_list']))
@@ -117,6 +135,10 @@
 					{
 						$this->addUser();
 					}
+					else if ($this->pageRobots)
+					{
+						$this->addRobot();
+					}
 				}
 			}
 			else if(isset($_POST['modify']) && !isset($_POST['back']))
@@ -133,6 +155,10 @@
 				else if($this->pageUsers)
 				{
 					$this->modifyUser();
+				}
+				else if ($this->pageRobots)
+				{
+					$this->modifyRobot();
 				}
 			}
 			else if($this->pageUsers && isset($_POST['assign']) && !isset($_POST['back']) && !empty($_POST['members_list']))
@@ -153,8 +179,13 @@
 				{
 					$this->deleteUsersAndMembers();
 				}
+				else if($this->pageRobots)
+				{
+					$this->deleteRobots();
+				}
 
 			}
+
 		}
 
 		//All Possible Actions
@@ -168,6 +199,17 @@
 				}
 				header("Location:console.php");
 			}
+		}
+		private function deleteRobots()
+		{
+			if(!empty($_POST['robots_list']))
+			{
+				foreach ($_POST['robots_list'] as $robot) {
+					RobotDAO::deleteRobot($robot);
+				}
+				header('location:console.php');
+			}
+
 		}
 		private function deleteUsersAndMembers()
 		{
@@ -252,10 +294,45 @@
 					header('location:console.php');
 
 				}
-
 			}
 		}
 
+		private function addRobot()
+		{
+			RobotDAO::insertRobot($_POST["name"],$_POST["grade_recommanded"]);
+			$newRobot = RobotDAO::getRobotByName($_POST["name"]);
+			foreach ($this->difficulties as $difficulty) {
+				RobotDAO::insertRobotScoreByDifficulty($newRobot["ID"],$difficulty["ID"],intval($_POST["score_" . $difficulty["ID"]]));
+			}
+			header('location:console.php');
+
+		}
+		private function modifyRobot()
+		{
+			if(!empty($_POST["robots_list"]))
+			{
+
+				$id = $_POST['robots_list'][0];
+				$this->robotMod = RobotDAO::getRobotsAndDifficultiesByID(intval($id));
+				if(isset($_POST['push']))
+				{
+					if( !empty($_POST["name"]) &&
+					!empty($_POST["grade_recommanded"]))
+					{
+						RobotDAO::updateRobot($_POST['robots_list'][0],$_POST["name"],$_POST["grade_recommanded"]);
+						foreach ($this->difficulties as $difficulty) {
+							RobotDAO::updateRobotScoreByDifficulty($id,$difficulty["ID"],intval($_POST["score_" . $difficulty["ID"]]));
+						}
+					}
+					header('location:console.php');
+
+				}
+			}
+			else
+			{
+				header('location:console.php');
+			}
+		}
 		private function addMember()
 		{
 			$this->userMod = $_POST['users_list'][0];

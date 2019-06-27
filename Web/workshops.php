@@ -102,7 +102,7 @@
 								<?php
 									foreach ($action->robots as $robot) {
 										?>
-								<li onclick="setSearchParams('robot',<?=$robot['ID'] ?>,this)"><?= $robot["NAME"] ?></li>
+											<li onclick="setSearchParams('robot',<?=$robot['ID'] ?>,this)"><?= $robot["NAME"] ?></li>
 										<?php
 									}
 								?>
@@ -112,7 +112,6 @@
 				</div>
 				<a onclick="deleteSearchParams()"><?= $action->trans->read("workshops","deleteFilter") ?></a>
 			</div>
-
 
 			<div id='workshops-list'>
 				<script>deleteSearchParams();</script>
