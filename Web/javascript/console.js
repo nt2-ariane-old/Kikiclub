@@ -27,6 +27,29 @@ const onPageLoad = () =>
 
 }
 
+
+const sendEmail = () =>
+{
+	let formData = new FormData();
+	fetch("send-email-ajax.php", {
+		method: "POST",
+		credentials: 'include',
+		body: formData
+	})
+	.then(response => response.json())
+	.then(data => {
+		console.log(data);
+		if(data)
+		{
+			alert("ENVOYER");
+		}
+		else
+		{
+			alert("Erreur d'envois");
+		}
+	});
+}
+
 const researchRobots = () =>
 {
 	let node= document.querySelector("#research-barRobots");

@@ -17,6 +17,7 @@
 		}
 	?>
 
+	<button onclick="sendEmail()">Send Email</button>
 	<?php if($action->pageWorkshops)
 		{
 			?>

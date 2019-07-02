@@ -3,22 +3,21 @@
 
 	class UsersDAO {
 
-		public static function getAllUsers($id)
+		public static function getAllUsers()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, FIRSTNAME,LASTNAME,EMAIL FROM users WHERE id=?");
-			$statement->bindParam(1, $id);
+			$statement = $connection->prepare("SELECT ID, FIRSTNAME,LASTNAME,EMAIL FROM users");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$contents = [];
 
-			if ($row = $statement->fetch()) {
-				$contents = $row;
+			while ($row = $statement->fetch()) {
+				$contents[] = $row;
 			}
 			return $contents;
-
 		}
+
 
 		public static function getUsersLikeName($name)
 		{

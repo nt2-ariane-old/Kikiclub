@@ -37,7 +37,6 @@
 
 					if(!empty($workshops[intval($_POST["id_workshop"])]))
 					{
-
 						WorkshopDAO::updateMemberWorkshop($_SESSION["member"],intval($_POST["id_workshop"]), $statut);
 					}
 					else
