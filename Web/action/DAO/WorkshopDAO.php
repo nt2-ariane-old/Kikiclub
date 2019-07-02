@@ -231,6 +231,25 @@
 			$statement->execute();
 		}
 
+		public static function getWorkshopByNameAndContent($name,$content)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE NAME=? AND CONTENT=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $content);
+
+			$statement->execute();
+
+			$content = [];
+
+			if ($row = $statement->fetch()) {
+				$content= $row;
+			}
+
+			return $content;
+		}
 		public static function selectMemberWorkshop($id_member)
 		{
 			$connection = Connection::getConnection();
@@ -252,7 +271,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=?)");
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND STATUT != 1)");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);

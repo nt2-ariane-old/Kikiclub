@@ -15,6 +15,7 @@
 		</select>
 	</div>
 
+	<input type="hidden" id="isFamilyMember" value="<?= $action->isFamilyMember() ?>" >
 	<div id="workshop-menu">
 		<div class="card">
 			<div class="card-header" id="headingDifficulty">

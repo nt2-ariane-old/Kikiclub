@@ -21,6 +21,9 @@
 
 					$statut;
 					switch ($_POST["category"]) {
+						case 'new':
+							$statut = 1;
+								break;
 						case 'not-started':
 							$statut = 2;
 							break;
@@ -30,11 +33,12 @@
 						case 'complete':
 							$statut = 4;
 							break;
+
 						default:
 							$statut = 1;
 							break;
 					}
-
+					echo("Statut : " . $statut);
 					if(!empty($workshops[intval($_POST["id_workshop"])]))
 					{
 						WorkshopDAO::updateMemberWorkshop($_SESSION["member"],intval($_POST["id_workshop"]), $statut);

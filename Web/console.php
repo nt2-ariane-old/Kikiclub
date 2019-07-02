@@ -17,13 +17,19 @@
 		}
 	?>
 
-	<button onclick="sendEmail()">Send Email</button>
+	<button onclick="">Send Email</button>
 	<?php if($action->pageWorkshops)
 		{
 			?>
 				<div class="management-tab">
 
 					<?php
+						if($action->workshopAdded)
+						{
+							?>
+								<script>sendEmail( <?= json_encode($action->workshopMod) ?> )</script>
+							<?php
+						}
 						if($action->add)
 						{
 							loadWorkshopsCreator(null,$action);
@@ -119,8 +125,8 @@
 						else if ($action->assignFamily)
 						{
 							?>
-								<div id="workshops-list">
-								<h2>Non assigné</h2>
+								<ul id="new" class="droppable Workshop-boxes">
+
 								<?php
 										foreach ($action->workshops as $workshop) {
 											$valide = true;
@@ -138,32 +144,30 @@
 											{
 
 												?>
-													<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
+														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></div>
 												<?php
 											}
 										}
 									?>
-								</div>
+								</ul>
 
-								<div id="in-progress" class="droppable">
-								<div id="not-started" class="droppable">
-								<h2>Not Started</h2>
+								<ul id="not-started" class="droppable Workshop-boxes">
 
-								<?php
+									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 2 )
 												{
 													?>
-														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
-
+														<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
 													<?php
 												}
 											}
 										}
 									?>
-								</div>
-								<h2>In Progress</h2>
+								</ul>
+
+								<ul id="in-progress" class="droppable Workshop-boxes">
 
 									<?php
 										foreach ($action->workshops as $workshop) {
@@ -171,36 +175,29 @@
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 3 )
 												{
 													?>
-														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
-
+														<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
 													<?php
 												}
 											}
-											?>
-											<?php
 										}
 									?>
-								</div>
+								</ul>
 
-								<div id="complete" class="droppable">
-								<h2>Complete</h2>
-
+								<ul id="complete" class="droppable Workshop-boxes">
 									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 4 )
 												{
 													?>
-														<div class="workshop-object" id="<?= $workshop["ID"] ?>"><?= $workshop["NAME"] ?></div>
-
+														<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
 													<?php
 												}
 											}
-											?>
-											<?php
 										}
 									?>
-								</div>
+								</ul>
+
 								<a id="manage-btn" href="console.php">Back</a>
 							<?php
 						}

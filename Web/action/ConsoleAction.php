@@ -30,6 +30,8 @@
 		public $assignFamily;
 
 
+		public $workshopAdded;
+
 
 		//Page en cours
 		public $pageWorkshops;
@@ -54,6 +56,7 @@
 			$this->pageUsers=false;
 
 			$this->error = false;
+			$this->workshopAdded = false;
 		}
 
 		protected function executeAction()
@@ -372,7 +375,14 @@
 			$type =  pathinfo($target_path, PATHINFO_EXTENSION);
 			move_uploaded_file($_FILES['workshopFile']['tmp_name'], $target_path);
 
-			WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$target_path, $type,$_POST['difficulty'],$_POST['robot']);
+			try {
+				WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$target_path, $type,$_POST['difficulty'],$_POST['robot']);
+				$this->workshopAdded = true;
+				$this->workshopMod  = WorkshopDAO::getWorkshopByNameAndContent($_POST['name'],$_POST['content']);
+			} catch (\Throwable $th) {
+				$this->workshopAdded = false;
+			}
+
 		}
 
 		private function assignWorkshopToMember()

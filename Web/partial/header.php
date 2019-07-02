@@ -13,25 +13,24 @@
 
 	<!-- SCRIPT -->
 		<!-- CUSTOM -->
-		<script src="javascript/main.js"></script>
+		<script src="./scripts/main.js"></script>
 
 		<!-- JQUERY -->
-		<script src="javascript/jquery.js"></script>
-		<script src="javascript/jquery-ui.js"></script>
+		<script src="./scripts/jquery.js"></script>
+		<script src="./scripts/jquery-ui.js"></script>
 
 		<!-- CKEDITOR -->
-		<script src="javascript/ckeditor.js"></script>
+		<script src="./scripts/ckeditor.js"></script>
 
 		<!-- BOOTSTRAP -->
-		<script src="javascript/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src="./scripts/bootstrap/bootstrap.bundle.min.js"></script>
 
 		<!-- GOOGLE -->
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 	<!-- PAGE CUSTOM -->
-		<link rel="stylesheet" href="./css/users.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="./css/users-mobile.css" type="text/css" media="handheld" />
-		<script src="javascript/users.js"></script>
+		<link rel="stylesheet" href="./css/show-users.css" type="text/css" media="screen" />
+		<script src="./scripts/users.js"></script>
 
 	<!-- CSS -->
 		<!-- FONTS -->
@@ -41,23 +40,15 @@
 		<link rel="stylesheet" href="css/main-mobile.css" type="text/css" media="handheld" />
 
 		<?php
-			if($action->page_name == 'users')
-			{
-				?>
-					<link rel="stylesheet" href="css/home.css" type="text/css" media="handheld" />
-				<?php
-			}
-			else
-			{
 				if(!empty($action->page_name))
 				{
 					?>
 
 						<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
-						<script src="javascript/<?= $action->page_name ?>.js"></script>
+						<script src="./scripts/<?= $action->page_name ?>.js"></script>
 					<?php
 				}
-			}
+
 		?>
 		<!-- JQUERY -->
 		<link rel="stylesheet" href="css/jquery-ui.css">
@@ -120,7 +111,7 @@
 	<div class="container">
     <div class="navbar-header">
 			<a href="#" class="btn btn-info btn-sm navbar-toggle collapsed colored-kikicode hover" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span	> <?= $action->complete_name ?></span>
+				<span	> Menu</span>
 				<span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -140,18 +131,18 @@
 
 				<?php
 			}
-			if($action->page_name != 'users')
-			{
+			// if($action->page_name != 'users')
+			// {
 				?>
 					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
 				<?php
-			}
-			if($action->page_name != 'workshops' && $action->isFamilyMember())
-			{
+			// }
+			// if($action->page_name != 'workshops' && $action->isFamilyMember())
+			// {
 				?>
 					<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
 				<?php
-			}
+			// }
 
 			if($action->isAdmin()){
 					?>
@@ -194,5 +185,5 @@
 		?>
 	<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
 
-
 </nav>
+<span id="siteseal"><script async type="text/./javascript" src="https://seal.godaddy.com/getSeal?sealID=DfItWm2Knz3813g59XlANqmd3IENFd158H6y2EYMnNEGIsbPfKWd6OGWpwn7"></script></span>

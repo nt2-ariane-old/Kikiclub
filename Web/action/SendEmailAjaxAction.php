@@ -12,21 +12,26 @@
 		protected function executeAction() {
 			$users = UsersDAO::getAllUsers();
 
-			$subject = "Petit Test";
+			$subject = "Nouvel Atelier!! :D ";
 			$msg = "Ceci est un petit test pour voir si j'envois des emails";
+			$htmlContent = file_get_contents("template.php");
+			$htmlContent = str_replace("***WORKSHOP***","La Télécommande",$htmlContent);
 
-			$othermsg = require_once("emails/test.php");
+			$headers = "Reply-To: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+			$headers .= "Return-Path: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+			$headers .= "From: Kikiclub <do-not-reply@doutreguay.com>\r\n";
 
-			$headers = "MIME-Version: 1.0" . "\r\n";
+			$headers .= "Organization: Code & Café\r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-
-			$headers .= "From: do-not-reply@kikiclub.ca";
+			$headers .= "X-Priority: 3\r\n";
+			$headers .= "X-Mailer: PHP". phpversion() ."\r\n";
 
 			try {
 				foreach ($users as $user) {
 					$to = $user["EMAIL"];
-					mail($to,$subject,$msg,$headers);
+					$htmlContent = str_replace("***USER***",$user["FIRSTNAME"],$htmlContent);
+					mail($to,$subject,$htmlContent,$headers);
 
 				}
 				$this->results = true;

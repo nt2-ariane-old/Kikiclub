@@ -64,7 +64,8 @@ const sortAndSearchWorkshops = () =>
 let nbWorkshops = 4;
 const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 {
-	console.log(states);
+	let isFamilyMember = document.getElementById("isFamilyMember").value;
+
 	let divWorkshops = document.getElementById('workshops-list');
 	divWorkshops.innerHTML ="";
 		let container = document.createElement('div');
@@ -80,7 +81,9 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 					let link = document.createElement('a');
 					link.href = "workshop-infos.php?workshop=" + workshop["ID"];
 					link.setAttribute('class','link normal');
-						let divType = document.createElement('div');
+						if(isFamilyMember)
+						{
+							let divType = document.createElement('div');
 							divType.setAttribute('class','type');
 
 							let ancien = false;
@@ -101,6 +104,10 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 							{
 								divType.innerHTML = states[1]["NAME"];
 							}
+							link.appendChild(divType);
+
+						}
+
 
 						let divTitle = document.createElement('div');
 							divTitle.setAttribute('class','title');
@@ -109,7 +116,6 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 								h2Title.innerHTML = workshop["NAME"];
 							divTitle.appendChild(h2Title);
 
-						link.appendChild(divType);
 						loadMedia(workshop,link);
 						link.appendChild(divTitle);
 

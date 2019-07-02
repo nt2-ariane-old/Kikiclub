@@ -35,11 +35,13 @@
 	border:2px solid black;
 }
 .workshop-object{
-	width:15vw;
-	height: 15vw;
+	width:150px;
+	height: 150px;
 	float: left;
 	background-color:white;
 	border:3px solid black;
+	position: relative;
+	overflow: hidden;
 
 }
 .workshop-object-hover{
@@ -50,25 +52,56 @@
 	border:3px solid black;
 
 }
-#workshops-list
-{
-	width:100vw;
-	height:20vw;
-	background-color: chartreuse;
-	border:1px solid black;
+
+.workshop-object h5{
+	text-align: center;
 }
 
-
-#complete,#not-started,#in-progress{
-
+.Workshop-boxes{
 	float: left;
 	background-color: bisque;
-	width:33%;
-	margin:0.1em;
+	width: 210px;
+	min-height: calc(120px * 4);
+	margin:0.5em;
 	border: 1px solid black;
-	height: 70%;
+	position: relative;
 }
 
+
+.Workshop-boxes *{
+	position: relative;
+	z-index: 5;
+}
+
+.Workshop-boxes .media{
+	position: absolute;
+	opacity: 0.5;
+	top:0;
+	left:0;
+	z-index: 0;
+
+}
+
+#new
+{
+	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">New</text></svg>');
+
+}
+
+#in-progress
+{
+	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">In Progress</text></svg>');
+}
+
+#not-started
+{
+	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">Not Started</text></svg>');
+}
+
+#complete
+{
+	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">Completed</text></svg>');
+}
  .avatars-list{
 	background-color: antiquewhite;
 	width:80%;

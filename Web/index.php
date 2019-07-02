@@ -7,7 +7,7 @@
 	require_once("partial/header.php");
 
 ?>
-	<script src="javascript/users.js"></script>
+	<script src="./javascript/users.js"></script>
 
 
 	<?php

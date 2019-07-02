@@ -28,8 +28,9 @@ const onPageLoad = () =>
 }
 
 
-const sendEmail = () =>
+const sendEmail = (workshop) =>
 {
+	console.log(workshop);
 	let formData = new FormData();
 	fetch("send-email-ajax.php", {
 		method: "POST",
@@ -144,28 +145,46 @@ const researchRobots = () =>
 }
 
 const activateDraggable = () => {
-	$( ".workshop-object" ).draggable();
-	$( ".droppable").droppable({
-	  accept: ".workshop-object",
-	  hoverClass: ".workshop-object-hover",
-	  activeClass: "ui-state-highlight",
-	  snap: ".workshop-object",
-      snapMode: "inner",
-	  classes: {
-		"ui-droppable-active": "ui-state-active",
-		"ui-droppable-hover": "ui-state-hover"
-	  },
-	  drop: function( event, ui ) {
-		this.style.backgroundColor = "red";
-		console.log(ui.draggable[0].id);
-		console.log(event.target.id);
-		setWorkshopToCategory(ui.draggable[0].id,event.target.id,true);
-		},
-		out: function(event,ui) {
-			this.style.backgroundColor = "gray";
+	// $( ".workshop-object" ).draggable();
+	// $( ".droppable").droppable({
+	//   accept: ".workshop-object",
+	//   hoverClass: ".workshop-object-hover",
+	//   activeClass: "ui-state-highlight",
+	//   snap: ".workshop-object",
+    //   snapMode: "inner",
+	//   classes: {
+	// 	"ui-droppable-active": "ui-state-active",
+	// 	"ui-droppable-hover": "ui-state-hover"
+	//   },
+	//   drop: function( event, ui ) {
+	// 	this.style.backgroundColor = "red";
+	// 	console.log(ui.draggable[0].id);
+	// 	console.log(event.target.id);
+	// 	setWorkshopToCategory(ui.draggable[0].id,event.target.id,true);
+	// 	},
+	// 	out: function(event,ui) {
+	// 		this.style.backgroundColor = "gray";
 
+	// 	}
+	// });
+	let dropped = false;
+	let draggable_sibling;
+
+	$( "ul.droppable" ).sortable({
+	  	connectWith: "ul",
+	  	start: function(event, ui) {
+		},
+		over: function(event, ui) {
+			console.log(ui.item[0].id);
+			console.log(event.target.id);
+			setWorkshopToCategory(parseInt(ui.item[0].id),event.target.id,true);
 		}
+
+
 	});
+
+	$( "#new,#complete, #not-started, #in-progress" ).disableSelection();
+
 }
 
 const setWorkshopToCategory = (id_workshop, category, adding) =>

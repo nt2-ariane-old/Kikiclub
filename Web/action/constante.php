@@ -1,16 +1,14 @@
 <?php
+	define("DB_NAME", "kikiclub");
+	define("DB_USER", "root");
 
 	// LOCALHOST
 	define("DB_HOST", "127.0.0.1");
-	define("DB_NAME", "kikiclub");
-	define("DB_USER", "root");
-	define("DB_PASS", "");
+	// define("DB_PASS", "");
 
 	// SITE
-	//  define("DB_HOST", "fdb21.awardspace.net");
-	//  define("DB_NAME", "2768863_kikiclub");
-	//  define("DB_USER", "2768863_kikiclub");
-	//  define("DB_PASS", "AAAaaa111");
+	// define("DB_HOST", "159.203.60.237");
+	 define("DB_PASS", "AAAaaa111");
 
 
 
