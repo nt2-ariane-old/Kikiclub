@@ -51,6 +51,7 @@
 			"users" => "Utilisateurs",
 			"admin" => "Console d'Admin",
 			"home" => "Accueil",
+			"signin" => "Se Connecter",
 
 		],
 

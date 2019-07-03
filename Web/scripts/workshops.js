@@ -95,7 +95,6 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 									{
 
 										ancien = true;
-										console.log(m_workshop["STATUT"]);
 										divType.innerHTML = states[m_workshop["STATUT"]]["NAME"];
 									}
 								}

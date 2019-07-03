@@ -33,7 +33,6 @@ const limitText = (limitField, limitNum) => {
 }
 
 window.fbAsyncInit = function() {
-	console.log("test");
 	FB.init({
 		appId      : '670117443417077',
 		cookie     : true,
@@ -181,7 +180,6 @@ const openConfirmBox = (form) =>
 			yesBtn.onclick = () => {accept(form)};
 			yesBtn.setAttribute('class','btn btn-success');
 			yesBtn.innerHTML = "Yes";
-			console.log(form);
 
 	let noBtn = document.createElement('button');
 			noBtn.setAttribute('onclick','refuse()');
@@ -219,21 +217,18 @@ const refuse = () =>
 const showProfiles = () =>
 {
 		 let node = document.getElementById("profile-box");
-		 console.log(node);
 		 node.style.display = "block";
 }
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
 		 auth2.disconnect();
-		 console.log("worked GOOGLE");
 	});
 
 
 	if(FB.getLoginStatus() == 'connected')
 	{
 				FB.logout(function(response) {
-					console.log("worked FB");
 				});
 	}
 

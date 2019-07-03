@@ -2,8 +2,8 @@
 	session_start();
 	require_once("action/constante.php");
 	require_once("action/Tools/Translator.php");
-	require_once("action/constante.php");
 	require_once("action/DAO/FamilyDAO.php");
+
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;

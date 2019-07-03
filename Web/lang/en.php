@@ -54,6 +54,7 @@
 			"admin" => "Admin Console",
 			"robots" => "Robots",
 			"home" => "Home",
+			"signin" => "Sign In",
 
 		],
 	];

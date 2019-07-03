@@ -10,12 +10,8 @@
 		}
 
 		protected function executeAction() {
-			$users = UsersDAO::getAllUsers();
 
-			$subject = "Nouvel Atelier!! :D ";
-			$msg = "Ceci est un petit test pour voir si j'envois des emails";
-			$htmlContent = file_get_contents("template.php");
-			$htmlContent = str_replace("***WORKSHOP***","La Télécommande",$htmlContent);
+			$users = UsersDAO::getAllUsers();
 
 			$headers = "Reply-To: Kikiclub <do-not-reply@doutreguay.com>\r\n";
 			$headers .= "Return-Path: Kikiclub <do-not-reply@doutreguay.com>\r\n";
@@ -26,6 +22,24 @@
 			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 			$headers .= "X-Priority: 3\r\n";
 			$headers .= "X-Mailer: PHP". phpversion() ."\r\n";
+
+			$subject = "";
+
+			$htmlContent = "";
+
+			var_dump($_POST);
+
+			if(!empty($_POST["workshop"]))
+			{
+				$subject = "Nouvel Atelier!! :D ";
+				$htmlContent = file_get_contents("template.php");
+				$workshop =$_POST["workshop"];
+				$htmlContent = str_replace("***WORKSHOP***",$workshop["NAME"],$htmlContent);
+				$htmlContent = str_replace("***CONTENT***",$workshop["CONTENT"],$htmlContent);
+				$htmlContent = str_replace("***PATH***",$workshop["MEDIA_PATH"],$htmlContent);
+			}
+
+			echo $htmlContent;
 
 			try {
 				foreach ($users as $user) {
@@ -39,6 +53,5 @@
 				echo $th;
 				$this->results = false;
 			}
-
 		}
 	}

@@ -22,7 +22,7 @@
 		public $robots;
 		public $difficulty;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"workshops","Workshops");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshops","Workshops");
 			$this->show_workshop = false;
 			$this->completed = [];
 			$this->new = [];
@@ -30,11 +30,7 @@
 			$this->notStarted = [];
 			$this->recommandations = [];
 		}
-		private function checkRecommandations()
-		{
-			$this->recommandations =array_merge($this->notStarted,$this->new);
-			$this->recommandations = array_merge($this->recommandations,$this->inProgress);
-		}
+
 		protected function executeAction() {
 			$this->complete_name = $this->trans->read("main","workshops");
 			$this->workshops_list = WorkshopDAO::getWorkshops();
@@ -53,8 +49,6 @@
 				$this->workshopStates = WorkshopDAO::getWorkshopStatesFR();
 				$this->grades = WorkshopDAO::getGradesFR();
 			}
-
-			$this->checkRecommandations();
 
 		}
 	}

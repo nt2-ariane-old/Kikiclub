@@ -5,7 +5,7 @@
 	class WorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"workshops-ajax","Workshops,Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshops-ajax","Workshops,Ajax");
 		}
 
 		protected function executeAction() {
@@ -19,10 +19,14 @@
 				$this->results["states"] = WorkshopDAO::getWorkshopStatesFR();
 
 			}
-			if(!empty($_SESSION["member"]))
+			if(!empty($_SESSION["id"]))
 			{
-				$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
+				if(!empty($_SESSION["member"]))
+				{
+					$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
+				}
 			}
+
 			if(!empty($_POST["id"]))
 			{
 				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);

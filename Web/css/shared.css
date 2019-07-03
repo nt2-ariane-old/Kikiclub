@@ -1,0 +1,85 @@
+#pages
+{
+	padding: 0 10%;
+}
+
+main
+{
+	float: left;
+	width: calc(100% - 300px - 2em);
+}
+#image-dropzone
+{
+	height: 100px;
+	background-color: antiquewhite;
+}
+.pageBtn
+{
+	background-color: transparent;
+	border: none;
+	padding: 1em;
+}
+.post
+{
+	width:80%;
+	background-color: white;
+	margin: 1em auto;
+	border: 1px solid black;
+}
+
+.post .username
+{
+	background-color: bisque;
+	padding: 5px;
+	margin: 0;
+}
+.post .title
+{
+	margin: 5px;
+	padding:5px;
+	border-bottom: 3px solid black;
+}
+.post .content
+{
+	padding: 10px;
+	margin: 0;
+}
+#add-shared input, #add-shared textarea ,#add-shared button
+{
+	display: block;
+	width:80%;
+	margin: 1em auto;
+}
+
+#social
+{
+	background-color: rgba(245, 245, 245, 0.808);
+	width: calc(300px + 2em);
+	height: 100%;
+	float:right;
+	padding:1em;
+}
+.instagram, .fb-page.fb_iframe_widget
+{
+	padding-top: 1em;
+}
+
+.instagram
+{
+	width:100%;
+	overflow: hidden;
+}
+.instagram-media
+{
+	background:#FFFFFF;
+	line-height:0;
+	padding:0 0;
+	text-align:center;
+	text-decoration:none;
+	width:300px;
+}
+
+.instagram-media.instagram-media-rendered
+{
+	min-width: 300px !important;
+}

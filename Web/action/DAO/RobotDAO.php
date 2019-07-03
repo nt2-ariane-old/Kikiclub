@@ -123,7 +123,7 @@
 			$statementRobots = $connection->prepare("UPDATE workshop_score SET score=? WHERE id_robot = ? AND id_difficulty=?");
 
 			$statementRobots->bindParam(1, $score);
-			$statementRobots->bindParam(2, $id_robot);
+			$staatementRobots->bindParam(2, $id_robot);
 			$statementRobots->bindParam(3, $id_difficulty);
 
 			$statementRobots->execute();

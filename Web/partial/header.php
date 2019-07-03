@@ -1,7 +1,4 @@
-<?php
-	require_once("functions/functionsIndex.php");
-?>
-
+<?php require_once("functions/functionsIndex.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +9,7 @@
 	<title>Kikiclub</title>
 
 	<!-- SCRIPT -->
+
 		<!-- CUSTOM -->
 		<script src="./scripts/main.js"></script>
 
@@ -22,6 +20,9 @@
 		<!-- CKEDITOR -->
 		<script src="./scripts/ckeditor.js"></script>
 
+		<!-- DROPZONE -->
+		<script src="./scripts/dropzone.js"></script>
+
 		<!-- BOOTSTRAP -->
 		<script src="./scripts/bootstrap/bootstrap.bundle.min.js"></script>
 
@@ -30,7 +31,7 @@
 
 	<!-- PAGE CUSTOM -->
 		<link rel="stylesheet" href="./css/show-users.css" type="text/css" media="screen" />
-		<script src="./scripts/users.js"></script>
+		<script src="./scripts/show-users.js"></script>
 
 	<!-- CSS -->
 		<!-- FONTS -->
@@ -52,6 +53,9 @@
 		?>
 		<!-- JQUERY -->
 		<link rel="stylesheet" href="css/jquery-ui.css">
+
+		<!-- DROPZONE -->
+		<link rel="stylesheet" href="css/dropzone.css">
 
 		<!-- BOOTSTRAP -->
 		<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
@@ -104,10 +108,7 @@
 	?>
 
 <nav id="menu" class="navbar navbar-inverse navbar-static-top" >
-	<?php
-		if($action->isLoggedIn())
-		{
-	?>
+
 	<div class="container">
     <div class="navbar-header">
 			<a href="#" class="btn btn-info btn-sm navbar-toggle collapsed colored-kikicode hover" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -123,51 +124,46 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 		 <?php
-			if(!($action->page_name == 'users' ||
-			$action->page_name == 'console' ))
+			if($action->isLoggedIn())
 			{
-				?>
-					<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
-
-				<?php
-			}
-			// if($action->page_name != 'users')
-			// {
+				if($action->page_name != 'users' && $action->page_name != 'console' )
+				{
+					?>
+						<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
+					<?php
+				}
 				?>
 					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
 				<?php
-			// }
-			// if($action->page_name != 'workshops' && $action->isFamilyMember())
-			// {
+				if($action->isAdmin()){
 				?>
-					<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
+					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
+						<ul class="dropdown-menu">
+							<form action="console.php" method="post">
+								<li> <button class="btn-link" name="users"><?= $action->trans->read("main","users") ?></button></li>
+								<li> <button class="btn-link" name="workshops"><?= $action->trans->read("main","workshops") ?></button></li>
+								<li> <button class="btn-link" name="robots"><?= $action->trans->read("main","robots") ?></button></li>
+							</form>
+						</ul>
+					</li>
 				<?php
-			// }
-
-			if($action->isAdmin()){
-					?>
-						<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
-								<ul class="dropdown-menu">
-									<form action="console.php" method="post">
-									<li> <button class="btn-link" name="users"><?= $action->trans->read("main","users") ?></button></li>
-									<li> <button class="btn-link" name="workshops"><?= $action->trans->read("main","workshops") ?></button></li>
-									<li> <button class="btn-link" name="robots"><?= $action->trans->read("main","robots") ?></button></li>
-
-										</form>
-								</ul>
-						</li>
-
-					<?php
-
+				}
+				?>
+				<li><a class="nav-item nav-link" onclick="signOut()"><?= $action->trans->read("main","signout") ?></a></li>
+				<?php
+			}
+			else
+			{
+				?>
+				<li><a class="nav-item nav-link" href="login.php"><?= $action->trans->read("main","signin") ?></a></li>
+				<?php
 			}
 			?>
-				<li><a class="nav-item nav-link" onclick="signOut()"><?= $action->trans->read("main","signout") ?></a></li>
-			<?php
-		?>
-
-      </ul>
-    </div>
-	</div>
+			<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
+			<li><a class="nav-item nav-link" href="shared.php">Users Posts</a></li>
+    </ul>
+  </div>
+</div>
 
 	<div class="member-name">
 		<?php
@@ -179,10 +175,6 @@
 			}
 		?>
 	</div>
-
-	<?php
-		}
-		?>
 	<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
 
 </nav>

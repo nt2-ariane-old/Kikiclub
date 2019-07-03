@@ -26,6 +26,14 @@
 					<?php
 						if($action->workshopAdded)
 						{
+
+							?>
+							<div style="background-color:white;color:green;">
+								Workshop Added!
+							</div>
+							<?php
+								var_dump($action->workshopMod);
+
 							?>
 								<script>sendEmail( <?= json_encode($action->workshopMod) ?> )</script>
 							<?php

@@ -30,8 +30,8 @@ const onPageLoad = () =>
 
 const sendEmail = (workshop) =>
 {
-	console.log(workshop);
 	let formData = new FormData();
+	formData.append("workshop",JSON.stringify(workshop));
 	fetch("send-email-ajax.php", {
 		method: "POST",
 		credentials: 'include',
