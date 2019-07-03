@@ -18,7 +18,7 @@
 
 			if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
 				$this->results["PATH"] =  $uploadfile;
-				$this->results["TYPE"] = $_FILES['file']['type'];
+				$this->results["TYPE"] =  pathinfo($uploadfile, PATHINFO_EXTENSION);
 			} else {
 				$this->results =  "Possible file upload attack!\n";
 			}

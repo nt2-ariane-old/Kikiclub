@@ -11,20 +11,20 @@
 	<!-- SCRIPT -->
 
 		<!-- CUSTOM -->
-		<script src="./scripts/main.js"></script>
+		<script src="scripts/main.js"></script>
 
 		<!-- JQUERY -->
-		<script src="./scripts/jquery.js"></script>
-		<script src="./scripts/jquery-ui.js"></script>
+		<script src="scripts/jquery.js"></script>
+		<script src="scripts/jquery-ui.js"></script>
 
 		<!-- CKEDITOR -->
-		<script src="./scripts/ckeditor.js"></script>
+		<script src="scripts/ckeditor.js"></script>
 
 		<!-- DROPZONE -->
-		<script src="./scripts/dropzone.js"></script>
+		<script src="scripts/dropzone.js"></script>
 
 		<!-- BOOTSTRAP -->
-		<script src="./scripts/bootstrap/bootstrap.bundle.min.js"></script>
+		<script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
 
 		<!-- GOOGLE -->
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -38,7 +38,6 @@
 		<link rel="stylesheet" href="css/fonts.css">
 		<!-- CUSTOM -->
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="css/main-mobile.css" type="text/css" media="handheld" />
 
 		<?php
 				if(!empty($action->page_name))

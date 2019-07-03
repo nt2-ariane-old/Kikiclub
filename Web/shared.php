@@ -17,20 +17,16 @@
 			{
 		?>
 			<section id="add-shared" onsubmit="return false;">
+			<h2>Partager votre expérience!</h2>
 					<form action="shared.php" method="post">
 						<input type="text" id="title" name="title" placeholder="Title">
 						<input type="hidden" name="media_path" id="media_path">
 						<input type="hidden" name="media_type" id="media_type">
-						<textarea id="content" name="content" style="width:80%;margin:auto;" cols="30" rows="10"></textarea>
+						<textarea id="content" name="content" cols="30" rows="10"></textarea>
 
+						<div id="imagedropzone" class="dropzone"></div>
 
-						<div id="imagedropzone2"></div>
-						<button onclick="loadPosts('insert')">Send</button>
-					</form>
-					<form action="post-media.php" class="dropzone" id="imagedropzone">
-						<div class="fallback">
-							<input name="file" type="file" multiple />
-						</div>
+						<button class="send" onclick="loadPosts('insert')">Send</button>
 					</form>
 
 			</section>

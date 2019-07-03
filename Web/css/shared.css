@@ -1,23 +1,45 @@
 #pages
 {
 	padding: 0 10%;
+	background-color: white;
+	margin: 1em 0 0 0;
 }
 
+#shared-posts
+{
+	background-color: antiquewhite;
+	margin: 0;
+	padding: 1em;
+}
 main
 {
-	float: left;
+	float: right;
 	width: calc(100% - 300px - 2em);
+	padding: 2em;
 }
-#image-dropzone
-{
-	height: 100px;
-	background-color: antiquewhite;
-}
+
 .pageBtn
 {
 	background-color: transparent;
 	border: none;
 	padding: 1em;
+}
+#add-shared
+{
+	background-color: beige;
+	margin: 0;
+	padding: 1em;
+}
+.media *
+{
+	margin: auto;
+	padding: 1em;
+
+}
+#imagedropzone,#content
+{
+	margin: 1em auto;
+	width: 80%;
 }
 .post
 {
@@ -25,8 +47,18 @@ main
 	background-color: white;
 	margin: 1em auto;
 	border: 1px solid black;
+	position: relative;
 }
 
+.post button
+{
+	position: absolute;
+	top:0;
+	right: 0;
+	border-radius: 100%;
+	background-color: red;
+	padding: 0 0.5em;
+}
 .post .username
 {
 	background-color: bisque;
@@ -44,7 +76,7 @@ main
 	padding: 10px;
 	margin: 0;
 }
-#add-shared input, #add-shared textarea ,#add-shared button
+#add-shared input, #add-shared textarea ,#add-shared .send
 {
 	display: block;
 	width:80%;
@@ -56,7 +88,7 @@ main
 	background-color: rgba(245, 245, 245, 0.808);
 	width: calc(300px + 2em);
 	height: 100%;
-	float:right;
+	float:left;
 	padding:1em;
 }
 .instagram, .fb-page.fb_iframe_widget

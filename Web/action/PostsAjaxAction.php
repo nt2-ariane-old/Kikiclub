@@ -19,7 +19,6 @@
 				$content = "";
 				$path = "";
 				$type = "";
-				var_dump($_POST);
 
 				if(!empty($_POST["content"]))
 					$content=$_POST["content"];

@@ -1,23 +1,22 @@
 Dropzone.autoDiscover = false;
-
+let dropzone;
+let content_editor;
 const onPageLoad = () =>
 {
-	ClassicEditor
-	.create( document.querySelector( '#content' ), {
-		// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-	} )
-	.then( editor => {
-		window.editor = editor;
-	} )
-	.catch( err => {
-		console.error( err.stack );
-	} );
 
+
+	ClassicEditor
+	.create( document.querySelector( '#content' ) )
+	.then( editor => {
+		content_editor = editor;
+	} )
+	.catch( error => {
+		console.error( error );
+	} );
 	$(function() {
 
-		var myDropzone = new Dropzone("#imagedropzone");
-
-		myDropzone.on("success", function(file,infos) {
+		dropzone = new Dropzone("div#imagedropzone", { url: "post-media.php"});
+		dropzone.on("success", function(file,infos) {
 			infos = JSON.parse(infos);
 			let media_path = document.getElementById('media_path');
 			media_path.value = infos["PATH"];
@@ -44,13 +43,15 @@ const loadPosts = (action=null,id=null) =>
 	if(action=='insert')
 	{
 		let title = document.getElementById('title');
-		let content = document.getElementById('content');
-
+		let media_path = document.getElementById('media_path');
+		let media_type = document.getElementById('media_type');
 		formData.append('title', title.value);
-		formData.append('content', content.value);
-
+		formData.append('content', content_editor.getData());
+		formData.append('media_path', media_path.value);
+		formData.append('media_type', media_type.value);
 		title.value = "";
-		content.value = "";
+		content_editor.setData('');
+		dropzone.removeAllFiles();
 	}
 	else if(action=='delete')
 	{
@@ -90,7 +91,7 @@ const loadPosts = (action=null,id=null) =>
 				{
 					let deleteButton = document.createElement("button");
 						deleteButton.setAttribute('onclick',"loadPosts('delete', " + post["ID"]+")");
-						deleteButton.innerHTML = 'Delete';
+						deleteButton.innerHTML = 'X';
 					postArticle.appendChild(deleteButton);
 				}
 			container.appendChild(postArticle);
@@ -98,7 +99,7 @@ const loadPosts = (action=null,id=null) =>
 		});
 
 		let containerPages = document.getElementById('pages');
-			containerPages.innerHTML = "";
+			containerPages.innerHTML = "Pages : ";
 
 		for (let i = 0; i < nbPages; i++) {
 			pageIndex = i + 1;

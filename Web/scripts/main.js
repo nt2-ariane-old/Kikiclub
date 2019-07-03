@@ -104,14 +104,14 @@ const read = (page, node) => {
 
 	return value;
 }
-const loadStars = (workshop,container) => {
+const loadStars = (object,container) => {
 	let stars = document.createElement('div');
 		stars.setAttribute('class','stars');
 		stars.innerHTML = read('workshops','difficulty') + " : ";
 
 	for (let i = 1; i <= 3; i++) {
 		let star = document.createElement('span');
-		if(i <= workshop["ID_DIFFICULTY"])
+		if(i <= object["ID_DIFFICULTY"])
 		{
 			star.setAttribute('class','fa fa-star checked');
 		}
@@ -123,13 +123,13 @@ const loadStars = (workshop,container) => {
 	}
 	container.appendChild(stars);
 }
-const loadMedia = (workshop,container ) => {
+const loadMedia = (object,container ) => {
 
 	let media = document.createElement("div");
 		media.setAttribute('class','media');
 
-
-		if(workshop["MEDIA_TYPE"] == "mp4")
+		console.log(object["MEDIA_TYPE"] );
+		if(object["MEDIA_TYPE"] == "mp4")
 		{
 			let video = document.createElement('video');
 				video.width = '100%';
@@ -138,31 +138,32 @@ const loadMedia = (workshop,container ) => {
 				video.innerHTML = "Your browser does not support the video tag.";
 
 				let source = document.createElement('source');
-				source.src = workshop["MEDIA_PATH"];
-				source.type = "video/" + workshop["MEDIA_TYPE"];
+				source.src = object["MEDIA_PATH"];
+				source.type = "video/" + object["MEDIA_TYPE"];
 				video.appendChild(source);
 
 			media.appendChild(video);
 
 		}
-		else if(workshop["MEDIA_TYPE"] == "png" ||
-				workshop["MEDIA_TYPE"] == "jpg")
+		else if(object["MEDIA_TYPE"] == "png" ||
+				object["MEDIA_TYPE"] == "jpg")
 		{
 			let image = document.createElement('img');
-				image.src = workshop["MEDIA_PATH"];
+				image.src = object["MEDIA_PATH"];
 
 			media.appendChild(image);
 		}
-		else if(workshop["MEDIA_TYPE"] == "mp3")
+		else if(object["MEDIA_TYPE"] == "mp3")
 		{
 			let audio = document.createElement('audio');
-			audio.src = workshop["MEDIA_PATH"];
+			audio.src = object["MEDIA_PATH"];
 			audio.controls = 'controls';
 			audio.innerHTML = "Your browser does not support the audio element.";
 
 			media.appendChild(audio);
 		}
 
+		console.log(media);
 	container.appendChild(media);
 	}
 
