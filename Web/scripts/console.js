@@ -39,7 +39,6 @@ const sendEmail = (workshop) =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
 		if(data)
 		{
 			alert("ENVOYER");
@@ -68,7 +67,6 @@ const researchRobots = () =>
 	.then(response => response.json())
 	.then(data => {
 		table.innerHTML = "";
-		console.log(data);
 		data.forEach(robot => {
 			let line = document.createElement("TR");
 
@@ -91,7 +89,6 @@ const researchRobots = () =>
 
 			//SCORES
 			let caseScores = document.createElement("TD");
-			console.log(robot["SCORES"].length)
 			if(robot["SCORES"].length > 0){
 				//CREATION OF TABLE
 				let tableScores = document.createElement("table");
@@ -145,28 +142,6 @@ const researchRobots = () =>
 }
 
 const activateDraggable = () => {
-	// $( ".workshop-object" ).draggable();
-	// $( ".droppable").droppable({
-	//   accept: ".workshop-object",
-	//   hoverClass: ".workshop-object-hover",
-	//   activeClass: "ui-state-highlight",
-	//   snap: ".workshop-object",
-    //   snapMode: "inner",
-	//   classes: {
-	// 	"ui-droppable-active": "ui-state-active",
-	// 	"ui-droppable-hover": "ui-state-hover"
-	//   },
-	//   drop: function( event, ui ) {
-	// 	this.style.backgroundColor = "red";
-	// 	console.log(ui.draggable[0].id);
-	// 	console.log(event.target.id);
-	// 	setWorkshopToCategory(ui.draggable[0].id,event.target.id,true);
-	// 	},
-	// 	out: function(event,ui) {
-	// 		this.style.backgroundColor = "gray";
-
-	// 	}
-	// });
 	let dropped = false;
 	let draggable_sibling;
 
@@ -175,8 +150,6 @@ const activateDraggable = () => {
 	  	start: function(event, ui) {
 		},
 		over: function(event, ui) {
-			console.log(ui.item[0].id);
-			console.log(event.target.id);
 			setWorkshopToCategory(parseInt(ui.item[0].id),event.target.id,true);
 		}
 
@@ -202,14 +175,6 @@ const setWorkshopToCategory = (id_workshop, category, adding) =>
 	.then(response => response.text())
 	.then(data => {
 		console.log(data);
-		if(data = 'valide')
-		{
-			console.log('deplacement accepter')
-		}
-		else
-		{
-			console.log('il y a eu une erreur...')
-		}
 	})
 
 	if(adding)
@@ -386,7 +351,6 @@ const researchMember = () =>
 	.then(response => response.json())
 	.then(data => {
 		table.innerHTML = "";
-		console.log(data);
 		data.forEach(user => {
 			let line = document.createElement("TR");
 
@@ -416,7 +380,6 @@ const researchMember = () =>
 
 			//FAMILY
 			let caseFamily = document.createElement("TD");
-			console.log(user["FAMILY"].length)
 			if(user["FAMILY"].length > 0){
 				//CREATION OF TABLE
 				let tableFamily = document.createElement("table");

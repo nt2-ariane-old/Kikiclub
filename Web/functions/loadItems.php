@@ -305,6 +305,58 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 	<?php
 }
 
+function loadBadgesCarousel($badges,$name,$action,$title)
+{
+	$nbBadges = 4;
+	?>
+		<div id="<?= $name  ?>" class="carousel slide" data-ride="carousel">
+			<!-- Content -->
+			<div class="carousel-inner">
+			<?php
+				for ($i=0; $i < sizeof($badges); $i++) {
+					?>
+					<div class="carousel-item <?php if($i == 0) echo 'active';?>">
+						<div class="container">
+							<div class="row">
+							<?php
+								$j = $i;
+								for($i; $i < $j + $nbBadges  && $i < sizeof($badges); $i++)
+								{
+									$badge = $badges[$i];
+							?>
+									<div class="badge col-sm-<?= 12/$nbBadges ?>" >
+									<?php
+										loadMedia($badge);
+									?>
+									<h5><?= $badge["NAME"] ?></h5>
+									<h6>Won by <?= $badge["OWNER"] ?></h6>
+									<h6>Won on <?= $badge["WON_ON"] ?></h6>
+								</div>
+							<?php
+
+							}
+							?>
+							</div>
+						</div>
+					</div>
+					<?php
+				}
+
+			?>
+		   </div>
+		   <!-- Controls -->
+		   <a class="carousel-control-prev" href="#<?= $name  ?>" role="button" data-slide="prev">
+		     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		     <span class="sr-only">Previous</span>
+		   </a>
+		   <a class="carousel-control-next" href="#<?= $name  ?>" role="button" data-slide="next">
+		     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		     <span class="sr-only">Next</span>
+		   </a>
+		</div>
+	<?php
+}
+
 
 function loadWorkshopsLine($workshops,$name,$action,$title)
 {

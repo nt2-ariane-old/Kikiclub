@@ -36,21 +36,7 @@ function signInFacebook() {
 		})
 		.then(response => response.json())
 		.then(data => {
-			if (typeof data === 'string' || data instanceof String)
-			{
-				console.log(data);
-			}
-			else
-			{
-				if(data === true)
-				{
-					window.location = 'users.php';
-				}
-				else
-				{
-					console.log(data);
-				}
-			}
+			window.location = '?user_t='+data;
 		})
 		});
 }
@@ -70,6 +56,7 @@ var finished_rendering = function() {
 function onSignIn(googleUser) {
 
 	let profile = googleUser.getBasicProfile();
+	let formData = new FormData();
 
 	formData.append('name', profile.getName());
 	formData.append('firstname', profile.getName());
@@ -87,21 +74,7 @@ function onSignIn(googleUser) {
 	})
 	.then(response => response.json())
 	.then(data => {
-		if (typeof data === 'string' || data instanceof String)
-			{
-				console.log(data);
-			}
-			else
-			{
-				if(data === true)
-				{
-					window.location = 'users.php';
-				}
-				else
-				{
-					console.log(data);
-				}
-			}
+		window.location = '?user_t='+data;
 	})
 
 }

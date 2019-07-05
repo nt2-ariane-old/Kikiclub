@@ -167,6 +167,16 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
+
+		public static function deleteToken($token)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("DELETE FROM CONNECT_TOKEN WHERE token=?");
+			$statement->bindParam(1, $token);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+		}
 		public static function getUserFromToken($token)
 		{
 			$connection = Connection::getConnection();

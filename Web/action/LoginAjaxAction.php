@@ -27,27 +27,29 @@
 							$token = openssl_random_pseudo_bytes(16);
 							$token = bin2hex($token);
 
-							$this->results = true;
+							if($_POST["type"] != "Wix")
+								UsersDAO::setTokenForUser($infos["ID"],$token);
+							$this->results = $token;
 						}
 						else
 						{
-							$this->results = false;
+							$this->results = $infos;
 						}
 					}
 					else
 					{
-						$this->results = false;
+						$this->results = "not a good type...";
 					}
 				}
 				else
 				{
-					$this->results = false;
+					$this->results = "not Logged In...";
 				}
 
 			}
 			else
 			{
-				$this->results = false;
+				$this->results = "not Connected...";
 			}
 
 		}

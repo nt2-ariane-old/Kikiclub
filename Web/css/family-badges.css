@@ -1,0 +1,62 @@
+main
+{
+	background-color: rgba(0, 0, 0, 0.822);
+	height: calc(100vh - (150px - 16px) - 130px - 50px);
+}
+
+#Badges
+{
+	height: 80%;
+}
+#pts
+{
+	height: 10%;
+	color: wheat;
+	font-size: 2em;
+	text-align: center;
+	font-weight: bolder;
+	line-height: 3em;
+}
+.badge h6
+{
+	color:blue;
+}
+section, .container,.carousel-item,.carousel-inner,.row
+{
+	height: 100%;
+
+}
+.media
+{
+	width:60%;
+	height: 60%;
+	margin: auto;
+}
+.media img
+{
+	position: static;
+	max-width: 100%;
+	max-height: 100%;
+	margin: auto;
+}
+
+.badge h5
+{
+	text-align: center;
+	margin: auto;
+
+	color: white;
+	height: 10%;
+}
+.badge h6
+{
+	text-align: center;
+	color:blue;
+	height: 10%;
+}
+
+.badge
+{
+	border: 1px solid white;
+	height: 100%;
+}

@@ -68,15 +68,18 @@
 
 		public function testConnectionToken()
 		{
-			if(!empty($_POST["login_token"]))
+			if(!empty($_GET["user_t"]))
 			{
-				$id = UsersDAO::getUserFromToken($_POST["login_token"]);
+				$id = UsersDAO::getUserFromToken($_GET["user_t"]);
 				if($id != null)
 				{
 					$user = UsersDAO::getUserWithID($id);
 					$_SESSION["visibility"] = $user["VISIBILITY"];
 					$_SESSION["id"] = $user["ID"];
+					UsersDAO::deleteToken($_GET["user_t"]);
+
 				}
+
 			}
 		}
 		public function isLoggedIn() {

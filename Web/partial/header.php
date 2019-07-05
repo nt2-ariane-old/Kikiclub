@@ -133,6 +133,8 @@
 				}
 				?>
 					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
+					<li><a class="nav-item nav-link" href="family-badges.php">Badges</a></li>
+
 				<?php
 				if($action->isAdmin()){
 				?>
@@ -159,7 +161,7 @@
 			}
 			?>
 			<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
-			<li><a class="nav-item nav-link" href="shared.php">Users Posts</a></li>
+			<li><a class="nav-item nav-link" href="shared.php">Experiences</a></li>
     </ul>
   </div>
 </div>

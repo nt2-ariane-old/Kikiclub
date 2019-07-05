@@ -4,6 +4,8 @@
 	require_once("action/DAO/FamilyDAO.php");
 	require_once("action/DAO/UsersDAO.php");
 	require_once("action/DAO/RobotDAO.php");
+	require_once("action/DAO/BadgeDAO.php");
+
 	class ConsoleAction extends CommonAction {
 		//liste d'objets et objet individuel a modifier
 		public $workshops;
@@ -387,8 +389,9 @@
 
 		private function assignWorkshopToMember()
 		{
+			$id_member = $_POST['members_list'][0];
 			$this->assignFamily = true;
-			$this->familyWorkshops = WorkshopDAO::selectMemberWorkshop($_POST['members_list'][0]);
+			$this->familyWorkshops = WorkshopDAO::selectMemberWorkshop($id_member);
 		}
 
 
