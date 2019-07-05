@@ -22,7 +22,8 @@ function signInFacebook() {
 	FB.api('/me',  { locale: 'tr_TR', fields: 'name, email' },
 	 response => {
 		let formData = new FormData();
-		formData.append('name', response.name);
+		formData.append('firstname', response.name);
+		formData.append('lastname', response.name);
 		formData.append('email', response.email);
 		formData.append('password', null);
 		formData.append('password_confirm',null);
@@ -70,8 +71,9 @@ function onSignIn(googleUser) {
 
 	let profile = googleUser.getBasicProfile();
 
-	let formData = new FormData();
 	formData.append('name', profile.getName());
+	formData.append('firstname', profile.getName());
+	formData.append('lastname', profile.getName());
 	formData.append('email', profile.getEmail());
 	formData.append('password', null);
 	formData.append('password_confirm',null);

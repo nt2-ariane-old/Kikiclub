@@ -1,6 +1,6 @@
 <?php
 	define("DB_NAME", "kikiclub");
-	define("DB_USER", "root");
+	define("DB_USER", "admin");
 
 	// LOCALHOST
 	define("DB_HOST", "127.0.0.1");

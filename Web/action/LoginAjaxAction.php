@@ -5,47 +5,50 @@
 		public $results;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "loginAjax", "Login","Ajax");
-			$this->results = false;				
+			$this->results = false;
 
 		}
 
 		protected function executeAction() {
+
 			if(!empty($_POST["isLoggedIn"]))
 			{
-				if($_POST["isLoggedIn"] == true)
+				if($_POST["isLoggedIn"] == true ||  $_POST["isLoggedIn"] == "true" )
 				{
 					$id_type = UsersDAO::getLoginTypeIdByName($_POST["type"]);
-					
-					if(UsersDAO::RegisterUser($_POST["email"],$_POST["password"],$_POST["password_confirm"],$_POST["name"],$_POST["name"],$this->default_visibility,$id_type))
-					{
-						$user = UsersDAO::getUserWithEmail($_POST["email"]);
-						
-						$_SESSION["visibility"] = $infos["VISIBILITY"];
-						$_SESSION["id"] = $infos["ID"];
-						$_SESSION["firstname"] = $infos["FIRSTNAME"];
-						$_SESSION["lastname"] = $infos["LASTNAME"];
 
-						$this->results = true;
-					}
-					else
+					if($id_type != -1)
 					{
+						UsersDAO::RegisterUser($_POST["email"],$_POST["password"],$_POST["password_confirm"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type);
+
 						$infos = UsersDAO::loginUserWithEmail($_POST["email"],null,$id_type);
-						if(is_string($infos))
+						if(!is_string($infos))
 						{
-							$this->results = $infos;
+							$token = openssl_random_pseudo_bytes(16);
+							$token = bin2hex($token);
+
+							$this->results = true;
 						}
 						else
 						{
-							$_SESSION["visibility"] = $infos["VISIBILITY"];
-							$_SESSION["id"] = $infos["ID"];
-							$_SESSION["firstname"] = $infos["FIRSTNAME"];
-							$_SESSION["lastname"] = $infos["LASTNAME"];
-							
-							$this->results = true;			
+							$this->results = false;
 						}
 					}
-					
+					else
+					{
+						$this->results = false;
+					}
 				}
+				else
+				{
+					$this->results = false;
+				}
+
 			}
+			else
+			{
+				$this->results = false;
+			}
+
 		}
 	}

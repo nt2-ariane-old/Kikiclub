@@ -16,6 +16,34 @@
     text-align: center;
     width: 80%;
 }
+#wix
+{
+	background-image : url("../images/Wix_logo.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: left;
+	background-color: white;
+	text-align: right;
+	box-shadow: 2px 4px #a3a1a17e;
+
+}
+#wix
+{
+	box-shadow: 4px 8px #a3a1a17e;
+	text-decoration: none;
+	color:black;
+
+}
+#wix a
+{
+	color:black;
+
+}
+#wix a:hover
+{
+	text-decoration: none;
+	color:blue;
+}
 .login-block input
 {
 	display: block;

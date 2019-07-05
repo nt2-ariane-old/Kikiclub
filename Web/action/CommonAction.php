@@ -66,6 +66,19 @@
 		}
 
 
+		public function testConnectionToken()
+		{
+			if(!empty($_POST["login_token"]))
+			{
+				$id = UsersDAO::getUserFromToken($_POST["login_token"]);
+				if($id != null)
+				{
+					$user = UsersDAO::getUserWithID($id);
+					$_SESSION["visibility"] = $user["VISIBILITY"];
+					$_SESSION["id"] = $user["ID"];
+				}
+			}
+		}
 		public function isLoggedIn() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}
@@ -79,6 +92,8 @@
 
 		public function execute()
 		{
+			$this->testConnectionToken();
+
 			if(!empty($_GET["logout"]))
 			{
 				session_unset();
@@ -87,6 +102,8 @@
 				header("location:index.php");
 				exit;
 			}
+
+
 			if(empty($_SESSION["visibility"]))
 			{
 				$_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
