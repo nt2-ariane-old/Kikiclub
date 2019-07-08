@@ -49,10 +49,12 @@
 			"signout" => "Se déconneccter",
 			"workshops" => "Ateliers",
 			"users" => "Utilisateurs",
-			"admin" => "Console d'Admin",
+			"admin" => "Administration",
+			"robots" => "Robots",
 			"home" => "Accueil",
 			"signin" => "Se Connecter",
-
+			"share" => "Partage",
+			"badges" => "Badges",
 		],
 
 	];

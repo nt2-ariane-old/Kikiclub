@@ -5,36 +5,29 @@
 	$actionUser->trans = $action->trans;
 	$actionUser->execute();
 ?>
-
 	<template id="child-template">
 		<div class='child-info'>
-
 			<a href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></a>
-
 			<h2 class='child-name'></h2>
 			<p class='child-nbWorkshops'></p>
 			<p class='child-nbPTS'></p>
 			<div class='child-nbalert'></div>
 			<a href="#"><div class='x-button'></div></a>
-
-
 		</div>
 	</template>
 		<?php
 			if($actionUser->create)
 			{
-				loadProfil(null,$actionUser);
+				//loadProfil(null,$actionUser);
 				?>
 					<div class="users-footer">
-						<a class="manage-btn" onclick="post('users.php',{'usermode':'manage'})"><?= $action->trans->read("users","return") ?></a>
+						<a class="manage-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
 					</div>
 				<?php
 			}
 			else if($actionUser->modify)
 			{
 				?>
-
-
 					<?php
 						if($actionUser->error)
 						{
@@ -50,7 +43,7 @@
 						?>
 					</div>
 					<div class="users-footer">
-						<a class="manage-btn" onclick="post('users.php',{'usermode':'manage'})"><?= $action->trans->read("users","return") ?></a>
+						<a class="manage-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
 					</div>
 
 				<?php

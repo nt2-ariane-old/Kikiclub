@@ -52,9 +52,9 @@
 			}
 			if(!empty($_POST["search"]))
 			{
-				if(!empty($_POST["difficulty"]))
+				if(!empty($_POST["difficulties"]))
 				{
-					$difficulties = json_decode($_POST["difficulty"]);
+					$difficulties = json_decode($_POST["difficulties"]);
 					if(sizeof($difficulties) > 0)
 					{
 						$temp = [];
@@ -71,9 +71,9 @@
 						$this->results["workshops"] = $temp;
 					}
 				}
-				if(!empty($_POST["state"]))
+				if(!empty($_POST["states"]))
 				{
-					$states = json_decode($_POST["state"]);
+					$states = json_decode($_POST["states"]);
 
 					$has_new = false;
 					if(sizeof($states) > 0)
@@ -117,9 +117,9 @@
 						$this->results["workshops"] = $temp;
 					}
 				}
-				if(!empty($_POST["robot"]))
+				if(!empty($_POST["robots"]))
 				{
-					$robots = json_decode($_POST["robot"]);
+					$robots = json_decode($_POST["robots"]);
 
 					if(sizeof($robots) > 0)
 					{

@@ -128,7 +128,6 @@ const loadMedia = (object,container ) => {
 	let media = document.createElement("div");
 		media.setAttribute('class','media');
 
-		console.log(object["MEDIA_TYPE"] );
 		if(object["MEDIA_TYPE"] == "mp4")
 		{
 			let video = document.createElement('video');
@@ -163,7 +162,6 @@ const loadMedia = (object,container ) => {
 			media.appendChild(audio);
 		}
 
-		console.log(media);
 	container.appendChild(media);
 	}
 

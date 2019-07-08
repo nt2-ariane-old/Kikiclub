@@ -107,14 +107,19 @@
 			if(isset($_SESSION["users"]))
 			{
 				$this->pageUsers=true;
+				$this->complete_name = "Users Management";
 			}
 			else if (isset($_SESSION["workshops"]))
 			{
 				$this->pageWorkshops=true;
+				$this->complete_name = "Workshops Management";
+
 			}
 			else if(isset($_SESSION["robots"]))
 			{
 				$this->pageRobots = true;
+				$this->complete_name = "Robots Management";
+
 			}
 
 			if(!empty($_POST['members_list']))

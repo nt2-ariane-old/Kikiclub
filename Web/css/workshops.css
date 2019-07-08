@@ -130,8 +130,13 @@
 #workshop-menu
 {
 	width:25%;
+	min-width: 300px;
 	float: left;
 	padding:3em;
+}
+#workshop-menu input,#workshop-menu li
+{
+	display: inline-block;
 }
 #workshop-menu .card
 {
@@ -204,9 +209,4 @@
 
 .media audio{
 	margin: auto;
-}
-
-#manage-btn
-{
-	top:0;
 }

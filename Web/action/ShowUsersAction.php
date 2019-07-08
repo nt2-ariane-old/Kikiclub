@@ -3,28 +3,20 @@
 	class ShowUsersAction {
 
 		public $create;
-		public $manage;
 		public $modify;
 
 		public $avatars;
-
-		public $trans;
 
 		public $error;
 		public $family_member;
 		public $errorMsg;
 		public $page_name = 'show-users';
 		public function __construct() {
-			$this->createFamily = false;
-			$this->management = false;
+			$this->create = false;
 			$this->modify = false;
 		}
 
 		public function execute() {
-			if(isset($_POST["normal"]))
-			{
-				$_SESSION["usermode"] = "normal";
-			}
 			$script = $_SERVER['SCRIPT_NAME'];
 
 			 if($script == "/kikiclub/web/show-users.php")
@@ -34,33 +26,21 @@
 			 {
 			 	header('Location:users.php');
 			 }
-			if(!empty($_POST["usermode"]))
+			if(!empty($_POST["action"]))
 			{
-				if($_POST["usermode"] == "normal")
+				if($_POST["action"] == "create")
 				{
-					$_SESSION["usermode"] = "normal";
+					$this->create = true;
 				}
-				else if($_POST["usermode"] == "create")
+				else if($_POST["action"] == "modify")
 				{
-					$_SESSION["usermode"] = "create";
-				}
-				else if($_POST["usermode"] == "manage")
-				{
-					$_SESSION["usermode"] = "manage";
-				}
-				else if($_POST["usermode"] == "modify")
-				{
-					$_SESSION["usermode"] = "modify";
+					$this->modify = true;
 				}
 			}
 
-			if(empty($_SESSION["usermode"]))
+			if($this->create)
 			{
-				$_SESSION["usermode"] = "normal";
-			}
-			if($_SESSION["usermode"] == "create")
-			{
-				$this->create = true;
+
 				$this->avatars = FamilyDAO::loadAvatar();
 
 				if(isset($_POST["form"]))
@@ -72,7 +52,6 @@
 						!empty($_POST["birth"]))
 						{
 							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
-							$_SESSION["usermode"] = "manage";
 							?>
 								<script>window.location = "users.php"</script>
 							<?php
@@ -84,9 +63,9 @@
 						}
 				}
 
-			} else if($_SESSION["usermode"] == "modify")
+			}
+			else if($this->modify)
 			{
-				$this->modify = true;
 				$this->avatars = FamilyDAO::loadAvatar();
 				if(!empty($_SESSION["member"]))
 				{
@@ -99,7 +78,6 @@
 							!empty($_POST["birth"]))
 							{
 								FamilyDAO::updateFamilyMember($_SESSION["member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
-								$_SESSION["usermode"] = "manage";
 								?>
 									<script>window.location = 'users.php'</script>
 								<?php
@@ -113,7 +91,6 @@
 					if(isset($_POST["delete"]))
 					{
 						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
-						$_SESSION["usermode"] = "manage";
 						unset($_SESSION["member"]);
 						?>
 							<script>window.location="users.php";</script>

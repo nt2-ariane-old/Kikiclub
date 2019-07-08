@@ -6,6 +6,16 @@
 	font-family: "Calling Code";
 }
 
+a
+{
+	color : black !important;
+	text-decoration: none !important;
+}
+a:hover
+{
+	color : black !important;
+	text-decoration: none !important;
+}
 HTML {
 	width: 100vw;
 	background-color: #D8DF23;
@@ -155,48 +165,56 @@ i {
 
 /* HEADER */
 header {
-	width:100%;
+
 	text-align: center;
-	float: left;
 	color: black;
 	background-color: white;
-	height: 130px;
+	height: calc( 80px + 2rem);
+	position: relative;
+	z-index: 1;
 }
 header h1{
 	color:black;
 	font-size: 80px;
+	line-height: 1;
 	width: 100%;
 	margin: auto;
 	text-align: center;
 }
 header h2{
+	line-height: 1;
 	color:rgb(70, 70, 70);
 }
 /* NAV */
-nav{
-	background-color: white;
-	width: 100%;
-	height: 50px;
-}
 
 #menu
 {
-	position: sticky;
+	position: fixed;
+	top: 0;
+	left:0;
+
 	z-index: 19;
 
 	top: 0;
 	left:0;
 	margin: 0;
-	height: 50px;
+	height: 60px;
+	width: 100px;
 }
 
-
+#header-infos
+{
+	width: 100%;
+	position: absolute;
+	top:2em;
+	text-align: right;
+	padding: 1em;
+}
 #hamburger{ /* Hamburger menu button */
 	background-image: url('../images/hamburger.png');
 	background-size: contain;
 	width: 30px;
 	height: 30px;
-	background-color: rgb(73, 90, 61);
 	float: left;
 }
 
@@ -214,10 +232,11 @@ nav ul li {
 }
 
 nav .container {
-	position: sticky;
+	position: absolute;
 	top:10px;
 	left:10px;
-	width: 100%;
+	width: calc(100vw - (2 * 10px));
+	max-width: 600px;
 	margin: 0;
 
 }
@@ -261,24 +280,34 @@ nav .container {
 /* Footer */
 footer {
 	background-color: white;
-	padding: 2em 20em;
 	width: 100%;
+	height: 80px;
 	text-align: center;
 	display: flex !important;
 	flex-direction: row;
 	justify-content: space-between;
 	text-align: center;
-	line-height: 75px;
+
 }
 
-footer a {
-	display: block;
-	width:75px;
-	height: 75px;
+
+footer a ,footer p{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	margin: auto 1em;
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
 	border-radius: 25%
+}
+
+footer p
+{
+	width: 200px;
+	line-height: 40px;
+
 }
 
 /* Afficheur de Profiles */
@@ -345,10 +374,9 @@ footer a {
 .manage-btn
 {
 	border: 5px solid black;
-	width:200px;
+	width:300px;
+	margin: auto;
 	text-align: center;
-	margin: 1em auto;
-	padding: 1em;
 }
 #confirm-box button{
 	margin: 0 calc( ( 200px - ( 2 * 60px ) ) / 3) ;
@@ -357,39 +385,32 @@ footer a {
 }
 
 /* Bouton pour modifier */
-#manage-btn{
-	border: 5px solid black;
-	width:200px;
-	height:40px;
-	text-align: center;
-	margin:auto;
-	position: static;
-}
 
-#manage-btn:hover{
-	border: 5px solid rgba(0, 0, 0, 0.425);
-}
 
 .member-name {
-	position: absolute;
-	right: 1em;
+	text-align: right;
+	padding: 0;
+	float: none;
 }
 .lang {
 	position: absolute;
-	top: 1.8em;
-	right: 1em;
+	right: 10px;
+	width: 100%;
+	top:10px;
+	text-align: right;
+	z-index: 2;
 }
 /* Version Web */
 @media only screen and (min-width: 768px) {
-	#manage-btn{
-		bottom:2em;
-	}
-	nav .container {
-		width: 25%;
 
-	}
-	header h1{
-		font-size: 100px;
-	}
+}
 
+@media only screen and (min-width: 970px) {
+	#header-infos
+	{
+		background-color: transparent;
+		width: 100%;
+		text-align: right;
+		padding : 0 1em;
+	}
 }

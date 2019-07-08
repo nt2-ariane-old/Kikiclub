@@ -143,7 +143,7 @@ const addNewMember = (container) => {
 	divNew.setAttribute('class','child-info');
 
 	let aNew = document.createElement('a');
-		aNew.setAttribute("onclick",'post("users.php",{"usermode":"create"})');
+		aNew.setAttribute("onclick",'post("users.php",{"action":"create"})');
 
 
 		let divLogo = document.createElement('div');
@@ -162,6 +162,6 @@ const addNewMember = (container) => {
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector('a').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"usermode":"modify"})');
+	node.querySelector('a').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"action":"modify"})');
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

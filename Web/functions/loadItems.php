@@ -103,13 +103,19 @@ function loadProfil($user,$action)
 								if($action->modify)
 								{
 									?>
-										<input type="hidden" name="modify">
+										<input type="hidden" name="action" value="modify">
+									<?php
+								}
+								else if ($action->create)
+								{
+									?>
+										<input type="hidden" name="action" value="create">
 									<?php
 								}
 								else
 								{
 									?>
-										<input type="hidden" name="add">
+										<script>window.location="users.php"</script>
 									<?php
 								}
 							}
@@ -162,17 +168,19 @@ function loadProfil($user,$action)
 						</div>
 						<div class="forms-btns">
 							<button type="submit" class="submit-btn"><?php if($userExist){echo $action->trans->read("main","update");} else{echo $action->trans->read("main","add");} ?></button>
+							<?php
+							if($userExist)
+							{
+								?>
+									<a class="delete-btn" onclick="post('users.php',{ 'delete':true});"><?= $action->trans->read("main","delete")?></a>
+
+								<?php
+							}
+						?>
 						</div>
 					</form>
 
-					<?php
-						if($userExist)
-						{
-							?>
-								<button class="delete-btn" onclick="post('users.php',{ 'delete':true});"><?= $action->trans->read("main","delete")?></button>
-							<?php
-						}
-					?>
+
 			</div>
 	<?php
 }
@@ -324,13 +332,11 @@ function loadBadgesCarousel($badges,$name,$action,$title)
 								{
 									$badge = $badges[$i];
 							?>
-									<div class="badge col-sm-<?= 12/$nbBadges ?>" >
+									<div class="kikiclub-badge col-sm-<?= 12/$nbBadges ?>" >
 									<?php
 										loadMedia($badge);
 									?>
 									<h5><?= $badge["NAME"] ?></h5>
-									<h6>Won by <?= $badge["OWNER"] ?></h6>
-									<h6>Won on <?= $badge["WON_ON"] ?></h6>
 								</div>
 							<?php
 

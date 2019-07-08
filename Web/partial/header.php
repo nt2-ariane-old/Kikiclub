@@ -95,47 +95,59 @@
 <div id="box"></div>
 
 <script>let langData = <?= json_encode($action->trans->langData) ?></script>
-<?php
-	if($action->isLoggedIn())
-	{
-?>
-<header>
+
+<a href="users.php"><header>
 	<h1><span class="colored-kikicode">Kiki</span>club</h1>
-</header>
-<?php
-	}
-	?>
+	<h2><?= $action->complete_name?></h2>
+	<div id="header-infos">
+		<div class="member-name">
+			<?php
+				if($action->isFamilyMember())
+				{
+					?>
+						<h3> <?= $action->trans->read("main","welcome") ." " . $action->member_name ?></h3>
+					<?php
+				}
+			?>
+		</div>
+	</div>
+</header></a>
 
-<nav id="menu" class="navbar navbar-inverse navbar-static-top" >
-
+<nav id="menu" class="  navbar navbar-inverse navbar-static-top" >
 	<div class="container">
     <div class="navbar-header">
 			<a href="#" class="btn btn-info btn-sm navbar-toggle collapsed colored-kikicode hover" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-				<span	> Menu</span>
+				<span	id="hamburger"></span>
 				<span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
 				<span class="icon-bar"></span>
-				<i class="arrow down"></i>
 			</a>
 		</div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 		 <?php
+		 		// if($action->page_name != 'users' && $action->page_name != 'console' )
+				// {
+				//
+				// 		<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
+				// 	<?php
+				// }
 			if($action->isLoggedIn())
 			{
-				if($action->page_name != 'users' && $action->page_name != 'console' )
-				{
-					?>
-						<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
-					<?php
-				}
-				?>
+				 ?>
 					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
-					<li><a class="nav-item nav-link" href="family-badges.php">Badges</a></li>
+				<?php
+			}
+				?>
+				<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
+				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("main","share") ?></a></li>
+				<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
 
 				<?php
+			if($action->isLoggedIn())
+			{
 				if($action->isAdmin()){
 				?>
 					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
@@ -160,23 +172,16 @@
 				<?php
 			}
 			?>
-			<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
-			<li><a class="nav-item nav-link" href="shared.php">Experiences</a></li>
+
     </ul>
-  </div>
+	</div>
+
+
 </div>
 
-	<div class="member-name">
-		<?php
-			if($action->isFamilyMember())
-			{
-				?>
-					<h3> <?= $action->trans->read("main","welcome") ." " . $action->member_name ?></h3>
-				<?php
-			}
-		?>
-	</div>
-	<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
+
 
 </nav>
+<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
+
 <span id="siteseal"><script async type="text/./javascript" src="https://seal.godaddy.com/getSeal?sealID=DfItWm2Knz3813g59XlANqmd3IENFd158H6y2EYMnNEGIsbPfKWd6OGWpwn7"></script></span>

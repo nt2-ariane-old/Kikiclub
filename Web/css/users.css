@@ -1,18 +1,30 @@
-body
-{
-	background-color: white !important;
-}
-html
-{
-	background-color: white !important;
-
-}
-
 .manage-btn
 {
 	height: 40px;
 	line-height: 30px;
 
 	display: block;
-	padding:0;
+	border-color: white;
+	color:white;
+}
+.users-footer a
+{
+	border-color: white;
+	color:white !important;
+}
+.users-footer a:hover
+{
+	border-color: rgba(255, 255, 255, 0.678);
+	color:white !important;
+}
+.users-footer
+{
+	background-color: black;
+	padding: 1em 0;
+	border-bottom: 5px solid burlywood;
+}
+
+#family-carousel
+{
+	padding: 0;
 }

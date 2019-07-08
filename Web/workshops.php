@@ -32,7 +32,7 @@
 								<?php
 									foreach ($action->difficulty as $diff) {
 										?>
-											<li onclick="setSearchParams('difficulty',<?=$diff['ID'] ?>,this)"><?= $diff["NAME"] ?></li>
+											<div><label><input type="checkbox" onclick="setSearchParams('difficulties',<?=$diff['ID'] ?>)"><li><?= $diff["NAME"] ?></li></label></div>
 										<?php
 									}
 								?>
@@ -56,7 +56,7 @@
 								<?php
 									foreach ($action->grades as $grade) {
 										?>
-											<li onclick="setSearchParams('age',<?=$grade['ID'] ?>,this)"><?= $grade["NAME"] ?></li>
+											<div><label><input type="checkbox" onclick="setSearchParams('grades',<?=$grade['ID'] ?>)"><li><?= $grade["NAME"] ?></li></label></div>
 										<?php
 									}
 								?>
@@ -80,7 +80,7 @@
 								<?php
 									foreach ($action->workshopStates as $state) {
 										?>
-											<li onclick="setSearchParams('state',<?=$state['ID'] ?>,this)"><?= $state["NAME"] ?></li>
+											<div><label><input type="checkbox" onclick="setSearchParams('states',<?=$state['ID'] ?>)"><li><?= $state["NAME"] ?></li></label></div>
 										<?php
 									}
 								?>
@@ -103,7 +103,7 @@
 								<?php
 									foreach ($action->robots as $robot) {
 										?>
-											<li onclick="setSearchParams('robot',<?=$robot['ID'] ?>,this)"><?= $robot["NAME"] ?></li>
+											<div><label><input type="checkbox" onclick="setSearchParams('robots',<?=$robot['ID'] ?>)"><li><?= $robot["NAME"] ?></li></label></div>
 										<?php
 									}
 								?>

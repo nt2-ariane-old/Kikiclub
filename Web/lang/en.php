@@ -1,4 +1,5 @@
 <?php
+
 	$langData = [
 		"loginpage" => [
 			"separator" => "OR",
@@ -51,10 +52,11 @@
 			"signout" => "Sign Out",
 			"workshops" => "Workshops",
 			"users" => "Users",
-			"admin" => "Admin Console",
+			"admin" => "Administration",
 			"robots" => "Robots",
 			"home" => "Home",
 			"signin" => "Sign In",
-
+			"share" => "Share",
+			"badges" => "Badges",
 		],
 	];

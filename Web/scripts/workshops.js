@@ -5,17 +5,16 @@ const onPageLoad = () =>
 
 let searchParams = [];
 
-const setSearchParams = (name, value,node) =>
+const setSearchParams = (name, value) =>
 {
+	console.log(name);
 	if(searchParams[name].indexOf(value) > -1)
 	{
 		searchParams[name].splice(searchParams[name].indexOf(value),1);
-		node.style.border = "none";
 	}
 	else
 	{
 		searchParams[name].push(value);
-		node.style.border = "1px solid black";
 	}
 
 	sortAndSearchWorkshops();
@@ -23,13 +22,13 @@ const setSearchParams = (name, value,node) =>
 
 const deleteSearchParams = () =>
 {
-	searchParams["difficulty"] = [];
-	searchParams["age"] = [];
-	searchParams["state"] = [];
-	searchParams["robot"] = [];
-	let filters = document.querySelectorAll(".card-body ul li");
+	searchParams["difficulties"] = [];
+	searchParams["grades"] = [];
+	searchParams["states"] = [];
+	searchParams["robots"] = [];
+	let filters = document.querySelectorAll("input[type='checkbox']");
 	filters.forEach(filter => {
-		filter.style.border = "none";
+		filter.checked = false;
 	});
 	sortAndSearchWorkshops();
 }

@@ -17,7 +17,6 @@
 		}
 	?>
 
-	<button onclick="">Send Email</button>
 	<?php if($action->pageWorkshops)
 		{
 			?>
@@ -31,10 +30,7 @@
 							<div style="background-color:white;color:green;">
 								Workshop Added!
 							</div>
-							<?php
-								var_dump($action->workshopMod);
 
-							?>
 								<script>sendEmail( <?= json_encode($action->workshopMod) ?> )</script>
 							<?php
 						}
