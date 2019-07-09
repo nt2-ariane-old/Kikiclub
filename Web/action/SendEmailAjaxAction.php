@@ -1,6 +1,7 @@
 <?php
 	require_once("action/CommonAction.php");
 	require_once("action/DAO/UsersDAO.php");
+	require_once("action/DAO/WorkshopDAO.php");
 
 	class SendEmailAjaxAction extends CommonAction {
 
@@ -27,19 +28,16 @@
 
 			$htmlContent = "";
 
-			var_dump($_POST);
-
 			if(!empty($_POST["workshop"]))
 			{
 				$subject = "Nouvel Atelier!! :D ";
 				$htmlContent = file_get_contents("template.php");
-				$workshop =$_POST["workshop"];
-				$htmlContent = str_replace("***WORKSHOP***",$workshop["NAME"],$htmlContent);
-				$htmlContent = str_replace("***CONTENT***",$workshop["CONTENT"],$htmlContent);
-				$htmlContent = str_replace("***PATH***",$workshop["MEDIA_PATH"],$htmlContent);
+				$workshop_id = intval($_POST["workshop"]);
+				$workshop_infos = WorkshopDAO::getWorkshopsWithID($workshop_id);
+				$htmlContent = str_replace("***WORKSHOP***",$workshop_infos["NAME"],$htmlContent);
+				$htmlContent = str_replace("***CONTENT***",$workshop_infos["CONTENT"],$htmlContent);
+				$htmlContent = str_replace("***PATH***",$workshop_infos["MEDIA_PATH"],$htmlContent);
 			}
-
-			echo $htmlContent;
 
 			try {
 				foreach ($users as $user) {

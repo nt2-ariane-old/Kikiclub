@@ -74,48 +74,42 @@
 				if(!empty($_POST["states"]))
 				{
 					$states = json_decode($_POST["states"]);
-
+					if(!empty($_SESSION["member"]))
+					{
 					$has_new = false;
 					if(sizeof($states) > 0)
 					{
 						$temp = [];
-						if(!empty($_SESSION["member"]))
-						{
+
 						$member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
 						$new_workshops =WorkshopDAO::selectMemberNewWorkshop($_SESSION["member"]);
 						foreach ($states as $state)
 						{
 
-							if($state == -1 && !$has_new)
+							if(($state == 1 || $state == 2) && !$has_new)
 							{
 								$temp = array_merge($temp, $new_workshops);
 								$has_new = true;
 							}
-							else
+
+							foreach ($this->results["workshops"] as $workshop)
 							{
-								foreach ($this->results["workshops"] as $workshop)
+								foreach ($member_workshops as $m_workshop)
 								{
-									foreach ($member_workshops as $m_workshop)
+									if($m_workshop["ID_WORKSHOP"] == $workshop["ID"] &&
+										$state == $m_workshop["STATUT"])
 									{
-										if($m_workshop["ID_WORKSHOP"] == $workshop["ID"] &&
-												$state == $m_workshop["STATUT"])
-										{
-												$temp[] = $workshop;
-										}
+										$temp[] = $workshop;
 									}
 								}
 							}
-							if($state == 0 && !$has_new)
-							{
-								$temp = array_merge($temp, $new_workshops);
-								$has_new = true;
-							}
 
-						}
+
+
 					}
-
 						$this->results["workshops"] = $temp;
 					}
+				}
 				}
 				if(!empty($_POST["robots"]))
 				{

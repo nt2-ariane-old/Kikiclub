@@ -313,7 +313,7 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 	<?php
 }
 
-function loadBadgesCarousel($badges,$name,$action,$title)
+function loadBadgesCarousel($badges,$name,$action,$title,$isMember=false)
 {
 	$nbBadges = 4;
 	?>
@@ -328,15 +328,22 @@ function loadBadgesCarousel($badges,$name,$action,$title)
 							<div class="row">
 							<?php
 								$j = $i;
-								for($i; $i < $j + $nbBadges  && $i < sizeof($badges); $i++)
-								{
-									$badge = $badges[$i];
+
+								foreach ($badges as $badge) {
 							?>
 									<div class="kikiclub-badge col-sm-<?= 12/$nbBadges ?>" >
 									<?php
 										loadMedia($badge);
 									?>
 									<h5><?= $badge["NAME"] ?></h5>
+									<?php
+										if($isMember)
+										{
+											?>
+												<h6>Won on <?= $badge["WON_ON"]?></h6>
+											<?php
+										}
+									?>
 								</div>
 							<?php
 
@@ -366,7 +373,11 @@ function loadBadgesCarousel($badges,$name,$action,$title)
 
 function loadWorkshopsLine($workshops,$name,$action,$title)
 {
-	$nbWorkshops = 4;
+	$nbWorkshopsS = 1;
+	$nbWorkshopsM = 2;
+	$nbWorkshopsL = 4;
+
+
 	?>
 	<div class="container">
 		<div class="row">
@@ -374,7 +385,7 @@ function loadWorkshopsLine($workshops,$name,$action,$title)
 			for ($i=0; $i < sizeof($workshops); $i++) {
 				$workshop = $workshops[$i];
 				?>
-					<div class="workshop col-sm-<?= 12/$nbWorkshops ?>" >
+					<div class="workshop col-md-<?= 12/$nbWorkshopsS ?>  col-md-<?= 12/$nbWorkshopsM ?> col-md-<?= 12/$nbWorkshopsL ?> " >
 						<div class="type">
 							<?php
 								if(in_array($workshop, $action->new) ) echo 'New';

@@ -87,6 +87,8 @@
 		<meta name="msapplication-TileColor" content="#D8DF23">
 		<meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
 		<meta name="theme-color" content="#D8DF23">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body onload="loadModules(); onPageLoad();">
 <div id="fb-root"></div>

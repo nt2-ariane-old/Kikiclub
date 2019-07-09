@@ -267,11 +267,29 @@
 
 			return $content;
 		}
+		public static function selectMemberNotStartedWorkshop($id_member)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND STATUT != 1 AND STATUT != 2)");
+
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_member);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+			return $content;
+		}
 		public static function selectMemberNewWorkshop($id_member)
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND STATUT != 1)");
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND STATUT != 1 )");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);

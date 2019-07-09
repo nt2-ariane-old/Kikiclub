@@ -24,7 +24,6 @@ const deleteSearchParams = () =>
 {
 	searchParams["difficulties"] = [];
 	searchParams["grades"] = [];
-	searchParams["states"] = [];
 	searchParams["robots"] = [];
 	let filters = document.querySelectorAll("input[type='checkbox']");
 	filters.forEach(filter => {
@@ -39,6 +38,7 @@ const sortAndSearchWorkshops = () =>
 	let formData = new FormData();
 	formData.append('sort', select.value);
 	formData.append('search',true);
+	console.log(searchParams);
 	for (const key in searchParams) {
 		if (searchParams.hasOwnProperty(key)) {
 			const element = searchParams[key];

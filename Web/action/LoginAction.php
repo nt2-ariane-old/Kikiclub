@@ -62,10 +62,8 @@
 					!empty($_POST["firstname"])  &&
 					!empty($_POST["lastname"]))
 					{
-						echo "ok";
 						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["psswd2"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type))
 						{
-							echo "registered";
 							$_SESSION["visibility"] =$this->default_visibility;
 						}
 						else

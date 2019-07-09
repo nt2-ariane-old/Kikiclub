@@ -97,7 +97,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 			node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
 		}
 	}
-	node.querySelector('a').setAttribute("onclick",'post("workshops.php",{"member":'+member["id"]+'})');
+	node.querySelector('a').setAttribute("onclick",'post("member-home.php",{"member":'+member["id"]+'})');
 
 	if(state==="manage")
 	{

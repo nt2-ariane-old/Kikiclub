@@ -40,7 +40,6 @@
 							$statut = 1;
 							break;
 					}
-					echo("Statut : " . $statut);
 					if(!empty($workshops[intval($_POST["id_workshop"])]))
 					{
 						WorkshopDAO::updateMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);

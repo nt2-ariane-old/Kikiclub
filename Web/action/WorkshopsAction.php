@@ -19,6 +19,7 @@
 		public $workshopStates;
 		public $grades;
 
+		public $stateSearch;
 		public $robots;
 		public $difficulty;
 		public function __construct() {
@@ -32,10 +33,6 @@
 		}
 
 		protected function executeAction() {
-			$this->complete_name = $this->trans->read("main","workshops");
-			$this->workshops_list = WorkshopDAO::getWorkshops();
-
-			$this->robots = RobotDAO::GetRobots();
 
 			if($_SESSION["language"] == "en")
 			{
@@ -49,6 +46,30 @@
 				$this->workshopStates = WorkshopDAO::getWorkshopStatesFR();
 				$this->grades = WorkshopDAO::getGradesFR();
 			}
+
+			$this->complete_name = $this->trans->read("main","workshops");
+
+
+			if(!empty($_SESSION["member"]))
+			{
+				if(!empty($_POST["type"]))
+				{
+					$type_name = $this->workshopStates[$_POST["type"]]["NAME"];
+					$this->complete_name  .= " : " . $type_name ;
+					$this->stateSearch = $_POST["type"];
+				}
+				else
+				{
+					header("location:member-home.php");
+				}
+			}
+
+
+			$this->workshops_list = WorkshopDAO::getWorkshops();
+
+			$this->robots = RobotDAO::GetRobots();
+
+
 
 		}
 	}

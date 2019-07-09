@@ -3,7 +3,7 @@
 	require_once("action/constante.php");
 	require_once("action/Tools/Translator.php");
 	require_once("action/DAO/FamilyDAO.php");
-
+	require_once("action/DAO/UsersDAO.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
@@ -71,13 +71,12 @@
 			if(!empty($_GET["user_t"]))
 			{
 				$id = UsersDAO::getUserFromToken($_GET["user_t"]);
-				if($id != null)
+				if(!empty($id))
 				{
 					$user = UsersDAO::getUserWithID($id);
-					$_SESSION["visibility"] = $user["VISIBILITY"];
-					$_SESSION["id"] = $user["ID"];
-					UsersDAO::deleteToken($_GET["user_t"]);
-
+				 	$_SESSION["visibility"] = $user["VISIBILITY"];
+				 	$_SESSION["id"] = $user["ID"];
+				 	UsersDAO::deleteToken($_GET["user_t"]);
 				}
 
 			}

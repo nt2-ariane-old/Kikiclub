@@ -161,7 +161,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("INSERT INTO CONNECT_TOKEN (id_user,token) VALUES (?,?)");
+			$statement = $connection->prepare("INSERT INTO connect_token (id_user,token) VALUES (?,?)");
 			$statement->bindParam(1, $id_user);
 			$statement->bindParam(2, $token);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -172,7 +172,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("DELETE FROM CONNECT_TOKEN WHERE token=?");
+			$statement = $connection->prepare("DELETE FROM connect_token WHERE token=?");
 			$statement->bindParam(1, $token);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -181,15 +181,14 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT id_user FROM CONNECT_TOKEN WHERE token=?");
+			$statement = $connection->prepare("SELECT ID_USER FROM connect_token WHERE token=?");
 			$statement->bindParam(1, $token);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
-
 			$id = null;
 			if($row = $statement->fetch())
 			{
-				$id = $row["id_user"];
+				$id = $row["ID_USER"];
 			}
 			return $id;
 		}
@@ -202,7 +201,7 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
-			$id = -1;
+			$id = null;
 
 			if ($row = $statement->fetch()) {
 				$id = $row["ID"];
