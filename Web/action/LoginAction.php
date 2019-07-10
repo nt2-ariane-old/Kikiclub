@@ -36,6 +36,7 @@
 							$_SESSION["id"] = $infos["ID"];
 							$_SESSION["firstname"] = $infos["firstname"];
 							$_SESSION["lastname"] = $infos["lastname"];
+
 						}
 					} else {
 						$this->error = true;
@@ -64,7 +65,18 @@
 					{
 						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["psswd2"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type))
 						{
-							$_SESSION["visibility"] =$this->default_visibility;
+							$infos = UsersDAO::loginUserWithEmail($_POST["email"],$_POST["psswd1"],$id_type);
+							if(!is_string($infos))
+							{
+								$_SESSION["id"] = $infos["ID"];
+								$_SESSION["visibility"] =$infos["VISIBILITY"];
+							}
+							else
+							{
+								$this->error = true;
+								$this->errorMsg = $infos;
+							}
+
 						}
 						else
 						{

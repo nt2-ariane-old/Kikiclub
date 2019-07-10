@@ -125,11 +125,16 @@ function loadProfil($user,$action)
 							<p><span class="input-title"><?= $action->trans->read("main","firstnameInput") ?> : </span><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("main","firstnameInput") ?>" value="<?php if($userExist) echo $user["firstname"]  ?>"></p>
 							<p><span class="input-title"><?= $action->trans->read("main","lastnameInput") ?> : </span><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("main","lastnameInput") ?>"  value="<?php if($userExist) echo $user["lastname"]  ?>"></p>
 							<p><span class="input-title"><?= $action->trans->read("main","birthInput") ?> : </span><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("main","birthInput") ?>"  value="<?php if($userExist) echo $user["birthday"]  ?>"></p>
-							<p><span class="input-title">Gender : </span><select name="gender" id="">
-								<option <?php if($userExist)if($user["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
-								<option <?php if($userExist)if($user["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
-								<option <?php if($userExist)if($user["gender_id"] == 2) echo 'selected' ; ?>  value="2">Do not specify</option>
-							</select></p>
+							<p><span class="input-title">Gender : </span>
+								<select name="gender" id="">
+									<?php
+										foreach ($action->genders as $gender) {
+											?>
+												<option <?php if($userExist)if($user["id_gender"] == $gender["ID"]) echo 'selected' ;?> value="<?= $gender["ID"] ?>"><?= $gender["NAME"] ?></option>
+											<?php
+										}
+									?>
+								</select></p>
 						</div>
 						<p><span class="input-title"><?= $action->trans->read("users","selectAvatar") ?></span></p>
 						<div class="avatars-list">

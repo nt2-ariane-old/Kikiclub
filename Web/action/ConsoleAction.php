@@ -13,7 +13,7 @@
 
 		public $users;
 		public $userMod;
-
+		public $genders;
 		public $family;
 		public $familyMod;
 		public $familyWorkshops;
@@ -104,6 +104,8 @@
 
 			}
 			$this->workshops = WorkshopDAO::getWorkshops();
+			$this->genders = FamilyDAO::getGenders();
+
 			if($_SESSION["language"] == 'en')
 			{
 				$this->difficulties = WorkshopDAO::getDifficultiesEN();

@@ -44,7 +44,7 @@ const searchUsers = (node,type) =>
 			{
 				$.ajax({
 					type: "POST",
-					url:"research-ajax.php",
+					url:"search-ajax.php",
 					data: {
 						'name':node.value,
 						'user': true,
@@ -92,16 +92,16 @@ const sendEmail = (workshop) =>
 	});
 }
 
-const researchRobots = () =>
+const searchRobots = () =>
 {
-	let node= document.querySelector("#research-barRobots");
+	let node= document.querySelector("#search-barRobots");
 	let table = document.querySelector("#table-robots");
 	let formData = new FormData();
 
 	formData.append('name', node.value);
 	formData.append('robots',true);
 
-	fetch("research-ajax.php", {
+	fetch("search-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData
@@ -275,15 +275,15 @@ const addquestion = () =>
 	node.appendChild(contents);
 }
 
-const researchWorkshop = () =>
+const searchWorkshop = () =>
 {
-	let node= document.querySelector("#research-bar");
+	let node= document.querySelector("#search-bar");
 	let table = document.querySelector(".tableValue");
 	let formData = new FormData();
 	formData.append('name', node.value);
 	formData.append('workshop',true);
 
-	fetch("research-ajax.php", {
+	fetch("search-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData

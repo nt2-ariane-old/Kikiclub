@@ -60,6 +60,23 @@
 			$statement->execute();
 
 		}
+
+		public static function getGenders()
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID,NAME FROM gender");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+			while($row = $statement->fetch())
+			{
+				$content[] = $row;
+			}
+			return $content;
+		}
+
 		public static function updateFamilyMember($id,$firstname,$lastname,$birthday,$gender,$id_avatar)
 		{
 			$connection = Connection::getConnection();

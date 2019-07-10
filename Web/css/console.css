@@ -172,24 +172,53 @@
 .bar
 {
 	padding:1em;
-	height:80vh;
 	background-color: white;
 	border-top : 2px solid black;
 	border-bottom : 2px solid black;
 	width:100%;
 	margin: 1em auto;
 
+
+}
+
+.control-bar
+{
+	position: fixed;
+	top : calc( 80px + 2rem);
+	right : 50px;
+}
+
+.control-bar #controls
+{
+	width: 300px;
+	background-color: salmon;
+	padding: 1em;
+	position: relative;
+	top:0;
+
+}
+
+.control-bar a
+{
+	margin: 0;
+	width: 100px;
+	margin-left: 200px;
+	height: 50px;
+	background-color: antiquewhite;
+	border-radius: 40%;
+	padding: 1em;
+	display: block;
 }
 .infos
 {
 	margin: 1em auto;
 }
-#research-bar,#research-barUsers
+#search-bar,#search-barUsers
 {
-	float:right;
-	text-align: right;
 	width:300px;
+	margin: auto;
 }
+
 
 #nav-console
 {

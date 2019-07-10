@@ -94,7 +94,7 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 									{
 
 										ancien = true;
-										divType.innerHTML = states[m_workshop["STATUT"]]["NAME"];
+										divType.innerHTML = states[m_workshop["ID_STATUT"]]["NAME"];
 									}
 								}
 							}

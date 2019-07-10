@@ -6,10 +6,10 @@
 	require_once("action/DAO/UsersDAO.php");
 	require_once("action/DAO/RobotDAO.php");
 
-	class ResearchAjaxAction extends CommonAction {
+	class SearchAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"research-ajax","Research,Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"search-ajax","Search,Ajax");
 		}
 
 		protected function executeAction() {

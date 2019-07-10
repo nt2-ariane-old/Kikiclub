@@ -123,7 +123,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	for (const key in member["workshops"]) {
 		if (member["workshops"].hasOwnProperty(key)) {
 			const element = member["workshops"][key];
-			if(element["STATUT"]==4)
+			if(element["ID_STATUT"]==4)
 			{
 				count++;
 			}

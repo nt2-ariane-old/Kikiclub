@@ -97,7 +97,7 @@
 								foreach ($member_workshops as $m_workshop)
 								{
 									if($m_workshop["ID_WORKSHOP"] == $workshop["ID"] &&
-										$state == $m_workshop["STATUT"])
+										$state == $m_workshop["ID_STATUT"])
 									{
 										$temp[] = $workshop;
 									}

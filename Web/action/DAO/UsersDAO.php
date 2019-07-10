@@ -195,6 +195,7 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
+
 		public static function getUserFromToken($token)
 		{
 			$connection = Connection::getConnection();

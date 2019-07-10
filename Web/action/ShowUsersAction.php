@@ -6,6 +6,7 @@
 		public $modify;
 
 		public $avatars;
+		public $genders;
 
 		public $error;
 		public $family_member;
@@ -18,7 +19,6 @@
 
 		public function execute() {
 			$script = $_SERVER['SCRIPT_NAME'];
-
 			 if($script == "/kikiclub/web/show-users.php")
 			 {
 			 	header('Location:users.php');
@@ -26,7 +26,11 @@
 			 {
 			 	header('Location:users.php');
 			 }
-			if(!empty($_POST["action"]))
+
+
+			 $this->genders = FamilyDAO::getGenders();
+
+			 if(!empty($_POST["action"]))
 			{
 				if($_POST["action"] == "create")
 				{

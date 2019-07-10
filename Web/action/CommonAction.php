@@ -139,7 +139,7 @@
 			{
 				$member = FamilyDAO::selectMember($_SESSION["member"]);
 				var_dump($member);
-				$this->member_name = $member["FIRSTNAME"];
+				$this->member_name = $member["firstname"];
 			}
 			$this->executeAction();
 		}

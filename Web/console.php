@@ -46,7 +46,7 @@
 						{
 							?>
 							<div class="bar">
-								<input type="text" name="research" id="research-bar" placeholder="Research" onkeyup="researchWorkshop()">
+								<input type="text" name="search" id="search-bar" placeholder="Search" onkeyup="searchWorkshop()">
 							</div>
 							<div class='form-workshops'>
 
@@ -66,13 +66,20 @@
 									</thead>
 									<tbody class='tableValue'>
 
-										<script>researchWorkshop()</script>
+										<script>searchWorkshop()</script>
 									</tbody>
 								</table>
-									<button type="submit" name="add" onclick="clicked=this.name" value="true">Add</button>
-									<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
-									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
-								</form>
+								<div class="control-bar">
+									<a data-toggle="collapse" data-target="#controls">Control</a>
+
+									<div class="collapse" id="controls">
+										<button type="submit" class="add-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
+										<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
+										<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
+									</div>
+								</div>
+
+							</form>
 							</div>
 							<?php
 						}
@@ -168,7 +175,7 @@
 									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
-												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 2 )
+												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 2 )
 												{
 													?>
 														<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
@@ -184,7 +191,7 @@
 									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
-												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 3 )
+												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 3 )
 												{
 													?>
 														<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
@@ -199,7 +206,7 @@
 									<?php
 										foreach ($action->workshops as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
-												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["STATUT"] == 4 )
+												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 4 )
 												{
 													?>
 														<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
@@ -321,12 +328,17 @@
 											?>
 										</tbody>
 									</table>
+									<div class="control-bar">
+										<a data-toggle="collapse" data-target="#controls">Control</a>
+										<div id="controls">
+											<button type="submit" name="assign" onclick="clicked=this.name">Assign Workshop to family member</button>
+											<button type="submit" name="add" onclick="clicked=this.name">Add Users</button>
+											<button type="submit" name="addFamily" onclick="clicked=this.name">Add Family Member</button>
+											<button type="submit" name="modify" onclick="clicked=this.name">Modify</button>
+											<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement)">Delete</button>
 
-									<button type="submit" name="assign" onclick="clicked=this.name">Assign Workshop to family member</button>
-									<button type="submit" name="add" onclick="clicked=this.name">Add Users</button>
-									<button type="submit" name="addFamily" onclick="clicked=this.name">Add Family Member</button>
-									<button type="submit" name="modify" onclick="clicked=this.name">Modify</button>
-									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement)">Delete</button>
+										</div>
+									</div>
 								</form>
 							</div>
 							<?php
@@ -422,7 +434,7 @@
 			?>
 				<div class="management-tab">
 					<div class="bar">
-						<input type="text" name="research" id="research-barRobots" placeholder="Research" onkeyup="researchWorkshop()">
+						<input type="text" name="search" id="search-barRobots" placeholder="search" onkeyup="searchWorkshop()">
 					</div>
 					<div class='sheet'>
 						<form action="console.php" id="profil-form" method="post" onSubmit="return validTab(this)">
@@ -438,13 +450,19 @@
 									</tr>
 								</thead>
 								<tbody id='table-robots'>
-									<script>researchRobots()</script>
+									<script>searchRobots()</script>
 								</tbody>
 							</table>
 
-							<button type="submit" name="add" onclick="clicked=this.name" value="true">Add</button>
-							<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
-							<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
+							<div class="control-bar">
+								<a data-toggle="collapse" data-target="#controls">Control</a>
+
+								<div class="collapse" id="controls">
+									<button type="submit" name="add" onclick="clicked=this.name" value="true">Add</button>
+									<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
+									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
+								</div>
+							</div>
 						</form>
 					</div>
 				</div>

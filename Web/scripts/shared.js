@@ -4,26 +4,33 @@ let content_editor;
 const onPageLoad = () =>
 {
 
+	let editorElement = document.querySelector('#content');
+	let dropzoneElement = document.querySelector('#imagedropzone');
+	if(editorElement != null)
+	{
+		ClassicEditor
+		.create( editorElement )
+		.then( editor => {
+			content_editor = editor;
+		} )
+		.catch( error => {
+			console.error( error );
+		} );
 
-	ClassicEditor
-	.create( document.querySelector( '#content' ) )
-	.then( editor => {
-		content_editor = editor;
-	} )
-	.catch( error => {
-		console.error( error );
-	} );
-	$(function() {
-
-		dropzone = new Dropzone("div#imagedropzone", { url: "post-media.php"});
-		dropzone.on("success", function(file,infos) {
-			infos = JSON.parse(infos);
-			let media_path = document.getElementById('media_path');
-			media_path.value = infos["PATH"];
-			let media_type = document.getElementById('media_type');
-			media_type.value = infos["TYPE"];
-		});
-	})
+	}
+	if(dropzoneElement != null)
+	{
+		$(function() {
+			dropzone = new Dropzone("div#imagedropzone", { url: "post-media.php"});
+			dropzone.on("success", function(file,infos) {
+				infos = JSON.parse(infos);
+				let media_path = document.getElementById('media_path');
+				media_path.value = infos["PATH"];
+				let media_type = document.getElementById('media_type');
+				media_type.value = infos["TYPE"];
+			});
+		})
+	}
 
 }
 

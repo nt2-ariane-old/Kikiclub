@@ -19,11 +19,13 @@ a:hover
 HTML {
 	width: 100vw;
 	background-color: #D8DF23;
+    min-height:100%;
 
 }
 
 body{
 	background-color: #D8DF23 !important;
+	height: 100%;
 }
 
 table{
