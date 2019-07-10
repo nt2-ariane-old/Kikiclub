@@ -4,7 +4,7 @@
 		"loginpage" => [
 			"separator" => "OR",
 
-			"signIn-Fb" => "Connect with Facebook or Google",
+			"signIn-Fb" => "Connect with Kikicode",
 			"signIn-E" => "Connect with your email",
 			"signUp" => "Sign up",
 			"login" => "Login",

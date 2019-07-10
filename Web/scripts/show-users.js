@@ -38,8 +38,12 @@ const loadChildren = () => {
 	.then(data => {
 		let family = data["family"];
 		let avatars = data["avatars"]
-
-		for (let i=-1; i < family.length; i++) {
+		let length = 0;
+		if(family != undefined)
+		{
+			length =  family.length;
+		}
+		for (let i=-1; i < length; i++) {
 			let divCarouselItem = document.createElement('div');
 			if(i==-1)
 			{
@@ -58,7 +62,7 @@ const loadChildren = () => {
 					let min = i;
 					let max = i + nbMembers;
 
-					for (let j = min; j < max && j < family.length; j++)
+					for (let j = min; j < max && j < length; j++)
 					{
 						if(j==-1)
 						{

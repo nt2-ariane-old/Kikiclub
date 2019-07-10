@@ -38,7 +38,7 @@
 
 			$request = "SELECT ";
 			$request .= "b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, f.FIRSTNAME AS OWNER, DATE_FORMAT(fb.won_on, '%Y-%m-%d') AS WON_ON ";
-			$request .= "FROM FAMILY_BADGES AS fb INNER JOIN BADGES AS b INNER JOIN FAMILY AS f ";
+			$request .= "FROM family_badges AS fb INNER JOIN BADGES AS b INNER JOIN FAMILY AS f ";
 			$request .= "WHERE fb.ID_BADGE = b.ID AND fb.ID_USER = ? AND f.id = fb.id_member ";
 
 			if(!empty($id_member))
@@ -70,11 +70,11 @@
 
 			$request = "SELECT ";
 			$request .= "b.ID AS ID_BADGE, b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, f.FIRSTNAME AS OWNER, DATE_FORMAT(fb.won_on, '%Y-%m-%d') AS WON_ON ";
-			$request .= "FROM FAMILY_BADGES AS fb INNER JOIN BADGES AS b INNER JOIN FAMILY AS f ";
+			$request .= "FROM family_badges AS fb INNER JOIN badges AS b INNER JOIN family as f ";
 			$request .= "WHERE fb.ID_BADGE = b.ID AND fb.id_member = ? AND f.id = fb.id_member ";
 
 
-			$statement = $connection->prepare( $request);
+			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $id_member);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -91,7 +91,7 @@
 		public static function addBadgeToMember($id_badge,$id_member,$id_user)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("INSERT INTO FAMILY_BADGES(ID_BADGE,ID_MEMBER,ID_USER,WON_ON) VALUES (?,?,?,CURDATE())");
+			$statement = $connection->prepare("INSERT INTO family_badges(ID_BADGE,ID_MEMBER,ID_USER,WON_ON) VALUES (?,?,?,CURDATE())");
 
 			$statement->bindParam(1, $id_badge);
 			$statement->bindParam(2, $id_member);

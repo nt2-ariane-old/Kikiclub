@@ -2,7 +2,7 @@
 	$langData = [
 		"loginpage" => [
 			"separator" => "OU",
-			"signIn-Fb" => "Se Connecter par Facebook ou Google",
+			"signIn-Fb" => "Se Connecter par Kikicode",
 			"signIn-E" => "Se connecter par courriel",
 			"signUp" => "S'inscrire",
 			"login" => "Se Connecter",

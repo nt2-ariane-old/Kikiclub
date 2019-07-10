@@ -34,10 +34,6 @@
 		<?php
 			loadBadgesCarousel($action->badges,"badges",$action,"badges",true);
 		?>
-
 	</main>
-
-
-
 <?php
 	require_once("partial/footer.php");

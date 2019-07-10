@@ -32,23 +32,6 @@ const limitText = (limitField, limitNum) => {
 	}
 }
 
-window.fbAsyncInit = function() {
-	FB.init({
-		appId      : '670117443417077',
-		cookie     : true,
-		xfbml      : true,
-		version    : 'v3.3'
-	});
-	FB.AppEvents.logPageView();
-
-	$( "#datepicker" ).datepicker({
-		changeMonth: true,
-		changeYear: true,
-		yearRange: "1900:2019",
-		dateFormat: 'dd/mm/yy'
-	  });
-}
-
 const openTab = (evt, tab) => {
 
 	let tabcontent = document.querySelectorAll(".tabcontent");
@@ -220,16 +203,6 @@ const showProfiles = () =>
 }
 function signOut() {
 	var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-		 auth2.disconnect();
-	});
-
-
-	if(FB.getLoginStatus() == 'connected')
-	{
-				FB.logout(function(response) {
-				});
-	}
 
 	window.location = "index.php?logout=true";
 
