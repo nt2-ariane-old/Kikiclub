@@ -1,3 +1,68 @@
+.sheet
+{
+	width: 100%;
+	margin: 0;
+	box-shadow: none;
+
+	background-color: white;
+	padding : 2em;
+
+
+}
+.sheet h2
+{
+	color:black;
+	text-align: center;
+	background-color: blanchedalmond;
+	border: 6px solid burlywood;
+	padding: 0.5em;
+	margin: 0;
+}
+#profil-form
+{
+	background-color: wheat;
+	border : 6px solid burlywood;
+}
+.infos
+{
+	width: 80%;
+	margin: auto;
+}
+
+#profil-form p
+{
+	padding: 0 1em;
+	width: 100%;
+	text-align: center;
+
+	display: inline-block;
+}
+#profil-form input,#profil-form select
+{
+	width: 100%;
+	margin: auto;
+	display: block;
+}
+#profil-form .input-title
+{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	display: block;
+	color: black;
+	font-weight: bolder;
+
+}
+
+.return-btn
+{
+	border: 0.3em solid black;
+	padding: 0.5em;
+	width: 20em;
+	text-align: center;
+	margin: 2em auto 0 auto;
+	display: block;
+}
 
 .child-logo,.child-stateLogo
 {
@@ -10,6 +75,7 @@
 	text-align: center;
 	background-size: 100%;
 	background-repeat: no-repeat;
+	background-position: center;
 }
 
 .child-stateLogo
@@ -24,8 +90,25 @@
 
 .child-logo:hover
 {
-	border-color: green;
+	border: none;
 	background-color: rgb(242, 243, 192);
+	box-shadow:
+	0 0 10px 5px rgb(242, 243, 192),  /* inner white */
+	0 0 20px 10px rgb(90, 247, 187), /* middle magenta */
+	0 0 25px 15px rgb(58, 226, 72); /* outer cyan */
+}
+
+.credit
+{
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 0.7em;
+}
+.credit a
+{
+	color: blue !important;
+	color: white;
 }
 
 .child-info
@@ -94,7 +177,7 @@
 	width:100%;
 
 	margin: auto;
-	padding: 1em;
+	padding: 2em 0;
 	background-color: rgba(0, 0, 0);
 	border-top : 4px solid burlywood;
 
@@ -108,7 +191,7 @@
 }
 
 .avatars-list{
-	background-color: #D8DF23;
+	background-color: white;
 	width:80%;
 	overflow-y: scroll;
 	height: 200px;
@@ -185,11 +268,40 @@
 	background-color: red;
 }
 
+@media only screen and (min-width:850px)
+{
+	#profil-form p
+	{
+		width: 49%;
+	}
+	.sheet
+	{
+		width: 80%;
 
+	}
+}
 
 /* FOR WEB */
  @media only screen and (min-width: 450px) {
 
+	.sheet
+	{
+		width: 90%;
+		margin: auto;
+		box-shadow: 0.5em 0.5em 0.5em 0.5em rgb(65, 65, 65);
+	}
+	#profil-form .input-title
+	{
+		display: inline-block;
+		width: 50%;
+		text-align: left;
+	}
+	#profil-form input,#profil-form select
+	{
+		width: 50%;
+
+		display: inline-block;
+	}
 	.users-
 	{
 		width: 100%;
@@ -214,6 +326,7 @@
 		padding: 0;
 		height: calc(100vh - 80px - 2rem - 4.8em - 80px);
 	}
+
 
 	.child-info{
 		width:100%;

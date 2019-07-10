@@ -92,26 +92,56 @@
 			}
 			return $contents;
 		}
-		public static function getFamilyLikeName($name)
+		public static function getFamilyLikeName($name,$type)
 		{
 			$connection = Connection::getConnection();
-			$name = '%' . $name . '%';
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM family WHERE firstname LIKE ? OR lastname LIKE ?");
+			$name = $name . '%';
+
+			$request = "SELECT id,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM family ";
+			if($type == 'firstname')
+			{
+				$request .= "WHERE firstname LIKE ?";
+			}
+			else if ($type == 'lastname')
+			{
+				$request .= "WHERE lastname LIKE ?";
+			}
+
+			$statement = $connection->prepare($request);
 
 			$statement->bindParam(1, $name);
-			$statement->bindParam(2, $name);
-			$statement->bindParam(3, $name);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[] = $row;
+				$contents[$row["id"]] = $row[$type];
 			}
 
 			return $content;
 		}
+
+		public static function selectMembersFromIdArray($ids)
+		{
+			$connection = Connection::getConnection();
+
+			$request = "SELECT id,firstname,lastname,birthday,gender_id,id_avatar,id_user,id,score FROM family WHERE id IN ('$ids')";
+			$statement = $connection->prepare();
+
+			$statement->bindParam(1, $name);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$contents[] = $row;
+			}
+
+			return $content;
+		}
+
 		public static function selectFamilyMembers($id_parent)
 		{
 			$connection = Connection::getConnection();
@@ -178,7 +208,7 @@
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("SELECT ID, EMAIL, FIRSTNAME, LASTNAME FROM users WHERE id=?");
-			$statement2->bindParam(1, $id_user);
+			$statement->bindParam(1, $id_user);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

@@ -18,10 +18,10 @@
 		<?php
 			if($actionUser->create)
 			{
-				//loadProfil(null,$actionUser);
+				loadProfil(null,$actionUser);
 				?>
-					<div class="users-footer">
-						<a class="manage-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
+					<div class="credit">
+						<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 					</div>
 				<?php
 			}
@@ -41,10 +41,11 @@
 						<?php
 							loadProfil($actionUser->family_member,$actionUser);
 						?>
+						<div class="credit">
+							<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+						</div>
 					</div>
-					<div class="users-footer">
-						<a class="manage-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
-					</div>
+
 
 				<?php
 			}
@@ -66,7 +67,9 @@
 				     	<span class="sr-only">Next</span>
 				   	</a>
 				</div>
-
+				<div class="credit">
+					<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+				</div>
 				<div class="users-footer">
 					<a class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></a>
 				</div>

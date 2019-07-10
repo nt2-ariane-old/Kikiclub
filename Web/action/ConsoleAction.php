@@ -61,8 +61,33 @@
 			$this->workshopAdded = false;
 		}
 
+		// protected function auto_generate_users()
+		// {
+		// 	for ($i=0; $i < 10000; $i++) {
+		// 		$firstname = $this->generateString(16);
+		// 		$lastname = $this->generateString(16);
+		// 		$email = $this->generateString(10) . "@test.com";
+		// 		UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_FAMILY_MEMBER,null);
+		// 	}
+		// }
+		protected function generateString($nb)
+		{
+		  $final_string = "";
+
+		  $range = "_!@#$^~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		  $length = strlen($range);
+
+		  for ($i = 0; $i < $nb; $i++)
+		  {
+			$index = rand(0, $length - 1);
+			$final_string.=$range[$index];
+		  }
+
+		  return $final_string;
+		}
 		protected function executeAction()
 		{
+
 			$this->preparePage();
 			$this->checkAction();
 		}
@@ -70,8 +95,15 @@
 		//Prepare the page before doing action
 		private function preparePage()
 		{
+			if(!empty($_SESSION["POST"]))
+			{
+				echo("SESSION POST");
+				var_dump($_SESSION["POST"]);
+				$_POST = $_SESSION["POST"];
+				unset($_SESSION["POST"]);
+
+			}
 			$this->workshops = WorkshopDAO::getWorkshops();
-			$this->users = FamilyDAO::getUsers();
 			if($_SESSION["language"] == 'en')
 			{
 				$this->difficulties = WorkshopDAO::getDifficultiesEN();
@@ -103,6 +135,7 @@
 				unset($_SESSION['users']);
 				unset($_SESSION['workshops']);
 			}
+
 
 			if(isset($_SESSION["users"]))
 			{
@@ -195,6 +228,20 @@
 				}
 
 			}
+			else
+			{
+				if(!empty($_POST["users_list"]))
+				{
+					if(isset($_POST["list"]))
+					{
+						$searchUsers =json_decode($_POST["users_list"],true);
+						foreach ($searchUsers as $user) {
+							$id = $user["value"];
+							$this->users[] = FamilyDAO::getUserFamily($id);
+						}
+					}
+				}
+			}
 
 		}
 
@@ -232,9 +279,9 @@
 			}
 			if(!empty($_POST['users_list']))
 			{
-				foreach($_POST['users_list'] as $users)
+				foreach($_POST['users_list'] as $user)
 				{
-					FamilyDAO::deleteUsers($users);
+					FamilyDAO::deleteUsers($user);
 				}
 			}
 			header("Location:console.php");
@@ -243,7 +290,7 @@
 		{
 			if(!empty($_POST['users_list']))
 			{
-				$this->userMod = UsersDAO::selectUser(intval($_POST['users_list'][0]));
+				$this->userMod = UsersDAO::getUserWithID(intval($_POST['users_list'][0]));
 
 				if(isset($_POST['push']))
 				{

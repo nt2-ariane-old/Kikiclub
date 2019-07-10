@@ -18,16 +18,45 @@
 			return $contents;
 		}
 
-
-		public static function getUsersLikeName($name)
+		public static function getAllUsersName()
 		{
 			$connection = Connection::getConnection();
-			$name = '%'.$name.'%';
-			$statement = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL FROM users WHERE EMAIL LIKE ? OR FIRSTNAME LIKE ? OR LASTNAME LIKE ? OR CONCAT(FIRSTNAME,' ', LASTNAME) LIKE ?");
-			$statement->bindParam(1, $name);
-			$statement->bindParam(2, $name);
-			$statement->bindParam(3, $name);
-			$statement->bindParam(4, $name);
+			$statement = $connection->prepare("SELECT ID, FIRSTNAME,LASTNAME,EMAIL FROM users");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = [];
+
+			while ($row = $statement->fetch()) {
+
+				$temp["value"] = $row["FIRSTNAME"];
+				$temp["data"] = $row["FIRSTNAME"];
+				$contents[] = $temp;
+
+			}
+			return $contents;
+		}
+
+		public static function getUsersLikeType($value,$type)
+		{
+			$connection = Connection::getConnection();
+			$value = $value.'%';
+			$request = "SELECT id,firstname,lastname,email FROM users ";
+			if($type == 'firstname')
+			{
+				$request .= "WHERE firstname LIKE ?";
+			}
+			else if ($type == 'lastname')
+			{
+				$request .= "WHERE lastname LIKE ?";
+			}
+			else if ($type == 'email')
+			{
+				$request .= "WHERE email LIKE ?";
+			}
+
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $value);
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -35,21 +64,10 @@
 			$contents = [];
 
 
+
 			while ($row = $statement->fetch()) {
-				$temp = [];
-				$temp["USER"] = $row;
-
-				$statement2 = $connection->prepare("SELECT ID, FIRSTNAME, LASTNAME, BIRTHDAY, SCORE, ID_AVATAR, GENDER_ID FROM family WHERE id_user = ?");
-				$statement2->bindParam(1, $row["ID"]);
-
-				$statement2->setFetchMode(PDO::FETCH_ASSOC);
-				$statement2->execute();
-
-				$family = [];
-				while ($rowFam = $statement2->fetch()) {
-					$family[] = $rowFam;
-				}
-				$temp["FAMILY"] = $family;
+				$temp["label"] = $row[$type];
+				$temp["value"] = $row["id"];
 				$contents[] = $temp;
 			}
 

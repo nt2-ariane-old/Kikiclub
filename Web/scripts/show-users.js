@@ -90,13 +90,10 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let node = document.createElement("div");
 	node.innerHTML = memberHTML;
 	let id_logo =  member["id_avatar"];
-	for (x in avatars)
-	{
-		if(x == id_logo)
-		{
-			node.querySelector(".child-logo").style = "background-image: url(" + avatars[x]["PATH"] +");";
-		}
-	}
+	console.log(member["id_avatar"]);
+	console.log(avatars[id_logo])
+	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["PATH"] +"');");
+
 	node.querySelector('a').setAttribute("onclick",'post("member-home.php",{"member":'+member["id"]+'})');
 
 	if(state==="manage")
@@ -130,10 +127,6 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	}
 
 	node.querySelector(".child-nbWorkshops").innerHTML = count + read("users","nbWorkshops");
-
-	let birth = new Date(member["birthday"]);
-	let today = new Date();
-
 
 	container.appendChild(node);
 }

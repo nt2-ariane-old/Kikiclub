@@ -22,11 +22,11 @@
 				}
 				if(isset($_POST["user"]))
 				{
-					$this->results = UsersDAO::getUsersLikeName($name);
+					$this->results = UsersDAO::getUsersLikeType($name,$_POST["type"]);
 				}
 				if(isset($_POST["family"]))
 				{
-					$this->results = FamilyDAO::getFamilyLikeName($name);
+					$this->results = FamilyDAO::getFamilyLikeName($name,$_POST["type"]);
 				}
 				if(isset($_POST["robots"]))
 				{

@@ -236,7 +236,7 @@ nav .container {
 	top:10px;
 	left:10px;
 	width: calc(100vw - (2 * 10px));
-	max-width: 600px;
+	max-width: 300px;
 	margin: 0;
 
 }

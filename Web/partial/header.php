@@ -98,7 +98,7 @@
 
 <script>let langData = <?= json_encode($action->trans->langData) ?></script>
 
-<a href="users.php"><header>
+<a href="index.php"><header>
 	<h1><span class="colored-kikicode">Kiki</span>club</h1>
 	<h2><?= $action->complete_name?></h2>
 	<div id="header-infos">

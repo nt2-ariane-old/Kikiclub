@@ -89,17 +89,22 @@
 						if($action->add)
 						{
 							?>
-							<div class="form-workshops">
-								<form action="console.php" method="post">
+							<div class="sheet">
+								<h2>Ajout d'un nouvel Utilisateur</h2>
+
+								<form action="console.php" id="profil-form" method="post">
 									<input type="hidden" name="add">
 									<input type="hidden" name="users">
+									<div class="infos">
+										<p><span class="input-title">First Name : </span><input type="text" name="firstname" placeholder="Firstname"></p>
+										<p><span class="input-title">Last Name : </span><input type="text" name="lastname" placeholder="Lastname"></p>
+										<p><span class="input-title">Email : </span><input type="text" name="email" placeholder="Email"></p>
+									</div>
+									<div class="forms-btns">
+										<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Add</button>
+										<button type="submit" class="delete-btn" name="back" onclick="clicked=this.name">Back</button>
+									</div>
 
-									<input type="text" name="firstname" placeholder="First Name">
-									<input type="text" name="lastname" placeholder="Last Name">
-									<input type="text" name="email" placeholder="Email">
-
-									<button type="submit" name="push" onclick="clicked=this.name">Add</button>
-									<button type="submit" name="back" onclick="clicked=this.name">Back</button>
 								</form>
 							</div>
 
@@ -109,19 +114,22 @@
 						{
 
 							?>
-							<div class="form-workshops">
-								<form action="console.php" method="post">
+							<div class="sheet">
+								<h2>Modification de <?= $action->userMod["FIRSTNAME"] ?> </h2>
+								<form action="console.php" id="profil-form" method="post">
 									<input type="hidden" name="modify">
 									<input type="hidden" name="users">
 									<input type="hidden" name="users_list[]" value="<?=$action->userMod["ID"]?>"></td>
 
-
-									<input type="text" name="firstname" placeholder="First Name" value="<?= $action->userMod["FIRSTNAME"] ?>">
-									<input type="text" name="lastname" placeholder="Last Name" value="<?= $action->userMod["LASTNAME"] ?>">
-									<input type="text" name="email" placeholder="Email" value="<?= $action->userMod["EMAIL"] ?>">
-
-									<button type="submit" name="push" onclick="clicked=this.name">Modify</button>
-									<button type="submit" name="back" onclick="clicked=this.name">Back</button>
+									<div class="infos">
+										<p><span class="input-title">First Name : </span><input type="text" name="firstname" value="<?= $action->userMod["FIRSTNAME"] ?>" placeholder="Firstname"></p>
+										<p><span class="input-title">Last Name : </span><input type="text" name="lastname" value="<?= $action->userMod["LASTNAME"] ?>" placeholder="Lastname"></p>
+										<p><span class="input-title">Email : </span><input type="text" name="email" value="<?= $action->userMod["EMAIL"] ?>" placeholder="Email"></p>
+									</div>
+									<div class="forms-btns">
+										<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Modify</button>
+										<button type="submit" class="delete-btn" name="back" onclick="clicked=this.name">Back</button>
+									</div>
 								</form>
 							</div>
 							<?php
@@ -223,16 +231,42 @@
 						{
 							?>
 							<div class="bar">
-								<input type="text" name="research" id="research-barUsers" placeholder="Research" onkeyup="researchMember()">
+								<div class="autocomplete" style="width:300px;">
+									<input id="search-user-firstname" type="text" name="search" onkeyup="searchUsers(this,'firstname')" placeholder="User Firstname">
+								</div>
+								<div class="autocomplete" style="width:300px;">
+									<input id="search-user-lastname" type="text" name="search" onkeyup="searchUsers(this,'lastname')" placeholder="User Lastname">
+								</div>
+								<div class="autocomplete" style="width:300px;">
+									<input id="search-user-email" type="text" name="search" onkeyup="searchUsers(this,'email')" placeholder="User Email">
+								</div>
+
+								<div class="autocomplete" style="width:300px;">
+									<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
+								</div>
+
+								<div class="autocomplete" style="width:300px;">
+									<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="Member Lastname">
+								</div>
+
+								<div class="autocomplete" style="width:300px;">
+									<input id="search-member-email" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
+								</div>
 							</div>
+
+							<?php
+								if(!empty($action->users))
+								{
+
+									?>
+
+
 							<div class='form-workshops'>
 								<form action="console.php" method="post" onSubmit="return validTab(this)">
 									<input type="hidden" name="users">
 									<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
 										<thead>
 										<tr class="rowMember">
-											<th style="width:5%;">Select</th>
-											<th style="width:10%;">ID</th>
 											<th style="width:10%;">First Name</th>
 											<th style="width:10%;">Last Name</th>
 											<th style="width:15%;">Email</th>
@@ -240,7 +274,51 @@
 										</tr>
 										</thead>
 										<tbody id="table-users">
-											<script>researchMember()</script>
+
+											<?php
+												foreach ($action->users as $user) {
+													?>
+													<tr>
+													<!-- <tr onclick="post('console.php',{'users':null,'users_list[]':<?= $user[0]['USER']['ID'] ?>,'modify':null})"> -->
+														<td><?= $user[0]["USER"]["FIRSTNAME"] ?></td>
+														<td><?= $user[0]["USER"]["LASTNAME"] ?></td>
+														<td><?= $user[0]["USER"]["EMAIL"] ?></td>
+														<td>
+															<?php
+																if(sizeof($user[0]["FAMILY"]) > 0)
+																{
+																	?>
+																	<table>
+																		<thead>
+																			<tr>
+																				<th>Firstname</th>
+																				<th>Lastname</th>
+																				<th>Score</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<?php
+																				foreach ($user[0]["FAMILY"] as $member) {
+																					?>
+																						<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'modify':null})">
+																							<td><?= $member["FIRSTNAME"] ?></td>
+																							<td><?= $member["LASTNAME"] ?></td>
+																							<td><?= $member["SCORE"] ?></td>
+																						</tr>
+																					<?php
+																				}
+																			?>
+																		</tbody>
+																	</table>
+
+																	<?php
+																}
+															?>
+														</td>
+													</tr></a>
+													<?php
+												}
+											?>
 										</tbody>
 									</table>
 
@@ -251,6 +329,9 @@
 									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement)">Delete</button>
 								</form>
 							</div>
+							<?php
+								}
+						?>
 						<?php
 						}
 						?>
@@ -262,8 +343,8 @@
 			if($action->add)
 			{
 				?>
-				<div class="form-workshops">
-					<form action="console.php" method="post">
+				<div class="sheet">
+					<form id="profil-form" action="console.php" method="post">
 						<input type="hidden" name="add">
 						<input type="hidden" name="robots">
 
@@ -298,8 +379,8 @@
 			else if($action->modify)
 			{
 				?>
-				<div class="form-workshops">
-					<form action="console.php" method="post">
+				<div class="sheet">
+					<form id="profil-form" action="console.php" method="post">
 						<?php
 							var_dump($action->robotMod);
 						?>
@@ -343,8 +424,8 @@
 					<div class="bar">
 						<input type="text" name="research" id="research-barRobots" placeholder="Research" onkeyup="researchWorkshop()">
 					</div>
-					<div class='form-workshops'>
-						<form action="console.php" method="post" onSubmit="return validTab(this)">
+					<div class='sheet'>
+						<form action="console.php" id="profil-form" method="post" onSubmit="return validTab(this)">
 							<input type="hidden" name="robots">
 
 							<table class='table table-striped table-hover' style="width:100%">

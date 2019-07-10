@@ -1,15 +1,23 @@
 const onPageLoad = () =>
 {
-	ClassicEditor
-	.create( document.querySelector( '#editor' ), {
-		// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-	} )
-	.then( editor => {
-		window.editor = editor;
-	} )
-	.catch( err => {
-		console.error( err.stack );
-	} );
+	document.addEventListener("click", (e) => {
+		closeAllLists(e.target);
+	});
+	let editor = document.querySelector('#editor');
+	if(editor != null)
+	{
+		ClassicEditor
+		.create( editor, {
+			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+	}
+
 
 	$('table.memberTable th') .click(
 		function() {
@@ -25,6 +33,40 @@ const onPageLoad = () =>
 
 	activateDraggable();
 
+
+}
+const searchUsers = (node,type) =>
+{
+	$( function() {
+		id = "#" + node.id;
+		$( id).autocomplete({
+			source: function(request,response)
+			{
+				$.ajax({
+					type: "POST",
+					url:"research-ajax.php",
+					data: {
+						'name':node.value,
+						'user': true,
+						'type':type,
+					},
+					dataType: 'json',
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			minLength: 1,
+			select: function( event, ui ) {
+				node.value = ui.item.label;
+				post("console.php",{"modify":null,"users":null,"users_list[]":ui.item.value})
+			},
+			response: function (event, ui) {
+				let users = JSON.stringify(ui.content)
+        post("console.php",{"list":null,"users_list":users});
+    	}
+		});
+	} );
 }
 
 
@@ -334,34 +376,32 @@ const researchWorkshop = () =>
 
 }
 
-const researchMember = () =>
+
+
+
+const searchMember = (node,type) =>
 {
-	let node= document.querySelector("#research-barUsers");
+	id = '#' + node.id;
+}
+
+
+const fillUserTable = (data) =>
+{
 	let table = document.querySelector("#table-users");
-	let formData = new FormData();
 
-	formData.append('name', node.value);
-	formData.append('user',true);
+	table.innerHTML = "";
 
-	fetch("research-ajax.php", {
-		method: "POST",
-		credentials: 'include',
-		body: formData
-	})
-	.then(response => response.json())
-	.then(data => {
-		table.innerHTML = "";
-		data.forEach(user => {
-			let line = document.createElement("TR");
+	data.forEach(user => {
+		let line = document.createElement("TR");
 
-			//Add Checkbox
-			let checkCase = document.createElement("TD");
+		//Add Checkbox
+		let checkCase = document.createElement("TD");
 
-			let checkbox = document.createElement("INPUT");
-				checkbox.setAttribute("type", "checkbox");
-				checkbox.setAttribute("name", "users_list[]");
-				checkbox.setAttribute("value", user["USER"]["ID"]);
-				checkCase.appendChild(checkbox);
+		let checkbox = document.createElement("INPUT");
+			checkbox.setAttribute("type", "checkbox");
+			checkbox.setAttribute("name", "users_list[]");
+			checkbox.setAttribute("value", user["USER"]["ID"]);
+			checkCase.appendChild(checkbox);
 
 			//ID
 			let caseId = document.createElement("TD");
@@ -473,10 +513,19 @@ const researchMember = () =>
 			line.appendChild(caseFamily);
 
 			table.appendChild(line);
-		});
+
 	});
 }
 
+
+const closeAllLists = (element,input) => {
+    let lists = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < lists.length; i++) {
+      if (element != lists[i] && element != input) {
+		lists[i].parentNode.removeChild(lists[i]);
+    }
+  }
+}
 const validTab = (form) =>
 {
 	let valide = true;

@@ -74,8 +74,9 @@ function loadProfil($user,$action)
 			<?php
 			}
 			?>
-
-				<form action="<?php if($action->page_name == 'show-users') echo 'users'; else $action->page_name; ?>.php" method="post">
+			<div class="sheet">
+				<h2>Votre Profil</h2>
+				<form id="profil-form" action="<?php if($action->page_name == 'show-users') echo 'users'; else $action->page_name; ?>.php" method="post">
 						<input type="hidden" name="form">
 						<?php
 							if($action->page_name=='console')
@@ -120,16 +121,17 @@ function loadProfil($user,$action)
 								}
 							}
 						?>
-						<input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("main","firstnameInput") ?>" value="<?php if($userExist) echo $user["firstname"]  ?>">
-						<input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("main","lastnameInput") ?>"  value="<?php if($userExist) echo $user["lastname"]  ?>">
-						<input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("main","birthInput") ?>"  value="<?php if($userExist) echo $user["birthday"]  ?>">
-						<select name="gender" id="">
-							<option <?php if($userExist)if($user["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
-							<option <?php if($userExist)if($user["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
-							<option <?php if($userExist)if($user["gender_id"] == 2) echo 'selected' ; ?>  value="2">Do not specify</option>
-						</select>
-
-						<p><?= $action->trans->read("users","selectAvatar") ?></p>
+						<div class="infos">
+							<p><span class="input-title"><?= $action->trans->read("main","firstnameInput") ?> : </span><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("main","firstnameInput") ?>" value="<?php if($userExist) echo $user["firstname"]  ?>"></p>
+							<p><span class="input-title"><?= $action->trans->read("main","lastnameInput") ?> : </span><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("main","lastnameInput") ?>"  value="<?php if($userExist) echo $user["lastname"]  ?>"></p>
+							<p><span class="input-title"><?= $action->trans->read("main","birthInput") ?> : </span><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("main","birthInput") ?>"  value="<?php if($userExist) echo $user["birthday"]  ?>"></p>
+							<p><span class="input-title">Gender : </span><select name="gender" id="">
+								<option <?php if($userExist)if($user["gender_id"] == 0) echo 'selected' ;?> value="0">Male</option>
+								<option <?php if($userExist)if($user["gender_id"] == 1) echo 'selected' ;?> value="1">Female</option>
+								<option <?php if($userExist)if($user["gender_id"] == 2) echo 'selected' ; ?>  value="2">Do not specify</option>
+							</select></p>
+						</div>
+						<p><span class="input-title"><?= $action->trans->read("users","selectAvatar") ?></span></p>
 						<div class="avatars-list">
 							<?php
 								foreach( $action->avatars as $avatar)
@@ -179,7 +181,10 @@ function loadProfil($user,$action)
 						?>
 						</div>
 					</form>
-
+					<div>
+						<a class="return-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
+					</div>
+				</div>
 
 			</div>
 	<?php
