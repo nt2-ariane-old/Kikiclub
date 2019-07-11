@@ -9,7 +9,7 @@
 		public $member_pts;
 		public $is_member;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,'family-badges','Badges');
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'family-badges','Badges');
 		}
 
 		protected function executeAction() {

@@ -43,11 +43,7 @@
 						$this->errorMsg =$this->trans->read("loginpage", "errorFeeld");
 					}
 				}
-				else
-				{
-					$this->error = true;
-					$this->errorMsg = 'not yet...';
-				}
+
 
 			}
 			else if(!empty($_GET["signup"]))
@@ -90,11 +86,7 @@
 						$this->errorMsg = $this->trans->read("loginpage", "errorFeeld");
 					}
 				}
-				else
-				{
-					$this->error = true;
-					$this->errorMsg = 'not yet...';
-				}
+
 
 			}
 			if($this->isLoggedIn())

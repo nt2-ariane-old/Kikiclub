@@ -22,7 +22,14 @@ HTML {
     min-height:100%;
 
 }
-
+.ck.ck-editor__editable_inline p
+{
+	width: 100% !important;
+}
+.ck.ck-editor	{
+	margin: auto;
+	width: 80%;
+}
 body{
 	background-color: #D8DF23 !important;
 	height: 100%;

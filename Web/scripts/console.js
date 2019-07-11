@@ -3,20 +3,7 @@ const onPageLoad = () =>
 	document.addEventListener("click", (e) => {
 		closeAllLists(e.target);
 	});
-	let editor = document.querySelector('#editor');
-	if(editor != null)
-	{
-		ClassicEditor
-		.create( editor, {
-			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
-		} )
-		.then( editor => {
-			window.editor = editor;
-		} )
-		.catch( err => {
-			console.error( err.stack );
-		} );
-	}
+
 
 
 	$('table.memberTable th') .click(
@@ -33,10 +20,27 @@ const onPageLoad = () =>
 
 	activateDraggable();
 
+	let feelds = ['firstname','lastname','email'];
+	feelds.forEach(feeld => {
+		let node = document.getElementById('search-user-' + feeld);
+		node.addEventListener("keyup",function(event){
+			searchUsers (node,feeld,event.keyCode)
+		 });
+		let nodeM = document.getElementById('search-member-' + feeld);
+		nodeM.addEventListener("keyup",function(event){
+			searchMember (nodeM,feeld,event.keyCode)
+		 });
+	});
+
 
 }
-const searchUsers = (node,type) =>
+let users;
+const searchUsers = (node,type,keycode) =>
 {
+	if(keycode === 13)
+	{
+		post("console.php",{"list":null,"users_list":users});
+	}
 	$( function() {
 		id = "#" + node.id;
 		$( id).autocomplete({
@@ -47,7 +51,7 @@ const searchUsers = (node,type) =>
 					url:"search-ajax.php",
 					data: {
 						'name':node.value,
-						'user': true,
+						'search-user': true,
 						'type':type,
 					},
 					dataType: 'json',
@@ -56,19 +60,55 @@ const searchUsers = (node,type) =>
 					}
 				});
 			},
-			minLength: 1,
+			minLength: 0,
 			select: function( event, ui ) {
 				node.value = ui.item.label;
 				post("console.php",{"modify":null,"users":null,"users_list[]":ui.item.value})
 			},
 			response: function (event, ui) {
-				let users = JSON.stringify(ui.content)
-        post("console.php",{"list":null,"users_list":users});
+				users = JSON.stringify(ui.content)
+
     	}
 		});
 	} );
 }
-
+let members;
+const searchMember = (node,type,keycode) =>
+{
+	if(keycode === 13)
+	{
+		post("console.php",{"list":null,"members_list":members});
+	}
+	$( function() {
+		id = "#" + node.id;
+		$( id).autocomplete({
+			source: function(request,response)
+			{
+				$.ajax({
+					type: "POST",
+					url:"search-ajax.php",
+					data: {
+						'name':node.value,
+						'search-member': true,
+						'type':type,
+					},
+					dataType: 'json',
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			minLength: 0,
+			select: function( event, ui ) {
+				node.value = ui.item.label;
+				post("console.php",{"modify":null,"users":null,"members_list[]":ui.item.value})
+			},
+			response: function (event, ui) {
+				members = JSON.stringify(ui.content)
+    	}
+		});
+	} );
+}
 
 const sendEmail = (workshop) =>
 {
@@ -375,15 +415,6 @@ const searchWorkshop = () =>
 	});
 
 }
-
-
-
-
-const searchMember = (node,type) =>
-{
-	id = '#' + node.id;
-}
-
 
 const fillUserTable = (data) =>
 {

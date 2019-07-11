@@ -20,13 +20,13 @@
 				{
 					$this->results = WorkshopDAO::getWorkshopsLikeName($name);
 				}
-				if(isset($_POST["user"]))
+				if(isset($_POST["search-user"]))
 				{
 					$this->results = UsersDAO::getUsersLikeType($name,$_POST["type"]);
 				}
-				if(isset($_POST["family"]))
+				if(isset($_POST["search-member"]))
 				{
-					$this->results = FamilyDAO::getFamilyLikeName($name,$_POST["type"]);
+					$this->results = FamilyDAO::getFamilyLikeType($name,$_POST["type"]);
 				}
 				if(isset($_POST["robots"]))
 				{

@@ -6,7 +6,7 @@
 		public $workshop;
 		public $member_workshops;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"workshop-infos", "Workshop Information");
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"workshop-infos", "Workshop Information");
 		}
 
 		protected function executeAction() {

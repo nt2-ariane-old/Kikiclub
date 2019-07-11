@@ -109,12 +109,12 @@
 			}
 			return $contents;
 		}
-		public static function getFamilyLikeName($name,$type)
+		public static function getFamilyLikeType($name,$type)
 		{
 			$connection = Connection::getConnection();
 			$name = $name . '%';
 
-			$request = "SELECT id,firstname,lastname,birthday,id_gender,id_avatar,id_user,id,score FROM family ";
+			$request = "SELECT id,firstname,lastname FROM family ";
 			if($type == 'firstname')
 			{
 				$request .= "WHERE firstname LIKE ?";
@@ -133,8 +133,13 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$contents[$row["id"]] = $row[$type];
+				$temp = [];
+				$temp["label"] = $row[$type];
+				$temp["value"] = $row["id"];
+				$content[] = $temp;
 			}
+
+
 
 			return $content;
 		}
@@ -246,7 +251,7 @@
 					$family[] = $rowFam;
 				}
 				$temp["FAMILY"] = $family;
-				$contents[] = $temp;
+				$contents = $temp;
 			}
 			return $contents;
 		}

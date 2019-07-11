@@ -7,7 +7,7 @@
 		public $results;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,"family-ajax", "Family,Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"family-ajax", "Family,Ajax");
 		}
 
 		protected function executeAction() {
@@ -21,6 +21,6 @@
 						$this->results["family"][$key]["alert"] = WorkshopDAO::selectMemberNewWorkshop($this->results["family"][$key]["ID"]);
 					}
 				}
-				
+
 		}
 	}

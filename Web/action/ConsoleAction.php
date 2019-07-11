@@ -12,6 +12,8 @@
 		public $workshopMod;
 
 		public $users;
+		public $members;
+
 		public $userMod;
 		public $genders;
 		public $family;
@@ -67,7 +69,7 @@
 		// 		$firstname = $this->generateString(16);
 		// 		$lastname = $this->generateString(16);
 		// 		$email = $this->generateString(10) . "@test.com";
-		// 		UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_FAMILY_MEMBER,null);
+		// 		UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null);
 		// 	}
 		// }
 		protected function generateString($nb)
@@ -98,7 +100,6 @@
 			if(!empty($_SESSION["POST"]))
 			{
 				echo("SESSION POST");
-				var_dump($_SESSION["POST"]);
 				$_POST = $_SESSION["POST"];
 				unset($_SESSION["POST"]);
 
@@ -157,11 +158,10 @@
 
 			}
 
-			if(!empty($_POST['members_list']))
+			if(!empty($_POST["members_list"]))
 			{
-				$_SESSION["member"] = $_POST['members_list'][0];
+				$_SESSION["member_admin"] = $_POST["members_list"][0];
 			}
-
 		}
 
 		//Verify what action to do with conditions
@@ -230,18 +230,28 @@
 				}
 
 			}
-			else
+			else if(isset($_POST["list"]))
 			{
+
 				if(!empty($_POST["users_list"]))
 				{
-					if(isset($_POST["list"]))
-					{
-						$searchUsers =json_decode($_POST["users_list"],true);
-						foreach ($searchUsers as $user) {
-							$id = $user["value"];
-							$this->users[] = FamilyDAO::getUserFamily($id);
-						}
+
+					$searchUsers =json_decode($_POST["users_list"],true);
+					foreach ($searchUsers as $user) {
+						$id = $user["value"];
+						$this->users[] = UsersDAO::getUserWithID($id);
 					}
+
+				}
+				if(!empty($_POST["members_list"]))
+				{
+
+					$searchMembers =json_decode($_POST["members_list"],true);
+					foreach ($searchMembers as $member) {
+						$id = $member["value"];
+						$this->members[] = FamilyDAO::selectMember($id);
+					}
+
 				}
 			}
 
@@ -290,9 +300,10 @@
 		}
 		private function modifyUser()
 		{
+
 			if(!empty($_POST['users_list']))
 			{
-				$this->userMod = UsersDAO::getUserWithID(intval($_POST['users_list'][0]));
+				$this->userMod = FamilyDAO::getUserFamily(intval($_POST['users_list'][0]));
 
 				if(isset($_POST['push']))
 				{

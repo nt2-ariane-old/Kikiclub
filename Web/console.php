@@ -36,50 +36,70 @@
 						}
 						if($action->add)
 						{
-							loadWorkshopsCreator(null,$action);
+							?>
+								<div class="management-tab">
+									<div class="sheet">
+										<?php
+										loadWorkshopsCreator(null,$action);
+										?>
+									</div>
+								</div>
+							<?php
 						}
 						else if($action->modify)
 						{
-							loadWorkshopsCreator($action->workshopMod,$action);
+							?>
+								<div class="management-tab">
+									<div class="sheet">
+										<?php
+										loadWorkshopsCreator($action->workshopMod,$action);
+										?>
+									</div>
+								</div>
+							<?php
 						}
 						else
 						{
 							?>
-							<div class="bar">
-								<input type="text" name="search" id="search-bar" placeholder="Search" onkeyup="searchWorkshop()">
-							</div>
-							<div class='form-workshops'>
 
-								<form action="console.php" method="post" onSubmit="return validTab(this)">
-								<input type="hidden" name="workshops">
+							<div class="sheet">
 
-								<table class='table table-striped table-hover' style="width:100%">
-									<thead>
-										<tr>
-											<th >Select</th>
-											<th>Image</th>
-											<th onclick="sortingTable('workshops-table',2)">Name</th>
-											<th onclick="sortingTable('workshops-table',3)">Content</th>
-											<th onclick="sortingTable('workshops-table',4)"><?= $action->trans->read('workshops','difficulty') ?></th>
-											<th onclick="sortingTable('workshops-table',5)">Robot</th>
-										</tr>
-									</thead>
-									<tbody class='tableValue'>
-
-										<script>searchWorkshop()</script>
-									</tbody>
-								</table>
-								<div class="control-bar">
-									<a data-toggle="collapse" data-target="#controls">Control</a>
-
-									<div class="collapse" id="controls">
-										<button type="submit" class="add-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
-										<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
-										<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
-									</div>
+								<div class="bar">
+									<input type="text" name="search" id="search-bar" placeholder="Search" onkeyup="searchWorkshop()">
 								</div>
+								<div class='form-workshops'>
 
-							</form>
+									<form action="console.php" method="post" onSubmit="return validTab(this)">
+									<input type="hidden" name="workshops">
+
+									<table class='table table-striped table-hover' style="width:100%">
+										<thead>
+											<tr>
+												<th >Select</th>
+												<th>Image</th>
+												<th onclick="sortingTable('workshops-table',2)">Name</th>
+												<th onclick="sortingTable('workshops-table',3)">Content</th>
+												<th onclick="sortingTable('workshops-table',4)"><?= $action->trans->read('workshops','difficulty') ?></th>
+												<th onclick="sortingTable('workshops-table',5)">Robot</th>
+											</tr>
+										</thead>
+										<tbody class='tableValue'>
+
+											<script>searchWorkshop()</script>
+										</tbody>
+									</table>
+									<div class="control-bar">
+										<a data-toggle="collapse" data-target="#controls">Control</a>
+
+										<div class="collapse" id="controls">
+											<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
+											<button type="submit" class="submit-btn" name="modify" onclick="clicked=this.name" value="true">Modify</button>
+											<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement);" value="true">Delete</button>
+										</div>
+									</div>
+
+								</form>
+								</div>
 							</div>
 							<?php
 						}
@@ -122,22 +142,56 @@
 
 							?>
 							<div class="sheet">
-								<h2>Modification de <?= $action->userMod["FIRSTNAME"] ?> </h2>
+								<h2>Modification de <?= $action->userMod["USER"]["FIRSTNAME"] ?> </h2>
 								<form action="console.php" id="profil-form" method="post">
 									<input type="hidden" name="modify">
 									<input type="hidden" name="users">
-									<input type="hidden" name="users_list[]" value="<?=$action->userMod["ID"]?>"></td>
+									<input type="hidden" name="users_list[]" value="<?=$action->userMod["USER"]["ID"]?>"></td>
 
 									<div class="infos">
-										<p><span class="input-title">First Name : </span><input type="text" name="firstname" value="<?= $action->userMod["FIRSTNAME"] ?>" placeholder="Firstname"></p>
-										<p><span class="input-title">Last Name : </span><input type="text" name="lastname" value="<?= $action->userMod["LASTNAME"] ?>" placeholder="Lastname"></p>
-										<p><span class="input-title">Email : </span><input type="text" name="email" value="<?= $action->userMod["EMAIL"] ?>" placeholder="Email"></p>
+										<p><span class="input-title">First Name : </span><input type="text" name="firstname" value="<?= $action->userMod["USER"]["FIRSTNAME"] ?>" placeholder="Firstname"></p>
+										<p><span class="input-title">Last Name : </span><input type="text" name="lastname" value="<?= $action->userMod["USER"]["LASTNAME"] ?>" placeholder="Lastname"></p>
+										<p><span class="input-title">Email : </span><input type="text" name="email" value="<?= $action->userMod["USER"]["EMAIL"] ?>" placeholder="Email"></p>
 									</div>
+
+
 									<div class="forms-btns">
 										<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Modify</button>
 										<button type="submit" class="delete-btn" name="back" onclick="clicked=this.name">Back</button>
 									</div>
 								</form>
+
+								<div class="family">
+									<?php
+										if(sizeof($action->userMod["FAMILY"]) > 0)
+										{
+									?>
+										<table>
+											<thead>
+												<tr>
+													<th>Firstname</th>
+													<th>Lastname</th>
+													<th>Score</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+												foreach ($action->userMod["FAMILY"] as $member) {
+											?>
+												<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'modify':null})">
+													<td><?= $member["FIRSTNAME"] ?></td>
+													<td><?= $member["LASTNAME"] ?></td>
+													<td><?= $member["SCORE"] ?></td>
+												</tr>
+											<?php
+												}
+											?>
+											</tbody>
+										</table>
+									<?php
+										}
+									?>
+								</div>
 							</div>
 							<?php
 						}
@@ -152,7 +206,7 @@
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] )
 												{
-													if($famWork["STATUT"] != 1)
+													if($famWork["ID_STATUT"] != 1)
 													{
 														$valide = false;
 													}
@@ -237,112 +291,116 @@
 						else
 						{
 							?>
-							<div class="bar">
-								<div class="autocomplete" style="width:300px;">
-									<input id="search-user-firstname" type="text" name="search" onkeyup="searchUsers(this,'firstname')" placeholder="User Firstname">
-								</div>
-								<div class="autocomplete" style="width:300px;">
-									<input id="search-user-lastname" type="text" name="search" onkeyup="searchUsers(this,'lastname')" placeholder="User Lastname">
-								</div>
-								<div class="autocomplete" style="width:300px;">
-									<input id="search-user-email" type="text" name="search" onkeyup="searchUsers(this,'email')" placeholder="User Email">
-								</div>
-
-								<div class="autocomplete" style="width:300px;">
-									<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
-								</div>
-
-								<div class="autocomplete" style="width:300px;">
-									<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="Member Lastname">
-								</div>
-
-								<div class="autocomplete" style="width:300px;">
-									<input id="search-member-email" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
-								</div>
-							</div>
-
-							<?php
-								if(!empty($action->users))
-								{
-
-									?>
+							<div class="sheet">
 
 
-							<div class='form-workshops'>
-								<form action="console.php" method="post" onSubmit="return validTab(this)">
-									<input type="hidden" name="users">
-									<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
-										<thead>
-										<tr class="rowMember">
-											<th style="width:10%;">First Name</th>
-											<th style="width:10%;">Last Name</th>
-											<th style="width:15%;">Email</th>
-											<th style="width:50%;">Family</th>
-										</tr>
-										</thead>
-										<tbody id="table-users">
-
-											<?php
-												foreach ($action->users as $user) {
-													?>
-													<tr>
-													<!-- <tr onclick="post('console.php',{'users':null,'users_list[]':<?= $user[0]['USER']['ID'] ?>,'modify':null})"> -->
-														<td><?= $user[0]["USER"]["FIRSTNAME"] ?></td>
-														<td><?= $user[0]["USER"]["LASTNAME"] ?></td>
-														<td><?= $user[0]["USER"]["EMAIL"] ?></td>
-														<td>
-															<?php
-																if(sizeof($user[0]["FAMILY"]) > 0)
-																{
-																	?>
-																	<table>
-																		<thead>
-																			<tr>
-																				<th>Firstname</th>
-																				<th>Lastname</th>
-																				<th>Score</th>
-																			</tr>
-																		</thead>
-																		<tbody>
-																			<?php
-																				foreach ($user[0]["FAMILY"] as $member) {
-																					?>
-																						<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'modify':null})">
-																							<td><?= $member["FIRSTNAME"] ?></td>
-																							<td><?= $member["LASTNAME"] ?></td>
-																							<td><?= $member["SCORE"] ?></td>
-																						</tr>
-																					<?php
-																				}
-																			?>
-																		</tbody>
-																	</table>
-
-																	<?php
-																}
-															?>
-														</td>
-													</tr></a>
-													<?php
-												}
-											?>
-										</tbody>
-									</table>
-									<div class="control-bar">
-										<a data-toggle="collapse" data-target="#controls">Control</a>
-										<div id="controls">
-											<button type="submit" name="assign" onclick="clicked=this.name">Assign Workshop to family member</button>
-											<button type="submit" name="add" onclick="clicked=this.name">Add Users</button>
-											<button type="submit" name="addFamily" onclick="clicked=this.name">Add Family Member</button>
-											<button type="submit" name="modify" onclick="clicked=this.name">Modify</button>
-											<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement)">Delete</button>
-
+								<div class="bar">
+									<div>
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-user-firstname" type="text" name="search" placeholder="User Firstname">
+										</div>
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-user-lastname" type="text" name="search" placeholder="User Lastname">
+										</div>
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-user-email" type="text" name="search" placeholder="User Email">
 										</div>
 									</div>
-								</form>
+									<div>
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
+										</div>
+
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="Member Lastname">
+										</div>
+
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-member-email" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
+										</div>
+									</div>
+
+
+								</div>
+
+								<?php
+									if(!empty($action->users))
+									{
+
+										?>
+
+
+								<div class='form-workshops'>
+									<h2>Users</h2>
+
+									<form action="console.php" method="post" onSubmit="return validTab(this)">
+										<input type="hidden" name="users">
+										<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
+											<thead>
+											<tr class="rowMember">
+												<th style="width:10%;">First Name</th>
+												<th style="width:10%;">Last Name</th>
+												<th style="width:15%;">Email</th>
+											</tr>
+											</thead>
+											<tbody id="table-users">
+
+												<?php
+													foreach ($action->users as $user) {
+														?>
+														<tr onclick="post('console.php',{'users':null,'users_list[]':<?= $user['ID'] ?>,'modify':null})">
+															<td><?= $user["FIRSTNAME"] ?></td>
+															<td><?= $user["LASTNAME"] ?></td>
+															<td><?= $user["EMAIL"] ?></td>
+														</tr></a>
+														<?php
+													}
+												?>
+											</tbody>
+										</table>
+										<div class="control-bar">
+											<a data-toggle="collapse" data-target="#controls">Control</a>
+											<div id="controls">
+												<button type="submit" name="add" onclick="clicked=this.name">Add Users</button>
+												<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement)">Delete</button>
+											</div>
+										</div>
+									</form>
+								</div>
 							</div>
 							<?php
-								}
+							}
+							else if (!empty($action->members))
+							{
+								?>
+									<div class='form-workshops'>
+										<h2>Family Members</h2>
+										<table>
+											<thead>
+												<tr>
+													<th>Firstname</th>
+													<th>Lastname</th>
+													<th>Score</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+												foreach ($action->members as $member) {
+											?>
+												<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'modify':null})">
+													<td><?= $member["firstname"] ?></td>
+													<td><?= $member["lastname"] ?></td>
+													<td><?= $member["score"] ?></td>
+												</tr>
+											<?php
+												}
+											?>
+											</tbody>
+										</table>
+									</div>
+								<?php
+
+							}
 						?>
 						<?php
 						}
@@ -391,52 +449,52 @@
 			else if($action->modify)
 			{
 				?>
-				<div class="sheet">
-					<form id="profil-form" action="console.php" method="post">
-						<?php
-							var_dump($action->robotMod);
-						?>
-						<input type="hidden" name="modify">
-						<input type="hidden" name="robots">
-						<input type="hidden" name="robots_list[]" value="<?=$action->robotMod["ROBOTS"]["ID"]?>"></td>
+				<div class="management-tab">
+					<div class="sheet">
+						<form id="profil-form" action="console.php" method="post">
+
+							<input type="hidden" name="modify">
+							<input type="hidden" name="robots">
+							<input type="hidden" name="robots_list[]" value="<?=$action->robotMod["ROBOTS"]["ID"]?>"></td>
 
 
-						<input type="text" name="name" placeholder="Name" value="<?=$action->robotMod["ROBOTS"]["NAME"]?>">
+							<input type="text" name="name" placeholder="Name" value="<?=$action->robotMod["ROBOTS"]["NAME"]?>">
 
-						<p> <span class="input_name"> Age Recommanded :</span>
-						<select name="grade_recommanded">
+							<p> <span class="input_name"> Age Recommanded :</span>
+							<select name="grade_recommanded">
+								<?php
+									foreach ($action->grades as $grade) {
+										?>
+											<option value="<?= $grade["ID"]?>"><?= $grade["NAME"]?></option>
+										<?php
+									}
+								?>
+
+							</select>
+							</p>
+
 							<?php
-								foreach ($action->grades as $grade) {
+								foreach ($action->robotMod["SCORES"] as $score) {
 									?>
-										<option value="<?= $grade["ID"]?>"><?= $grade["NAME"]?></option>
+										<p><span class="input_name"><?= $score["DIFFICULTY"]?></span><input type="number" name="score_<?= $score["ID_DIFFICULTY"]?>" placeholder="Score" value="<?= $score["SCORE"]?>"></p>
 									<?php
 								}
 							?>
-
-						</select>
-						</p>
-
-						<?php
-							foreach ($action->robotMod["SCORES"] as $score) {
-								?>
-									<p><span class="input_name"><?= $score["DIFFICULTY"]?></span><input type="number" name="score_<?= $score["ID_DIFFICULTY"]?>" placeholder="Score" value="<?= $score["SCORE"]?>"></p>
-								<?php
-							}
-						?>
-						<button type="submit" name="push" onclick="clicked=this.name">Modify</button>
-						<button type="submit" name="back" onclick="clicked=this.name">Back</button>
-					</form>
+							<button type="submit" name="push" onclick="clicked=this.name">Modify</button>
+							<button type="submit" name="back" onclick="clicked=this.name">Back</button>
+						</form>
+					</div>
 				</div>
 				<?php
 			}
 			else
 			{
 			?>
-				<div class="management-tab">
+				<div class='sheet'>
 					<div class="bar">
 						<input type="text" name="search" id="search-barRobots" placeholder="search" onkeyup="searchWorkshop()">
 					</div>
-					<div class='sheet'>
+
 						<form action="console.php" id="profil-form" method="post" onSubmit="return validTab(this)">
 							<input type="hidden" name="robots">
 
@@ -458,9 +516,9 @@
 								<a data-toggle="collapse" data-target="#controls">Control</a>
 
 								<div class="collapse" id="controls">
-									<button type="submit" name="add" onclick="clicked=this.name" value="true">Add</button>
-									<button type="submit" name="modify" onclick="clicked=this.name" value="true">Modify</button>
-									<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement);" value="true">Delete</button>
+									<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
+									<button type="submit" class="submit-btn"name="modify" onclick="clicked=this.name" value="true">Modify</button>
+									<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement);" value="true">Delete</button>
 								</div>
 							</div>
 						</form>

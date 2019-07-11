@@ -7,9 +7,11 @@
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
-		public static $VISIBILITY_FAMILY_MEMBER = 1;
-		public static $VISIBILITY_CUSTOMER_USER = 2;
-		public static $VISIBILITY_ADMIN_USER = 3;
+		public static $VISIBILITY_CUSTOMER_USER = 1;
+		public static $VISIBILITY_ANIMATOR = 2;
+		public static $VISIBILITY_MODERATOR = 3;
+		public static $VISIBILITY_ADMIN_USER = 4;
+		public static $VISIBILITY_OWNER = 5;
 
 		public $default_visibility;
 		public $page_visibility;
@@ -137,9 +139,16 @@
 
 			if($this->isFamilyMember())
 			{
+
 				$member = FamilyDAO::selectMember($_SESSION["member"]);
-				var_dump($member);
-				$this->member_name = $member["firstname"];
+				if($member == null)
+				{
+					unset($_SESSION["member"]);
+				}
+				else
+				{
+					$this->member_name = $member["firstname"];
+				}
 			}
 			$this->executeAction();
 		}

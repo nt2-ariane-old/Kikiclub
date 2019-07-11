@@ -4,7 +4,7 @@
 	class UsersAction extends CommonAction {
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,'users',"Home");
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'users',"Home");
 		}
 
 		protected function executeAction() {

@@ -12,7 +12,7 @@
 		}
 
 		protected function executeAction() {
-			$id_member =$_SESSION["member"];
+			$id_member =$_SESSION["member_admin"];
 			if(!empty($_POST["id_workshop"]) &&
 			!empty($_POST["category"]) &&
 			!empty($_POST["adding"]))

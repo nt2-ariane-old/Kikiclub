@@ -1,33 +1,38 @@
+let classicEditor;
 const loadModules = () =>
 {
-	// gapi.load('auth2', function(){
-  //       auth2 = gapi.auth2.init({
-  //           client_id: '704832246976-9gtrh525ke8s7p8kp9vatgals73l22ud.apps.googleusercontent.com'
-	// 					//client_id: '704832246976-7qoem5fnkn8um3566973uoeg7pmpp3pv.apps.googleusercontent.com'
-	// 			});
-  //       // Attach the click handler to the sign-in button
-  //       auth2.attachClickHandler('signin-button', {}, null, null);
-	// });
+	editor = document.querySelector('#editor');
+	if(editor != null)
+	{
+		ClassicEditor
+		.create( editor, {
+			// toolbar: [ 'heading', '|', 'bold', 'italic', 'link' ]
+		} )
+		.then( editorCK => {
+			classicEditor = editorCK;
+			console.log(classicEditor);
+			console.log(classicEditor.document);
+			classicEditor.document.attachListener( doc, 'keydown', function( event ){
+				console.log(event);
+			});
+			window.editor = classicEditor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+	}
 
-	gapi.load('auth2', function() {
-		gapi.auth2.init();
-	});
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js?version=v3.3";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
 
 }
 
-const limitText = (limitField, limitNum) => {
+const limitText = (textarea, limitNum) => {
+
 	let node = document.getElementById("countdown");
-	if (limitField.value.length > limitNum) {
-		limitField.value = limitField.value.substring(0, limitNum);
+	console.log(textarea.value)
+	if (textarea.value.length > limitNum) {
+		textarea.value = textarea.value.substring(0, limitNum);
 	} else {
-		let value =  (limitNum - limitField.value.length);
+		let value =  (limitNum - textarea.value.length);
 		node.innerHTML = value + "";
 	}
 }

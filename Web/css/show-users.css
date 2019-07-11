@@ -18,7 +18,7 @@
 	padding: 0.5em;
 	margin: 0;
 }
-#profil-form
+#profil-form, #workshop-form
 {
 	background-color: wheat;
 	border : 6px solid burlywood;
@@ -29,21 +29,23 @@
 	margin: auto;
 }
 
-#profil-form p
+#profil-form p, #workshop-form
 {
 	padding: 0 1em;
 	width: 100%;
 	text-align: center;
-
+	margin: auto;
 	display: inline-block;
 }
-#profil-form input,#profil-form select
+#profil-form input,#profil-form select,
+#workshop-form input,#workshop-form select
 {
 	width: 100%;
 	margin: auto;
 	display: block;
 }
-#profil-form .input-title
+#profil-form .input-title,
+#workshop-form .input-title
 {
 	width: 100%;
 	margin: auto;
@@ -270,9 +272,17 @@
 
 @media only screen and (min-width:850px)
 {
-	#profil-form p
+	 #workshop-form p
 	{
 		width: 49%;
+		margin: auto;
+	}
+	 #workshop-form p
+	{
+		width: calc(49% - 2em);
+		display: inline-block;
+		margin: 1em;
+
 	}
 	.sheet
 	{
@@ -288,18 +298,19 @@
 	{
 		width: 90%;
 		margin: auto;
-		box-shadow: 0.5em 0.5em 0.5em 0.5em rgb(65, 65, 65);
 	}
-	#profil-form .input-title
+	#profil-form .input-title,
+	#workshop-form .input-title
 	{
 		display: inline-block;
 		width: 50%;
 		text-align: left;
 	}
-	#profil-form input,#profil-form select
+	#profil-form input,#profil-form select,
+	#workshop-form input,#workshop-form select
+
 	{
 		width: 50%;
-
 		display: inline-block;
 	}
 	.users-

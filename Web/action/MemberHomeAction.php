@@ -8,7 +8,7 @@
 		public $member;
 		public $badges;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_FAMILY_MEMBER,'member-home','Member Home');
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'member-home','Member Home');
 		}
 
 		protected function executeAction() {

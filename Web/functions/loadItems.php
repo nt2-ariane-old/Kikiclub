@@ -76,7 +76,7 @@ function loadProfil($user,$action)
 			?>
 			<div class="sheet">
 				<h2>Votre Profil</h2>
-				<form id="profil-form" action="<?php if($action->page_name == 'show-users') echo 'users'; else $action->page_name; ?>.php" method="post">
+				<form id="profil-form" action="<?php if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php" method="post">
 						<input type="hidden" name="form">
 						<?php
 							if($action->page_name=='console')
@@ -136,6 +136,7 @@ function loadProfil($user,$action)
 									?>
 								</select></p>
 						</div>
+
 						<p><span class="input-title"><?= $action->trans->read("users","selectAvatar") ?></span></p>
 						<div class="avatars-list">
 							<?php
@@ -179,15 +180,24 @@ function loadProfil($user,$action)
 							if($userExist)
 							{
 								?>
-									<a class="delete-btn" onclick="post('users.php',{ 'delete':true});"><?= $action->trans->read("main","delete")?></a>
+									<a class="delete-btn" onclick="post('<?php	if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php',{ 'delete':true});"><?= $action->trans->read("main","delete")?></a>
 
 								<?php
 							}
 						?>
 						</div>
 					</form>
+					<?php
+						if($action->page_name == 'console' && $userExist)
+						{
+							?>
+								<a onclick="post('console.php',{'assign':true,'members_list[]':<?=$user['ID']?>})">Assign Workshop to family member</button>
+
+							<?php
+						}
+					?>
 					<div>
-						<a class="return-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
+						<a class="return-btn"  href="<?php	if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php"><?= $action->trans->read("users","return") ?></a>
 					</div>
 				</div>
 
@@ -201,8 +211,7 @@ function loadWorkshopsCreator($workshop, $action)
 	if($workshop != null)
 		$workshopExist = true;
 	?>
-		<div class="form-workshops">
-			<form action="console.php" method="post" enctype="multipart/form-data">
+			<form action="console.php" id="workshop-form" method="post" enctype="multipart/form-data">
 				<?php
 					if($workshopExist)
 					{
@@ -218,49 +227,50 @@ function loadWorkshopsCreator($workshop, $action)
 					}
 				?>
 
+
 				<input type="hidden" name="workshops">
 				<input type="hidden" name="workshops_list[]" value="<?=$workshop["ID"]?>"></td>
 
-						<input type="text" name="name" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
-						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onKeyDown="limitText(this.form.content,125);" onKeyUp="limitText(this.form.content,125);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
-						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">125</div> left.
+						<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
+						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
+						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">512</div> left.
 
 						<br>
-						<?= $action->trans->read('workshops','difficulty') ?>
-						<select name="difficulty">
-							<?php
-								foreach ($action->difficulties as $difficulty) {
-									?>
-										<option value=<?= $difficulty["ID"]?> <?php if($workshopExist && $workshop["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
+						<div class="infos">
+						<p><span class="input-title"><?= $action->trans->read("workshops","difficulty") ?> : </span><select name="difficulty">
+								<?php
+									foreach ($action->difficulties as $difficulty) {
+										?>
+											<option value=<?= $difficulty["ID"]?> <?php if($workshopExist && $workshop["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
 
-									<?php
-								}
-							?>
+										<?php
+									}
+								?>
 							</select>
+						</p>
+						<p><span class="input-title"><?= $action->trans->read("workshops","robots") ?> : </span><select name="robot">
+								<?php
+									foreach ($action->robots as $robot) {
+										?>
+											<option value=<?= $robot["ID"]?> <?php if($workshop["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
+										<?php
+									}
+								?>
+								</select>
+						</p>
+						<p><span class="input-title">Choose Workshop Image: </span><input name="workshopFile" type="file" /></p>
 
-							Robot:
-							<select name="robot">
-							<?php
-								foreach ($action->robots as $robot) {
-									?>
-										<option value=<?= $robot["ID"]?> <?php if($workshop["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
-									<?php
-								}
-							?>
-							</select>
-						<div id="questions">
-							<input type="hidden" name="nbQuestions" value=0 id="nbQuestions">
-						</div>
-						<a onclick="addquestion()">Add Question</a>
 
+
+
+					</div>
 
 						<!-- <input type="hidden" name="MAX_FILE_SIZE" value="100000" /> -->
-						Choose Workshop Image: <input name="workshopFile" type="file" /><br />
 
-						<button type="submit" name="push"><?php if($workshopExist) echo 'Modify'; else echo 'Add'; ?></button>
-						<button type="submit" name="back">Back</button>
+						<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Modify'; else echo 'Add'; ?></button>
+						<button type="submit" class="delete-btn" name="back">Back</button>
 					</form>
-				</div>
+
 	<?php
 
 }
