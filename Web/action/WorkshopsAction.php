@@ -65,7 +65,7 @@
 			}
 
 
-			$this->workshops_list = WorkshopDAO::getWorkshops();
+			$this->workshops_list = WorkshopDAO::getWorkshops("none",false,true);
 
 			$this->robots = RobotDAO::GetRobots();
 

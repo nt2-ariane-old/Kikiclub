@@ -58,11 +58,11 @@
 }
 
 .Workshop-boxes{
-	float: left;
+	display: inline-block;
 	background-color: bisque;
-	width: 210px;
+	width:100%;
+	min-width: 220px;
 	min-height: calc(120px * 4);
-	margin:0.5em;
 	border: 1px solid black;
 	position: relative;
 }
@@ -95,6 +95,16 @@
 
 }
 
+#manage-btn
+{
+	display: block;
+	margin: auto;
+	width: 100px;
+	text-align: center;
+	padding: 1em;
+	background-color: white;
+	border: 5px solid black;
+}
 #in-progress
 {
 	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">In Progress</text></svg>');
@@ -259,7 +269,22 @@ table
 .management-tab
 {
 	padding: 2em 0;
-	background-color: rgba(0, 0, 0, 0.700);
+	background-color: rgba(0, 0, 0);
 	width:100%;
 	margin: auto;
+}
+
+@media only screen and (min-width:480px)
+{
+	.Workshop-boxes{
+		width: calc((100% - 2 * 1.5em) / 2);
+		margin:0.5em;
+
+	}
+}
+@media only screen and (min-width:960px)
+{
+	.Workshop-boxes{
+		width: calc((100% - 4 * 1.5em) / 4);
+	}
 }

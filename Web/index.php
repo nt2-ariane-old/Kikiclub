@@ -19,10 +19,19 @@
 		}
 		else
 		{
-			?>
-				<!-- <script>window.location = "https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5";</script> -->
-				<script>window.location = "login.php";</script>
-			<?php
+			echo $action->url;
+			if($action->url === "localhost")
+			{
+				 ?>
+			 		<script>window.location = "login.php";</script>
+			 	<?php
+			}
+			else
+			{
+				?>
+					<script>window.location = "https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5";</script>
+			 	<?php
+			}
 		}
 	?>
 <?php

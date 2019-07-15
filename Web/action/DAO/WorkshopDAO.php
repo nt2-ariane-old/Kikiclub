@@ -3,23 +3,40 @@
 
 	class WorkshopDAO {
 
-		public static function getWorkshops($orderby="none",$ascendant=false) { //RECEVOIR TOUTES LES PAGES
+		public static function getWorkshops($orderby="none",$ascendant=false, $deployed=true) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
-			if($orderby == "NAME")
+
+			$request = "SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ";
+			if($orderby != "none")
 			{
+				if($orderby == "NAME")
+				{
+					$request .= "ORDER BY NAME ";
+				}
+				else if($orderby == "ID")
+				{
+					$request .= "ORDER BY ID ";
+				}
+
 				if($ascendant)
-					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY NAME ASC ");
+				{
+					$request .= "ASC ";
+				}
 				else
-					$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY NAME DESC ");
+				{
+					$request .= "DESC ";
+				}
 			}
-			else if($orderby == "ID")
+
+			if($deployed)
 			{
-				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ORDER BY ID DESC ");
+				$request .= "WHERE deployed = TRUE ";
 			}
 			else
 			{
-				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ");
+				$request .= "WHERE deployed = FALSE ";
 			}
+			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -30,11 +47,16 @@
 			}
 			return $content;
 		}
-		public static function getWorkshopsLikeName($name) { //RECEVOIR TOUTES LES PAGES
+		public static function getWorkshopsLikeName($name, $deployed=true) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 			$name = '%' . $name . '%';
 
-			$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE NAME LIKE ?");
+			$request = "SELECT ID,DEPLOYED,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE NAME LIKE ? ";
+			if($deployed)
+			{
+				$request .= "AND deployed = TRUE";
+			}
+			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $name);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -86,12 +108,12 @@
 			$connection = Connection::getConnection();
 			if($request == "difficulty")
 			{
-				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE ID_DIFFICULTY=?");
+				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE ID_DIFFICULTY=?  AND deployed = TRUE");
 				$statement->bindParam(1, $value);
 			}
 			else
 			{
-				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ");
+				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops WHERE deployed = TRUE");
 			}
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -235,7 +257,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE NAME=? AND CONTENT=?");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE NAME=? AND CONTENT=? AND deployed = TRUE");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
@@ -289,7 +311,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 )");
+			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 )  AND deployed = TRUE");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);

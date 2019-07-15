@@ -18,7 +18,7 @@
 				$name = $_POST["name"];
 				if(isset($_POST["workshop"]))
 				{
-					$this->results = WorkshopDAO::getWorkshopsLikeName($name);
+					$this->results = WorkshopDAO::getWorkshopsLikeName($name,false);
 				}
 				if(isset($_POST["search-user"]))
 				{

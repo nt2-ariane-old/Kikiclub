@@ -19,6 +19,7 @@
 
 		public function execute() {
 			$script = $_SERVER['SCRIPT_NAME'];
+
 			 if($script == "/kikiclub/web/show-users.php")
 			 {
 			 	header('Location:users.php');
@@ -26,6 +27,8 @@
 			 {
 			 	header('Location:users.php');
 			 }
+
+
 
 
 			 $this->genders = FamilyDAO::getGenders();

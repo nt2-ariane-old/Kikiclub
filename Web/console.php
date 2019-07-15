@@ -94,7 +94,7 @@
 										<div class="collapse" id="controls">
 											<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
 											<button type="submit" class="submit-btn" name="modify" onclick="clicked=this.name" value="true">Modify</button>
-											<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement);" value="true">Delete</button>
+											<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'});" value="true">Delete</button>
 										</div>
 									</div>
 
@@ -201,7 +201,7 @@
 								<ul id="new" class="droppable Workshop-boxes">
 
 								<?php
-										foreach ($action->workshops as $workshop) {
+										foreach ($action->workshopsDeployed as $workshop) {
 											$valide = true;
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] )
@@ -227,7 +227,7 @@
 								<ul id="not-started" class="droppable Workshop-boxes">
 
 									<?php
-										foreach ($action->workshops as $workshop) {
+										foreach ($action->workshopsDeployed as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 2 )
 												{
@@ -243,7 +243,7 @@
 								<ul id="in-progress" class="droppable Workshop-boxes">
 
 									<?php
-										foreach ($action->workshops as $workshop) {
+										foreach ($action->workshopsDeployed as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 3 )
 												{
@@ -258,7 +258,7 @@
 
 								<ul id="complete" class="droppable Workshop-boxes">
 									<?php
-										foreach ($action->workshops as $workshop) {
+										foreach ($action->workshopsDeployed as $workshop) {
 											foreach ($action->familyWorkshops as $famWork) {
 												if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 4 )
 												{
@@ -361,8 +361,8 @@
 										<div class="control-bar">
 											<a data-toggle="collapse" data-target="#controls">Control</a>
 											<div id="controls">
-												<button type="submit" name="add" onclick="clicked=this.name">Add Users</button>
-												<button type="submit" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement)">Delete</button>
+												<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name">Add New User</button>
+												<button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button>
 											</div>
 										</div>
 									</form>
@@ -397,6 +397,13 @@
 											?>
 											</tbody>
 										</table>
+										<div class="control-bar">
+											<a data-toggle="collapse" data-target="#controls">Control</a>
+											<div id="controls">
+												<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name">Add Users</button>
+												<button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button>
+											</div>
+										</div>
 									</div>
 								<?php
 
@@ -518,7 +525,7 @@
 								<div class="collapse" id="controls">
 									<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
 									<button type="submit" class="submit-btn"name="modify" onclick="clicked=this.name" value="true">Modify</button>
-									<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement);" value="true">Delete</button>
+									<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'});" value="true">Delete</button>
 								</div>
 							</div>
 						</form>

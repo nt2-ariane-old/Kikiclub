@@ -154,7 +154,7 @@ const loadMedia = (object,container ) => {
 	}
 
 let clicked;
-const openConfirmBox = (form) =>
+const openConfirmBox = (form,params) =>
 {
 	let confirmBox = document.createElement('div');
 			confirmBox.setAttribute('class','alert alert-warning');
@@ -164,7 +164,7 @@ const openConfirmBox = (form) =>
 			text.innerHTML = 'Are you sure you want to do this?';
 
 	let yesBtn = document.createElement('button');
-			yesBtn.onclick = () => {accept(form)};
+			yesBtn.onclick = () => {accept(form,params)};
 			yesBtn.setAttribute('class','btn btn-success');
 			yesBtn.innerHTML = "Yes";
 
@@ -182,16 +182,24 @@ const openConfirmBox = (form) =>
 	return false;
 }
 
-const accept = (form) =>
+const accept = (form,params) =>
 {
-	let typeInput = document.createElement('input');
-			typeInput.type = 'hidden';
-			typeInput.name = clicked;
+	if(params.type == 'form')
+	{
+		let typeInput = document.createElement('input');
+		typeInput.type = 'hidden';
+		typeInput.name = clicked;
 
-	form.appendChild(typeInput)
+		form.appendChild(typeInput)
 
-	form.onsubmit = 'return true';
-	form.submit();
+		form.onsubmit = 'return true';
+		form.submit();
+	}
+	else if(params.type == 'post')
+	{
+		post(params.path,params.params);
+	}
+
 }
 const refuse = () =>
 {
@@ -206,12 +214,7 @@ const showProfiles = () =>
 		 let node = document.getElementById("profile-box");
 		 node.style.display = "block";
 }
-function signOut() {
-	var auth2 = gapi.auth2.getAuthInstance();
 
-	window.location = "index.php?logout=true";
-
-}
 
 
 

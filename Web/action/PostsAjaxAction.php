@@ -43,5 +43,16 @@
 
 			$this->results["nbPages"] = ceil(sizeof(PostDAO::getPosts()) / $nbPostByPage);
 
+			if(!empty($_SESSION["id"]))
+			{
+				$this->results["id_user"] = $_SESSION["id"];
+			}
+			else
+			{
+				$this->results["id_user"] = -1;
+			}
+
+			$this->results["visibility"] = $_SESSION["visibility"];
+
 		}
 	}

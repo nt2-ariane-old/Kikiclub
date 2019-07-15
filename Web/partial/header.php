@@ -164,7 +164,7 @@
 				<?php
 				}
 				?>
-				<li><a class="nav-item nav-link" onclick="signOut()"><?= $action->trans->read("main","signout") ?></a></li>
+				<li><a class="nav-item nav-link" href="?logout=true"><?= $action->trans->read("main","signout") ?></a></li>
 				<?php
 			}
 			else

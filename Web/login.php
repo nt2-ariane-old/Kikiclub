@@ -19,24 +19,7 @@
 				<div class="error"><?= $action->errorMsg?></div>
 			<?php
 		}
-		if($action->otherlogin)
-		{
-			?>
-				<!-- <form action="login.php?other=true" method="post" onsubmit="return(login());"> -->
-				<form action="login.php?other=true" method="post">
-					<input type="hidden" name="type" value="signin">
-					<input type="hidden" name="form">
-					<input type="email" name="email" id="email" placeholder="<?= $action->trans->read("loginpage", "emailInput") ?>">
-					<input type="password" name="psswd" id="password" placeholder="<?= $action->trans->read("loginpage", "passwordInput") ?>">
-					<button type="submit"><?=  $action->trans->read("loginpage", "login") ?></button>
-				</form>
-				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
-				<div class="signinButton other"><a href="login.php"><?=  $action->trans->read("loginpage", "signIn-Fb") ?></a></div>
-				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
-				<div class="signinButton other"><a href="?signup=true"><?=  $action->trans->read("loginpage", "signUp") ?></a></div>
-			<?php
-		}
-		else if ($action->signup)
+		if ($action->signup)
 		{
 			?>
 			<!-- <form action="login.php?signup=true" method="post" onsubmit="signup()"> -->
@@ -49,10 +32,8 @@
 				<input type="email" name="email" id="email" placeholder="<?=  $action->trans->read("loginpage", "emailInput") ?>">
 				<input type="password" name="psswd1" id="password1" placeholder="<?=  $action->trans->read("loginpage", "passwordInput") ?>">
 				<input type="password" name="psswd2" id="password2" placeholder="<?=  $action->trans->read("loginpage", "confirmPasswordInput") ?>">
-				<button type="submit"><?=  $action->trans->read("loginpage", "login") ?></button>
+				<button type="submit"><?=  $action->trans->read("loginpage", "signUp") ?></button>
 			</form>
-			<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
-			<div class="signinButton other"><a href="login.php"><?=  $action->trans->read("loginpage", "signIn-Fb") ?></a></div>
 			<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
 			<div class="signinButton other"><a href="?other=true"><?=  $action->trans->read("loginpage", "signIn-E") ?></a></div>
 		<?php
@@ -60,16 +41,22 @@
 		else
 		{
 			?>
-				<div class="signinButton" id="wix"><a href="https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5"> Se connecter avec Wix </a></div>
-				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
-				<div class="signinButton other"><a href="?other=true"><?=  $action->trans->read("loginpage", "signIn-E") ?></a></div>
+				<!-- <form action="login.php?other=true" method="post" onsubmit="return(login());"> -->
+				<form action="login.php?other=true" method="post">
+					<input type="hidden" name="type" value="signin">
+					<input type="hidden" name="form">
+					<input type="email" name="email" id="email" placeholder="<?= $action->trans->read("loginpage", "emailInput") ?>">
+					<input type="password" name="psswd" id="password" placeholder="<?= $action->trans->read("loginpage", "passwordInput") ?>">
+					<button type="submit"><?=  $action->trans->read("loginpage", "login") ?></button>
+				</form>
 				<div class="separator"><?=  $action->trans->read("loginpage", "separator") ?></div>
 				<div class="signinButton other"><a href="?signup=true"><?=  $action->trans->read("loginpage", "signUp") ?></a></div>
 			<?php
 		}
 
 
-	?>
+
+		?>
 	</div>
 <?php
 	require_once("partial/footer.php");

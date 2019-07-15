@@ -21,7 +21,7 @@
 		public $member_name;
 
 		public $trans;
-
+		public $url;
 
 
 		public function __construct($page_visibility,$page_name,$complete_name)
@@ -30,6 +30,7 @@
 			$this->page_name = $page_name;
 			$this->complete_name = $complete_name;
 			$this->default_visibility = 1;
+			$this->url = $_SERVER['HTTP_HOST'];
 		}
 
 		public function generateFormToken($form) {

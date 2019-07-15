@@ -73,6 +73,8 @@ const loadPosts = (action=null,id=null) =>
 	.then(data => {
 		posts = data["posts"];
 		nbPages = data["nbPages"];
+		idUser = data["id_user"];
+		visibilty = data["visibility"];
 		let container = document.getElementById('shared-posts');
 		container.innerHTML = "";
 		posts.forEach(post => {
@@ -94,7 +96,7 @@ const loadPosts = (action=null,id=null) =>
 				postArticle.appendChild(title);
 				postArticle.appendChild(content);
 				loadMedia(post,postArticle)
-				if(isUser(post["ID_USER"]))
+				if(idUser === post["ID_USER"] || visibilty >= 3)
 				{
 					let deleteButton = document.createElement("button");
 						deleteButton.setAttribute('onclick',"loadPosts('delete', " + post["ID"]+")");

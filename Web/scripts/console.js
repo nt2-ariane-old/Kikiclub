@@ -335,7 +335,14 @@ const searchWorkshop = () =>
 
 		data.forEach(workshop => {
 			let line = document.createElement("TR");
-
+			if(workshop["DEPLOYED"])
+			{
+				line.style.backgroundColor = "GREEN";
+			}
+			else
+			{
+				line.style.backgroundColor = "RED";
+			}
 			//Add Checkbox
 			let checkCase = document.createElement("TD");
 

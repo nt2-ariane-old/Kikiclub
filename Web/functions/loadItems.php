@@ -75,7 +75,7 @@ function loadProfil($user,$action)
 			}
 			?>
 			<div class="sheet">
-				<h2>Votre Profil</h2>
+				<h2>Profil de <?= $user["firstname"] ?></h2>
 				<form id="profil-form" action="<?php if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php" method="post">
 						<input type="hidden" name="form">
 						<?php
@@ -180,7 +180,7 @@ function loadProfil($user,$action)
 							if($userExist)
 							{
 								?>
-									<a class="delete-btn" onclick="post('<?php	if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php',{ 'delete':true});"><?= $action->trans->read("main","delete")?></a>
+									<a class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement,{type:'post',path:'<?php	if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php',params:{ 'delete':true}})"><?= $action->trans->read("main","delete")?></a>
 
 								<?php
 							}
@@ -191,14 +191,20 @@ function loadProfil($user,$action)
 						if($action->page_name == 'console' && $userExist)
 						{
 							?>
-								<a onclick="post('console.php',{'assign':true,'members_list[]':<?=$user['ID']?>})">Assign Workshop to family member</button>
+								<a class="return-btn" onclick="post('console.php',{'assign':true,'members_list[]':<?=$user['ID']?>})">Assign Workshop to family member</a>
 
 							<?php
 						}
+						else
+						{
+							?>
+								<div>
+									<a class="return-btn"  href="<?php	if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php"><?= $action->trans->read("users","return") ?></a>
+								</div>
+							<?php
+						}
 					?>
-					<div>
-						<a class="return-btn"  href="<?php	if($action->page_name == 'show-users') echo 'users'; else echo 'console'; ?>.php"><?= $action->trans->read("users","return") ?></a>
-					</div>
+
 				</div>
 
 			</div>

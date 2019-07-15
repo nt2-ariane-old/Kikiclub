@@ -37,16 +37,16 @@
 			{
 				switch ($_POST["sort"]) {
 					case 'none':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops();
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("none",false,true);
 						break;
 					case 'ascName':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",true);
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",true,true);
 						break;
 					case 'descName':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",false);
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",false,true);
 						break;
 					case 'recents':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("ID");
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("ID",true,true);
 						break;
 				}
 			}

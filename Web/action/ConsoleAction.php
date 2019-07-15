@@ -104,7 +104,9 @@
 				unset($_SESSION["POST"]);
 
 			}
-			$this->workshops = WorkshopDAO::getWorkshops();
+			$this->workshopsNotDeployed = WorkshopDAO::getWorkshops("none",false,false);
+			$this->workshopsDeployed = WorkshopDAO::getWorkshops("none",false,true);
+
 			$this->genders = FamilyDAO::getGenders();
 
 			if($_SESSION["language"] == 'en')
