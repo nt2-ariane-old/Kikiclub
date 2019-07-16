@@ -102,6 +102,8 @@
 	<h1><span class="colored-kikicode">Kiki</span>club</h1>
 	<h2><?= $action->complete_name?></h2>
 	<div id="header-infos">
+		<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
+
 		<div class="member-name">
 			<?php
 				if($action->isFamilyMember())
@@ -112,7 +114,9 @@
 				}
 			?>
 		</div>
+
 	</div>
+
 </header></a>
 
 <nav id="menu" class="  navbar navbar-inverse navbar-static-top" >
@@ -180,10 +184,4 @@
 
 
 </div>
-
-
-
 </nav>
-<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
-
-<span id="siteseal"><script async type="text/./javascript" src="https://seal.godaddy.com/getSeal?sealID=DfItWm2Knz3813g59XlANqmd3IENFd158H6y2EYMnNEGIsbPfKWd6OGWpwn7"></script></span>

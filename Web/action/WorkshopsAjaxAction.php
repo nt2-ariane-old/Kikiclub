@@ -137,5 +137,13 @@
 
 
 			}
+			if(!empty($_POST["deployed"]))
+			{
+				WorkshopDAO::setDeployed($_POST["id"],$_POST["deployed"]);
+				$this->results = [];
+				$this->results["state"] = $_POST["deployed"];
+				$this->results["type"] = "deployed";
+				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);
+			}
 		}
 	}

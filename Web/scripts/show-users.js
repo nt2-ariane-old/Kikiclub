@@ -1,7 +1,7 @@
 let previousState = "manage";
 let states = ["normal","manage"]
 
-const loadChildren = () => {
+const loadChildren = (isCarousel) => {
 
 	let state;
 	for (let i = 0; i < states.length; i++) {
@@ -44,15 +44,20 @@ const loadChildren = () => {
 			length =  family.length;
 		}
 		for (let i=-1; i < length; i++) {
-			let divCarouselItem = document.createElement('div');
-			if(i==-1)
+			let divCarouselItem;
+			if(isCarousel)
 			{
-				divCarouselItem.setAttribute('class','carousel-item active');
+					divCarouselItem = document.createElement('div');
+				if(i==-1)
+				{
+					divCarouselItem.setAttribute('class','carousel-item active');
+				}
+				else
+				{
+					divCarouselItem.setAttribute('class','carousel-item');
+				}
 			}
-			else
-			{
-				divCarouselItem.setAttribute('class','carousel-item');
-			}
+
 				let divContainer = document.createElement('div');
 					divContainer.setAttribute('class','container');
 
@@ -82,8 +87,16 @@ const loadChildren = () => {
 						i = j;
 					}
 					divContainer.appendChild(divRow);
-				divCarouselItem.appendChild(divContainer);
-			container.appendChild(divCarouselItem);
+			if(isCarousel)
+			{
+					divCarouselItem.appendChild(divContainer);
+				container.appendChild(divCarouselItem);
+			}
+			else
+			{
+				container.appendChild(divContainer);
+			}
+
 		}
 
 	})
@@ -94,8 +107,6 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let node = document.createElement("div");
 	node.innerHTML = memberHTML;
 	let id_logo =  member["id_avatar"];
-	console.log(member["id_avatar"]);
-	console.log(avatars[id_logo])
 	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["PATH"] +"');");
 
 	node.querySelector('a').setAttribute("onclick",'post("member-home.php",{"member":'+member["id"]+'})');

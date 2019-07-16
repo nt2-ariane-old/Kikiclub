@@ -30,8 +30,6 @@
 							<div style="background-color:white;color:green;">
 								Workshop Added!
 							</div>
-
-								<script>sendEmail( <?= json_encode($action->workshopMod) ?> )</script>
 							<?php
 						}
 						if($action->add)
@@ -295,6 +293,7 @@
 
 
 								<div class="bar">
+									<h3>Search User</h3>
 									<div>
 										<div class="autocomplete" style="width:300px;">
 											<input id="search-user-firstname" type="text" name="search" placeholder="User Firstname">
@@ -306,6 +305,7 @@
 											<input id="search-user-email" type="text" name="search" placeholder="User Email">
 										</div>
 									</div>
+									<h3>Search Member</h3>
 									<div>
 										<div class="autocomplete" style="width:300px;">
 											<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
@@ -313,10 +313,6 @@
 
 										<div class="autocomplete" style="width:300px;">
 											<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="Member Lastname">
-										</div>
-
-										<div class="autocomplete" style="width:300px;">
-											<input id="search-member-email" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
 										</div>
 									</div>
 

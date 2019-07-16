@@ -19,7 +19,6 @@
 		}
 		else
 		{
-			echo $action->url;
 			if($action->url === "localhost")
 			{
 				 ?>

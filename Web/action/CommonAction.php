@@ -4,6 +4,7 @@
 	require_once("action/Tools/Translator.php");
 	require_once("action/DAO/FamilyDAO.php");
 	require_once("action/DAO/UsersDAO.php");
+	require_once("lib/Mobile_Detect.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
@@ -23,6 +24,10 @@
 		public $trans;
 		public $url;
 
+		public $detect;
+
+
+
 
 		public function __construct($page_visibility,$page_name,$complete_name)
 		{
@@ -31,6 +36,7 @@
 			$this->complete_name = $complete_name;
 			$this->default_visibility = 1;
 			$this->url = $_SERVER['HTTP_HOST'];
+			$this->detect = new Mobile_Detect;
 		}
 
 		public function generateFormToken($form) {

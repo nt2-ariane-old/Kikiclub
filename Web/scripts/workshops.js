@@ -7,7 +7,6 @@ let searchParams = [];
 
 const setSearchParams = (name, value) =>
 {
-	console.log(name);
 	if(searchParams[name].indexOf(value) > -1)
 	{
 		searchParams[name].splice(searchParams[name].indexOf(value),1);
@@ -19,7 +18,7 @@ const setSearchParams = (name, value) =>
 
 	sortAndSearchWorkshops();
 }
-
+searchParams["states"] = [];
 const deleteSearchParams = () =>
 {
 	searchParams["difficulties"] = [];
@@ -38,7 +37,6 @@ const sortAndSearchWorkshops = () =>
 	let formData = new FormData();
 	formData.append('sort', select.value);
 	formData.append('search',true);
-	console.log(searchParams);
 	for (const key in searchParams) {
 		if (searchParams.hasOwnProperty(key)) {
 			const element = searchParams[key];

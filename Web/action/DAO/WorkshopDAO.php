@@ -7,6 +7,17 @@
 			$connection = Connection::getConnection();
 
 			$request = "SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY FROM workshops ";
+
+
+			if($deployed)
+			{
+				$request .= "WHERE deployed = TRUE ";
+			}
+			else
+			{
+				$request .= "WHERE deployed = FALSE ";
+			}
+
 			if($orderby != "none")
 			{
 				if($orderby == "NAME")
@@ -27,15 +38,6 @@
 					$request .= "DESC ";
 				}
 			}
-
-			if($deployed)
-			{
-				$request .= "WHERE deployed = TRUE ";
-			}
-			else
-			{
-				$request .= "WHERE deployed = FALSE ";
-			}
 			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -46,6 +48,24 @@
 				$content[] = $row;
 			}
 			return $content;
+		}
+		public static function setDeployed($id,$deployed)
+		{
+			$connection = Connection::getConnection();
+			$request = "UPDATE workshops SET ";
+			if($deployed == "true")
+			{
+				$request .= "deployed=TRUE ";
+			}
+			else
+			{
+				$request .= "deployed=FALSE ";
+			}
+			$request.="WHERE id=?";
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
 		}
 		public static function getWorkshopsLikeName($name, $deployed=true) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
@@ -72,7 +92,7 @@
 		public static function getWorkshopsWithID($id) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,ID_ROBOT,ID_DIFFICULTY FROM workshops WHERE ID=?");
+			$statement = $connection->prepare("SELECT ID,DEPLOYED,ID_ROBOT,ID_DIFFICULTY FROM workshops WHERE ID=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -350,7 +370,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE id=?");
+			$statement = $connection->prepare("SELECT ID, DEPLOYED, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();

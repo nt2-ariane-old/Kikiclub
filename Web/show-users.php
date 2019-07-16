@@ -51,22 +51,38 @@
 			}
 			else
 			{
+				if($action->detect->isMobile())
+				{
+					?>
+						<div id="family">
+							<script>loadChildren(false)</script>
+						</div>
+					<?php
+				}
+				else
+				{
+					?>
+						<div id="family-carousel" class="carousel slide" data-interval="false" data-ride="carousel">
+							<!-- Content -->
+							<div class="carousel-inner" id="family">
+								<script>loadChildren(true)</script>
+							</div>
+
+							<!-- Controls -->
+							<a class="carousel-control-prev" href="#family-carousel" role="button" data-slide="prev">
+							   	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							   	<span class="sr-only">Previous</span>
+							</a>
+							<a class="carousel-control-next" href="#family-carousel" role="button" data-slide="next">
+							   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							   	<span class="sr-only">Next</span>
+							</a>
+						</div>
+					<?php
+				}
 				?>
-				<div id="family-carousel" class="carousel slide" data-ride="carousel">
-					<!-- Content -->
-					<div class="carousel-inner" id="family">
-						<script>loadChildren()</script>
-				   	</div>
-				   	<!-- Controls -->
-				   	<a class="carousel-control-prev" href="#family-carousel" role="button" data-slide="prev">
-				     	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				     	<span class="sr-only">Previous</span>
-				   	</a>
-				   	<a class="carousel-control-next" href="#family-carousel" role="button" data-slide="next">
-				    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				     	<span class="sr-only">Next</span>
-				   	</a>
-				</div>
+
+
 				<div class="credit">
 					<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 				</div>

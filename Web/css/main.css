@@ -178,13 +178,17 @@ header {
 	text-align: center;
 	color: black;
 	background-color: white;
-	height: calc( 80px + 2rem);
-	position: relative;
+	position: static;
 	z-index: 1;
+	margin: 0;
+}
+header *
+{
+	margin: 0;
 }
 header h1{
 	color:black;
-	font-size: 80px;
+	font-size: 20vw;
 	line-height: 1;
 	width: 100%;
 	margin: auto;
@@ -192,32 +196,32 @@ header h1{
 }
 header h2{
 	line-height: 1;
+	font-size: 10vw;
 	color:rgb(70, 70, 70);
+	margin: 0;
 }
 /* NAV */
 
+
 #menu
 {
-	position: fixed;
-	top: 0;
-	left:0;
-
+	position: static;
+	background-color: white;
 	z-index: 19;
-
-	top: 0;
-	left:0;
 	margin: 0;
-	height: 60px;
-	width: 100px;
+	width: 100%;
+	margin: 0;
 }
+
 
 #header-infos
 {
 	width: 100%;
-	position: absolute;
-	top:2em;
+	position: relative;
+	background-color: white;
 	text-align: right;
-	padding: 1em;
+	padding: 0;
+	margin: 0;
 }
 #hamburger{ /* Hamburger menu button */
 	background-image: url('../images/hamburger.png');
@@ -234,24 +238,26 @@ nav ul {
 }
 
 nav ul li {
-	padding: 1em;
 	width: 80%;
-	border-bottom: 1px solid black;
 	margin: auto;
+}
+nav  ul  li  a {
+	text-decoration: underline !important;
 }
 
 nav .container {
-	position: absolute;
-	top:10px;
-	left:10px;
+	position: relative;
+
 	width: calc(100vw - (2 * 10px));
-	max-width: 300px;
+
 	margin: 0;
 
 }
 .nav-item, .nav-link
 {
 	color: black;
+	padding: 0;
+	margin: auto;
 }
 
 /* LOGO */
@@ -299,7 +305,11 @@ footer {
 
 }
 
-
+footer p
+{
+	font-size: 3vw;
+	line-height: 3vw;
+}
 footer a ,footer p{
 	display: inline-block;
 	width: 40px;
@@ -312,12 +322,6 @@ footer a ,footer p{
 	border-radius: 25%
 }
 
-footer p
-{
-	width: 200px;
-	line-height: 40px;
-
-}
 
 /* Afficheur de Profiles */
 #x-btn
@@ -396,22 +400,58 @@ footer p
 /* Bouton pour modifier */
 
 
-.member-name {
-	text-align: right;
+.member-name, .lang {
+	position: static;
+	display: block;
 	padding: 0;
-	float: none;
-}
-.lang {
-	position: absolute;
-	right: 10px;
-	width: 100%;
-	top:10px;
-	text-align: right;
+	margin: 0;
 	z-index: 2;
+	text-align: right;
 }
 /* Version Web */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 450px) {
+	#menu {
+		position: fixed;
+		top: 0;
+		left:0;
+		background: transparent;
+		height: 60px;
+		width: 100px;
+	}
 
+	header h1
+{
+	font-size: 80px;
+}
+	header h2
+{
+	font-size: 2rem;
+}
+
+	footer p
+	{
+		font-size: 1em;
+		line-height: 1em;
+		width: 150px;
+	}
+	.lang ,.member-name {
+
+		width: 49%;
+		display: inline-block;
+	}
+	.member-name
+	{
+		text-align: right;
+	}
+	.lang
+	{
+		text-align: left;
+	}
+
+	nav .container
+	{
+		max-width: 300px;
+	}
 }
 
 @media only screen and (min-width: 970px) {
@@ -419,7 +459,18 @@ footer p
 	{
 		background-color: transparent;
 		width: 100%;
+		position: absolute;
+		top:2em;
 		text-align: right;
 		padding : 0 1em;
 	}
+	.lang {
+		position: sticky;
+		right: 10px;
+		width: 100%;
+
+		text-align: right;
+		z-index: 2;
+	}
+
 }

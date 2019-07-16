@@ -46,13 +46,13 @@
 
 			"welcome" => "Bienvenue",
 
-			"signout" => "Se déconneccter",
+			"signout" => "Déconnexion",
 			"workshops" => "Ateliers",
 			"users" => "Utilisateurs",
 			"admin" => "Administration",
 			"robots" => "Robots",
 			"home" => "Accueil",
-			"signin" => "Se Connecter",
+			"signin" => "Connexion",
 			"share" => "Partage",
 			"badges" => "Badges",
 		],

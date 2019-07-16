@@ -95,7 +95,7 @@
 				<script>deleteSearchParams();</script>
 
 			</div>
-			<script onload="console.log('TEST')">console.log("TEST2");setSearchParams('states',<?=$action->stateSearch?>)</script>
+			<script >setSearchParams('states',<?=$action->stateSearch?>)</script>
 
 <?php
 	require_once("partial/footer.php");

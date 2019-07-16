@@ -10,11 +10,13 @@ const loadModules = () =>
 		} )
 		.then( editorCK => {
 			classicEditor = editorCK;
-			console.log(classicEditor);
-			console.log(classicEditor.document);
-			classicEditor.document.attachListener( doc, 'keydown', function( event ){
-				console.log(event);
-			});
+
+			let editable = document.querySelector('.ck-editor__editable');
+				editable.addEventListener('keydown',function(event)
+				{
+					limitText(editable,512);
+
+				})
 			window.editor = classicEditor;
 		} )
 		.catch( err => {
@@ -22,17 +24,24 @@ const loadModules = () =>
 		} );
 	}
 
+	if(document.querySelector('.carousel') != null)
+	{
+		$('.carousel').carousel({
+			interval: false
+		});
+	}
 
 }
 
 const limitText = (textarea, limitNum) => {
 
 	let node = document.getElementById("countdown");
-	console.log(textarea.value)
-	if (textarea.value.length > limitNum) {
-		textarea.value = textarea.value.substring(0, limitNum);
+	let textValue = textarea.innerHTML;
+	if (textValue.length > limitNum) {
+		classicEditor.setData(textValue.substring(0, limitNum))
+		setCursorToEnd();
 	} else {
-		let value =  (limitNum - textarea.value.length);
+		let value =  (limitNum - textarea.innerHTML.length);
 		node.innerHTML = value + "";
 	}
 }
@@ -198,6 +207,31 @@ const accept = (form,params) =>
 	else if(params.type == 'post')
 	{
 		post(params.path,params.params);
+	}
+	else if(params.type == 'ajax')
+	{
+		$.ajax({
+			type: "POST",
+			url:params.path,
+			data: params.params,
+			dataType: 'json',
+			success: function( data ) {
+
+				if(data["type"] == "deployed")
+				{
+					if(data["state"] == "true")
+					{
+						sendEmail(data["workshop"]);
+					}
+				}
+			},
+			error: function (request, status, error) {
+				console.log(request.responseText);
+			}
+		});
+		let box = document.querySelector('#confirm-box');
+		box.remove();
+
 	}
 
 }

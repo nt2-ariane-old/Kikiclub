@@ -99,7 +99,6 @@
 		{
 			if(!empty($_SESSION["POST"]))
 			{
-				echo("SESSION POST");
 				$_POST = $_SESSION["POST"];
 				unset($_SESSION["POST"]);
 

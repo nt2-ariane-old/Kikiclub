@@ -23,13 +23,24 @@ const onPageLoad = () =>
 	let feelds = ['firstname','lastname','email'];
 	feelds.forEach(feeld => {
 		let node = document.getElementById('search-user-' + feeld);
-		node.addEventListener("keyup",function(event){
-			searchUsers (node,feeld,event.keyCode)
-		 });
-		let nodeM = document.getElementById('search-member-' + feeld);
-		nodeM.addEventListener("keyup",function(event){
-			searchMember (nodeM,feeld,event.keyCode)
-		 });
+		if(node != null)
+		{
+			node.addEventListener("keyup",function(event){
+				searchUsers (node,feeld,event.keyCode)
+			 });
+		}
+
+		if(feeld != 'email')
+		{
+			let nodeM = document.getElementById('search-member-' + feeld);
+				if(nodeM != null)
+				{
+					nodeM.addEventListener("keyup",function(event){
+						searchMember (nodeM,feeld,event.keyCode)
+					});
+				}
+		}
+
 	});
 
 
@@ -121,9 +132,9 @@ const sendEmail = (workshop) =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		if(data)
+		if(data.length > 0)
 		{
-			alert("ENVOYER");
+			alert("Envoyer a " + data.length + " personnes");
 		}
 		else
 		{
@@ -256,7 +267,7 @@ const setWorkshopToCategory = (id_workshop, category, adding) =>
 	})
 	.then(response => response.text())
 	.then(data => {
-		console.log(data);
+
 	})
 
 	if(adding)
