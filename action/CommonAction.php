@@ -4,7 +4,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/Tools/Translator.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
-	require_once("lib/Mobile_Detect.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/Mobile_Detect.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;

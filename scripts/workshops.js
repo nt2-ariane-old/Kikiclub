@@ -47,7 +47,7 @@ const sortAndSearchWorkshops = () =>
 			}
 		}
 	}
-	fetch("workshops-ajax.php", {
+	fetch("ajax/workshops-ajax.php", {
 		method: "POST",
 		credentials: 'include', // Pour envoyer les cookies avec la requête!
 		body: formData

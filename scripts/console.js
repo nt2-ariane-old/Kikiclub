@@ -59,7 +59,7 @@ const searchUsers = (node,type,keycode) =>
 			{
 				$.ajax({
 					type: "POST",
-					url:"search-ajax.php",
+					url:"ajax/search-ajax.php",
 					data: {
 						'name':node.value,
 						'search-user': true,
@@ -97,7 +97,7 @@ const searchMember = (node,type,keycode) =>
 			{
 				$.ajax({
 					type: "POST",
-					url:"search-ajax.php",
+					url:"ajax/search-ajax.php",
 					data: {
 						'name':node.value,
 						'search-member': true,
@@ -152,7 +152,7 @@ const searchRobots = () =>
 	formData.append('name', node.value);
 	formData.append('robots',true);
 
-	fetch("search-ajax.php", {
+	fetch("ajax/search-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData
@@ -260,7 +260,7 @@ const setWorkshopToCategory = (id_workshop, category, adding) =>
 	formData.append('category',category );
 	formData.append('adding', adding);
 
-	fetch("familyWorkshops-ajax.php", {
+	fetch("ajax/familyWorkshops-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData
@@ -334,7 +334,7 @@ const searchWorkshop = () =>
 	formData.append('name', node.value);
 	formData.append('workshop',true);
 
-	fetch("search-ajax.php", {
+	fetch("ajax/search-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData

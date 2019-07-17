@@ -29,7 +29,7 @@ const loadChildren = (isCarousel) => {
 	let formData = new FormData();
 
 	let nbMembers = 4;
-	fetch("family-ajax.php", {
+	fetch("ajax/family-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData

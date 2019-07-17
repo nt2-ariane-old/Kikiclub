@@ -8,8 +8,7 @@
 			if ($lang == "en") {
 				$sanitizedLang = $lang;
 			}
-			require_once("lang/" . $sanitizedLang . ".php");
-
+			require_once($_SERVER['DOCUMENT_ROOT'] . "/lang/" . $sanitizedLang . ".php");
 
 			$this->langData = $langData;
 		}

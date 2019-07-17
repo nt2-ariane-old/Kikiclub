@@ -64,7 +64,7 @@ const loadPosts = (action=null,id=null) =>
 	{
 		formData.append('id', id);
 	}
-	fetch("posts-ajax.php", {
+	fetch("ajax/posts-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData
