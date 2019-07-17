@@ -1,5 +1,5 @@
 <?php
-	require_once("action/ShowUsersAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/ShowUsersAction.php");
 
 	$actionUser = new ShowUsersAction();
 	$actionUser->trans = $action->trans;
@@ -7,12 +7,11 @@
 ?>
 	<template id="child-template">
 		<div class='child-info'>
-			<a href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></a>
+			<button href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></button>
 			<h2 class='child-name'></h2>
 			<p class='child-nbWorkshops'></p>
 			<p class='child-nbPTS'></p>
 			<div class='child-nbalert'></div>
-			<a href="#"><div class='x-button'></div></a>
 		</div>
 	</template>
 		<?php
@@ -87,7 +86,7 @@
 					<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 				</div>
 				<div class="users-footer">
-					<a class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></a>
+					<button class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></button>
 				</div>
 
 				<?php

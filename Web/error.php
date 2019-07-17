@@ -1,5 +1,5 @@
 <?php
-	require_once("action/ErrorAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/ErrorAction.php");
 
 	$action = new ErrorAction();
 	$action->execute();

@@ -1,5 +1,5 @@
 <?php
-	require_once("action/SendEmailAjaxAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/SendEmailAjaxAction.php");
 
 	$action = new SendEmailAjaxAction();
 	$action->execute();

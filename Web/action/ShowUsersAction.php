@@ -1,5 +1,5 @@
 <?php
-	require_once("action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
 	class ShowUsersAction {
 
 		public $create;

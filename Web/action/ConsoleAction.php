@@ -1,10 +1,10 @@
 <?php
-	require_once("action/CommonAction.php");
-	require_once("action/DAO/WorkshopDAO.php");
-	require_once("action/DAO/FamilyDAO.php");
-	require_once("action/DAO/UsersDAO.php");
-	require_once("action/DAO/RobotDAO.php");
-	require_once("action/DAO/BadgeDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 
 	class ConsoleAction extends CommonAction {
 		//liste d'objets et objet individuel a modifier

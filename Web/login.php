@@ -1,5 +1,5 @@
 <?php
-	require_once("action/LoginAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/LoginAction.php");
 
 	$action = new LoginAction();
 	$action->execute();

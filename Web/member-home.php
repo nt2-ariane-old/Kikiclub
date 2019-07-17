@@ -1,5 +1,5 @@
 <?php
-	require_once("action/MemberHomeAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/MemberHomeAction.php");
 
 	$action = new MemberHomeAction();
 	$action->execute();

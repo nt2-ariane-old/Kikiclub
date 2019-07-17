@@ -1,5 +1,5 @@
 <?php
-	require_once("action/BadgesAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/BadgesAction.php");
 
 	$action = new BadgesAction();
 	$action->execute();

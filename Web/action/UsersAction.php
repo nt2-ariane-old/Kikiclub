@@ -1,5 +1,5 @@
 <?php
-	require_once("action/CommonAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 
 	class UsersAction extends CommonAction {
 

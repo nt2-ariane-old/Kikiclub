@@ -1,5 +1,5 @@
 <?php
-	require_once("action/IndexAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/IndexAction.php");
 
 	$action = new IndexAction();
 	$action->execute();

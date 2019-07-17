@@ -121,27 +121,27 @@ const searchMember = (node,type,keycode) =>
 	} );
 }
 
-const sendEmail = (workshop) =>
-{
-	let formData = new FormData();
-	formData.append("workshop",JSON.stringify(workshop));
-	fetch("send-email-ajax.php", {
-		method: "POST",
-		credentials: 'include',
-		body: formData
-	})
-	.then(response => response.json())
-	.then(data => {
-		if(data.length > 0)
-		{
-			alert("Envoyer a " + data.length + " personnes");
-		}
-		else
-		{
-			alert("Erreur d'envois");
-		}
-	});
-}
+// const sendEmail = (workshop) =>
+// {
+// 	let formData = new FormData();
+// 	formData.append("workshop",JSON.stringify(workshop));
+// 	// fetch("send-email-ajax.php", {
+// 	// 	method: "POST",
+// 	// 	credentials: 'include',
+// 	// 	body: formData
+// 	// })
+// 	// .then(response => response.json())
+// 	// .then(data => {
+// 	// 	if(data.length > 0)
+// 	// 	{
+// 	// 		alert("Envoyer a " + data.length + " personnes");
+// 	// 	}
+// 	// 	else
+// 	// 	{
+// 	// 		alert("Erreur d'envois");
+// 	// 	}
+// 	// });
+// }
 
 const searchRobots = () =>
 {

@@ -221,7 +221,7 @@ const accept = (form,params) =>
 				{
 					if(data["state"] == "true")
 					{
-						sendEmail(data["workshop"]);
+						//sendEmail(data["workshop"]);
 					}
 				}
 			},

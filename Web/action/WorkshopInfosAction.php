@@ -1,6 +1,6 @@
 <?php
-	require_once("action/CommonAction.php");
-	require_once("action/DAO/WorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	class WorkshopInfosAction extends CommonAction {
 
 		public $workshop;

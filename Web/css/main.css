@@ -240,9 +240,12 @@ nav ul {
 nav ul li {
 	width: 80%;
 	margin: auto;
+	padding: 0.3rem;
 }
-nav  ul  li  a {
-	text-decoration: underline !important;
+
+nav ul li a:hover
+{
+	text-decoration:  underline black double  !important;
 }
 
 nav .container {
@@ -390,6 +393,7 @@ footer a ,footer p{
 	width:300px;
 	margin: auto;
 	text-align: center;
+	background-color: transparent;
 }
 #confirm-box button{
 	margin: 0 calc( ( 200px - ( 2 * 60px ) ) / 3) ;
@@ -458,9 +462,11 @@ footer a ,footer p{
 	#header-infos
 	{
 		background-color: transparent;
-		width: 100%;
+		width: 30%;
+
 		position: absolute;
 		top:2em;
+		right: 0;
 		text-align: right;
 		padding : 0 1em;
 	}

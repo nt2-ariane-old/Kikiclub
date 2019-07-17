@@ -1,5 +1,5 @@
 <?php
-	require_once("action/SharedAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/SharedAction.php");
 
 	$action = new SharedAction();
 	$action->execute();

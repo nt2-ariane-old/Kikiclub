@@ -1,5 +1,5 @@
 <?php
-	require_once("action/DAO/Connection.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/Connection.php");
 
 	class RobotDAO {
 

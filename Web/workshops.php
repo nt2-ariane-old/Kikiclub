@@ -1,5 +1,5 @@
 <?php
-	require_once("action/WorkshopsAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/WorkshopsAction.php");
 
 	$action = new WorkshopsAction();
 	$action->execute();
@@ -95,6 +95,14 @@
 				<script>deleteSearchParams();</script>
 
 			</div>
+			<?php
+				if($action->isAdmin())
+				{
+					?>
+						<button>+</button>
+					<?php
+				}
+			?>
 			<script >setSearchParams('states',<?=$action->stateSearch?>)</script>
 
 <?php

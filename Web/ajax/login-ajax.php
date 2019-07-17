@@ -1,5 +1,5 @@
 <?php
-	require_once("action/LoginAjaxAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/LoginAjaxAction.php");
 	header('Access-Control-Allow-Origin: https://kikinumerique.wixsite.com/kikiclubsandbox');
 
 	$action = new LoginAjaxAction();

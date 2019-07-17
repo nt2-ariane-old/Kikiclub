@@ -1,5 +1,5 @@
 <?php
-	require_once("action/WorkshopInfosAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/WorkshopInfosAction.php");
 
 	$action = new WorkshopInfosAction();
 	$action->execute();

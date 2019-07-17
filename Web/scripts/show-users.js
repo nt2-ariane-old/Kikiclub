@@ -109,7 +109,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let id_logo =  member["id_avatar"];
 	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["PATH"] +"');");
 
-	node.querySelector('a').setAttribute("onclick",'post("member-home.php",{"member":'+member["id"]+'})');
+	node.querySelector('button').setAttribute("onclick",'post("member-home.php",{"member":'+member["id"]+'})');
 
 	if(state==="manage")
 	{
@@ -150,8 +150,8 @@ const addNewMember = (container) => {
 	let divNew = document.createElement('div');
 	divNew.setAttribute('class','child-info');
 
-	let aNew = document.createElement('a');
-		aNew.setAttribute("onclick",'post("users.php",{"action":"create"})');
+	let linkNew = document.createElement('button');
+		linkNew.setAttribute("onclick",'post("users.php",{"action":"create"})');
 
 
 		let divLogo = document.createElement('div');
@@ -163,13 +163,13 @@ const addNewMember = (container) => {
 			h2Name.setAttribute('class','child-name');
 
 
-		aNew.appendChild(divLogo);
-		aNew.appendChild(h2Name);
-	divNew.appendChild(aNew);
+		linkNew.appendChild(divLogo);
+		linkNew.appendChild(h2Name);
+	divNew.appendChild(linkNew);
 	container.appendChild(divNew);
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector('a').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"action":"modify"})');
+	node.querySelector('button').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"action":"modify"})');
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

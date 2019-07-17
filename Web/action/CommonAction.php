@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	require_once("action/constante.php");
-	require_once("action/Tools/Translator.php");
-	require_once("action/DAO/FamilyDAO.php");
-	require_once("action/DAO/UsersDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/constante.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/Tools/Translator.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
 	require_once("lib/Mobile_Detect.php");
 	abstract class CommonAction
 	{

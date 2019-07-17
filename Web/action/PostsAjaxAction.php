@@ -1,6 +1,6 @@
 <?php
-	require_once("action/CommonAction.php");
-	require_once("action/DAO/PostDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/PostDAO.php");
 
 	class PostsAjaxAction extends CommonAction {
 		public $results;
