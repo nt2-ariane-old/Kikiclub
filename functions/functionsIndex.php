@@ -1,2 +1,2 @@
 <?php
-	require_once("functions/loadItems.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/functions/loadItems.php");

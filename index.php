@@ -4,7 +4,7 @@
 	$action = new IndexAction();
 	$action->execute();
 
-	require_once("partial/header.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 
 ?>
 	<script src="./javascript/users.js"></script>
@@ -34,4 +34,4 @@
 		}
 	?>
 <?php
-	require_once("partial/footer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

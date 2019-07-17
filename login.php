@@ -4,7 +4,7 @@
 	$action = new LoginAction();
 	$action->execute();
 
-	require_once("partial/header.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 
 	<div class="logo"></div>
@@ -59,4 +59,4 @@
 		?>
 	</div>
 <?php
-	require_once("partial/footer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

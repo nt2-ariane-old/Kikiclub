@@ -4,7 +4,7 @@
 	$action = new ErrorAction();
 	$action->execute();
 
-	require_once("partial/header.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 
 	if ($action->err400) {
 		?>
@@ -38,4 +38,4 @@
 		<?php
 	}
 
-	require_once("partial/footer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

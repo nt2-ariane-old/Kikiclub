@@ -4,7 +4,7 @@
 	$action = new MemberHomeAction();
 	$action->execute();
 
-	require_once("partial/header.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 	<main>
 		<h2>Workshops</h2>
@@ -36,4 +36,4 @@
 		?>
 	</main>
 <?php
-	require_once("partial/footer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

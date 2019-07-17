@@ -4,7 +4,7 @@
 	$action = new WorkshopInfosAction();
 	$action->execute();
 
-	require_once("partial/header.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 
 	<?php
@@ -45,4 +45,4 @@
 		}
 	?>
 <?php
-	require_once("partial/footer.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

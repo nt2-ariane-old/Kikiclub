@@ -1,4 +1,4 @@
-<?php require_once("functions/functionsIndex.php");?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/functions/functionsIndex.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
