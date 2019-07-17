@@ -31,7 +31,7 @@
 			if(!empty($_POST["workshop"]))
 			{
 				$subject = "Nouvel Atelier!! :D ";
-				$htmlContent = file_get_contents("template.php");
+				$htmlContent = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/emails/template.php");
 				$workshop = json_decode($_POST["workshop"],true);
 
 				$htmlContent = str_replace("***WORKSHOP***",$workshop["NAME"],$htmlContent);
