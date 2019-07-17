@@ -1,5 +1,5 @@
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/WorkshopsAjaxAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/Ajax/WorkshopsAjaxAction.php");
 
 	$action = new WorkshopsAjaxAction();
 	$action->execute();
