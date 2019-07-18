@@ -1,250 +1,257 @@
-
-.workshops-list{
-	width:40vw;
-	overflow-x: scroll;
-	overflow-y:auto;
-	height:100vw;
-	transform-origin: right top;
-	transform:rotate(-90deg) translateY(-40vw);
+.workshops-list {
+  width: 75%;
+  overflow-x: scroll;
+  overflow-y: auto;
+  height: 100vw;
+  -webkit-transform-origin: right top;
+          transform-origin: right top;
+  -webkit-transform: rotate(-90deg) translateY(-40vw);
+          transform: rotate(-90deg) translateY(-40vw);
+  clear: both;
 }
-.workshops-info
-{
-	width:100%;
-	height:0px;
-	background-color: rgb(8, 109, 5);
-	overflow: hidden;
-	color:black;
-	position: relative;
-	border: 3px solid black;
-	display: none;
-}
-.workshops-info .media
-{
-	position: absolute;
-	width: 300px;
-	height: 300px;
-	top:0;
-	right:0;
-
-
-}
-
-
-
-
-.workshop{
-	height: 300px;
-	width:100%;
-	padding: 0;
-	position: relative;
-	padding: 1em;
-}
-.workshop * {
-	position: relative;
-
-}
-.workshop .title
-{
-	text-align: center;
-
-
-}
-
-.type
-{
-	position: relative;
-	background-color: black ;
-	width:90%;
-	color: white;
-	transform: translateY(100%);
-
-	font-size: 1.3em;
-	font-weight: bolder;
-	z-index: 1;
-}
-.workshop h4{
-	text-align: left;
-	color:yellowgreen;
-	margin:0.5em 0;
-}
-
-.workshop .stars{
-	border:2px solid black;
-	background-color: rgb(184, 184, 184);
-
-	padding: 0.5em;
-	width:200px;
-	margin: 1em 0;
-	align-self: left;
-}
-.workshop .description
-{
-	width:50%;
-	background-color: whitesmoke;
-	border-top : 2px solid black;
-	border-bottom : 2px solid black;
-	overflow: hidden;
-	margin:1em 0;
-}
-
 
 .workshops-list a {
-	color:inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
-.carousel-indicators{
-	background-color: black;
-	width: 100%;
-	margin:0;
+.workshop-section {
+  width: 50vw;
+  margin: auto;
+  background-color: transparent;
+  height: 100vh;
 }
 
-.workshop .media{
-	height: 70%;
-	width: 100%;
-	border: none;
-	z-index: 0;
-	opacity: 1;
-	display: flex;
-	background-color: rgba(0, 0, 0, 0.75);
+.workshop-section .media {
+  margin: auto;
+  padding: 0;
+  width: 70%;
 }
 
-.workshop .media video,.workshop .media audio
-{
-	width:100%;
-	height: auto;
-	display: block;
-	align-self: center;
-}
-.workshop .media img
-{
-	max-width: 100%;
-	display: block;
-	align-self: center;
-	max-height: 100%;
-	margin: auto;
+.workshop-section img {
+  display: block;
+  margin: 1em auto;
+  border: 3px solid white;
 }
 
-
-#workshop-menu
-{
-	display: none;
-
-}
-#workshop-menu input,#workshop-menu li
-{
-	display: inline-block;
-}
-#workshop-menu .card
-{
-	background-color: transparent;
-	border: none;
-	border-top: 5px solid black;
-	border-bottom: 5px solid black;
-
+.workshop {
+  height: 300px;
+  width: 100%;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.801);
+  border-radius: 10%;
+  border: 2px solid black;
+  margin: 1em;
 }
 
-#workshop-menu .card-header
-{
-	border-bottom: 2px solid black;
-
+.workshop * {
+  position: relative;
 }
 
-.sort
-{
-	width: 100%;
-	padding: 0.5em;
-	background-color: wheat;
-	overflow: auto;
-}
-#sort_select
-{
-	border: 2px solid black;
-	box-shadow: none;
-	width: 200px;
-	height: 30px;
-	float: right;
-
-
-
+.workshop .title {
+  text-align: center;
+  overflow: hidden;
 }
 
-
-.workshops-list
-{
-	width: 75%;
-
-	clear: both;
-}
-.workshop-section .media{
-	margin:auto;
-	padding: 0;
-	width: 70%;
-
-}
-.workshop-section{
-	width:50vw;
-	margin:auto;
-	background-color: transparent;
-	height: 100vh;
+.workshop .title h2 {
+  font-size: 1.2em;
 }
 
-.workshop-section img{
-	display: block;
-	margin: 1em auto;
-	border:3px solid white;
+.workshop h4 {
+  text-align: left;
+  color: yellowgreen;
+  margin: 0.5em 0;
 }
 
-.question {
-	-webkit-transform: skew(30deg);
-    -moz-transform: skew(30deg);
-    -o-transform: skew(30deg);
-	transform: skew(30deg);
-
-	background-color:greenyellow;
-	border : 3px solid blue;
+.workshop .stars {
+  border: 2px solid black;
+  background-color: #b8b8b8;
+  padding: 0.5em;
+  width: 200px;
+  margin: 1em 0;
+  -ms-flex-item-align: left;
+      -ms-grid-row-align: left;
+      align-self: left;
 }
 
-.media audio{
-	margin: auto;
+.workshop .type {
+  top: calc((300px / 100 * 70 ) - 0.5em);
+  background-color: white;
+  display: block;
+  text-align: center;
+  position: relative;
+  left: -15%;
+  min-width: 130%;
+  z-index: 1;
+  margin: 0;
+}
+
+.workshop .type:before, .workshop .type:after {
+  content: '';
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-style: solid;
+  border-width: 0;
+  outline: none;
+}
+
+.workshop .type .content {
+  position: relative;
+  z-index: 5;
+  background-color: #d6da8f;
+  display: block;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.workshop .type.ribbon {
+  outline: none;
+  outline-color: transparent;
+}
+
+.workshop .type.ribbon:before, .workshop .type.ribbon:after {
+  top: 5px;
+  z-index: -1;
+}
+
+.workshop .type.ribbon:before {
+  border-color: #d1d393 #d1d393 #d1d393 transparent;
+  left: -25px;
+  border-width: 17px;
+}
+
+.workshop .type.ribbon:after {
+  border-color: #d1d393 transparent #d1d393 #d1d393;
+  right: -25px;
+  border-width: 17px;
+}
+
+.workshop .description {
+  width: 50%;
+  background-color: whitesmoke;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  overflow: hidden;
+  margin: 1em 0;
+}
+
+.workshop .media {
+  height: 70%;
+  width: 100%;
+  border: none;
+  z-index: 0;
+  opacity: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 50%;
+  border: 5px solid black;
+  overflow: hidden;
+}
+
+.workshop .media video, .workshop .media audio, .workshop .media img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.carousel-indicators {
+  background-color: black;
+  width: 100%;
+  margin: 0;
+}
+
+#workshop-menu {
+  display: none;
+}
+
+#workshop-menu input, #workshop-menu li {
+  display: inline-block;
+}
+
+#workshop-menu .card-header {
+  border-bottom: 2px solid black;
+}
+
+#workshop-menu .card {
+  background-color: transparent;
+  border: none;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+.workshops-info {
+  width: 100%;
+  height: 0px;
+  background-color: #086d05;
+  overflow: hidden;
+  color: black;
+  position: relative;
+  border: 3px solid black;
+  display: none;
+}
+
+.workshops-info .media {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 0;
+  right: 0;
+}
+
+.sort {
+  width: 100%;
+  padding: 0.5em;
+  background-color: wheat;
+  overflow: auto;
+}
+
+#sort_select {
+  border: 2px solid black;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  width: 200px;
+  height: 30px;
+  float: right;
 }
 
 @media only screen and (min-width: 1000px) {
-	#workshop-menu {
-		width:25%;
-		min-width: 300px;
-		display: block;
-		float: left;
-		padding:3em;
-
-
-	}
-	.workshops-list
-	{
-		clear: both;
-		float: left;
-
-	}
-	.workshops-info.col-sm-12
-{
-	float:both;
-	width: 100%;
+  #workshop-menu {
+    width: 25%;
+    min-width: 300px;
+    display: block;
+    float: left;
+    padding: 3em;
+  }
+  .workshops-list {
+    clear: both;
+    float: left;
+  }
+  .workshops-info.col-sm-12 {
+    float: both;
+    width: 100%;
+  }
 }
 
- }
-
-@media only screen and (min-width:450px) and (max-width: 1000px) {
-	#workshop-menu {
-		width: 100%;
-		display: block;
-	}
-	#search-form
-	{
-		display: flex;
-	}
-	#search-form .card {
-		width : calc(100% / 3);
-		margin: 1em;
-	}
-
+@media only screen and (min-width: 450px) and (max-width: 1000px) {
+  #workshop-menu {
+    width: 100%;
+    display: block;
   }
+  #search-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  #search-form .card {
+    width: calc(100% / 3);
+    margin: 1em;
+  }
+}
+/*# sourceMappingURL=workshops.css.map */

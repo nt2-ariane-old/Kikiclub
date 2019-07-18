@@ -1,91 +1,79 @@
-main
-{
-	background-color: rgba(0, 0, 0, 0.822);
-	height: calc(100vh - 80px - 2rem - 4.8em - 80px);
-
-}
-.badges-footer
-{
-	height: 4.8rem;
-	background-color: black;
-	text-align: center;
-	padding: 1em 0;
-	border-bottom: 5px solid burlywood;
+main {
+  background-color: rgba(0, 0, 0, 0.822);
 }
 
-.manage-btn
-{
-	height: 40px;
-	line-height: 30px;
-
-	display: block;
-	border-color: white;
-	color:white;
-}
-.badges-footer a
-{
-	border-color: white;
-	color:white !important;
-}
-.badges-footer a:hover
-{
-	border-color: rgba(255, 255, 255, 0.678);
-	color:white !important;
+.badges-footer {
+  height: 4.8rem;
+  background-color: black;
+  text-align: center;
+  padding: 1em 0;
+  border-bottom: 5px solid burlywood;
 }
 
-#Badges
-{
-	height: 100%;
-}
-#pts
-{
-	height: 10%;
-	color: wheat;
-	font-size: 2em;
-	text-align: center;
-	font-weight: bolder;
-	line-height: 3em;
-}
-.kikiclub-badge h6
-{
-	color:blue;
-}
-section, .container,.carousel-item,.carousel-inner,.row
-{
-	height: 100%;
-
-}
-.media
-{
-	width:100%;
-	height: 90%;
-	margin: auto;
-}
-.media img
-{
-	position: static;
-	max-width: 100%;
-	max-height: 100%;
-	margin: auto;
+.manage-btn {
+  height: 40px;
+  line-height: 30px;
+  display: block;
+  border-color: white;
+  color: white;
 }
 
-.kikiclub-badge h5
-{
-	text-align: center;
-	margin: auto;
-
-	color: white;
-	height: 10%;
-}
-.kikiclub-badge h6
-{
-	text-align: center;
-	color:blue;
-	height: 10%;
+.badges-footer a {
+  border-color: white;
+  color: white !important;
 }
 
-.kikiclub-badge
-{
-	border: 1px solid white;
-	height: 100%;
+.badges-footer a:hover {
+  border-color: rgba(255, 255, 255, 0.678);
+  color: white !important;
 }
+
+#pts {
+  height: 10%;
+  color: wheat;
+  font-size: 2em;
+  text-align: center;
+  font-weight: bolder;
+  line-height: 3em;
+}
+
+.kikiclub-badge h6 {
+  color: blue;
+}
+
+.kikiclub-badge input {
+  height: 10%;
+}
+
+.media {
+  width: 100%;
+  height: 85%;
+  min-height: 150px;
+  margin: auto;
+  text-align: center;
+}
+
+.media img {
+  position: static;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.kikiclub-badge h5 {
+  text-align: center;
+  margin: auto;
+  color: white;
+  height: 10%;
+}
+
+.kikiclub-badge h6 {
+  text-align: center;
+  color: blue;
+  height: 10%;
+}
+
+.kikiclub-badge {
+  border: 1px solid white;
+}
+/*# sourceMappingURL=family-badges.css.map */

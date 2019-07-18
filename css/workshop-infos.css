@@ -1,53 +1,47 @@
-.fa.fa-star
-{
-	color:white;
+.fa.fa-star {
+  color: white;
+}
 
+.fa.fa-star.checked {
+  color: #D8DF23;
 }
-.fa.fa-star.checked
-{
-	color:#D8DF23;
 
+.stars {
+  background-color: wheat;
+  padding: 1em;
+  font-weight: bolder;
 }
-.stars
-{
-	background-color: wheat;
-	padding: 1em;
-	font-weight: bolder;
-}
-#workshop-infos
-{
-	width: 80%;
-	margin: auto;
-	padding: 2em;
-}
-#workshop-infos .media
-{
-	width: 50%;
-	float: left;
-	height: 50vh;
-	border: 5px solid black;
-	margin: auto;
-}
-#workshop-infos #infos
-{
-	width: calc(50% - 2em);
-	float: left;
-	padding: 1em;
-	background-color: white;
-	margin: 1em;
-}
-.media video
-{
-	width: 100%;
-	height: 100%;
-}
-.media img
-{
-	max-width: 100%;
-	max-height: 100%;
-	margin: auto;
-}
-.description
-{
 
+#workshop-infos {
+  width: 80%;
+  margin: auto;
+  padding: 2em;
 }
+
+#workshop-infos .media {
+  width: 50%;
+  float: left;
+  height: 50vh;
+  border: 5px solid black;
+  margin: auto;
+}
+
+#workshop-infos #infos {
+  width: calc(50% - 2em);
+  float: left;
+  padding: 1em;
+  background-color: white;
+  margin: 1em;
+}
+
+.media video {
+  width: 100%;
+  height: 100%;
+}
+
+.media img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+/*# sourceMappingURL=workshop-infos.css.map */

@@ -339,6 +339,43 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 	<?php
 }
 
+function loadBadgesLine($badges,$name,$action,$title,$isMember=false)
+{
+	$nbBadges = 4;
+	?>
+	<div class="container">
+		<?php
+			for ($i=0; $i < sizeof($badges) / $nbBadges ; $i++) {
+				# code...
+			}
+		?>
+		<div class="row" id="<?= $title ?>">
+		<?php
+			foreach ($badges as $badge) {
+				?>
+				<div class="kikiclub-badge col-sm-<?= 12/$nbBadges ?>" >
+					<?php
+						loadMedia($badge);
+					?>
+					<h5><?= $badge["NAME"] ?></h5>
+					<?php
+						if($isMember)
+						{
+					?>
+							<h6>Won on <?= $badge["WON_ON"]?></h6>
+					<?php
+						}
+					?>
+				</div>
+				<?php
+			}
+		?>
+		</div>
+	</div>
+	<?php
+
+}
+
 function loadBadgesCarousel($badges,$name,$action,$title,$isMember=false)
 {
 	$nbBadges = 4;

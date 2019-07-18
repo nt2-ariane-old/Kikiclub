@@ -1,0 +1,258 @@
+
+.workshops-list{
+	width: 75%;
+	overflow-x: scroll;
+	overflow-y:auto;
+	height:100vw;
+	transform-origin: right top;
+	transform:rotate(-90deg) translateY(-40vw);
+	clear: both;
+
+	a {
+		color:inherit;
+		text-decoration: none;
+	}
+}
+
+.workshop-section{
+	width:50vw;
+	margin:auto;
+	background-color: transparent;
+	height: 100vh;
+	.media{
+		margin:auto;
+		padding: 0;
+		width: 70%;
+
+	}
+	img{
+		display: block;
+		margin: 1em auto;
+		border:3px solid white;
+	}
+}
+
+.workshop{
+	height: 300px;
+	width:100%;
+	position: relative;
+	background-color: rgba(255, 255, 255, 0.801);
+	border-radius: 10%;
+	border: 2px solid black;
+	margin: 1em;
+	* {
+		position: relative;
+	}
+	.title
+	{
+		text-align: center;
+		overflow: hidden;
+		h2{
+			font-size: 1.2em;
+		}
+	}
+	h4{
+		text-align: left;
+		color:yellowgreen;
+		margin:0.5em 0;
+	}
+	.stars{
+		border:2px solid black;
+		background-color: rgb(184, 184, 184);
+
+		padding: 0.5em;
+		width:200px;
+		margin: 1em 0;
+		align-self: left;
+	}
+	.type
+	{
+		top: calc((300px / 100 * 70 ) - 0.5em);
+		background-color: white;
+		display: block;
+		text-align: center;
+		position: relative;
+		left: -15%;
+		min-width:130%;
+		z-index: 1;
+		margin: 0;
+
+		&:before, &:after {
+			content: '';
+			position: absolute;
+			height: 0;
+			width: 0;
+			border-style: solid;
+			border-width: 0;
+			outline:none;
+
+		}
+		.content
+		{
+			position: relative;
+			z-index: 5;
+			background-color: rgb(214, 218, 143) ;
+			display: block;
+			border-top: 3px solid black;
+			border-bottom: 3px solid black;
+
+		}
+	}
+
+	.type.ribbon
+	{
+		outline:none;
+		outline-color: transparent;
+		&:before, &:after {
+			top: 5px;
+			z-index: -1;
+		}
+		&:before {
+			border-color: rgb(209, 211, 147)  rgb(209, 211, 147) rgb(209, 211, 147) transparent;
+			left: -25px;
+			border-width: 17px;
+		}
+		&:after {
+			border-color: rgb(209, 211, 147) transparent rgb(209, 211, 147) rgb(209, 211, 147);
+			right: -25px;
+			border-width: 17px;
+
+		}
+
+	}
+
+	.description
+	{
+		width:50%;
+		background-color: whitesmoke;
+		border-top : 2px solid black;
+		border-bottom : 2px solid black;
+		overflow: hidden;
+		margin:1em 0;
+	}
+	.media{
+		height: 70%;
+		width: 100%;
+		border: none;
+		z-index: 0;
+		opacity: 1;
+		display: flex;
+		background-color: rgba(0, 0, 0, 0.75);
+		border-radius: 50%;
+		border: 5px solid black;
+		overflow: hidden;
+		video,audio,img
+		{
+			max-width: 100%;
+			max-height: 100%;
+			margin: auto;
+			display: block;
+			align-self: center;
+		}
+	}
+
+}
+.carousel-indicators{
+	background-color: black;
+	width: 100%;
+	margin:0;
+}
+
+#workshop-menu
+{
+	display: none;
+	input, li
+	{
+		display: inline-block;
+	}
+	.card-header
+	{
+		border-bottom: 2px solid black;
+
+	}
+	.card
+	{
+		background-color: transparent;
+		border: none;
+		border-top: 5px solid black;
+		border-bottom: 5px solid black;
+
+	}
+}
+
+.workshops-info
+{
+	width:100%;
+	height:0px;
+	background-color: rgb(8, 109, 5);
+	overflow: hidden;
+	color:black;
+	position: relative;
+	border: 3px solid black;
+	display: none;
+
+	.media
+	{
+		position: absolute;
+		width: 300px;
+		height: 300px;
+		top:0;
+		right:0;
+	}
+}
+
+.sort
+{
+	width: 100%;
+	padding: 0.5em;
+	background-color: wheat;
+	overflow: auto;
+}
+#sort_select
+{
+	border: 2px solid black;
+	box-shadow: none;
+	width: 200px;
+	height: 30px;
+	float: right;
+}
+
+@media only screen and (min-width: 1000px) {
+	#workshop-menu {
+		width:25%;
+		min-width: 300px;
+		display: block;
+		float: left;
+		padding:3em;
+
+
+	}
+	.workshops-list
+	{
+		clear: both;
+		float: left;
+
+	}
+	.workshops-info.col-sm-12
+{
+	float:both;
+	width: 100%;
+}
+
+ }
+
+@media only screen and (min-width:450px) and (max-width: 1000px) {
+	#workshop-menu {
+		width: 100%;
+		display: block;
+	}
+	#search-form
+	{
+		display: flex;
+	}
+	#search-form .card {
+		width : calc(100% / 3);
+		margin: 1em;
+	}
+
+  }

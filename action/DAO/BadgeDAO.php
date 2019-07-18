@@ -5,16 +5,14 @@
 
 		public static function getBadges($id_type=null)
 		{
-			$request = "SELECT  * FROM BADGES";
+			$request = "SELECT  * FROM badges";
 
 			if(!empty($id_type))
 			{
 				$request .= " WHERE ID_BADGE_TYPE=?";
 			}
 			$connection = Connection::getConnection();
-
 			$statement = $connection->prepare($request);
-
 			if(!empty($id_type))
 			{
 				$statement->bindParam(1, $id_type);
@@ -38,7 +36,7 @@
 
 			$request = "SELECT ";
 			$request .= "b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, f.FIRSTNAME AS OWNER, DATE_FORMAT(fb.won_on, '%Y-%m-%d') AS WON_ON ";
-			$request .= "FROM family_badges AS fb INNER JOIN BADGES AS b INNER JOIN FAMILY AS f ";
+			$request .= "FROM family_badges AS fb INNER JOIN badges AS b INNER JOIN family AS f ";
 			$request .= "WHERE fb.ID_BADGE = b.ID AND fb.ID_USER = ? AND f.id = fb.id_member ";
 
 			if(!empty($id_member))
@@ -113,4 +111,91 @@
 			$statement->execute();
 		}
 
+		public static function addBadge($name=null,$id_type=1, $value_needed=null,$media_path=null,$media_type=null)
+		{
+			$connection = Connection::getConnection();
+			$request = "INSERT INTO badges(NAME,VALUE_NEEDED,ID_BADGE_TYPE,MEDIA_PATH,MEDIA_TYPE) VALUES (?,?,?,?,?)";
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $value_needed);
+			$statement->bindParam(3, $id_type);
+			$statement->bindParam(4, $media_path);
+			$statement->bindParam(5, $media_type);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+		}
+
+		public static function updateBadge($id,$name=null,$id_type=null, $value_needed=null,$media_path=null,$media_type=null)
+		{
+			$connection = Connection::getConnection();
+			$request = "UPDATE badges SET NAME=?,VALUE_NEEDED=?,ID_BADGE_TYPE=?,MEDIA_PATH=?,MEDIA_TYPE=? WHERE id=?";
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $value_needed);
+			$statement->bindParam(3, $id_type);
+			$statement->bindParam(4, $media_path);
+			$statement->bindParam(5, $media_type);
+			$statement->bindParam(6, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+		}
+
+		public static function deleteBadge($id)
+		{
+			$connection = Connection::getConnection();
+			$request = "DELETE FROM badges WHERE id=?";
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+		}
+		public static function getIdFromLastCreated()
+		{
+			$connection = Connection::getConnection();
+			$request = "SELECT id FROM badges ORDER BY id DESC LIMIT 1;";
+			$statement = $connection->prepare($request);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$id = 0;
+
+			if($row = $statement->fetch())
+			{
+				$id = $row["id"];
+			}
+			return $id;
+		}
+		public static function getBadgeByID($id)
+		{
+			$connection = Connection::getConnection();
+			$request = "SELECT * FROM badges WHERE id=?;";
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+
+			if($row = $statement->fetch())
+			{
+				$content = $row;
+			}
+			return $content;
+		}
+		public static function getBadgesType()
+		{
+			$connection = Connection::getConnection();
+			$request = "SELECT ID,NAME FROM badge_type ";
+			$statement = $connection->prepare($request);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+
+			while($row = $statement->fetch())
+			{
+				$content[] = $row;
+			}
+			return $content;
+		}
 }

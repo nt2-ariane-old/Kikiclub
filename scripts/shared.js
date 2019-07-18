@@ -21,13 +21,25 @@ const onPageLoad = () =>
 	if(dropzoneElement != null)
 	{
 		$(function() {
-			dropzone = new Dropzone("div#imagedropzone", { url: "post-media.php"});
+			dropzone = new Dropzone("div#imagedropzone", { url: "ajax/media-ajax.php",params: {
+				dir: "images/uploads/shared"
+		   }});
 			dropzone.on("success", function(file,infos) {
 				infos = JSON.parse(infos);
-				let media_path = document.getElementById('media_path');
-				media_path.value = infos["PATH"];
-				let media_type = document.getElementById('media_type');
-				media_type.value = infos["TYPE"];
+				console.log()
+				if(typeof(infos) === "string")
+				{
+					alert(infos);
+				}
+				else
+				{
+					let media_path = document.getElementById('media_path');
+					media_path.value = infos["PATH"];
+					let media_type = document.getElementById('media_type');
+					media_type.value = infos["TYPE"];
+				}
+
+
 			});
 		})
 	}
@@ -56,6 +68,7 @@ const loadPosts = (action=null,id=null) =>
 		formData.append('content', content_editor.getData());
 		formData.append('media_path', media_path.value);
 		formData.append('media_type', media_type.value);
+
 		title.value = "";
 		content_editor.setData('');
 		dropzone.removeAllFiles();

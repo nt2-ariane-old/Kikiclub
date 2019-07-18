@@ -14,7 +14,5 @@
 
 		protected function executeAction() {
 			$this->badges = BadgeDAO::getBadges();
-
-
 		}
 	}

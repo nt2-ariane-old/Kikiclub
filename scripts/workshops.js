@@ -81,8 +81,9 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 						if(isFamilyMember)
 						{
 							let divType = document.createElement('div');
-							divType.setAttribute('class','type');
-
+							divType.setAttribute('class','type ribbon');
+								let spanContent = document.createElement('span');
+									spanContent.setAttribute('class','content');
 							let ancien = false;
 							for (const key in memberWorkshops) {
 								if (memberWorkshops.hasOwnProperty(key)) {
@@ -92,14 +93,15 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 									{
 
 										ancien = true;
-										divType.innerHTML = states[m_workshop["ID_STATUT"]]["NAME"];
+										spanContent.innerHTML = states[m_workshop["ID_STATUT"]]["NAME"];
 									}
 								}
 							}
 							if(!ancien)
 							{
-								divType.innerHTML = states[1]["NAME"];
+								spanContent.innerHTML = states[1]["NAME"];
 							}
+								divType.appendChild(spanContent);
 							link.appendChild(divType);
 
 						}

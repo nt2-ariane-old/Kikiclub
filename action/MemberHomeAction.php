@@ -25,7 +25,7 @@
 			$id = $_SESSION["member"];
 			$this->member = FamilyDAO::selectMember($id);
 
-			$this->member["alert"] = sizeof(WorkshopDAO::selectMemberNotStartedWorkshop($id));
+			$this->member["alert"] = sizeof(WorkshopDAO::selectMemberNewWorkshop($id));
 			$this->complete_name = $this->member["firstname"] . "'s Page";
 
 			$this->badges = BadgeDAO::getMemberBadge($id);

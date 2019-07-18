@@ -1,23 +1,20 @@
 @font-face {
-	font-family: "Calling Code BI";
-	src: url("../fonts/Flat-it - Calling Code Bold Italic.otf"),
-		 url("../fonts/Flat-it - Calling Code Bold Italic.ttf") format('ttf');
+  font-family: "Calling Code BI";
+  src: url("../fonts/Flat-it - Calling Code Bold Italic.otf"), url("../fonts/Flat-it - Calling Code Bold Italic.ttf") format("ttf");
 }
 
 @font-face {
-	font-family: "Calling Code B";
-	src: url("../fonts/Flat-it - Calling Code Bold.otf"),
-		 url("../fonts/Flat-it - Calling Code Bold.ttf") format('ttf');
+  font-family: "Calling Code B";
+  src: url("../fonts/Flat-it - Calling Code Bold.otf"), url("../fonts/Flat-it - Calling Code Bold.ttf") format("ttf");
 }
 
 @font-face {
-	font-family: "Calling Code I";
-	src: url("../fonts/Flat-it - Calling Code Italic.otf"),
-		 url("../fonts/Flat-it - Calling Code Italic.ttf") format('ttf');
+  font-family: "Calling Code I";
+  src: url("../fonts/Flat-it - Calling Code Italic.otf"), url("../fonts/Flat-it - Calling Code Italic.ttf") format("ttf");
 }
 
 @font-face {
-	font-family: "Calling Code";
-	src: url("../fonts/Flat-it - Calling Code Regular.otf") format('otf'),
-		 url("../fonts/Flat-it - Calling Code Regular.ttf") format('ttf');
+  font-family: "Calling Code";
+  src: url("../fonts/Flat-it - Calling Code Regular.otf") format("otf"), url("../fonts/Flat-it - Calling Code Regular.ttf") format("ttf");
 }
+/*# sourceMappingURL=fonts.css.map */

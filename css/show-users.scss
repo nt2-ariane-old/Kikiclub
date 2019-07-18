@@ -1,0 +1,399 @@
+
+.sheet
+{
+	background-color: black;
+	width: 100%;
+	margin: 0;
+	box-shadow: none;
+
+}
+.sheet h2
+{
+	color:black;
+	text-align: center;
+	background-color: blanchedalmond;
+	border: 6px solid burlywood;
+	padding: 0.5em;
+	margin: 0;
+}
+
+.sheet .return-btn
+{
+	color: white !important;
+	border-color: white;
+}
+#profil-form, #workshop-form
+{
+	background-color: wheat;
+	border : 6px solid burlywood;
+}
+.infos
+{
+	width: 80%;
+	margin: auto;
+}
+
+#profil-form p, #workshop-form
+{
+	padding: 0 1em;
+	width: 100%;
+	text-align: center;
+	margin: auto;
+	display: inline-block;
+}
+#profil-form input,#profil-form select,
+#workshop-form input,#workshop-form select
+{
+	width: 100%;
+	margin: auto;
+	display: block;
+}
+#profil-form .input-title,
+#workshop-form .input-title
+{
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	display: block;
+	color: black;
+	font-weight: bolder;
+
+}
+
+.return-btn
+{
+	border: 0.3em solid black;
+	padding: 0.5em;
+	width: 20em;
+	text-align: center;
+	margin: 2em auto 0 auto;
+	display: block;
+}
+
+.child-logo,.child-stateLogo
+{
+	width:200px;
+	height:200px;
+	margin: 1em auto;
+	border-radius: 100%;
+	background-color: #ADB30F;
+	box-shadow:
+	0 0 10px 5px #ADB30F,  /* inner white */
+	0 0 20px 10px rgb(33, 80, 61), /* middle magenta */
+	0 0 25px 15px rgb(51, 50, 50); /* outer cyan */
+	text-align: center;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.child-stateLogo
+{
+	opacity: 0.4;
+	position: absolute;
+	top:-1em;
+	display:none;
+
+	left: calc((100% - 200px) / 2);
+}
+
+.child-logo:hover
+{
+	border: none;
+	background-color: rgb(242, 243, 192);
+	box-shadow:
+	0 0 10px 5px rgb(242, 243, 192),  /* inner white */
+	0 0 20px 10px rgb(90, 247, 187), /* middle magenta */
+	0 0 25px 15px rgb(58, 226, 72); /* outer cyan */
+}
+
+.credit
+{
+	background-color: black;
+	color: white;
+	text-align: center;
+	font-size: 0.7em;
+}
+.credit a
+{
+	color: blue !important;
+	color: white;
+}
+
+.child-info
+{
+	width:80vw;
+	height:100vw;
+	margin:2em;
+	position:relative;
+	text-align: center;
+	color:white;
+	font-weight: bold;
+}
+
+.child-name
+{
+	color:white;
+}
+.child-nbWorkshops, .child-nbPTS
+{
+	color:#E8EE4D;
+}
+
+.child-age,.child-nbWorkshops, .child-nbPTS
+{
+	font-size: 5vw;
+}
+.child-name
+{
+	font-size: 10vw;
+}
+
+.child-nbalert
+{
+
+	background-color: red;
+	border-radius: 100%;
+	border: 1px solid black;
+	position: absolute;
+
+
+	text-align: center;
+
+	font-weight: bolder;
+
+	right: calc( (80vw - 60vw) / 2);
+	font-size: 10vw;
+	top: 5vw;
+	width : 15vw;
+	height: 15vw;
+	line-height: 15vw;
+}
+#addLogo
+{
+	background-image: url("../images/plus.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+
+.x-button{
+	background-color:red;
+	border-radius:4vw;
+	margin:auto;
+}
+.users-contents
+{
+	width:100%;
+
+	margin: auto;
+	padding: 2em 0;
+	background-color: rgb(0, 0, 0);
+
+	color: white;
+}
+
+#family
+{
+	background-color: black;
+}
+.users-contents input[type=text],.users-contents select,.users-contents p {
+	display: block;
+	width:80%;
+	margin: 1em auto;
+	padding:4px;
+}
+
+.avatars-list{
+	background-color: white;
+	width:80%;
+	overflow-y: scroll;
+	height: 200px;
+	margin:auto;
+	border: 8px solid burlywood;
+}
+.avatars-list input[type="radio"]:checked+img {
+	border: 3px solid red;
+}
+.avatars-list label img{
+	width:100px;
+	height:100px;
+}
+.avatars-list label input[type=radio] {
+	opacity: 0;
+ }
+
+ .tab {
+	overflow: hidden;
+	border: 3px solid #878C00;
+	background-color: #E8EE4D;
+	padding:0px;
+	margin: 0px;
+	width:100%;
+
+  }
+
+  .tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	margin:0;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+  }
+  .tab button:hover {
+	background-color: #ADB30F;
+  }
+  .tab button.active {
+	background-color: rgb(148, 153, 13);
+  }
+  .tabcontent {
+	background-color: #ADB30F;
+	display: none;
+	border: 3px solid #878C00;
+	border-top: none;
+	height:90%;
+	width:100%;
+	margin:auto;
+  }
+.forms-btns{
+	margin:auto;
+	width:100%;
+	text-align: center;
+	display: block;
+
+}
+.submit-btn,.delete-btn{
+	padding:1em 2em;
+	border: 3px solid black;
+	box-shadow: black 5px 5px 2.5px 2.5px;
+	margin: 1em auto;
+	display: inline-block;
+	width: 200px;
+}
+.submit-btn
+{
+	background-color: green;
+}
+.delete-btn
+{
+	background-color: red;
+}
+
+.child-info button
+{
+	background-color: transparent;
+	border: none;
+}
+@media only screen and (min-width:850px)
+{
+	 #workshop-form p
+	{
+		width: 49%;
+		margin: auto;
+	}
+	 #workshop-form p
+	{
+		width: calc(49% - 2em);
+		display: inline-block;
+		margin: 1em;
+
+	}
+	.sheet
+	{
+		background-color: white;
+		width: 80%;
+	}
+	.sheet .return-btn
+	{
+		color: black !important;
+		border-color: black;
+	}
+}
+
+/* FOR WEB */
+ @media only screen and (min-width: 450px) {
+
+	.sheet
+	{
+
+		width: 90%;
+		margin: auto;
+		padding:2em;
+	}
+
+	#profil-form .input-title,
+	#workshop-form .input-title
+	{
+		display: inline-block;
+		width: 50%;
+		text-align: left;
+	}
+	#profil-form input,#profil-form select,
+	#workshop-form input,#workshop-form select
+
+	{
+		width: 50%;
+		display: inline-block;
+	}
+	.users-
+	{
+		width: 100%;
+		height: calc(100vh - 500px - 90px - 50px);
+		line-height: calc(100vh - 500px - 90px - 50px);
+
+		background-color: white;
+		text-align: center;
+		position: relative;
+	}
+	#family{
+		width:100%;
+		height: 100%;
+		background-color: black;
+		border-top : 5px solid burlywood;
+		margin: 0;
+		padding: 0;
+	}
+	#family-carousel
+	{
+		margin: 0;
+		padding: 0;
+		height: calc(100vh - 80px - 2rem - 4.8em - 80px);
+	}
+
+
+	.child-info{
+		width:100%;
+		max-width: 500px;
+		height:500px;
+	}
+	.child-logo,.child-stateLogo
+	{
+		width: 200px;
+		height:200px;
+	}
+	.child-stateLogo{
+		left: calc((100% - 200px) / 2);
+
+
+	}
+
+	.child-age,.child-nbWorkshops, .child-nbPTS
+	{
+		font-size: 1em;
+	}
+	.child-name
+	{
+		font-size: 3vw;
+	}
+	.child-nbalert{
+		right: calc( (100% - 200px) / 2);
+		font-size: 1.8em;
+		line-height: 1.8em;
+		top: 0.5em;
+		width : 1.8em;
+		height: 1.8em;
+
+	}
+ }

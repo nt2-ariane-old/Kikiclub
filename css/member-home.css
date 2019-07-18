@@ -1,38 +1,37 @@
-main
-{
-	min-height: calc(100vh - 80px - 2rem - 4.8em - 80px);
-	background-color: black;
-	padding: 1em;
+main {
+  min-height: calc(100vh - 80px - 2rem - 4.8em - 80px);
+  background-color: black;
+  padding: 1em;
 }
-main *
-{
-	color:white;
-}
-.access-btn
-{
-	position: relative;
-	color:black;
-	height: 200px;
-	width: 200px;
-	background-color: beige;
-	text-align: center;
-	margin: auto;
-	border: 5px solid brown;
 
-	line-height: 200px;
+main * {
+  color: white;
 }
-.alert-new
-{
-	background-color:red;
-	font-size: 1em;
-	color: black;
-	height: 50px;
-	width: 50px;
-	border: 5px solid brown;
-	border-radius: 100%;
-	line-height: 46px;
-	padding: 0;
-	position: absolute;
-	top:0;
-	right: 0;
+
+.access-btn {
+  position: relative;
+  color: black;
+  height: 200px;
+  width: 200px;
+  background-color: beige;
+  text-align: center;
+  margin: auto;
+  border: 5px solid brown;
+  line-height: 200px;
 }
+
+.alert-new {
+  background-color: red;
+  font-size: 1em;
+  color: black;
+  height: 50px;
+  width: 50px;
+  border: 5px solid brown;
+  border-radius: 100%;
+  line-height: 46px;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/*# sourceMappingURL=member-home.css.map */
