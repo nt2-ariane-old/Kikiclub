@@ -20,6 +20,55 @@
 
 		}
 
+		public static function searchAllUsersAndMembers($value)
+		{
+			$connection = Connection::getConnection();
+			$value = $value . "%";
+			$requestMember = "SELECT id,firstname,lastname FROM family ";
+			$requestMember .= "WHERE firstname LIKE ? OR lastname LIKE ? OR CONCAT(firstname,' ',lastname) LIKE ?";
+
+			$statementMember = $connection->prepare($requestMember);
+			$statementMember->bindParam(1, $value);
+			$statementMember->bindParam(2, $value);
+			$statementMember->bindParam(3, $value);
+			$statementMember->setFetchMode(PDO::FETCH_ASSOC);
+			$statementMember->execute();
+
+			$contents = null;
+
+			while ($row = $statementMember->fetch())
+			{
+
+				$temp = [];
+				$temp["type"] = "member";
+				$temp["label"] = "Member => " . $row["firstname"] . " " . $row["lastname"];
+				$temp["value"] = $row["id"];
+				$contents[] = $temp;
+			}
+
+			$requestUser = "SELECT id,firstname,lastname,email FROM users ";
+			$requestUser .= "WHERE firstname LIKE ? OR lastname LIKE ? OR email LIKE ? OR CONCAT(firstname,' ',lastname) LIKE ?";
+			$statementUser = $connection->prepare($requestUser);
+			$statementUser->bindParam(1, $value);
+			$statementUser->bindParam(2, $value);
+			$statementUser->bindParam(3, $value);
+			$statementUser->bindParam(4, $value);
+			$statementUser->setFetchMode(PDO::FETCH_ASSOC);
+			$statementUser->execute();
+
+			while ($row = $statementUser->fetch())
+			{
+				$temp = [];
+				$temp["type"] = "user";
+				$temp["label"] = "User => " . $row["firstname"] . " " . $row["lastname"] . " => " . $row["email"];
+				$temp["value"] = $row["id"];
+				$contents[] = $temp;
+			}
+
+			return $contents;
+
+		}
+
 		public static function addScore($id,$newPts)
 		{
 			$connection = Connection::getConnection();

@@ -7,6 +7,8 @@ let searchParams = [];
 
 const setSearchParams = (name, value) =>
 {
+	console.log(name);
+	console.log(value);
 	if(searchParams[name].indexOf(value) > -1)
 	{
 		searchParams[name].splice(searchParams[name].indexOf(value),1);

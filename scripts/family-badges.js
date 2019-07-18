@@ -76,7 +76,7 @@ const updateBadge = (id,params) =>
 		type: "POST",
 		url:"ajax/badges-ajax.php",
 		data: {
-			'modify':null,
+			'update':null,
 			'id':id,
 			'params':params
 		},

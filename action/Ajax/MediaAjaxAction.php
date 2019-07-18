@@ -16,8 +16,13 @@
 			$dir = $_POST["dir"];
 			$max_size = 1024 * 1024 * 10;
 
+			$head = "http://";
+			if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+			{
+				$head = "https://";
+			}
 			$uploaddir = $_SERVER['DOCUMENT_ROOT'] . "/" . $dir . "/";
-			$webdir = "https://" . $_SERVER['HTTP_HOST'] . "/" . $dir . "/";
+			$webdir = $head . $_SERVER['HTTP_HOST'] . "/" . $dir . "/";
 
 			$uploadfile = $uploaddir . basename($_FILES['file']['name']);
 			$webfile = $webdir . basename($_FILES['file']['name']);

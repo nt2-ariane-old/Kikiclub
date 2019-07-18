@@ -139,10 +139,7 @@
 			$this->trans = new Translator($currentLang);
 
 
-			if(!empty($_POST["member"]))
-			{
-				$_SESSION["member"] = $_POST["member"];
-			}
+
 
 			if($this->isFamilyMember())
 			{

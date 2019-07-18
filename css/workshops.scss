@@ -91,7 +91,7 @@
 		{
 			position: relative;
 			z-index: 5;
-			background-color: rgb(214, 218, 143) ;
+			background-color: rgb(209, 116, 80) ;
 			display: block;
 			border-top: 3px solid black;
 			border-bottom: 3px solid black;
@@ -108,12 +108,12 @@
 			z-index: -1;
 		}
 		&:before {
-			border-color: rgb(209, 211, 147)  rgb(209, 211, 147) rgb(209, 211, 147) transparent;
+			border-color: rgb(207, 145, 86)  rgb(207, 145, 86) rgb(207, 145, 86) transparent;
 			left: -25px;
 			border-width: 17px;
 		}
 		&:after {
-			border-color: rgb(209, 211, 147) transparent rgb(209, 211, 147) rgb(209, 211, 147);
+			border-color: rgb(207, 145, 86) transparent rgb(207, 145, 86) rgb(207, 145, 86);
 			right: -25px;
 			border-width: 17px;
 

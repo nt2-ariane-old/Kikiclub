@@ -54,7 +54,7 @@
 			{
 				if(!empty($_POST["difficulties"]))
 				{
-					$difficulties = json_decode($_POST["difficulties"]);
+					$difficulties = json_decode($_POST["difficulties"],true);
 					if(sizeof($difficulties) > 0)
 					{
 						$temp = [];
@@ -62,17 +62,41 @@
 						{
 							foreach ($difficulties as $difficulty_id)
 							{
-									if($difficulty_id == $workshop["ID_DIFFICULTY"])
-									{
-										$temp[] = $workshop;
-									}
+								if($difficulty_id === $workshop["ID_DIFFICULTY"])
+								{
+									$temp[] = $workshop;
+								}
 							}
 						}
+
+
+						$this->results["workshops"] = $temp;
+					}
+				}
+				if(!empty($_POST["grades"]))
+				{
+					$grades = json_decode($_POST["grades"],true);
+					if(sizeof($grades) > 0)
+					{
+						$temp = [];
+						foreach ($this->results["workshops"] as $workshop)
+						{
+							foreach ($grades as $grade_id)
+							{
+								if($grade_id === $workshop["ID_GRADE"])
+								{
+									$temp[] = $workshop;
+								}
+							}
+						}
+
+
 						$this->results["workshops"] = $temp;
 					}
 				}
 				if(!empty($_POST["states"]))
 				{
+
 					$states = json_decode($_POST["states"]);
 					if(!empty($_SESSION["member"]))
 					{
@@ -86,11 +110,6 @@
 						foreach ($states as $state)
 						{
 
-							if(($state == 1 || $state == 2) && !$has_new)
-							{
-								$temp = array_merge($temp, $new_workshops);
-								$has_new = true;
-							}
 
 							foreach ($this->results["workshops"] as $workshop)
 							{
@@ -101,6 +120,19 @@
 									{
 										$temp[] = $workshop;
 									}
+
+								}
+								foreach ($new_workshops as $m_workshop)
+								{
+
+									if($workshop["ID"] == $m_workshop["ID"] )
+									{
+										if($state == 1 || $state == 2)
+										{
+											$temp[] = $workshop;
+										}
+									}
+
 								}
 							}
 

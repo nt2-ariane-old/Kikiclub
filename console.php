@@ -44,7 +44,7 @@
 								</div>
 							<?php
 						}
-						else if($action->modify)
+						else if($action->update)
 						{
 							?>
 								<div class="management-tab">
@@ -91,7 +91,7 @@
 
 										<div class="collapse" id="controls">
 											<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
-											<button type="submit" class="submit-btn" name="modify" onclick="clicked=this.name" value="true">Modify</button>
+											<button type="submit" class="submit-btn" name="update" onclick="clicked=this.name" value="true">Update</button>
 											<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'});" value="true">Delete</button>
 										</div>
 									</div>
@@ -135,14 +135,14 @@
 
 							<?php
 						}
-						else if($action->modify)
+						else if($action->update)
 						{
 
 							?>
 							<div class="sheet">
 								<h2>Modification de <?= $action->userMod["USER"]["FIRSTNAME"] ?> </h2>
 								<form action="console.php" id="profil-form" method="post">
-									<input type="hidden" name="modify">
+									<input type="hidden" name="update">
 									<input type="hidden" name="users">
 									<input type="hidden" name="users_list[]" value="<?=$action->userMod["USER"]["ID"]?>"></td>
 
@@ -154,7 +154,7 @@
 
 
 									<div class="forms-btns">
-										<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Modify</button>
+										<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Apply</button>
 										<button type="submit" class="delete-btn" name="back" onclick="clicked=this.name">Back</button>
 									</div>
 								</form>
@@ -176,7 +176,7 @@
 											<?php
 												foreach ($action->userMod["FAMILY"] as $member) {
 											?>
-												<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'modify':null})">
+												<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'update':null})">
 													<td><?= $member["FIRSTNAME"] ?></td>
 													<td><?= $member["LASTNAME"] ?></td>
 													<td><?= $member["SCORE"] ?></td>
@@ -293,6 +293,12 @@
 
 
 								<div class="bar">
+									<h3>Search Every Feeld</h3>
+									<div>
+										<div class="autocomplete" style="width:300px;">
+											<input id="search-all" type="text" name="search" placeholder="All feelds">
+										</div>
+									</div>
 									<h3>Search User</h3>
 									<div>
 										<div class="autocomplete" style="width:300px;">
@@ -319,14 +325,18 @@
 
 								</div>
 
-								<?php
-									if(!empty($action->users))
-									{
 
-										?>
 
+							<?php
+							if(!empty($action->users) || !empty($action->members))
+							{
+							?>
 
 								<div class='form-workshops'>
+								<?php
+								if(!empty($action->users))
+									{
+									?>
 									<h2>Users</h2>
 
 									<form action="console.php" method="post" onSubmit="return validTab(this)">
@@ -344,7 +354,7 @@
 												<?php
 													foreach ($action->users as $user) {
 														?>
-														<tr onclick="post('console.php',{'users':null,'users_list[]':<?= $user['ID'] ?>,'modify':null})">
+														<tr onclick="post('console.php',{'users':null,'users_list[]':<?= $user['ID'] ?>,'update':null})">
 															<td><?= $user["FIRSTNAME"] ?></td>
 															<td><?= $user["LASTNAME"] ?></td>
 															<td><?= $user["EMAIL"] ?></td>
@@ -354,22 +364,11 @@
 												?>
 											</tbody>
 										</table>
-										<div class="control-bar">
-											<a data-toggle="collapse" data-target="#controls">Control</a>
-											<div id="controls">
-												<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name">Add New User</button>
-												<button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-							<?php
-							}
-							else if (!empty($action->members))
-							{
-								?>
-									<div class='form-workshops'>
+										<?php
+										}
+										if (!empty($action->members))
+										{
+										?>
 										<h2>Family Members</h2>
 										<table>
 											<thead>
@@ -383,7 +382,7 @@
 											<?php
 												foreach ($action->members as $member) {
 											?>
-												<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'modify':null})">
+												<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'update':null})">
 													<td><?= $member["firstname"] ?></td>
 													<td><?= $member["lastname"] ?></td>
 													<td><?= $member["score"] ?></td>
@@ -393,21 +392,23 @@
 											?>
 											</tbody>
 										</table>
+										<?php
+										}
+									?>
 										<div class="control-bar">
 											<a data-toggle="collapse" data-target="#controls">Control</a>
 											<div id="controls">
-												<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name">Add Users</button>
+												<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name">Add New User</button>
 												<button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button>
 											</div>
 										</div>
-									</div>
-								<?php
-
+									</form>
+								</div>
+							<?php
 							}
-						?>
-						<?php
 						}
 						?>
+						</div>
 				</div>
 			<?php
 		}
@@ -449,14 +450,14 @@
 				</div>
 				<?php
 			}
-			else if($action->modify)
+			else if($action->update)
 			{
 				?>
 				<div class="management-tab">
 					<div class="sheet">
 						<form id="profil-form" action="console.php" method="post">
 
-							<input type="hidden" name="modify">
+							<input type="hidden" name="update">
 							<input type="hidden" name="robots">
 							<input type="hidden" name="robots_list[]" value="<?=$action->robotMod["ROBOTS"]["ID"]?>"></td>
 
@@ -483,7 +484,7 @@
 									<?php
 								}
 							?>
-							<button type="submit" name="push" onclick="clicked=this.name">Modify</button>
+							<button type="submit" name="push" onclick="clicked=this.name">Apply</button>
 							<button type="submit" name="back" onclick="clicked=this.name">Back</button>
 						</form>
 					</div>
@@ -520,7 +521,7 @@
 
 								<div class="collapse" id="controls">
 									<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
-									<button type="submit" class="submit-btn"name="modify" onclick="clicked=this.name" value="true">Modify</button>
+									<button type="submit" class="submit-btn"name="update" onclick="clicked=this.name" value="true">Update</button>
 									<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'});" value="true">Delete</button>
 								</div>
 							</div>

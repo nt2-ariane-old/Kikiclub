@@ -20,6 +20,10 @@
 				{
 					$this->results = WorkshopDAO::getWorkshopsLikeName($name,false);
 				}
+				if(isset($_POST["search-all-feelds"]))
+				{
+					$this->results = FamilyDAO::searchAllUsersAndMembers($name);
+				}
 				if(isset($_POST["search-user"]))
 				{
 					$this->results = UsersDAO::getUsersLikeType($name,$_POST["type"]);

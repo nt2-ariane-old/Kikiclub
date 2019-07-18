@@ -87,7 +87,7 @@ function loadProfil($user,$action)
 								if($action->modFamily)
 								{
 									?>
-										<input type="hidden" name="modify">
+										<input type="hidden" name="update">
 										<input type="hidden" name="members_list[]" value="<?=$user["ID"]?>">
 									<?php
 								}
@@ -101,10 +101,10 @@ function loadProfil($user,$action)
 							}
 							else
 							{
-								if($action->modify)
+								if($action->update)
 								{
 									?>
-										<input type="hidden" name="action" value="modify">
+										<input type="hidden" name="action" value="update">
 									<?php
 								}
 								else if ($action->create)
@@ -222,7 +222,7 @@ function loadWorkshopsCreator($workshop, $action)
 					if($workshopExist)
 					{
 						?>
-							<input type="hidden" name="modify">
+							<input type="hidden" name="update">
 						<?php
 					}
 					else
@@ -264,16 +264,34 @@ function loadWorkshopsCreator($workshop, $action)
 								?>
 								</select>
 						</p>
-						<p><span class="input-title">Choose Workshop Image: </span><input name="workshopFile" type="file" /></p>
+						<div id="current-media">
+							<?php
+								if($workshopExist)
+								{
+									loadMedia($workshop);
+								}
+							?>
+						</div>
+						<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["MEDIA_PATH"]; } ?>">
+						<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["MEDIA_TYPE"]; } ?>">
 
-
-
+						<div id="drop-workshop" class="dropzone"></div>
+						<p><span class="input-title"><?= $action->trans->read("workshops","grades")  ?> : </span><select name="grade">
+								<?php
+									foreach ($action->grades as $grade) {
+										?>
+											<option value=<?= $grade["ID"]?> <?php if($workshop["ID_GRADE"] ==  $grade["ID"]) echo 'selected' ;?>><?= $grade["NAME"]?></option>
+										<?php
+									}
+								?>
+								</select>
+						</p>
 						<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php if($workshop["DEPLOYED"]) echo 'checked'; ?>></p>
 					</div>
 
 						<!-- <input type="hidden" name="MAX_FILE_SIZE" value="100000" /> -->
 
-						<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Modify'; else echo 'Add'; ?></button>
+						<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>
 						<button type="submit" class="delete-btn" name="back">Back</button>
 					</form>
 

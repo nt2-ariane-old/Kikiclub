@@ -3,6 +3,8 @@ let dropzone;
 let content_editor;
 const onPageLoad = () =>
 {
+	Dropzone.autoDiscover = false;
+
 
 	let editorElement = document.querySelector('#content');
 	let dropzoneElement = document.querySelector('#imagedropzone');
@@ -21,9 +23,13 @@ const onPageLoad = () =>
 	if(dropzoneElement != null)
 	{
 		$(function() {
-			dropzone = new Dropzone("div#imagedropzone", { url: "ajax/media-ajax.php",params: {
-				dir: "images/uploads/shared"
-		   }});
+			var dropzone = $("#imagedropzone").dropzone({
+				url: "ajax/media-ajax.php",
+				params: {
+					dir: "images/uploads/shared"
+			   	}
+			 });
+
 			dropzone.on("success", function(file,infos) {
 				infos = JSON.parse(infos);
 				console.log()

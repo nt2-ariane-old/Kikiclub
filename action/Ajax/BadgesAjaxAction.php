@@ -18,7 +18,7 @@
 				$this->results["id"] = BadgeDAO::getIdFromLastCreated();
 
 			}
-			if(isset($_POST["modify"]))
+			if(isset($_POST["update"]))
 			{
 				$id = $_POST["id"];
 				$badge = BadgeDAO::getBadgeByID($id);

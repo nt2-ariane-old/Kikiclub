@@ -1,10 +1,48 @@
+let dropzone;
+
+Dropzone.autoDiscover = false;
+
 const onPageLoad = () =>
 {
+	Dropzone.autoDiscover = false;
+
 	document.addEventListener("click", (e) => {
 		closeAllLists(e.target);
 	});
 
 
+	if(document.querySelector("#drop-workshop") != null)
+	{
+		$(function() {
+			dropzone = new Dropzone("div#drop-workshop",
+				{ url: "ajax/media-ajax.php",
+					params: {
+						dir: "images/uploads/workshops"
+					 }
+				});
+			dropzone.on("success", function(file,infos) {
+				infos = JSON.parse(infos);
+				console.log()
+				if(typeof(infos) === "string")
+				{
+					alert(infos);
+				}
+				else
+				{
+					let media_path = document.getElementById('media_path');
+					media_path.value = infos["PATH"];
+
+					let media_type = document.getElementById('media_type');
+					media_type.value = infos["TYPE"];
+
+					let media = document.querySelector("#current-media");
+					media.innerHTML = "";
+
+					loadMedia({"MEDIA_PATH":infos["PATH"],"MEDIA_TYPE":infos["TYPE"]},media);
+				}
+			});
+		})
+	}
 
 	$('table.memberTable th') .click(
 		function() {
@@ -19,6 +57,14 @@ const onPageLoad = () =>
 	)
 
 	activateDraggable();
+
+	let nodeAll = document.getElementById('search-all');
+		if(nodeAll != null)
+		{
+			nodeAll.addEventListener("keyup",function(event){
+				searchAll(nodeAll,event.keyCode);
+			 });
+		}
 
 	let feelds = ['firstname','lastname','email'];
 	feelds.forEach(feeld => {
@@ -74,11 +120,55 @@ const searchUsers = (node,type,keycode) =>
 			minLength: 0,
 			select: function( event, ui ) {
 				node.value = ui.item.label;
-				post("console.php",{"modify":null,"users":null,"users_list[]":ui.item.value})
+				post("console.php",{"update":null,"users":null,"users_list[]":ui.item.value})
 			},
 			response: function (event, ui) {
 				users = JSON.stringify(ui.content)
 
+    	}
+		});
+	} );
+}
+let all_list = [];
+const searchAll = (node,keycode) =>
+{
+	if(keycode === 13)
+	{
+		post("console.php",{"list":null,"users_and_member_list":all_list});
+	}
+	$( function() {
+		id = "#" + node.id;
+		$( id).autocomplete({
+			source: function(request,response)
+			{
+				$.ajax({
+					type: "POST",
+					url:"ajax/search-ajax.php",
+					data: {
+						'name':node.value,
+						'search-all-feelds': true
+					},
+					dataType: 'json',
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			minLength: 0,
+			select: function( event, ui ) {
+				node.value = ui.item.label;
+				if(ui.item.type == "user")
+				{
+					post("console.php",{"update":null,"users":null,"users_list[]":ui.item.value})
+
+				}
+				if(ui.item.type == "member")
+				{
+					post("console.php",{"update":null,"users":null,"members_list[]":ui.item.value})
+				}
+			},
+			response: function (event, ui) {
+				all_list = JSON.stringify(ui.content);
     	}
 		});
 	} );
@@ -112,7 +202,7 @@ const searchMember = (node,type,keycode) =>
 			minLength: 0,
 			select: function( event, ui ) {
 				node.value = ui.item.label;
-				post("console.php",{"modify":null,"users":null,"members_list[]":ui.item.value})
+				post("console.php",{"update":null,"users":null,"members_list[]":ui.item.value})
 			},
 			response: function (event, ui) {
 				members = JSON.stringify(ui.content)

@@ -99,7 +99,7 @@
 .workshop .type .content {
   position: relative;
   z-index: 5;
-  background-color: #d6da8f;
+  background-color: #d17450;
   display: block;
   border-top: 3px solid black;
   border-bottom: 3px solid black;
@@ -116,13 +116,13 @@
 }
 
 .workshop .type.ribbon:before {
-  border-color: #d1d393 #d1d393 #d1d393 transparent;
+  border-color: #cf9156 #cf9156 #cf9156 transparent;
   left: -25px;
   border-width: 17px;
 }
 
 .workshop .type.ribbon:after {
-  border-color: #d1d393 transparent #d1d393 #d1d393;
+  border-color: #cf9156 transparent #cf9156 #cf9156;
   right: -25px;
   border-width: 17px;
 }

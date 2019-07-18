@@ -58,10 +58,6 @@
 					$this->complete_name  .= " : " . $type_name ;
 					$this->stateSearch = $_POST["type"];
 				}
-				else
-				{
-					header("location:member-home.php");
-				}
 			}
 
 

@@ -3,7 +3,7 @@
 	class ShowUsersAction {
 
 		public $create;
-		public $modify;
+		public $update;
 
 		public $avatars;
 		public $genders;
@@ -14,7 +14,7 @@
 		public $page_name = 'show-users';
 		public function __construct() {
 			$this->create = false;
-			$this->modify = false;
+			$this->update = false;
 		}
 
 		public function execute() {
@@ -39,9 +39,9 @@
 				{
 					$this->create = true;
 				}
-				else if($_POST["action"] == "modify")
+				else if($_POST["action"] == "update")
 				{
-					$this->modify = true;
+					$this->update = true;
 				}
 			}
 
@@ -71,7 +71,7 @@
 				}
 
 			}
-			else if($this->modify)
+			else if($this->update)
 			{
 				$this->avatars = FamilyDAO::loadAvatar();
 				if(!empty($_SESSION["member"]))

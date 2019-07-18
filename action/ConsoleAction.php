@@ -13,6 +13,7 @@
 
 		public $users;
 		public $members;
+		public $all_searched;
 
 		public $userMod;
 		public $genders;
@@ -27,7 +28,7 @@
 		public $difficulties;
 		public $robots;
 		//differentes fonctions d'administrations (true si utiliser, false si non)
-		public $modify;
+		public $update;
 		public $add;
 		public $addFamily;
 		public $modFamily;
@@ -50,7 +51,7 @@
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console", "Admin Console");
 			$this->add = false;
-			$this->modify=false;
+			$this->update=false;
 
 			$this->addFamily=false;
 			$this->modFamily=false;
@@ -187,24 +188,24 @@
 					}
 				}
 			}
-			else if(isset($_POST['modify']) && !isset($_POST['back']))
+			else if(isset($_POST['update']) && !isset($_POST['back']))
 			{
-				$this->modify = true;
+				$this->update = true;
 				if(!empty($_POST['members_list']))
 				{
-					$this->modifyMember();
+					$this->updateMember();
 				}
 				else if($this->pageWorkshops)
 				{
-					$this->modifyWorkshop();
+					$this->updateWorkshop();
 				}
 				else if($this->pageUsers)
 				{
-					$this->modifyUser();
+					$this->updateUser();
 				}
 				else if ($this->pageRobots)
 				{
-					$this->modifyRobot();
+					$this->updateRobot();
 				}
 			}
 			else if($this->pageUsers && isset($_POST['assign']) && !isset($_POST['back']) && !empty($_POST['members_list']))
@@ -254,6 +255,26 @@
 					}
 
 				}
+				if(!empty($_POST["users_and_member_list"]))
+				{
+					$results =json_decode($_POST["users_and_member_list"],true);
+					foreach ($results as $result) {
+						$id = $result["value"];
+
+						if($result["type"] == "member")
+						{
+							$this->members[] = FamilyDAO::selectMember($id);
+						}
+						if($result["type"] == "user")
+						{
+							$this->users[] = UsersDAO::getUserWithID($id);
+
+						}
+					}
+					var_dump($results);
+
+
+				}
 			}
 
 		}
@@ -299,7 +320,7 @@
 			}
 			header("Location:console.php");
 		}
-		private function modifyUser()
+		private function updateUser()
 		{
 
 			if(!empty($_POST['users_list']))
@@ -314,10 +335,10 @@
 			}
 		}
 
-		private function modifyMember()
+		private function updateMember()
 		{
 
-			$this->modify = false;
+			$this->update = false;
 			$this->modFamily = true;
 			$this->familyMod = FamilyDAO::selectMember($_POST['members_list'][0]);
 			$this->avatars = FamilyDAO::loadAvatar();
@@ -343,27 +364,15 @@
 			}
 		}
 
-		private function modifyWorkshop()
+		private function updateWorkshop()
 		{
 			if(!empty($_POST['workshops_list']))
 			{
 				$this->workshopMod = WorkshopDAO::selectWorkshop(intval($_POST['workshops_list'][0]));
 				if(isset($_POST['push']))
 				{
-					$target_path = "uploads/";
-					$target_path = $target_path . basename( $_FILES['workshopFile']['name']);
-					$type =  pathinfo($target_path, PATHINFO_EXTENSION);
-
-					if($_FILES['workshopFile']['error'] == 2)
-					{
-						$this->error = true;
-						$this->errorMsg = "Uploaded file is too big...";
-					}
-					move_uploaded_file($_FILES['workshopFile']['tmp_name'], $target_path);
-
-					WorkshopDAO::updateWorkshop(intval($_POST['workshops_list'][0]),$_POST['name'],$_POST['content'],$target_path,$type,$_POST['difficulty'],$_POST['robot']);
+					WorkshopDAO::updateWorkshop(intval($_POST['workshops_list'][0]),$_POST['name'],$_POST['content'],$_POST['media_path'],$_POST['media_type'],$_POST['difficulty'],$_POST['robot'],$_POST['grade']);
 					header('location:console.php');
-
 				}
 			}
 		}
@@ -378,7 +387,7 @@
 			header('location:console.php');
 
 		}
-		private function modifyRobot()
+		private function updateRobot()
 		{
 			if(!empty($_POST["robots_list"]))
 			{
@@ -433,18 +442,11 @@
 
 		private function addWorkshop()
 		{
-			$target_path = "uploads/";
-			$target_path = $target_path . basename( $_FILES['workshopFile']['name']);
-			if($_FILES['workshopFile']['error'] == 2)
-			{
-				$this->error = true;
-				$this->errorMsg = "Uploaded file is too big...";
-			}
-			$type =  pathinfo($target_path, PATHINFO_EXTENSION);
-			move_uploaded_file($_FILES['workshopFile']['tmp_name'], $target_path);
+
+
 
 			try {
-				WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$target_path, $type,$_POST['difficulty'],$_POST['robot']);
+				WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$_POST['media_path'], $_POST['media_type'],$_POST['difficulty'],$_POST['robot'],$_POST['grade']);
 				$this->workshopAdded = true;
 				$this->workshopMod  = WorkshopDAO::getWorkshopByNameAndContent($_POST['name'],$_POST['content']);
 			} catch (\Throwable $th) {

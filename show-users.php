@@ -24,7 +24,7 @@
 					</div>
 				<?php
 			}
-			else if($actionUser->modify)
+			else if($actionUser->update)
 			{
 				?>
 					<?php

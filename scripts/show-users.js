@@ -170,6 +170,6 @@ const addNewMember = (container) => {
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector('button').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"action":"modify"})');
+	node.querySelector('button').setAttribute("onclick",'post("users.php",{"member":'+member["id"]+',"action":"update"})');
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }
