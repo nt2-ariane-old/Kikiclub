@@ -103,7 +103,15 @@
 					<?php
 				}
 			?>
+			<?php
+				if(!empty($action->stateSearch))
+				{
+					?>
 			<script >setSearchParams('states',<?=$action->stateSearch?>)</script>
+
+					<?php
+				}
+			?>
 
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

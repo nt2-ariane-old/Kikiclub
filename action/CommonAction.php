@@ -1,5 +1,6 @@
 <?php
 	session_start();
+
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/constante.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/Tools/Translator.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
@@ -26,7 +27,7 @@
 
 		public $detect;
 
-
+		public $admin_mode;
 
 
 		public function __construct($page_visibility,$page_name,$complete_name)
@@ -37,6 +38,7 @@
 			$this->default_visibility = 1;
 			$this->url = $_SERVER['HTTP_HOST'];
 			$this->detect = new Mobile_Detect;
+			$this->admin_mode = false;
 		}
 
 		public function generateFormToken($form) {
@@ -45,17 +47,6 @@
 
 			 return $token;
 		}
-
-		public function checkPost()
-		{
-			$whitelist = array('token','req-name','req-email','typeOfChange','urgency','URL-main','addURLS', 'curText', 'newText', 'save-stuff');
-			foreach ($_POST as $key=>$item) {
-				if (!in_array($key, $whitelist)) {
-					die("Hack-Attempt detected. Please use only the fields in the form");
-				}
-			}
-		}
-
 		public function verifyFormToken($form) {
 			$valide = true;
 
@@ -75,27 +66,13 @@
 		}
 
 
-		public function testConnectionToken()
-		{
-			if(!empty($_GET["user_t"]))
-			{
-				$id = UsersDAO::getUserFromToken($_GET["user_t"]);
-				if(!empty($id))
-				{
-					$user = UsersDAO::getUserWithID($id);
-				 	$_SESSION["visibility"] = $user["VISIBILITY"];
-				 	$_SESSION["id"] = $user["ID"];
-				 	UsersDAO::deleteToken($_GET["user_t"]);
-				}
 
-			}
-		}
 		public function isLoggedIn() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}
 		public function isFamilyMember()
 		{
-			return !empty($_SESSION["member"]);
+			return !empty($_SESSION["member_id"]);
 		}
 		public function isAdmin() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_CUSTOMER_USER;
@@ -103,7 +80,8 @@
 
 		public function execute()
 		{
-			$this->testConnectionToken();
+			//check if user want to logout
+			error_reporting(E_ALL);
 
 			if(!empty($_GET["logout"]))
 			{
@@ -114,17 +92,63 @@
 				exit;
 			}
 
-
+			//check what is the current visibility and
+			// if the page visibility is greater than the user visibility redirect to home page
 			if(empty($_SESSION["visibility"]))
 			{
 				$_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
 			}
+
 			if($_SESSION["visibility"] < $this->page_visibility)
 			{
 				header("location:index.php");
 				exit;
 			}
 
+			//check if they're is a connection token and test it
+			if(!empty($_GET["user_t"]))
+			{
+				$id = UsersDAO::getUserFromToken($_GET["user_t"]);
+
+				//if token is working
+				if(!empty($id))
+				{
+					//get user info
+					$user = UsersDAO::getUserWithID($id);
+				 	$_SESSION["visibility"] = $user["VISIBILITY"];
+					$_SESSION["id"] = $user["ID"];
+
+					//delete token
+				 	UsersDAO::deleteToken($_GET["user_t"]);
+				}
+			}
+
+
+			//Check if admin want to be in admin mode
+			if($this->isAdmin())
+			{
+				if(!isset($_SESSION["admin_mode"]))
+				{
+					$_SESSION["admin_mode"] = false;
+				}
+
+				if(!empty($_GET["admin"]))
+				{
+					if($_GET["admin"] === "true")
+					{
+
+						$_SESSION["admin_mode"] = true;
+					}
+					else
+					{
+						$_SESSION["admin_mode"] = false;
+					}
+
+				}
+				$this->admin_mode = $_SESSION['admin_mode'];
+
+			}
+			//check language and translate
 			if(empty($_SESSION["language"]))
 			{
 				$_SESSION["language"] = "fr";
@@ -141,19 +165,21 @@
 
 
 
+			//check if the family member exist, and if yes, show is name
 			if($this->isFamilyMember())
 			{
-
-				$member = FamilyDAO::selectMember($_SESSION["member"]);
+				$member = FamilyDAO::selectMember($_SESSION["member_id"]);
 				if($member == null)
 				{
-					unset($_SESSION["member"]);
+					unset($_SESSION["member_id"]);
 				}
 				else
 				{
-					$this->member_name = $member["firstname"];
+					$this->member_name = $member["member_id"];
 				}
 			}
+
+			//execute page action
 			$this->executeAction();
 		}
 

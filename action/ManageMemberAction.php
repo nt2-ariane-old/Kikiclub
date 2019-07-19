@@ -1,48 +1,36 @@
 <?php
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
-	class ShowUsersAction {
 
+	class ManageMemberAction extends CommonAction {
+
+		//mode
 		public $create;
 		public $update;
 
+		//utilities
 		public $avatars;
 		public $genders;
 
+		//member info
+		public $member;
+
+		//error management
 		public $error;
-		public $family_member;
 		public $errorMsg;
-		public $page_name = 'show-users';
+
+
 		public function __construct() {
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER);
 			$this->create = false;
 			$this->update = false;
 		}
 
-		public function execute() {
-			$script = $_SERVER['SCRIPT_NAME'];
+		protected function executeAction() {
 
-			 if($script == "/kikiclub/web/show-users.php")
-			 {
-			 	header('Location:users.php');
-			 } else if($script == "/show-users.php")
-			 {
-			 	header('Location:users.php');
-			 }
-
-
-
-
-			 $this->genders = FamilyDAO::getGenders();
-
-			 if(!empty($_POST["action"]))
+			if(empty($_SESSION["member_id"]))
 			{
-				if($_POST["action"] == "create")
-				{
-					$this->create = true;
-				}
-				else if($_POST["action"] == "update")
-				{
-					$this->update = true;
-				}
+				header("Location:users.php");
 			}
 
 			if($this->create)
@@ -74,17 +62,17 @@
 			else if($this->update)
 			{
 				$this->avatars = FamilyDAO::loadAvatar();
-				if(!empty($_SESSION["member"]))
+				if(!empty($_SESSION["member_id"]))
 				{
 
-					$this->family_member = FamilyDAO::selectMember($_SESSION["member"]);
+					$this->family_member = FamilyDAO::selectMember($_SESSION["member_id"]);
 					if(isset($_POST["form"]))
 					{
 						if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))
 							{
-								FamilyDAO::updateFamilyMember($_SESSION["member"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+								FamilyDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
 								?>
 									<script>window.location = 'users.php'</script>
 								<?php
@@ -97,8 +85,8 @@
 					}
 					if(isset($_POST["delete"]))
 					{
-						FamilyDAO::deleteFamilyMember($_SESSION["member"]);
-						unset($_SESSION["member"]);
+						FamilyDAO::deleteFamilyMember($_SESSION["member_id"]);
+						unset($_SESSION["member_id"]);
 						?>
 							<script>window.location="users.php";</script>
 						<?php
@@ -108,7 +96,5 @@
 
 
 			}
-
-
 		}
 	}

@@ -73,7 +73,7 @@
 									<table class='table table-striped table-hover' style="width:100%">
 										<thead>
 											<tr>
-												<th >Select</th>
+												<th onclick="checkAll()" >Select</th>
 												<th>Image</th>
 												<th onclick="sortingTable('workshops-table',2)">Name</th>
 												<th onclick="sortingTable('workshops-table',3)">Content</th>
@@ -92,6 +92,7 @@
 										<div class="collapse" id="controls">
 											<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name" value="true">Add</button>
 											<button type="submit" class="submit-btn" name="update" onclick="clicked=this.name" value="true">Update</button>
+											<button type="submit" class="submit-btn" name="deployed" onclick="clicked=this.name" value="true">Deployed</button>
 											<button type="submit" class="delete-btn"name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'});" value="true">Delete</button>
 										</div>
 									</div>

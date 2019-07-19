@@ -155,7 +155,11 @@
 			if($action->isLoggedIn())
 			{
 				if($action->isAdmin()){
+					echo 'is admin : ' . $action->admin_mode;
 				?>
+
+					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
+
 					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
 						<ul class="dropdown-menu">
 							<form action="console.php" method="post">
@@ -165,6 +169,7 @@
 							</form>
 						</ul>
 					</li>
+
 				<?php
 				}
 				?>

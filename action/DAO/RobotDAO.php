@@ -13,7 +13,8 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				//$content[$row["ID"]] = $row;
+				$content[] = $row;
 			}
 
 			return $content;

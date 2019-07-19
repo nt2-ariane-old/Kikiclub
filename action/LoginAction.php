@@ -39,9 +39,6 @@
 						{
 							$_SESSION["visibility"] = $infos["VISIBILITY"];
 							$_SESSION["id"] = $infos["ID"];
-							$_SESSION["firstname"] = $infos["firstname"];
-							$_SESSION["lastname"] = $infos["lastname"];
-
 						}
 					} else {
 						$this->error = true;

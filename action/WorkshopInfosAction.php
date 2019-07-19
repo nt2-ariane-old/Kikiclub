@@ -17,9 +17,9 @@
 				$this->show_workshop = true;
 				$this->questions = WorkshopDAO::selectWorkshopQuestions($id);
 				$this->member_workshops = [];
-				if(!empty($_SESSION["member"]))
+				if(!empty($_SESSION["member_id"]))
 				{
-					$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
+					$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 					$existe = false;
 					foreach ($this->member_workshops as $item) {
 						if($id == $item["ID_WORKSHOP"])
@@ -30,7 +30,7 @@
 					}
 					if(!$existe)
 					{
-						WorkshopDAO::addMemberWorkshop($_SESSION["member"],$id,2);
+						WorkshopDAO::addMemberWorkshop($_SESSION["member_id"],$id,2);
 					}
 				}
 

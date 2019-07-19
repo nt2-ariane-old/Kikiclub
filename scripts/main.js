@@ -90,7 +90,14 @@ let closeProfilesBox = () =>
 	box.style.display = "none";
 }
 
+let change_page = (path, params) => {
+
+	console.log("changing page");
+  set_value(params);
+  window.location = path;
+}
 let post = (path, params, method='post') => {
+
   const form = document.createElement('form');
   form.method = method;
   form.action = path;
@@ -265,14 +272,28 @@ const refuse = () =>
 	return false;
 }
 
+const set_value = (values) =>
+{
+	if(isDict(values))
+	{
+		values['set_value'] = null;
+		$.ajax({
+			type: "POST",
+			url:'ajax/basic-ajax.php',
+			data:values,
+			dataType: 'json'
+		});
+	}
+}
 const showProfiles = () =>
 {
 		 let node = document.getElementById("profile-box");
 		 node.style.display = "block";
 }
 
-
-
+const isDict = (v) => {
+    return typeof v==='object' && v!==null && !(v instanceof Array) && !(v instanceof Date);
+}
 
 const sortingTable = (tableName,n) => {
   let table = document.getElementById(tableName);

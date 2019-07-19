@@ -64,20 +64,56 @@
 			$this->workshopAdded = false;
 		}
 
-		// protected function auto_generate_users()
-		// {
-		// 	for ($i=0; $i < 10000; $i++) {
-		// 		$firstname = $this->generateString(16);
-		// 		$lastname = $this->generateString(16);
-		// 		$email = $this->generateString(10) . "@test.com";
-		// 		UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null);
-		// 	}
-		// }
+		protected function auto_generate_users($nb)
+		{
+			for ($i=0; $i < $nb; $i++) {
+				$firstname = $this->generateString(16);
+				$lastname = $this->generateString(16);
+				$email = $this->generateString(10) . "@test.com";
+				UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null);
+			}
+		}
+
+		protected function auto_generate_workshops($nb)
+		{
+		 	for ($i=0; $i < $nb; $i++) {
+		 		$name = $this->generateString(16);
+				$content = $this->generateString(100);
+
+				$grade = $this->grades[rand(0,sizeof($this->grades) -1)]["ID"];
+				$diff = $this->difficulties[rand(0,sizeof($this->difficulties) -1 )]["ID"];
+				$robot = $this->robots[rand(0,sizeof($this->robots) - 1) ]["ID"];
+				$media_path = "images/uploads/workshops/logoNom.png";
+				$media_type = "png";
+				$deployed = rand(0,1);
+		 		WorkshopDAO::addWorkshop($name, $content, $media_path, $media_type,$diff,$robot,$grade);
+			}
+		}
+
+		protected function auto_generate_robots($nb)
+		{
+		 	for ($i=0; $i < $nb; $i++) {
+				 $name = $this->generateString(8);
+
+				 $grade = $this->grades[rand(0,sizeof($this->grades) -1)]["ID"];
+				 RobotDAO::insertRobot($name,$grade);
+				 $id = RobotDAO::getRobotByName($name)["ID"];
+					$score = rand(1,20);
+				 foreach ($this->difficulties as $diff) {
+					 RobotDAO::insertRobotScoreByDifficulty($id,$diff["ID"],$score);
+					 $score += rand(1,5);
+
+				 }
+
+			}
+			$this->robots = RobotDAO::getRobots();
+
+		}
 		protected function generateString($nb)
 		{
 		  $final_string = "";
 
-		  $range = "_!@#$^~abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		  $range = "abcdefghijklmnopqrstuvwxyz -";
 		  $length = strlen($range);
 
 		  for ($i = 0; $i < $nb; $i++)
@@ -92,7 +128,32 @@
 		{
 
 			$this->preparePage();
+
+			if(!empty($_GET["generate"]))
+			{
+				$gen = $_GET["generate"];
+				if(!empty($_GET["nb"]))
+				{
+					$nb = intval($_GET["nb"]);
+					if($gen == "robots")
+					{
+						$this->auto_generate_robots($nb);
+					}
+					if($gen == "users")
+					{
+						$this->auto_generate_users($nb);
+					}
+					if($gen == "workshops")
+					{
+						$this->auto_generate_workshops($nb);
+					}
+				}
+
+			}
+
 			$this->checkAction();
+
+
 		}
 
 		//Prepare the page before doing action
@@ -102,8 +163,8 @@
 			{
 				$_POST = $_SESSION["POST"];
 				unset($_SESSION["POST"]);
-
 			}
+
 			$this->workshopsNotDeployed = WorkshopDAO::getWorkshops("none",false,false);
 			$this->workshopsDeployed = WorkshopDAO::getWorkshops("none",false,true);
 
@@ -193,6 +254,9 @@
 				$this->update = true;
 				if(!empty($_POST['members_list']))
 				{
+					$_SESSION["admin_member_id"] =$_POST['members_list'][0];
+					$_SESSION["current_mode"] = "update_member";
+					unset($_POST['members_list']);
 					$this->updateMember();
 				}
 				else if($this->pageWorkshops)
@@ -237,7 +301,6 @@
 
 				if(!empty($_POST["users_list"]))
 				{
-
 					$searchUsers =json_decode($_POST["users_list"],true);
 					foreach ($searchUsers as $user) {
 						$id = $user["value"];
@@ -271,12 +334,18 @@
 
 						}
 					}
-					var_dump($results);
 
 
 				}
-			}
 
+			}
+			else if(isset($_POST["deployed"]))
+			{
+				if(!empty($_POST["workshops_list"]))
+				{
+					$this->deployWorkshops();
+				}
+			}
 		}
 
 		//All Possible Actions
@@ -289,6 +358,13 @@
 					WorkshopDAO::deleteWorkshop($workshop);
 				}
 				header("Location:console.php");
+			}
+		}
+		private function deployWorkshops()
+		{
+			$list = $_POST["workshops_list"];
+			foreach ($list as $workshop) {
+				WorkshopDAO::setDeployed($workshop,"true");
 			}
 		}
 		private function deleteRobots()
@@ -340,7 +416,8 @@
 
 			$this->update = false;
 			$this->modFamily = true;
-			$this->familyMod = FamilyDAO::selectMember($_POST['members_list'][0]);
+
+			$this->familyMod = FamilyDAO::selectMember($_SESSION["admin_member_id"]);
 			$this->avatars = FamilyDAO::loadAvatar();
 			if(isset($_POST["form"]))
 			{

@@ -8,9 +8,15 @@
 		}
 
 		protected function executeAction() {
-			if(!empty($_POST["member"]))
+
+			if(isset($_POST["set_value"]))
 			{
-				$_SESSION["member"] = $_POST["member"];
+				unset($_POST["set_value"]);
+
+				foreach ($_POST as $key => $value) {
+					$_SESSION[$key] = $value;
+				}
 			}
+
 		}
 	}

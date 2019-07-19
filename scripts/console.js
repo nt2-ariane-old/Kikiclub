@@ -523,7 +523,39 @@ const searchWorkshop = () =>
 	});
 
 }
+const checkAll = () =>
+{
+	let checks = document.querySelectorAll("input[type='checkbox']");
+	let checking = true;
+	let invert = false;
+	while(checking)
+	{
+		checking = false;
+		let counter = 0;
+		checks.forEach(element => {
+			if(!element.hasAttribute('checked'))
+			{
+				counter++;
+			}
 
+			if(invert)
+			{
+				element.removeAttribute('checked');
+			}
+			else
+			{
+				element.setAttribute('checked','checked');
+			}
+		});
+		console.log(counter);
+		if(counter == 0 && !invert)
+		{
+			invert = true;
+			checking = true;
+		}
+	}
+
+}
 const fillUserTable = (data) =>
 {
 	let table = document.querySelector("#table-users");

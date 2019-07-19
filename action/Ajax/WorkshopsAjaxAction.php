@@ -21,9 +21,9 @@
 			}
 			if(!empty($_SESSION["id"]))
 			{
-				if(!empty($_SESSION["member"]))
+				if(!empty($_SESSION["member_id"]))
 				{
-					$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
+					$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 				}
 			}
 
@@ -51,9 +51,11 @@
 				}
 			}
 			if(!empty($_POST["search"]))
-			{
+		{
+
 				if(!empty($_POST["difficulties"]))
 				{
+					$this->results["search"]["difficulties"] = $_POST["difficulties"];
 					$difficulties = json_decode($_POST["difficulties"],true);
 					if(sizeof($difficulties) > 0)
 					{
@@ -68,13 +70,12 @@
 								}
 							}
 						}
-
-
 						$this->results["workshops"] = $temp;
 					}
 				}
 				if(!empty($_POST["grades"]))
 				{
+					$this->results["search"]["grades"] = $_POST["grades"];
 					$grades = json_decode($_POST["grades"],true);
 					if(sizeof($grades) > 0)
 					{
@@ -96,21 +97,20 @@
 				}
 				if(!empty($_POST["states"]))
 				{
+					$this->results["search"]["states"] = $_POST["states"];
 
 					$states = json_decode($_POST["states"]);
-					if(!empty($_SESSION["member"]))
+					if(!empty($_SESSION["member_id"]))
 					{
 					$has_new = false;
 					if(sizeof($states) > 0)
 					{
 						$temp = [];
 
-						$member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member"]);
-						$new_workshops =WorkshopDAO::selectMemberNewWorkshop($_SESSION["member"]);
+						$member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+						$new_workshops =WorkshopDAO::selectMemberNewWorkshop($_SESSION["member_id"]);
 						foreach ($states as $state)
 						{
-
-
 							foreach ($this->results["workshops"] as $workshop)
 							{
 								foreach ($member_workshops as $m_workshop)
@@ -135,16 +135,15 @@
 
 								}
 							}
-
-
-
-					}
-						$this->results["workshops"] = $temp;
+							$this->results["workshops"] = $temp;
+						}
 					}
 				}
 				}
 				if(!empty($_POST["robots"]))
 				{
+					$this->results["search"]["robots"] = $_POST["robots"];
+
 					$robots = json_decode($_POST["robots"]);
 
 					if(sizeof($robots) > 0)

@@ -50,13 +50,13 @@
 			$this->complete_name = $this->trans->read("main","workshops");
 
 
-			if(!empty($_SESSION["member"]))
+			if(!empty($_SESSION["member_id"]))
 			{
-				if(!empty($_POST["type"]))
+				if(!empty($_SESSION["workshop_type"]))
 				{
-					$type_name = $this->workshopStates[$_POST["type"]]["NAME"];
+					$type_name = $this->workshopStates[$_SESSION["workshop_type"]]["NAME"];
 					$this->complete_name  .= " : " . $type_name ;
-					$this->stateSearch = $_POST["type"];
+					$this->stateSearch = $_SESSION["workshop_type"];
 				}
 			}
 

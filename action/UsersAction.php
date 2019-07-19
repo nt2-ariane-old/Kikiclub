@@ -9,13 +9,11 @@
 
 		protected function executeAction() {
 			$this->complete_name = $this->trans->read("main","home");
-			if(empty($_POST))
-			{
-				if(!empty($_SESSION["member"]))
-				{
-					unset($_SESSION["member"]);
-				}
-			}
+
+			unset($_SESSION["member_id"]);
+
+			$this->genders = FamilyDAO::getGenders();
+
 
 		}
 	}

@@ -155,7 +155,8 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				$content[] = $row;
+				//$content[$row["ID"]] = $row;
 			}
 
 			return $content;
@@ -170,7 +171,8 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				//$content[$row["ID"]] = $row;
+				$content[] = $row;
 			}
 
 			return $content;
@@ -215,7 +217,8 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				$content[] = $row;
+				// $content[$row["ID"]] = $row;
 			}
 
 			return $content;
@@ -230,7 +233,8 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				// $content[$row["ID"]] = $row;
+				$content[] = $row;
 			}
 
 			return $content;
@@ -240,7 +244,7 @@
 		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$difficulty,$id_robot,$grade){
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_ROBOT,ID_DIFFICULTY,ID_GRADE) VALUES (?,?,?,?,?,?)");
+			$statement = $connection->prepare("INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_ROBOT,ID_DIFFICULTY,ID_GRADE) VALUES (?,?,?,?,?,?,?)");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
