@@ -283,7 +283,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE NAME=? AND CONTENT=? AND deployed = TRUE");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE NAME=? AND CONTENT=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);

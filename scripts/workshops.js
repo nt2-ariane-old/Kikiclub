@@ -77,8 +77,10 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 				const workshop = workshops[i];
 				let divWorkshop = document.createElement('div');
 					divWorkshop.setAttribute('class', 'workshop col-sm-'+ 12/nbWorkshops )
-					let link = document.createElement('a');
-					link.href = "workshop-infos.php?workshop=" + workshop["ID"];
+					let link = document.createElement('button');
+
+					link.setAttribute("onclick",'change_page("workshop-infos.php",{"workshop_id":'+workshop["ID"]+'})');
+
 					link.setAttribute('class','link normal');
 						if(isFamilyMember)
 						{

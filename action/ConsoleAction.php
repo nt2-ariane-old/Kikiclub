@@ -235,10 +235,7 @@
 				$this->add = true;
 				if(isset($_POST['push']))
 				{
-					if($this->pageWorkshops)
-					{
-						$this->addWorkshop();
-					}
+
 					else if($this->pageUsers)
 					{
 						$this->addUser();
@@ -252,44 +249,16 @@
 			else if(isset($_POST['update']) && !isset($_POST['back']))
 			{
 				$this->update = true;
-				if(!empty($_POST['members_list']))
-				{
-					$_SESSION["admin_member_id"] =$_POST['members_list'][0];
-					$_SESSION["current_mode"] = "update_member";
-					unset($_POST['members_list']);
-					$this->updateMember();
-				}
-				else if($this->pageWorkshops)
-				{
-					$this->updateWorkshop();
-				}
-				else if($this->pageUsers)
-				{
-					$this->updateUser();
-				}
-				else if ($this->pageRobots)
+
+				if ($this->pageRobots)
 				{
 					$this->updateRobot();
 				}
 			}
-			else if($this->pageUsers && isset($_POST['assign']) && !isset($_POST['back']) && !empty($_POST['members_list']))
-			{
-				$this->assignWorkshopToMember();
-			}
-			else if($this->pageUsers && isset($_POST['addFamily']) && !isset($_POST['back']) && !empty($_POST['users_list']))
-			{
-				$this->addMember();
-			}
+
+
 			else if(isset($_POST['delete']))
 			{
-				if($this->pageWorkshops)
-				{
-					$this->deleteWorkshops();
-				}
-				else if($this->pageUsers)
-				{
-					$this->deleteUsersAndMembers();
-				}
 				else if($this->pageRobots)
 				{
 					$this->deleteRobots();

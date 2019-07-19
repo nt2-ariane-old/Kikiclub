@@ -23,15 +23,7 @@
 				<div class="management-tab">
 
 					<?php
-						if($action->workshopAdded)
-						{
 
-							?>
-							<div style="background-color:white;color:green;">
-								Workshop Added!
-							</div>
-							<?php
-						}
 						if($action->add)
 						{
 							?>
@@ -48,11 +40,7 @@
 						{
 							?>
 								<div class="management-tab">
-									<div class="sheet">
-										<?php
-										loadWorkshopsCreator($action->workshopMod,$action);
-										?>
-									</div>
+
 								</div>
 							<?php
 						}

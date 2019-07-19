@@ -170,7 +170,6 @@
 					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
 						<ul class="dropdown-menu">
 							<form action="console.php" method="post">
-								<li> <button class="btn-link" name="users"><?= $action->trans->read("main","users") ?></button></li>
 								<li> <button class="btn-link" name="workshops"><?= $action->trans->read("main","workshops") ?></button></li>
 								<li> <button class="btn-link" name="robots"><?= $action->trans->read("main","robots") ?></button></li>
 							</form>

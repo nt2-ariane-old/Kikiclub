@@ -21,6 +21,7 @@
 			}
 			if(!empty($_SESSION["id"]))
 			{
+
 				if(!empty($_SESSION["member_id"]))
 				{
 					$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
@@ -29,24 +30,28 @@
 
 			if(!empty($_POST["id"]))
 			{
+
+
 				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);
+
 				$this->results["robots"] = RobotDao::getRobots();
 
 			}
 			if(!empty($_POST["sort"]))
 			{
+
 				switch ($_POST["sort"]) {
 					case 'none':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("none",false,true);
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("none",false,!$this->admin_mode);
 						break;
 					case 'ascName':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",true,true);
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",true,!$this->admin_mode);
 						break;
 					case 'descName':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",false,true);
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",false,!$this->admin_mode);
 						break;
 					case 'recents':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("ID",true,true);
+						$this->results["workshops"]=WorkshopDAO::getWorkshops("ID",true,!$this->admin_mode);
 						break;
 				}
 			}

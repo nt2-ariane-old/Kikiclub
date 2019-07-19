@@ -96,10 +96,10 @@
 
 			</div>
 			<?php
-				if($action->isAdmin())
+				if($action->admin_mode)
 				{
 					?>
-						<button>+</button>
+						<button onclick='change_page("workshop-infos.php",{"workshop_id":null})'>+</button>
 					<?php
 				}
 			?>

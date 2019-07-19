@@ -5,44 +5,52 @@
 	$action->execute();
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
-?>
 
-	<?php
-		if(!empty($action->workshop))
-		{
-			if($action->isLoggedIn())
+
+			if($action->admin_mode)
 			{
-				?>
-					<div class="workshop" id="workshop-infos">
-						<script>loadMedia(<?= json_encode($action->workshop) ?>,document.getElementById("workshop-infos") )</script>
-						<div class="infos" id="infos">
-						<h2><?= $action->workshop["NAME"] ?></h2>
-						<script>loadStars(<?= json_encode($action->workshop) ?>,document.getElementById("infos") )</script>
-
-
-						<p><?=  $action->workshop["CONTENT"]?></p>
-
-
+				if($action->added)
+				{
+					?>
+						<div style="background-color:green;color:white;">
+							Workshop Added!
 						</div>
+					<?php
+				}
+				?>
 
+					<div class="sheet">
+						<?php
+							loadWorkshopsCreator($action->workshop,$action);
+						?>
 					</div>
 				<?php
 			}
 			else
 			{
-				?>
-
-				<?php
-			}
+				if(!empty($action->workshop))
+				{
+					?>
+						<div class="workshop" id="workshop-infos">
+							<script>loadMedia(<?= json_encode($action->workshop) ?>,document.getElementById("workshop-infos") )</script>
+							<div class="infos" id="infos">
+								<h2><?= $action->workshop["NAME"] ?></h2>
+								<script>loadStars(<?= json_encode($action->workshop) ?>,document.getElementById("infos") )</script>
+								<p><?=  $action->workshop["CONTENT"]?></p>
+							</div>
+						</div>
+					<?php
+				}
+				else
+				{
+					?>
+						<h3>This Workshop doesn't exist...</h3>
+					<?php
+				}
 		}
-		else
-		{
-			?>
-				<div>No Workshop</div>
 
-				<script>window.location = "error.php?404";</script>
-			<?php
-		}
-	?>
-<?php
+		?>
+			<a href="workshops.php" class="return-btn">Back</a>
+		<?php
+
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

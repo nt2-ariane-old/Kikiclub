@@ -216,86 +216,74 @@ function loadWorkshopsCreator($workshop, $action)
 	if($workshop != null)
 		$workshopExist = true;
 	?>
-			<form action="console.php" id="workshop-form" method="post" enctype="multipart/form-data">
+	<form action="workshop-infos.php" id="workshop-form" method="post" enctype="multipart/form-data">
+		<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
+		<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
+		(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">512</div> left.
+
+		<br>
+		<div class="infos">
+			<p><span class="input-title"><?= $action->trans->read("workshops","difficulty") ?> : </span><select name="difficulty">
 				<?php
-					if($workshopExist)
+					foreach ($action->difficulties as $difficulty)
 					{
 						?>
-							<input type="hidden" name="update">
-						<?php
-					}
-					else
-					{
-						?>
-							<input type="hidden" name="add">
+							<option value=<?= $difficulty["ID"]?> <?php if($workshopExist && $workshop["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
 						<?php
 					}
 				?>
+			</select></p>
 
+			<p><span class="input-title"><?= $action->trans->read("workshops","robots") ?> : </span><select name="robot">
+				<?php
+					foreach ($action->robots as $robot)
+					{
+						?>
+							<option value=<?= $robot["ID"]?> <?php if($workshop["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
+						<?php
+					}
+				?>
+			</select></p>
 
-				<input type="hidden" name="workshops">
-				<input type="hidden" name="workshops_list[]" value="<?=$workshop["ID"]?>"></td>
+			<div id="current-media">
+				<?php
+					if($workshopExist)
+					{
+						loadMedia($workshop);
+					}
+				?>
+			</div>
 
-						<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
-						<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
-						(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">512</div> left.
+			<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["MEDIA_PATH"]; } ?>">
+			<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["MEDIA_TYPE"]; } ?>">
 
-						<br>
-						<div class="infos">
-						<p><span class="input-title"><?= $action->trans->read("workshops","difficulty") ?> : </span><select name="difficulty">
-								<?php
-									foreach ($action->difficulties as $difficulty) {
-										?>
-											<option value=<?= $difficulty["ID"]?> <?php if($workshopExist && $workshop["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
+			<div id="drop-workshop" class="dropzone"></div>
 
-										<?php
-									}
-								?>
-							</select>
-						</p>
-						<p><span class="input-title"><?= $action->trans->read("workshops","robots") ?> : </span><select name="robot">
-								<?php
-									foreach ($action->robots as $robot) {
-										?>
-											<option value=<?= $robot["ID"]?> <?php if($workshop["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
-										<?php
-									}
-								?>
-								</select>
-						</p>
-						<div id="current-media">
-							<?php
-								if($workshopExist)
-								{
-									loadMedia($workshop);
-								}
-							?>
-						</div>
-						<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["MEDIA_PATH"]; } ?>">
-						<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["MEDIA_TYPE"]; } ?>">
+			<p><span class="input-title"><?= $action->trans->read("workshops","grades")  ?> : </span><select name="grade">
+				<?php
+					foreach ($action->grades as $grade) {
+						?>
+							<option value=<?= $grade["ID"]?> <?php if($workshop["ID_GRADE"] ==  $grade["ID"]) echo 'selected' ;?>><?= $grade["NAME"]?></option>
+						<?php
+					}
+				?>
+			</select></p>
 
-						<div id="drop-workshop" class="dropzone"></div>
-						<p><span class="input-title"><?= $action->trans->read("workshops","grades")  ?> : </span><select name="grade">
-								<?php
-									foreach ($action->grades as $grade) {
-										?>
-											<option value=<?= $grade["ID"]?> <?php if($workshop["ID_GRADE"] ==  $grade["ID"]) echo 'selected' ;?>><?= $grade["NAME"]?></option>
-										<?php
-									}
-								?>
-								</select>
-						</p>
-						<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php if($workshop["DEPLOYED"]) echo 'checked'; ?>></p>
-					</div>
+			<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php if($workshop["DEPLOYED"]) echo 'checked'; ?>></p>
+		</div>
 
-						<!-- <input type="hidden" name="MAX_FILE_SIZE" value="100000" /> -->
+		<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>
 
-						<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>
-						<button type="submit" class="delete-btn" name="back">Back</button>
-					</form>
-
+		<?php
+			if($workshopExist)
+			{
+				?>
+					<button type="submit" class="delete-btn" name="delete">Delete</button>
+				<?php
+			}
+		?>
+	</form>
 	<?php
-
 }
 $nbWorkshops = 4;
 function loadWorkshopsCarousel($workshops,$name,$action,$title)
