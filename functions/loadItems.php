@@ -191,7 +191,6 @@ function loadProfil($user,$action)
 						if($action->page_name == 'console' && $userExist)
 						{
 							?>
-								<a class="return-btn" onclick="post('console.php',{'assign':true,'members_list[]':<?=$user['ID']?>})">Assign Workshop to family member</a>
 
 							<?php
 						}
@@ -199,7 +198,7 @@ function loadProfil($user,$action)
 						{
 							?>
 								<div>
-									<a class="return-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>
+									<a class="return-btn" href="<?= $action->previous_page ?>.php"><?= $action->trans->read("users","return") ?></a>
 								</div>
 							<?php
 						}

@@ -48,6 +48,14 @@
 						<script src="./scripts/<?= $action->page_name ?>.js"></script>
 					<?php
 				}
+				if($action->admin_mode)
+				{
+				?>
+						<link rel="stylesheet" href="css/admin.css">
+						<script src="./scripts/admin.js"></script>
+
+				<?php
+				}
 
 		?>
 		<!-- JQUERY -->
@@ -90,7 +98,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<body onload="loadModules(); onPageLoad();">
+<body onload="loadModules(); onPageLoad();<?php if($action->isAdmin()) echo 'adminLoad();'?>">
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
 
@@ -155,7 +163,6 @@
 			if($action->isLoggedIn())
 			{
 				if($action->isAdmin()){
-					echo 'is admin : ' . $action->admin_mode;
 				?>
 
 					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>

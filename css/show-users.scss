@@ -5,6 +5,7 @@
 	width: 100%;
 	margin: 0;
 	box-shadow: none;
+	min-height: calc(100vh - 80px - 2rem - 80px);
 
 }
 .sheet h2
@@ -123,7 +124,7 @@
 .child-info
 {
 	width:80vw;
-	height:100vw;
+	height: calc(100vh - 80px - 2rem - 4.8em - 80px);
 	margin:2em;
 	position:relative;
 	text-align: center;
@@ -359,14 +360,14 @@
 	{
 		margin: 0;
 		padding: 0;
-		height: calc(100vh - 80px - 2rem - 4.8em - 80px);
+		min-height: calc(100vh - 80px - 2rem - 4.8em - 80px);
 	}
 
 
 	.child-info{
 		width:100%;
 		max-width: 500px;
-		height:500px;
+		height: calc(100vh - 80px - 2rem - 4.8em - 80px);
 	}
 	.child-logo,.child-stateLogo
 	{

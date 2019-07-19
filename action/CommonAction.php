@@ -29,6 +29,7 @@
 
 		public $admin_mode;
 
+		public $previous_page;
 
 		public function __construct($page_visibility,$page_name,$complete_name)
 		{
@@ -92,6 +93,7 @@
 				exit;
 			}
 
+
 			//check what is the current visibility and
 			// if the page visibility is greater than the user visibility redirect to home page
 			if(empty($_SESSION["visibility"]))
@@ -123,6 +125,18 @@
 				}
 			}
 
+			//check current page
+			if(!empty( $_SESSION["current"]))
+			{
+				$this->previous_page = $_SESSION["current"];
+			}
+			else
+			{
+				$this->previous_page = "index";
+			}
+			if (strpos($this->page_name, 'error') === false && strpos($this->page_name, 'ajax') === false && $this->previous_page != $this->page_name) {
+				$_SESSION["current"] = $this->page_name;
+			}
 
 			//Check if admin want to be in admin mode
 			if($this->isAdmin())
@@ -175,7 +189,7 @@
 				}
 				else
 				{
-					$this->member_name = $member["member_id"];
+					$this->member_name = $member["firstname"];
 				}
 			}
 

@@ -196,6 +196,16 @@
 			$statement->execute();
 		}
 
+		public static function deleteUser($id)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("DELETE FROM users WHERE id=?");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+		}
+
 		public static function getUserFromToken($token)
 		{
 			$connection = Connection::getConnection();

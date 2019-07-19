@@ -20,18 +20,35 @@
 		public $errorMsg;
 
 
+
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER);
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"manage-member","Manage Member");
 			$this->create = false;
 			$this->update = false;
 		}
 
 		protected function executeAction() {
 
-			if(empty($_SESSION["member_id"]))
+			if(!empty($_SESSION["members_action"]))
 			{
-				header("Location:users.php");
+				if($_SESSION["members_action"] == "create")
+				{
+					$this->create = true;
+				}
+				else if($_SESSION["members_action"] == "update")
+				{
+					$this->update = true;
+					if(empty($_SESSION["member_id"]))
+					{
+						header("Location:'. $this->previous_page . '.php");
+					}
+
+				}
 			}
+
+
+
+			$this->genders = FamilyDAO::getGenders();
 
 			if($this->create)
 			{
@@ -47,9 +64,8 @@
 						!empty($_POST["birth"]))
 						{
 							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
-							?>
-								<script>window.location = "users.php"</script>
-							<?php
+							header('location:'. $this->previous_page . '.php');
+
 						}
 						else
 						{
@@ -73,9 +89,7 @@
 							!empty($_POST["birth"]))
 							{
 								FamilyDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
-								?>
-									<script>window.location = 'users.php'</script>
-								<?php
+								header('location:'. $this->previous_page . '.php');
 							}
 							else
 							{
@@ -87,10 +101,7 @@
 					{
 						FamilyDAO::deleteFamilyMember($_SESSION["member_id"]);
 						unset($_SESSION["member_id"]);
-						?>
-							<script>window.location="users.php";</script>
-						<?php
-
+						header('location:'. $this->previous_page . '.php');
 					}
 				}
 

@@ -113,7 +113,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let id_logo =  member["id_avatar"];
 	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["PATH"] +"');");
 
-	node.querySelector('button').setAttribute("onclick",'change_page("member-home.php",{"member":'+member["id"]+'})');
+	node.querySelector('button').setAttribute("onclick",'change_page("member-home.php",{"member_id":'+member["id"]+'})');
 
 	if(state==="manage")
 	{
@@ -155,7 +155,7 @@ const addNewMember = (container) => {
 	divNew.setAttribute('class','child-info');
 
 	let linkNew = document.createElement('button');
-		linkNew.setAttribute("onclick",'change_page("users.php",{"users_action":"create"})');
+		linkNew.setAttribute("onclick",'change_page("manage-member.php",{"members_action":"create"})');
 
 
 		let divLogo = document.createElement('div');
@@ -174,6 +174,6 @@ const addNewMember = (container) => {
 }
 const addManageButton = (node,member) => {
 	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector('button').setAttribute("onclick",'change_page("users.php",{"member":'+member["id"]+',"users_action":"update"})');
+	node.querySelector('button').setAttribute("onclick",'change_page("manage-member.php",{"member_id":'+member["id"]+',"members_action":"update"})');
 	node.querySelector(".child-stateLogo").style.display = 'block';
 }

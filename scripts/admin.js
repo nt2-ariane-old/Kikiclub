@@ -2,7 +2,7 @@ let dropzone;
 
 Dropzone.autoDiscover = false;
 
-const onPageLoad = () =>
+const adminLoad = () =>
 {
 	Dropzone.autoDiscover = false;
 
@@ -96,7 +96,7 @@ const searchUsers = (node,type,keycode) =>
 {
 	if(keycode === 13)
 	{
-		post("console.php",{"list":null,"users_list":users});
+		post("users.php",{"list":null,"users_list":users});
 	}
 	$( function() {
 		id = "#" + node.id;
@@ -121,6 +121,8 @@ const searchUsers = (node,type,keycode) =>
 			select: function( event, ui ) {
 				node.value = ui.item.label;
 				post("console.php",{"update":null,"users":null,"users_list[]":ui.item.value})
+
+
 			},
 			response: function (event, ui) {
 				users = JSON.stringify(ui.content)
@@ -134,7 +136,7 @@ const searchAll = (node,keycode) =>
 {
 	if(keycode === 13)
 	{
-		post("console.php",{"list":null,"users_and_member_list":all_list});
+		post("users.php",{"list":null,"users_and_member_list":all_list});
 	}
 	$( function() {
 		id = "#" + node.id;
@@ -159,12 +161,13 @@ const searchAll = (node,keycode) =>
 				node.value = ui.item.label;
 				if(ui.item.type == "user")
 				{
-					post("console.php",{"update":null,"users":null,"users_list[]":ui.item.value})
+					change_page("manage-user.php",{"user_id":ui.item.value,"users_action":"update"});
+
 
 				}
 				if(ui.item.type == "member")
 				{
-					post("console.php",{"update":null,"users":null,"members_list[]":ui.item.value})
+					change_page("manage-member.php",{"member_id":ui.item.value,"members_action":"update"});
 				}
 			},
 			response: function (event, ui) {
@@ -178,7 +181,7 @@ const searchMember = (node,type,keycode) =>
 {
 	if(keycode === 13)
 	{
-		post("console.php",{"list":null,"members_list":members});
+		post("users.php",{"list":null,"members_list":members});
 	}
 	$( function() {
 		id = "#" + node.id;
@@ -202,7 +205,7 @@ const searchMember = (node,type,keycode) =>
 			minLength: 0,
 			select: function( event, ui ) {
 				node.value = ui.item.label;
-				post("console.php",{"update":null,"users":null,"members_list[]":ui.item.value})
+				change_page("member-home.php",{"member":ui.item.value});
 			},
 			response: function (event, ui) {
 				members = JSON.stringify(ui.content)
@@ -325,6 +328,7 @@ const searchRobots = () =>
 }
 
 const activateDraggable = () => {
+	console.log('dragable-activated')
 	let dropped = false;
 	let draggable_sibling;
 

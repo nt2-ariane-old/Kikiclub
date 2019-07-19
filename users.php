@@ -51,7 +51,6 @@
 							{
 						?>
 							<h2>Users</h2>
-							<form action="console.php" method="post" onSubmit="return validTab(this)">
 							<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
 								<thead>
 									<tr class="rowMember">
@@ -64,7 +63,7 @@
 									<?php
 										foreach ($action->users as $user) {
 									?>
-										<tr onclick="post('console.php',{'users':null,'users_list[]':<?= $user['ID'] ?>,'update':null})">
+										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['ID'] ?>,'users_action':'update'})">
 											<td><?= $user["FIRSTNAME"] ?></td>
 											<td><?= $user["LASTNAME"] ?></td>
 											<td><?= $user["EMAIL"] ?></td>
@@ -92,7 +91,7 @@
 									<?php
 										foreach ($action->members as $member) {
 									?>
-										<tr onclick="post('console.php',{'users':null,'members_list[]':<?= $member['ID'] ?>,'update':null})">
+										<tr onclick="change_page('manage-member.php',{'member_id':<?= $member['ID'] ?>,'members_action':'update'})">
 											<td><?= $member["firstname"] ?></td>
 											<td><?= $member["lastname"] ?></td>
 											<td><?= $member["score"] ?></td>
@@ -105,23 +104,27 @@
 						<?php
 							}
 						?>
-						<div class="control-bar">
-							<a data-toggle="collapse" data-target="#controls">Control</a>
-							<div id="controls">
-								<button type="submit" class="submit-btn" name="add" onclick="clicked=this.name">Add New User</button>
-								<button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button>
-							</div>
-						</div>
-					</form>
+
 				</div>
 			<?php
 			}
 		?>
 	</div>
+
+	<div class="control-bar">
+		<a data-toggle="collapse" data-target="#controls">Control</a>
+		<div id="controls">
+			<button class="submit-btn" onclick="change_page('manage-user.php',{'users_action':'create'})">Add New User</button>
+			<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
+		</div>
+	</div>
 	<?php
 		}
-		//show profiles
-	?>
+		else
+		{
+
+			//show profiles
+			?>
 	<template id="child-template">
 		<div class='child-info'>
 			<button href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></button>
@@ -133,9 +136,9 @@
 	</template>
 	<?php
 
-		if($action->detect->isMobile())
-		{
-			?>
+if($action->detect->isMobile())
+{
+	?>
 				<div id="family">
 					<script>loadChildren(false)</script>
 				</div>
@@ -172,5 +175,6 @@
 			<button class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></button>
 		</div>
 <?php
+	}
 
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

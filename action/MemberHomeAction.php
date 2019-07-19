@@ -18,19 +18,6 @@
 				header('location:users.php');
 			}
 
-
-			if(!empty($_SESSION["users_action"]))
-			{
-				if($_SESSION["users_action"] == "create")
-				{
-					$this->create = true;
-				}
-				else if($_SESSION["users_action"] == "update")
-				{
-					$this->update = true;
-				}
-			}
-
 			$id = $_SESSION["member_id"];
 			$this->member = FamilyDAO::selectMember($id);
 

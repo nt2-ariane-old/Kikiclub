@@ -296,56 +296,7 @@
 				}
 
 			}
-			else if(isset($_POST["list"]))
-			{
 
-				if(!empty($_POST["users_list"]))
-				{
-					$searchUsers =json_decode($_POST["users_list"],true);
-					foreach ($searchUsers as $user) {
-						$id = $user["value"];
-						$this->users[] = UsersDAO::getUserWithID($id);
-					}
-
-				}
-				if(!empty($_POST["members_list"]))
-				{
-
-					$searchMembers =json_decode($_POST["members_list"],true);
-					foreach ($searchMembers as $member) {
-						$id = $member["value"];
-						$this->members[] = FamilyDAO::selectMember($id);
-					}
-
-				}
-				if(!empty($_POST["users_and_member_list"]))
-				{
-					$results =json_decode($_POST["users_and_member_list"],true);
-					foreach ($results as $result) {
-						$id = $result["value"];
-
-						if($result["type"] == "member")
-						{
-							$this->members[] = FamilyDAO::selectMember($id);
-						}
-						if($result["type"] == "user")
-						{
-							$this->users[] = UsersDAO::getUserWithID($id);
-
-						}
-					}
-
-
-				}
-
-			}
-			else if(isset($_POST["deployed"]))
-			{
-				if(!empty($_POST["workshops_list"]))
-				{
-					$this->deployWorkshops();
-				}
-			}
 		}
 
 		//All Possible Actions
