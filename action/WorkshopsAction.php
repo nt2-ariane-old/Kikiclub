@@ -16,6 +16,7 @@
 		public $show_workshop;
 		public $questions;
 
+		public $nb_workshops;
 		public $workshopStates;
 		public $grades;
 
@@ -34,6 +35,7 @@
 
 		protected function executeAction() {
 
+			$this->nb_workshops = WorkshopDAO::getNbWorkshops(!$this->admin_mode);
 			if($_SESSION["language"] == "en")
 			{
 				$this->difficulty = WorkshopDAO::getDifficultiesEN();

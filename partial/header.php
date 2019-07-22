@@ -40,6 +40,14 @@
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
 
 		<?php
+				if($action->admin_mode)
+				{
+					?>
+						<link rel="stylesheet" href="css/admin.css">
+						<script src="./scripts/admin.js"></script>
+
+				<?php
+				}
 				if(!empty($action->page_name))
 				{
 					?>
@@ -47,14 +55,6 @@
 						<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
 						<script src="./scripts/<?= $action->page_name ?>.js"></script>
 					<?php
-				}
-				if($action->admin_mode)
-				{
-				?>
-						<link rel="stylesheet" href="css/admin.css">
-						<script src="./scripts/admin.js"></script>
-
-				<?php
 				}
 
 		?>
@@ -158,6 +158,7 @@
 				<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
 				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("main","share") ?></a></li>
 				<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
+				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("main","robots") ?></a></li>
 
 				<?php
 			if($action->isLoggedIn())
@@ -166,15 +167,6 @@
 				?>
 
 					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
-
-					<li  class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $action->trans->read("main","admin") ?></a>
-						<ul class="dropdown-menu">
-							<form action="console.php" method="post">
-								<li> <button class="btn-link" name="workshops"><?= $action->trans->read("main","workshops") ?></button></li>
-								<li> <button class="btn-link" name="robots"><?= $action->trans->read("main","robots") ?></button></li>
-							</form>
-						</ul>
-					</li>
 
 				<?php
 				}

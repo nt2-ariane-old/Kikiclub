@@ -42,7 +42,12 @@
 					}
 					else
 					{
-						WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$_POST['media_path'], $_POST['media_type'],$_POST['difficulty'],$_POST['robot'],$_POST['grade']);
+						$deploy = false;
+						if($_POST["deployed"] == 'true')
+						{
+							$deploy = true;
+						}
+						WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$_POST['media_path'], $_POST['media_type'],$_POST['difficulty'],$_POST['robot'],$_POST['grade'],$deploy);
 						$this->added = true;
 					}
 				}

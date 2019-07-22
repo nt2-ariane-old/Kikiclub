@@ -113,7 +113,7 @@
 
 	<div class="control-bar">
 		<a data-toggle="collapse" data-target="#controls">Control</a>
-		<div id="controls">
+		<div class="collapse" id="controls">
 			<button class="submit-btn" onclick="change_page('manage-user.php',{'users_action':'create'})">Add New User</button>
 			<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
 		</div>

@@ -52,7 +52,7 @@ HTML {
 	width: 80%;
 }
 body{
-	background-color: #D8DF23 !important;
+	background-color: black !important;
 	height: 100%;
 }
 
@@ -476,6 +476,7 @@ footer a ,footer p{
 	nav .container
 	{
 		max-width: 300px;
+		min-width: 200px;
 	}
 }
 

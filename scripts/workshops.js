@@ -4,7 +4,13 @@ const onPageLoad = () =>
 }
 
 let searchParams = [];
-
+let currentPage = 0;
+const setPage = (page) =>
+{
+	currentPage = page;
+	console.log(currentPage);
+	sortAndSearchWorkshops();
+}
 const setSearchParams = (name, value) =>
 {
 	console.log(name);
@@ -39,6 +45,7 @@ const sortAndSearchWorkshops = () =>
 	let formData = new FormData();
 	formData.append('sort', select.value);
 	formData.append('search',true);
+	formData.append('page',currentPage);
 	for (const key in searchParams) {
 		if (searchParams.hasOwnProperty(key)) {
 			const element = searchParams[key];
@@ -56,12 +63,13 @@ const sortAndSearchWorkshops = () =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		loadWorkshopsList(data["workshops"],data["member_workshops"],data["states"]);
+		console.log(data);
+		loadWorkshopsList(data["workshops"],data["member_workshops"],data["states"],data["nbPages"]);
 	});
 }
 
 let nbWorkshops = 4;
-const loadWorkshopsList = (workshops,memberWorkshops,states) =>
+const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 {
 	let isFamilyMember = document.getElementById("isFamilyMember").value;
 
@@ -75,11 +83,14 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 
 			for (let i = 0; i < workshops.length; i++) {
 				const workshop = workshops[i];
-				let divWorkshop = document.createElement('div');
-					divWorkshop.setAttribute('class', 'workshop col-sm-'+ 12/nbWorkshops )
-					let link = document.createElement('button');
+				let divCol = document.createElement('div');
+					divCol.setAttribute('class', ' col-sm-'+ 12/nbWorkshops )
+					divWorkshop = document.createElement('div');
+					divWorkshop.setAttribute('class','workshop');
 
-					link.setAttribute("onclick",'change_page("workshop-infos.php",{"workshop_id":'+workshop["ID"]+'})');
+					let link = document.createElement('a');
+
+					link.href = "workshop-infos.php?workshop_id="+workshop["ID"];
 
 					link.setAttribute('class','link normal');
 						if(isFamilyMember)
@@ -122,9 +133,22 @@ const loadWorkshopsList = (workshops,memberWorkshops,states) =>
 						link.appendChild(divTitle);
 
 					divWorkshop.appendChild(link);
-				row.appendChild(divWorkshop);
+					divCol.appendChild(divWorkshop)
+				row.appendChild(divCol);
 			}
 
 			container.appendChild(row);
 		divWorkshops.appendChild(container);
+
+		let indexes = document.querySelector('#indexes');
+
+		indexes.innerHTML = "";
+
+		for (let i = 1; i <= nbPage; i++) {
+			let button = document.createElement('button');
+				button.onclick = () => setPage(i - 1);
+				button.innerHTML = i;
+			indexes.appendChild(button);
+		}
+
 }

@@ -180,6 +180,29 @@
 				$this->results["state"] = $_POST["deployed"];
 				$this->results["type"] = "deployed";
 				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);
+
+
+			}
+			if(!empty($this->results["workshops"]))
+			{
+				$this->results["nbPages"] = ceil(sizeof($this->results["workshops"]) /12);
+
+			}
+			if(isset($_POST["page"]))
+			{
+				$page = $_POST["page"];
+				if($page == -1)
+				{
+					$page = 0;
+				}
+				else if($page >= $this->results["nbPages"])
+				{
+					$page = $this->results["nbPages"] - 1;
+				}
+				$limit_min = $page * 12;
+				$limit_max = 12;
+				$this->results["workshops"] = array_slice($this->results["workshops"],$limit_min,$limit_max);
+
 			}
 		}
 	}

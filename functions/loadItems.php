@@ -269,7 +269,7 @@ function loadWorkshopsCreator($workshop, $action)
 				?>
 			</select></p>
 
-			<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php if($workshop["DEPLOYED"]) echo 'checked'; ?>></p>
+				<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php } ?> <?php if($workshop["DEPLOYED"]) echo 'checked'; ?>></p>
 		</div>
 
 		<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>

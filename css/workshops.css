@@ -36,12 +36,10 @@
 
 .workshop {
   height: 300px;
-  width: 100%;
   position: relative;
   background-color: rgba(255, 255, 255, 0.801);
   border-radius: 10%;
   border: 2px solid black;
-  margin: 1em;
 }
 
 .workshop * {
@@ -80,8 +78,8 @@
   display: block;
   text-align: center;
   position: relative;
-  left: -15%;
-  min-width: 130%;
+  left: -5%;
+  min-width: 110%;
   z-index: 1;
   margin: 0;
 }
@@ -167,19 +165,29 @@
   margin: 0;
 }
 
-#workshop-menu {
+.control-bar {
+  left: 25%;
+}
+
+.control-bar a {
+  margin: 0;
+  background-color: rgba(189, 98, 98, 0.802);
+  margin-left: 0;
+}
+
+aside #workshop-menu {
   display: none;
 }
 
-#workshop-menu input, #workshop-menu li {
+aside #workshop-menu input, aside #workshop-menu li {
   display: inline-block;
 }
 
-#workshop-menu .card-header {
+aside #workshop-menu .card-header {
   border-bottom: 2px solid black;
 }
 
-#workshop-menu .card {
+aside #workshop-menu .card {
   background-color: transparent;
   border: none;
   border-top: 5px solid black;
@@ -208,7 +216,7 @@
 .sort {
   width: 100%;
   padding: 0.5em;
-  background-color: wheat;
+  background-color: black;
   overflow: auto;
 }
 
@@ -222,36 +230,65 @@
 }
 
 @media only screen and (min-width: 1000px) {
-  #workshop-menu {
+  aside {
     width: 25%;
-    min-width: 300px;
-    display: block;
     float: left;
-    padding: 3em;
+    padding: 1em;
+    background-color: white;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
   }
-  .workshops-list {
-    clear: both;
-    float: left;
+  aside #workshop-menu {
+    display: block;
+  }
+  aside #workshop-menu #search-form .card {
+    background-color: rgba(217, 223, 35, 0.442);
+  }
+  aside #workshop-menu #search-form .card-header {
+    background-color: #d9df23;
+  }
+  main {
+    width: calc(75% - 1.1em);
+    padding: 0;
+    margin: 0;
+    float: right;
+  }
+  main #workshops-list {
+    height: calc(330px * 3 + ( 3 * 2rem ));
+  }
+  *:has(.workshop) {
+    padding: 4rem;
+  }
+  .workshop {
+    margin: 1rem;
   }
   .workshops-info.col-sm-12 {
     float: both;
     width: 100%;
   }
+  .sort {
+    width: calc(75% - 1.1em);
+    float: right;
+  }
 }
 
 @media only screen and (min-width: 450px) and (max-width: 1000px) {
-  #workshop-menu {
+  aside #workshop-menu {
     width: 100%;
     display: block;
   }
-  #search-form {
+  aside #workshop-menu #search-form {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
   }
-  #search-form .card {
+  aside #workshop-menu #search-form .card {
+    background-color: #D8DF23;
     width: calc(100% / 3);
     margin: 1em;
+  }
+  .workshops-list {
+    min-height: calc(300px * 3 + (3 * 2em));
   }
 }
 /*# sourceMappingURL=workshops.css.map */

@@ -11,7 +11,7 @@
 
 
 			<?php
-				if($action->isAdmin())
+				if($action->admin_mode)
 				{
 					loadBadgesLine($action->badges,'Badges',$action,'Badges');
 				}
@@ -25,7 +25,7 @@
 
 	</main>
 	<?php
-		if($action->isAdmin())
+		if($action->admin_mode)
 		{
 			?>
 				<input type="hidden" id="isAdmin">

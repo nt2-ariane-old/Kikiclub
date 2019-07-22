@@ -44,4 +44,92 @@
   max-height: 100%;
   margin: auto;
 }
+
+aside #workshop-menu {
+  display: none;
+}
+
+aside #workshop-menu input, aside #workshop-menu li {
+  display: inline-block;
+}
+
+aside #workshop-menu .card-header {
+  border-bottom: 2px solid black;
+}
+
+aside #workshop-menu .card {
+  background-color: transparent;
+  border: none;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+}
+
+@media only screen and (min-width: 1000px) {
+  aside {
+    height: 1500px;
+    width: 25%;
+    float: left;
+    padding: 1em;
+    margin: 0;
+    background-color: white;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+  }
+  aside #workshop-menu {
+    display: block;
+  }
+  aside #workshop-menu #search-form .card {
+    background-color: rgba(217, 223, 35, 0.442);
+  }
+  aside #workshop-menu #search-form .card-header {
+    background-color: #d9df23;
+  }
+  #btns-zone {
+    clear: both;
+    background-color: white;
+    border-bottom: 5px solid black;
+    padding: 0.5em;
+  }
+  #btns-zone .return-btn {
+    display: block;
+    margin: auto;
+    padding: 0.5em;
+  }
+  #workshop-form {
+    background-color: #D8DF23;
+    border: none;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+  }
+  #workshop-form .media {
+    border: 5px solid black;
+    height: 400px;
+    width: 400px;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.483);
+  }
+  main {
+    width: calc(75% - 1.1em);
+    padding: 0;
+    margin: 0;
+    float: right;
+  }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 1000px) {
+  aside #workshop-menu {
+    width: 100%;
+    display: block;
+  }
+  aside #workshop-menu #search-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  aside #workshop-menu #search-form .card {
+    background-color: #D8DF23;
+    width: calc(100% / 3);
+    margin: 1em;
+  }
+}
 /*# sourceMappingURL=workshop-infos.css.map */

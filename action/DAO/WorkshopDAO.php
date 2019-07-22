@@ -3,8 +3,9 @@
 
 	class WorkshopDAO {
 
-		public static function getWorkshops($orderby="none",$ascendant=false, $deployed=true) { //RECEVOIR TOUTES LES PAGES
+		public static function getWorkshops($orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
+
 
 			$request = "SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY,ID_GRADE FROM workshops ";
 
@@ -38,14 +39,45 @@
 					$request .= "DESC ";
 				}
 			}
+			if($page >= 0)
+			{
+				$request .= " LIMIT ?,12";
+			}
 			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
+
+			if($page >= 0)
+			{
+				$limit = $page * 12;
+				$statement->bindParam(1, $limit);
+
+			}
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
 				$content[] = $row;
+			}
+			return $content;
+		}
+
+		public static function getNbWorkshops($deployed=true)
+		{
+			$connection = Connection::getConnection();
+			$request = "SELECT COUNT(*) AS nb FROM workshops ";
+			if($deployed)
+			{
+				$request .= "WHERE deployed=TRUE ";
+			}
+			$statement = $connection->prepare($request);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+			if($row = $statement->fetch())
+			{
+				$content = $row["nb"];
 			}
 			return $content;
 		}
@@ -241,10 +273,19 @@
 		}
 
 
-		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$difficulty,$id_robot,$grade){
+		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$difficulty,$id_robot,$grade,$deploy){
 			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_ROBOT,ID_DIFFICULTY,ID_GRADE) VALUES (?,?,?,?,?,?,?)");
+			$request = "INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_ROBOT,ID_DIFFICULTY,ID_GRADE,DEPLOYED) VALUES (?,?,?,?,?,?,?,";
+			if($deploy)
+			{
+				$request .= "TRUE";
+			}
+			else
+			{
+				$request .= "FALSE";
+			}
+			$request .= ")";
+			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
@@ -253,6 +294,7 @@
 			$statement->bindParam(5, $id_robot);
 			$statement->bindParam(6, $difficulty);
 			$statement->bindParam(7, $grade);
+
 			$statement->execute();
 		}
 		public static function updateWorkshop($id,$name, $content, $MEDIA_PATH, $MEDIA_TYPE, $id_difficulty, $id_robot,$id_grade){

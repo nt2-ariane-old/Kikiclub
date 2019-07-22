@@ -104,6 +104,23 @@
 
 			return $content;
 		}
+		public static function getRobotByID($id)
+		{
+			$connection = Connection::getConnection();
+			$statementRobots = $connection->prepare("SELECT * FROM robot WHERE id=?");
+			$statementRobots->bindParam(1, $id);
+			$statementRobots->setFetchMode(PDO::FETCH_ASSOC);
+			$statementRobots->execute();
+
+			$content = [];
+
+			if ($row = $statementRobots->fetch()) {
+
+				$content = $row;
+			}
+
+			return $content;
+		}
 		public static function insertRobotScoreByDifficulty($id_robot,$id_difficulty,$score)
 		{
 			$connection = Connection::getConnection();
