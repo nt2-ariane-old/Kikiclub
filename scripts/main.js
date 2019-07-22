@@ -262,6 +262,10 @@ const accept = (form,params) =>
 		box.remove();
 
 	}
+	else if(params.type == 'function')
+	{
+		params.function();
+	}
 
 }
 const refuse = () =>

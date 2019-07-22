@@ -7,7 +7,7 @@
 			$connection = Connection::getConnection();
 
 
-			$request = "SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY,ID_GRADE FROM workshops ";
+			$request = "SELECT * FROM workshops ";
 
 
 			if($deployed)
@@ -103,7 +103,7 @@
 			$connection = Connection::getConnection();
 			$name = '%' . $name . '%';
 
-			$request = "SELECT ID,DEPLOYED,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY,ID_GRADE FROM workshops WHERE NAME LIKE ? ";
+			$request = "SELECT * FROM workshops WHERE NAME LIKE ? ";
 			if($deployed)
 			{
 				$request .= "AND deployed = TRUE";
@@ -160,12 +160,12 @@
 			$connection = Connection::getConnection();
 			if($request == "difficulty")
 			{
-				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY,ID_GRADE FROM workshops WHERE ID_DIFFICULTY=?  AND deployed = TRUE");
+				$statement = $connection->prepare("SELECT * FROM workshops WHERE ID_DIFFICULTY=?  AND deployed = TRUE");
 				$statement->bindParam(1, $value);
 			}
 			else
 			{
-				$statement = $connection->prepare("SELECT ID,ID_ROBOT,NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_DIFFICULTY,ID_GRADE FROM workshops WHERE deployed = TRUE");
+				$statement = $connection->prepare("SELECT * FROM workshops WHERE deployed = TRUE");
 			}
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -273,9 +273,9 @@
 		}
 
 
-		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$difficulty,$id_robot,$grade,$deploy){
+		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$deploy){
 			$connection = Connection::getConnection();
-			$request = "INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,ID_ROBOT,ID_DIFFICULTY,ID_GRADE,DEPLOYED) VALUES (?,?,?,?,?,?,?,";
+			$request = "INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,DEPLOYED) VALUES (?,?,?,?,";
 			if($deploy)
 			{
 				$request .= "TRUE";
@@ -291,25 +291,19 @@
 			$statement->bindParam(2, $content);
 			$statement->bindParam(3, $MEDIA_PATH);
 			$statement->bindParam(4, $MEDIA_TYPE);
-			$statement->bindParam(5, $id_robot);
-			$statement->bindParam(6, $difficulty);
-			$statement->bindParam(7, $grade);
 
 			$statement->execute();
 		}
-		public static function updateWorkshop($id,$name, $content, $MEDIA_PATH, $MEDIA_TYPE, $id_difficulty, $id_robot,$id_grade){
+		public static function updateWorkshop($id,$name, $content, $MEDIA_PATH, $MEDIA_TYPE){
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("UPDATE workshops SET NAME=?,CONTENT=?,MEDIA_PATH=? , MEDIA_TYPE=?, ID_DIFFICULTY=?, ID_ROBOT=?,ID_GRADE=? WHERE id=?");
+			$statement = $connection->prepare("UPDATE workshops SET NAME=?,CONTENT=?,MEDIA_PATH=? , MEDIA_TYPE=? WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
 			$statement->bindParam(3, $MEDIA_PATH);
 			$statement->bindParam(4, $MEDIA_TYPE);
-			$statement->bindParam(5, $id_difficulty);
-			$statement->bindParam(6, $id_robot);
-			$statement->bindParam(7, $id_grade);
-			$statement->bindParam(8, $id);
+			$statement->bindParam(5, $id);
 			$statement->execute();
 		}
 		public static function deleteWorkshop($id){
@@ -340,11 +334,82 @@
 
 			return $content;
 		}
+
+		public static function getFilterTypeIdByName($name)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT ID FROM filter_type WHERE NAME=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $name);
+
+			$statement->execute();
+
+			$content = 0;
+
+			if ($row = $statement->fetch()) {
+				$content = $row["ID"];
+			}
+
+			return $content;
+		}
+		public static function insertWorkshopFilters($id_workshop,$id_type,$id_filter)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("INSERT INTO workshop_filters(id_workshop,id_type,id_filter) VALUES(?,?,?)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_workshop);
+			$statement->bindParam(2, $id_type);
+			$statement->bindParam(3, $id_filter);
+
+			$statement->execute();
+		}
+		public static function updateWorkshopFilters($id,$id_workshop,$id_type,$id_filter)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("UPDATE workshop_filters SET id_workshop=?,id_type=?,id_filter=? WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_workshop);
+			$statement->bindParam(2, $id_type);
+			$statement->bindParam(3, $id_filter);
+			$statement->bindParam(4, $id);
+
+			$statement->execute();
+		}
+		public static function deleteWorkshopFilters($id)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("DELETE FROM workshop_filters WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+
+			$statement->execute();
+		}
+		public static function selectWorkshopFilters($id_workshop)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT * FROM workshop_filters WHERE id_workshop = ?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_workshop);
+			$statement->execute();
+
+			$content = null;
+
+			while($row = $statement->fetch())
+			{
+				$content[$row["id_type"]][$row["id_filter"]] = $row;
+			}
+			return $content;
+		}
 		public static function selectMemberWorkshop($id_member)
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID_MEMBER, ID_WORKSHOP, ID_STATUT, LAST_MODIFICATION FROM family_workshops WHERE ID_MEMBER=?");
+			$statement = $connection->prepare("SELECT * FROM family_workshops WHERE ID_MEMBER=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
 			$statement->execute();
@@ -361,7 +426,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 AND ID_STATUT != 2)  AND deployed = TRUE");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 AND ID_STATUT != 2)  AND deployed = TRUE");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
@@ -379,7 +444,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 )  AND deployed = TRUE");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 )  AND deployed = TRUE");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
@@ -418,7 +483,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID, DEPLOYED, NAME, CONTENT, MEDIA_PATH , MEDIA_TYPE ,ID_ROBOT, ID_DIFFICULTY,ID_GRADE FROM workshops WHERE id=?");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();

@@ -136,7 +136,7 @@
 							<div class="collapse" id="controls">
 								<button onclick="change_page('workshop-infos.php',{'workshop_id':null})">Add</button>
 								<button onclick="change_page('workshop-infos.php',{'deployed':null})">Deployed</button>
-								<button  onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'post',{'path':'workshop-infos.php','params':{'delete':null}}});" value="true">Delete</button>
+								<button  onclick="openConfirmBox(null,{type:'function','function':deleteSelected});">Delete</button>
 							</div>
 						</div>
 					<?php

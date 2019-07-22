@@ -8,13 +8,11 @@ let currentPage = 0;
 const setPage = (page) =>
 {
 	currentPage = page;
-	console.log(currentPage);
 	sortAndSearchWorkshops();
 }
 const setSearchParams = (name, value) =>
 {
-	console.log(name);
-	console.log(value);
+
 	if(searchParams[name].indexOf(value) > -1)
 	{
 		searchParams[name].splice(searchParams[name].indexOf(value),1);
@@ -87,11 +85,11 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 					divCol.setAttribute('class', ' col-sm-'+ 12/nbWorkshops )
 					divWorkshop = document.createElement('div');
 					divWorkshop.setAttribute('class','workshop');
+					divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["ID"]);
 
 					let link = document.createElement('a');
 
-					link.href = "workshop-infos.php?workshop_id="+workshop["ID"];
-
+					//link.href = "workshop-infos.php?workshop_id="+workshop["ID"];
 					link.setAttribute('class','link normal');
 						if(isFamilyMember)
 						{
@@ -150,5 +148,40 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 				button.innerHTML = i;
 			indexes.appendChild(button);
 		}
+
+}
+let selected_workshops = [];
+const clicWorkshop = (node,id) =>
+{
+
+	if (window.event.ctrlKey) {
+		let index = selected_workshops.indexOf(id);
+		if(index > -1)
+		{
+			selected_workshops.splice(index, 1);
+			node.style = "border:none";
+		}
+		else
+		{
+			selected_workshops.push(id);
+			node.style = "border:5px solid red;";
+
+		}
+
+	}
+	else
+	{
+		window.location = "workshop-infos.php?workshop_id=" + id;
+	}
+}
+
+const deleteSelected = () =>
+{
+	let selected = JSON.stringify(selected_workshops);
+}
+
+const deployedSelected = () =>
+{
+	let selected = JSON.stringify(selected_workshops);
 
 }

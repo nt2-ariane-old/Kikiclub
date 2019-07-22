@@ -216,72 +216,127 @@ function loadWorkshopsCreator($workshop, $action)
 	if($workshop != null)
 		$workshopExist = true;
 	?>
-	<form action="workshop-infos.php" id="workshop-form" method="post" enctype="multipart/form-data">
-		<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
-		<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
-		(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">512</div> left.
+		<form action="workshop-infos.php"  method="post" enctype="multipart/form-data">
+					<aside>
+					<div id="workshop-menu">
+						<div id="search-form">
+							<div class="card">
+								<div class="card-header" id="headingDifficulty">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
+											<?= $action->trans->read('workshops','difficulty') ?>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseDifficulty" class="collapse show" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
+									<div class="card-body">
+										<ul>
+											<?php
+												foreach ($action->difficulties as $diff) {
+													?>
+														<div><label><input type="checkbox" name="difficulties[]" value="<?=$diff['ID'] ?>" <?php if(!empty($action->filters[$action->id_types['difficulties']])) if(!empty($action->filters[$action->id_types['difficulties']][$diff['ID']])) echo 'checked' ?>><li><?= $diff["NAME"] ?></li></label></div>
+													<?php
+												}
+											?>
+										</ul>
+									</div>
+								</div>
+							</div>
 
-		<br>
-		<div class="infos">
-			<p><span class="input-title"><?= $action->trans->read("workshops","difficulty") ?> : </span><select name="difficulty">
-				<?php
-					foreach ($action->difficulties as $difficulty)
-					{
-						?>
-							<option value=<?= $difficulty["ID"]?> <?php if($workshopExist && $workshop["ID_DIFFICULTY"] ==  $difficulty["ID"]) echo 'selected' ;?>><?= $difficulty["NAME"]?></option>
-						<?php
-					}
-				?>
-			</select></p>
+							<div class="card">
+								<div class="card-header" id="headingAge">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseAge" aria-expanded="true" aria-controls="collapseAge">
+											<?= $action->trans->read('workshops','scholar') ?>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
+									<div class="card-body">
+										<ul>
+											<?php
+												foreach ($action->grades as $grade) {
+													?>
+														<div><label><input type="checkbox" name="grades[]" value="<?=$grade['ID'] ?>" <?php if(!empty($action->filters[$action->id_types['grades']])) if(!empty($action->filters[$action->id_types['grades']][$grade['ID']])) echo 'checked' ?>><li><?= $grade["NAME"] ?></li></label></div>
+													<?php
+												}
+											?>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingRobot">
+									<h5 class="mb-0">
+										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="true" aria-controls="collapseRobots">
+											<?= $action->trans->read('workshops','robots') ?>
+										</button>
+									</h5>
+								</div>
+								<div id="collapseRobots" class="collapse show" aria-labelledby="headingRobot" data-parent="#workshop-menu">
+									<div class="card-body">
+										<ul>
+											<?php
+												foreach ($action->robots as $robot) {
+													?>
+														<div><label><input type="checkbox" name="robots[]" value="<?=$robot['ID'] ?>" <?php if(!empty($action->filters[$action->id_types['robots']])) if(!empty($action->filters[$action->id_types['robots']][$robot['ID']])) echo 'checked' ?>><li><?= $robot["NAME"] ?></li></label></div>
+													<?php
+												}
+											?>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a onclick="deleteParams()"><?= $action->trans->read("workshops","deleteFilter") ?></a>
+					</div>
+				</aside>
+				<main>
+				<div id="workshop-form">
 
-			<p><span class="input-title"><?= $action->trans->read("workshops","robots") ?> : </span><select name="robot">
-				<?php
-					foreach ($action->robots as $robot)
-					{
-						?>
-							<option value=<?= $robot["ID"]?> <?php if($workshop["ID_ROBOT"] ==  $robot["ID"]) echo 'selected' ;?>><?= $robot["NAME"]?></option>
-						<?php
-					}
-				?>
-			</select></p>
 
-			<div id="current-media">
-				<?php
-					if($workshopExist)
-					{
-						loadMedia($workshop);
-					}
-				?>
-			</div>
+					<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
+					<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
+					(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">512</div> left.
 
-			<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["MEDIA_PATH"]; } ?>">
-			<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["MEDIA_TYPE"]; } ?>">
+					<br>
+					<div class="infos">
 
-			<div id="drop-workshop" class="dropzone"></div>
 
-			<p><span class="input-title"><?= $action->trans->read("workshops","grades")  ?> : </span><select name="grade">
-				<?php
-					foreach ($action->grades as $grade) {
-						?>
-							<option value=<?= $grade["ID"]?> <?php if($workshop["ID_GRADE"] ==  $grade["ID"]) echo 'selected' ;?>><?= $grade["NAME"]?></option>
-						<?php
-					}
-				?>
-			</select></p>
 
-				<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php } ?> <?php if($workshop["DEPLOYED"]) echo 'checked'; ?>></p>
-		</div>
 
-		<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>
+						<div id="current-media">
+							<?php
+								if($workshopExist)
+								{
+									loadMedia($workshop);
+								}
+							?>
+						</div>
 
-		<?php
-			if($workshopExist)
-			{
-				?>
-					<button type="submit" class="delete-btn" name="delete">Delete</button>
-				<?php
-			}
-		?>
+						<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["MEDIA_PATH"]; } ?>">
+						<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["MEDIA_TYPE"]; } ?>">
+
+						<div id="drop-workshop" class="dropzone"></div>
+
+
+							<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php } ?> <?php if($workshop["deployed"]) echo 'checked'; ?>></p>
+					</div>
+					<div id="params">
+
+					</div>
+					<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>
+
+					<?php
+						if($workshopExist)
+						{
+							?>
+								<button type="submit" class="delete-btn" name="delete">Delete</button>
+							<?php
+						}
+					?>
+				</div>
+				</main>
 	</form>
 	<?php
 }
