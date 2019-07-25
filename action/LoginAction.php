@@ -37,8 +37,8 @@
 						}
 						else
 						{
-							$_SESSION["visibility"] = $infos["VISIBILITY"];
-							$_SESSION["id"] = $infos["ID"];
+							$_SESSION["visibility"] = $infos["visibility"];
+							$_SESSION["id"] = $infos["id"];
 						}
 					} else {
 						$this->error = true;
@@ -66,8 +66,8 @@
 							$infos = UsersDAO::loginUserWithEmail($_POST["email"],$_POST["psswd1"],$id_type);
 							if(!is_string($infos))
 							{
-								$_SESSION["id"] = $infos["ID"];
-								$_SESSION["visibility"] =$infos["VISIBILITY"];
+								$_SESSION["id"] = $infos["id"];
+								$_SESSION["visibility"] =$infos["visibility"];
 							}
 							else
 							{

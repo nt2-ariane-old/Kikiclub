@@ -94,7 +94,7 @@
 		public static function getUserWithEmail($email)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, FIRSTNAME,LASTNAME,EMAIL FROM users WHERE email=?");
+			$statement = $connection->prepare("SELECT * FROM users WHERE email=?");
 			$statement->bindParam(1, $email);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -111,7 +111,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statementUser = $connection->prepare("SELECT ID,FIRSTNAME,LASTNAME,EMAIL,VISIBILITY FROM users WHERE email = ?");
+			$statementUser = $connection->prepare("SELECT * FROM users WHERE email = ?");
 			$statementUser->bindParam(1, $email);
 			$statementUser->setFetchMode(PDO::FETCH_ASSOC);
 			$statementUser->execute();
@@ -119,7 +119,7 @@
 			$infos = null;
 
 			if ($rowUser = $statementUser->fetch()) {
-				$rowLogin = UsersDAO::getLoginInfosForUserByType($rowUser["ID"],$id_type);
+				$rowLogin = UsersDAO::getLoginInfosForUserByType($rowUser["id"],$id_type);
 				if (!empty($rowLogin)) {
 					$rowLoginType = UsersDAO::getLoginTypeById($rowLogin["ID_LOGIN_TYPE"]);
 					if(!empty($rowLoginType))

@@ -12,52 +12,80 @@
 			if($_SESSION["language"] == 'en')
 			{
 				$this->results["states"] = WorkshopDAO::getWorkshopStatesEN();
-
 			}
 			else
 			{
 				$this->results["states"] = WorkshopDAO::getWorkshopStatesFR();
-
 			}
 			if(!empty($_SESSION["id"]))
 			{
-
 				if(!empty($_SESSION["member_id"]))
 				{
-					$this->results["member_workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+					$this->results["workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 				}
 			}
-
 			if(!empty($_POST["id"]))
 			{
-
-
 				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);
-
 				$this->results["robots"] = RobotDao::getRobots();
+			}
+			if(!empty($_POST["selected"]))
+			{
+				$selected = json_decode($_POST["selected"],true);
+				foreach ($selected as $value) {
+					if(!empty($_POST["deployed_multiple"]))
+					{
+						$deployed = WorkshopDAO::selectWorkshop($value)["deployed"];
+						if($deployed)
+						{
+							WorkshopDAO::setDeployed($value,"false");
+							$this->results["undeployed"][] = $value;
+						}
+						else
+						{
+							WorkshopDAO::setDeployed($value,"true");
+							$this->results["has_been_deployed"][] = $value;
+
+						}
+					}
+					else if (!empty($_POST["delete_multiple"]))
+					{
+
+					}
+					# code...
+				}
 
 			}
 			if(!empty($_POST["sort"]))
 			{
-
+				$f = null;
+				if($this->admin_mode || empty($_SESSION["member_id"]))
+				{
+					$f = "WorkshopDAO::getWorkshops";
+					$id = null;
+				}
+				else
+				{
+					$f = "WorkshopDAO::getMemberWorkshopsSorted";
+					$id = $_SESSION["member_id"];
+				}
 				switch ($_POST["sort"]) {
 					case 'none':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("none",false,!$this->admin_mode);
-						break;
+						$this->results["workshops"]=$f($id,"none",false,!$this->admin_mode);
+					break;
 					case 'ascName':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",true,!$this->admin_mode);
+						$this->results["workshops"]=$f($id,"NAME",true,!$this->admin_mode);
 						break;
 					case 'descName':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("NAME",false,!$this->admin_mode);
-						break;
+					$this->results["workshops"]=$f($id,"NAME",false,!$this->admin_mode);
+					break;
 					case 'recents':
-						$this->results["workshops"]=WorkshopDAO::getWorkshops("ID",true,!$this->admin_mode);
-						break;
+					$this->results["workshops"]=$f($id,"ID",true,!$this->admin_mode);
+					break;
 				}
 			}
 			if(!empty($_POST["search"]))
-		{
-
+			{
 				if(!empty($_POST["difficulties"]))
 				{
 					$this->results["search"]["difficulties"] = $_POST["difficulties"];
@@ -67,11 +95,18 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							foreach ($difficulties as $difficulty_id)
+							$filters = WorkshopDAO::selectWorkshopFilters($workshop["ID"]);
+							$workshop_difficulties = $filters[WorkshopDAO::getFilterTypeIdByName('difficulty')];
+							if(!empty($workshop_difficulties))
 							{
-								if($difficulty_id === $workshop["ID_DIFFICULTY"])
+								foreach ($difficulties as $difficulty_id)
 								{
-									$temp[] = $workshop;
+									foreach ($workshop_difficulties as $diff) {
+										if($difficulty_id === $diff["id_filter"])
+										{
+											$temp[] = $workshop;
+										}
+									}
 								}
 							}
 						}
@@ -87,16 +122,21 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							foreach ($grades as $grade_id)
+							$filters = WorkshopDAO::selectWorkshopFilters($workshop["ID"]);
+							$workshop_grades = $filters[WorkshopDAO::getFilterTypeIdByName('grade')];
+							if(!empty($workshop_grades ))
 							{
-								if($grade_id === $workshop["ID_GRADE"])
+								foreach ($grades as $grade_id)
 								{
-									$temp[] = $workshop;
+									foreach ($workshop_grades as $grade) {
+										if($grade_id === $grade["id_filter"])
+										{
+											$temp[] = $workshop;
+										}
+									}
 								}
 							}
 						}
-
-
 						$this->results["workshops"] = $temp;
 					}
 				}
@@ -111,7 +151,6 @@
 					if(sizeof($states) > 0)
 					{
 						$temp = [];
-
 						$member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 						$new_workshops =WorkshopDAO::selectMemberNewWorkshop($_SESSION["member_id"]);
 						foreach ($states as $state)
@@ -152,18 +191,24 @@
 					$robots = json_decode($_POST["robots"]);
 
 					if(sizeof($robots) > 0)
-					{
-						$temp = [];
+					{						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							foreach ($robots as $robot_id)
+							$filters = WorkshopDAO::selectWorkshopFilters($workshop["ID"]);
+							var_dump($filters);
+							if(!empty($filters[WorkshopDAO::getFilterTypeIdByName('robot')]))
 							{
+								$workshop_robots = $filters[WorkshopDAO::getFilterTypeIdByName('robot')];
 
-									if($robot_id == $workshop["ID_ROBOT"])
-									{
-										$temp[] = $workshop;
+								foreach ($robots as $robot_id)
+								{
+									foreach ($workshop_robots as $robot) {
+										if($robot_id === $robot["id_filter"])
+										{
+											$temp[] = $workshop;
+										}
 									}
-
+								}
 							}
 						}
 						$this->results["workshops"] = $temp;
@@ -186,7 +231,10 @@
 			if(!empty($this->results["workshops"]))
 			{
 				$this->results["nbPages"] = ceil(sizeof($this->results["workshops"]) /12);
-
+			}
+			else
+			{
+				$this->results["nbPages"] = 0;
 			}
 			if(isset($_POST["page"]))
 			{
@@ -202,6 +250,38 @@
 				$limit_min = $page * 12;
 				$limit_max = 12;
 				$this->results["workshops"] = array_slice($this->results["workshops"],$limit_min,$limit_max);
+
+			}
+			if(isset($_POST["assign-all"]))
+			{
+				$id = $_SESSION["workshop_id"];
+				$filters = WorkshopDAO::selectWorkshopFilters($id);
+				$grades = $filters[WorkshopDAO::getFilterTypeIdByName('grade')];
+
+
+				$ages = [];
+				if(!empty($grades))
+				{
+					foreach ($grades as $grade) {
+						$id_grade = $grade["id_filter"];
+
+						$ages[] = WorkshopDAO::getGradeById($id_grade)["AGE"];
+					}
+				}
+				$members = FamilyDAO::getAllMemberWithAges($ages);
+				var_dump($members);
+				$this->results = [];
+				foreach ($members as $value) {
+					$id_member = $value["ID"];
+					$workshops = WorkshopDAO::selectMemberWorkshop($id_member);
+					if(!array_key_exists($id,$workshops))
+					{
+						WorkshopDAO::addMemberWorkshop($id_member,$id, 1);
+						$this->results[] = $value;
+
+					}
+
+				}
 
 			}
 		}

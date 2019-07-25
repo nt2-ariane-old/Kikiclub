@@ -38,12 +38,7 @@
 
 
 		<?php
-		if($action->admin_mode)
-		{
-			?>
-				<a class="return-btn" href="assign-member.php")>Assign Workshop to family member</a>
-			<?php
-		}
+
 	}
 	else if($action->assign)
 	{

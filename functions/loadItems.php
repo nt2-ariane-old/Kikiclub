@@ -75,7 +75,20 @@ function loadProfil($user,$action)
 			}
 			?>
 			<div class="sheet">
-				<h2>Profil de <?= $user["firstname"] ?></h2>
+				<?php
+					if($userExist)
+					{
+						?>
+							<h2>Profil de <?= $user["firstname"] ?></h2>
+						<?php
+					}
+					else
+					{
+						?>
+							<h2>Nouveau Profil</h2>
+						<?php
+					}
+				?>
 				<form id="profil-form" action="manage-member.php" method="post">
 						<input type="hidden" name="form">
 						<?php
@@ -167,7 +180,7 @@ function loadProfil($user,$action)
 												<?php
 											}
 										?>
-										<img src="<?=$avatar["PATH"]?>">
+										<img  style="cursor:pointer;" src="<?=$avatar["PATH"]?>">
 									</label>
 
 									<?php
@@ -180,7 +193,7 @@ function loadProfil($user,$action)
 							if($userExist)
 							{
 								?>
-									<a class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement,{type:'post',path:'manage-member.php',params:{ 'delete':true}})"><?= $action->trans->read("main","delete")?></a>
+									<a class="delete-btn" style="cursor:pointer;" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement,{type:'post',path:'manage-member.php',params:{ 'delete':true}})"><?= $action->trans->read("main","delete")?></a>
 
 								<?php
 							}
@@ -188,21 +201,17 @@ function loadProfil($user,$action)
 						</div>
 					</form>
 					<?php
-						if($action->page_name == 'console' && $userExist)
+						if($action->admin_mode && $userExist)
 						{
 							?>
-
-							<?php
-						}
-						else
-						{
-							?>
-								<div>
-									<a class="return-btn" href="<?= $action->previous_page ?>.php"><?= $action->trans->read("users","return") ?></a>
-								</div>
+								<a class="return-btn" href="assign-member.php")>Assign Workshop to family member</a>
 							<?php
 						}
 					?>
+					<div>
+						<a class="return-btn" href="<?= $action->previous_page ?>.php"><?= $action->trans->read("users","return") ?></a>
+					</div>
+
 
 				</div>
 
@@ -338,6 +347,8 @@ function loadWorkshopsCreator($workshop, $action)
 				</div>
 				</main>
 	</form>
+
+
 	<?php
 }
 $nbWorkshops = 4;

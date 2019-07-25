@@ -174,14 +174,46 @@ const clicWorkshop = (node,id) =>
 		window.location = "workshop-infos.php?workshop_id=" + id;
 	}
 }
-
 const deleteSelected = () =>
 {
 	let selected = JSON.stringify(selected_workshops);
+
+	console.log(selected);
+	$.ajax({
+		type: "POST",
+		url:'ajax/workshops-ajax.php',
+		data: {
+			'selected' : selected,
+			'delete_multiple' : true
+		},
+		dataType: 'json',
+		success: function( data ) {
+			console.log(data);
+		},
+		error: function (request, status, error) {
+			console.log(request.responseText);
+		}
+	});
 }
 
-const deployedSelected = () =>
+const deployed_selected = () =>
 {
 	let selected = JSON.stringify(selected_workshops);
+	console.log(selected);
+	$.ajax({
+		type: "POST",
+		url:'ajax/workshops-ajax.php',
+		data: {
+			'selected' : selected,
+			'deployed_multiple' : true
+		},
+		dataType: 'json',
+		success: function( data ) {
+			console.log(data);
+		},
+		error: function (request, status, error) {
+			console.log(request.responseText);
+		}
+	});
 
 }

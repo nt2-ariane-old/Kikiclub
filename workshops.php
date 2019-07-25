@@ -21,7 +21,7 @@
 				<div class="card">
 					<div class="card-header" id="headingDifficulty">
 						<h5 class="mb-0">
-							<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
+							<button class="btn btn-link" aria-expanded="true" aria-controls="collapseDifficulty">
 								<?= $action->trans->read('workshops','difficulty') ?>
 							</button>
 								</h5>
@@ -45,7 +45,7 @@
 						<div class="card">
 							<div class="card-header" id="headingAge">
 								<h5 class="mb-0">
-									<button class="btn btn-link" data-toggle="collapse" data-target="#collapseAge" aria-expanded="true" aria-controls="collapseAge">
+									<button class="btn btn-link" aria-expanded="true" aria-controls="collapseAge">
 									<?= $action->trans->read('workshops','scholar') ?>
 									</button>
 								</h5>
@@ -68,7 +68,7 @@
 						<div class="card">
 							<div class="card-header" id="headingRobot">
 								<h5 class="mb-0">
-									<button class="btn btn-link" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="true" aria-controls="collapseRobots">
+									<button class="btn btn-link" aria-expanded="true" aria-controls="collapseRobots">
 									<?= $action->trans->read('workshops','robots') ?>
 									</button>
 								</h5>
@@ -135,7 +135,7 @@
 
 							<div class="collapse" id="controls">
 								<button onclick="change_page('workshop-infos.php',{'workshop_id':null})">Add</button>
-								<button onclick="change_page('workshop-infos.php',{'deployed':null})">Deployed</button>
+								<button onclick="deployed_selected()">Deployed</button>
 								<button  onclick="openConfirmBox(null,{type:'function','function':deleteSelected});">Delete</button>
 							</div>
 						</div>

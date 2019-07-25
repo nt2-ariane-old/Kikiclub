@@ -50,11 +50,19 @@
 
 			$this->genders = FamilyDAO::getGenders();
 
+			$this->avatars = FamilyDAO::loadAvatar();
+
+			if($this->admin_mode && !empty($_SESSION["user_id"]))
+			{
+				$id = $_SESSION["user_id"];
+			}
+			else
+			{
+				$id = $_SESSION["id"];
+			}
+
 			if($this->create)
 			{
-
-				$this->avatars = FamilyDAO::loadAvatar();
-
 				if(isset($_POST["form"]))
 				{
 
@@ -63,9 +71,13 @@
 						!empty($_POST["lastname"]) &&
 						!empty($_POST["birth"]))
 						{
-							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$_SESSION["id"]);
-							header('location:'. $this->previous_page . '.php');
 
+							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+							$this->create = false;
+							$this->update = true;
+							$member = FamilyDAO::getMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$id);
+							var_dump($member);
+							$_SESSION["member_id"] = $member["id"];
 						}
 						else
 						{
@@ -75,12 +87,11 @@
 				}
 
 			}
-			else if($this->update)
+			if($this->update)
 			{
-				$this->avatars = FamilyDAO::loadAvatar();
 				if(!empty($_SESSION["member_id"]))
 				{
-
+					echo $_SESSION["member_id"];
 					$this->family_member = FamilyDAO::selectMember($_SESSION["member_id"]);
 					if(isset($_POST["form"]))
 					{
@@ -89,7 +100,6 @@
 							!empty($_POST["birth"]))
 							{
 								FamilyDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
-								header('location:'. $this->previous_page . '.php');
 							}
 							else
 							{

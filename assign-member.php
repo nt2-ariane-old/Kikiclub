@@ -16,7 +16,7 @@
 				{
 					if($famWork["ID_WORKSHOP"] == $workshop["ID"] )
 					{
-						if($famWork["ID_STATUT"] != 1 && $famWork["ID_STATUT"] != 2)
+						if($famWork["ID_STATUT"] != 1 && $famWork["ID_STATUT"] != 2 )
 						{
 							$valide = false;
 						}
@@ -32,22 +32,7 @@
 		?>
 	</ul>
 
-	<ul id="not-started" class="droppable Workshop-boxes">
-		<?php
-			foreach ($action->workshops_deployed as $workshop)
-			{
-				foreach ($action->member_workshops as $famWork)
-				{
-					if($famWork["ID_WORKSHOP"] == $workshop["ID"] && $famWork["ID_STATUT"] == 2 )
-					{
-						?>
-							<li class="workshop-object" id="<?= $workshop["ID"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["NAME"] ?></h5></li>
-						<?php
-					}
-				}
-			}
-		?>
-	</ul>
+
 
 	<ul id="in-progress" class="droppable Workshop-boxes">
 		<?php
@@ -83,6 +68,6 @@
 		?>
 	</ul>
 
-	<a id="manage-btn" href="<?= $action->previous_page ?>.php">Back</a>
+	<a id="manage-btn" href="manage-member.php">Back</a>
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

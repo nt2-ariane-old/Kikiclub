@@ -33,9 +33,9 @@
 
 					<div class="forms-btns">
 						<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Add</button>
-						<a href="<?= $action->previous_page ?>.php" class="delete-btn">Back</a>
 					</div>
 				</form>
+
 			</div>
 
 		<?php
@@ -58,10 +58,7 @@
 					</div>
 				</form>
 				<div class="family">
-					<?php
-						if(sizeof($action->user["FAMILY"]) > 0)
-						{
-							?>
+
 							<table>
 								<thead>
 									<tr>
@@ -71,23 +68,27 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php
+								<?php
+									if(sizeof($action->user["FAMILY"]) > 0)
+									{
 										foreach ($action->user["FAMILY"] as $member)
 										{
-									?>
-											<tr onclick="change_page('manage-member.php',{'member_id':<?= $member['ID'] ?>,'members_action':'update'})">
+								?>
+											<tr style="cursor:pointer;" onclick="change_page('manage-member.php',{'member_id':<?= $member['ID'] ?>,'members_action':'update'})">
 												<td><?= $member["FIRSTNAME"] ?></td>
 												<td><?= $member["LASTNAME"] ?></td>
 												<td><?= $member["SCORE"] ?></td>
 											</tr>
-									<?php
+								<?php
 										}
-									?>
+									}
+								?>
+									<tr style="cursor:pointer;" onclick="change_page('manage-member.php',{'member_id':null,'members_action':'create'})">
+										<td > Add </td>
+									</tr>
 								</tbody>
 							</table>
-					<?php
-						}
-					?>
+
 				</div>
 				<div>
 					<a class="return-btn" href="users.php"><?= $action->trans->read("users","return") ?></a>

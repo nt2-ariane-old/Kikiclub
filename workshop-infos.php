@@ -46,8 +46,19 @@
 
 		?>
 		<div id="btns-zone">
+			<?php
+				if($action->admin_mode)
+				{
+			?>
+				<button class="return-btn" onclick="assignAllUsers()"> Assign All Users</button>
+			<?php
+				}
+			?>
 			<a href="workshops.php" class="return-btn">Back</a>
 		</div>
+
+		<div id="loading-page"></div>
+
 		<?php
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

@@ -117,8 +117,8 @@
 				{
 					//get user info
 					$user = UsersDAO::getUserWithID($id);
-				 	$_SESSION["visibility"] = $user["VISIBILITY"];
-					$_SESSION["id"] = $user["ID"];
+				 	$_SESSION["visibility"] = $user["visibility"];
+					$_SESSION["id"] = $user["id"];
 
 					//delete token
 				 	UsersDAO::deleteToken($_GET["user_t"]);
@@ -126,16 +126,26 @@
 			}
 
 			//check current page
-			if(!empty( $_SESSION["current"]))
+			if(strpos($this->page_name, 'error') === false && strpos($this->page_name, 'ajax') === false && $this->page_name != "assign-member")
 			{
-				$this->previous_page = $_SESSION["current"];
+				if(!empty( $_SESSION["current"]))
+				{
+					if($_SESSION["current"] != $this->page_name)
+					{
+
+						$_SESSION["previous"] = $_SESSION["current"];
+					}
+				}
+				else
+				{
+					$_SESSION["previous"] = "index";
+				}
+				$_SESSION["current"] = $this->page_name;
+				$this->previous_page = $_SESSION["previous"];
 			}
 			else
 			{
-				$this->previous_page = "index";
-			}
-			if (strpos($this->page_name, 'error') === false && strpos($this->page_name, 'ajax') === false && $this->previous_page != $this->page_name) {
-				$_SESSION["current"] = $this->page_name;
+				$this->previous_page = $_SESSION["previous"];
 			}
 
 			//Check if admin want to be in admin mode

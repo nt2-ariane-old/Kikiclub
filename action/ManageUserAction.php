@@ -45,6 +45,10 @@
 
 				}
 			}
+			else
+			{
+				header("Location:users.php");
+			}
 
 			if($this->create)
 			{
@@ -52,15 +56,19 @@
 				{
 					UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],CommonAction::$VISIBILITY_CUSTOMER_USER,null);
 					$this->added = true;
+					$this->create = false;
+					$this->update = true;
+					$this->id_user = UsersDAO::getUserWithEmail($_POST['email'])["ID"];
+					$_SESSION["user_id"] = $this->id_user;
+					$_SESSION["users_action"] = "update";
 				}
 			}
-			else if($this->update)
+			if($this->update)
 			{
 				$this->user =  FamilyDAO::getUserFamily($this->id_user);
 				if(isset($_POST['push']))
 				{
 					UsersDAO::updateUser($this->id_user,$_POST['email'],$_POST['firstname'],$_POST['lastname']);
-					header('location:users.php');
 				}
 				if(isset($_POST['delete']))
 				{
@@ -68,10 +76,7 @@
 					header('location:users.php');
 				}
 			}
-			else
-			{
-				header("Location:users.php");
-			}
+
 
 		}
 

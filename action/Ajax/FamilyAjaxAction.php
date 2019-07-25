@@ -12,13 +12,13 @@
 
 		protected function executeAction() {
 			if(!empty($_SESSION["id"]))
-				$this->results["family"] = FamilyDAO::selectFamilyMembers($_SESSION["id"]);
+				$this->results["family"] = FamilyDAO::selectFamily($_SESSION["id"]);
 				$this->results["avatars"] = FamilyDAO::loadAvatar();
 				if(!empty($this->results["family"]))
 				{
 					foreach ($this->results["family"] as $key => $value) {
-						$this->results["family"][$key]["workshops"] = WorkshopDAO::selectMemberWorkshop($this->results["family"][$key]["ID"]);
-						$this->results["family"][$key]["alert"] = WorkshopDAO::selectMemberNewWorkshop($this->results["family"][$key]["ID"]);
+						$this->results["family"][$key]["workshops"] = WorkshopDAO::selectMemberWorkshop($this->results["family"][$key]["id"]);
+						$this->results["family"][$key]["alert"] = WorkshopDAO::selectMemberNewWorkshop($this->results["family"][$key]["id"]);
 					}
 				}
 

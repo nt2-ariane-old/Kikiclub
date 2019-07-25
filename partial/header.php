@@ -98,7 +98,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<body onload="loadModules(); onPageLoad();<?php if($action->isAdmin()) echo 'adminLoad();'?>">
+<body onload="loadModules(); onPageLoad();<?php if($action->admin_mode) echo 'adminLoad();'?>">
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
 

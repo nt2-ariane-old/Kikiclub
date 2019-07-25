@@ -15,7 +15,7 @@
 			}
 
 			$id_member = $_SESSION["member_id"];
-			$this->workshops_deployed = WorkshopDAO::getWorkshops("none",false,true);
+			$this->workshops_deployed = WorkshopDAO::getWorkshops(null,"none",false,true);
 			$this->member_workshops = WorkshopDAO::selectMemberWorkshop($id_member);
 
 		}

@@ -158,6 +158,31 @@
 			}
 			return $contents;
 		}
+
+		public static function getMember($firstname,$lastname,$birth,$id_user)
+		{
+			$connection = Connection::getConnection();
+
+			$request = "SELECT * FROM family WHERE firstname=? AND lastname=? AND id_user=? AND STR_TO_DATE(?, '%d/%m/%Y')";
+
+			$statement = $connection->prepare($request);
+
+			$statement->bindParam(1, $firstname);
+			$statement->bindParam(2, $lastname);
+			$statement->bindParam(3, $id_user);
+			$statement->bindParam(4, $birth);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = null;
+
+			if($row = $statement->fetch())
+			{
+				$contents = $row;
+			}
+
+			return $contents;
+		}
 		public static function getFamilyLikeType($name,$type)
 		{
 			$connection = Connection::getConnection();
@@ -193,14 +218,62 @@
 			return $content;
 		}
 
+		public static function getAllMember()
+		{
+			$connection = Connection::getConnection();
+
+
+			$request = "SELECT id FROM family ";
+
+			$statement = $connection->prepare($request);
+
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+
+
+			return $content;
+		}
+		public static function getAllMemberWithAges($ages)
+		{
+			$connection = Connection::getConnection();
+			$age_str = "";
+			foreach ($ages as $age) {
+				$age_str .= strval($age) . ',';
+			}
+			$age_str .= '-1';
+
+			$request = "SELECT ID, FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS AGE FROM family WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( " . $age_str . " )";
+			echo $request;
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1,$age_str);
+
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+			return $content;
+		}
+
 		public static function selectMembersFromIdArray($ids)
 		{
 			$connection = Connection::getConnection();
 
-			$request = "SELECT id,firstname,lastname,birthday,id_gender,id_avatar,id_user,id,score FROM family WHERE id IN ('$ids')";
+			$request = "SELECT * FROM family WHERE id IN (?)";
 			$statement = $connection->prepare();
 
-			$statement->bindParam(1, $name);
+			$statement->bindParam(1, $ids);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -213,10 +286,10 @@
 			return $content;
 		}
 
-		public static function selectFamilyMembers($id_parent)
+		public static function selectFamily($id_parent)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,birthday,id_gender,id_avatar,id_user,id,score FROM family WHERE id_user=? ORDER BY birthday DESC");
+			$statement = $connection->prepare("SELECT * FROM family WHERE id_user=? ORDER BY birthday DESC");
 
 			$statement->bindParam(1, $id_parent);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -246,35 +319,6 @@
 			return $contents;
 		}
 
-		public static function getUsers()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, EMAIL, FIRSTNAME, LASTNAME FROM users");
-			$statement->bindParam(1, $id_user);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$contents = [];
-
-			while ($row = $statement->fetch()) {
-				$temp = [];
-				$temp["USER"] = $row;
-
-				$statement2 = $connection->prepare("SELECT ID, FIRSTNAME, LASTNAME, BIRTHDAY, SCORE, ID_AVATAR, id_gender FROM family WHERE id_user = ?");
-				$statement2->bindParam(1, $row["ID"]);
-
-				$statement2->setFetchMode(PDO::FETCH_ASSOC);
-				$statement2->execute();
-
-				$family = [];
-				while ($rowFam = $statement2->fetch()) {
-					$family[] = $rowFam;
-				}
-				$temp["FAMILY"] = $family;
-				$contents[] = $temp;
-			}
-			return $contents;
-		}
 		public static function getUserFamily($id_user)
 		{
 			$connection = Connection::getConnection();

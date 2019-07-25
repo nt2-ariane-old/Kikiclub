@@ -3,7 +3,7 @@
 
 	class WorkshopDAO {
 
-		public static function getWorkshops($orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
+		public static function getWorkshops($id=null,$orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 
 
@@ -61,6 +61,64 @@
 			}
 			return $content;
 		}
+		public static function getMemberWorkshopsSorted($id_member,$orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
+			$connection = Connection::getConnection();
+
+			$request = "SELECT * FROM workshops WHERE id IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=?) ";
+
+			if($deployed)
+			{
+				$request .= "AND deployed = TRUE ";
+			}
+			else
+			{
+				$request .= "AND deployed = FALSE ";
+			}
+
+			if($orderby != "none")
+			{
+				if($orderby == "NAME")
+				{
+					$request .= "ORDER BY NAME ";
+				}
+				else if($orderby == "ID")
+				{
+					$request .= "ORDER BY ID ";
+				}
+
+				if($ascendant)
+				{
+					$request .= "ASC ";
+				}
+				else
+				{
+					$request .= "DESC ";
+				}
+			}
+			if($page >= 0)
+			{
+				$request .= " LIMIT ?,12";
+			}
+			$statement = $connection->prepare($request);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+
+			$statement->bindParam(1, $id_member);
+			if($page >= 0)
+			{
+				$limit = $page * 12;
+				$statement->bindParam(2, $limit);
+
+			}
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[] = $row;
+			}
+
+			return $content;
+		}
 
 		public static function getNbWorkshops($deployed=true)
 		{
@@ -81,9 +139,31 @@
 			}
 			return $content;
 		}
+
+		public static function isDeployed($id)
+		{
+			$connection = Connection::getConnection();
+
+			$request = "SELECT * FROM workshops WHERE ID=?";
+
+			$statement = $connection->prepare($request);
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+
+			if($row = $statement->fetch())
+			{
+				$contents = $row;
+			}
+
+			return $content;
+		}
 		public static function setDeployed($id,$deployed)
 		{
 			$connection = Connection::getConnection();
+
 			$request = "UPDATE workshops SET ";
 			if($deployed == "true")
 			{
@@ -94,6 +174,7 @@
 				$request .= "deployed=FALSE ";
 			}
 			$request.="WHERE id=?";
+
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -242,7 +323,7 @@
 		public static function getGradesEN()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM scholar_level");
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -255,10 +336,27 @@
 
 			return $content;
 		}
+		public static function getGradeById($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level WHERE id = ?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+			$statement->execute();
+
+			$content = [];
+
+			if ($row = $statement->fetch()) {
+				$content = $row;
+				// $content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
 		public static function getGradesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM scholar_level");
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -444,7 +542,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 )  AND deployed = TRUE");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT = 1 OR ID_STATUT = 2 )  AND deployed = TRUE");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);

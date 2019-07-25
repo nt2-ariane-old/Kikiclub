@@ -64,6 +64,57 @@ aside #workshop-menu .card {
   border-bottom: 5px solid black;
 }
 
+#loading-page {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.592);
+}
+
+#btns-zone {
+  clear: both;
+  background-color: white;
+  border-bottom: 5px solid black;
+  padding: 0.5em;
+}
+
+#btns-zone .return-btn {
+  background-color: transparent;
+  display: block;
+  margin: auto;
+  padding: 0.5em;
+  margin: 0.5em auto;
+}
+
+.loading-bar {
+  background-color: white;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  top: calc((100% - (50px)) / 2);
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.loading-bar .loading-percentage {
+  background-color: aqua;
+  height: 50px;
+  position: absolute;
+  top: 0;
+}
+
+.loading-bar.download {
+  top: calc((100% / 2));
+}
+
+.loading-bar.download .loading-percentage {
+  background-color: green;
+}
+
 @media only screen and (min-width: 1000px) {
   aside {
     height: 1500px;
@@ -83,17 +134,6 @@ aside #workshop-menu .card {
   }
   aside #workshop-menu #search-form .card-header {
     background-color: #d9df23;
-  }
-  #btns-zone {
-    clear: both;
-    background-color: white;
-    border-bottom: 5px solid black;
-    padding: 0.5em;
-  }
-  #btns-zone .return-btn {
-    display: block;
-    margin: auto;
-    padding: 0.5em;
   }
   #workshop-form {
     background-color: #D8DF23;
