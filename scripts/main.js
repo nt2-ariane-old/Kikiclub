@@ -154,7 +154,7 @@ const loadMedia = (object,container ) => {
 	let media = document.createElement("div");
 		media.setAttribute('class','media');
 
-		if(object["MEDIA_TYPE"] == "mp4")
+		if(object["media_type"] == "mp4")
 		{
 			let video = document.createElement('video');
 				video.width = '100%';
@@ -163,25 +163,25 @@ const loadMedia = (object,container ) => {
 				video.innerHTML = "Your browser does not support the video tag.";
 
 				let source = document.createElement('source');
-				source.src = object["MEDIA_PATH"];
-				source.type = "video/" + object["MEDIA_TYPE"];
+				source.src = object["media_path"];
+				source.type = "video/" + object["media_type"];
 				video.appendChild(source);
 
 			media.appendChild(video);
 
 		}
-		else if(object["MEDIA_TYPE"] == "png" ||
-				object["MEDIA_TYPE"] == "jpg")
+		else if(object["media_type"] == "png" ||
+				object["media_type"] == "jpg")
 		{
 			let image = document.createElement('img');
-				image.src = object["MEDIA_PATH"];
+				image.src = object["media_path"];
 
 			media.appendChild(image);
 		}
-		else if(object["MEDIA_TYPE"] == "mp3")
+		else if(object["media_type"] == "mp3")
 		{
 			let audio = document.createElement('audio');
-			audio.src = object["MEDIA_PATH"];
+			audio.src = object["media_path"];
 			audio.controls = 'controls';
 			audio.innerHTML = "Your browser does not support the audio element.";
 

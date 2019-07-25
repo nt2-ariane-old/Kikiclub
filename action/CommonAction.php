@@ -71,7 +71,7 @@
 		public function isLoggedIn() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}
-		public function isFamilyMember()
+		public function isMember()
 		{
 			return !empty($_SESSION["member_id"]);
 		}
@@ -190,7 +190,7 @@
 
 
 			//check if the family member exist, and if yes, show is name
-			if($this->isFamilyMember())
+			if($this->isMember())
 			{
 				$member = MemberDAO::selectMember($_SESSION["member_id"]);
 				if($member == null)

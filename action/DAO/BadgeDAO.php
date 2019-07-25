@@ -36,7 +36,7 @@
 			$connection = Connection::getConnection();
 
 			$request = "SELECT ";
-			$request .= "b.ID AS ID_BADGE, b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, m.FIRSTNAME AS OWNER, DATE_FORMAT(mb.won_on, '%Y-%m-%d') AS WON_ON ";
+			$request .= "b.ID AS id_badge, b.NAME AS name, b.MEDIA_PATH AS media_path, b.MEDIA_TYPE AS media_type, m.FIRSTNAME AS owner, DATE_FORMAT(mb.won_on, '%Y-%m-%d') AS won_on ";
 			$request .= "FROM member_badges AS mb INNER JOIN badges AS b INNER JOIN member as m ";
 			$request .= "WHERE mb.ID_BADGE = b.ID AND mb.id_member = ? AND m.id = mb.id_member ";
 
@@ -49,7 +49,7 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID_BADGE"]] = $row;
+				$content[$row["id_badge"]] = $row;
 			}
 
 			return $content;
@@ -58,7 +58,7 @@
 		public static function addBadgeToMember($id_badge,$id_member,$id_user)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("INSERT INTO member_badges(ID_BADGE,ID_MEMBER,ID_USER,WON_ON) VALUES (?,?,?,CURDATE())");
+			$statement = $connection->prepare("INSERT INTO member_badges(id_badge,id_member,id_user,won_on) VALUES (?,?,?,CURDATE())");
 
 			$statement->bindParam(1, $id_badge);
 			$statement->bindParam(2, $id_member);
@@ -67,23 +67,11 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
-		public static function updatePost($id,$title,$content,$media_path, $media_type)
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE shared_posts SET TITLE=?,CONTENT=?,MEDIA_PATH=?,MEDIA_TYPE=? WHERE ID=?");
-			$statement->bindParam(1, $title);
-			$statement->bindParam(2, $content);
-			$statement->bindParam(3, $media_path);
-			$statement->bindParam(4, $media_type);
-			$statement->bindParam(5, $id);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-		}
 
 		public static function addBadge($name=null,$id_type=1, $value_needed=null,$media_path=null,$media_type=null)
 		{
 			$connection = Connection::getConnection();
-			$request = "INSERT INTO badges(NAME,VALUE_NEEDED,ID_BADGE_TYPE,MEDIA_PATH,MEDIA_TYPE) VALUES (?,?,?,?,?)";
+			$request = "INSERT INTO badges(name,value_needed,id_badge_type,media_path,media_type) VALUES (?,?,?,?,?)";
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $value_needed);

@@ -1,6 +1,7 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
 	class WorkshopInfosAction extends CommonAction {
@@ -46,9 +47,9 @@
 
 			if($this->exist) $id = $_SESSION["workshop_id"];
 
-			$this->id_types["robots"] = WorkshopDAO::getFilterTypeIdByName('robot');
-			$this->id_types["difficulties"] = WorkshopDAO::getFilterTypeIdByName('difficulty');
-			$this->id_types["grades"] = WorkshopDAO::getFilterTypeIdByName('grade');
+			$this->id_types["robots"] = FilterDAO::getFilterTypeIdByName('robot');
+			$this->id_types["difficulties"] = FilterDAO::getFilterTypeIdByName('difficulty');
+			$this->id_types["grades"] = FilterDAO::getFilterTypeIdByName('grade');
 
 			if($this->admin_mode)
 			{
@@ -73,7 +74,7 @@
 						$this->exist = true;
 					}
 
-					$this->filters = WorkshopDAO::getWorkshopFilters($id);
+					$this->filters = FilterDAO::getWorkshopFilters($id);
 
 					$filters_selected = [];
 					$filters_selected["robots"] = [];
@@ -102,11 +103,11 @@
 							$id_filter = $this->getFilterID($id_type,$value);
 							if($id_filter >= 0)
 							{
-								WorkshopDAO::updateWorkshopFilters($id_filter,$id,$id_type,$value);
+								FilterDAO::updateWorkshopFilters($id_filter,$id,$id_type,$value);
 							}
 							else
 							{
-								WorkshopDAO::insertWorkshopFilters($id,$id_type,$value);
+								FilterDAO::insertWorkshopFilters($id,$id_type,$value);
 
 							}
 						}
@@ -130,16 +131,16 @@
 
 			if($this->exist)
 			{
-				$this->filters = WorkshopDAO::getWorkshopFilters($id);
+				$this->filters = FilterDAO::getWorkshopFilters($id);
 
 				$this->workshop = WorkshopDAO::getWorkshop($id);
 				if(!empty($_SESSION["member_id"]))
 				{
-					$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+					$this->member_workshops =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 					$existe = false;
 					foreach ($this->member_workshops as $item)
 					{
-						if($id == $item["ID_WORKSHOP"])
+						if($id == $item["id_workshop"])
 						{
 							$existe = true;
 							break;
@@ -147,7 +148,7 @@
 					}
 					if(!$existe)
 					{
-						WorkshopDAO::addMemberWorkshop($_SESSION["member_id"],$id,2);
+						MemberWorkshopDAO::addMemberWorkshop($_SESSION["member_id"],$id,2);
 					}
 				}
 
@@ -183,7 +184,7 @@
 				{
 					if(!in_array($key,$list))
 					{
-							WorkshopDAO::deleteWorkshopFilters($filter["id"]);
+							FilterDAO::deleteWorkshopFilters($filter["id"]);
 					}
 				}
 			}

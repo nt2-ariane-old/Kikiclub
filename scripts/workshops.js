@@ -109,17 +109,17 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 								if (memberWorkshops.hasOwnProperty(key)) {
 									const m_workshop = memberWorkshops[key];
 
-									if(m_workshop["ID_WORKSHOP"] == workshop["ID"])
+									if(m_workshop["id_workshop"] == workshop["id"])
 									{
 
 										ancien = true;
-										spanContent.innerHTML = states[m_workshop["ID_STATUT"]]["NAME"];
+										spanContent.innerHTML = states[m_workshop["id_statut"]]["name"];
 									}
 								}
 							}
 							if(!ancien)
 							{
-								spanContent.innerHTML = states[1]["NAME"];
+								spanContent.innerHTML = states[1]["name"];
 							}
 								divType.appendChild(spanContent);
 							link.appendChild(divType);
@@ -131,7 +131,7 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 							divTitle.setAttribute('class','title');
 
 							let h2Title = document.createElement('h2');
-								h2Title.innerHTML = workshop["NAME"];
+								h2Title.innerHTML = workshop["name"];
 							divTitle.appendChild(h2Title);
 
 						loadMedia(workshop,link);

@@ -10,9 +10,12 @@
 		<?php
 			foreach ($action->robots as $robot) {
 				?>
-					<a href="robot-infos.php?robot_id=<?= $robot["ID"]  ?>" ><div class="robot">
-						<h3><?= $robot["NAME"] ?></h3>
-					</div></a>
+					<?php
+						?>
+					<div class="robot">
+					<a href="robot-infos.php?robot_id=<?= $robot["id"]  ?>" ><div class="media"><img class="img-rounded" src=<?=$robot["media_path"]?> alt=""></div></a>
+						<h3><?= $robot["name"] ?></h3>
+					</div>
 				<?php
 			}
 		?>

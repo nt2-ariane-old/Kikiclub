@@ -44,12 +44,12 @@
 	{
 		?>
 			<div class="sheet">
-				<h2>Modification de <?= $action->user["USER"]["FIRSTNAME"] ?> </h2>
+				<h2>Modification de <?= $action->user["user"]["firstname"] ?> </h2>
 				<form action="manage-user.php" id="profil-form" method="post" onSubmit="return validTab(this)">
 					<div class="infos">
-						<p><span class="input-title">First Name : </span><input type="text" name="firstname" value="<?= $action->user["USER"]["FIRSTNAME"] ?>" placeholder="Firstname"></p>
-						<p><span class="input-title">Last Name : </span><input type="text" name="lastname" value="<?= $action->user["USER"]["LASTNAME"] ?>" placeholder="Lastname"></p>
-						<p><span class="input-title">Email : </span><input type="text" name="email" value="<?= $action->user["USER"]["EMAIL"] ?>" placeholder="Email"></p>
+						<p><span class="input-title">First Name : </span><input type="text" name="firstname" value="<?= $action->user["user"]["firstname"] ?>" placeholder="Firstname"></p>
+						<p><span class="input-title">Last Name : </span><input type="text" name="lastname" value="<?= $action->user["user"]["lastname"] ?>" placeholder="Lastname"></p>
+						<p><span class="input-title">Email : </span><input type="text" name="email" value="<?= $action->user["user"]["email"] ?>" placeholder="Email"></p>
 					</div>
 
 					<div class="forms-btns">
@@ -69,15 +69,15 @@
 								</thead>
 								<tbody>
 								<?php
-									if(sizeof($action->user["FAMILY"]) > 0)
+									if(sizeof($action->user["family"]) > 0)
 									{
-										foreach ($action->user["FAMILY"] as $member)
+										foreach ($action->user["family"] as $member)
 										{
 								?>
-											<tr style="cursor:pointer;" onclick="change_page('manage-member.php',{'member_id':<?= $member['ID'] ?>,'members_action':'update'})">
-												<td><?= $member["FIRSTNAME"] ?></td>
-												<td><?= $member["LASTNAME"] ?></td>
-												<td><?= $member["SCORE"] ?></td>
+											<tr style="cursor:pointer;" onclick="change_page('manage-member.php',{'member_id':<?= $member['id'] ?>,'members_action':'update'})">
+												<td><?= $member["firstname"] ?></td>
+												<td><?= $member["lastname"] ?></td>
+												<td><?= $member["score"] ?></td>
 											</tr>
 								<?php
 										}

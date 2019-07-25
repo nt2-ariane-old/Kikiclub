@@ -4,25 +4,25 @@ function loadMedia( $workshop ){
   ?>
     <div class="media">
 			<?php
-				if($workshop["MEDIA_TYPE"] == "mp4")
+				if($workshop["media_type"] == "mp4")
 				{
 			?>
 				<video class="img-rounded" width="100%" height="100%" controls>
-					<source src="<?=$workshop["MEDIA_PATH"]?>" type="video/<?= $workshop["MEDIA_TYPE"] ?>">
+					<source src="<?=$workshop["media_path"]?>" type="video/<?= $workshop["media_type"] ?>">
 						Your browser does not support the video tag.
 					</video>
 			<?php
-				} else if ($workshop["MEDIA_TYPE"] == "png" ||
-					        $workshop["MEDIA_TYPE"] == "jpg")
+				} else if ($workshop["media_type"] == "png" ||
+					        $workshop["media_type"] == "jpg")
 				{
 			?>
-					<img class="img-rounded" src=<?=$workshop["MEDIA_PATH"]?> alt="">
+					<img class="img-rounded" src=<?=$workshop["media_path"]?> alt="">
 			<?php
 				}
-				else if($workshop["MEDIA_TYPE"] == "mp3")
+				else if($workshop["media_type"] == "mp3")
 				{
 			?>
-					<audio class="img-rounded" src="<?=$workshop["MEDIA_PATH"]?>" controls="controls">
+					<audio class="img-rounded" src="<?=$workshop["media_path"]?>" controls="controls">
 						Your browser does not support the audio element.
 					</audio>
 			<?php
@@ -323,8 +323,8 @@ function loadWorkshopsCreator($workshop, $action)
 							?>
 						</div>
 
-						<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["MEDIA_PATH"]; } ?>">
-						<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["MEDIA_TYPE"]; } ?>">
+						<input type="hidden" name="media_path" id="media_path" value="<?php if($workshopExist) { echo $workshop["media_path"]; } ?>">
+						<input type="hidden" name="media_type" id="media_type" value="<?php if($workshopExist) { echo $workshop["media_type"]; } ?>">
 
 						<div id="drop-workshop" class="dropzone"></div>
 
@@ -415,28 +415,26 @@ function loadBadgesLine($badges,$name,$action,$title,$isMember=false)
 	$nbBadges = 4;
 	?>
 	<div class="container">
-		<?php
-			for ($i=0; $i < sizeof($badges) / $nbBadges ; $i++) {
-				# code...
-			}
-		?>
 		<div class="row" id="<?= $title ?>">
 		<?php
 			foreach ($badges as $badge) {
 				?>
-				<div class="kikiclub-badge col-sm-<?= 12/$nbBadges ?>" >
-					<?php
-						loadMedia($badge);
-					?>
-					<h5><?= $badge["NAME"] ?></h5>
-					<?php
-						if($isMember)
-						{
-					?>
-							<h6>Won on <?= $badge["WON_ON"]?></h6>
-					<?php
-						}
-					?>
+				<div class="col-sm-<?= 12/$nbBadges ?>" >
+					<div onclick='clicBadge(this,<?= json_encode($badge)?>)' class = "kikiclub-badge">
+						<h5><?= $badge["name"] ?></h5>
+						<?php
+							loadMedia($badge);
+						?>
+						<?php
+							if($isMember)
+							{
+						?>
+								<h6>Won on <?= $badge["won_on"]?></h6>
+						<?php
+							}
+						?>
+					</div>
+
 				</div>
 				<?php
 			}
@@ -469,12 +467,12 @@ function loadBadgesCarousel($badges,$name,$action,$title,$isMember=false)
 									<?php
 										loadMedia($badge);
 									?>
-									<h5><?= $badge["NAME"] ?></h5>
+									<h5><?= $badge["name"] ?></h5>
 									<?php
 										if($isMember)
 										{
 											?>
-												<h6>Won on <?= $badge["WON_ON"]?></h6>
+												<h6>Won on <?= $badge["won_on"]?></h6>
 											<?php
 										}
 									?>

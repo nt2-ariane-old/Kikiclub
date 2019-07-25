@@ -114,7 +114,7 @@
 
 		<div class="member-name">
 			<?php
-				if($action->isFamilyMember())
+				if($action->isMember())
 				{
 					?>
 						<h3> <?= $action->trans->read("main","welcome") ." " . $action->member_name ?></h3>

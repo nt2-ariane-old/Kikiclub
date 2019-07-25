@@ -1,7 +1,7 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 
 	class MemberHomeAction extends CommonAction {
@@ -21,7 +21,7 @@
 			$id = $_SESSION["member_id"];
 			$this->member = MemberDAO::selectMember($id);
 
-			$this->member["alert"] = sizeof(WorkshopDAO::selectMemberNewWorkshop($id));
+			$this->member["alert"] = sizeof(MemberWorkshopDAO::selectMemberNewWorkshop($id));
 			$this->complete_name = $this->member["firstname"] . "'s Page";
 
 			$this->badges = BadgeDAO::getMemberBadge($id);

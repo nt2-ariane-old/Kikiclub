@@ -68,7 +68,7 @@
 				}
 				else
 				{
-					$f = "WorkshopDAO::getMemberWorkshopsSorted";
+					$f = "MemberWorkshopDAO::getMemberWorkshopsSorted";
 					$id = $_SESSION["member_id"];
 				}
 				switch ($_POST["sort"]) {
@@ -97,7 +97,7 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = FilterDAO::getWorkshopFilters($workshop["ID"]);
+							$filters = FilterDAO::getWorkshopFilters($workshop["id"]);
 							$workshop_difficulties = $filters[FilterDAO::getFilterTypeIdByName('difficulty')];
 							if(!empty($workshop_difficulties))
 							{
@@ -124,7 +124,7 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = FilterDAO::getWorkshopFilters($workshop["ID"]);
+							$filters = FilterDAO::getWorkshopFilters($workshop["id"]);
 							$workshop_grades = $filters[FilterDAO::getFilterTypeIdByName('grade')];
 							if(!empty($workshop_grades ))
 							{
@@ -161,8 +161,8 @@
 							{
 								foreach ($member_workshops as $m_workshop)
 								{
-									if($m_workshop["ID_WORKSHOP"] == $workshop["ID"] &&
-										$state == $m_workshop["ID_STATUT"])
+									if($m_workshop["id_workshop"] == $workshop["id"] &&
+										$state == $m_workshop["id_statut"])
 									{
 										$temp[] = $workshop;
 									}
@@ -171,7 +171,7 @@
 								foreach ($new_workshops as $m_workshop)
 								{
 
-									if($workshop["ID"] == $m_workshop["ID"] )
+									if($workshop["id"] == $m_workshop["id"] )
 									{
 										if($state == 1 || $state == 2)
 										{
@@ -196,7 +196,7 @@
 					{						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = FilterDAO::getWorkshopFilters($workshop["ID"]);
+							$filters = FilterDAO::getWorkshopFilters($workshop["id"]);
 							var_dump($filters);
 							if(!empty($filters[FilterDAO::getFilterTypeIdByName('robot')]))
 							{
@@ -267,13 +267,13 @@
 					foreach ($grades as $grade) {
 						$id_grade = $grade["id_filter"];
 
-						$ages[] = FilterDAO::getGradeById($id_grade)["AGE"];
+						$ages[] = FilterDAO::getGradeById($id_grade)["age"];
 					}
 				}
 				$members = MemberDAO::getAllMemberWithAges($ages);
 				$this->results = [];
 				foreach ($members as $value) {
-					$id_member = $value["ID"];
+					$id_member = $value["id"];
 					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
 					if(!array_key_exists($id,$workshops))
 					{

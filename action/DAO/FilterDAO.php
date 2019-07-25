@@ -160,7 +160,7 @@
 		public static function getGradeById($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level WHERE id = ?");
+			$statement = $connection->prepare("SELECT id,NAME_FR as name,age FROM scholar_level WHERE id = ?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();

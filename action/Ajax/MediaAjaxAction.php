@@ -33,8 +33,8 @@
 				if($_FILES["file"]["size"] <= $max_size)
 				{
 					if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
-						$this->results["PATH"] =  $webfile;
-						$this->results["TYPE"] =  pathinfo($webfile, PATHINFO_EXTENSION);
+						$this->results["path"] =  $webfile;
+						$this->results["type"] =  pathinfo($webfile, PATHINFO_EXTENSION);
 					} else {
 						$this->results =  "Possible file upload attack!";
 					}

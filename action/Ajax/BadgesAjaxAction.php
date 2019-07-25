@@ -24,18 +24,21 @@
 				$badge = BadgeDAO::getBadgeByID($id);
 
 				$params = $_POST["params"];
-
+				$this->results["badge"] = $badge;
+				$this->results["params"] = $params;
 				foreach ($params as $key => $value) {
 					$badge[$key] = $value;
+
 				}
 
-				BadgeDAO::updateBadge($id,$badge["NAME"],$badge["ID_BADGE_TYPE"], $badge["VALUE_NEEDED"],$badge["MEDIA_PATH"],$badge["MEDIA_TYPE"]);
-				$this->results = true;
+				BadgeDAO::updateBadge($id,$badge["name"],$badge["id_badge_type"], $badge["value_needed"],$badge["media_path"],$badge["media_type"]);
 			}
 			if(isset($_POST["delete"]))
 			{
-
-				BadgeDAO::deleteBadge($_POST["id"]);
+				$selected = json_decode($_POST["selected"],true);
+				foreach ($selected as $badge) {
+					BadgeDAO::deleteBadge($badge);
+				}
 			}
 		}
 	}

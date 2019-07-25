@@ -12,7 +12,7 @@
 		public static function insertFamilyMember($firstname,$lastname,$birthday,$gender,$id_avatar,$id_parent)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("INSERT INTO family(firstname,lastname,birthday,id_gender,id_avatar,id_user) VALUES(?,?,STR_TO_DATE(?, '%d/%m/%Y') ,?,?,?)");
+			$statement = $connection->prepare("INSERT INTO member(firstname,lastname,birthday,id_gender,id_avatar,id_user) VALUES(?,?,STR_TO_DATE(?, '%d/%m/%Y') ,?,?,?)");
 
 			$statement->bindParam(1, $firstname);
 			$statement->bindParam(2, $lastname);
@@ -30,7 +30,7 @@
 		{
 			$connection = Connection::getConnection();
 			$value = $value . "%";
-			$requestMember = "SELECT id,firstname,lastname FROM family ";
+			$requestMember = "SELECT id,firstname,lastname FROM member ";
 			$requestMember .= "WHERE firstname LIKE ? OR lastname LIKE ? OR CONCAT(firstname,' ',lastname) LIKE ?";
 
 			$statementMember = $connection->prepare($requestMember);
@@ -78,7 +78,7 @@
 		public static function addScore($id,$newPts)
 		{
 			$connection = Connection::getConnection();
-			$statementMember = $connection->prepare("SELECT SCORE FROM family WHERE ID=?");
+			$statementMember = $connection->prepare("SELECT SCORE FROM member WHERE ID=?");
 
 			$statementMember->bindParam(1, $id);
 
@@ -89,7 +89,7 @@
 			{
 				$score = $row["SCORE"] + $newPts;
 
-				$statementScore = $connection->prepare("UPDATE family SET score=? WHERE id=?");
+				$statementScore = $connection->prepare("UPDATE member SET score=? WHERE id=?");
 				$statementScore->bindParam(1, $score);
 				$statementScore->bindParam(2, $id);
 				$statementScore->execute();
@@ -99,7 +99,7 @@
 		public static function deleteFamilyMember($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("DELETE FROM family WHERE id = ?");
+			$statement = $connection->prepare("DELETE FROM member WHERE id = ?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -135,7 +135,7 @@
 		public static function updateFamilyMember($id,$firstname,$lastname,$birthday,$gender,$id_avatar)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE family SET firstname=?,lastname=?,birthday=STR_TO_DATE(?, '%d/%m/%Y'),id_gender=?,id_avatar=? WHERE id=?");
+			$statement = $connection->prepare("UPDATE member SET firstname=?,lastname=?,birthday=STR_TO_DATE(?, '%d/%m/%Y'),id_gender=?,id_avatar=? WHERE id=?");
 
 			$statement->bindParam(1, $firstname);
 			$statement->bindParam(2, $lastname);
@@ -152,7 +152,7 @@
 		public static function selectMember($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,DATE_FORMAT(birthday,'%d/%m/%Y') birthday,id_gender,id_avatar,id_user,id,score FROM family WHERE id=?");
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,DATE_FORMAT(birthday,'%d/%m/%Y') birthday,id_gender,id_avatar,id_user,id,score FROM member WHERE id=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -169,7 +169,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$request = "SELECT * FROM family WHERE firstname=? AND lastname=? AND id_user=? AND STR_TO_DATE(?, '%d/%m/%Y')";
+			$request = "SELECT * FROM member WHERE firstname=? AND lastname=? AND id_user=? AND STR_TO_DATE(?, '%d/%m/%Y')";
 
 			$statement = $connection->prepare($request);
 
@@ -194,7 +194,7 @@
 			$connection = Connection::getConnection();
 			$name = $name . '%';
 
-			$request = "SELECT id,firstname,lastname FROM family ";
+			$request = "SELECT id,firstname,lastname FROM member ";
 			if($type == 'firstname')
 			{
 				$request .= "WHERE firstname LIKE ?";
@@ -229,7 +229,7 @@
 			$connection = Connection::getConnection();
 
 
-			$request = "SELECT id FROM family ";
+			$request = "SELECT id FROM member ";
 
 			$statement = $connection->prepare($request);
 
@@ -251,7 +251,7 @@
 			$connection = Connection::getConnection();
 			$age_str = "";
 			for ($i=0; $i < sizeof($ages); $i++) {
-				$age = $ages[$id];
+				$age = $ages[$i];
 				if($i == 0)
 				{
 					$age_str .= strval($age);
@@ -261,7 +261,7 @@
 			}
 
 
-			$request = "SELECT id, FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS age FROM family WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
+			$request = "SELECT id, FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS age FROM member WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1,$age_str);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -280,7 +280,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$request = "SELECT * FROM family WHERE id IN (?)";
+			$request = "SELECT * FROM member WHERE id IN (?)";
 			$statement = $connection->prepare();
 
 			$statement->bindParam(1, $ids);
@@ -299,7 +299,7 @@
 		public static function selectFamily($id_parent)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT * FROM family WHERE id_user=? ORDER BY birthday DESC");
+			$statement = $connection->prepare("SELECT * FROM member WHERE id_user=? ORDER BY birthday DESC");
 
 			$statement->bindParam(1, $id_parent);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -343,17 +343,17 @@
 				$temp = [];
 				$temp["user"] = $row;
 
-				$statement2 = $connection->prepare("SELECT * FROM family WHERE id_user = ?");
+				$statement2 = $connection->prepare("SELECT * FROM member WHERE id_user = ?");
 				$statement2->bindParam(1, $row["id"]);
 
 				$statement2->setFetchMode(PDO::FETCH_ASSOC);
 				$statement2->execute();
 
-				$family = [];
+				$member = [];
 				while ($rowFam = $statement2->fetch()) {
-					$family[] = $rowFam;
+					$member[] = $rowFam;
 				}
-				$temp["family"] = $family;
+				$temp["family"] = $member;
 				$contents = $temp;
 			}
 			return $contents;

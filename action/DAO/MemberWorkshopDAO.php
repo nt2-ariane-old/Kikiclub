@@ -29,7 +29,7 @@
 		public static function getMemberWorkshopsSorted($id_member,$orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 
-			$request = "SELECT * FROM workshops WHERE id IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=?) ";
+			$request = "SELECT * FROM workshops WHERE id IN (SELECT ID_WORKSHOP FROM member_workshops WHERE ID_MEMBER=?) ";
 
 			if($deployed)
 			{
@@ -94,7 +94,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM family_workshops WHERE ID_MEMBER=?");
+			$statement = $connection->prepare("SELECT * FROM member_workshops WHERE ID_MEMBER=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
 			$statement->execute();
@@ -120,7 +120,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID IN (SELECT id_workshop FROM family_workshops WHERE id_member=? AND id_statut = 1 OR id_statut = 2 )  AND deployed = TRUE");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID IN (SELECT id_workshop FROM member_workshops WHERE id_member=? AND id_statut = 1 OR id_statut = 2 )  AND deployed = TRUE");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
@@ -149,7 +149,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("INSERT INTO family_workshops(id_member, id_workshop, id_statut) VALUES (?,?,?)");
+			$statement = $connection->prepare("INSERT INTO member_workshops(id_member, id_workshop, id_statut) VALUES (?,?,?)");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
 			$statement->bindParam(2, $id_workshop);
@@ -170,7 +170,7 @@
 		public static function updateMemberWorkshop($id_member,$id_workshop, $statut)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE family_workshops SET ID_STATUT = ?, LAST_MODIFICATION=CURRENT_TIMESTAMP WHERE ID_MEMBER = ? AND ID_WORKSHOP=?");
+			$statement = $connection->prepare("UPDATE member_workshops SET ID_STATUT = ?, LAST_MODIFICATION=CURRENT_TIMESTAMP WHERE ID_MEMBER = ? AND ID_WORKSHOP=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $statut);
 			$statement->bindParam(2, $id_member);
