@@ -3,7 +3,7 @@
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/constante.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/Tools/Translator.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/Mobile_Detect.php");
 	abstract class CommonAction
@@ -192,7 +192,7 @@
 			//check if the family member exist, and if yes, show is name
 			if($this->isFamilyMember())
 			{
-				$member = FamilyDAO::selectMember($_SESSION["member_id"]);
+				$member = MemberDAO::selectMember($_SESSION["member_id"]);
 				if($member == null)
 				{
 					unset($_SESSION["member_id"]);

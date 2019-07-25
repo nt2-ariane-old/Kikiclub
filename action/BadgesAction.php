@@ -1,7 +1,7 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 
 	class BadgesAction extends CommonAction {
 		public $badges;

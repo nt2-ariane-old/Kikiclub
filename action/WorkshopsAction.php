@@ -2,6 +2,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
 
 	class WorkshopsAction extends CommonAction {
 		public $workshops_list;
@@ -36,15 +37,15 @@
 
 			if($_SESSION["language"] == "en")
 			{
-				$this->difficulty = WorkshopDAO::getDifficultiesEN();
-				$this->workshopStates = WorkshopDAO::getWorkshopStatesEN();
-				$this->grades = WorkshopDAO::getGradesEN();
+				$this->difficulty = FilterDAO::getDifficultiesEN();
+				$this->workshopStates = FilterDAO::getWorkshopStatesEN();
+				$this->grades = FilterDAO::getGradesEN();
 			}
 			else
 			{
-				$this->difficulty = WorkshopDAO::getDifficultiesFR();
-				$this->workshopStates = WorkshopDAO::getWorkshopStatesFR();
-				$this->grades = WorkshopDAO::getGradesFR();
+				$this->difficulty = FilterDAO::getDifficultiesFR();
+				$this->workshopStates = FilterDAO::getWorkshopStatesFR();
+				$this->grades = FilterDAO::getGradesFR();
 			}
 
 			$this->complete_name = $this->trans->read("main","workshops");

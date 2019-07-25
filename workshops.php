@@ -14,7 +14,7 @@
 			<option value="descName">Name Z-A</option>
 		</select>
 	</div>
-	<input type="hidden" id="isFamilyMember" value="<?= $action->isFamilyMember() ?>" >
+	<input type="hidden" id="isMember" value="<?= $action->isMember() ?>" >
 	<aside>
 		<div id="workshop-menu">
 			<div id="search-form">
@@ -99,13 +99,7 @@
 
 			</div>
 			<div id='indexes'>
-				<?php
-					for ($i=1; $i <= $action->nb_workshops / 12; $i++) {
-						?>
-							<button onclick="setPage(<?= $i - 1 ?>)"><?= $i ?></button>
-						<?php
-					}
-				?>
+
 			</div>
 			</main>
 			<?php

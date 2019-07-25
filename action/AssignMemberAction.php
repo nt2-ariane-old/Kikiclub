@@ -1,6 +1,7 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 
 	class AssignMemberAction extends CommonAction {
 		public $workshopsDeployed;
@@ -16,7 +17,7 @@
 
 			$id_member = $_SESSION["member_id"];
 			$this->workshops_deployed = WorkshopDAO::getWorkshops(null,"none",false,true);
-			$this->member_workshops = WorkshopDAO::selectMemberWorkshop($id_member);
+			$this->member_workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
 
 		}
 	}

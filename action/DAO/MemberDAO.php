@@ -1,7 +1,13 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/Connection.php");
 
-	class FamilyDAO {
+	/**
+	 * Access to all filter related informations in the database
+	 *
+	 * @link       https://doutreguay.com/action/DAO/FilterDAO
+	 * @since      Class available since Alpha 1.0.0
+	 */
+	class MemberDAO {
 
 		public static function insertFamilyMember($firstname,$lastname,$birthday,$gender,$id_avatar,$id_parent)
 		{

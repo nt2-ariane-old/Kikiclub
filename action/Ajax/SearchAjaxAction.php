@@ -2,7 +2,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
 
@@ -22,7 +22,7 @@
 				}
 				if(isset($_POST["search-all-feelds"]))
 				{
-					$this->results = FamilyDAO::searchAllUsersAndMembers($name);
+					$this->results = MemberDAO::searchAllUsersAndMembers($name);
 				}
 				if(isset($_POST["search-user"]))
 				{
@@ -30,7 +30,7 @@
 				}
 				if(isset($_POST["search-member"]))
 				{
-					$this->results = FamilyDAO::getFamilyLikeType($name,$_POST["type"]);
+					$this->results = MemberDAO::getFamilyLikeType($name,$_POST["type"]);
 				}
 				if(isset($_POST["robots"]))
 				{

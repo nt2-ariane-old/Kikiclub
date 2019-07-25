@@ -1,67 +1,27 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
+
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
+
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
 
 	class ConsoleAction extends CommonAction {
-		//liste d'objets et objet individuel a modifier
-		public $workshops;
-		public $workshopMod;
 
-		public $users;
-		public $members;
-		public $all_searched;
-
-		public $userMod;
 		public $genders;
-		public $family;
-		public $familyMod;
-		public $familyWorkshops;
-
-		public $robotMod;
-
 		public $avatars;
-
 		public $difficulties;
 		public $robots;
-		//differentes fonctions d'administrations (true si utiliser, false si non)
-		public $update;
-		public $add;
-		public $addFamily;
-		public $modFamily;
-		public $assignFamily;
-
-
-		public $workshopAdded;
-
-
-		//Page en cours
-		public $pageWorkshops;
-		public $pageUsers;
-		public $pageRobots;
-
-		//Error infos
-		public $error;
-		public $errorMsg;
-
 		public $grades;
+
+		public $show_results;
+		public $results;
+
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console", "Admin Console");
-			$this->add = false;
-			$this->update=false;
-
-			$this->addFamily=false;
-			$this->modFamily=false;
-			$this->assignFamily=false;
-
-			$this->pageWorkshops=false;
-			$this->pageUsers=false;
-
-			$this->error = false;
-			$this->workshopAdded = false;
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console", "Randomizer");
+			$this->show_results = false;
 		}
 
 		protected function auto_generate_users($nb)
@@ -126,30 +86,31 @@
 		}
 		protected function executeAction()
 		{
-			$this->grades = WorkshopDAO::getGradesFR();
-			$this->difficulties = WorkshoPDAO::getDifficultiesFR();
+			$this->grades = FilterDAO::getGradesFR();
+			$this->difficulties = FilterDAO::getDifficultiesFR();
 			$this->robots = RobotDAO::getRobots();
-			if(!empty($_GET["generate"]))
-			{
-				$gen = $_GET["generate"];
-				if(!empty($_GET["nb"]))
-				{
-					$nb = intval($_GET["nb"]);
-					if($gen == "robots")
-					{
-						$this->auto_generate_robots($nb);
-					}
-					if($gen == "users")
-					{
-						$this->auto_generate_users($nb);
-					}
-					if($gen == "workshops")
-					{
-						$this->auto_generate_workshops($nb);
-					}
-				}
 
+			if(!empty($_POST["value"]))
+			{
+				$nb = intval($_POST["value"]);
+				if(!empty($_POST["robot"]))
+				{
+					$this->auto_generate_robots($nb);
+					$this->results = $nb . " robots ont été créers aléatoirement";
+				}
+				if(!empty($_POST["user"]))
+				{
+					$this->auto_generate_users($nb);
+					$this->results = $nb . " utilisateurs ont été créers aléatoirement";
+				}
+				if(!empty($_POST["workshop"]))
+				{
+					$this->auto_generate_workshops($nb);
+					$this->results = $nb . " Ateliers ont été créers aléatoirement";
+				}
+				$this->show_results = true;
 			}
+
 		}
 
 	}

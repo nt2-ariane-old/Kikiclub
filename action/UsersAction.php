@@ -34,7 +34,7 @@
 					$searchMembers =json_decode($_POST["members_list"],true);
 					foreach ($searchMembers as $member) {
 						$id = $member["value"];
-						$this->members[] = FamilyDAO::selectMember($id);
+						$this->members[] = MemberDAO::selectMember($id);
 					}
 
 				}
@@ -46,7 +46,7 @@
 
 						if($result["type"] == "member")
 						{
-							$this->members[] = FamilyDAO::selectMember($id);
+							$this->members[] = MemberDAO::selectMember($id);
 						}
 						if($result["type"] == "user")
 						{

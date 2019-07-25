@@ -69,7 +69,7 @@ const sortAndSearchWorkshops = () =>
 let nbWorkshops = 4;
 const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 {
-	let isFamilyMember = document.getElementById("isFamilyMember").value;
+	let isMember = document.getElementById("isMember").value;
 
 	let divWorkshops = document.getElementById('workshops-list');
 	divWorkshops.innerHTML ="";
@@ -98,7 +98,7 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 
 					//link.href = "workshop-infos.php?workshop_id="+workshop["ID"];
 					link.setAttribute('class','link normal');
-						if(isFamilyMember)
+						if(isMember)
 						{
 							let divType = document.createElement('div');
 							divType.setAttribute('class','type ribbon');

@@ -1,6 +1,6 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 
 	class ManageMemberAction extends CommonAction {
 
@@ -48,9 +48,9 @@
 
 
 
-			$this->genders = FamilyDAO::getGenders();
+			$this->genders = MemberDAO::getGenders();
 
-			$this->avatars = FamilyDAO::loadAvatar();
+			$this->avatars = MemberDAO::loadAvatar();
 
 			if($this->admin_mode && !empty($_SESSION["user_id"]))
 			{
@@ -72,10 +72,10 @@
 						!empty($_POST["birth"]))
 						{
 
-							FamilyDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+							MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
 							$this->create = false;
 							$this->update = true;
-							$member = FamilyDAO::getMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$id);
+							$member = MemberDAO::getMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$id);
 							var_dump($member);
 							$_SESSION["member_id"] = $member["id"];
 						}
@@ -92,14 +92,14 @@
 				if(!empty($_SESSION["member_id"]))
 				{
 					echo $_SESSION["member_id"];
-					$this->family_member = FamilyDAO::selectMember($_SESSION["member_id"]);
+					$this->family_member = MemberDAO::selectMember($_SESSION["member_id"]);
 					if(isset($_POST["form"]))
 					{
 						if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))
 							{
-								FamilyDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+								MemberDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
 							}
 							else
 							{
@@ -109,7 +109,7 @@
 					}
 					if(isset($_POST["delete"]))
 					{
-						FamilyDAO::deleteFamilyMember($_SESSION["member_id"]);
+						MemberDAO::deleteFamilyMember($_SESSION["member_id"]);
 						unset($_SESSION["member_id"]);
 						header('location:'. $this->previous_page . '.php');
 					}

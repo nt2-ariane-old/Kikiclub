@@ -1,7 +1,8 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 	class FamilyWorkshopsAjaxAction extends CommonAction {
@@ -19,7 +20,7 @@
 			{
 				if($_POST["adding"] == true)
 				{
-					$workshops = WorkshopDAO::selectMemberWorkshop($id_member);
+					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
 
 					$statut;
 					switch ($_POST["category"]) {
@@ -42,22 +43,22 @@
 					}
 					if(!empty($workshops[intval($_POST["id_workshop"])]))
 					{
-						WorkshopDAO::updateMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
+						MemberWorkshopDAO::updateMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
 					}
 					else
 					{
-						WorkshopDAO::addMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
+						MemberWorkshopDAO::addMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
 					}
 
-					$workshops = WorkshopDAO::selectMemberWorkshop($id_member);
+					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
 					if($statut == 4)
 					{
 
 						$workshop = WorkshopDAO::getWorkshop(intval($_POST["id_workshop"]));
 						$score = RobotDAO::getScoreOfRobotByDifficulty($workshop["ID_ROBOT"],$workshop["ID_DIFFICULTY"]);
-						FamilyDAO::addScore($id_member,$score);
+						MemberDAO::addScore($id_member,$score);
 
-						$member = FamilyDAO::selectMember($id_member);
+						$member = MemberDAO::selectMember($id_member);
 						$member_badges = BadgeDAO::getMemberBadge($id_member);
 						$badges = BadgeDAO::getBadges(1);
 

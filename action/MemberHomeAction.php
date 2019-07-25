@@ -1,6 +1,6 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FamilyDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 
@@ -19,7 +19,7 @@
 			}
 
 			$id = $_SESSION["member_id"];
-			$this->member = FamilyDAO::selectMember($id);
+			$this->member = MemberDAO::selectMember($id);
 
 			$this->member["alert"] = sizeof(WorkshopDAO::selectMemberNewWorkshop($id));
 			$this->complete_name = $this->member["firstname"] . "'s Page";

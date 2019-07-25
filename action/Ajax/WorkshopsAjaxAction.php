@@ -2,6 +2,8 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 	class WorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
@@ -11,17 +13,17 @@
 		protected function executeAction() {
 			if($_SESSION["language"] == 'en')
 			{
-				$this->results["states"] = WorkshopDAO::getWorkshopStatesEN();
+				$this->results["states"] = FilterDAO::getWorkshopStatesEN();
 			}
 			else
 			{
-				$this->results["states"] = WorkshopDAO::getWorkshopStatesFR();
+				$this->results["states"] = FilterDAO::getWorkshopStatesFR();
 			}
 			if(!empty($_SESSION["id"]))
 			{
 				if(!empty($_SESSION["member_id"]))
 				{
-					$this->results["workshops"] = WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+					$this->results["workshops"] = MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 				}
 			}
 			if(!empty($_POST["id"]))
@@ -95,8 +97,8 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = WorkshopDAO::getWorkshopFilters($workshop["ID"]);
-							$workshop_difficulties = $filters[WorkshopDAO::getFilterTypeIdByName('difficulty')];
+							$filters = FilterDAO::getWorkshopFilters($workshop["ID"]);
+							$workshop_difficulties = $filters[FilterDAO::getFilterTypeIdByName('difficulty')];
 							if(!empty($workshop_difficulties))
 							{
 								foreach ($difficulties as $difficulty_id)
@@ -122,8 +124,8 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = WorkshopDAO::getWorkshopFilters($workshop["ID"]);
-							$workshop_grades = $filters[WorkshopDAO::getFilterTypeIdByName('grade')];
+							$filters = FilterDAO::getWorkshopFilters($workshop["ID"]);
+							$workshop_grades = $filters[FilterDAO::getFilterTypeIdByName('grade')];
 							if(!empty($workshop_grades ))
 							{
 								foreach ($grades as $grade_id)
@@ -151,8 +153,8 @@
 					if(sizeof($states) > 0)
 					{
 						$temp = [];
-						$member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
-						$new_workshops =WorkshopDAO::selectMemberNewWorkshop($_SESSION["member_id"]);
+						$member_workshops =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+						$new_workshops =MemberWorkshopDAO::selectMemberNewWorkshop($_SESSION["member_id"]);
 						foreach ($states as $state)
 						{
 							foreach ($this->results["workshops"] as $workshop)
@@ -194,11 +196,11 @@
 					{						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = WorkshopDAO::getWorkshopFilters($workshop["ID"]);
+							$filters = FilterDAO::getWorkshopFilters($workshop["ID"]);
 							var_dump($filters);
-							if(!empty($filters[WorkshopDAO::getFilterTypeIdByName('robot')]))
+							if(!empty($filters[FilterDAO::getFilterTypeIdByName('robot')]))
 							{
-								$workshop_robots = $filters[WorkshopDAO::getFilterTypeIdByName('robot')];
+								$workshop_robots = $filters[FilterDAO::getFilterTypeIdByName('robot')];
 
 								foreach ($robots as $robot_id)
 								{
@@ -255,8 +257,8 @@
 			if(isset($_POST["assign-all"]))
 			{
 				$id = $_SESSION["workshop_id"];
-				$filters = WorkshopDAO::getWorkshopFilters($id);
-				$grades = $filters[WorkshopDAO::getFilterTypeIdByName('grade')];
+				$filters = FilterDAO::getWorkshopFilters($id);
+				$grades = $filters[FilterDAO::getFilterTypeIdByName('grade')];
 
 
 				$ages = [];
@@ -265,18 +267,17 @@
 					foreach ($grades as $grade) {
 						$id_grade = $grade["id_filter"];
 
-						$ages[] = WorkshopDAO::getGradeById($id_grade)["AGE"];
+						$ages[] = FilterDAO::getGradeById($id_grade)["AGE"];
 					}
 				}
-				$members = FamilyDAO::getAllMemberWithAges($ages);
-				var_dump($members);
+				$members = MemberDAO::getAllMemberWithAges($ages);
 				$this->results = [];
 				foreach ($members as $value) {
 					$id_member = $value["ID"];
-					$workshops = WorkshopDAO::selectMemberWorkshop($id_member);
+					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
 					if(!array_key_exists($id,$workshops))
 					{
-						WorkshopDAO::addMemberWorkshop($id_member,$id, 1);
+						MemberWorkshopDAO::addMemberWorkshop($id_member,$id, 1);
 						$this->results[] = $value;
 
 					}

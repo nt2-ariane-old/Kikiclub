@@ -65,7 +65,7 @@
 			}
 			if($this->update)
 			{
-				$this->user =  FamilyDAO::getUserFamily($this->id_user);
+				$this->user =  MemberDAO::getUserFamily($this->id_user);
 				if(isset($_POST['push']))
 				{
 					UsersDAO::updateUser($this->id_user,$_POST['email'],$_POST['firstname'],$_POST['lastname']);

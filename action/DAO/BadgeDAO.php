@@ -30,46 +30,15 @@
 			return $content;
 		}
 
-		public static function getFamilyBadges($id_user, $id_member=null)
-		{
-			$connection = Connection::getConnection();
-
-			$request = "SELECT ";
-			$request .= "b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, f.FIRSTNAME AS OWNER, DATE_FORMAT(fb.won_on, '%Y-%m-%d') AS WON_ON ";
-			$request .= "FROM family_badges AS fb INNER JOIN badges AS b INNER JOIN family AS f ";
-			$request .= "WHERE fb.ID_BADGE = b.ID AND fb.ID_USER = ? AND f.id = fb.id_member ";
-
-			if(!empty($id_member))
-			{
-				$request .= "AND fb.id_member = ?";
-			}
-			$statement = $connection->prepare( $request);
-			$statement->bindParam(1, $id_user);
-			if(!empty($id_member))
-			{
-				$statement->bindParam(2, $id_member);
-			}
-
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
-			}
-
-			return $content;
-		}
 
 		public static function getMemberBadge($id_member)
 		{
 			$connection = Connection::getConnection();
 
 			$request = "SELECT ";
-			$request .= "b.ID AS ID_BADGE, b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, f.FIRSTNAME AS OWNER, DATE_FORMAT(fb.won_on, '%Y-%m-%d') AS WON_ON ";
-			$request .= "FROM family_badges AS fb INNER JOIN badges AS b INNER JOIN family as f ";
-			$request .= "WHERE fb.ID_BADGE = b.ID AND fb.id_member = ? AND f.id = fb.id_member ";
+			$request .= "b.ID AS ID_BADGE, b.NAME AS NAME, b.MEDIA_PATH AS MEDIA_PATH, b.MEDIA_TYPE AS MEDIA_TYPE, m.FIRSTNAME AS OWNER, DATE_FORMAT(mb.won_on, '%Y-%m-%d') AS WON_ON ";
+			$request .= "FROM member_badges AS mb INNER JOIN badges AS b INNER JOIN member as m ";
+			$request .= "WHERE mb.ID_BADGE = b.ID AND mb.id_member = ? AND m.id = mb.id_member ";
 
 
 			$statement = $connection->prepare($request);
@@ -89,7 +58,7 @@
 		public static function addBadgeToMember($id_badge,$id_member,$id_user)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("INSERT INTO family_badges(ID_BADGE,ID_MEMBER,ID_USER,WON_ON) VALUES (?,?,?,CURDATE())");
+			$statement = $connection->prepare("INSERT INTO member_badges(ID_BADGE,ID_MEMBER,ID_USER,WON_ON) VALUES (?,?,?,CURDATE())");
 
 			$statement->bindParam(1, $id_badge);
 			$statement->bindParam(2, $id_member);

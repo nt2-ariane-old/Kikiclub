@@ -167,6 +167,7 @@
 				?>
 
 					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
+					<li><a class="nav-item nav-link" href="console.php">Randomizer (Temp)</a></li>
 
 				<?php
 				}

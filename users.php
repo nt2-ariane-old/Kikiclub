@@ -78,7 +78,7 @@
 							if (!empty($action->members))
 							{
 						?>
-							<h2>Family Members</h2>
+							<h2>Family's Members</h2>
 							<table>
 								<thead>
 									<tr>
