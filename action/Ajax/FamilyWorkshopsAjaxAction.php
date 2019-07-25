@@ -53,7 +53,7 @@
 					if($statut == 4)
 					{
 
-						$workshop = WorkshopDAO::getWorkshopsWithID(intval($_POST["id_workshop"]));
+						$workshop = WorkshopDAO::getWorkshop(intval($_POST["id_workshop"]));
 						$score = RobotDAO::getScoreOfRobotByDifficulty($workshop["ID_ROBOT"],$workshop["ID_DIFFICULTY"]);
 						FamilyDAO::addScore($id_member,$score);
 

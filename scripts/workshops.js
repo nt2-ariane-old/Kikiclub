@@ -74,6 +74,7 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 	let divWorkshops = document.getElementById('workshops-list');
 	divWorkshops.innerHTML ="";
 		let container = document.createElement('div');
+
 			container.setAttribute('class','container');
 
 			let row = document.createElement('div');
@@ -82,11 +83,17 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 			for (let i = 0; i < workshops.length; i++) {
 				const workshop = workshops[i];
 				let divCol = document.createElement('div');
+
 					divCol.setAttribute('class', ' col-sm-'+ 12/nbWorkshops )
+
 					divWorkshop = document.createElement('div');
 					divWorkshop.setAttribute('class','workshop');
 					divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["ID"]);
 
+					if(!workshop["deployed"])
+					{
+						divWorkshop.style.backgroundColor = "red";
+					}
 					let link = document.createElement('a');
 
 					//link.href = "workshop-infos.php?workshop_id="+workshop["ID"];
@@ -189,6 +196,8 @@ const deleteSelected = () =>
 		dataType: 'json',
 		success: function( data ) {
 			console.log(data);
+			sortAndSearchWorkshops();
+			selected_workshops = [];
 		},
 		error: function (request, status, error) {
 			console.log(request.responseText);
@@ -210,6 +219,8 @@ const deployed_selected = () =>
 		dataType: 'json',
 		success: function( data ) {
 			console.log(data);
+			sortAndSearchWorkshops()
+			selected_workshops = [];
 		},
 		error: function (request, status, error) {
 			console.log(request.responseText);

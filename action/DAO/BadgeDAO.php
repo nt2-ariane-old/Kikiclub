@@ -128,7 +128,7 @@
 		public static function updateBadge($id,$name=null,$id_type=null, $value_needed=null,$media_path=null,$media_type=null)
 		{
 			$connection = Connection::getConnection();
-			$request = "UPDATE badges SET NAME=?,VALUE_NEEDED=?,ID_BADGE_TYPE=?,MEDIA_PATH=?,MEDIA_TYPE=? WHERE id=?";
+			$request = "UPDATE badges SET name=?,value_needed=?,id_badge_type=?,media_path=?,media_type=? WHERE id=?";
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $value_needed);
@@ -185,7 +185,7 @@
 		public static function getBadgesType()
 		{
 			$connection = Connection::getConnection();
-			$request = "SELECT ID,NAME FROM badge_type ";
+			$request = "SELECT * FROM badge_type ";
 			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();

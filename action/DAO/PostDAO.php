@@ -6,15 +6,19 @@
 		public static function getPosts($min=0,$nb=null)
 		{
 			$connection = Connection::getConnection();
-			if($nb == null){
-				$statement = $connection->prepare("SELECT shared_posts.ID AS ID, shared_posts.TITLE AS TITLE,shared_posts.CONTENT AS CONTENT,shared_posts.MEDIA_PATH AS MEDIA_PATH,shared_posts.MEDIA_TYPE AS MEDIA_TYPE , shared_posts.ID_USER AS ID_USER, CONCAT(users.FIRSTNAME, ' ',users.LASTNAME) AS USERNAME FROM shared_posts INNER JOIN users ON shared_posts.ID_USER=users.ID");
-			}
-			else
+			$request = "SELECT shared_posts.id AS id, shared_posts.title AS title,shared_posts.content AS content,shared_posts.media_path AS media_path,shared_posts.media_type AS media_type , shared_posts.id_user AS id_user, CONCAT(users.firstname, ' ',users.lastname) AS username FROM shared_posts INNER JOIN users ON shared_posts.id_user =users.id "
+			if($nb != null)
 			{
-				$statement = $connection->prepare("SELECT shared_posts.ID AS ID, shared_posts.TITLE AS TITLE,shared_posts.CONTENT AS CONTENT,shared_posts.MEDIA_PATH AS MEDIA_PATH,shared_posts.MEDIA_TYPE AS MEDIA_TYPE , shared_posts.ID_USER AS ID_USER, CONCAT(users.FIRSTNAME, ' ',users.LASTNAME) AS USERNAME FROM shared_posts INNER JOIN users ON shared_posts.ID_USER=users.ID LIMIT ?,?");
+				$request .= "LIMIT ?,?"
+			}
+			$statement = $connection->prepare($request);
+
+			if($nb != null)
+			{
 				$statement->bindParam(1, $min);
 				$statement->bindParam(2, $nb);
 			}
+			$statement = $connection->prepare();
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

@@ -121,10 +121,10 @@
 			if ($rowUser = $statementUser->fetch()) {
 				$rowLogin = UsersDAO::getLoginInfosForUserByType($rowUser["id"],$id_type);
 				if (!empty($rowLogin)) {
-					$rowLoginType = UsersDAO::getLoginTypeById($rowLogin["ID_LOGIN_TYPE"]);
+					$rowLoginType = UsersDAO::getLoginTypeById($rowLogin["id_login_type"]);
 					if(!empty($rowLoginType))
 					{
-						switch ($rowLoginType["NAME"]) {
+						switch ($rowLoginType["name"]) {
 							case 'Facebook':
 								$infos = $rowUser;
 								break;
@@ -164,7 +164,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement= $connection->prepare("SELECT ID,NAME FROM login_type");
+			$statement= $connection->prepare("SELECT * FROM login_type");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -210,14 +210,14 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID_USER FROM connect_token WHERE token=?");
+			$statement = $connection->prepare("SELECT id_user FROM connect_token WHERE token=?");
 			$statement->bindParam(1, $token);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 			$id = null;
 			if($row = $statement->fetch())
 			{
-				$id = $row["ID_USER"];
+				$id = $row["id_user"];
 			}
 			return $id;
 		}
@@ -225,7 +225,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID FROM login_type WHERE NAME=?");
+			$statement = $connection->prepare("SELECT id FROM login_type WHERE NAME=?");
 			$statement->bindParam(1, $name);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -233,7 +233,7 @@
 			$id = null;
 
 			if ($row = $statement->fetch()) {
-				$id = $row["ID"];
+				$id = $row["id"];
 			}
 			return $id;
 		}
@@ -242,7 +242,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,NAME FROM login_type WHERE ID=?");
+			$statement = $connection->prepare("SELECT * FROM login_type WHERE id=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -260,7 +260,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statementLogin = $connection->prepare("INSERT INTO users_login(ID_USER,ID_LOGIN_TYPE,PASSWORD) VALUES (?,?,?)");
+			$statementLogin = $connection->prepare("INSERT INTO users_login(id_user,id_login_type,password) VALUES (?,?,?)");
 			$statementLogin->bindParam(1, $id_user);
 			$statementLogin->bindParam(2, $id_type);
 			$statementLogin->bindParam(3, $password);
@@ -271,7 +271,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statementLogin = $connection->prepare("SELECT ID_USER,ID_LOGIN_TYPE,PASSWORD FROM users_login WHERE ID_USER=? AND ID_LOGIN_TYPE =?");
+			$statementLogin = $connection->prepare("SELECT * FROM users_login WHERE id_user=? AND id_login_type =?");
 			$statementLogin->bindParam(1, $id_user);
 			$statementLogin->bindParam(2, $id_type);
 			$statementLogin->setFetchMode(PDO::FETCH_ASSOC);
@@ -312,7 +312,7 @@
 			else
 			{
 				$user = UsersDAO::getUserWithEmail($email);
-				if(empty(UsersDAO::getLoginInfosForUserByType($user["ID"],$id_type)))
+				if(empty(UsersDAO::getLoginInfosForUserByType($user["id"],$id_type)))
 				{
 					$valide = true;
 				}
@@ -337,7 +337,7 @@
 			if(!empty($id_type) && $valide)
 			{
 				$user = UsersDAO::getUserWithEmail($email);
-				UsersDAO::addLoginInfosForUser($user["ID"],$id_type,$password);
+				UsersDAO::addLoginInfosForUser($user["id"],$id_type,$password);
 			}
 
 			return $valide;

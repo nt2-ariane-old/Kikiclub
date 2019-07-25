@@ -61,8 +61,8 @@
 
 			while ($row = $statementRobots->fetch()) {
 				$temp = [] ;
-				$temp["ROBOTS"] = $row;
-				$temp["SCORES"] = RobotDAO::getDifficultyScoresForRobot($row["ID"]);
+				$temp["robots"] = $row;
+				$temp["scores"] = RobotDAO::getDifficultyScoresForRobot($row["ID"]);
 				$content[] = $temp;
 			}
 
@@ -80,8 +80,8 @@
 			$content = [];
 
 			if ($row = $statementRobots->fetch()) {
-				$content["ROBOTS"] = $row;
-				$content["SCORES"] = RobotDAO::getDifficultyScoresForRobot($row["ID"]);
+				$content["robots"] = $row;
+				$content["scores"] = RobotDAO::getDifficultyScoresForRobot($row["id"]);
 			}
 
 			return $content;
@@ -151,7 +151,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statementRobots = $connection->prepare("SELECT SCORE FROM workshop_score WHERE ID_ROBOT = ? AND ID_DIFFICULTY = ?");
+			$statementRobots = $connection->prepare("SELECT score FROM workshop_score WHERE ID_ROBOT = ? AND ID_DIFFICULTY = ?");
 
 			$statementRobots->bindParam(1, $id_robot);
 			$statementRobots->bindParam(2, $id_difficulty);
@@ -162,7 +162,7 @@
 			$score = 0;
 
 			if ($row = $statementRobots->fetch()) {
-				$score = $row["SCORE"];
+				$score = $row["score"];
 			}
 
 			return $score;
@@ -171,7 +171,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statementRobots = $connection->prepare("SELECT d.NAME_EN AS DIFFICULTY, s.ID_DIFFICULTY AS ID_DIFFICULTY, s.SCORE AS SCORE FROM workshop_score AS s INNER JOIN difficulty AS d WHERE s.id_difficulty = d.id AND s.id_robot = ?");
+			$statementRobots = $connection->prepare("SELECT d.name_en AS difficulty, s.id_difficulty AS id_difficulty, s.score AS score FROM workshop_score AS s INNER JOIN difficulty AS d WHERE s.id_difficulty = d.id AND s.id_robot = ?");
 
 			$statementRobots->bindParam(1, $id);
 

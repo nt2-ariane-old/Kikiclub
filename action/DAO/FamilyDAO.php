@@ -244,16 +244,20 @@
 		{
 			$connection = Connection::getConnection();
 			$age_str = "";
-			foreach ($ages as $age) {
-				$age_str .= strval($age) . ',';
-			}
-			$age_str .= '-1';
+			for ($i=0; $i < sizeof($ages); $i++) {
+				$age = $ages[$id];
+				if($i == 0)
+				{
+					$age_str .= strval($age);
 
-			$request = "SELECT ID, FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS AGE FROM family WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( " . $age_str . " )";
-			echo $request;
+				}
+				$age_str .= ',' . strval($age);
+			}
+
+
+			$request = "SELECT id, FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS age FROM family WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1,$age_str);
-
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -306,7 +310,7 @@
 		public static function loadAvatar()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME,PATH FROM avatar");
+			$statement = $connection->prepare("SELECT * FROM avatar");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -322,7 +326,7 @@
 		public static function getUserFamily($id_user)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, EMAIL, FIRSTNAME, LASTNAME FROM users WHERE id=?");
+			$statement = $connection->prepare("SELECT * FROM users WHERE id=?");
 			$statement->bindParam(1, $id_user);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -331,10 +335,10 @@
 
 			if ($row = $statement->fetch()) {
 				$temp = [];
-				$temp["USER"] = $row;
+				$temp["user"] = $row;
 
-				$statement2 = $connection->prepare("SELECT ID, FIRSTNAME, LASTNAME, BIRTHDAY, SCORE, ID_AVATAR, id_gender FROM family WHERE id_user = ?");
-				$statement2->bindParam(1, $row["ID"]);
+				$statement2 = $connection->prepare("SELECT * FROM family WHERE id_user = ?");
+				$statement2->bindParam(1, $row["id"]);
 
 				$statement2->setFetchMode(PDO::FETCH_ASSOC);
 				$statement2->execute();
@@ -343,9 +347,11 @@
 				while ($rowFam = $statement2->fetch()) {
 					$family[] = $rowFam;
 				}
-				$temp["FAMILY"] = $family;
+				$temp["family"] = $family;
 				$contents = $temp;
 			}
 			return $contents;
 		}
+
+
 	}

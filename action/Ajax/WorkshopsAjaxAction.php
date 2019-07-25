@@ -26,7 +26,7 @@
 			}
 			if(!empty($_POST["id"]))
 			{
-				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);
+				$this->results["workshop"] = WorkshopDAO::getWorkshop($_POST["id"]);
 				$this->results["robots"] = RobotDao::getRobots();
 			}
 			if(!empty($_POST["selected"]))
@@ -35,7 +35,7 @@
 				foreach ($selected as $value) {
 					if(!empty($_POST["deployed_multiple"]))
 					{
-						$deployed = WorkshopDAO::selectWorkshop($value)["deployed"];
+						$deployed = WorkshopDAO::isDeployed($value);
 						if($deployed)
 						{
 							WorkshopDAO::setDeployed($value,"false");
@@ -50,7 +50,7 @@
 					}
 					else if (!empty($_POST["delete_multiple"]))
 					{
-
+						WorkshopDAO::deleteWorkshop($value);
 					}
 					# code...
 				}
@@ -95,7 +95,7 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = WorkshopDAO::selectWorkshopFilters($workshop["ID"]);
+							$filters = WorkshopDAO::getWorkshopFilters($workshop["ID"]);
 							$workshop_difficulties = $filters[WorkshopDAO::getFilterTypeIdByName('difficulty')];
 							if(!empty($workshop_difficulties))
 							{
@@ -122,7 +122,7 @@
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = WorkshopDAO::selectWorkshopFilters($workshop["ID"]);
+							$filters = WorkshopDAO::getWorkshopFilters($workshop["ID"]);
 							$workshop_grades = $filters[WorkshopDAO::getFilterTypeIdByName('grade')];
 							if(!empty($workshop_grades ))
 							{
@@ -194,7 +194,7 @@
 					{						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
-							$filters = WorkshopDAO::selectWorkshopFilters($workshop["ID"]);
+							$filters = WorkshopDAO::getWorkshopFilters($workshop["ID"]);
 							var_dump($filters);
 							if(!empty($filters[WorkshopDAO::getFilterTypeIdByName('robot')]))
 							{
@@ -224,7 +224,7 @@
 				$this->results = [];
 				$this->results["state"] = $_POST["deployed"];
 				$this->results["type"] = "deployed";
-				$this->results["workshop"] = WorkshopDAO::selectWorkshop($_POST["id"]);
+				$this->results["workshop"] = WorkshopDAO::getWorkshop($_POST["id"]);
 
 
 			}
@@ -255,7 +255,7 @@
 			if(isset($_POST["assign-all"]))
 			{
 				$id = $_SESSION["workshop_id"];
-				$filters = WorkshopDAO::selectWorkshopFilters($id);
+				$filters = WorkshopDAO::getWorkshopFilters($id);
 				$grades = $filters[WorkshopDAO::getFilterTypeIdByName('grade')];
 
 

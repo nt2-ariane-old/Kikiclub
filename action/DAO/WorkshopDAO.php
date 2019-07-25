@@ -3,22 +3,31 @@
 
 	class WorkshopDAO {
 
+		/**
+		 * Select all member's workshop sorted with the different parameters
+		 *
+		 * @param integer   $id  null for the moment, to match MemberWorkshop::getMemberWorkshopsSorted
+		 * @param string   $orderby with columns you want it ordered
+		 * 						none : don't order by
+		 * 						NAME : ordered by name
+		 *						ID 	 : ordered by ID
+		 * @param bool   $ascendant ordered ascendant(true) or decendant(false)
+		 * @param bool   $deployed do you want only the deployed workshops ?
+		 * @param integer   $page page of the workshop (12 workshops per pages)
+		 * 						-1 : do not limit
+		 * 						else : limit per pages
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the workshops sorted with the parameters
+		 */
 		public static function getWorkshops($id=null,$orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
-
-
 			$request = "SELECT * FROM workshops ";
-
 
 			if($deployed)
 			{
 				$request .= "WHERE deployed = TRUE ";
 			}
-			else
-			{
-				$request .= "WHERE deployed = FALSE ";
-			}
-
 			if($orderby != "none")
 			{
 				if($orderby == "NAME")
@@ -61,125 +70,71 @@
 			}
 			return $content;
 		}
-		public static function getMemberWorkshopsSorted($id_member,$orderby="none",$ascendant=false, $deployed=true, $page=-1) { //RECEVOIR TOUTES LES PAGES
+
+		/**
+		 * Select all informations about a workshop
+		 *
+		 * @param integer   $id  id of the workshop you wanna get
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all information about the workshop
+		 */
+		public static function getWorkshop($id)
+		{
 			$connection = Connection::getConnection();
 
-			$request = "SELECT * FROM workshops WHERE id IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=?) ";
-
-			if($deployed)
-			{
-				$request .= "AND deployed = TRUE ";
-			}
-			else
-			{
-				$request .= "AND deployed = FALSE ";
-			}
-
-			if($orderby != "none")
-			{
-				if($orderby == "NAME")
-				{
-					$request .= "ORDER BY NAME ";
-				}
-				else if($orderby == "ID")
-				{
-					$request .= "ORDER BY ID ";
-				}
-
-				if($ascendant)
-				{
-					$request .= "ASC ";
-				}
-				else
-				{
-					$request .= "DESC ";
-				}
-			}
-			if($page >= 0)
-			{
-				$request .= " LIMIT ?,12";
-			}
-			$statement = $connection->prepare($request);
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
-
-			$statement->bindParam(1, $id_member);
-			if($page >= 0)
-			{
-				$limit = $page * 12;
-				$statement->bindParam(2, $limit);
-
-			}
+			$statement->bindParam(1, $id);
 			$statement->execute();
 
 			$content = [];
 
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
+			if ($row = $statement->fetch()) {
+				$content = $row;
 			}
 
 			return $content;
 		}
 
-		public static function getNbWorkshops($deployed=true)
-		{
-			$connection = Connection::getConnection();
-			$request = "SELECT COUNT(*) AS nb FROM workshops ";
-			if($deployed)
-			{
-				$request .= "WHERE deployed=TRUE ";
-			}
-			$statement = $connection->prepare($request);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = null;
-			if($row = $statement->fetch())
-			{
-				$content = $row["nb"];
-			}
-			return $content;
-		}
-
-		public static function isDeployed($id)
+		/**
+		 * Select all informations about a workshop by Name and Content (ex : when you don't have the id)
+		 *
+		 * @param string   $name  name of the workshop you wanna get
+		 * @param string   $content  content of the workshop you wanna get
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all information about the workshop
+		 */
+		public static function getWorkshopByNameAndContent($name,$content)
 		{
 			$connection = Connection::getConnection();
 
-			$request = "SELECT * FROM workshops WHERE ID=?";
-
-			$statement = $connection->prepare($request);
-			$statement->bindParam(1, $id);
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE name=? AND content=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $name);
+			$statement->bindParam(2, $content);
+
 			$statement->execute();
 
-			$content = null;
+			$content = [];
 
-			if($row = $statement->fetch())
-			{
-				$contents = $row;
+			if ($row = $statement->fetch()) {
+				$content= $row;
 			}
 
 			return $content;
 		}
-		public static function setDeployed($id,$deployed)
-		{
-			$connection = Connection::getConnection();
 
-			$request = "UPDATE workshops SET ";
-			if($deployed == "true")
-			{
-				$request .= "deployed=TRUE ";
-			}
-			else
-			{
-				$request .= "deployed=FALSE ";
-			}
-			$request.="WHERE id=?";
-
-			$statement = $connection->prepare($request);
-			$statement->bindParam(1, $id);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-		}
+		/**
+		 * Select all workshops that matche the name
+		 *
+		 * @param string   $name  name of the workshop you wanna get
+		 * @param bool   $deployed  do you only want deployed workshops? : Default -> true
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all information about the workshops
+		 */
 		public static function getWorkshopsLikeName($name, $deployed=true) { //RECEVOIR TOUTES LES PAGES
 			$connection = Connection::getConnection();
 			$name = '%' . $name . '%';
@@ -202,179 +157,23 @@
 
 			return $content;
 		}
-		public static function getWorkshopsWithID($id) { //RECEVOIR TOUTES LES PAGES
+
+		/**
+		 * Create a new workshop
+		 *
+		 * @param string   $name  name of the workshop
+		 * @param string   $content  content of the workshop
+		 * @param string   $media_path  path of the media
+		 * @param string   $media_type  type of the media
+		 * @param bool   $deployed  is it deployed?
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return void
+		 */
+		public static function addWorkshop($name, $content, $media_path, $media_type,$deployed){
 			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT ID,DEPLOYED,ID_ROBOT,ID_DIFFICULTY,ID_GRADE FROM workshops WHERE ID=?");
-			$statement->bindParam(1, $id);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			if ($row = $statement->fetch()) {
-				$content = $row;
-			}
-
-			return $content;
-		}
-		public static function getWorkshopsScoreValue($id_robot, $id_difficulty)
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT score FROM WORKSHOP_SCORE WHERE ID_WORKSHOP = ? AND ID_DIFFICULTY=?");
-			$statement->bindParam(1, $id_workshop);
-			$statement->bindParam(2, $id_difficulty);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$value = [];
-
-			if ($row = $statement->fetch()) {
-				$value = $row["score"];
-			}
-
-			return $value;
-		}
-		public static function searchWorkshops($request=null, $value=null)
-		{
-
-			$connection = Connection::getConnection();
-			if($request == "difficulty")
-			{
-				$statement = $connection->prepare("SELECT * FROM workshops WHERE ID_DIFFICULTY=?  AND deployed = TRUE");
-				$statement->bindParam(1, $value);
-			}
-			else
-			{
-				$statement = $connection->prepare("SELECT * FROM workshops WHERE deployed = TRUE");
-			}
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
-			}
-			return $content;
-		}
-		public static function getDifficultiesFR()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM difficulty");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
-				//$content[$row["ID"]] = $row;
-			}
-
-			return $content;
-		}
-		public static function getDifficultiesEN()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME FROM difficulty");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				//$content[$row["ID"]] = $row;
-				$content[] = $row;
-			}
-
-			return $content;
-		}
-		public static function getWorkshopStatesFR()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM workshop_statut");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
-			}
-
-			return $content;
-		}
-		public static function getWorkshopStatesEN()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME FROM workshop_statut");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
-			}
-
-			return $content;
-		}
-		public static function getGradesEN()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
-				// $content[$row["ID"]] = $row;
-			}
-
-			return $content;
-		}
-		public static function getGradeById($id)
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level WHERE id = ?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id);
-			$statement->execute();
-
-			$content = [];
-
-			if ($row = $statement->fetch()) {
-				$content = $row;
-				// $content[$row["ID"]] = $row;
-			}
-
-			return $content;
-		}
-		public static function getGradesFR()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				// $content[$row["ID"]] = $row;
-				$content[] = $row;
-			}
-
-			return $content;
-		}
-
-
-		public static function addWorkshop($name, $content, $MEDIA_PATH, $MEDIA_TYPE,$deploy){
-			$connection = Connection::getConnection();
-			$request = "INSERT INTO workshops(NAME,CONTENT,MEDIA_PATH, MEDIA_TYPE,DEPLOYED) VALUES (?,?,?,?,";
-			if($deploy)
+			$request = "INSERT INTO workshops(name,content,media_path, media_type,deployed) VALUES (?,?,?,?,";
+			if($deployed)
 			{
 				$request .= "TRUE";
 			}
@@ -387,15 +186,29 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
-			$statement->bindParam(3, $MEDIA_PATH);
-			$statement->bindParam(4, $MEDIA_TYPE);
+			$statement->bindParam(3, $media_path);
+			$statement->bindParam(4, $media_type);
 
 			$statement->execute();
 		}
+
+		/**
+		 * Update a workshop infos
+		 *
+		 * @param string   $id  id of the workshop
+		 * @param string   $name  name of the workshop
+		 * @param string   $content  content of the workshop
+		 * @param string   $media_path  path of the media
+		 * @param string   $media_type  type of the media
+		 * @param bool   $deployed  is it deployed?
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return void
+		 */
 		public static function updateWorkshop($id,$name, $content, $MEDIA_PATH, $MEDIA_TYPE){
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("UPDATE workshops SET NAME=?,CONTENT=?,MEDIA_PATH=? , MEDIA_TYPE=? WHERE id=?");
+			$statement = $connection->prepare("UPDATE workshops SET name=?,content=?,media_path=? , media_type=? WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
 			$statement->bindParam(2, $content);
@@ -404,6 +217,15 @@
 			$statement->bindParam(5, $id);
 			$statement->execute();
 		}
+
+		/**
+		 * Delete a workshop
+		 *
+		 * @param string   $id  id of the workshop
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return void
+		 */
 		public static function deleteWorkshop($id){
 			$connection = Connection::getConnection();
 
@@ -413,203 +235,63 @@
 			$statement->execute();
 		}
 
-		public static function getWorkshopByNameAndContent($name,$content)
+		/**
+		 * Check if the workshop is deployed
+		 *
+		 * @param string   $id  id of the workshop
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return bool
+		 */
+		public static function isDeployed($id)
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE NAME=? AND CONTENT=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $name);
-			$statement->bindParam(2, $content);
+			$request = "SELECT deployed FROM workshops WHERE id=?";
 
-			$statement->execute();
-
-			$content = [];
-
-			if ($row = $statement->fetch()) {
-				$content= $row;
-			}
-
-			return $content;
-		}
-
-		public static function getFilterTypeIdByName($name)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT ID FROM filter_type WHERE NAME=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $name);
-
-			$statement->execute();
-
-			$content = 0;
-
-			if ($row = $statement->fetch()) {
-				$content = $row["ID"];
-			}
-
-			return $content;
-		}
-		public static function insertWorkshopFilters($id_workshop,$id_type,$id_filter)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("INSERT INTO workshop_filters(id_workshop,id_type,id_filter) VALUES(?,?,?)");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_workshop);
-			$statement->bindParam(2, $id_type);
-			$statement->bindParam(3, $id_filter);
-
-			$statement->execute();
-		}
-		public static function updateWorkshopFilters($id,$id_workshop,$id_type,$id_filter)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("UPDATE workshop_filters SET id_workshop=?,id_type=?,id_filter=? WHERE id=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_workshop);
-			$statement->bindParam(2, $id_type);
-			$statement->bindParam(3, $id_filter);
-			$statement->bindParam(4, $id);
-
-			$statement->execute();
-		}
-		public static function deleteWorkshopFilters($id)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("DELETE FROM workshop_filters WHERE id=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $id);
-
-			$statement->execute();
-		}
-		public static function selectWorkshopFilters($id_workshop)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT * FROM workshop_filters WHERE id_workshop = ?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_workshop);
 			$statement->execute();
 
 			$content = null;
 
-			while($row = $statement->fetch())
+			if($row = $statement->fetch())
 			{
-				$content[$row["id_type"]][$row["id_filter"]] = $row;
-			}
-			return $content;
-		}
-		public static function selectMemberWorkshop($id_member)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT * FROM family_workshops WHERE ID_MEMBER=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_member);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[$row["ID_WORKSHOP"]] = $row;
+				$content = $row["deployed"];
 			}
 
 			return $content;
 		}
-		public static function selectMemberNotStartedWorkshop($id_member)
+
+		/**
+		 *  Set if the workshop is deployed or not
+		 *
+		 * @param string   $id  id of the workshop
+		 * @param bool   $deployed  is the workshop deployed?
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return void
+		 */
+		public static function setDeployed($id,$deployed)
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID NOT IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT != 1 AND ID_STATUT != 2)  AND deployed = TRUE");
-
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_member);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
+			$request = "UPDATE workshops SET ";
+			if($deployed == "true")
+			{
+				$request .= "deployed=TRUE ";
 			}
-
-			return $content;
-		}
-		public static function selectMemberNewWorkshop($id_member)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID IN (SELECT ID_WORKSHOP FROM family_workshops WHERE ID_MEMBER=? AND ID_STATUT = 1 OR ID_STATUT = 2 )  AND deployed = TRUE");
-
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_member);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
+			else
+			{
+				$request .= "deployed=FALSE ";
 			}
+			$request.="WHERE id=?";
 
-			return $content;
-		}
-		public static function addMemberWorkshop($id_member,$id_workshop, $statut)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("INSERT INTO family_workshops(ID_MEMBER, ID_WORKSHOP, ID_STATUT) VALUES (?,?,?)");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_member);
-			$statement->bindParam(2, $id_workshop);
-			$statement->bindParam(3, $statut);
-			$statement->execute();
-		}
-		public static function updateMemberWorkshop($id_member,$id_workshop, $statut)
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE family_workshops SET ID_STATUT = ?, LAST_MODIFICATION=CURRENT_TIMESTAMP WHERE ID_MEMBER = ? AND ID_WORKSHOP=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $statut);
-			$statement->bindParam(2, $id_member);
-			$statement->bindParam(3, $id_workshop);
-			$statement->execute();
-		}
-		public static function selectWorkshop($id)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE id=?");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement = $connection->prepare($request);
 			$statement->bindParam(1, $id);
-			$statement->execute();
-
-			$content = [];
-
-			if ($row = $statement->fetch()) {
-				$content = $row;
-			}
-
-			return $content;
-		}
-
-		public static function selectWorkshopQuestions($id_workshop)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT ID, QUESTION, ANSWER FROM workshops_question WHERE id_workshop=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->bindParam(1, $id_workshop);
 			$statement->execute();
-
-			$content = [];
-
-			while ($row[] = $statement->fetch()) {
-				$content = $row;
-			}
-
-			return $content;
 		}
+
 	}

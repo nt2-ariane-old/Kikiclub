@@ -72,7 +72,7 @@
 						$this->exist = true;
 					}
 
-					$this->filters = WorkshopDAO::selectWorkshopFilters($id);
+					$this->filters = WorkshopDAO::getWorkshopFilters($id);
 
 					$filters_selected = [];
 					$filters_selected["robots"] = [];
@@ -129,9 +129,9 @@
 
 			if($this->exist)
 			{
-				$this->filters = WorkshopDAO::selectWorkshopFilters($id);
+				$this->filters = WorkshopDAO::getWorkshopFilters($id);
 
-				$this->workshop = WorkshopDAO::selectWorkshop($id);
+				$this->workshop = WorkshopDAO::getWorkshop($id);
 				if(!empty($_SESSION["member_id"]))
 				{
 					$this->member_workshops =WorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
