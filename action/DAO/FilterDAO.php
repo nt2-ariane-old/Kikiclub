@@ -102,11 +102,17 @@
 			return $content;
 		}
 
-
+		/**
+		 *  Get all the grades : Name in English
+		 *
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the grades name in English + ID
+		 */
 		public static function getGradesEN()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level");
+			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME,AGE FROM scholar_level");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -120,6 +126,13 @@
 			return $content;
 		}
 
+		/**
+		 *  Get all the grades : Name in French
+		 *
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the grades name in French + ID
+		 */
 		public static function getGradesFR()
 		{
 			$connection = Connection::getConnection();
@@ -136,7 +149,14 @@
 
 			return $content;
 		}
-
+		/**
+		 *  Get a Grade's informations
+		 *
+		 * @param integer   $id  id of the grade
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array informations about grade
+		 */
 		public static function getGradeById($id)
 		{
 			$connection = Connection::getConnection();
@@ -155,22 +175,13 @@
 			return $content;
 		}
 
-		public static function getDifficultiesFR()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM difficulty");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$content = [];
-
-			while ($row = $statement->fetch()) {
-				$content[] = $row;
-				//$content[$row["ID"]] = $row;
-			}
-
-			return $content;
-		}
+		/**
+		 *  Get all the difficulties : Name in English
+		 *
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the difficulties name in English + ID
+		 */
 		public static function getDifficultiesEN()
 		{
 			$connection = Connection::getConnection();
@@ -187,21 +198,38 @@
 
 			return $content;
 		}
-		public static function getWorkshopStatesFR()
+
+		/**
+		 *  Get all the difficulties : Name in French
+		 *
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the difficulties name in French + ID
+		 */
+		public static function getDifficultiesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM workshop_statut");
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM difficulty");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				$content[] = $row;
+				//$content[$row["ID"]] = $row;
 			}
 
 			return $content;
 		}
+
+		/**
+		 *  Get all the workshop states : Name in English
+		 *		new, in-progress, completed, etc
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the states in English + ID
+		 */
 		public static function getWorkshopStatesEN()
 		{
 			$connection = Connection::getConnection();
@@ -217,6 +245,38 @@
 
 			return $content;
 		}
+
+		/**
+		 *  Get all the workshop states : Name in French
+		 *		new, in-progress, completed, etc
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return Array return all the states in French + ID
+		 */
+		public static function getWorkshopStatesFR()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM workshop_statut");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["ID"]] = $row;
+			}
+
+			return $content;
+		}
+
+		/**
+		 *  Get a Filter's type id by name
+		 *
+		 * @param string   $name  name of the type
+		 *
+		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
+		 * @return integer id of the type
+		 */
 		public static function getFilterTypeIdByName($name)
 		{
 			$connection = Connection::getConnection();
