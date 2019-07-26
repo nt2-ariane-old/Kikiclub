@@ -1,3 +1,14 @@
+#workshop-form
+{
+  background-color: transparent;
+  border: none;
+  height: auto;
+  .media
+{
+	background-color: transparent;
+}
+}
+
 .fa.fa-star
 {
 	color:white;
@@ -10,9 +21,9 @@
 }
 .stars
 {
-	background-color: wheat;
-	padding: 1em;
+
 	font-weight: bolder;
+	display: inline;
 }
 #workshop-infos
 {
@@ -21,19 +32,24 @@
 	padding: 2em;
 	.media
 	{
-		width: 50%;
-		float: left;
+
 		height: 50vh;
-		border: 5px solid black;
 		margin: auto;
 	}
 	#infos
 	{
-		width: calc(50% - 2em);
-		float: left;
+		width: 100%;
+
 		padding: 1em;
-		background-color: white;
 		margin: 1em;
+		.fa.fa-star
+		{
+			color:gray;
+		}
+		.fa.fa-star.checked
+		{
+			color:#D8DF23;
+		}
 	}
 }
 
@@ -122,6 +138,36 @@ aside
 	}
 
 }
+.sheet
+{
+	background-image: url("../images/textures/workshop.png");
+	background-size: 100% 100%;
+	min-height: 0;
+	background-repeat: no-repeat;
+
+	height: 1200px;
+	.media *
+	{
+		border: groove;
+		border-radius: 10%;
+	}
+	h2
+	{
+		background-color: transparent;
+		border: none;
+		font-size: 3rem;
+	}
+	.logo-kiki-café
+	{
+		width:100px;
+		height: 100px;
+		background-image: url("../images/textures/logo-café.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		margin: auto;
+		padding: 0;
+	}
+}
 .loading-bar.download
 {
 	top: calc((100% / 2));
@@ -134,7 +180,7 @@ aside
 @media only screen and (min-width: 1000px) {
 	aside
 	{
-		height: 1500px;
+		height: 1200px;
 		width:25%;
 		float: left;
 		padding:1em;
@@ -159,19 +205,15 @@ aside
 
   #workshop-form
   {
-	background-color: #D8DF23;
+
 
 	border: none;
-	border-top:5px solid black;
-	border-bottom:5px solid black;
 
 	.media
 	{
-		border: 5px solid black;
 		height: 400px;
 		width: 400px;
 		margin: auto;
-		background-color: rgba(0, 0, 0, 0.483);
 	}
 
   }
@@ -181,7 +223,6 @@ aside
 		padding: 0;
 		margin:0;
 		float: right;
-
 	}
 }
 

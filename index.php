@@ -25,7 +25,7 @@
 			else
 			{
 				?>
-					<script>window.location = "https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5";</script>
+					<script>window.location = "workshops.php";</script>
 			 	<?php
 			}
 		}

@@ -1,3 +1,14 @@
+@charset "UTF-8";
+#workshop-form {
+  background-color: transparent;
+  border: none;
+  height: auto;
+}
+
+#workshop-form .media {
+  background-color: transparent;
+}
+
 .fa.fa-star {
   color: white;
 }
@@ -7,9 +18,8 @@
 }
 
 .stars {
-  background-color: wheat;
-  padding: 1em;
   font-weight: bolder;
+  display: inline;
 }
 
 #workshop-infos {
@@ -19,19 +29,22 @@
 }
 
 #workshop-infos .media {
-  width: 50%;
-  float: left;
   height: 50vh;
-  border: 5px solid black;
   margin: auto;
 }
 
 #workshop-infos #infos {
-  width: calc(50% - 2em);
-  float: left;
+  width: 100%;
   padding: 1em;
-  background-color: white;
   margin: 1em;
+}
+
+#workshop-infos #infos .fa.fa-star {
+  color: gray;
+}
+
+#workshop-infos #infos .fa.fa-star.checked {
+  color: #D8DF23;
 }
 
 .media video {
@@ -107,6 +120,35 @@ aside #workshop-menu .card {
   top: 0;
 }
 
+.sheet {
+  background-image: url("../images/textures/workshop.png");
+  background-size: 100% 100%;
+  min-height: 0;
+  background-repeat: no-repeat;
+  height: 1200px;
+}
+
+.sheet .media * {
+  border: groove;
+  border-radius: 10%;
+}
+
+.sheet h2 {
+  background-color: transparent;
+  border: none;
+  font-size: 3rem;
+}
+
+.sheet .logo-kiki-café {
+  width: 100px;
+  height: 100px;
+  background-image: url("../images/textures/logo-café.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: auto;
+  padding: 0;
+}
+
 .loading-bar.download {
   top: calc((100% / 2));
 }
@@ -117,7 +159,7 @@ aside #workshop-menu .card {
 
 @media only screen and (min-width: 1000px) {
   aside {
-    height: 1500px;
+    height: 1200px;
     width: 25%;
     float: left;
     padding: 1em;
@@ -136,17 +178,12 @@ aside #workshop-menu .card {
     background-color: #d9df23;
   }
   #workshop-form {
-    background-color: #D8DF23;
     border: none;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
   }
   #workshop-form .media {
-    border: 5px solid black;
     height: 400px;
     width: 400px;
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.483);
   }
   main {
     width: calc(75% - 1.1em);

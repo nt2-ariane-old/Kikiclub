@@ -38,11 +38,11 @@
 
 			if($orderby != "none")
 			{
-				if($orderby == "NAME")
+				if($orderby == "name")
 				{
 					$request .= "ORDER BY NAME ";
 				}
-				else if($orderby == "ID")
+				else if($orderby == "id")
 				{
 					$request .= "ORDER BY ID ";
 				}

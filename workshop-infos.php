@@ -26,14 +26,62 @@
 				if(!empty($action->workshop))
 				{
 					?>
+					<div class="sheet">
 						<div class="workshop" id="workshop-infos">
-							<script>loadMedia(<?= json_encode($action->workshop) ?>,document.getElementById("workshop-infos") )</script>
+							<div class="logo-kiki-café"></div>
+							<h2><?= $action->workshop["name"] ?></h2>
+
 							<div class="infos" id="infos">
-								<h2><?= $action->workshop["NAME"] ?></h2>
-								<script>loadStars(<?= json_encode($action->workshop) ?>,document.getElementById("infos") )</script>
-								<p><?=  $action->workshop["CONTENT"]?></p>
+								<?php
+
+									if(!empty($action->workshop_robots))
+									{
+										?>
+											<p><strong>Type : </strong>
+											<?php
+												$i = 0;
+												foreach ($action->workshop_robots as $robot) {
+													if($i > 0)
+													{
+														echo ',';
+													}
+													?>
+														<span><?= $robot["name"] ?></span>
+													<?php
+													$i++;
+												}
+												?></p>
+										<?php
+									}
+
+									if(!empty($action->workshop_grades))
+									{
+										?>
+											<p><strong>Recommanded Grades : </strong>
+											<?php
+												$i = 0;
+												foreach ($action->workshop_grades as $grade) {
+													if($i > 0)
+													{
+														echo ',';
+													}
+													?>
+														<span><?= $grade["name"] ?></span>
+													<?php
+													$i++;
+												}
+												?></p>
+										<?php
+									}
+									?>
+								<?php
+									loadStars($action->workshop_difficulties,$action);
+									?>
+								<p><strong>Introduction : </strong><?=  $action->workshop["content"]?></p>
 							</div>
+							<script>loadMedia(<?= json_encode($action->workshop) ?>,document.getElementById("workshop-infos") )</script>
 						</div>
+					</div>
 					<?php
 				}
 				else

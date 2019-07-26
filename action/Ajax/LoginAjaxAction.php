@@ -26,7 +26,7 @@
 						{
 							$token = openssl_random_pseudo_bytes(16);
 							$token = bin2hex($token);
-							UsersDAO::setTokenForUser($infos["ID"],$token);
+							UsersDAO::setTokenForUser($infos["id"],$token);
 							$this->results = $token;
 						}
 						else

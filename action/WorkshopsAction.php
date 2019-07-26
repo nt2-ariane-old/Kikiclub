@@ -55,7 +55,7 @@
 			{
 				if(!empty($_SESSION["workshop_type"]))
 				{
-					$type_name = $this->workshopStates[$_SESSION["workshop_type"]]["NAME"];
+					$type_name = $this->workshopStates[$_SESSION["workshop_type"]]["name"];
 					$this->complete_name  .= " : " . $type_name ;
 					$this->stateSearch = $_SESSION["workshop_type"];
 				}

@@ -28,7 +28,7 @@
 								<?php
 									foreach ($action->grades as $grade) {
 										?>
-											<option value="<?= $grade["ID"]?>"><?= $grade["NAME"]?></option>
+											<option value="<?= $grade["id"]?>"><?= $grade["name"]?></option>
 										<?php
 									}
 								?>
@@ -39,7 +39,7 @@
 							<?php
 								foreach ($action->difficulties as $difficulty) {
 									?>
-										<p><span class="input_name"><?= $difficulty["NAME"]?></span><input type="number" name="score_<?= $difficulty["ID"]?>" placeholder="Score"></p>
+										<p><span class="input_name"><?= $difficulty["name"]?></span><input type="number" name="score_<?= $difficulty["id"]?>" placeholder="Score"></p>
 									<?php
 								}
 							?>
@@ -53,14 +53,14 @@
 					?>
 							<form id="profil-form" action="robot-infos.php" method="post">
 
-								<input type="text" name="name" placeholder="Name" value="<?=$action->robot["ROBOTS"]["NAME"]?>">
+								<input type="text" name="name" placeholder="Name" value="<?=$action->robot["robots"]["name"]?>">
 
 								<p> <span class="input_name"> Age Recommanded :</span>
 								<select name="grade_recommanded">
 									<?php
 										foreach ($action->grades as $grade) {
 											?>
-												<option value="<?= $grade["ID"]?>"><?= $grade["NAME"]?></option>
+												<option value="<?= $grade["id"]?>"><?= $grade["name"]?></option>
 											<?php
 										}
 										?>
@@ -69,9 +69,9 @@
 								</p>
 
 								<?php
-									foreach ($action->robot["SCORES"] as $score) {
+									foreach ($action->robot["scores"] as $score) {
 										?>
-											<p><span class="input_name"><?= $score["DIFFICULTY"]?></span><input type="number" name="score_<?= $score["ID_DIFFICULTY"]?>" placeholder="Score" value="<?= $score["SCORE"]?>"></p>
+											<p><span class="input_name"><?= $score["difficulty"]?></span><input type="number" name="score_<?= $score["id_difficulty"]?>" placeholder="Score" value="<?= $score["score"]?>"></p>
 										<?php
 									}
 									?>
@@ -94,7 +94,10 @@
 				if($action->exist)
 				{
 					?>
-						<h3><?= $action->robot["NAME"] ?></h3>
+						<h3><?= $action->robot["robots"]["name"] ?></h3>
+						<h4>Recommanded Grade : <?= $action->grades[$action->robot["robots"]["id_grade"]]["name"]?></h4>
+						<div class="description" ><p><?= $action->robot["robots"]["description"] ?></p></div>
+						<div class="media"><img class="img-rounded" src=<?=$action->robot["robots"]["media_path"]?> alt=""></div>
 					<?php
 				}
 				else

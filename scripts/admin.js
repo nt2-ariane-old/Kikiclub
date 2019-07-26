@@ -262,16 +262,16 @@ const searchRobots = () =>
 			let checkbox = document.createElement("INPUT");
 				checkbox.setAttribute("type", "checkbox");
 				checkbox.setAttribute("name", "robots_list[]");
-				checkbox.setAttribute("value", robot["ROBOTS"]["ID"]);
+				checkbox.setAttribute("value", robot["ROBOTS"]["id"]);
 				checkCase.appendChild(checkbox);
 
 			//ID
 			let caseId = document.createElement("TD");
-				caseId.innerHTML =robot["ROBOTS"]["ID"];
+				caseId.innerHTML =robot["ROBOTS"]["id"];
 
 			//NAME
 			let casename= document.createElement("TD");
-				casename.innerHTML =robot["ROBOTS"]["NAME"];
+				casename.innerHTML =robot["ROBOTS"]["name"];
 
 			//SCORES
 			let caseScores = document.createElement("TD");
@@ -454,7 +454,7 @@ const searchWorkshop = () =>
 			let checkbox = document.createElement("INPUT");
 				checkbox.setAttribute("type", "checkbox");
 				checkbox.setAttribute("name", "workshops_list[]");
-				checkbox.setAttribute("value", workshop["ID"]);
+				checkbox.setAttribute("value", workshop["id"]);
 				checkbox.setAttribute("class","checkbox");
 				checkCase.appendChild(checkbox);
 
@@ -496,13 +496,13 @@ const searchWorkshop = () =>
 			//NAME
 			let caseName = document.createElement("TD");
 			let name = document.createElement("h5");
-				name.innerHTML =workshop["NAME"];
+				name.innerHTML =workshop["name"];
 				caseName.appendChild(name);
 
 			//CONTENT
 			let caseContent = document.createElement("TD");
 			let content = document.createElement("p");
-				content.innerHTML =workshop["CONTENT"];
+				content.innerHTML =workshop["content"];
 				caseContent.appendChild(content);
 			//DIFFICULTY
 			let caseDifficulty = document.createElement("TD");
@@ -575,12 +575,12 @@ const fillUserTable = (data) =>
 		let checkbox = document.createElement("INPUT");
 			checkbox.setAttribute("type", "checkbox");
 			checkbox.setAttribute("name", "users_list[]");
-			checkbox.setAttribute("value", user["USER"]["ID"]);
+			checkbox.setAttribute("value", user["USER"]["id"]);
 			checkCase.appendChild(checkbox);
 
 			//ID
 			let caseId = document.createElement("TD");
-				caseId.innerHTML =user["USER"]["ID"];
+				caseId.innerHTML =user["USER"]["id"];
 
 			//FIRSTNAME
 			let casefirst = document.createElement("TD");
@@ -610,7 +610,7 @@ const fillUserTable = (data) =>
 							Familyline.appendChild(thSelect);
 
 						let thID = document.createElement("th");
-							thID.innerHTML = "ID";
+							thID.innerHTML = "id";
 							thID.style.width = '10%';
 							Familyline.appendChild(thID);
 
@@ -646,11 +646,11 @@ const fillUserTable = (data) =>
 						let checkboxFamily  = document.createElement("INPUT");
 							checkboxFamily.setAttribute("type", "checkbox");
 							checkboxFamily.setAttribute("name", "members_list[]");
-							checkboxFamily.setAttribute("value", member["ID"]);
+							checkboxFamily.setAttribute("value", member["id"]);
 							tdCheck.appendChild(checkboxFamily);
 						//ID
 						let tdId =document.createElement("td");
-							tdId.innerHTML =member["ID"];
+							tdId.innerHTML =member["id"];
 						//FIRST
 						let tdFirst =document.createElement("td");
 							tdFirst.innerHTML =member["FIRSTNAME"];

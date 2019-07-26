@@ -32,38 +32,50 @@ function loadMedia( $workshop ){
   <?php
 }
 
-function loadStars($workshop,$action ){
-
+function loadStars($workshop_difficulties,$action ){
 	?>
+			<strong><?= $action->trans->read("workshops","difficulty")?> : </strong>
+	<?php
+	$i = 0;
+	if(!empty($workshop_difficulties))
+	foreach ($workshop_difficulties as $difficulty) {
+		if($i > 0)
+		{
+			?>
+				<strong style="padding:1em">OR</strong>
+			<?php
+		}
+		?>
+
 	<div class="stars">
-		<?= $action->trans->read("workshops","difficulty")?> :
-	<?php
-	for($i = 0 ; $i < 3; $i++)
-	{
-
-		if( $i <= $workshop["ID_DIFFICULTY"])
+		<?php
+		for($i = 1 ; $i <= sizeof($action->difficulties); $i++)
 		{
-			?>
-				<span class="fa fa-star checked"></span>
-			<?php
+			if( $i <= $difficulty["id_filter"])
+			{
+				?>
+					<span class="fa fa-star checked"></span>
+				<?php
+			}
+			else
+			{
+				?>
+					<span class="fa fa-star"></span>
+				<?php
+			}
 		}
-		else
-		{
-			?>
-				<span class="fa fa-star"></span>
-			<?php
-		}
-	}
-	?>
-		</div>
+		?>
+	</div>
 	<?php
+		$i++;
+		}
 }
 
 function loadProfil($user,$action)
 {
 	$userExist = false;
 	if($user != null)
-		$userExist = true;
+	$userExist = true;
 	?>
 		<div class="users-contents">
 			<?php
@@ -101,7 +113,7 @@ function loadProfil($user,$action)
 								{
 									?>
 										<input type="hidden" name="update">
-										<input type="hidden" name="members_list[]" value="<?=$user["ID"]?>">
+										<input type="hidden" name="members_list[]" value="<?=$user["id"]?>">
 									<?php
 								}
 								else
@@ -143,7 +155,7 @@ function loadProfil($user,$action)
 									<?php
 										foreach ($action->genders as $gender) {
 											?>
-												<option <?php if($userExist)if($user["id_gender"] == $gender["ID"]) echo 'selected' ;?> value="<?= $gender["ID"] ?>"><?= $gender["NAME"] ?></option>
+												<option <?php if($userExist)if($user["id_gender"] == $gender["id"]) echo 'selected' ;?> value="<?= $gender["id"] ?>"><?= $gender["name"] ?></option>
 											<?php
 										}
 									?>
@@ -160,23 +172,23 @@ function loadProfil($user,$action)
 										<?php
 											if($userExist)
 											{
-												if($user["id_avatar"] ==  $avatar["ID"]){
+												if($user["id_avatar"] ==  $avatar["id"]){
 												?>
-													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>" checked>
+													<input type="radio" name="avatar" value="<?=$avatar["id"]?>" checked>
 
 												<?php
 												}
 												else
 												{
 													?>
-														<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
+														<input type="radio" name="avatar" value="<?=$avatar["id"]?>">
 													<?php
 												}
 											}
 											else
 											{
 												?>
-													<input type="radio" name="avatar" value="<?=$avatar["ID"]?>">
+													<input type="radio" name="avatar" value="<?=$avatar["id"]?>">
 												<?php
 											}
 										?>
@@ -226,86 +238,86 @@ function loadWorkshopsCreator($workshop, $action)
 		$workshopExist = true;
 	?>
 		<form action="workshop-infos.php"  method="post" enctype="multipart/form-data">
-					<aside>
-					<div id="workshop-menu">
-						<div id="search-form">
-							<div class="card">
-								<div class="card-header" id="headingDifficulty">
-									<h5 class="mb-0">
-										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
-											<?= $action->trans->read('workshops','difficulty') ?>
-										</button>
-									</h5>
-								</div>
-								<div id="collapseDifficulty" class="collapse show" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
-									<div class="card-body">
-										<ul>
-											<?php
-												foreach ($action->difficulties as $diff) {
-													?>
-														<div><label><input type="checkbox" name="difficulties[]" value="<?=$diff['ID'] ?>" <?php if(!empty($action->filters[$action->id_types['difficulties']])) if(!empty($action->filters[$action->id_types['difficulties']][$diff['ID']])) echo 'checked' ?>><li><?= $diff["NAME"] ?></li></label></div>
-													<?php
-												}
-											?>
-										</ul>
-									</div>
-								</div>
+			<aside>
+				<div id="workshop-menu">
+					<div id="search-form">
+						<div class="card">
+							<div class="card-header" id="headingDifficulty">
+								<h5 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="true" aria-controls="collapseDifficulty">
+										<?= $action->trans->read('workshops','difficulty') ?>
+									</button>
+								</h5>
 							</div>
-
-							<div class="card">
-								<div class="card-header" id="headingAge">
-									<h5 class="mb-0">
-										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseAge" aria-expanded="true" aria-controls="collapseAge">
-											<?= $action->trans->read('workshops','scholar') ?>
-										</button>
-									</h5>
-								</div>
-								<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
-									<div class="card-body">
-										<ul>
-											<?php
-												foreach ($action->grades as $grade) {
-													?>
-														<div><label><input type="checkbox" name="grades[]" value="<?=$grade['ID'] ?>" <?php if(!empty($action->filters[$action->id_types['grades']])) if(!empty($action->filters[$action->id_types['grades']][$grade['ID']])) echo 'checked' ?>><li><?= $grade["NAME"] ?></li></label></div>
-													<?php
-												}
-											?>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header" id="headingRobot">
-									<h5 class="mb-0">
-										<button class="btn btn-link" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="true" aria-controls="collapseRobots">
-											<?= $action->trans->read('workshops','robots') ?>
-										</button>
-									</h5>
-								</div>
-								<div id="collapseRobots" class="collapse show" aria-labelledby="headingRobot" data-parent="#workshop-menu">
-									<div class="card-body">
-										<ul>
-											<?php
-												foreach ($action->robots as $robot) {
-													?>
-														<div><label><input type="checkbox" name="robots[]" value="<?=$robot['ID'] ?>" <?php if(!empty($action->filters[$action->id_types['robots']])) if(!empty($action->filters[$action->id_types['robots']][$robot['ID']])) echo 'checked' ?>><li><?= $robot["NAME"] ?></li></label></div>
-													<?php
-												}
-											?>
-										</ul>
-									</div>
+							<div id="collapseDifficulty" class="collapse show" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
+								<div class="card-body">
+									<ul>
+										<?php
+											foreach ($action->difficulties as $diff) {
+												?>
+													<div><label><input type="checkbox" name="difficulties[]" value="<?=$diff['id'] ?>" <?php if(!empty($action->filters[$action->id_types['difficulties']])) if(!empty($action->filters[$action->id_types['difficulties']][$diff['id']])) echo 'checked' ?>><li><?= $diff["name"] ?></li></label></div>
+												<?php
+											}
+										?>
+									</ul>
 								</div>
 							</div>
 						</div>
-						<a onclick="deleteParams()"><?= $action->trans->read("workshops","deleteFilter") ?></a>
+						<div class="card">
+							<div class="card-header" id="headingAge">
+								<h5 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse" data-target="#collapseAge" aria-expanded="true" aria-controls="collapseAge">
+										<?= $action->trans->read('workshops','scholar') ?>
+									</button>
+								</h5>
+							</div>
+							<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
+								<div class="card-body">
+									<ul>
+										<?php
+											foreach ($action->grades as $grade) {
+												?>
+													<div><label><input type="checkbox" name="grades[]" value="<?=$grade['id'] ?>" <?php if(!empty($action->filters[$action->id_types['grades']])) if(!empty($action->filters[$action->id_types['grades']][$grade['id']])) echo 'checked' ?>><li><?= $grade["name"] ?></li></label></div>
+												<?php
+											}
+										?>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingRobot">
+								<h5 class="mb-0">
+									<button class="btn btn-link" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="true" aria-controls="collapseRobots">
+										<?= $action->trans->read('workshops','robots') ?>
+									</button>
+								</h5>
+							</div>
+							<div id="collapseRobots" class="collapse show" aria-labelledby="headingRobot" data-parent="#workshop-menu">
+								<div class="card-body">
+									<ul>
+										<?php
+											foreach ($action->robots as $robot) {
+												?>
+													<div><label><input type="checkbox" name="robots[]" value="<?=$robot['id'] ?>" <?php if(!empty($action->filters[$action->id_types['robots']])) if(!empty($action->filters[$action->id_types['robots']][$robot['id']])) echo 'checked' ?>><li><?= $robot["name"] ?></li></label></div>
+												<?php
+											}
+										?>
+									</ul>
+								</div>
+							</div>
+						</div>
 					</div>
-				</aside>
-				<main>
+				<a onclick="deleteParams()"><?= $action->trans->read("workshops","deleteFilter") ?></a>
+			</div>
+		</aside>
+		<main>
+			<div class="sheet">
 				<div id="workshop-form">
 
 
-					<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["NAME"]  ?>">
-					<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["CONTENT"]?></textarea>
+					<input type="text" name="name" id="input-h1" placeholder="Title" value="<?php if($workshopExist) echo $workshop["name"]  ?>">
+					<textarea name="content" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($workshopExist) echo $workshop["content"]?></textarea>
 					(Maximum characters: 125). You have <div style="display:inline-block;" id="countdown">512</div> left.
 
 					<br>
@@ -329,7 +341,7 @@ function loadWorkshopsCreator($workshop, $action)
 						<div id="drop-workshop" class="dropzone"></div>
 
 
-							<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['ID']?> , deployed:this.checked}});" <?php } ?> <?php if($workshop["deployed"]) echo 'checked'; ?>></p>
+							<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['id']?> , deployed:this.checked}});" <?php } ?> <?php if($workshop["deployed"]) echo 'checked'; ?>></p>
 					</div>
 					<div id="params">
 
@@ -345,7 +357,8 @@ function loadWorkshopsCreator($workshop, $action)
 						}
 					?>
 				</div>
-				</main>
+			</div>
+		</main>
 	</form>
 
 
@@ -377,9 +390,9 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 										loadMedia($workshop);
 									?>
 									<h4><?= $title ?> workshop</h3>
-									<div class="title"><h2><?= $workshop["NAME"] ?></h4></div>
+									<div class="title"><h2><?= $workshop["name"] ?></h4></div>
 
-									<h5>Type : <?= $action->robots[$workshop["ID_ROBOT"]]["NAME"] ?></h5>
+									<h5>Type : <?= $action->robots[$workshop["id_ROBOT"]]["name"] ?></h5>
 									<?php
 										loadStars($workshop);
 									?>
@@ -529,7 +542,7 @@ function loadWorkshopsLine($workshops,$name,$action,$title)
 						<?php
 							loadMedia($workshop);
 						?>
-						<div class="title"><h2><?= $workshop["NAME"] ?></h4></div>
+						<div class="title"><h2><?= $workshop["name"] ?></h4></div>
 					</div>
 				<?php
 			}

@@ -13,6 +13,7 @@
 			<button type="submit" name="workshop">add workshops</button>
 			<button type="submit" name="user">add users</button>
 			<button type="submit" name="robot">add robots</button>
+			<button type="submit" name="member">add members</button>
 
 		</form>
 	</div>

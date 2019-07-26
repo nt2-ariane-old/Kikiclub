@@ -1110,7 +1110,7 @@
 		ridentifier = new RegExp( "^" + identifier + "$" ),
 
 		matchExpr = {
-			"ID": new RegExp( "^#(" + characterEncoding + ")" ),
+			"id": new RegExp( "^#(" + characterEncoding + ")" ),
 			"CLASS": new RegExp( "^\\.(" + characterEncoding + ")" ),
 			"TAG": new RegExp( "^(" + characterEncoding.replace( "w", "w*" ) + ")" ),
 			"ATTR": new RegExp( "^" + attributes ),
@@ -1513,7 +1513,7 @@
 
 		// ID find and filter
 		if ( support.getById ) {
-			Expr.find["ID"] = function( id, context ) {
+			Expr.find["id"] = function( id, context ) {
 				if ( typeof context.getElementById !== strundefined && documentIsHTML ) {
 					var m = context.getElementById( id );
 					// Check parentNode to catch when Blackberry 4.6 returns
@@ -1521,7 +1521,7 @@
 					return m && m.parentNode ? [m] : [];
 				}
 			};
-			Expr.filter["ID"] = function( id ) {
+			Expr.filter["id"] = function( id ) {
 				var attrId = id.replace( runescape, funescape );
 				return function( elem ) {
 					return elem.getAttribute("id") === attrId;
@@ -1530,9 +1530,9 @@
 		} else {
 			// Support: IE6/7
 			// getElementById is not reliable as a find shortcut
-			delete Expr.find["ID"];
+			delete Expr.find["id"];
 
-			Expr.filter["ID"] =  function( id ) {
+			Expr.filter["id"] =  function( id ) {
 				var attrId = id.replace( runescape, funescape );
 				return function( elem ) {
 					var node = typeof elem.getAttributeNode !== strundefined && elem.getAttributeNode("id");
@@ -2852,11 +2852,11 @@
 
 				// Take a shortcut and set the context if the root selector is an ID
 				tokens = match[0] = match[0].slice( 0 );
-				if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
+				if ( tokens.length > 2 && (token = tokens[0]).type === "id" &&
 						support.getById && context.nodeType === 9 && documentIsHTML &&
 						Expr.relative[ tokens[1].type ] ) {
 
-					context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
+					context = ( Expr.find["id"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
 					if ( !context ) {
 						return results;
 					}

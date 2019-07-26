@@ -68,7 +68,7 @@
 							{
 								RobotDAO::updateRobot($id,$_POST["name"],$_POST["grade_recommanded"]);
 								foreach ($this->difficulties as $difficulty) {
-									RobotDAO::updateRobotScoreByDifficulty($id,$difficulty["ID"],intval($_POST["score_" . $difficulty["ID"]]));
+									RobotDAO::updateRobotScoreByDifficulty($id,$difficulty["id"],intval($_POST["score_" . $difficulty["id"]]));
 								}
 							}
 							header('location:robots.php');
@@ -85,7 +85,7 @@
 							RobotDAO::insertRobot($_POST["name"],$_POST["grade_recommanded"]);
 							$newRobot = RobotDAO::getRobotByName($_POST["name"]);
 							foreach ($this->difficulties as $difficulty) {
-								RobotDAO::insertRobotScoreByDifficulty($newRobot["ID"],$difficulty["ID"],intval($_POST["score_" . $difficulty["ID"]]));
+								RobotDAO::insertRobotScoreByDifficulty($newRobot["id"],$difficulty["id"],intval($_POST["score_" . $difficulty["id"]]));
 							}
 							header('location:robots.php');
 						}

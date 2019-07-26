@@ -33,7 +33,7 @@
 										<?php
 											foreach ($action->difficulty as $diff) {
 												?>
-													<div><label><input type="checkbox" onclick="setSearchParams('difficulties',<?=$diff['ID'] ?>)"><li><?= $diff["NAME"] ?></li></label></div>
+													<div><label><input type="checkbox" onclick="setSearchParams('difficulties',<?=$diff['id'] ?>)"><li><?= $diff["name"] ?></li></label></div>
 												<?php
 											}
 										?>
@@ -57,7 +57,7 @@
 										<?php
 											foreach ($action->grades as $grade) {
 												?>
-													<div><label><input type="checkbox" onclick="setSearchParams('grades',<?=$grade['ID'] ?>)"><li><?= $grade["NAME"] ?></li></label></div>
+													<div><label><input type="checkbox" onclick="setSearchParams('grades',<?=$grade['id'] ?>)"><li><?= $grade["name"] ?></li></label></div>
 												<?php
 											}
 										?>
@@ -80,7 +80,7 @@
 										<?php
 											foreach ($action->robots as $robot) {
 												?>
-													<div><label><input type="checkbox" onclick="setSearchParams('robots',<?=$robot['ID'] ?>)"><li><?= $robot["NAME"] ?></li></label></div>
+													<div><label><input type="checkbox" onclick="setSearchParams('robots',<?=$robot['id'] ?>)"><li><?= $robot["name"] ?></li></label></div>
 												<?php
 											}
 										?>

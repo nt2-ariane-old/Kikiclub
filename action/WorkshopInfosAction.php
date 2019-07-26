@@ -10,6 +10,9 @@
 		public $member_workshops;
 
 		public $difficulties;
+		public $workshop_difficulties;
+		public $workshop_robots;
+		public $workshop_grades;
 		public $grades;
 		public $robots;
 		public $exist;
@@ -17,7 +20,7 @@
 		public $filters;
 		public $id_types;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"workshop-infos", "Workshop Information");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshop-infos", "Workshop Information");
 			$this->exist = false;
 			$this->added = false;
 		}
@@ -43,7 +46,7 @@
 				$this->grades = FilterDAO::getGradesFR();
 
 			}
-			$this->robots = RobotDAO::getRobots();
+			$this->robots = RobotDAO::getRobots(true);
 
 			if($this->exist) $id = $_SESSION["workshop_id"];
 
@@ -69,7 +72,7 @@
 							$deploy = true;
 						}
 						WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$_POST['media_path'], $_POST['media_type'],$deploy);
-						$id = WorkshopDAO::getWorkshopByNameAndContent($_POST['name'],$_POST['content'])["ID"];
+						$id = WorkshopDAO::getWorkshopByNameAndContent($_POST['name'],$_POST['content'])["id"];
 						$this->added = true;
 						$this->exist = true;
 					}
@@ -134,6 +137,26 @@
 				$this->filters = FilterDAO::getWorkshopFilters($id);
 
 				$this->workshop = WorkshopDAO::getWorkshop($id);
+
+				if(!empty($this->filters[$this->id_types["difficulties"]]))
+				{
+					$this->workshop_difficulties = $this->filters[$this->id_types["difficulties"]];
+				}
+				if(!empty($this->filters[$this->id_types["robots"]]))
+				{
+					$robots = $this->filters[$this->id_types["robots"]];
+					foreach ($robots as $robot) {
+						$this->workshop_robots[] = RobotDAO::getRobotByID($robot["id_filter"]);
+					}
+				}
+				if(!empty($this->filters[$this->id_types["grades"]]))
+				{
+					$grades = $this->filters[$this->id_types["grades"]];
+					foreach ($grades as $grade) {
+						$this->workshop_grades[] = FilterDAO::getGradeById($grade["id_filter"]);
+					}
+				}
+
 				if(!empty($_SESSION["member_id"]))
 				{
 					$this->member_workshops =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);

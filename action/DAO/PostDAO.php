@@ -6,10 +6,10 @@
 		public static function getPosts($min=0,$nb=null)
 		{
 			$connection = Connection::getConnection();
-			$request = "SELECT shared_posts.id AS id, shared_posts.title AS title,shared_posts.content AS content,shared_posts.media_path AS media_path,shared_posts.media_type AS media_type , shared_posts.id_user AS id_user, CONCAT(users.firstname, ' ',users.lastname) AS username FROM shared_posts INNER JOIN users ON shared_posts.id_user =users.id "
+			$request = "SELECT shared_posts.id AS id, shared_posts.title AS title,shared_posts.content AS content,shared_posts.media_path AS media_path,shared_posts.media_type AS media_type , shared_posts.id_user AS id_user, CONCAT(users.firstname, ' ',users.lastname) AS username FROM shared_posts INNER JOIN users ON shared_posts.id_user =users.id ";
 			if($nb != null)
 			{
-				$request .= "LIMIT ?,?"
+				$request .= "LIMIT ?,?";
 			}
 			$statement = $connection->prepare($request);
 

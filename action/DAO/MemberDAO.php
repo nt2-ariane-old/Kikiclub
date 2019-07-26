@@ -120,7 +120,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT ID,NAME FROM gender");
+			$statement = $connection->prepare("SELECT * FROM gender");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -324,7 +324,7 @@
 			$contents = [];
 
 			while ($row = $statement->fetch()) {
-				$contents[$row["ID"]] = $row;
+				$contents[] = $row;
 			}
 			return $contents;
 		}

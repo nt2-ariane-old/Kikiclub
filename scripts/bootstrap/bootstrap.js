@@ -3405,7 +3405,7 @@
         return Default$4;
       }
     }, {
-      key: "NAME",
+      key: "name",
       get: function get() {
         return NAME$6;
       }
@@ -3592,7 +3592,7 @@
         return Default$5;
       }
     }, {
-      key: "NAME",
+      key: "name",
       get: function get() {
         return NAME$7;
       }

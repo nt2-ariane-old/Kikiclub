@@ -63,7 +63,7 @@
 									<?php
 										foreach ($action->users as $user) {
 									?>
-										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['ID'] ?>,'users_action':'update'})">
+										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['id'] ?>,'users_action':'update'})">
 											<td><?= $user["FIRSTNAME"] ?></td>
 											<td><?= $user["LASTNAME"] ?></td>
 											<td><?= $user["EMAIL"] ?></td>
@@ -91,7 +91,7 @@
 									<?php
 										foreach ($action->members as $member) {
 									?>
-										<tr onclick="change_page('manage-member.php',{'member_id':<?= $member['ID'] ?>,'members_action':'update'})">
+										<tr onclick="change_page('manage-member.php',{'member_id':<?= $member['id'] ?>,'members_action':'update'})">
 											<td><?= $member["firstname"] ?></td>
 											<td><?= $member["lastname"] ?></td>
 											<td><?= $member["score"] ?></td>

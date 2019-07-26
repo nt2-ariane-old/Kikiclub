@@ -3,7 +3,7 @@
 
 	class RobotDAO {
 
-		public static function getRobots()
+		public static function getRobots($keys=false)
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("SELECT * FROM robot");
@@ -13,8 +13,14 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				//$content[$row["ID"]] = $row;
-				$content[] = $row;
+				if($keys)
+				{
+					$content[$row["id"]] = $row;
+				}
+				else
+				{
+					$content[] = $row;
+				}
 			}
 
 			return $content;
@@ -62,7 +68,7 @@
 			while ($row = $statementRobots->fetch()) {
 				$temp = [] ;
 				$temp["robots"] = $row;
-				$temp["scores"] = RobotDAO::getDifficultyScoresForRobot($row["ID"]);
+				$temp["scores"] = RobotDAO::getDifficultyScoresForRobot($row["id"]);
 				$content[] = $temp;
 			}
 

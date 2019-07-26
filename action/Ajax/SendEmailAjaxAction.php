@@ -33,8 +33,8 @@
 				$htmlContent = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/emails/template.php");
 				$workshop = json_decode($_POST["workshop"],true);
 
-				$htmlContent = str_replace("***WORKSHOP***",$workshop["NAME"],$htmlContent);
-				$htmlContent = str_replace("***CONTENT***",$workshop["CONTENT"],$htmlContent);
+				$htmlContent = str_replace("***WORKSHOP***",$workshop["name"],$htmlContent);
+				$htmlContent = str_replace("***CONTENT***",$workshop["content"],$htmlContent);
 				$htmlContent = str_replace("***PATH***",$workshop["MEDIA_PATH"],$htmlContent);
 			}
 			$this->results = [];

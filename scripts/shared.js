@@ -108,7 +108,7 @@ const loadPosts = (action=null,id=null) =>
 					title.setAttribute('class', 'title');
 
 				let content = document.createElement('p');
-					content.innerHTML =  post["CONTENT"];
+					content.innerHTML =  post["content"];
 					content.setAttribute('class', 'content');
 
 				postArticle.appendChild(user);
@@ -118,7 +118,7 @@ const loadPosts = (action=null,id=null) =>
 				if(idUser === post["ID_USER"] || visibilty >= 3)
 				{
 					let deleteButton = document.createElement("button");
-						deleteButton.setAttribute('onclick',"loadPosts('delete', " + post["ID"]+")");
+						deleteButton.setAttribute('onclick',"loadPosts('delete', " + post["id"]+")");
 						deleteButton.innerHTML = 'X';
 					postArticle.appendChild(deleteButton);
 				}

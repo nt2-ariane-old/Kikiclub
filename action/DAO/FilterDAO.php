@@ -112,7 +112,7 @@
 		public static function getGradesEN()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME,AGE FROM scholar_level");
+			$statement = $connection->prepare("SELECT id,name_en as name,age FROM scholar_level");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -120,7 +120,7 @@
 
 			while ($row = $statement->fetch()) {
 				$content[] = $row;
-				// $content[$row["ID"]] = $row;
+				// $content[$row["id"]] = $row;
 			}
 
 			return $content;
@@ -136,14 +136,14 @@
 		public static function getGradesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME,AGE FROM scholar_level");
+			$statement = $connection->prepare("SELECT id,name_fr as name,age FROM scholar_level");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				// $content[$row["ID"]] = $row;
+				// $content[$row["id"]] = $row;
 				$content[] = $row;
 			}
 
@@ -160,7 +160,7 @@
 		public static function getGradeById($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT id,NAME_FR as name,age FROM scholar_level WHERE id = ?");
+			$statement = $connection->prepare("SELECT id,name_fr as name,age FROM scholar_level WHERE id = ?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();
@@ -169,7 +169,7 @@
 
 			if ($row = $statement->fetch()) {
 				$content = $row;
-				// $content[$row["ID"]] = $row;
+				// $content[$row["id"]] = $row;
 			}
 
 			return $content;
@@ -185,14 +185,14 @@
 		public static function getDifficultiesEN()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME FROM difficulty");
+			$statement = $connection->prepare("SELECT id,name_en as name FROM difficulty");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				//$content[$row["ID"]] = $row;
+				//$content[$row["id"]] = $row;
 				$content[] = $row;
 			}
 
@@ -209,7 +209,7 @@
 		public static function getDifficultiesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM difficulty");
+			$statement = $connection->prepare("SELECT id,name_fr as name FROM difficulty");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -217,7 +217,7 @@
 
 			while ($row = $statement->fetch()) {
 				$content[] = $row;
-				//$content[$row["ID"]] = $row;
+				//$content[$row["id"]] = $row;
 			}
 
 			return $content;
@@ -233,14 +233,14 @@
 		public static function getWorkshopStatesEN()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_EN as NAME FROM workshop_statut");
+			$statement = $connection->prepare("SELECT id,name_en as name FROM workshop_statut");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				$content[$row["id"]] = $row;
 			}
 
 			return $content;
@@ -256,14 +256,14 @@
 		public static function getWorkshopStatesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,NAME_FR as NAME FROM workshop_statut");
+			$statement = $connection->prepare("SELECT id,name_fr as NAME FROM workshop_statut");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[$row["ID"]] = $row;
+				$content[$row["id"]] = $row;
 			}
 
 			return $content;

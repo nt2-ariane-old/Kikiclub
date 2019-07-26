@@ -76,13 +76,13 @@
 						$this->results["workshops"]=$f($id,"none",false,!$this->admin_mode);
 					break;
 					case 'ascName':
-						$this->results["workshops"]=$f($id,"NAME",true,!$this->admin_mode);
+						$this->results["workshops"]=$f($id,"name",true,!$this->admin_mode);
 						break;
 					case 'descName':
-					$this->results["workshops"]=$f($id,"NAME",false,!$this->admin_mode);
+					$this->results["workshops"]=$f($id,"name",false,!$this->admin_mode);
 					break;
 					case 'recents':
-					$this->results["workshops"]=$f($id,"ID",true,!$this->admin_mode);
+					$this->results["workshops"]=$f($id,"id",true,!$this->admin_mode);
 					break;
 				}
 			}
@@ -197,7 +197,6 @@
 						foreach ($this->results["workshops"] as $workshop)
 						{
 							$filters = FilterDAO::getWorkshopFilters($workshop["id"]);
-							var_dump($filters);
 							if(!empty($filters[FilterDAO::getFilterTypeIdByName('robot')]))
 							{
 								$workshop_robots = $filters[FilterDAO::getFilterTypeIdByName('robot')];

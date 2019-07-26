@@ -88,7 +88,7 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 
 					divWorkshop = document.createElement('div');
 					divWorkshop.setAttribute('class','workshop');
-					divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["ID"]);
+					divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["id"]);
 
 					if(!workshop["deployed"])
 					{
@@ -96,7 +96,6 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 					}
 					let link = document.createElement('a');
 
-					//link.href = "workshop-infos.php?workshop_id="+workshop["ID"];
 					link.setAttribute('class','link normal');
 						if(isMember)
 						{

@@ -58,7 +58,7 @@
 					$this->added = true;
 					$this->create = false;
 					$this->update = true;
-					$this->id_user = UsersDAO::getUserWithEmail($_POST['email'])["ID"];
+					$this->id_user = UsersDAO::getUserWithEmail($_POST['email'])["id"];
 					$_SESSION["user_id"] = $this->id_user;
 					$_SESSION["users_action"] = "update";
 				}

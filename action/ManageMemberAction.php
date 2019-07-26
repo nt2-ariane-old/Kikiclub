@@ -76,7 +76,6 @@
 							$this->create = false;
 							$this->update = true;
 							$member = MemberDAO::getMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$id);
-							var_dump($member);
 							$_SESSION["member_id"] = $member["id"];
 						}
 						else

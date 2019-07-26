@@ -6,7 +6,7 @@
 		public static function getAllUsers()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, FIRSTNAME,LASTNAME,EMAIL FROM users");
+			$statement = $connection->prepare("SELECT * FROM users");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
@@ -18,30 +18,11 @@
 			return $contents;
 		}
 
-		public static function getAllUsersName()
-		{
-			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, FIRSTNAME,LASTNAME,EMAIL FROM users");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$contents = [];
-
-			while ($row = $statement->fetch()) {
-
-				$temp["value"] = $row["FIRSTNAME"];
-				$temp["data"] = $row["FIRSTNAME"];
-				$contents[] = $temp;
-
-			}
-			return $contents;
-		}
-
 		public static function getUsersLikeType($value,$type)
 		{
 			$connection = Connection::getConnection();
 			$value = $value.'%';
-			$request = "SELECT id,firstname,lastname,email FROM users ";
+			$request = "SELECT * FROM users ";
 			if($type == 'firstname')
 			{
 				$request .= "WHERE firstname LIKE ?";
@@ -63,8 +44,6 @@
 
 			$contents = [];
 
-
-
 			while ($row = $statement->fetch()) {
 				$temp["label"] = $row[$type];
 				$temp["value"] = $row["id"];
@@ -77,7 +56,7 @@
 		public static function getUserWithID($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID, VISIBILITY,FIRSTNAME,LASTNAME,EMAIL FROM users WHERE id=?");
+			$statement = $connection->prepare("SELECT * FROM users WHERE id=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -135,7 +114,7 @@
 								$infos = $rowUser;
 								break;
 							case 'Kikiclub':
-								if (password_verify($password,$rowLogin["PASSWORD"]))
+								if (password_verify($password,$rowLogin["password"]))
 								{
 									$infos = $rowUser;
 								}
