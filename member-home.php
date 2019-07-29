@@ -10,7 +10,7 @@
 		<h2>Workshops</h2>
 		<div class="container">
 			<div class="row">
-				<button onclick="post('workshops.php',{'type':2})" class="access-btn col-lg-3 rounded-circle" id="new">
+				<button onclick="change_page('workshops.php',{'workshop_type':2})" class="access-btn col-lg-3 rounded-circle" id="new">
 					New
 					<?php
 						if($action->member["alert"] > 0)
@@ -22,10 +22,10 @@
 					?>
 				</button>
 
-				<button onclick="post('workshops.php',{'type':3})" class="access-btn col-lg-3 rounded-circle" id="progress">
+				<button onclick="change_page('workshops.php',{'workshop_type':3})" class="access-btn col-lg-3 rounded-circle" id="progress">
 					In Progress
 				</button>
-				<button onclick="post('workshops.php',{'type':4})" class="access-btn col-lg-3 rounded-circle" id="complete">
+				<button onclick="change_page('workshops.php',{'workshop_type':4})" class="access-btn col-lg-3 rounded-circle" id="complete">
 					Complete
 				</button>
 			</div>

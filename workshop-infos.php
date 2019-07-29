@@ -41,14 +41,17 @@
 											<?php
 												$i = 0;
 												foreach ($action->workshop_robots as $robot) {
-													if($i > 0)
+													if(!empty($robot))
 													{
-														echo ',';
+														if($i > 0)
+														{
+															echo ',';
+														}
+														?>
+															<span><?= $robot["name"] ?></span>
+														<?php
+														$i++;
 													}
-													?>
-														<span><?= $robot["name"] ?></span>
-													<?php
-													$i++;
 												}
 												?></p>
 										<?php

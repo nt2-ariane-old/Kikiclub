@@ -109,7 +109,7 @@
 		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
 		 * @return Array return all the grades name in English + ID
 		 */
-		public static function getGradesEN()
+		public static function getGradesEN($withKeys=false)
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("SELECT id,name_en as name,age FROM scholar_level");
@@ -119,8 +119,14 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content[] = $row;
-				// $content[$row["id"]] = $row;
+				if($withKeys)
+				{
+					$content[$row["id"]] = $row;
+				}
+				else
+				{
+					$content[] = $row;
+				}
 			}
 
 			return $content;
@@ -133,7 +139,7 @@
 		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
 		 * @return Array return all the grades name in French + ID
 		 */
-		public static function getGradesFR()
+		public static function getGradesFR($withKeys=false)
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("SELECT id,name_fr as name,age FROM scholar_level");
@@ -143,8 +149,14 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				// $content[$row["id"]] = $row;
-				$content[] = $row;
+				if($withKeys)
+				{
+					$content[$row["id"]] = $row;
+				}
+				else
+				{
+					$content[] = $row;
+				}
 			}
 
 			return $content;
@@ -256,7 +268,7 @@
 		public static function getWorkshopStatesFR()
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT id,name_fr as NAME FROM workshop_statut");
+			$statement = $connection->prepare("SELECT id,name_fr as name FROM workshop_statut");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

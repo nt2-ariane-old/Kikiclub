@@ -128,9 +128,9 @@
 							<a data-toggle="collapse" data-target="#controls">Control</a>
 
 							<div class="collapse" id="controls">
-								<button onclick="change_page('workshop-infos.php',{'workshop_id':null})">Add</button>
-								<button onclick="deployed_selected()">Deployed</button>
-								<button  onclick="openConfirmBox(null,{type:'function','function':deleteSelected});">Delete</button>
+								<button class="submit-btn" onclick="change_page('workshop-infos.php',{'workshop_id':null})">Add</button>
+								<button class="submit-btn" onclick="deployed_selected()">Deployed</button>
+								<button class="delete-btn" onclick="openConfirmBox(null,{type:'function','function':deleteSelected});">Delete</button>
 							</div>
 						</div>
 					<?php

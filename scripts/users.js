@@ -111,7 +111,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let node = document.createElement("div");
 	node.innerHTML = memberHTML;
 	let id_logo =  member["id_avatar"];
-	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["PATH"] +"');");
+	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["path"] +"');");
 
 	node.querySelector('button').setAttribute("onclick",'change_page("member-home.php",{"member_id":'+member["id"]+'})');
 

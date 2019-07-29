@@ -73,11 +73,11 @@
 				}
 				switch ($_POST["sort"]) {
 					case 'none':
-						$this->results["workshops"]=$f($id,"none",false,!$this->admin_mode);
+					$this->results["workshops"]=$f($id,"none",false,!$this->admin_mode);
 					break;
 					case 'ascName':
-						$this->results["workshops"]=$f($id,"name",true,!$this->admin_mode);
-						break;
+					$this->results["workshops"]=$f($id,"name",true,!$this->admin_mode);
+					break;
 					case 'descName':
 					$this->results["workshops"]=$f($id,"name",false,!$this->admin_mode);
 					break;
@@ -88,6 +88,10 @@
 			}
 			if(!empty($_POST["search"]))
 			{
+				if(!empty($_SESSION["member_id"]))
+				{
+					$this->results["member_workshops"] =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+				}
 				if(!empty($_POST["difficulties"]))
 				{
 					$this->results["search"]["difficulties"] = $_POST["difficulties"];
@@ -144,22 +148,22 @@
 				}
 				if(!empty($_POST["states"]))
 				{
-					$this->results["search"]["states"] = $_POST["states"];
 
 					$states = json_decode($_POST["states"]);
+					$this->results["search"]["states"] = $_POST["states"];
 					if(!empty($_SESSION["member_id"]))
 					{
 					$has_new = false;
 					if(sizeof($states) > 0)
 					{
 						$temp = [];
-						$member_workshops =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
+						$this->results["member_workshops"] =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
 						$new_workshops =MemberWorkshopDAO::selectMemberNewWorkshop($_SESSION["member_id"]);
 						foreach ($states as $state)
 						{
 							foreach ($this->results["workshops"] as $workshop)
 							{
-								foreach ($member_workshops as $m_workshop)
+								foreach ($this->results["member_workshops"] as $m_workshop)
 								{
 									if($m_workshop["id_workshop"] == $workshop["id"] &&
 										$state == $m_workshop["id_statut"])
@@ -271,13 +275,43 @@
 				}
 				$members = MemberDAO::getAllMemberWithAges($ages);
 				$this->results = [];
-				foreach ($members as $value) {
-					$id_member = $value["id"];
+
+				$headers = "Reply-To: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+				$headers .= "Return-Path: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+				$headers .= "From: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+
+				$headers .= "Organization: Code & Café\r\n";
+				$headers .= "MIME-Version: 1.0\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$headers .= "X-Priority: 3\r\n";
+				$headers .= "X-Mailer: PHP". phpversion() ."\r\n";
+
+				$subject = "";
+
+				$htmlContent = "";
+
+				$subject = "Nouvel Atelier!! :D ";
+				$htmlContent = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/emails/template.php");
+
+
+				$workshop = WorkshopDAO::getWorkshop($id);
+
+				$htmlContent = str_replace("***WORKSHOP***",$workshop["name"],$htmlContent);
+				$htmlContent = str_replace("***CONTENT***",$workshop["content"],$htmlContent);
+				$htmlContent = str_replace("***PATH***",$workshop["media_path"],$htmlContent);
+
+				foreach ($members as $member) {
+					$id_member = $member["id"];
 					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
+					$user = UsersDAO::getUserWithID($member["id_user"]);
+					$to = $user["email"];
+					$htmlContent = str_replace("***USER***",$user["firstname"],$htmlContent);
+					$htmlContent = str_replace("***MEMBER***",$member["firstname"],$htmlContent);
 					if(!array_key_exists($id,$workshops))
 					{
 						MemberWorkshopDAO::addMemberWorkshop($id_member,$id, 1);
-						$this->results[] = $value;
+						mail($to,$subject,$htmlContent,$headers);
+						$this->results[] = $member;
 
 					}
 

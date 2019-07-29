@@ -17,11 +17,12 @@
 		<h2 style="margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;max-width:100%;font-family:'Calling Code';text-align:center;color:#878C00;font-weight:bolder;" >Nous venons de créer un nouvel atelier</h2>
 		<p style="text-align:left; padding:1em;">Bonjour ***USER***</p>
 
-		<p style="text-align:left;padding:1em;"> Nous avons un nouvel atelier pour toi : ***WORKSHOP***</p>
+		<p style="text-align:left;padding:1em;"> Nous avons créer un nouvel atelier qui pourrais intéresser ***MEMBER*** : </p>
+		<h2> ***WORKSHOP*** </h2>
 
 		***CONTENT***
 
-		<img src="***PATH***">
+		<img src=" ***PATH*** ">
 		<p style="text-align:left;padding:1em;">Si tu veux venir le découvrir, n'hésite pas à passer au Code & Café ou tu peux le regarder sur le Kikiclub : <a style="color:blue;display:block;" href="https://www.doutreguay.com">Kikiclub.ca</a></p>
 
 	</div>

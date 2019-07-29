@@ -103,15 +103,16 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 							divType.setAttribute('class','type ribbon');
 								let spanContent = document.createElement('span');
 									spanContent.setAttribute('class','content');
-							let ancien = false;
+
+									let ancien = false;
 							for (const key in memberWorkshops) {
 								if (memberWorkshops.hasOwnProperty(key)) {
 									const m_workshop = memberWorkshops[key];
-
 									if(m_workshop["id_workshop"] == workshop["id"])
 									{
 
 										ancien = true;
+										console.log(states[m_workshop["id_statut"]]);
 										spanContent.innerHTML = states[m_workshop["id_statut"]]["name"];
 									}
 								}

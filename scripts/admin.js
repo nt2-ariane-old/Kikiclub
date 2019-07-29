@@ -30,15 +30,15 @@ const adminLoad = () =>
 				else
 				{
 					let media_path = document.getElementById('media_path');
-					media_path.value = infos["PATH"];
+					media_path.value = infos["path"];
 
 					let media_type = document.getElementById('media_type');
-					media_type.value = infos["TYPE"];
+					media_type.value = infos["type"];
 
 					let media = document.querySelector("#current-media");
 					media.innerHTML = "";
 
-					loadMedia({"MEDIA_PATH":infos["PATH"],"MEDIA_TYPE":infos["TYPE"]},media);
+					loadMedia({"media_path":infos["path"],"media_type":infos["type"]},media);
 				}
 			});
 		})
@@ -469,8 +469,8 @@ const searchWorkshop = () =>
 				media.setAttribute("height", "100");
 
 				let source =document.createElement("SOURCE");
-				source.setAttribute("src", workshop["MEDIA_PATH"]);
-				source.setAttribute("type", "video/"+workshop["MEDIA_TYPE"]);
+				source.setAttribute("src", workshop["media_path"]);
+				source.setAttribute("type", "video/"+workshop["media_type"]);
 				media.appendChild(source);
 			}
 			else if( workshop["MEDIA_TYPE"] == "png" ||
@@ -478,12 +478,12 @@ const searchWorkshop = () =>
 			{
 				media = document.createElement("img");
 				media.style.width = "100px";
-				media.src =workshop["MEDIA_PATH"];
+				media.src =workshop["media_path"];
 			}
 			else if(workshop["MEDIA_TYPE"] == "mp3")
 			{
 				media = document.createElement("audio");
-				media.src = workshop["MEDIA_PATH"];
+				media.src = workshop["media_path"];
 				media.controls="controls";
 				media.innerHTML = "Your browser does not support the audio element.";
 			}

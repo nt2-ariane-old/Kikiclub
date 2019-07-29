@@ -35,12 +35,12 @@
 
 				$htmlContent = str_replace("***WORKSHOP***",$workshop["name"],$htmlContent);
 				$htmlContent = str_replace("***CONTENT***",$workshop["content"],$htmlContent);
-				$htmlContent = str_replace("***PATH***",$workshop["MEDIA_PATH"],$htmlContent);
+				$htmlContent = str_replace("***PATH***",$workshop["media_path"],$htmlContent);
 			}
 			$this->results = [];
 			foreach ($users as $user) {
-				$to = $user["EMAIL"];
-				$htmlContent = str_replace("***USER***",$user["FIRSTNAME"],$htmlContent);
+				$to = $user["email"];
+				$htmlContent = str_replace("***USER***",$user["firstname"],$htmlContent);
 				mail($to,$subject,$htmlContent,$headers);
 				$this->results[] = $to;
 			}

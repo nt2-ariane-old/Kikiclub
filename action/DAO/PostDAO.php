@@ -18,7 +18,6 @@
 				$statement->bindParam(1, $min);
 				$statement->bindParam(2, $nb);
 			}
-			$statement = $connection->prepare();
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

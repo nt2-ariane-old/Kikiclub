@@ -64,9 +64,9 @@
 										foreach ($action->users as $user) {
 									?>
 										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['id'] ?>,'users_action':'update'})">
-											<td><?= $user["FIRSTNAME"] ?></td>
-											<td><?= $user["LASTNAME"] ?></td>
-											<td><?= $user["EMAIL"] ?></td>
+											<td><?= $user["firstname"] ?></td>
+											<td><?= $user["lastname"] ?></td>
+											<td><?= $user["email"] ?></td>
 										</tr></a>
 									<?php
 										}

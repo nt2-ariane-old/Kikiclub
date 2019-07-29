@@ -31,10 +31,22 @@
 			}
 			if(!empty($_SESSION["robot_id"]))
 			{
-				$this->exist = true;
-				if($this->admin_mode)
+				if(!empty(RobotDAO::getRobotByID($_SESSION["robot_id"])))
 				{
-					$this->update = true;
+					$this->exist = true;
+					if($this->admin_mode)
+					{
+						$this->update = true;
+					}
+
+
+				}
+				else
+				{
+					if($this->admin_mode)
+					{
+						$this->add = true;
+					}
 				}
 			}
 			else
@@ -45,15 +57,17 @@
 				}
 			}
 
+			$this->difficulties = FilterDAO::getDifficultiesEN();
+
 			if($this->exist) $id = $_SESSION["robot_id"];
 
 			if($_SESSION["language"] == 'en')
 			{
-				$this->grades = FilterDAO::getGradesEN();
+				$this->grades = FilterDAO::getGradesEN(true);
 			}
 			else
 			{
-				$this->grades = FilterDAO::getGradesFR();
+				$this->grades = FilterDAO::getGradesFR(true);
 			}
 			if($this->admin_mode)
 			{
@@ -66,7 +80,7 @@
 							if( !empty($_POST["name"]) &&
 							!empty($_POST["grade_recommanded"]))
 							{
-								RobotDAO::updateRobot($id,$_POST["name"],$_POST["grade_recommanded"]);
+								RobotDAO::updateRobot($id,$_POST["name"],$_POST["grade_recommanded"],$_POST["media_path"],$_POST["media_type"],$_POST["description"]);
 								foreach ($this->difficulties as $difficulty) {
 									RobotDAO::updateRobotScoreByDifficulty($id,$difficulty["id"],intval($_POST["score_" . $difficulty["id"]]));
 								}
@@ -82,7 +96,7 @@
 					{
 						if(isset($_POST['push']))
 						{
-							RobotDAO::insertRobot($_POST["name"],$_POST["grade_recommanded"]);
+							RobotDAO::insertRobot($_POST["name"],$_POST["grade_recommanded"],$_POST["media_path"],$_POST["media_type"],$_POST["description"]);
 							$newRobot = RobotDAO::getRobotByName($_POST["name"]);
 							foreach ($this->difficulties as $difficulty) {
 								RobotDAO::insertRobotScoreByDifficulty($newRobot["id"],$difficulty["id"],intval($_POST["score_" . $difficulty["id"]]));
@@ -105,7 +119,14 @@
 
 			if($this->exist)
 			{
-				$this->robot = RobotDAO::getRobotsAndDifficultiesByID($id);
+				if($this->admin_mode)
+				{
+					$this->robot = RobotDAO::getRobotsAndDifficultiesByID($id);
+				}
+				else
+				{
+					$this->robot = RobotDAO::getRobotByID($id);
+				}
 			}
 
 		}

@@ -1,3 +1,35 @@
+.robots-footer
+{
+	height: 4.8rem;
+	background-color: black;
+	background-image: url("../images/textures/floor.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-align: center;
+	padding: 1em 0;
+	border-bottom: 5px solid burlywood;
+}
+.manage-btn
+{
+	height: 40px;
+	line-height: 30px;
+
+	display: block;
+	border-color: white;
+	background-color:#D8DF23;
+	color:black;
+}
+.robots-footer a
+{
+	border-color: white;
+	color:black !important;
+}
+.robots-footer a:hover
+{
+	border-color: rgba(255, 255, 255, 0.678);
+	color: rgba(0, 0, 0, 0.678) !important;
+}
+
 .robot
 {
 	// border-bottom: 50px solid #D8DF23;

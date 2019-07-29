@@ -60,7 +60,7 @@
 						$robots = $filters[FilterDAO::getFilterTypeIdByName("robot")];
 
 						$score = 0;
-						if(!empty($robots) || !empty($difficulties)))
+						if(!empty($robots) || !empty($difficulties))
 						{
 							foreach ($robots as $robot) {
 								foreach ($difficulties as $diff) {

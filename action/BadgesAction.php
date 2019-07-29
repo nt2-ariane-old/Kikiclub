@@ -6,7 +6,7 @@
 	class BadgesAction extends CommonAction {
 		public $badges;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'family-badges','Badges');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'family-badges','Badges');
 		}
 
 		protected function executeAction() {

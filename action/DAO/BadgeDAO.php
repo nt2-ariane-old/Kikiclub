@@ -36,7 +36,7 @@
 			$connection = Connection::getConnection();
 
 			$request = "SELECT ";
-			$request .= "b.ID AS id_badge, b.NAME AS name, b.MEDIA_PATH AS media_path, b.MEDIA_TYPE AS media_type, m.FIRSTNAME AS owner, DATE_FORMAT(mb.won_on, '%Y-%m-%d') AS won_on ";
+			$request .= "b.ID AS id_badge, b.name AS name, b.media_path AS media_path, b.MEDIA_TYPE AS media_type, m.firstname AS owner, DATE_FORMAT(mb.won_on, '%Y-%m-%d') AS won_on ";
 			$request .= "FROM member_badges AS mb INNER JOIN badges AS b INNER JOIN member as m ";
 			$request .= "WHERE mb.ID_BADGE = b.ID AND mb.id_member = ? AND m.id = mb.id_member ";
 

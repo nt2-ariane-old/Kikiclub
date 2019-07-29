@@ -33,23 +33,29 @@
 			$statement->bindParam(1, $id);
 			$statement->execute();
 		}
-		public static function insertRobot($name,$gradeRecommanded)
+		public static function insertRobot($name,$gradeRecommanded,$media_path,$media_type,$description)
 		{
 			$connection = Connection::getConnection();
-			$statementRobots = $connection->prepare("INSERT INTO robot(NAME,ID_GRADE) VALUES (?,?)");
+			$statementRobots = $connection->prepare("INSERT INTO robot(NAME,ID_GRADE,MEDIA_PATH,MEDIA_TYPE,DESCRIPTION) VALUES (?,?,?,?,?)");
 			$statementRobots->bindParam(1, $name);
 			$statementRobots->bindParam(2, $gradeRecommanded);
+			$statementRobots->bindParam(3, $media_path);
+			$statementRobots->bindParam(4, $media_type);
+			$statementRobots->bindParam(5, $description);
 
 			$statementRobots->setFetchMode(PDO::FETCH_ASSOC);
 			$statementRobots->execute();
 		}
-		public static function updateRobot($id,$name,$gradeRecommanded)
+		public static function updateRobot($id,$name,$gradeRecommanded,$media_path,$media_type,$description)
 		{
 			$connection = Connection::getConnection();
-			$statementRobots = $connection->prepare("UPDATE robot SET NAME=?,ID_GRADE=? WHERE ID=?");
+			$statementRobots = $connection->prepare("UPDATE robot SET NAME=?,ID_GRADE=?,media_path=?,media_type=?,description=? WHERE ID=?");
 			$statementRobots->bindParam(1, $name);
 			$statementRobots->bindParam(2, $gradeRecommanded);
-			$statementRobots->bindParam(3, $id);
+			$statementRobots->bindParam(3, $media_path);
+			$statementRobots->bindParam(4, $media_type);
+			$statementRobots->bindParam(5, $description);
+			$statementRobots->bindParam(6, $id);
 
 			$statementRobots->setFetchMode(PDO::FETCH_ASSOC);
 			$statementRobots->execute();
@@ -147,7 +153,7 @@
 			$statementRobots = $connection->prepare("UPDATE workshop_score SET score=? WHERE id_robot = ? AND id_difficulty=?");
 
 			$statementRobots->bindParam(1, $score);
-			$staatementRobots->bindParam(2, $id_robot);
+			$statementRobots->bindParam(2, $id_robot);
 			$statementRobots->bindParam(3, $id_difficulty);
 
 			$statementRobots->execute();

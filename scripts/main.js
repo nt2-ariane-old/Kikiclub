@@ -265,6 +265,8 @@ const accept = (form,params) =>
 	else if(params.type == 'function')
 	{
 		params.function();
+		let box = document.querySelector('#confirm-box');
+		box.remove();
 	}
 
 }

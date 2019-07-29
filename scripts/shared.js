@@ -23,29 +23,33 @@ const onPageLoad = () =>
 	if(dropzoneElement != null)
 	{
 		$(function() {
-			var dropzone = $("#imagedropzone").dropzone({
+			 dropzone = $("#imagedropzone").dropzone({
 				url: "ajax/media-ajax.php",
 				params: {
 					dir: "images/uploads/shared"
-			   	}
-			 });
-
-			dropzone.on("success", function(file,infos) {
-				infos = JSON.parse(infos);
-				console.log()
-				if(typeof(infos) === "string")
-				{
-					alert(infos);
+				},
+				dictDefaultMessage: "Ajouter du contenu Media ici",
+				init: function() {
+					this.on("success", function(file,infos) {
+						infos = JSON.parse(infos);
+						console.log(infos)
+						console.log(file);
+						if(typeof(infos) === "string")
+						{
+							alert(infos);
+						}
+						else
+						{
+							let media_path = document.getElementById('media_path');
+							media_path.value = infos["path"];
+							let media_type = document.getElementById('media_type');
+							media_type.value = infos["type"];
+						}
+					}),
+					this.on("addedfile", function(file) {
+						alert("Added file.");
+					})
 				}
-				else
-				{
-					let media_path = document.getElementById('media_path');
-					media_path.value = infos["PATH"];
-					let media_type = document.getElementById('media_type');
-					media_type.value = infos["TYPE"];
-				}
-
-
 			});
 		})
 	}
@@ -77,8 +81,13 @@ const loadPosts = (action=null,id=null) =>
 
 		title.value = "";
 		content_editor.setData('');
-		dropzone.removeAllFiles();
-	}
+		$('.dropzone')[0].dropzone.files.forEach(function(file) {
+			file.previewElement.remove();
+		});
+		$('.dropzone').find('div.default.message').find('span').show();
+		$('.dropzone').find('div.default.message').find('span').empty();
+		$('.dropzone').find('div.default.message').find('span').append('Drop files here or click here to upload an image.');
+		}
 	else if(action=='delete')
 	{
 		formData.append('id', id);
@@ -101,10 +110,10 @@ const loadPosts = (action=null,id=null) =>
 				postArticle.setAttribute('class','post');
 
 				let user = document.createElement('h5');
-					user.innerHTML =post["USERNAME"];
+					user.innerHTML =post["username"];
 					user.setAttribute('class', 'username');
 				let title = document.createElement('h3');
-					title.innerHTML = post["TITLE"];
+					title.innerHTML = post["title"];
 					title.setAttribute('class', 'title');
 
 				let content = document.createElement('p');

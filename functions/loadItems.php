@@ -192,7 +192,7 @@ function loadProfil($user,$action)
 												<?php
 											}
 										?>
-										<img  style="cursor:pointer;" src="<?=$avatar["PATH"]?>">
+										<img  style="cursor:pointer;" src="<?=$avatar["path"]?>">
 									</label>
 
 									<?php
@@ -340,7 +340,7 @@ function loadWorkshopsCreator($workshop, $action)
 
 						<div id="drop-workshop" class="dropzone"></div>
 
-
+							<input type="hidden" name="deployed" value="false">
 							<p><span class="input-title">Deployed</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$workshop['id']?> , deployed:this.checked}});" <?php } ?> <?php if($workshop["deployed"]) echo 'checked'; ?>></p>
 					</div>
 					<div id="params">
@@ -362,6 +362,84 @@ function loadWorkshopsCreator($workshop, $action)
 	</form>
 
 
+	<?php
+}
+function loadRobotEditor($robot,$action)
+{
+	$exist = false;
+	if($robot != null)
+	{
+		$exist = true;
+	}
+	?>
+		<form id="profil-form" action="robot-infos.php" method="post">
+			<div class="robot-infos">
+				<h5>Robot informations</h3>
+				<input class="h2" type="text" name="name" placeholder="Name" <?php if($exist){ ?>value="<?=$action->robot["robots"]["name"]?>" <?php } ?>>
+				<div id=current-media>
+					<?php
+						if($exist)
+						{
+							loadMedia($action->robot["robots"]);
+						}
+					?>
+				</div>
+
+				<div id="imagedropzone" class="dropzone"></div>
+				<input type="hidden" name="media_path" id="media_path" <?php if($exist){ ?>value="<?=$action->robot["robots"]["media_path"]?>" <?php } ?>>
+				<input type="hidden" name="media_type" id="media_type" <?php if($exist){ ?>value="<?=$action->robot["robots"]["media_type"]?>" <?php } ?>>
+				<p> <span class="input_name"> Age Recommanded :</span>
+					<select name="grade_recommanded">
+									<?php
+										foreach ($action->grades as $grade) {
+											?>
+												<option value="<?= $grade["id"]?>"  <?php if($exist){ if($action->robot["robots"]["id_grade"] == $grade["id"]) { echo 'selected'; } }?>><?= $grade["name"]?></option>
+												<?php
+										}
+										?>
+
+								</select>
+
+							</p>
+							<textarea name="description" id="editor" cols="50" rows="10" style="width:80%;height:150px;" onkeyup="limitText(this,512);" onkeypress="limitText(this,512);" onkeydown="limitText(this,512);"><?php if($exist) {echo $action->robot ["robots"]["description"];}?></textarea>
+							<p>(Maximum characters: 125). You have <span style="display:inline-block;" id="countdown">512</span> left.</p>
+						</div>
+						<div class="robot-infos">
+
+
+							<br>
+							<h5>Scores by difficulties when workshop completed</h3>
+							<?php
+								if($exist)
+								{
+									foreach ($action->robot["scores"] as $score) {
+										?>
+											<p><span class="input_name"><?= $score["difficulty"]?></span><input type="number" name="score_<?= $score["id_difficulty"]?>" placeholder="Score" value="<?= $score["score"]?>"></p>
+											<?php
+									}
+								}
+								else
+								{
+									foreach ($action->difficulties as $difficulty) {
+									?>
+										<p><span class="input_name"><?= $difficulty["name"]?></span><input type="number" name="score_<?= $difficulty["id"]?>" placeholder="Score"></p>
+									<?php
+									}
+								}
+							?>
+
+
+								<button type="submit" class="submit-btn" name="push" onclick="clicked=this.name">Apply</button>
+								<?php
+									if($action->update)
+									{
+										?>
+											<button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name">Delete</button>
+											<?php
+									}
+									?>
+						</div>
+							</form>
 	<?php
 }
 $nbWorkshops = 4;
@@ -433,7 +511,7 @@ function loadBadgesLine($badges,$name,$action,$title,$isMember=false)
 			foreach ($badges as $badge) {
 				?>
 				<div class="col-sm-<?= 12/$nbBadges ?>" >
-					<div onclick='clicBadge(this,<?= json_encode($badge)?>)' class = "kikiclub-badge">
+			<div <?php if($action->admin_mode) { ?> onclick='clicBadge(this,<?= json_encode($badge)?>)' <?php } ?> class = "kikiclub-badge">
 						<h5><?= $badge["name"] ?></h5>
 						<?php
 							loadMedia($badge);

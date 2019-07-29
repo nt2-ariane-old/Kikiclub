@@ -49,9 +49,60 @@
 		vertical-align: top; /* added */
 
 	}
+	.h2
+	{
+		text-align: center !important;
+		margin: 1em auto  !important;
+		display: block  !important;
+	}
+}
+.manage-btn
+{
+	height: 40px;
+	line-height: 30px;
+
+	display: block;
+	border-color: white;
+	background-color:#D8DF23;
+	color:black;
+}
+.error-droid
+{
+	border: none;
+	float: none;
+	h2
+	{
+		background-color:red;
+		border: 5px solid white;
+	}
+	img
+	{
+		display: block;
+		margin: 1em auto;
+	}
+}
+#profil-form
+{
+	padding: 3em;
+	background-color: rgba(255, 255, 255, 0.578);
+	border: none;
+	.media
+	{
+		margin: 1em;
+		width: auto;
+		display: block;
+	}
+	#imagedropzone
+	{
+		margin: 1em;
+	}
+	.ck.ck-editor
+	{
+		margin: 1em;
+		width: auto;
+	}
 
 }
-
 .description::after
 {
 	clear: both;
