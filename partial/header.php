@@ -12,7 +12,6 @@
 
 	<!-- PAGE CUSTOM -->
 		<link rel="stylesheet" href="./css/show-users.css" type="text/css" media="screen" />
-		<script src="./scripts/show-users.js"></script>
 
 	<!-- CSS -->
 		<!-- FONTS -->
@@ -26,20 +25,12 @@
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
 
 		<?php
-				if($action->admin_mode)
-				{
-					?>
-						<link rel="stylesheet" href="css/admin.css">
-						<script src="./scripts/admin.js"></script>
 
-				<?php
-				}
 				if(!empty($action->page_name))
 				{
 					?>
 
 						<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
-						<script src="./scripts/<?= $action->page_name ?>.js"></script>
 					<?php
 				}
 
@@ -83,10 +74,52 @@
 		<meta name="theme-color" content="#D8DF23">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+		<!-- SCRIPTS -->
+		<!-- CUSTOM -->
+		<script src="scripts/main.js"></script>
+
+
+		<!-- JQUERY -->
+
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/jquery-migrate.min.js"></script>
+		<script src="scripts/jquery-ui.js"></script>
+		<script src="scripts/jquery.tinycarousel.js"></script>
+		<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+		<script type="text/javascript" src="scripts/jquery.js"></script>
+
+		<!-- CAROUSEL SLICK -->
+		<script type="text/javascript" src="slick/slick.min.js"></script>
+
+		<!-- CKEDITOR -->
+		<script src="scripts/ckeditor.js"></script>
+
+
+		<!-- DROPZONE -->
+		<script src="scripts/dropzone.js"></script>
+		<!-- BOOTSTRAP -->
+		<script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
+
+		<!-- CUSTOM -->
+		<script src="./scripts/show-users.js"></script>/
+		<?php
+			if(!empty($action->page_name))
+			{
+				?>
+					<script src="./scripts/<?= $action->page_name ?>.js"></script>
+				<?php
+			}
+			if($action->admin_mode)
+			{
+				?>
+					<!-- <link rel="stylesheet" href="css/admin.css"> -->
+					<script src="./scripts/admin.js"></script>
+
+			<?php
+			}
+		?>
 </head>
 <body onload="loadModules(); onPageLoad();<?php if($action->admin_mode) echo 'adminLoad();'?>">
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
 
 <div id="box"></div>
 

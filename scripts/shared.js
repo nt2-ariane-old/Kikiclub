@@ -1,4 +1,3 @@
-Dropzone.autoDiscover = false;
 let dropzone;
 let content_editor;
 const onPageLoad = () =>

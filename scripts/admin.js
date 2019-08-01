@@ -1,7 +1,5 @@
 let dropzone;
 
-Dropzone.autoDiscover = false;
-
 const adminLoad = () =>
 {
 	Dropzone.autoDiscover = false;
