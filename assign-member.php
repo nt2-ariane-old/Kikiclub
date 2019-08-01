@@ -16,7 +16,7 @@
 				{
 					if($famWork["id_workshop"] == $workshop["id"] )
 					{
-						if($famWork["id_statut"] != 1 && $famWork["id_statut"] != 2 )
+						if($famWork["id_statut"] != 1 )
 						{
 							$valide = false;
 						}
@@ -40,7 +40,7 @@
 			{
 				foreach ($action->member_workshops as $famWork)
 				{
-					if($famWork["id_workshop"] == $workshop["id"] && $famWork["id_statut"] == 3 )
+					if($famWork["id_workshop"] == $workshop["id"] && $famWork["id_statut"] == 2 )
 					{
 						?>
 							<li class="workshop-object" id="<?= $workshop["id"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["name"] ?></h5></li>
@@ -57,7 +57,7 @@
 			{
 				foreach ($action->member_workshops as $famWork)
 				{
-					if($famWork["id_workshop"] == $workshop["id"] && $famWork["id_statut"] == 4 )
+					if($famWork["id_workshop"] == $workshop["id"] && $famWork["id_statut"] == 3 )
 					{
 						?>
 							<li class="workshop-object" id="<?= $workshop["id"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["name"] ?></h5></li>

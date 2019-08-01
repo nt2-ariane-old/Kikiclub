@@ -2,7 +2,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 
 	class BasicAjaxAction extends CommonAction {
-
+		public $results;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'basic-ajax','Basics Ajax');
 		}

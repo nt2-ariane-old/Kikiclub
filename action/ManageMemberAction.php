@@ -50,8 +50,6 @@
 
 			$this->genders = MemberDAO::getGenders();
 
-			$this->avatars = MemberDAO::loadAvatar();
-
 			if($this->admin_mode && !empty($_SESSION["user_id"]))
 			{
 				$id = $_SESSION["user_id"];
@@ -74,42 +72,42 @@
 
 							MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
 							$this->create = false;
-							$this->update = true;
-							$member = MemberDAO::getMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$id);
-							$_SESSION["member_id"] = $member["id"];
+							header('Location:'.$this->previous_page);
+
 						}
 						else
 						{
 							$this->error=true;
 							$this->errorMsg = "You need to fill all Feeld...";
 						}
-				}
+					}
 
-			}
-			if($this->update)
-			{
-				if(!empty($_SESSION["member_id"]))
+				}
+				if($this->update)
 				{
-					echo $_SESSION["member_id"];
-					$this->family_member = MemberDAO::selectMember($_SESSION["member_id"]);
-					if(isset($_POST["form"]))
+					if(!empty($_SESSION["member_id"]))
 					{
-						if( !empty($_POST["firstname"]) &&
+						echo $_SESSION["member_id"];
+						$this->family_member = MemberDAO::selectMember($_SESSION["member_id"]);
+						if(isset($_POST["form"]))
+						{
+							if( !empty($_POST["firstname"]) &&
 							!empty($_POST["lastname"]) &&
 							!empty($_POST["birth"]))
 							{
 								MemberDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+								header('Location:'.$this->previous_page);
 							}
 							else
 							{
 								$this->error=true;
 								$this->errorMsg = "You need to fill all Feeld...";
 							}
-					}
-					if(isset($_POST["delete"]))
-					{
-						MemberDAO::deleteFamilyMember($_SESSION["member_id"]);
-						unset($_SESSION["member_id"]);
+						}
+						if(isset($_POST["delete"]))
+						{
+							MemberDAO::deleteFamilyMember($_SESSION["member_id"]);
+							unset($_SESSION["member_id"]);
 						header('location:'. $this->previous_page . '.php');
 					}
 				}

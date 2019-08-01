@@ -245,7 +245,6 @@ input[type=submit] {
 }
 
 .active {
-  background-color: rgba(235, 221, 193, 0.623);
   text-align: center;
   color: black;
 }

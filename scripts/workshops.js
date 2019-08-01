@@ -97,34 +97,33 @@ const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
 					let link = document.createElement('a');
 
 					link.setAttribute('class','link normal');
-						if(isMember)
-						{
-							let divType = document.createElement('div');
-							divType.setAttribute('class','type ribbon');
-								let spanContent = document.createElement('span');
-									spanContent.setAttribute('class','content');
+						// if(isMember)
+						// {
+						// 	let divType = document.createElement('div');
+						// 	divType.setAttribute('class','type ribbon');
+						// 		let spanContent = document.createElement('span');
+						// 			spanContent.setAttribute('class','content');
 
-									let ancien = false;
-							for (const key in memberWorkshops) {
-								if (memberWorkshops.hasOwnProperty(key)) {
-									const m_workshop = memberWorkshops[key];
-									if(m_workshop["id_workshop"] == workshop["id"])
-									{
+						// 			let ancien = false;
+						// 	for (const key in memberWorkshops) {
+						// 		if (memberWorkshops.hasOwnProperty(key)) {
+						// 			const m_workshop = memberWorkshops[key];
+						// 			if(m_workshop["id_workshop"] == workshop["id"])
+						// 			{
 
-										ancien = true;
-										console.log(states[m_workshop["id_statut"]]);
-										spanContent.innerHTML = states[m_workshop["id_statut"]]["name"];
-									}
-								}
-							}
-							if(!ancien)
-							{
-								spanContent.innerHTML = states[1]["name"];
-							}
-								divType.appendChild(spanContent);
-							link.appendChild(divType);
+						// 				ancien = true;
+						// 				spanContent.innerHTML = states[m_workshop["id_statut"]]["name"];
+						// 			}
+						// 		}
+						// 	}
+						// 	if(!ancien)
+						// 	{
+						// 		spanContent.innerHTML = states[1]["name"];
+						// 	}
+						// 		divType.appendChild(spanContent);
+						// 	link.appendChild(divType);
 
-						}
+						// }
 
 
 						let divTitle = document.createElement('div');

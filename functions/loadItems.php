@@ -16,7 +16,7 @@ function loadMedia( $workshop ){
 					        $workshop["media_type"] == "jpg")
 				{
 			?>
-					<img class="img-rounded" src=<?=$workshop["media_path"]?> alt="">
+					<img class="img-rounded" src="<?=$workshop['media_path']?>" alt="">
 			<?php
 				}
 				else if($workshop["media_type"] == "mp3")
@@ -192,7 +192,7 @@ function loadProfil($user,$action)
 												<?php
 											}
 										?>
-										<img  style="cursor:pointer;" src="<?=$avatar["path"]?>">
+										<img  style="cursor:pointer;" src="<?=$avatar["media_path"]?>">
 									</label>
 
 									<?php
@@ -447,7 +447,7 @@ function loadWorkshopsCarousel($workshops,$name,$action,$title)
 {
 
 	?>
-		<div id="<?= $name  ?>" class="carousel slide" data-ride="carousel">
+		<div id="<?= $name  ?>" class="carousel slide" >
 			<!-- Content -->
 			<div class="carousel-inner">
 			<?php
@@ -536,15 +536,43 @@ function loadBadgesLine($badges,$name,$action,$title,$isMember=false)
 
 }
 
-function loadBadgesCarousel($badges,$name,$action,$title,$isMember=false)
+function loadBadgesSlider($won_badges,$all_badges,$name,$action,$title,$idMember=false)
+{
+	?>
+		<div id="slider1">
+            <a class="buttons prev" href="#">&lt;</a>
+                <div class="viewport">
+					<ul class="overview" style="width: 1008px; left: 0px;">
+						<?php
+							foreach ($all_badges as $badge) {
+								?>
+									<li onclick="openModal();openBadge(<?= $badge['id'] ?>)" class="kikiclub-badge <?php if(!array_key_exists($badge["id"], $won_badges)) { echo 'blured'; } ?>" class="kikiclub-badge"><?php loadMedia($badge)?></li>
+
+								<?php
+							}
+						?>
+					</ul>
+                </div>
+            <a class="buttons next" href="#">&gt;</a>
+
+            <script type="text/javascript">
+                $(document).ready(function()
+              	{
+                    $('#slider1').tinycarousel();
+        		});
+            </script>
+        </div>
+	<?php
+}
+function loadBadgesCarousel($won_badges,$all_badges,$name,$action,$title,$isMember=false)
 {
 	$nbBadges = 4;
 	?>
-		<div id="<?= $name  ?>" class="carousel slide" data-ride="carousel">
+		<div id="<?= $name  ?>" class="carousel slide" >
 			<!-- Content -->
 			<div class="carousel-inner">
 			<?php
-				for ($i=0; $i < sizeof($badges); $i++) {
+				for ($i=0; $i < sizeof($all_badges); $i++) {
 					?>
 					<div class="carousel-item <?php if($i == 0) echo 'active';?>">
 						<div class="container">
@@ -552,21 +580,14 @@ function loadBadgesCarousel($badges,$name,$action,$title,$isMember=false)
 							<?php
 								$j = $i;
 
-								foreach ($badges as $badge) {
+								for ($i=$j; $i < sizeof($all_badges) && $i < $j + $nbBadges; $i++) {
+									$badge = $all_badges[$i];
 							?>
-									<div class="kikiclub-badge col-sm-<?= 12/$nbBadges ?>" >
+									<div onclick="openModal();openBadge(<?= $badge['id'] ?>)" class="kikiclub-badge <?php if(!array_key_exists($badge["id"], $won_badges)) { echo 'blured'; } ?> col-sm-<?= 12/$nbBadges ?>" >
 									<?php
 										loadMedia($badge);
 									?>
-									<h5><?= $badge["name"] ?></h5>
-									<?php
-										if($isMember)
-										{
-											?>
-												<h6>Won on <?= $badge["won_on"]?></h6>
-											<?php
-										}
-									?>
+
 								</div>
 							<?php
 
@@ -609,14 +630,7 @@ function loadWorkshopsLine($workshops,$name,$action,$title)
 				$workshop = $workshops[$i];
 				?>
 					<div class="workshop col-md-<?= 12/$nbWorkshopsS ?>  col-md-<?= 12/$nbWorkshopsM ?> col-md-<?= 12/$nbWorkshopsL ?> " >
-						<div class="type">
-							<?php
-								if(in_array($workshop, $action->new) ) echo 'New';
-								else if(in_array($workshop, $action->completed) ) echo 'Complete';
-							 	else if(in_array($workshop, $action->notStarted) ) echo 'Not Started';
-								else if(in_array($workshop, $action->inProgress) ) echo 'In Progress';
-							?>
-						</div>
+
 						<?php
 							loadMedia($workshop);
 						?>

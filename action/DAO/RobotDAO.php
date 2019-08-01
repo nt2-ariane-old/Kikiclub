@@ -163,19 +163,22 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statementRobots = $connection->prepare("SELECT score FROM workshop_score WHERE ID_ROBOT = ? AND ID_DIFFICULTY = ?");
+			echo $id_robot . '<br>' . $id_difficulty . '<br>';
+			$statement = $connection->prepare("SELECT score FROM workshop_score WHERE id_robot = ? AND id_difficulty = ?");
 
-			$statementRobots->bindParam(1, $id_robot);
-			$statementRobots->bindParam(2, $id_difficulty);
+			$statement->bindParam(1, $id_robot);
+			$statement->bindParam(2, $id_difficulty);
 
-			$statementRobots->setFetchMode(PDO::FETCH_ASSOC);
-			$statementRobots->execute();
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
 
 			$score = 0;
 
-			if ($row = $statementRobots->fetch()) {
+			if ($row = $statement->fetch()) {
 				$score = $row["score"];
+				echo 'test';
 			}
+			var_dump($score);
 
 			return $score;
 		}

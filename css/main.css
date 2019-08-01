@@ -25,7 +25,6 @@ a:hover {
   display: block;
   margin: auto;
   background-color: white;
-  border: 3px solid burlywood;
   width: 3em;
   height: 3em;
   background-repeat: no-repeat;
@@ -35,10 +34,9 @@ a:hover {
   background-image: url("../images/plus.png");
 }
 
-HTML {
+html {
   width: 100vw;
-  background-color: #D8DF23;
-  min-height: 100%;
+  background-color: black !important;
 }
 
 .ck.ck-editor__editable_inline p {
@@ -52,7 +50,6 @@ HTML {
 
 body {
   background-color: black !important;
-  height: 100%;
 }
 
 table {
@@ -101,7 +98,6 @@ a {
 h1 {
   text-align: center;
   color: #878C00;
-  font-weight: bolder;
 }
 
 .error {
@@ -212,7 +208,7 @@ header * {
 header h1 {
   color: black;
   font-size: 20vw;
-  line-height: 1;
+  line-height: 1.2;
   width: 100%;
   margin: auto;
   text-align: center;
@@ -242,6 +238,17 @@ header h2 {
   text-align: right;
   padding: 0;
   margin: 0;
+}
+
+#header-infos .member-name {
+  width: 50%;
+  float: left;
+}
+
+#header-infos .media {
+  width: 50%;
+  float: left;
+  height: 96px;
 }
 
 #hamburger {
@@ -314,7 +321,7 @@ nav .container {
 footer {
   background-color: white;
   width: 100%;
-  height: 80px;
+  height: 176px;
   text-align: center;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
@@ -329,21 +336,32 @@ footer {
   text-align: center;
 }
 
-footer p {
-  font-size: 3vw;
-  line-height: 3vw;
-}
-
 footer a, footer p {
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 100px;
+  height: 100px;
   padding: 0;
   margin: auto 1em;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 25%;
+}
+
+footer p {
+  font-size: 3vw;
+  line-height: 100px;
+  padding: 0;
+  width: 16em;
+}
+
+footer p a {
+  display: inline;
+  margin: 0;
+}
+
+footer p a:hover {
+  color: #D8DF23 !important;
 }
 
 /* Afficheur de Profiles */
@@ -390,10 +408,6 @@ footer a, footer p {
   background-color: transparent;
 }
 
-#profile-box .manage-btn {
-  background-color: whitesmoke;
-}
-
 /* Box de confirmation de formulaire */
 #confirm-box {
   position: fixed;
@@ -410,6 +424,10 @@ footer a, footer p {
   margin: auto;
   text-align: center;
   background-color: transparent;
+}
+
+.manage-btn:hover {
+  border: 5px solid black;
 }
 
 #confirm-box button {
@@ -435,25 +453,17 @@ footer a, footer p {
     left: 0;
     background: transparent;
     height: 60px;
-    width: 100px;
+    width: 300px;
   }
   header h1 {
     font-size: 80px;
+    font-family: "Calling Code I";
   }
   header h2 {
     font-size: 2rem;
   }
   footer p {
     font-size: 1em;
-    line-height: 1em;
-    width: 150px;
-  }
-  .lang, .member-name {
-    width: 49%;
-    display: inline-block;
-  }
-  .member-name {
-    text-align: right;
   }
   .lang {
     text-align: left;
@@ -462,6 +472,130 @@ footer a, footer p {
     max-width: 300px;
     min-width: 200px;
   }
+  .navbar-collapse {
+    max-height: 100vh;
+    overflow: scroll;
+  }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  -webkit-transform: translateX(-10px);
+          transform: translateX(-10px);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #D8DF23;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b5ba24;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.carousel-inner > .item {
+  -webkit-transition: 1s linear left;
+  transition: 1s linear left;
+}
+
+/* Tiny Carousel */
+#slider1 {
+  margin: 0 0 20px;
+  overflow: hidden;
+  padding: 0 40px;
+  position: relative;
+}
+
+#slider1 .viewport {
+  float: left;
+  width: 100%;
+  height: 123px;
+  overflow: hidden;
+  position: relative;
+}
+
+#slider1 .buttons {
+  border: 2px solid black;
+  background: #D8DF23;
+  border-radius: 35px;
+  display: block;
+  margin: 30px 0 0;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  line-height: 35px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+#slider1 .next {
+  margin: 30px 0 0;
+  left: auto;
+  right: 0;
+  top: 0;
+}
+
+#slider1 .disable {
+  visibility: hidden;
+}
+
+#slider1 .overview {
+  list-style: none;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  top: 0;
+}
+
+#slider1 .overview li {
+  float: left;
+  margin: 0 20px 0 0;
+  overflow: hidden;
+  height: 121px;
+  border: 1px solid #dcdcdc;
+  width: calc( 100% / 3 - 20px);
 }
 
 @media only screen and (min-width: 970px) {

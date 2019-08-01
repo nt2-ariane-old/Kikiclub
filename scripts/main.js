@@ -90,11 +90,14 @@ let closeProfilesBox = () =>
 	box.style.display = "none";
 }
 
-let change_page = (path, params) => {
 
-	console.log("changing page");
-  set_value(params);
-  window.location = path;
+let change_page = (path, params) => {
+  set_value(params,() => { redirect(path)});
+}
+let redirect = (path) =>
+{
+	console.log('test');
+	window.location = path;
 }
 let post = (path, params, method='post') => {
 
@@ -278,19 +281,26 @@ const refuse = () =>
 	return false;
 }
 
-const set_value = (values) =>
+const set_value = (values,callback) =>
 {
 	if(isDict(values))
 	{
+		console.log(values);
 		values['set_value'] = null;
 		$.ajax({
 			type: "POST",
 			url:'ajax/basic-ajax.php',
 			data:values,
-			dataType: 'json'
+			dataType: 'json',
+			success: function( data ) {
+				console.log(data);
+				callback();
+			},
+
 		});
 	}
 }
+
 const showProfiles = () =>
 {
 		 let node = document.getElementById("profile-box");

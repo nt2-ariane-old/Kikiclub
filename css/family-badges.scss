@@ -14,7 +14,6 @@ main
 	background-repeat: no-repeat;
 	text-align: center;
 	padding: 1em 0;
-	border-bottom: 5px solid burlywood;
 }
 
 .manage-btn
@@ -90,14 +89,34 @@ main
 	color:blue;
 	height: 10%;
 }
+img
+{
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
+}
 
 .kikiclub-badge
 {
+	&.blured
+	{
+		.media
+		{
+			img
+			{
+				filter: grayscale(100%) blur(100px);
+				-webkit-filter: grayscale(100%) blur(100px);
+
+			}
+
+
+		}
+	}
+
 	border: 1px solid white;
 	background-color: #D8DF23;
 	position: relative;
-	width: 100%;
-	height: 90%;
+	width: 200px;
+	height: 200px;
 	border-radius: 0 0 140px 140px;
 	display: inline-block;
 

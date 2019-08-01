@@ -7,33 +7,43 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 	<main>
-		<h2>Workshops</h2>
-		<div class="container">
-			<div class="row">
-				<button onclick="change_page('workshops.php',{'workshop_type':2})" class="access-btn col-lg-3 rounded-circle" id="new">
-					New
-					<?php
-						if($action->member["alert"] > 0)
-						{
-							?>
-								<div class="alert-new"><?=$action->member["alert"]?></div>
-							<?php
-						}
-					?>
-				</button>
-
-				<button onclick="change_page('workshops.php',{'workshop_type':3})" class="access-btn col-lg-3 rounded-circle" id="progress">
-					In Progress
-				</button>
-				<button onclick="change_page('workshops.php',{'workshop_type':4})" class="access-btn col-lg-3 rounded-circle" id="complete">
-					Complete
-				</button>
-			</div>
-		</div>
-		<h2>Badges</h2>
 		<?php
-			loadBadgesCarousel($action->badges,"badges",$action,"badges",true);
+			$i = 0;
+			foreach ($action->workshops_categories as $key => $workshops) {
+				?>
+				<h3><?= $key ?></h3>
+				<div class="container">
+					<div class="row line" id="<?= $i ?>">
+				<?php
+				foreach ($workshops as $workshop) {
+					?>
+						<div class="col-lg-2">
+							<a onclick="openModal();openWorkshop(<?= $workshop['id'] ?>)" ><div class="workshop" >
+							<!-- <a href="workshop-infos.php?workshop_id=<?= '..'//$workshop["id"] ?>" ><div class="workshop" > -->
+								<?php
+									loadMedia($workshop);
+								?>
+								<h4><?= $workshop["name"] ?></h4>
+							</div></a>
+						</div>
+					<?php
+				}
+				?>
+					</div>
+					<a  class="link-collapse" onclick="show(<?= $i ?>,this)">Afficher plus</a>
+				</div>
+				<?php
+				$i++;
+			}
+		?>
+		<h3>__ Badges</h3>
+		<?php
+			loadBadgesSlider($action->won_badges,$action->all_badges,"badges",$action,"badges",true);
 		?>
 	</main>
+	<div id="member_modal" class="modal">
+	  <span class="close cursor" onclick="closeModal()">&times;</span>
+	  <div id="modal_content" class="modal_content"></div>
+	</div>
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

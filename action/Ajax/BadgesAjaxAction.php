@@ -11,6 +11,10 @@
 
 		protected function executeAction() {
 			$this->results = [];
+			if(!empty($_POST["id"]))
+			{
+				$this->results["badge"] = BadgeDAO::getBadgeByID($_POST["id"]);
+			}
 			if(isset($_POST["add"]))
 			{
 				$this->results["types"] = BadgeDAO::getBadgesType();

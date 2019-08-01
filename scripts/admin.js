@@ -205,7 +205,7 @@ const searchMember = (node,type,keycode) =>
 			minLength: 0,
 			select: function( event, ui ) {
 				node.value = ui.item.label;
-				change_page("member-home.php",{"member":ui.item.value});
+				change_page("member-home.php",{"member_id":ui.item.value});
 			},
 			response: function (event, ui) {
 				members = JSON.stringify(ui.content)

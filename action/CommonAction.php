@@ -21,7 +21,10 @@
 		public $complete_name;
 
 		public $member_name;
+		public $member_avatar;
 
+		public $members;
+		public $avatars;
 		public $trans;
 		public $url;
 
@@ -187,8 +190,12 @@
 			$this->trans = new Translator($currentLang);
 
 
+			if($this->isLoggedIn())
+			{
+				$this->members = MemberDAO::selectFamily($_SESSION["id"]);
+			}
 
-
+			$this->avatars = MemberDAO::loadAvatar();;
 			//check if the family member exist, and if yes, show is name
 			if($this->isMember())
 			{
@@ -200,6 +207,7 @@
 				else
 				{
 					$this->member_name = $member["firstname"];
+					$this->member_avatar = $this->avatars[$member["id_avatar"]] ;
 				}
 			}
 

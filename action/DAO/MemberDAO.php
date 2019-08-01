@@ -261,7 +261,7 @@
 			}
 
 
-			$request = "SELECT id, FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS age FROM member WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
+			$request = "SELECT FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS age,id,id_user,firstname,lastname FROM member WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1,$age_str);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);

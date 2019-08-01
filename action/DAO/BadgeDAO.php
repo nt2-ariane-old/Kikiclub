@@ -5,12 +5,13 @@
 
 		public static function getBadges($id_type=null)
 		{
-			$request = "SELECT  * FROM badges";
+			$request = "SELECT  * FROM badges ";
 
 			if(!empty($id_type))
 			{
-				$request .= " WHERE ID_BADGE_TYPE=?";
+				$request .= "WHERE ID_BADGE_TYPE=? ";
 			}
+			$request .= "ORDER BY value_needed ASC";
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare($request);
 			if(!empty($id_type))

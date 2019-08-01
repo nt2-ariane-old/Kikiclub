@@ -108,6 +108,24 @@
 			return $content;
 		}
 
+		public static function selectMemberWorkshopByCategories($id_member)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT w.id as id, ws.name_fr as statut, id_workshop, w.name as name, w.media_path as media_path, w.media_type as media_type FROM member_workshops as mw JOIN workshop_statut as ws JOIN workshops as w WHERE ID_MEMBER=? AND mw.id_statut = ws.id AND mw.id_workshop = w.id ");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_member);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content[$row["statut"]][] = $row;
+			}
+
+			return $content;
+		}
+
 		/**
 		 * Select all new workshops from a member
 		 *
@@ -120,7 +138,7 @@
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID IN (SELECT id_workshop FROM member_workshops WHERE id_member=? AND id_statut = 1 OR id_statut = 2 )  AND deployed = TRUE");
+			$statement = $connection->prepare("SELECT * FROM workshops WHERE ID IN (SELECT id_workshop FROM member_workshops WHERE id_member=? AND id_statut = 1 )  AND deployed = TRUE");
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);

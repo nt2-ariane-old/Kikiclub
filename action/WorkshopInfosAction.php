@@ -156,25 +156,6 @@
 						$this->workshop_grades[] = FilterDAO::getGradeById($grade["id_filter"]);
 					}
 				}
-
-				if(!empty($_SESSION["member_id"]))
-				{
-					$this->member_workshops =MemberWorkshopDAO::selectMemberWorkshop($_SESSION["member_id"]);
-					$existe = false;
-					foreach ($this->member_workshops as $item)
-					{
-						if($id == $item["id_workshop"])
-						{
-							$existe = true;
-							break;
-						}
-					}
-					if(!$existe)
-					{
-						MemberWorkshopDAO::addMemberWorkshop($_SESSION["member_id"],$id,2);
-					}
-				}
-
 			}
 
 

@@ -82,7 +82,9 @@
 									?>
 								<p><strong>Introduction : </strong><?=  $action->workshop["content"]?></p>
 							</div>
-							<script>loadMedia(<?= json_encode($action->workshop) ?>,document.getElementById("workshop-infos") )</script>
+							<?php
+								loadMedia($action->workshop);
+							?>
 						</div>
 					</div>
 					<?php

@@ -50,18 +50,6 @@
 
 			$this->complete_name = $this->trans->read("main","workshops");
 
-
-			if(!empty($_SESSION["member_id"]))
-			{
-				if(!empty($_SESSION["workshop_type"]))
-				{
-					$type_name = $this->workshopStates[$_SESSION["workshop_type"]]["name"];
-					$this->complete_name  .= " : " . $type_name ;
-					$this->stateSearch = $_SESSION["workshop_type"];
-				}
-			}
-
-
 			$this->workshops_list = WorkshopDAO::getWorkshops(null,"none",false,true);
 
 			$this->robots = RobotDAO::GetRobots();

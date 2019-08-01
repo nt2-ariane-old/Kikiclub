@@ -61,16 +61,17 @@
 			if(!empty($_POST["sort"]))
 			{
 				$f = null;
-				if($this->admin_mode || empty($_SESSION["member_id"]))
-				{
+				// if($this->admin_mode || empty($_SESSION["member_id"]))
+				// {
+
+				// }
+				// else
+				// {
+				// 	$f = "MemberWorkshopDAO::getMemberWorkshopsSorted";
+				// 	$id = $_SESSION["member_id"];
+				// }
 					$f = "WorkshopDAO::getWorkshops";
 					$id = null;
-				}
-				else
-				{
-					$f = "MemberWorkshopDAO::getMemberWorkshopsSorted";
-					$id = $_SESSION["member_id"];
-				}
 				switch ($_POST["sort"]) {
 					case 'none':
 					$this->results["workshops"]=$f($id,"none",false,!$this->admin_mode);
@@ -94,23 +95,26 @@
 				}
 				if(!empty($_POST["difficulties"]))
 				{
-					$this->results["search"]["difficulties"] = $_POST["difficulties"];
 					$difficulties = json_decode($_POST["difficulties"],true);
+					$this->results["search"]["difficulties"] = $difficulties;
 					if(sizeof($difficulties) > 0)
 					{
 						$temp = [];
 						foreach ($this->results["workshops"] as $workshop)
 						{
 							$filters = FilterDAO::getWorkshopFilters($workshop["id"]);
-							$workshop_difficulties = $filters[FilterDAO::getFilterTypeIdByName('difficulty')];
-							if(!empty($workshop_difficulties))
+							if(!empty($filters[FilterDAO::getFilterTypeIdByName('difficulty')]))
 							{
-								foreach ($difficulties as $difficulty_id)
+								$workshop_difficulties = $filters[FilterDAO::getFilterTypeIdByName('difficulty')];
+								if(!empty($workshop_difficulties))
 								{
-									foreach ($workshop_difficulties as $diff) {
-										if($difficulty_id === $diff["id_filter"])
-										{
-											$temp[] = $workshop;
+									foreach ($difficulties as $difficulty_id)
+									{
+										foreach ($workshop_difficulties as $diff) {
+											if($difficulty_id === $diff["id_filter"])
+											{
+												$temp[] = $workshop;
+											}
 										}
 									}
 								}
@@ -121,8 +125,8 @@
 				}
 				if(!empty($_POST["grades"]))
 				{
-					$this->results["search"]["grades"] = $_POST["grades"];
 					$grades = json_decode($_POST["grades"],true);
+					$this->results["search"]["grades"] =$grades;
 					if(sizeof($grades) > 0)
 					{
 						$temp = [];
@@ -149,8 +153,8 @@
 				if(!empty($_POST["states"]))
 				{
 
-					$states = json_decode($_POST["states"]);
-					$this->results["search"]["states"] = $_POST["states"];
+					$states = json_decode($_POST["states"],true);
+					$this->results["search"]["states"] = $states;
 					if(!empty($_SESSION["member_id"]))
 					{
 					$has_new = false;
@@ -192,9 +196,9 @@
 				}
 				if(!empty($_POST["robots"]))
 				{
-					$this->results["search"]["robots"] = $_POST["robots"];
 
 					$robots = json_decode($_POST["robots"]);
+					$this->results["search"]["robots"] =$robots;
 
 					if(sizeof($robots) > 0)
 					{						$temp = [];
@@ -232,6 +236,11 @@
 				$this->results["workshop"] = WorkshopDAO::getWorkshop($_POST["id"]);
 
 
+			}
+			if(!empty($_POST["id"]))
+			{
+				$this->results["workshop"] = WorkshopDAO::getWorkshop($_POST["id"]);
+				$this->results["filters"] = FilterDAO::getWorkshopFilters($_POST["id"],true);
 			}
 			if(!empty($this->results["workshops"]))
 			{
@@ -295,23 +304,25 @@
 
 
 				$workshop = WorkshopDAO::getWorkshop($id);
-
+				var_dump($workshop);
 				$htmlContent = str_replace("***WORKSHOP***",$workshop["name"],$htmlContent);
 				$htmlContent = str_replace("***CONTENT***",$workshop["content"],$htmlContent);
 				$htmlContent = str_replace("***PATH***",$workshop["media_path"],$htmlContent);
-
 				foreach ($members as $member) {
 					$id_member = $member["id"];
 					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
+
 					$user = UsersDAO::getUserWithID($member["id_user"]);
 					$to = $user["email"];
 					$htmlContent = str_replace("***USER***",$user["firstname"],$htmlContent);
 					$htmlContent = str_replace("***MEMBER***",$member["firstname"],$htmlContent);
+					$this->results["member"][] = $member;
 					if(!array_key_exists($id,$workshops))
 					{
 						MemberWorkshopDAO::addMemberWorkshop($id_member,$id, 1);
 						mail($to,$subject,$htmlContent,$headers);
-						$this->results[] = $member;
+
+						$this->results["append_member"][] = $member;
 
 					}
 

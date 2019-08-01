@@ -3,13 +3,14 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 	class MemberWorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'familyWorkshops-ajax', "Family Workshops, Ajax");
-			$this->results = 'invalide';
+			$this->results = [];
 		}
 
 		protected function executeAction() {
@@ -27,14 +28,11 @@
 						case 'new':
 							$statut = 1;
 								break;
-						case 'not-started':
+						case 'in-progress':
 							$statut = 2;
 							break;
-						case 'in-progress':
-							$statut = 3;
-							break;
 						case 'complete':
-							$statut = 4;
+							$statut = 3;
 							break;
 
 						default:
@@ -63,20 +61,23 @@
 						if(!empty($robots) || !empty($difficulties))
 						{
 							foreach ($robots as $robot) {
+								$this->results['robots'][] = $robot;
 								foreach ($difficulties as $diff) {
-									$score += RobotDAO::getScoreOfRobotByDifficulty($robot["id"],$diff["id"]);
+									$this->results['difficulties'][] = $diff;
+									$score += RobotDAO::getScoreOfRobotByDifficulty($robot["id_filter"],$diff["id_filter"]);
 									# code...
 								}
 							}
 						}
+
+						$this->results['added_score'] = $score;
 						MemberDAO::addScore($id_member,$score);
 
 						$member = MemberDAO::selectMember($id_member);
 						$member_badges = BadgeDAO::getMemberBadge($id_member);
 						$badges = BadgeDAO::getBadges(1);
+						$this->results['score'] = $member['score'];
 
-
-						$this->results = 'valide';
 						foreach ($badges as $badge) {
 
 							if($member["score"] >= $badge["value_needed"] )

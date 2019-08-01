@@ -8,26 +8,7 @@
 
 	<title>Kikiclub</title>
 
-	<!-- SCRIPT -->
 
-		<!-- CUSTOM -->
-		<script src="scripts/main.js"></script>
-
-		<!-- JQUERY -->
-		<script src="scripts/jquery.js"></script>
-		<script src="scripts/jquery-ui.js"></script>
-
-		<!-- CKEDITOR -->
-		<script src="scripts/ckeditor.js"></script>
-
-		<!-- DROPZONE -->
-		<script src="scripts/dropzone.js"></script>
-
-		<!-- BOOTSTRAP -->
-		<script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
-
-		<!-- GOOGLE -->
-		<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 	<!-- PAGE CUSTOM -->
 		<link rel="stylesheet" href="./css/show-users.css" type="text/css" media="screen" />
@@ -36,6 +17,11 @@
 	<!-- CSS -->
 		<!-- FONTS -->
 		<link rel="stylesheet" href="css/fonts.css">
+
+		<!-- CAROUSEL SLICK-->
+		<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+		<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+
 		<!-- CUSTOM -->
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
 
@@ -108,20 +94,19 @@
 
 <a href="index.php"><header>
 	<h1><span class="colored-kikicode">Kiki</span>club</h1>
-	<h2><?= $action->complete_name?></h2>
 	<div id="header-infos">
-		<div class="lang"><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></div>
 
 		<div class="member-name">
 			<?php
 				if($action->isMember())
 				{
 					?>
-						<h3> <?= $action->trans->read("main","welcome") ." " . $action->member_name ?></h3>
-					<?php
+						<h3> <?= $action->member_name ?></h3>
+						<?php
 				}
-			?>
+				?>
 		</div>
+		<?php loadMedia($action->member_avatar);?>
 
 	</div>
 
@@ -143,28 +128,47 @@
       <ul class="nav navbar-nav">
 		 <?php
 		 		// if($action->page_name != 'users' && $action->page_name != 'console' )
-				// {
-				//
-				// 		<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
-				// 	<?php
+				 // {
+					 //
+					 // 		<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
+					 // 	<?php
 				// }
-			if($action->isLoggedIn())
-			{
-				 ?>
+				if($action->isLoggedIn())
+				{
+					?>
 					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
 				<?php
 			}
-				?>
-				<li><a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a></li>
+			?>
+				<li> <a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a>
+				<?php
+					if($action->isLoggedIn())
+					{
+						?>
+
+					<ul>
+						<?php
+							foreach ($action->members as $member) {
+								?>
+									<li><a onclick="change_page('member-home.php',{'member_id':<?= $member["id"] ?>})"><?= $member["firstname"] ?></a></li>
+								<?php
+							}
+							?>
+					</ul>
+							<?php
+						}
+					?>
+				</li>
 				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("main","share") ?></a></li>
 				<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
 				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("main","robots") ?></a></li>
+				<li><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></li>
 
 				<?php
 			if($action->isLoggedIn())
 			{
 				if($action->isAdmin()){
-				?>
+					?>
 
 					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
 					<li><a class="nav-item nav-link" href="console.php">Randomizer (Temp)</a></li>

@@ -110,15 +110,7 @@
 					<?php
 				}
 			?>
-			<?php
-				if(!empty($action->stateSearch))
-				{
-					?>
-			<script >setSearchParams('states',<?=$action->stateSearch?>)</script>
 
-					<?php
-				}
-			?>
 
 			<?php
 				if($action->admin_mode)

@@ -84,11 +84,31 @@
 		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
 		 * @return Array return all information about the workshop's filters
 		 */
-		public static function getWorkshopFilters($id_workshop)
+		public static function getWorkshopFilters($id_workshop,$name=false)
 		{
 			$connection = Connection::getConnection();
+			if($name)
+			{
+				$request = "SELECT ft.name as type,
+								CASE
+									WHEN ft.name = 'difficulty' THEN fd.name_fr
+									WHEN ft.name = 'grade' THEN fg.name_fr
+									WHEN ft.name = 'robot' THEN fr.name
+         							ELSE 'Inconnu'
+								END AS filter
 
-			$statement = $connection->prepare("SELECT * FROM workshop_filters WHERE id_workshop = ?");
+							FROM workshop_filters as wt
+								LEFT JOIN filter_type as ft ON ft.id = wt.id_type
+								LEFT JOIN difficulty as fd ON (fd.id = wt.id_filter AND ft.name = 'difficulty')
+								LEFT JOIN robot as fr ON (fr.id = wt.id_filter AND ft.name = 'robot')
+								LEFT JOIN scholar_level as fg ON (fg.id = wt.id_filter AND ft.name = 'grade')
+							WHERE wt.id_workshop = ?";
+			}
+			else
+			{
+				$request = "SELECT * FROM workshop_filters WHERE id_workshop = ?";
+			}
+			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_workshop);
 			$statement->execute();
@@ -97,7 +117,14 @@
 
 			while($row = $statement->fetch())
 			{
-				$content[$row["id_type"]][$row["id_filter"]] = $row;
+				if($name)
+				{
+					$content[$row["type"]][$row["filter"]] = $row;
+				}
+				else
+				{
+					$content[$row["id_type"]][$row["id_filter"]] = $row;
+				}
 			}
 			return $content;
 		}

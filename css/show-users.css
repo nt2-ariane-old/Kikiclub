@@ -11,7 +11,6 @@
   color: black;
   text-align: center;
   background-color: blanchedalmond;
-  border: 6px solid burlywood;
   padding: 0.5em;
   margin: 0;
 }
@@ -23,7 +22,6 @@
 
 #profil-form, #workshop-form {
   background-color: wheat;
-  border: 6px solid burlywood;
 }
 
 #workshop-form {
@@ -192,7 +190,6 @@
   overflow-y: scroll;
   height: 200px;
   margin: auto;
-  border: 8px solid burlywood;
 }
 
 .avatars-list input[type="radio"]:checked + img {
@@ -256,20 +253,18 @@
 
 .submit-btn, .delete-btn {
   padding: 1em 2em;
-  border: 3px solid black;
-  -webkit-box-shadow: black 5px 5px 2.5px 2.5px;
-          box-shadow: black 5px 5px 2.5px 2.5px;
+  border: none;
+  border-bottom: 3px solid black;
+  border-top: 3px solid black;
   margin: 1em auto;
   display: inline-block;
   width: 200px;
+  background-color: transparent;
 }
 
-.submit-btn {
-  background-color: green;
-}
-
-.delete-btn {
-  background-color: red;
+.submit-btn:hover, .delete-btn:hover {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.5);
+  border-top: 3px solid rgba(0, 0, 0, 0.5);
 }
 
 .child-info button {
@@ -327,7 +322,6 @@
     width: 100%;
     height: 100%;
     background-color: black;
-    border-top: 5px solid burlywood;
     margin: 0;
     padding: 0;
   }

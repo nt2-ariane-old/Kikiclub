@@ -170,6 +170,8 @@
 }
 aside
 {
+	background-color: white;
+	padding: 0.5em;
 	#workshop-menu
 	{
 		display: none;
@@ -274,7 +276,18 @@ aside
 	.workshop
 	{
 		margin: 1rem;
+		&:after
+		{
+			background-image: url("../images/textures/ring.png");
+			background-repeat: no-repeat;
+			background-size: 200px;
+			display: block;
+			background-color: wheat;
+			width: 200px;
+			height: 200px;
+		}
 	}
+
 	.workshops-info.col-sm-12
 {
 	float:both;

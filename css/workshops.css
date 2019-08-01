@@ -175,6 +175,11 @@
   margin-left: 0;
 }
 
+aside {
+  background-color: white;
+  padding: 0.5em;
+}
+
 aside #workshop-menu {
   display: none;
 }
@@ -261,6 +266,15 @@ aside #workshop-menu .card {
   }
   .workshop {
     margin: 1rem;
+  }
+  .workshop:after {
+    background-image: url("../images/textures/ring.png");
+    background-repeat: no-repeat;
+    background-size: 200px;
+    display: block;
+    background-color: wheat;
+    width: 200px;
+    height: 200px;
   }
   .workshops-info.col-sm-12 {
     float: both;

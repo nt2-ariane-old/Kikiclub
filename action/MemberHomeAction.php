@@ -6,7 +6,9 @@
 
 	class MemberHomeAction extends CommonAction {
 		public $member;
-		public $badges;
+		public $won_badges;
+		public $all_badges;
+		public $workshops_categories;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'member-home','Member Home');
 		}
@@ -20,10 +22,11 @@
 
 			$id = $_SESSION["member_id"];
 			$this->member = MemberDAO::selectMember($id);
-
+			$this->workshops_categories = MemberWorkshopDAO::selectMemberWorkshopByCategories($id);
 			$this->member["alert"] = sizeof(MemberWorkshopDAO::selectMemberNewWorkshop($id));
 			$this->complete_name = $this->member["firstname"] . "'s Page";
 
-			$this->badges = BadgeDAO::getMemberBadge($id);
+			$this->won_badges = BadgeDAO::getMemberBadge($id);
+			$this->all_badges = BadgeDAO::getBadges();
 		}
 	}

@@ -147,7 +147,7 @@ if($action->detect->isMobile())
 		else
 		{
 			?>
-				<div id="family-carousel" class="carousel slide" data-interval="false" data-ride="carousel">
+				<div id="family-carousel" class="carousel slide" data-interval="false">
 					<!-- Content -->
 					<div class="carousel-inner" id="family">
 						<script>loadChildren(true)</script>
@@ -167,10 +167,6 @@ if($action->detect->isMobile())
 		}
 		?>
 
-
-		<div class="credit">
-			<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"             title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"             title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
-		</div>
 		<div class="users-footer">
 			<button class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></button>
 		</div>

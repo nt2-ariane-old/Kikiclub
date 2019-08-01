@@ -7,18 +7,21 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 	<div class="sheet">
-		<?php
-			foreach ($action->robots as $robot) {
-				?>
-					<?php
-						?>
-					<div class="robot">
-					<a href="robot-infos.php?robot_id=<?= $robot["id"]  ?>" ><div class="media"><img class="img-rounded" src=<?=$robot["media_path"]?> alt=""></div></a>
-						<h3><?= $robot["name"] ?></h3>
-					</div>
-				<?php
-			}
-		?>
+		<div class="robots-slider">
+			<?php
+				foreach ($action->robots as $robot) {
+			?>
+				<div class="robot">
+					<a href="robot-infos.php?robot_id=<?= $robot["id"]  ?>">
+						<div class="media">
+							<img class="img-rounded" src='<?=$robot["media_path"]?>' alt="">
+						</div>
+					</a>
+				</div>
+			<?php
+				}
+			?>
+		</div>
 	</div>
 	<div class="robots-footer">
 		<a href="index.php" class="manage-btn">Back</a>
