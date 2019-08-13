@@ -5,6 +5,13 @@
 			<a href="https://www.facebook.com/kikicode/" style="background-image:url(images/fb.png);"></a>
 		</footer>
 
+<!-- CAROUSEL SLICK -->
+<script type="text/javascript" src="slick/slick.min.js"></script>
+
+<!-- MULTISLIDER -->
+<script src="scripts/multislider.js"></script>
+<script src="scripts/multislider.min.js"></script>
+
 
 	</body>
 </html>

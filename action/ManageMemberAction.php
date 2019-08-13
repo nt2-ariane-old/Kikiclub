@@ -4,10 +4,6 @@
 
 	class ManageMemberAction extends CommonAction {
 
-		//mode
-		public $create;
-		public $update;
-
 		//utilities
 		public $avatars;
 		public $genders;
@@ -23,30 +19,9 @@
 
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"manage-member","Manage Member");
-			$this->create = false;
-			$this->update = false;
 		}
 
 		protected function executeAction() {
-
-			if(!empty($_SESSION["members_action"]))
-			{
-				if($_SESSION["members_action"] == "create")
-				{
-					$this->create = true;
-				}
-				else if($_SESSION["members_action"] == "update")
-				{
-					$this->update = true;
-					if(empty($_SESSION["member_id"]))
-					{
-						header("Location:'. $this->previous_page . '.php");
-					}
-
-				}
-			}
-
-
 
 			$this->genders = MemberDAO::getGenders();
 
@@ -58,61 +33,40 @@
 			{
 				$id = $_SESSION["id"];
 			}
-
-			if($this->create)
+			$id_member = -1;
+			if(!empty($_SESSION["member_id"]))
 			{
-				if(isset($_POST["form"]))
+				$id_member = $_SESSION["member_id"];
+				$this->member = MemberDAO::selectMember($id_member);
+			}
+			if( !empty($_POST["firstname"]) &&
+				!empty($_POST["lastname"]) &&
+				!empty($_POST["birth"]))
 				{
-
-
-					if( !empty($_POST["firstname"]) &&
-						!empty($_POST["lastname"]) &&
-						!empty($_POST["birth"]))
-						{
-
-							MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
-							$this->create = false;
-							header('Location:'.$this->previous_page);
-
-						}
-						else
-						{
-							$this->error=true;
-							$this->errorMsg = "You need to fill all Feeld...";
-						}
-					}
-
-				}
-				if($this->update)
-				{
-					if(!empty($_SESSION["member_id"]))
+					if($id_member >= 0)
 					{
-						echo $_SESSION["member_id"];
-						$this->family_member = MemberDAO::selectMember($_SESSION["member_id"]);
-						if(isset($_POST["form"]))
-						{
-							if( !empty($_POST["firstname"]) &&
-							!empty($_POST["lastname"]) &&
-							!empty($_POST["birth"]))
-							{
-								MemberDAO::updateFamilyMember($_SESSION["member_id"],$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
-								header('Location:'.$this->previous_page);
-							}
-							else
-							{
-								$this->error=true;
-								$this->errorMsg = "You need to fill all Feeld...";
-							}
-						}
-						if(isset($_POST["delete"]))
-						{
-							MemberDAO::deleteFamilyMember($_SESSION["member_id"]);
-							unset($_SESSION["member_id"]);
-						header('location:'. $this->previous_page . '.php');
+						MemberDAO::updateFamilyMember($id_member,$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
 					}
+					else
+					{
+						MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+					}
+					header('Location:'.$this->previous_page);
+				}
+			else
+				{
+					$this->error=true;
+					$this->errorMsg = "You need to fill all Feeld...";
 				}
 
 
+			if($id_member >= 0)
+			{
+				if(isset($_POST["delete"]))
+				{
+					MemberDAO::deleteFamilyMember($id_member);
+					unset($_SESSION["member_id"]);
+				}
 			}
 		}
 	}

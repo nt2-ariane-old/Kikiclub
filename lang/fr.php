@@ -24,7 +24,7 @@
 			"manage" => "Modifier les Profils",
 			"return" => "Retourner au Profils",
 			"profil" => "Profil",
-			"selectAvatar" => "Selectionner l'Avatar",
+			"selectAvatar" => "Choisir Avatar",
 		],
 		"workshops" => [
 			"difficulty" => "Difficulté",

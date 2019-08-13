@@ -6,7 +6,7 @@ const onPageLoad = () =>
 let previousState = "manage";
 let states = ["normal","manage"]
 
-const loadChildren = (isCarousel) => {
+const loadMembers = (isCarousel) => {
 	let state;
 	for (let i = 0; i < states.length; i++) {
 		const element = states[i];
@@ -27,7 +27,7 @@ const loadChildren = (isCarousel) => {
 
 
 	previousState = state;
-	let memberHTML = document.querySelector("#child-template").innerHTML;
+	let memberHTML = document.querySelector("#member-template").innerHTML;
 	let container = document.getElementById("family");
 	container.innerHTML = "";
 	let formData = new FormData();
@@ -49,59 +49,30 @@ const loadChildren = (isCarousel) => {
 		}
 		for (let i=-1; i < length; i++) {
 			let divCarouselItem;
-			if(isCarousel)
-			{
-					divCarouselItem = document.createElement('div');
-				if(i==-1)
-				{
-					divCarouselItem.setAttribute('class','carousel-item active');
-				}
-				else
-				{
-					divCarouselItem.setAttribute('class','carousel-item');
-				}
-			}
+				divCarouselItem = document.createElement('div');
+				divCarouselItem.setAttribute('class','item');
 
-				let divContainer = document.createElement('div');
-					divContainer.setAttribute('class','container');
 
-					let divRow = document.createElement('div');
-						divRow.setAttribute('class','row');
-
-					let min = i;
-					let max = i + nbMembers;
-
-					for (let j = min; j < max && j < length; j++)
-					{
-						if(j==-1)
+						if(i==-1)
 						{
 							let divNewMember = document.createElement('div');
-								divNewMember.setAttribute('class','col-sm-' + 12/nbMembers);
+								divNewMember.setAttribute('class','member');
 								addNewMember(divNewMember);
-							divRow.appendChild(divNewMember);
+							divCarouselItem.appendChild(divNewMember);
 						}
 						else
 						{
 							let divMember = document.createElement('div');
-								divMember.setAttribute('class','col-sm-' + 12/nbMembers);
-								addMember(family[j], memberHTML,divMember,state, avatars);
+								divMember.setAttribute('class','member');
+								addMember(family[i], memberHTML,divMember,state, avatars);
 
-							divRow.appendChild(divMember);
+							divCarouselItem.appendChild(divMember);
 						}
-						i = j;
-					}
-					divContainer.appendChild(divRow);
-			if(isCarousel)
-			{
-					divCarouselItem.appendChild(divContainer);
 				container.appendChild(divCarouselItem);
-			}
-			else
-			{
-				container.appendChild(divContainer);
-			}
-
 		}
+		$('#family-carousel').multislider({
+			interval:0,
+		});
 
 	})
 
@@ -111,7 +82,7 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let node = document.createElement("div");
 	node.innerHTML = memberHTML;
 	let id_logo =  member["id_avatar"];
-	node.querySelector(".child-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["media_path"] +"');");
+	node.querySelector(".member-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["media_path"] +"');");
 
 	node.querySelector('button').setAttribute("onclick",'change_page("member-home.php",{"member_id":'+member["id"]+'})');
 
@@ -120,19 +91,19 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 		addManageButton(node,member );
 	}
 
-	node.querySelector(".child-name").innerHTML = member["firstname"];
+	node.querySelector(".member-name").innerHTML = member["firstname"];
 	if(member["alert"].length > 0)
 	{
-		node.querySelector(".child-nbalert").style.display = 'block';
-		node.querySelector(".child-nbalert").innerHTML = member["alert"].length;
+		node.querySelector(".member-nbalert").style.display = 'block';
+		node.querySelector(".member-nbalert").innerHTML = member["alert"].length;
 
 	}
 	else
 	{
-		node.querySelector(".child-nbalert").style.display = 'none';
+		node.querySelector(".member-nbalert").style.display = 'none';
 	}
 
-	node.querySelector(".child-nbPTS").innerHTML = member["score"] + read("users","nbPts");
+	node.querySelector(".member-nbPTS").innerHTML = member["score"] + read("users","nbPts");
 
 	let count = 0;
 	for (const key in member["workshops"]) {
@@ -145,26 +116,26 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 		}
 	}
 
-	node.querySelector(".child-nbWorkshops").innerHTML = count + read("users","nbWorkshops");
+	node.querySelector(".member-nbWorkshops").innerHTML = count + read("users","nbWorkshops");
 
 	container.appendChild(node);
 }
 
 const addNewMember = (container) => {
 	let divNew = document.createElement('div');
-	divNew.setAttribute('class','child-info');
+	divNew.setAttribute('class','member-info');
 
 	let linkNew = document.createElement('button');
 		linkNew.setAttribute("onclick",'change_page("manage-member.php",{"members_action":"create"})');
 
 
 		let divLogo = document.createElement('div');
-			divLogo.setAttribute('class','child-logo');
+			divLogo.setAttribute('class','member-logo');
 			divLogo.setAttribute('id','addLogo');
 
 		let h2Name = document.createElement('h2');
 			h2Name.innerHTML = read("users","new");
-			h2Name.setAttribute('class','child-name');
+			h2Name.setAttribute('class','member-name');
 
 
 		linkNew.appendChild(divLogo);
@@ -173,7 +144,7 @@ const addNewMember = (container) => {
 	container.appendChild(divNew);
 }
 const addManageButton = (node,member) => {
-	node.querySelector(".child-stateLogo").style = "background-image: url(images/tool.png);";
+	node.querySelector(".member-stateLogo").style = "background-image: url(images/tool.png);";
 	node.querySelector('button').setAttribute("onclick",'change_page("manage-member.php",{"member_id":'+member["id"]+',"members_action":"update"})');
-	node.querySelector(".child-stateLogo").style.display = 'block';
+	node.querySelector(".member-stateLogo").style.display = 'block';
 }

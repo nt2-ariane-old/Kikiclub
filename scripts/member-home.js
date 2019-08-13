@@ -1,21 +1,8 @@
 const onPageLoad = () =>
 {
-
-	$(document).ready(function(){
-		$('#slider1').tinycarousel({
-			 start: 2, // where should the carousel start?
-			 display: 1, // how many blocks do you want to move at a time?
-			 axis: 'x', // vertical or horizontal scroller? 'x' or 'y' .
-			 controls: false, // show left and right navigation buttons?
-			 pager: false, // is there a page number navigation present?
-			 interval: true, // move to the next block on interval.
-			 intervaltime: 1000, // interval time in milliseconds.
-			 animation: true, // false is instant, true is animate.
-			 duration: 500, // how fast must the animation move in milliseconds?
-			 callback: null, // function that executes after every move
-		});
+	$('#mixedSlider_badges').multislider({
+		interval:0,
 	});
-
 }
 
 const show = (id,link) =>

@@ -30,29 +30,7 @@ const loadModules = () =>
 			interval: false
 		});
 	}
-	if(document.querySelector('#datepicker') != null)
-	{
 
-		$( function() {
-			$.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
-			$( "#datepicker" ).datepicker(
-				{
-				changeMonth: true,
-				changeYear: true,
-				showOtherMonths: true,
-				selectOtherMonths: true,
-				showAnim:'slideDown',
-				dateFormat:'dd/mm/yy',
-				minDate: "-100y",
-				maxDate: "-4y",
-				yearRange: "1900:2100"
-
-
-			});
-
-		}
-		);
-	}
 }
 
 const limitText = (textarea, limitNum) => {

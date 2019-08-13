@@ -23,6 +23,7 @@
 
 		<!-- CUSTOM -->
 		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/carousel.css" type="text/css" media="screen" />
 
 		<?php
 
@@ -81,15 +82,10 @@
 
 		<!-- JQUERY -->
 
+		<script type="text/javascript" src="scripts/jquery.js"></script>
 		<script type="text/javascript" src="scripts/jquery.min.js"></script>
 		<script type="text/javascript" src="scripts/jquery-migrate.min.js"></script>
-		<script src="scripts/jquery-ui.js"></script>
-		<script src="scripts/jquery.tinycarousel.js"></script>
 		<script type="text/javascript" src="scripts/jquery-ui.js"></script>
-		<script type="text/javascript" src="scripts/jquery.js"></script>
-
-		<!-- CAROUSEL SLICK -->
-		<script type="text/javascript" src="slick/slick.min.js"></script>
 
 		<!-- CKEDITOR -->
 		<script src="scripts/ckeditor.js"></script>
@@ -101,7 +97,8 @@
 		<script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
 
 		<!-- CUSTOM -->
-		<script src="./scripts/show-users.js"></script>/
+		<script src="./scripts/show-users.js"></script>
+		<script src="./scripts/carousel.js"></script>
 		<?php
 			if(!empty($action->page_name))
 			{
@@ -112,7 +109,7 @@
 			if($action->admin_mode)
 			{
 				?>
-					<!-- <link rel="stylesheet" href="css/admin.css"> -->
+					<link rel="stylesheet" href="css/admin.css">
 					<script src="./scripts/admin.js"></script>
 
 			<?php
@@ -121,29 +118,23 @@
 </head>
 <body onload="loadModules(); onPageLoad();<?php if($action->admin_mode) echo 'adminLoad();'?>">
 
-<div id="box"></div>
-
-<script>let langData = <?= json_encode($action->trans->langData) ?></script>
-
-<a href="index.php"><header>
-	<h1><span class="colored-kikicode">Kiki</span>club</h1>
-	<div id="header-infos">
-
-		<div class="member-name">
-			<?php
-				if($action->isMember())
-				{
-					?>
-						<h3> <?= $action->member_name ?></h3>
-						<?php
-				}
+<script>
+	let langData = <?= json_encode($action->trans->langData) ?>;
+</script>
+<header>
+	<a href="index.php"><h1><span class="colored-kikicode">Kiki</span>club</h1></a>
+	<a href="manage-member.php"><div id="header-infos">
+		<?php
+			if($action->isMember())
+			{
 				?>
-		</div>
-		<?php loadMedia($action->member_avatar);?>
-
-	</div>
-
-</header></a>
+					<h5> <?= $action->member_name ?></h5>
+				<?php
+					loadMedia($action->member_avatar);
+			}
+		?>
+	</div></a>
+</header>
 
 <nav id="menu" class="  navbar navbar-inverse navbar-static-top" >
 	<div class="container">

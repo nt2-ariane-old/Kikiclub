@@ -125,51 +125,32 @@
 
 			//show profiles
 			?>
-	<template id="child-template">
-		<div class='child-info'>
-			<button href="#"><div class='child-logo'></div><div class='child-stateLogo'></div></button>
-			<h2 class='child-name'></h2>
-			<p class='child-nbWorkshops'></p>
-			<p class='child-nbPTS'></p>
-			<div class='child-nbalert'></div>
+	<template id="member-template">
+		<div class='member-info'>
+			<button href="#"><div class='member-logo'></div><div class='member-stateLogo'></div></button>
+			<h2 class='member-name'></h2>
+			<p class='member-nbWorkshops'></p>
+			<p class='member-nbPTS'></p>
+			<div class='member-nbalert'></div>
 		</div>
 	</template>
-	<?php
 
-if($action->detect->isMobile())
-{
-	?>
-				<div id="family">
-					<script>loadChildren(false)</script>
-				</div>
-			<?php
-		}
-		else
-		{
-			?>
-				<div id="family-carousel" class="carousel slide" data-interval="false">
-					<!-- Content -->
-					<div class="carousel-inner" id="family">
-						<script>loadChildren(true)</script>
-					</div>
+	<main>
 
-					<!-- Controls -->
-					<a class="carousel-control-prev" href="#family-carousel" role="button" data-slide="prev">
-					   	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					   	<span class="sr-only">Previous</span>
-					</a>
-					<a class="carousel-control-next" href="#family-carousel" role="button" data-slide="next">
-					   	<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					   	<span class="sr-only">Next</span>
-					</a>
-				</div>
-			<?php
-		}
-		?>
-
-		<div class="users-footer">
-			<button class="manage-btn" onclick="loadChildren()"><?= $action->trans->read("users","manage") ?></button>
+		<div id="family-carousel" class="multislider" data-interval="false">
+			<div class="MS-content" id="family">
+				<script>loadMembers(true)</script>
+			</div>
+			<div class="MS-controls">
+				<button id="btn-left" class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+				<button id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+			</div>
 		</div>
+	</main>
+
+	<div class="users-footer">
+		<button class="manage-btn" onclick="loadMembers()"><?= $action->trans->read("users","manage") ?></button>
+	</div>
 <?php
 	}
 

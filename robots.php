@@ -6,40 +6,49 @@
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
-	<div class="sheet">
-		<div class="robots-slider">
-			<?php
-				foreach ($action->robots as $robot) {
-			?>
-				<div class="robot">
-					<a href="robot-infos.php?robot_id=<?= $robot["id"]  ?>">
-						<div class="media">
-							<img class="img-rounded" src='<?=$robot["media_path"]?>' alt="">
+	<main>
+		<div id="mixedSlider" class="multislider">
+			<div class="MS-content">
+				<?php
+					foreach ($action->robots as $robot) {
+						?>
+					<div class="item">
+						<div class="robot">
+							<a href="robot-infos.php?robot_id=<?= $robot["id"]  ?>">
+								<div class="media">
+									<img class="img-rounded" src='<?=$robot["media_path"]?>' alt="">
+								</div>
+							</a>
 						</div>
-					</a>
-				</div>
-			<?php
-				}
-			?>
-		</div>
-	</div>
-	<div class="robots-footer">
-		<a href="index.php" class="manage-btn">Back</a>
-	</div>
-	<?php
-		if($action->admin_mode)
-		{
-			?>
-				<div class="control-bar">
-					<a data-toggle="collapse" data-target="#controls">Control</a>
-					<div class="collapse" id="controls">
-						<button class="submit-btn" onclick="change_page('robot-infos.php',{'robot_id':null})">Add New Robot</button>
-						<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
 					</div>
-				</div>
-			<?php
-		}
-	?>
+				<?php
+					}
+					?>
+			</div>
+			<div class="MS-controls">
+				<button id="btn-left" class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+				<button id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+			</div>
+		</div>
+
+	</main>
+		<!-- <div class="robots-footer">
+			<a href="index.php" class="manage-btn">Back</a>
+		</div> -->
+		<?php
+			if($action->admin_mode)
+			{
+				?>
+					<div class="control-bar">
+						<a data-toggle="collapse" data-target="#controls">Control</a>
+						<div class="collapse" id="controls">
+							<button class="submit-btn" onclick="change_page('robot-infos.php',{'robot_id':null})">Add New Robot</button>
+							<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
+						</div>
+					</div>
+				<?php
+			}
+		?>
 
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

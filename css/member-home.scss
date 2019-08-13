@@ -7,9 +7,7 @@ main
 	background-size: cover;
 	background-color: white;
 }
-main *
-{
-}
+
 #badges
 {
 	min-height: 12em;
@@ -30,45 +28,63 @@ main *
 
 	display: block;
 	margin: auto;
-	background-image: url("../images/textures/box.png");
 	background-repeat: no-repeat;
 	background-size: 90% 90%;
 	background-position: center;
 	align-self: center;
 	justify-self: center;
 }
-
-.kikiclub-badge
+.item
 {
-	background-color:#D8DF23;
-	border-radius: 100%;
-	border : 2px solid white;
-	overflow: hidden;
-	&.blured
+	width: 214px !important;
+	a
 	{
-		background-color: gray;
-		.media
+		margin: 0 !important;
+		.kikiclub-badge
 		{
-			img
-			{
-				filter: grayscale(100%) blur(1px);
-				-webkit-filter: grayscale(100%) blur(3px);
+			width: 214px;
+			height: 214px;
 
+			position: relative;
+			background-color: white;
+			border: 1px solid black;
+			border-radius: 100%;
+			overflow: hidden;
+			&.blured
+			{
+				background-color: gray;
+				overflow: hidden;
+				.media
+				{
+					overflow: hidden;
+					img
+					{
+						overflow: hidden;
+						filter: grayscale(100%) blur(1px);
+						-webkit-filter: grayscale(100%) blur(3px);
+						vertical-align: middle;
+						max-height: 100%;
+						max-width: 100%;
+						width: auto;
+						height: auto;
+						position: absolute;
+						top: 0;
+						bottom: 0;
+						left: 0;
+						right: 0;
+						margin: auto;
+
+					}
+					display: block;
+					margin: auto;
+
+				}
 			}
-			display: block;
-			margin: auto;
 
 		}
 	}
-
-	border: 1px solid white;
-	background-color: #D8DF23;
-	position: relative;
-	width: 200px;
-	height: 200px;
-	display: inline-block;
-
 }
+
 .workshop-infos
 {
 	max-width: 90%;
@@ -98,13 +114,23 @@ main *
 		float: right;
 	}
   }
+.container
+{
+	margin: 0 auto;
+}
 h3
 {
 	color:#000000;
 }
+.item a
+{
+	width: 100%;
+	display: block;
+}
 .workshop
 {
 	height: 180px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -149,16 +175,15 @@ h3
 	overflow: hidden;
 }
 .alert-new
-
 {
 	text-align: center;
 	text-indent: 0;
-	background-color:red;
+	background-color:#E60A60;
 	font-size: 1em;
 	color: black;
 	height: 50px;
 	width: 50px;
-	border: 5px solid brown;
+	border: 5px solid #E60A60;
 	border-radius: 100%;
 	line-height: 46px;
 	padding: 0;

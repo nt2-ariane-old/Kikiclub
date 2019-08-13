@@ -304,7 +304,6 @@
 
 
 				$workshop = WorkshopDAO::getWorkshop($id);
-				var_dump($workshop);
 				$htmlContent = str_replace("***WORKSHOP***",$workshop["name"],$htmlContent);
 				$htmlContent = str_replace("***CONTENT***",$workshop["content"],$htmlContent);
 				$htmlContent = str_replace("***PATH***",$workshop["media_path"],$htmlContent);

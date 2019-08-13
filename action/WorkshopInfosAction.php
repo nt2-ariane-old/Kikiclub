@@ -100,7 +100,6 @@
 					}
 
 					foreach ($filters_selected as $key => $list) {
-						echo '<script> console.log(' . json_encode($list).') </script>';
 						$id_type = $this->id_types[$key];
 						foreach ($list as $value) {
 							$id_filter = $this->getFilterID($id_type,$value);

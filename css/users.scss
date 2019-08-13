@@ -8,23 +8,136 @@
 	color:white;
 
 }
-.users-footer a
+
+main
 {
-	border-color: white;
-	color:white !important;
-}
-.users-footer a:hover
-{
-	border-color: rgba(255, 255, 255, 0.678);
-	color:white !important;
+	background-color: black;
+	height: 80vh;
+	position: relative;
+	#family-carousel
+	{
+		background-color: transparent;
+		.MS-controls
+		{
+			button
+			{
+				color: white;
+				font-size: 60px;
+
+				text-shadow: -1px -1px 8px #D4D4D4,
+							-1px 1px 8px #D4D4D4,
+							1px -1px 8px #D4D4D4,
+							1px 1px 8px #D4D4D4;
+				&:hover
+				{
+					text-shadow: -1px -1px 8px rgb(106, 106, 106),
+								-1px 1px 8px rgb(106, 106, 106),
+								1px -1px 8px rgb(106, 106, 106),
+								1px 1px 8px rgb(106, 106, 106);
+				}
+
+			}
+		}
+		position: absolute;
+		top:calc( (80vh - ((40px * 1.2) +  (2 * (19px * 1.2)) + (240px * 1.2))) / 2);
+
+	}
 }
 .users-footer
 {
 	background-color: black;
 	padding: 1em 0;
+	a
+	{
+		&:hover
+		{
+			border-color: rgba(255, 255, 255, 0.678);
+			color:white !important;
+		}
+		border-color: white;
+		color:white !important;
+	}
 }
 
-#family-carousel
+.member
 {
-	padding: 0;
+	text-align: center;
+	height: calc((40px * 1.2) +  (2 * (19px * 1.2)) + (240px * 1.2));
+	overflow: hidden;
+	position: relative;
+	.member-name
+	{
+		color:white;
+		font-size: 40px;
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	.member-nbWorkshops, .member-nbPTS
+	{
+		color:#68B04D;
+	}
+
+	.member-nbWorkshops, .member-nbPTS
+	{
+		font-size: 19px;
+	}
+ 	button
+	{
+		background-color: transparent;
+		border: none;
+		display: block;
+		margin: auto;
+	}
+
+	.member-logo,.member-stateLogo
+	{
+		display: block;
+		border-radius: 100%;
+		width: 240px;
+		height: 240px;
+		margin: 1em auto;
+		background-color: #ADB30F;
+
+		box-shadow:
+		0 0 10px 5px #ADB30F,
+		0 0 20px 10px rgb(33, 80, 61),
+		0 0 25px 15px rgb(51, 50, 50);
+
+		background-size: 100%;
+		background-repeat: no-repeat;
+		background-position: center;
+		&:hover
+		{
+			border: none;
+			background-color: rgb(242, 243, 192);
+			box-shadow:
+			0 0 10px 5px rgb(242, 243, 192),  /* inner white */
+			0 0 20px 10px rgb(90, 247, 187), /* middle magenta */
+			0 0 25px 15px rgb(58, 226, 72); /* outer cyan */
+		}
+	}
+
+	.member-stateLogo
+	{
+		left: calc((100% - 240px) / 2);
+		opacity: 0.4;
+		position: absolute;
+		top:0;
+		display:none;
+
+	}
+
+	.member-nbalert
+	{
+		background-color: rgb(211, 10, 87);
+		border-radius: 100%;
+		width: 45px;
+		height: 45px;
+		font-size: 30px;
+		position: absolute;
+		top:25px;
+		right: calc(50% - (240px / 2) + (45px / 4));
+
+	}
 }

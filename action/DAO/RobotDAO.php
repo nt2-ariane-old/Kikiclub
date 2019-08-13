@@ -163,7 +163,6 @@
 		{
 			$connection = Connection::getConnection();
 
-			echo $id_robot . '<br>' . $id_difficulty . '<br>';
 			$statement = $connection->prepare("SELECT score FROM workshop_score WHERE id_robot = ? AND id_difficulty = ?");
 
 			$statement->bindParam(1, $id_robot);
@@ -176,9 +175,7 @@
 
 			if ($row = $statement->fetch()) {
 				$score = $row["score"];
-				echo 'test';
 			}
-			var_dump($score);
 
 			return $score;
 		}

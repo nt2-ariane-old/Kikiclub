@@ -87,70 +87,14 @@ function loadProfil($user,$action)
 			}
 			?>
 			<div class="sheet">
-				<?php
-					if($userExist)
-					{
-						?>
-							<h2>Profil de <?= $user["firstname"] ?></h2>
-						<?php
-					}
-					else
-					{
-						?>
-							<h2>Nouveau Profil</h2>
-						<?php
-					}
-				?>
+				<h3>Profil</h3>
 				<form id="profil-form" action="manage-member.php" method="post">
-						<input type="hidden" name="form">
-						<?php
-							if($action->page_name=='console')
-							{
-								?>
-									<input type="hidden" name="users">
-								<?php
-								if($action->modFamily)
-								{
-									?>
-										<input type="hidden" name="update">
-										<input type="hidden" name="members_list[]" value="<?=$user["id"]?>">
-									<?php
-								}
-								else
-								{
-									?>
-										<input type="hidden" name="addFamily">
-										<input type="hidden" name="users_list[]" value="<?=$action->userMod?>">
-									<?php
-								}
-							}
-							else
-							{
-								if($action->update)
-								{
-									?>
-										<input type="hidden" name="action" value="update">
-									<?php
-								}
-								else if ($action->create)
-								{
-									?>
-										<input type="hidden" name="action" value="create">
-									<?php
-								}
-								else
-								{
-									?>
-										<script>window.location="users.php"</script>
-									<?php
-								}
-							}
-						?>
-						<div class="infos">
-							<p><span class="input-title"><?= $action->trans->read("main","firstnameInput") ?> : </span><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("main","firstnameInput") ?>" value="<?php if($userExist) echo $user["firstname"]  ?>"></p>
-							<p><span class="input-title"><?= $action->trans->read("main","lastnameInput") ?> : </span><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("main","lastnameInput") ?>"  value="<?php if($userExist) echo $user["lastname"]  ?>"></p>
-							<p><span class="input-title"><?= $action->trans->read("main","birthInput") ?> : </span><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("main","birthInput") ?>"  value="<?php if($userExist) echo $user["birthday"]  ?>"></p>
-							<p><span class="input-title">Gender : </span>
+					<div class="infos">
+						<p><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("main","firstnameInput") ?>" value="<?php if($userExist) echo $user["firstname"]  ?>"></p>
+						<p><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("main","lastnameInput") ?>"  value="<?php if($userExist) echo $user["lastname"]  ?>"></p>
+						<p><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("main","birthInput") ?>"  value="<?php if($userExist) echo $user["birthday"]  ?>"></p>
+
+						<p><span class="input-title">Gender : </span>
 								<select name="gender" id="">
 									<?php
 										foreach ($action->genders as $gender) {
@@ -162,21 +106,20 @@ function loadProfil($user,$action)
 								</select></p>
 						</div>
 
-						<p><span class="input-title"><?= $action->trans->read("users","selectAvatar") ?></span></p>
-						<div class="avatars-list">
-							<?php
-								foreach( $action->avatars as $avatar)
-								{
-									?>
-									<label>
-										<?php
-											if($userExist)
-											{
-												if($user["id_avatar"] ==  $avatar["id"]){
-												?>
-													<input type="radio" name="avatar" value="<?=$avatar["id"]?>" checked>
+						<h3><?= $action->trans->read("users","selectAvatar") ?></h3>
 
-												<?php
+						<div id="mixedSlider_avatars" class="multislider avatars-list">
+							<div class="MS-content">
+								<?php
+									foreach ($action->avatars as $avatar) {
+								?>
+									<div class="item">
+										<label>
+											<?php
+												if($userExist && $user["id_avatar"] ==  $avatar["id"]){
+													?>
+														<input type="radio" name="avatar" value="<?=$avatar["id"]?>" checked>
+													<?php
 												}
 												else
 												{
@@ -184,21 +127,20 @@ function loadProfil($user,$action)
 														<input type="radio" name="avatar" value="<?=$avatar["id"]?>">
 													<?php
 												}
-											}
-											else
-											{
-												?>
-													<input type="radio" name="avatar" value="<?=$avatar["id"]?>">
-												<?php
-											}
-										?>
-										<img  style="cursor:pointer;" src="<?=$avatar["media_path"]?>">
-									</label>
-
-									<?php
-								}
-							?>
+											?>
+											<img  style="cursor:pointer;" src="<?=$avatar["media_path"]?>">
+										</label>
+									</div>
+								<?php
+									}
+								?>
+							</div>
+							<div class="MS-controls">
+								<button id="btn-left" class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+								<button id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+							</div>
 						</div>
+
 						<div class="forms-btns">
 							<button type="submit" class="submit-btn"><?php if($userExist){echo $action->trans->read("main","update");} else{echo $action->trans->read("main","add");} ?></button>
 							<?php
@@ -539,29 +481,29 @@ function loadBadgesLine($badges,$name,$action,$title,$isMember=false)
 function loadBadgesSlider($won_badges,$all_badges,$name,$action,$title,$idMember=false)
 {
 	?>
-		<div id="slider1">
-            <a class="buttons prev" href="#">&lt;</a>
-                <div class="viewport">
-					<ul class="overview" style="width: 1008px; left: 0px;">
-						<?php
-							foreach ($all_badges as $badge) {
-								?>
-									<li onclick="openModal();openBadge(<?= $badge['id'] ?>)" class="kikiclub-badge <?php if(!array_key_exists($badge["id"], $won_badges)) { echo 'blured'; } ?>" class="kikiclub-badge"><?php loadMedia($badge)?></li>
+	<div id="mixedSlider_badges" class="multislider">
+		<div class="MS-content">
+			<?php
+				foreach ($all_badges as $badge) {
+					?>
+					<div class="item">
+						<a <?php if(array_key_exists($badge["id"], $won_badges)) { ?> onclick="openModal();openBadge(<?= $badge['id'] ?>)" <?php } ?>>
+							<div class="kikiclub-badge <?php if(!array_key_exists($badge["id"], $won_badges)) { echo 'blured'; } ?>">
+								<?php loadMedia($badge)?>
+							</div>
+						</a>
+					</div>
 
-								<?php
-							}
-						?>
-					</ul>
-                </div>
-            <a class="buttons next" href="#">&gt;</a>
+					<?php
+				}
+			?>
+		</div>
+		<div class="MS-controls">
+			<button id="btn-left" class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+			<button id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+		</div>
+	</div>
 
-            <script type="text/javascript">
-                $(document).ready(function()
-              	{
-                    $('#slider1').tinycarousel();
-        		});
-            </script>
-        </div>
 	<?php
 }
 function loadBadgesCarousel($won_badges,$all_badges,$name,$action,$title,$isMember=false)

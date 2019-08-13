@@ -36,7 +36,7 @@ a:hover {
 
 html {
   width: 100vw;
-  background-color: black !important;
+  background-color: white !important;
 }
 
 .ck.ck-editor__editable_inline p {
@@ -49,7 +49,7 @@ html {
 }
 
 body {
-  background-color: black !important;
+  background-color: white !important;
 }
 
 table {
@@ -240,15 +240,26 @@ header h2 {
   margin: 0;
 }
 
-#header-infos .member-name {
-  width: 50%;
+#header-infos .media {
+  width: 20%;
   float: left;
+  height: 48px;
+  border-radius: 100%;
 }
 
-#header-infos .media {
-  width: 50%;
+#header-infos .media img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+#header-infos h5 {
+  width: 80%;
+  height: 48px;
+  line-height: 48px;
   float: left;
-  height: 96px;
+  padding: 0 1em;
 }
 
 #hamburger {

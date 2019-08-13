@@ -1,0 +1,99 @@
+.avatars-list{
+	background-color: white;
+	width:80%;
+	overflow-y: scroll;
+	height: 200px;
+	margin:auto;
+	input[type="radio"]:checked+img {
+		border: 3px solid red;
+	}
+	label
+	{
+		img{
+			width:100px;
+			height:100px;
+		}
+		input[type=radio] {
+			opacity: 0;
+		 }
+	}
+
+}
+
+.users-contents
+{
+	background-color: white;
+	#profil-form
+	{
+		input[type=text],select, p {
+			display: block;
+			width:350px;
+			margin:3px;
+			padding: 4px;
+			font-size: 17px;
+			padding-left: 12px;
+		}
+		#mixedSlider_avatars
+		{
+			height: 140px;
+			width: 100%;
+			.MS-controls button
+			{
+				top: calc(( 140px - (75px / 2) ) / 2);
+			}
+			.item
+			{
+				width:120px;
+				height: 120px;
+				border-radius: 100%;
+				background-color: #D8DF23;
+				margin: 6px;
+			}
+		}
+
+	}
+	.submit-btn,.delete-btn
+	{
+		padding: 4px;
+		font-size: 17px;
+		width: 140px;
+		border: none;
+		&:hover
+		{
+			background-color: transparent;
+			border: 2px solid rgb(177, 226, 240);
+			margin: 2px;
+		}
+	}
+
+
+	.submit-btn
+	{
+		background-color: rgba(217, 223, 35, 0.5);
+	}
+
+	.delete-btn{
+		background-color: rgba(255, 0, 0, 0.5);
+
+	}
+
+}
+
+.sheet
+{
+	width: 972px;
+	margin: auto;
+	box-shadow: none;
+	min-height: calc(100vh - 80px - 2rem - 80px);
+	h3
+	{
+		font-size:30px;
+		color:black;
+		text-align: center;
+		margin: 2rem;
+	}
+}
+
+@media only screen and (min-width: 450px) {
+
+}

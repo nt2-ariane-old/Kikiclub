@@ -1,3 +1,7 @@
+body {
+  background-color: white !important;
+}
+
 .workshops-list {
   width: 75%;
   overflow-x: scroll;
@@ -175,6 +179,13 @@
   margin-left: 0;
 }
 
+#indexes button {
+  border: 1px solid black;
+  background-color: transparent;
+  border-radius: 100%;
+  padding: 0.5em;
+}
+
 aside {
   background-color: white;
   padding: 0.5em;
@@ -240,19 +251,18 @@ aside #workshop-menu .card {
     float: left;
     padding: 1em;
     background-color: white;
-    border-top: 5px solid black;
-    border-bottom: 5px solid black;
   }
   aside #workshop-menu {
     display: block;
   }
   aside #workshop-menu #search-form .card {
-    background-color: rgba(217, 223, 35, 0.442);
+    background-color: rgba(255, 255, 255, 0.442);
   }
   aside #workshop-menu #search-form .card-header {
     background-color: #d9df23;
   }
   main {
+    background-color: white;
     width: calc(75% - 1.1em);
     padding: 0;
     margin: 0;
@@ -283,6 +293,7 @@ aside #workshop-menu .card {
   .sort {
     width: calc(75% - 1.1em);
     float: right;
+    background-color: white;
   }
 }
 
