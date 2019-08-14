@@ -42,8 +42,7 @@ body {
   height: 300px;
   position: relative;
   background-color: rgba(255, 255, 255, 0.801);
-  border-radius: 10%;
-  border: 2px solid black;
+  overflow: hidden;
 }
 
 .workshop * {
@@ -148,9 +147,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   background-color: rgba(0, 0, 0, 0.75);
-  border-radius: 50%;
-  border: 5px solid black;
   overflow: hidden;
+  border-radius: 10%;
 }
 
 .workshop .media video, .workshop .media audio, .workshop .media img {
@@ -273,9 +271,6 @@ aside #workshop-menu .card {
   }
   *:has(.workshop) {
     padding: 4rem;
-  }
-  .workshop {
-    margin: 1rem;
   }
   .workshop:after {
     background-image: url("../images/textures/ring.png");

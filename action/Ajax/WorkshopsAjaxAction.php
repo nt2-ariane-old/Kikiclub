@@ -240,7 +240,7 @@
 			if(!empty($_POST["id"]))
 			{
 				$this->results["workshop"] = WorkshopDAO::getWorkshop($_POST["id"]);
-				$this->results["filters"] = FilterDAO::getWorkshopFilters($_POST["id"],true);
+				$this->results["filters"] = FilterDAO::getWorkshopFilters($_POST["id"],true,true);
 			}
 			if(!empty($this->results["workshops"]))
 			{

@@ -136,8 +136,8 @@ function loadProfil($user,$action)
 								?>
 							</div>
 							<div class="MS-controls">
-								<button id="btn-left" class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-								<button id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+								<button type="button" id="btn-left" class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+								<button type="button" id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 							</div>
 						</div>
 

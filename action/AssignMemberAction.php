@@ -19,5 +19,7 @@
 			$this->workshops_deployed = WorkshopDAO::getWorkshops(null,"none",false,true);
 			$this->member_workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
 
+
+
 		}
 	}

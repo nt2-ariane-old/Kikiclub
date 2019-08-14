@@ -84,20 +84,40 @@
 		 * @author Ludovic Doutre-Guay <ludovicdguay@gmail.com>
 		 * @return Array return all information about the workshop's filters
 		 */
-		public static function getWorkshopFilters($id_workshop,$name=false)
+		public static function getWorkshopFilters($id_workshop,$nameType=false,$nameFilter=false)
 		{
 			$connection = Connection::getConnection();
-			if($name)
+			if($nameType || $nameFilter )
 			{
-				$request = "SELECT ft.name as type,
-								CASE
+				if($nameType)
+				{
+					$request = "SELECT ft.name as type, ";
+				}
+				else
+				{
+					$request = "SELECT ft.id as type, ";
+				}
+
+				if($nameFilter)
+				{
+					$request .= " CASE
 									WHEN ft.name = 'difficulty' THEN fd.name_fr
 									WHEN ft.name = 'grade' THEN fg.name_fr
 									WHEN ft.name = 'robot' THEN fr.name
          							ELSE 'Inconnu'
-								END AS filter
+								END AS filter ";
+				}
+				else
+				{
+					$request .= " CASE
+									WHEN ft.name = 'difficulty' THEN fd.id
+									WHEN ft.name = 'grade' THEN fg.id
+									WHEN ft.name = 'robot' THEN fr.id
+					 				ELSE -1
+								END AS filter ";
+				}
 
-							FROM workshop_filters as wt
+				$request .=	"FROM workshop_filters as wt
 								LEFT JOIN filter_type as ft ON ft.id = wt.id_type
 								LEFT JOIN difficulty as fd ON (fd.id = wt.id_filter AND ft.name = 'difficulty')
 								LEFT JOIN robot as fr ON (fr.id = wt.id_filter AND ft.name = 'robot')
@@ -117,7 +137,7 @@
 
 			while($row = $statement->fetch())
 			{
-				if($name)
+				if($nameType || $nameFilter)
 				{
 					$content[$row["type"]][$row["filter"]] = $row;
 				}

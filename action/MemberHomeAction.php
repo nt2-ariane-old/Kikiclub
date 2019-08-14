@@ -2,6 +2,8 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 
 	class MemberHomeAction extends CommonAction {
@@ -22,6 +24,36 @@
 
 			$id = $_SESSION["member_id"];
 			$this->member = MemberDAO::selectMember($id);
+
+			$m_workshops = MemberWorkshopDAO::selectMemberWorkshop($id);
+			$workshops = WorkshopDAO::getWorkshops();
+
+			foreach ($workshops as $workshop) {
+				if(!array_key_exists($workshop["id"],$m_workshops))
+				{
+					$id_w = $workshop["id"];
+					$filters = FilterDAO::getWorkshopFilters($id_w);
+					$grades = $filters[FilterDAO::getFilterTypeIdByName('grade')];
+
+					$ages = [];
+					if(!empty($grades))
+					{
+						foreach ($grades as $grade) {
+							$id_grade = $grade["id_filter"];
+
+							$ages[] = FilterDAO::getGradeById($id_grade)["age"];
+						}
+
+					}
+
+
+					if(in_array($this->member["age"],$ages))
+					{
+						MemberWorkshopDAO::addMemberWorkshop($id,$id_w, 1);
+					}
+				}
+			}
+
 			$this->workshops_categories = MemberWorkshopDAO::selectMemberWorkshopByCategories($id);
 			$this->member["alert"] = sizeof(MemberWorkshopDAO::selectMemberNewWorkshop($id));
 			$this->complete_name = $this->member["firstname"] . "'s Page";

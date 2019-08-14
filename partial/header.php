@@ -76,12 +76,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- SCRIPTS -->
+
 		<!-- CUSTOM -->
 		<script src="scripts/main.js"></script>
 
-
 		<!-- JQUERY -->
-
 		<script type="text/javascript" src="scripts/jquery.js"></script>
 		<script type="text/javascript" src="scripts/jquery.min.js"></script>
 		<script type="text/javascript" src="scripts/jquery-migrate.min.js"></script>
@@ -90,14 +89,13 @@
 		<!-- CKEDITOR -->
 		<script src="scripts/ckeditor.js"></script>
 
-
 		<!-- DROPZONE -->
 		<script src="scripts/dropzone.js"></script>
+
 		<!-- BOOTSTRAP -->
 		<script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
 
 		<!-- CUSTOM -->
-		<script src="./scripts/show-users.js"></script>
 		<script src="./scripts/carousel.js"></script>
 		<?php
 			if(!empty($action->page_name))
@@ -117,11 +115,13 @@
 		?>
 </head>
 <body onload="loadModules(); onPageLoad();<?php if($action->admin_mode) echo 'adminLoad();'?>">
-
+<div id="box"></div>
 <script>
 	let langData = <?= json_encode($action->trans->langData) ?>;
 </script>
+
 <header>
+
 	<a href="index.php"><h1><span class="colored-kikicode">Kiki</span>club</h1></a>
 	<a href="manage-member.php"><div id="header-infos">
 		<?php
@@ -151,12 +151,6 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 		 <?php
-		 		// if($action->page_name != 'users' && $action->page_name != 'console' )
-				 // {
-					 //
-					 // 		<li><a class="nav-item nav-link" id="setting-button" onclick="showProfiles()"></a></li>
-					 // 	<?php
-				// }
 				if($action->isLoggedIn())
 				{
 					?>
@@ -183,9 +177,8 @@
 						}
 					?>
 				</li>
-				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("main","share") ?></a></li>
-				<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
 				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("main","robots") ?></a></li>
+				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("main","share") ?></a></li>
 				<li><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></li>
 
 				<?php
@@ -194,6 +187,7 @@
 				if($action->isAdmin()){
 					?>
 
+					<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
 					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
 					<li><a class="nav-item nav-link" href="console.php">Randomizer (Temp)</a></li>
 

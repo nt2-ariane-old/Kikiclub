@@ -152,7 +152,7 @@
 		public static function selectMember($id)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("SELECT ID,firstname,lastname,DATE_FORMAT(birthday,'%d/%m/%Y') birthday,id_gender,id_avatar,id_user,id,score FROM member WHERE id=?");
+			$statement = $connection->prepare("SELECT ID,firstname,lastname,FLOOR((DATEDIFF(NOW(),birthday) / 365)) AS age,DATE_FORMAT(birthday,'%d/%m/%Y') as birthday,id_gender,id_avatar,id_user,id,score FROM member WHERE id=?");
 			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -261,7 +261,7 @@
 			}
 
 
-			$request = "SELECT FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) AS age,id,id_user,firstname,lastname FROM member WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
+			$request = "SELECT FLOOR((DATEDIFF(NOW(),birthday) / 365)) AS age,id,id_user,firstname,lastname FROM member WHERE FLOOR((DATEDIFF(NOW(),BIRTHDAY) / 365)) IN( ? )";
 			$statement = $connection->prepare($request);
 			$statement->bindParam(1,$age_str);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -324,7 +324,7 @@
 			$contents = [];
 
 			while ($row = $statement->fetch()) {
-				$contents[] = $row;
+				$contents[$row["id"]] = $row;
 			}
 			return $contents;
 		}
