@@ -6,13 +6,6 @@
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 
-	if($action->error)
-	{
-		?>
-			<div class="error"><?= $action->errorMsg?></div>
-		<?php
-	}
-
 	?>
 	<div id="profil">
 		<?php loadProfil($action->member,$action); ?>

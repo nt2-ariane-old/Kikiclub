@@ -31,7 +31,7 @@
 		],
 		"workshops" => [
 			"difficulty" => "Difficulty",
-			"scholar" => "Suggested Scholar Level",
+			"scholar" => "Suggested Scholar Year",
 			"state" => "Workshop State",
 			"robots" => "Robots",
 			"deleteFilter" => "Delete Filter",

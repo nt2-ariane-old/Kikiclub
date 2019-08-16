@@ -1,6 +1,8 @@
 let classicEditor;
+Dropzone.autoDiscover = false;
 const loadModules = () =>
 {
+
 	editor = document.querySelector('#editor');
 	if(editor != null)
 	{
@@ -12,11 +14,11 @@ const loadModules = () =>
 			classicEditor = editorCK;
 
 			let editable = document.querySelector('.ck-editor__editable');
-				editable.addEventListener('keydown',function(event)
-				{
-					limitText(editable,512);
+			editable.addEventListener('keydown',function(event)
+			{
+				limitText(editable,512);
 
-				})
+			})
 			window.editor = classicEditor;
 		} )
 		.catch( err => {
@@ -154,10 +156,11 @@ const loadMedia = (object,container ) => {
 		else if(object["media_type"] == "png" ||
 				object["media_type"] == "jpg")
 		{
-			let image = document.createElement('img');
-				image.src = object["media_path"];
+			media.style = "background-image:url(" + object["media_path"] +");";
+			// let image = document.createElement('img');
+			// 	image.src = object["media_path"];
 
-			media.appendChild(image);
+			// media.appendChild(image);
 		}
 		else if(object["media_type"] == "mp3")
 		{

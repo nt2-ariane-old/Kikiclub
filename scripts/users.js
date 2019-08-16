@@ -86,10 +86,8 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 
 	node.querySelector('button').setAttribute("onclick",'change_page("member-home.php",{"member_id":'+member["id"]+'})');
 
-	if(state==="manage")
-	{
-		addManageButton(node,member );
-	}
+
+	node.querySelector('button').setAttribute("onclick",'change_page("manage-member.php",{"member_id":'+member["id"]+',"members_action":"update"})');
 
 	node.querySelector(".member-name").innerHTML = member["firstname"];
 	if(member["alert"].length > 0)
@@ -143,8 +141,21 @@ const addNewMember = (container) => {
 	divNew.appendChild(linkNew);
 	container.appendChild(divNew);
 }
-const addManageButton = (node,member) => {
-	node.querySelector(".member-stateLogo").style = "background-image: url(images/tool.png);";
-	node.querySelector('button').setAttribute("onclick",'change_page("manage-member.php",{"member_id":'+member["id"]+',"members_action":"update"})');
-	node.querySelector(".member-stateLogo").style.display = 'block';
+
+const setManage = () => {
+	let nodes = document.querySelectorAll(".member-stateLogo");
+
+	nodes.forEach(node => {
+		let type = node.style.display;
+		if(type == "block")
+		{
+			console.log('block');
+			node.style = "display:hidden;"
+		}
+		else
+		{
+			console.log('hidden');
+			node.style.display = 'block';
+		}
+	});
 }

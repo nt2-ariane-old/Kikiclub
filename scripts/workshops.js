@@ -65,6 +65,31 @@ const sortAndSearchWorkshops = () =>
 		loadWorkshopsList(data["workshops"],data["member_workshops"],data["states"],data["nbPages"]);
 	});
 }
+const plusMinusSign = (node) =>
+{
+	let sign = node.querySelector(".buttonSign");
+	if(sign.innerHTML == "+")
+	{
+		sign.innerHTML = "-";
+	}
+	else
+	{
+		sign.innerHTML = "+";
+	}
+
+}
+const openFilters = () =>
+{
+	let node = document.querySelector('aside');
+	node.style.width = "100%";
+	node.style.padding = "60px 10px";
+}
+const closeFilters = () =>
+{
+	let node = document.querySelector('aside');
+	node.style.width = "0";
+	node.style.padding = "0";
+}
 
 let nbWorkshops = 4;
 const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>

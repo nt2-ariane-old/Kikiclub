@@ -1,10 +1,12 @@
 .login-block {
   background-color: transparent;
   padding: 50px;
-  position: absolute;
+  height: 80vh;
   width: 100%;
-  left: calc((100vw - 80% - (50px)) / 2);
-  top: calc((100vh - 80% + 150px + (1em * 2)) / 2);
+  margin: auto;
+  background-image: url("../images/textures/kikicode.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #spinner {
@@ -64,35 +66,32 @@
   margin: auto;
 }
 
+.login-block button:hover {
+  background-color: rgba(249, 253, 121, 0.5);
+}
+
 .signinButton {
   padding: 0.5em;
   color: black;
   margin: auto;
-}
-
-.signinButton.other {
-  border: 2px solid #3f4942;
+  background-color: white;
   text-align: center;
+  border: 3px solid black;
 }
 
-.signinButton.other a,
-.signinButton.other a:hover {
-  color: black;
-  text-decoration: none;
-}
-
-.signinButton.other:hover {
-  border: 2px solid black;
-  -webkit-box-shadow: 3px 3px black;
-          box-shadow: 3px 3px black;
-  text-decoration: none;
+.signinButton:hover {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 @media only screen and (min-width: 768px) {
-  .login-block {
-    width: 400px;
-    left: calc((100vw - 400px - (50px)) / 2);
-    top: calc((100vh - 400px + 150px + (1em * 2)) / 2);
+  .login-block * {
+    margin: auto;
+  }
+  .login-block input, .login-block .signinButton {
+    width: 300px;
+    margin: 1.5em auto;
+    padding: 4px;
+    padding-left: 8px;
   }
   #spinner {
     width: 400px;

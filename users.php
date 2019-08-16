@@ -149,7 +149,7 @@
 	</main>
 
 	<div class="users-footer">
-		<button class="manage-btn" onclick="loadMembers()"><?= $action->trans->read("users","manage") ?></button>
+		<button class="manage-btn" onclick="setManage()"><?= $action->trans->read("users","manage") ?></button>
 	</div>
 <?php
 	}

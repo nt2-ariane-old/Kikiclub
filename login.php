@@ -7,9 +7,6 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 
-	<div class="logo"></div>
-
-	<div class="logo-nom"></div>
 	<div class="login-block">
 
 	<?php

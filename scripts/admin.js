@@ -1,8 +1,6 @@
 let dropzone;
-
 const adminLoad = () =>
 {
-	Dropzone.autoDiscover = false;
 
 	document.addEventListener("click", (e) => {
 		closeAllLists(e.target);

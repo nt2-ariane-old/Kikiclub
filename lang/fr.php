@@ -28,7 +28,7 @@
 		],
 		"workshops" => [
 			"difficulty" => "Difficulté",
-			"scholar" => "Niveau Scolaire Suggéré",
+			"scholar" => "Année Scolaire Suggérée",
 			"state" => "États de l'atelier",
 			"robots" => "Robots",
 			"deleteFilter" => "Supprimer les filtres",

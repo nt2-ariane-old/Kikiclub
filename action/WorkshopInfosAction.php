@@ -118,7 +118,7 @@
 
 					}
 
-
+					header('Location:workshops.php');
 				}
 				if(isset($_POST['delete']))
 				{

@@ -77,8 +77,6 @@
 
 		<!-- SCRIPTS -->
 
-		<!-- CUSTOM -->
-		<script src="scripts/main.js"></script>
 
 		<!-- JQUERY -->
 		<script type="text/javascript" src="scripts/jquery.js"></script>
@@ -94,9 +92,15 @@
 
 		<!-- BOOTSTRAP -->
 		<script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
+		<!-- WOW.JS -->
+		<script src="scripts/wow.js"></script>
+		<script src="scripts/wow.min.js"></script>
+		<link rel="stylesheet" href="css/animate.css">
 
-		<!-- CUSTOM -->
+		<!-- CAROUSEL -->
 		<script src="./scripts/carousel.js"></script>
+		<!-- CUSTOM -->
+		<script src="scripts/main.js"></script>
 		<?php
 			if(!empty($action->page_name))
 			{
@@ -116,6 +120,9 @@
 </head>
 <body onload="loadModules(); onPageLoad();<?php if($action->admin_mode) echo 'adminLoad();'?>">
 <div id="box"></div>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_CA/sdk.js#xfbml=1&version=v4.0&appId=670117443417077&autoLogAppEvents=1"></script>
+
 <script>
 	let langData = <?= json_encode($action->trans->langData) ?>;
 </script>

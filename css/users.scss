@@ -63,7 +63,7 @@ main
 .member
 {
 	text-align: center;
-	height: calc((40px * 1.2) +  (2 * (19px * 1.2)) + (240px * 1.2));
+	height: calc((40px * 1.2) +  (2 * (19px * 1.2)) + ((240px * 1.2) + 32px));
 	overflow: hidden;
 	position: relative;
 	.member-name
@@ -97,7 +97,7 @@ main
 		border-radius: 100%;
 		width: 240px;
 		height: 240px;
-		margin: 1em auto;
+		margin: 30px auto;
 		background-color: #ADB30F;
 
 		box-shadow:
@@ -122,10 +122,11 @@ main
 	.member-stateLogo
 	{
 		left: calc((100% - 240px) / 2);
-		opacity: 0.4;
+		opacity: 0.6;
 		position: absolute;
 		top:0;
 		display:none;
+		background-image: url(../images/tool.png);
 
 	}
 

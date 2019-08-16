@@ -14,50 +14,57 @@
 			<option value="descName">Name Z-A</option>
 		</select>
 	</div>
+
 	<input type="hidden" id="isMember" value="<?= $action->isMember() ?>" >
+
+	<div class="btn-filter" onclick="openFilters()">
+		<span>Filtrer</span>
+	</div>
 	<aside>
+		<span id="x-aside" onclick="closeFilters()">x</span>
+		<h2>Filtrer</h2>
 		<div id="workshop-menu">
 			<div id="search-form">
 				<div class="card">
-					<div class="card-header" id="headingDifficulty">
-						<h5 class="mb-0">
-							<button class="btn btn-link" aria-expanded="true" aria-controls="collapseDifficulty">
-								<?= $action->trans->read('workshops','difficulty') ?>
-							</button>
-								</h5>
-								</div>
+					<div class="card-header" id="headingDifficulty" onclick="plusMinusSign(this)" data-toggle="collapse" data-target="#collapseDifficulty" aria-expanded="false" aria-controls="collapseDifficulty">
+						<h5 class="mb-0"><?= $action->trans->read('workshops','difficulty') ?></h5>
+						<span class="buttonSign">+</span>
+					</div>
 
-								<div id="collapseDifficulty" class="collapse show" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
+					<div id="collapseDifficulty" class="collapse multi-collapse" aria-labelledby="headingDifficulty" data-parent="#workshop-menu">
+
 								<div class="card-body">
 									<ul>
 										<?php
 											foreach ($action->difficulty as $diff) {
 												?>
-													<div><label><input type="checkbox" onclick="setSearchParams('difficulties',<?=$diff['id'] ?>)"><li><?= $diff["name"] ?></li></label></div>
-												<?php
+													<div>
+														<label>
+															<input type="checkbox" onclick="setSearchParams('difficulties',<?=$diff['id'] ?>)">
+															<span></span><li><?= $diff["name"] ?></li>
+														</label>
+														<div>
+															<?php
 											}
-										?>
+											?>
 									</ul>
 								</div>
 							</div>
 						</div>
 
-						<div class="card">
-							<div class="card-header" id="headingAge">
-								<h5 class="mb-0">
-									<button class="btn btn-link" aria-expanded="true" aria-controls="collapseAge">
-									<?= $action->trans->read('workshops','scholar') ?>
-									</button>
-								</h5>
-								</div>
+						<div class="card" >
+							<div class="card-header" id="headingAge" onclick="plusMinusSign(this)" data-toggle="collapse" data-target="#collapseAge" aria-expanded="false" aria-controls="collapseAge">
+								<h5 class="mb-0"><?= $action->trans->read('workshops','scholar') ?></h5>
+								<span class="buttonSign">+</span>
+							</div>
 
-								<div id="collapseAge" class="collapse show" aria-labelledby="headingAge" data-parent="#workshop-menu">
+							<div id="collapseAge" class="collapse multi-collapse" aria-labelledby="headingAge" data-parent="#workshop-menu">
 								<div class="card-body">
 									<ul>
 										<?php
 											foreach ($action->grades as $grade) {
 												?>
-													<div><label><input type="checkbox" onclick="setSearchParams('grades',<?=$grade['id'] ?>)"><li><?= $grade["name"] ?></li></label></div>
+													<div><label><input type="checkbox" onclick="setSearchParams('grades',<?=$grade['id'] ?>)"><span></span><li><?= $grade["name"] ?></li></label></div>
 												<?php
 											}
 										?>
@@ -66,24 +73,20 @@
 							</div>
 						</div>
 						<div class="card">
-							<div class="card-header" id="headingRobot">
-								<h5 class="mb-0">
-									<button class="btn btn-link" aria-expanded="true" aria-controls="collapseRobots">
-									<?= $action->trans->read('workshops','robots') ?>
-									</button>
-								</h5>
-								</div>
-
-								<div id="collapseRobots" class="collapse show" aria-labelledby="headingRobot" data-parent="#workshop-menu">
+							<div class="card-header" id="headingRobot" onclick="plusMinusSign(this)" data-toggle="collapse" data-target="#collapseRobots" aria-expanded="false" aria-controls="collapseRobots">
+								<h5 class="mb-0"><?= $action->trans->read('workshops','robots') ?></h5>
+								<span class="buttonSign">+</span>
+							</div>
+							<div id="collapseRobots" class="collapse multi-collapse" aria-labelledby="headingRobot" data-parent="#workshop-menu">
 								<div class="card-body">
 									<ul>
 										<?php
 											foreach ($action->robots as $robot) {
 												?>
-													<div><label><input type="checkbox" onclick="setSearchParams('robots',<?=$robot['id'] ?>)"><li><?= $robot["name"] ?></li></label></div>
-												<?php
+													<div><label><input type="checkbox" onclick="setSearchParams('robots',<?=$robot['id'] ?>)"><span></span><li><?= $robot["name"] ?></li></label></div>
+													<?php
 											}
-										?>
+											?>
 									</ul>
 								</div>
 							</div>
@@ -94,7 +97,7 @@
 			</aside>
 			<main>
 
-			<div id='workshops-list'>
+				<div id='workshops-list'>
 				<script>deleteSearchParams();</script>
 
 			</div>
@@ -102,14 +105,6 @@
 
 			</div>
 			</main>
-			<?php
-				if($action->admin_mode)
-				{
-					?>
-						<a href='workshop-infos.php?workshop_id='>+</a>
-					<?php
-				}
-			?>
 
 
 			<?php

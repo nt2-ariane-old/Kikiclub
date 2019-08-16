@@ -2,9 +2,6 @@ let dropzone;
 let content_editor;
 const onPageLoad = () =>
 {
-	Dropzone.autoDiscover = false;
-
-
 	let editorElement = document.querySelector('#content');
 	let dropzoneElement = document.querySelector('#imagedropzone');
 	if(editorElement != null)
