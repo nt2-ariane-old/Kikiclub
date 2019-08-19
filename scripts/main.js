@@ -76,7 +76,6 @@ let change_page = (path, params) => {
 }
 let redirect = (path) =>
 {
-	console.log('test');
 	window.location = path;
 }
 let post = (path, params, method='post') => {
@@ -266,7 +265,6 @@ const set_value = (values,callback) =>
 {
 	if(isDict(values))
 	{
-		console.log(values);
 		values['set_value'] = null;
 		$.ajax({
 			type: "POST",
@@ -274,7 +272,6 @@ const set_value = (values,callback) =>
 			data:values,
 			dataType: 'json',
 			success: function( data ) {
-				console.log(data);
 				callback();
 			},
 

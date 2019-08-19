@@ -24,7 +24,6 @@ const show = (id,link) =>
 	}
 	else
 	{
-		console.log("no node");
 	}
 }
 
@@ -49,7 +48,6 @@ const openWorkshop = ($id) =>
 		success: function( data ) {
 			workshop = data["workshop"];
 			filters = data["filters"];
-			console.log(filters);
 
 			let node = document.getElementById('modal_content');
 				node.innerHTML = "";
@@ -58,7 +56,6 @@ const openWorkshop = ($id) =>
 
 					loadMedia(workshop,workshop_div);
 					let strings = []
-					console.log(filters["difficulty"]);
 					for (const keyf in filters) {
 						if (filters.hasOwnProperty(keyf)) {
 							const filter = filters[keyf];
@@ -67,7 +64,6 @@ const openWorkshop = ($id) =>
 							for (const keyi in filter) {
 								if (filter.hasOwnProperty(keyi)) {
 									const element = filter[keyi];
-									console.log(element);
 									if(i > 0)
 									{
 										strings[keyf] += ", "
@@ -120,7 +116,6 @@ const openBadge = ($id) =>
 		dataType: 'json',
 		success: function( data ) {
 			badge = data["badge"];
-			console.log(badge);
 
 			let node = document.getElementById('modal_content');
 				node.innerHTML = "";

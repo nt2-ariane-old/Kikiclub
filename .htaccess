@@ -17,3 +17,5 @@ RewriteRule ^(.*)$ $1.php [L]
 
 RewriteCond  %{REQUEST_FILENAME}.php workshop-infos.php
 RewriteRule ^([^/\\.]+)*[/]*([^/\\.]+)*[/]*([^/\\.]+)*[/]*$ workshop-infos.php?workshop=$1 [L]
+
+php_flag magic_quotes_gpc Off

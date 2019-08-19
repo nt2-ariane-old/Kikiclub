@@ -233,12 +233,14 @@ aside
 		#workshop-menu {
 			width: 100%;
 			display: block;
-			#search-form
+			.search-form
 			{
 				display: flex;
+				float: left;
+				width: 33%;
 				.card {
 					background-color: #D8DF23;
-					width : calc(100% / 3);
+					width : 100%;
 					margin: 1em;
 				}
 			}

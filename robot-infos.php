@@ -19,10 +19,7 @@
 				if($action->exist)
 				{
 					?>
-						<h3><?= $action->robot["name"] ?></h3>
-						<h4>Recommanded Grade : <?= $action->grades[$action->robot["id_grade"]]["name"]?></h4>
-						<div class="description" ><p><?= $action->robot["description"] ?></p></div>
-						<div class="media"><img class="img-rounded" src=<?=$action->robot["media_path"]?> alt=""></div>
+
 					<?php
 				}
 				else

@@ -58,12 +58,16 @@ main {
 
 main .multislider {
   position: relative;
-  top: calc((80vh - 300px )/ 2);
+  top: calc((80vh - 220px )/ 2);
+}
+
+main .multislider .MS-content {
+  max-width: 220px;
 }
 
 main .multislider .MS-content .item {
-  width: 300px;
-  height: 300px;
+  width: 220px;
+  height: 220px;
 }
 
 main .multislider .MS-content .item .robot {
@@ -79,17 +83,36 @@ main .multislider .MS-content .item .robot a {
 }
 
 main .multislider .MS-content .item .robot a .media {
-  width: 280px;
-  height: 280px;
+  width: 200px;
+  height: 200px;
   margin: auto;
   display: block;
   position: relative;
 }
 
 main .multislider .MS-content .item .robot a .media img {
+  display: block;
   position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
+}
+
+@media only screen and (min-width: 450px) {
+  main .multislider {
+    top: calc((80vh - 300px )/ 2);
+  }
+  main .multislider .MS-content {
+    max-width: 100%;
+  }
+  main .multislider .MS-content .item {
+    width: 300px;
+    height: 300px;
+  }
+  main .multislider .MS-content .item .robot a .media {
+    width: 280px;
+    height: 280px;
+    margin: auto;
+  }
 }
 /*# sourceMappingURL=robots.css.map */

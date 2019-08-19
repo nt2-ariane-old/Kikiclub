@@ -49,7 +49,7 @@
 					}
 
 					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
-					if($statut == 4)
+					if($statut == 3)
 					{
 
 						$workshop = WorkshopDAO::getWorkshop(intval($_POST["id_workshop"]));

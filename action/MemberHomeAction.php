@@ -46,7 +46,13 @@
 
 					}
 
-
+					if($this->member["age"] >= 17)
+					{
+						if(in_array(17,$ages))
+						{
+							MemberWorkshopDAO::addMemberWorkshop($id,$id_w, 1);
+						}
+					}
 					if(in_array($this->member["age"],$ages))
 					{
 						MemberWorkshopDAO::addMemberWorkshop($id,$id_w, 1);

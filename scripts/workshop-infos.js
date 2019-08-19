@@ -113,7 +113,6 @@ const assignAllUsers = () =>
 		success: function(data){
 		  //Do something success-ish
 		  loadingPage.style = "display:none;";
-		  console.log(data);
 		}
 	  });
 }

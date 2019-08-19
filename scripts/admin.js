@@ -18,7 +18,6 @@ const adminLoad = () =>
 				});
 			dropzone.on("success", function(file,infos) {
 				infos = JSON.parse(infos);
-				console.log()
 				if(typeof(infos) === "string")
 				{
 					alert(infos);
@@ -324,7 +323,6 @@ const searchRobots = () =>
 }
 
 const activateDraggable = () => {
-	console.log('dragable-activated')
 	let dropped = false;
 	let draggable_sibling;
 
@@ -547,7 +545,6 @@ const checkAll = () =>
 				element.setAttribute('checked','checked');
 			}
 		});
-		console.log(counter);
 		if(counter == 0 && !invert)
 		{
 			invert = true;

@@ -39,27 +39,29 @@
 				$id_member = $_SESSION["member_id"];
 				$this->member = MemberDAO::selectMember($id_member);
 			}
-			if( !empty($_POST["firstname"]) &&
-				!empty($_POST["lastname"]) &&
-				!empty($_POST["birth"]))
-				{
-					if($id_member >= 0)
+			if(!empty($_POST))
+			{
+				if( !empty($_POST["firstname"]) &&
+					!empty($_POST["lastname"]) &&
+					!empty($_POST["birth"]))
 					{
-						MemberDAO::updateFamilyMember($id_member,$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+						if($id_member >= 0)
+						{
+							MemberDAO::updateFamilyMember($id_member,$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+						}
+						else
+						{
+							MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+						}
+						header('Location:'.$this->previous_page);
 					}
-					else
+				else
 					{
-						MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+						$this->error=true;
+						$this->errorMsg = "You need to fill all Feeld...";
 					}
-					header('Location:'.$this->previous_page);
-				}
-			else
-				{
-					$this->error=true;
-					$this->errorMsg = "You need to fill all Feeld...";
-				}
 
-
+			}
 			if($id_member >= 0)
 			{
 				if(isset($_POST["delete"]))

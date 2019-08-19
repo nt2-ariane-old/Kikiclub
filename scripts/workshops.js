@@ -61,8 +61,20 @@ const sortAndSearchWorkshops = () =>
 	})
 	.then(response => response.json())
 	.then(data => {
-		console.log(data);
-		loadWorkshopsList(data["workshops"],data["member_workshops"],data["states"],data["nbPages"]);
+		if(data["workshops"].length > 0)
+		{
+			loadWorkshopsList(data["workshops"],data["nbPages"]);
+		}
+		else
+		{
+			let divWorkshops = document.getElementById('workshops-list');
+				divWorkshops.innerHTML = "";
+				let h3error = document.createElement('h3');
+					h3error.innerHTML = "Aucun Ateliers Disponibles";
+				divWorkshops.appendChild(h3error);
+			let indexes = document.querySelector('#indexes');
+				indexes.innerHTML = "";
+		}
 	});
 }
 const plusMinusSign = (node) =>
@@ -76,8 +88,16 @@ const plusMinusSign = (node) =>
 	{
 		sign.innerHTML = "+";
 	}
-
+	expandAccordion();
 }
+
+var expandAccordion = function() {
+    var header = $('[data-target="#accordion-0"]');
+    if (header.hasClass('collapsed')) {
+        header.click();
+    }
+}
+
 const openFilters = () =>
 {
 	let node = document.querySelector('aside');
@@ -92,7 +112,7 @@ const closeFilters = () =>
 }
 
 let nbWorkshops = 4;
-const loadWorkshopsList = (workshops,memberWorkshops,states,nbPage) =>
+const loadWorkshopsList = (workshops,nbPage) =>
 {
 	let isMember = document.getElementById("isMember").value;
 
@@ -209,7 +229,6 @@ const deleteSelected = () =>
 {
 	let selected = JSON.stringify(selected_workshops);
 
-	console.log(selected);
 	$.ajax({
 		type: "POST",
 		url:'ajax/workshops-ajax.php',
@@ -219,7 +238,6 @@ const deleteSelected = () =>
 		},
 		dataType: 'json',
 		success: function( data ) {
-			console.log(data);
 			sortAndSearchWorkshops();
 			selected_workshops = [];
 		},
@@ -232,7 +250,6 @@ const deleteSelected = () =>
 const deployed_selected = () =>
 {
 	let selected = JSON.stringify(selected_workshops);
-	console.log(selected);
 	$.ajax({
 		type: "POST",
 		url:'ajax/workshops-ajax.php',
@@ -242,7 +259,6 @@ const deployed_selected = () =>
 		},
 		dataType: 'json',
 		success: function( data ) {
-			console.log(data);
 			sortAndSearchWorkshops()
 			selected_workshops = [];
 		},

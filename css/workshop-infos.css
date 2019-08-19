@@ -198,14 +198,16 @@ aside #workshop-menu .card {
     width: 100%;
     display: block;
   }
-  aside #workshop-menu #search-form {
+  aside #workshop-menu .search-form {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    float: left;
+    width: 33%;
   }
-  aside #workshop-menu #search-form .card {
+  aside #workshop-menu .search-form .card {
     background-color: #D8DF23;
-    width: calc(100% / 3);
+    width: 100%;
     margin: 1em;
   }
 }

@@ -6,8 +6,7 @@ const onPageLoad = () =>
 let selected_badges = [];
 const clicBadge = (node,badge) =>
 {
-	console.log(badge);
-	console.log(node);
+
 	id = badge.id;
 	if (window.event.ctrlKey) {
 		let index = selected_badges.indexOf(id);
@@ -25,7 +24,6 @@ const clicBadge = (node,badge) =>
 	}
 	else if(window.event.altKey)
 	{
-		console.log(node.querySelector("#update_" + id));
 		if(node.querySelector("#update_" + id) != null)
 		{
 			node.innerHTML ="";
@@ -112,7 +110,6 @@ const deleteBadges = () =>
 }
 const addBadge = () =>
 {
-	console.log('clic');
 	$.ajax({
 		type: "POST",
 		url:"ajax/badges-ajax.php",
@@ -179,8 +176,7 @@ const addBadge = () =>
 
 const updateBadge = (id,params) =>
 {
-	console.log(params);
-	console.log(id);
+
 	$.ajax({
 		type: "POST",
 		url:"ajax/badges-ajax.php",
@@ -191,7 +187,6 @@ const updateBadge = (id,params) =>
 		},
 		dataType: 'json',
 		success: function( data ) {
-			console.log(data);
 		}
 	});
 }

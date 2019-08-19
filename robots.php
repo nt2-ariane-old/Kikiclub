@@ -13,12 +13,9 @@
 					foreach ($action->robots as $robot) {
 						?>
 					<div class="item">
-						<div class="robot">
-							<a href="robot-infos.php?robot_id=<?= $robot["id"]  ?>">
-								<div class="media">
-									<img class="img-rounded" src='<?=$robot["media_path"]?>' alt="">
-								</div>
-							</a>
+						<div class="robot" onclick="<?php if($action->admin_mode) { ?> window.location.href = 'robot-infos.php?robot_id=<?= $robot['id'];  ?>' <?php } else { ?>openModal();loadRobot(<?= $robot['id']?>);<?php }?>">
+							<div class="media"><img class="img-rounded" src=<?=$robot["media_path"]?> alt=""></div>
+
 						</div>
 					</div>
 				<?php
@@ -35,6 +32,9 @@
 		<!-- <div class="robots-footer">
 			<a href="index.php" class="manage-btn">Back</a>
 		</div> -->
+		<div id="robot_modal" class="modal">
+
+		</div>
 		<?php
 			if($action->admin_mode)
 			{

@@ -329,9 +329,6 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
     margin: 0;
     float: right;
   }
-  main #workshops-list {
-    height: calc(300px * 3);
-  }
   *:has(.workshop) {
     padding: 4rem;
   }
@@ -363,15 +360,15 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
   .btn-filter {
     display: block;
     background-color: red;
-    width: 20px;
+    width: 36px;
     height: 75px;
     position: fixed;
     z-index: 100;
     cursor: pointer;
   }
   .btn-filter span {
-    -webkit-transform: rotate(90deg) translateY(35px) translateY(-35px);
-            transform: rotate(90deg) translateY(35px) translateY(-35px);
+    -webkit-transform: rotate(90deg) translateX(10px);
+            transform: rotate(90deg) translateX(10px);
     display: block;
   }
   #x-aside {
@@ -411,17 +408,21 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
     width: 100%;
     display: block;
   }
-  aside #workshop-menu #search-form {
+  aside #workshop-menu .search-form {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    width: 33%;
+    float: left;
   }
-  aside #workshop-menu #search-form .card {
-    width: calc(100% / 3);
+  aside #workshop-menu .search-form .card {
+    width: 100%;
     margin: 1em;
   }
-  .workshops-list {
-    min-height: calc(300px * 3 + (3 * 2em));
+  aside #workshop-menu:after {
+    content: "";
+    clear: both;
+    display: table;
   }
 }
 /*# sourceMappingURL=workshops.css.map */

@@ -11,7 +11,6 @@ const onPageLoad = () =>
 				});
 			dropzone.on("success", function(file,infos) {
 				infos = JSON.parse(infos);
-				console.log()
 				if(typeof(infos) === "string")
 				{
 					alert(infos);

@@ -28,8 +28,6 @@ const onPageLoad = () =>
 				init: function() {
 					this.on("success", function(file,infos) {
 						infos = JSON.parse(infos);
-						console.log(infos)
-						console.log(file);
 						if(typeof(infos) === "string")
 						{
 							alert(infos);

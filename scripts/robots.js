@@ -33,6 +33,27 @@ function closeModal() {
 	document.getElementById("robot_modal").style.display = "none";
 }
 
+const loadRobot = (id) =>
+{
+	let container = document.getElementById("robot_modal");
+	$.ajax({
+		type: "POST",
+		url:'ajax/robot-ajax.php',
+		data:
+		 {
+			'id':id
+		 },
+		dataType: 'json',
+		success: function( data ) {
+			console.log(data);
+			loadRobotInfos(container,data["robot"],data["grade"]);
+		},
+		error: function (request, status, error) {
+			console.log(request.responseText);
+		}
+
+	});
+}
 // $action->grades[$action->robot["id_grade"]]["name"]
 const loadRobotInfos = (container,robot,robot_grade) =>
 {

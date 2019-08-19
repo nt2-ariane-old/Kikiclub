@@ -335,11 +335,7 @@ aside
 		padding: 0;
 		margin:0;
 		float: right;
-		#workshops-list
-		{
-			height: calc(300px * 3);
 
-		}
 	}
 
 
@@ -387,14 +383,14 @@ aside
 	{
 		display: block;
 		background-color: red;
-		width: 20px;
+		width: 36px;
 		height: 75px;
 		position: fixed;
 		z-index: 100;
 		cursor: pointer;
 		span
 		{
-			transform: rotate(90deg) translateY(35px) translateY(-35px);
+			transform: rotate(90deg) translateX(10px);
 
 			display: block;
 
@@ -439,19 +435,29 @@ aside
 		#workshop-menu {
 			width: 100%;
 			display: block;
-			#search-form
+			.search-form
 			{
 				display: flex;
+				width: 33%;
+				float: left;
 				.card {
-					width : calc(100% / 3);
+					width :100%;
 					margin: 1em;
 				}
+
+			}
+			&:after
+			{
+				content: "";
+				clear: both;
+				display: table;
 			}
 		}
+
 	}
 	.workshops-list
 	{
-		min-height: calc(300px * 3 + (3 * 2em));
+
 
 	}
 

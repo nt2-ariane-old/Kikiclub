@@ -149,12 +149,10 @@ const setManage = () => {
 		let type = node.style.display;
 		if(type == "block")
 		{
-			console.log('block');
 			node.style = "display:hidden;"
 		}
 		else
 		{
-			console.log('hidden');
 			node.style.display = 'block';
 		}
 	});
