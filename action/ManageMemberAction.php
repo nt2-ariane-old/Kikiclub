@@ -68,6 +68,7 @@
 				{
 					MemberDAO::deleteFamilyMember($id_member);
 					unset($_SESSION["member_id"]);
+					header('location:' . $this->previous_page . '.php');
 				}
 			}
 		}

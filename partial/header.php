@@ -21,22 +21,7 @@
 		<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
 		<link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
 
-		<!-- CUSTOM -->
-		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
-		<link rel="stylesheet" href="css/carousel.css" type="text/css" media="screen" />
-
-		<?php
-
-				if(!empty($action->page_name))
-				{
-					?>
-
-						<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
-					<?php
-				}
-
-		?>
-		<!-- JQUERY -->
+				<!-- JQUERY -->
 		<link rel="stylesheet" href="css/jquery-ui.css">
 
 		<!-- DROPZONE -->
@@ -48,6 +33,18 @@
 		<!-- STARS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+		<!-- CUSTOM -->
+		<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/carousel.css" type="text/css" media="screen" />
+
+		<?php
+			if(!empty($action->page_name))
+			{
+				?>
+					<link rel="stylesheet" href="css/<?= $action->page_name ?>.css">
+				<?php
+			}
+		?>
 
 	<!-- META -->
 		<!-- GOOGLE -->
@@ -130,6 +127,16 @@
 <header>
 
 	<a href="index.php"><h1><span class="colored-kikicode">Kiki</span>club</h1></a>
+	<?php
+		if($action->page_name == 'robots' ||
+		$action->page_name == 'workshops' ||
+		$action->page_name == 'shared')
+		{
+			?>
+				<h2>Les <span class="colored-kikicode"><?= $action->complete_name?></span></h2>
+			<?php
+		}
+	?>
 	<a href="manage-member.php"><div id="header-infos">
 		<?php
 			if($action->isMember())
@@ -193,11 +200,20 @@
 			{
 				if($action->isAdmin()){
 					?>
-
-					<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
 					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
-					<li><a class="nav-item nav-link" href="console.php">Randomizer (Temp)</a></li>
-
+					<?php
+						if($action->admin_mode)
+						{
+							?>
+								<li>Outils Admins : 
+									<ul>
+										<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
+										<li><a class="nav-item nav-link" href="console.php">Randomizer (Temp)</a></li>
+									</ul>
+								</li>
+							<?php
+						}
+					?>
 				<?php
 				}
 				?>

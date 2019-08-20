@@ -54,9 +54,9 @@
 			"users" => "Users",
 			"admin" => "Administration",
 			"robots" => "Robots",
-			"home" => "Home",
+			"home" => "Profils",
 			"signin" => "Sign In",
-			"share" => "Share",
+			"share" => "Shared Posts",
 			"badges" => "Badges",
 		],
 	];

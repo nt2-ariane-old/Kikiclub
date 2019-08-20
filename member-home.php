@@ -70,7 +70,6 @@
 		?>
 	</main>
 	<div id="member_modal" class="modal">
-	  <span class="close cursor" onclick="closeModal()">&times;</span>
 	  <div id="modal_content" class="modal_content"></div>
 	</div>
 <?php

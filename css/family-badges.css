@@ -24,7 +24,7 @@ main {
 
 .badges-footer a {
   border-color: white;
-  color: black !important;
+  color: black;
 }
 
 .badges-footer a:hover {

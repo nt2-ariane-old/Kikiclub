@@ -22,7 +22,7 @@ main #family-carousel {
 main #family-carousel .MS-controls button {
   color: white;
   font-size: 60px;
-  text-shadow: -1px -1px 8px #D4D4D4, -1px 1px 8px #D4D4D4, 1px -1px 8px #D4D4D4, 1px 1px 8px #D4D4D4;
+  text-shadow: -1px -1px 8px #D4D4D4, -1px 1px 8px #D4D4D4, 1px -1px 8px #D4D4D4, 1px 1px 8px #D4D4D4;
 }
 
 main #family-carousel .MS-controls button:hover {
@@ -36,12 +36,12 @@ main #family-carousel .MS-controls button:hover {
 
 .users-footer a {
   border-color: white;
-  color: white !important;
+  color: white;
 }
 
 .users-footer a:hover {
   border-color: rgba(255, 255, 255, 0.678);
-  color: white !important;
+  color: white;
 }
 
 .member {

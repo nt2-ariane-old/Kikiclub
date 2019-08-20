@@ -24,14 +24,40 @@
 .robots-footer a
 {
 	border-color: white;
-	color:black !important;
+	color:black ;
 }
 .robots-footer a:hover
 {
 	border-color: rgba(255, 255, 255, 0.678);
-	color: rgba(0, 0, 0, 0.678) !important;
+	color: rgba(0, 0, 0, 0.678) ;
 }
-
+.modal_content
+{
+	section
+	{
+		padding: 1em;
+		float: left;
+		width: 50%;
+		&:after
+		{
+			clear: both;
+		}
+	}
+	.media
+	{
+		background-color: #D8DF23;
+		height: 100%;
+		width: 50%;
+		float: right;
+		img
+		{
+			max-width: 100%;
+			max-height: 100%;
+			margin: auto;
+		}
+	}
+	
+}
 .robot
 {
 
@@ -43,15 +69,21 @@
 		margin: auto;
 		width: 300px;
 		height: 300px;
-		border: 1px solid black;
+		border: 1px solid #C5C5C5;
 		border-radius: 100%;
 		overflow: hidden;
 		img
 		{
 			vertical-align: middle;
+
 			max-width: 100%;
 			margin: auto;
 			max-height: 100%;
+			transition: 0.5s;
+			&:hover
+			{
+				opacity: 0.5;
+			}
 		}
 	}
 }

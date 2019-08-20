@@ -79,24 +79,20 @@ const sortAndSearchWorkshops = () =>
 }
 const plusMinusSign = (node) =>
 {
+	let allSigns = document.querySelectorAll(".buttonSign");
+	allSigns.forEach(sign => {
+			sign.innerHTML = "+";
+	});
 	let sign = node.querySelector(".buttonSign");
-	if(sign.innerHTML == "+")
-	{
-		sign.innerHTML = "-";
-	}
-	else
-	{
-		sign.innerHTML = "+";
-	}
-	expandAccordion();
+	let nodeParent = node.parentNode;
+		let card = nodeParent.querySelector(".collapse");		
+		let opened = card.classList.contains("show");
+		if(!opened)
+		{
+			sign.innerHTML = "-";
+		}
 }
 
-var expandAccordion = function() {
-    var header = $('[data-target="#accordion-0"]');
-    if (header.hasClass('collapsed')) {
-        header.click();
-    }
-}
 
 const openFilters = () =>
 {
@@ -112,10 +108,17 @@ const closeFilters = () =>
 }
 
 let nbWorkshops = 4;
+
+function openModal() {
+	document.getElementById("workshop_modal").style.display = "flex";
+  }
+  function closeModal() {
+	document.getElementById("workshop_modal").style.display = "none";
+  }
+
+
 const loadWorkshopsList = (workshops,nbPage) =>
 {
-	let isMember = document.getElementById("isMember").value;
-
 	let divWorkshops = document.getElementById('workshops-list');
 	divWorkshops.innerHTML ="";
 		let container = document.createElement('div');
@@ -133,8 +136,9 @@ const loadWorkshopsList = (workshops,nbPage) =>
 
 					divWorkshop = document.createElement('div');
 					divWorkshop.setAttribute('class','workshop');
-					divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["id"]);
+					// divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["id"]);
 
+					divWorkshop.setAttribute('onclick','openModal();openWorkshop('+workshop["id"]+');')
 					if(!workshop["deployed"])
 					{
 						divWorkshop.style.backgroundColor = "red";
@@ -142,34 +146,7 @@ const loadWorkshopsList = (workshops,nbPage) =>
 					let link = document.createElement('a');
 
 					link.setAttribute('class','link normal');
-						// if(isMember)
-						// {
-						// 	let divType = document.createElement('div');
-						// 	divType.setAttribute('class','type ribbon');
-						// 		let spanContent = document.createElement('span');
-						// 			spanContent.setAttribute('class','content');
-
-						// 			let ancien = false;
-						// 	for (const key in memberWorkshops) {
-						// 		if (memberWorkshops.hasOwnProperty(key)) {
-						// 			const m_workshop = memberWorkshops[key];
-						// 			if(m_workshop["id_workshop"] == workshop["id"])
-						// 			{
-
-						// 				ancien = true;
-						// 				spanContent.innerHTML = states[m_workshop["id_statut"]]["name"];
-						// 			}
-						// 		}
-						// 	}
-						// 	if(!ancien)
-						// 	{
-						// 		spanContent.innerHTML = states[1]["name"];
-						// 	}
-						// 		divType.appendChild(spanContent);
-						// 	link.appendChild(divType);
-
-						// }
-
+					
 
 						let divTitle = document.createElement('div');
 							divTitle.setAttribute('class','title');

@@ -27,8 +27,9 @@
 			$uploadfile = $uploaddir . basename($_FILES['file']['name']);
 			$webfile = $webdir . basename($_FILES['file']['name']);
 
-			$accepeted_type = ['video/mp4','image/png','image/jpeg','image/gif','audio/mp3'];
-			if(in_array($_FILES['file']['type'],$accepeted_type))
+			$accepeted_type = ['mp4','png','jpeg','jpg','gif','mp3'];
+			$type = pathinfo($webfile, PATHINFO_EXTENSION);
+			if(in_array($type,$accepeted_type))
 			{
 				if($_FILES["file"]["size"] <= $max_size)
 				{
@@ -46,7 +47,7 @@
 			}
 			else
 			{
-				$this->results =  "Type not accepted";
+				$this->results =  "Type " .pathinfo($webfile, PATHINFO_EXTENSION) . " not accepted";
 			}
 
 

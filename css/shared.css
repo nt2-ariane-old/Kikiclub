@@ -5,21 +5,18 @@
 }
 
 #shared-posts {
-  background-color: antiquewhite;
   margin: 0;
-  padding: 1em;
 }
 
 main {
-  float: right;
-  width: calc(100% - 300px - 2em);
-  padding: 2em;
+  width: 100%;
 }
 
 .social-media {
   width: 100%;
   height: 800px;
   background-color: white;
+  margin: 1em 0;
 }
 
 .pageBtn {
@@ -28,15 +25,30 @@ main {
   padding: 1em;
 }
 
+h2 {
+  text-align: center;
+}
+
 #add-shared {
-  background-color: beige;
+  background-color: rgba(217, 223, 35, 0.692);
+  border: 3px solid gray;
   margin: 0;
   padding: 1em;
 }
 
-.media * {
+#add-shared input {
+  padding: 4px;
+  padding-left: 8px;
+}
+
+#add-shared .ck.ck-editor {
   margin: auto;
-  padding: 1em;
+  width: 80%;
+}
+
+#add-shared .ck.ck-editor .ck.ck-editor__editable_inline p {
+  width: 100%;
+  height: 200px;
 }
 
 #imagedropzone, #content {
@@ -45,11 +57,26 @@ main {
 }
 
 .post {
-  width: 80%;
+  width: 100%;
   background-color: white;
-  margin: 1em auto;
+  margin: auto;
   border: 1px solid black;
   position: relative;
+  text-align: center;
+  margin: 1em 0;
+}
+
+.post .media {
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  background-size: 90% auto;
+  background-repeat: no-repeat;
+  background-position: top 20% right 50%;
+  margin: 1em auto;
+  -webkit-box-shadow: 0 0 10px 3px black;
+          box-shadow: 0 0 10px 3px black;
+  max-width: 90%;
 }
 
 .post button {
@@ -59,10 +86,11 @@ main {
   border-radius: 100%;
   background-color: red;
   padding: 0 0.5em;
+  border-color: black;
 }
 
 .post .username {
-  background-color: bisque;
+  background-color: #D8DF23;
   padding: 5px;
   margin: 0;
 }
@@ -70,7 +98,11 @@ main {
 .post .title {
   margin: 5px;
   padding: 5px;
-  border-bottom: 3px solid black;
+  border-bottom: 1px solid gray;
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  font-weight: bolder;
 }
 
 .post .content {
@@ -85,8 +117,11 @@ main {
 }
 
 #social {
-  background-color: rgba(245, 245, 245, 0.808);
-  width: calc(300px + 2em);
+  display: none;
+  background-color: #D8DF23;
+  border: 3px solid gray;
+  margin: 2em 1em;
+  width: calc(300px);
   height: 100%;
   float: left;
   padding: 1em;
@@ -111,6 +146,23 @@ main {
 }
 
 .instagram-media.instagram-media-rendered {
-  min-width: 300px !important;
+  min-width: 300px;
+}
+
+@media (min-width: 576px) {
+  main {
+    padding: 2em;
+  }
+}
+
+@media (min-width: 992px) {
+  #social {
+    display: block;
+  }
+  main {
+    float: right;
+    width: calc(100% - 300px - 2em);
+    padding: 2em;
+  }
 }
 /*# sourceMappingURL=shared.css.map */

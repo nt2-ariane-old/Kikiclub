@@ -51,9 +51,9 @@
 			"users" => "Utilisateurs",
 			"admin" => "Administration",
 			"robots" => "Robots",
-			"home" => "Accueil",
+			"home" => "Profils",
 			"signin" => "Connexion",
-			"share" => "Partage",
+			"share" => "Partages",
 			"badges" => "Badges",
 		],
 

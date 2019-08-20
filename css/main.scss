@@ -3,18 +3,22 @@
 	margin: 0;
 	padding: 0;
 	max-width: 100%;
-	font-family: "Calling Code";
+	font-family: "Calling Code R";
 }
-
+a,h1,h2,h3,h4,h5,h6,p,div
+{
+  font-family: "Calling Code R";
+}
 a
 {
-	color : black !important;
-	text-decoration: none !important;
+	color : black ;
+	text-decoration: none ;
+	cursor: pointer;
 }
 a:hover
 {
-	color : black !important;
-	text-decoration: none !important;
+	color : black ;
+	text-decoration: none ;
 }
 .admin
 {
@@ -38,20 +42,20 @@ a:hover
 }
 html {
 	width: 100vw;
-	background-color: white !important ;
+	background-color: white  ;
 
 
 }
 .ck.ck-editor__editable_inline p
 {
-	width: 100% !important;
+	width: 100% ;
 }
 .ck.ck-editor	{
 	margin: auto;
 	width: 80%;
 }
 body{
-	background-color: white !important;
+	background-color: white ;
 
 }
 
@@ -70,7 +74,7 @@ a {
 	background-color: transparent;
 	box-shadow: none;
 	border: none;
-	color: black !important;
+	color: black ;
 }
 .btn-link:hover { /* Button that look like a link*/
 	text-decoration: black;
@@ -207,7 +211,7 @@ header *
 }
 header h1{
 	color:black;
-	font-size: 20vw;
+	font-size: 46px;
 	line-height: 1.2;
 	width: 100%;
 	margin: auto;
@@ -224,12 +228,19 @@ header h2{
 
 #menu
 {
-	position: static;
-	background-color: white;
+	position: absolute;
+	top: calc((55px - 48px) / 2);
+	left:0;
+	background: transparent;
+	height: 40px;
+	width: 60px;
 	z-index: 19;
+	padding: 0;
 	margin: 0;
-	width: 100%;
-	margin: 0;
+	.container
+	{
+		padding: 0;
+	}
 }
 
 
@@ -243,7 +254,8 @@ header h2{
 	margin: 0;
 	.media
 	{
-		width: 20%;
+		width: 48px;
+		padding: 0;
 		float: left;
 		height: 48px;
 		border-radius: 100%;
@@ -257,13 +269,26 @@ header h2{
 	}
 	h5
 	{
-		width: 80%;
+		width: calc(100% - 50px);
 		height: 48px;
 		line-height: 48px;
 		float: left;
 		padding : 0 1em;
 	}
 
+}
+.navbar-collapse
+{
+	width: 100vw;
+	max-width: 100vw;
+	position: absolute;
+	margin: 0;
+	left: 0;
+	top: 48px;
+}
+.navbar-header
+{
+	transform: translateX(10px)
 }
 #hamburger{ /* Hamburger menu button */
 	background-image: url('../images/hamburger.png');
@@ -287,7 +312,7 @@ nav ul li {
 
 nav ul li a:hover
 {
-	text-decoration:  underline black double  !important;
+	text-decoration:  underline black double  ;
 }
 
 nav .container {
@@ -343,7 +368,7 @@ footer {
 	width: 100%;
 	height: 176px;
 	text-align: center;
-	display: flex !important;
+	display: flex ;
 	flex-direction: row;
 	justify-content: space-between;
 	text-align: center;
@@ -374,7 +399,7 @@ footer p
 		margin: 0;
 		&:hover
 		{
-			color:#D8DF23 !important;
+			color:#D8DF23 ;
 		}
 	}
 
@@ -471,20 +496,33 @@ footer p
 }
 /* Version Web */
 @media only screen and (min-width: 450px) {
+	.modal
+	{
+		.modal_content
+		{
+			width: 90%;
+			height: 90%;
+		}
+	}
 	#menu {
-		position: fixed;
-		top: 0;
+		position: absolute;
+		top: calc((96px - 48px) / 2);
 		left:0;
 		background: transparent;
-		height: 60px;
+		height: 40px;
 		width: 300px;
 
+	}
+	.navbar-collapse
+	{
+		max-width: 300px;
 	}
 
 	header h1
 {
-	font-size: 80px;
-	font-family: "Calling Code I";
+	font-size: 69px;
+	line-height: 1.4;
+
 }
 	header h2
 {
@@ -510,7 +548,7 @@ footer p
 	.navbar-collapse
 	{
 		max-height: 100vh;
-		overflow: scroll
+		overflow-x: scroll
 
 	}
 }
@@ -536,29 +574,54 @@ footer p
   }
 
   .modal {
+
+	.modal_content
+	{
+		overflow-y: scroll;
+		position: relative;
+		width: 100%;
+		height: auto;
+		box-shadow: 0 0 3px 3px #B5B5B5;
+		background-color:  #F5F5F5;
+		
+		.close {
+			color: black;
+			top: 4px;
+			right: 4px;
+			&:hover,&:focus
+			{
+				color: gray;
+			}
+		}
+		margin: auto;
+	}
+	align-items:center;
+	justify-content: center;
+
 	display: none;
+	padding: 0;
 	position: fixed;
-	z-index: 1;
-	padding-top: 100px;
+	z-index: 300;
+	margin: auto;
 	left: 0;
 	top: 0;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.800);
-  }
+}
 
-  .close {
+.close {
 	color: white;
 	position: absolute;
 	top: 10px;
 	right: 25px;
 	font-size: 35px;
 	font-weight: bold;
-  }
+}
 
-  .close:hover,
-  .close:focus {
+.close:hover,
+.close:focus {
 	color: #999;
 	text-decoration: none;
 	cursor: pointer;
@@ -572,6 +635,70 @@ footer p
 }
 
 /* Tiny Carousel */
+.workshop-infos
+{
+	width: 100%;
+	height: 100%;
+	background-color: #F5F5F5;
+	box-shadow: 0 0 3px 3px #B5B5B5;
+	margin: auto;
+	.close {
+		color: black;
+		top: 4px;
+		right: 4px;
+		&:hover,&:focus
+		{
+			color: gray;
+		}
+	}
+	*
+	{
+		padding: 0 1rem;
+	}
+	::-webkit-scrollbar-track {
+		background: #F5F5F5; 
+	  }
+
+	.infos
+	{
+		
+		width: 100%;
+		overflow-y: scroll;
+		overflow-x: none;
+		h2
+		{
+			width: 90%;
+			text-align: center;
+			font-weight: bolder;
+			font-size: 40px;
+		}
+		h4
+		{
+			font-size: 22px;
+		}
+		p
+		{
+			font-size: 1rem;
+			padding: 0;
+		}
+		
+	}
+	.media
+	{		
+		border: 1px solid black;
+		width: 300px;
+		height: 300px;
+		margin: auto;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		img,video,audio
+		{
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
+  }
 
 #slider1 {
 	margin: 0 0 20px;
@@ -636,14 +763,50 @@ footer p
     width: calc( 100% / 3 - 20px);
 }
 
-@media only screen and (min-width: 970px) {
+@media only screen and (min-width: 576px)
+{
+	.modal
+	{
+		.modal_content
+		{
+			width: 80%;
+			height: 80%;
+		}
+		.workshop-infos
+		{
+			.media
+			{
+				width: 50%;
+				height: 100%;
+				float: right;
+				&::after {
+					content: "";
+					clear: both;
+					display: table;
+				  }
+			}
+			.infos
+			{
+				float: left;	
+				width: 50%;
+				height: 100%;
+			}
+		}
+	}
+}
+@media (min-width: 768px)
+{
+	
+}
+@media (min-width: 992px)
+{
 	#header-infos
 	{
 		background-color: transparent;
 		width: 30%;
 
 		position: absolute;
-		top:2em;
+		top: calc((96px - 48px) / 2);
 		right: 0;
 		text-align: right;
 		padding : 0 1em;
@@ -656,5 +819,8 @@ footer p
 		text-align: right;
 		z-index: 2;
 	}
+}
+@media (min-width: 1200px)
+{
 
 }

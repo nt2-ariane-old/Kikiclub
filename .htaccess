@@ -19,3 +19,9 @@ RewriteCond  %{REQUEST_FILENAME}.php workshop-infos.php
 RewriteRule ^([^/\\.]+)*[/]*([^/\\.]+)*[/]*([^/\\.]+)*[/]*$ workshop-infos.php?workshop=$1 [L]
 
 php_flag magic_quotes_gpc Off
+
+<FilesMatch "\.(ttf|otf|woff)$">
+<IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+</IfModule>
+</FilesMatch>

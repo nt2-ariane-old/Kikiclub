@@ -35,15 +35,56 @@ main {
       justify-self: center;
 }
 
+.badges-infos {
+  width: 100%;
+  height: 90%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.badges-infos * {
+  margin: 0;
+  padding: 0;
+}
+
+.badges-infos .close {
+  color: black;
+  top: 4px;
+  right: 4px;
+}
+
+.badges-infos .close:hover, .badges-infos .close:focus {
+  color: gray;
+}
+
+.badges-infos .media {
+  width: 300px;
+  height: 300px;
+  border-radius: 100%;
+  background-position: center;
+  background-size: 90% auto;
+  background-repeat: no-repeat;
+  background-color: #D8DF23;
+}
+
 .item {
-  width: 214px !important;
+  width: 214px;
 }
 
-.item a {
-  margin: 0 !important;
+.item div {
+  margin: 0;
 }
 
-.item a .kikiclub-badge {
+.item div .kikiclub-badge {
   width: 214px;
   height: 214px;
   position: relative;
@@ -51,14 +92,15 @@ main {
   border: 1px solid black;
   border-radius: 100%;
   overflow: hidden;
+  margin: auto;
 }
 
-.item a .kikiclub-badge.blured {
+.item div .kikiclub-badge.blured {
   background-color: gray;
   overflow: hidden;
 }
 
-.item a .kikiclub-badge.blured .media {
+.item div .kikiclub-badge.blured .media {
   overflow: hidden;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -66,7 +108,7 @@ main {
   margin: auto;
 }
 
-.item a .kikiclub-badge.blured .media img {
+.item div .kikiclub-badge.blured .media img {
   overflow: hidden;
   filter: grayscale(100%) blur(1px);
   -webkit-filter: grayscale(100%) blur(3px);
@@ -83,34 +125,46 @@ main {
   margin: auto;
 }
 
-.workshop-infos {
-  max-width: 90%;
-  max-height: 90%;
-  overflow: hidden;
-  background-color: white;
+.multislider .MS-content {
   margin: auto;
 }
 
-.workshop-infos * {
-  padding: 1em;
+@media (min-width: 576px) {
+  .badges-infos .infos {
+    padding: 1rem;
+    float: left;
+  }
+  .badges-infos .media {
+    width: 50%;
+    height: 90%;
+    border-radius: 100%;
+    background-position: center;
+    background-size: 90% auto;
+    background-repeat: no-repeat;
+    float: left;
+    background-color: #D8DF23;
+  }
+  .MS-content {
+    max-width: 540px;
+  }
 }
 
-.workshop-infos h2 {
-  float: left;
-  width: 50%;
-  border-bottom: 5px solid black;
+@media (min-width: 768px) {
+  .MS-content {
+    max-width: 720px;
+  }
 }
 
-.workshop-infos .media {
-  width: 50%;
-  height: 50%;
-  float: right;
+@media (min-width: 992px) {
+  .MS-content {
+    max-width: 960px;
+  }
 }
 
-.workshop-infos .media::after {
-  content: "";
-  clear: both;
-  display: table;
+@media (min-width: 1200px) {
+  .MS-content {
+    max-width: 1140px;
+  }
 }
 
 .container {
@@ -119,6 +173,13 @@ main {
 
 h3 {
   color: #000000;
+  text-align: center;
+  padding: 1em;
+  font-weight: bolder;
+}
+
+h3 + p {
+  text-align: center;
 }
 
 .item a {

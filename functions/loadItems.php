@@ -487,11 +487,11 @@ function loadBadgesSlider($won_badges,$all_badges,$name,$action,$title,$idMember
 				foreach ($all_badges as $badge) {
 					?>
 					<div class="item">
-						<a <?php if(array_key_exists($badge["id"], $won_badges)) { ?> onclick="openModal();openBadge(<?= $badge['id'] ?>)" <?php } ?>>
+						<div  <?php if(array_key_exists($badge["id"], $won_badges)) { ?> onclick="openModal();openBadge(<?= $badge['id'] ?>)" style="cursor:pointer;" <?php } ?>>
 							<div class="kikiclub-badge <?php if(!array_key_exists($badge["id"], $won_badges)) { echo 'blured'; } ?>">
 								<?php loadMedia($badge)?>
 							</div>
-						</a>
+						</div>
 					</div>
 
 					<?php

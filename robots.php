@@ -33,7 +33,8 @@
 			<a href="index.php" class="manage-btn">Back</a>
 		</div> -->
 		<div id="robot_modal" class="modal">
-
+	  		<span class="close cursor" onclick="closeModal()">&times;</span>
+	  		<div id="modal_content" class="modal_content"></div>
 		</div>
 		<?php
 			if($action->admin_mode)

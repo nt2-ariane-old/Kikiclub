@@ -35,6 +35,83 @@ const loadModules = () =>
 
 }
 
+const openWorkshop = ($id) =>
+{
+	$.ajax({
+		type: "POST",
+		url:'ajax/workshops-ajax.php',
+		data:
+		 {
+			'id':$id
+		 },
+		dataType: 'json',
+		success: function( data ) {
+			workshop = data["workshop"];
+			filters = data["filters"];
+
+			let node = document.getElementById('modal_content');
+				node.innerHTML = "";
+				let x_btn = document.createElement('span');
+					x_btn.setAttribute('class','close cursor');
+					x_btn.setAttribute('onclick','closeModal()');
+					x_btn.innerHTML = "&times;";
+				let workshop_div = document.createElement('div');
+					workshop_div.setAttribute('class','workshop-infos');
+
+					workshop_div.appendChild(x_btn);
+					loadMedia(workshop,workshop_div);
+					let infos_div = document.createElement('div');
+						infos_div.setAttribute('class','infos');
+
+					let strings = []
+					for (const keyf in filters) {
+						if (filters.hasOwnProperty(keyf)) {
+							const filter = filters[keyf];
+							strings[keyf] = "";
+							let i = 0;
+							for (const keyi in filter) {
+								if (filter.hasOwnProperty(keyi)) {
+									const element = filter[keyi];
+									if(i > 0)
+									{
+										strings[keyf] += ", "
+									}
+									strings[keyf] += element["filter"] ;
+									i++;
+								}
+							}
+						}
+					}
+
+
+
+					let name = document.createElement('h2');
+					name.innerHTML = workshop['name'];
+
+					let botsh4 = document.createElement('h4');
+						if( strings["robot"] != null)
+							botsh4.innerHTML = "Type : " + strings["robot"];
+					
+					let diffsh4 = document.createElement('h4');
+						if( strings["difficulty"] != null)
+							diffsh4.innerHTML = "Difficulté : " + strings["difficulty"];
+					let gradesh4 = document.createElement('h4');
+						if( strings["grade"] != null)
+							gradesh4.innerHTML = "Age : " + strings["grade"];
+					let content = document.createElement('div');
+						content.innerHTML = workshop['content'];
+
+						infos_div.appendChild(name);
+						infos_div.appendChild(botsh4);
+						infos_div.appendChild(diffsh4);
+						infos_div.appendChild(gradesh4);
+						infos_div.appendChild(content);
+					workshop_div.appendChild(infos_div);
+				node.appendChild(workshop_div);
+		},
+
+	});
+}
 const limitText = (textarea, limitNum) => {
 
 	let node = document.getElementById("countdown");

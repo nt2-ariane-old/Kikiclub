@@ -41,7 +41,6 @@ const onPageLoad = () =>
 						}
 					}),
 					this.on("addedfile", function(file) {
-						alert("Added file.");
 					})
 				}
 			});
@@ -117,7 +116,10 @@ const loadPosts = (action=null,id=null) =>
 				postArticle.appendChild(user);
 				postArticle.appendChild(title);
 				postArticle.appendChild(content);
-				loadMedia(post,postArticle)
+				if(post["media_path"] != "")
+				{
+					loadMedia(post,postArticle);
+				}
 				if(idUser === post["ID_USER"] || visibilty >= 3)
 				{
 					let deleteButton = document.createElement("button");

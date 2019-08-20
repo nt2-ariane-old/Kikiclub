@@ -84,10 +84,10 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 	let id_logo =  member["id_avatar"];
 	node.querySelector(".member-logo").setAttribute('style', "background-image : url('" + avatars[id_logo]["media_path"] +"');");
 
-	node.querySelector('button').setAttribute("onclick",'change_page("member-home.php",{"member_id":'+member["id"]+'})');
+	node.querySelector('.member-logo').setAttribute("onclick",'change_page("member-home.php",{"member_id":'+member["id"]+'})');
 
 
-	node.querySelector('button').setAttribute("onclick",'change_page("manage-member.php",{"member_id":'+member["id"]+',"members_action":"update"})');
+	node.querySelector('.member-stateLogo').setAttribute("onclick",'change_page("manage-member.php",{"member_id":'+member["id"]+',"members_action":"update"})');
 
 	node.querySelector(".member-name").innerHTML = member["firstname"];
 	if(member["alert"].length > 0)
