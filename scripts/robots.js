@@ -54,7 +54,6 @@ const loadRobot = (id) =>
 
 	});
 }
-// $action->grades[$action->robot["id_grade"]]["name"]
 const loadRobotInfos = (container,robot,robot_grade) =>
 {
 	let mediaDiv = document.createElement('div');
