@@ -178,7 +178,7 @@ let post = (path, params, method='post') => {
 
 const read = (page, node) => {
 	value = "TEXT_NOT_FOUND";
-
+	console.log(langData);
 	if(page in langData)
 	{
 		if (node in langData[page])

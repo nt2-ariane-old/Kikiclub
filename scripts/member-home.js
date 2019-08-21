@@ -8,17 +8,18 @@ const onPageLoad = () =>
 const show = (id,link) =>
 {
 	let node = document.getElementById(id);
+	console.log(node);
 	if(node != null)
 	{
 		if(node.offsetHeight > 180)
 		{
 			node.style = "height:180px;"
-			link.innerHTML = "Afficher plus";
+			link.innerHTML = read("member-home",'show-more');
 		}
 		else
 		{
 			node.style = "height:auto;"
-			link.innerHTML = "Afficher moins";
+			link.innerHTML = read("member-home",'show-less');
 
 		}
 	}

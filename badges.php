@@ -17,7 +17,7 @@
 	</main>
 
 	<div class="badges-footer">
-		<a href="index.php" class="manage-btn">Back</a>
+		<a href="index.php" class="manage-btn"><?= $action->trans->read("all_pages","back") ?></a>
 	</div>
 
 	<?php
@@ -25,11 +25,11 @@
 				{
 					?>
 						<div class="control-bar">
-							<a data-toggle="collapse" data-target="#controls">Control</a>
+							<a data-toggle="collapse" data-target="#controls"><?= $action->trans->read("all_pages","control") ?></a>
 
 							<div class="collapse" id="controls">
-								<button class="submit-btn" onclick="addBadge()">Add</button>
-								<button class="delete-btn" onclick="openConfirmBox(null,{type:'function','function':deleteBadges});">Delete</button>
+								<button class="submit-btn" onclick="addBadge()"><?= $action->trans->read("all_pages","add") ?></button>
+								<button class="delete-btn" onclick="openConfirmBox(null,{type:'function','function':deleteBadges});"><?= $action->trans->read("all_pages","delete") ?></button>
 							</div>
 						</div>
 					<?php

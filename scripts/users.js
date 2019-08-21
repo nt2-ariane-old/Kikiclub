@@ -6,7 +6,7 @@ const onPageLoad = () =>
 let previousState = "manage";
 let states = ["normal","manage"]
 
-const loadMembers = (isCarousel) => {
+const loadMembers = () => {
 	let state;
 	for (let i = 0; i < states.length; i++) {
 		const element = states[i];
@@ -32,7 +32,6 @@ const loadMembers = (isCarousel) => {
 	container.innerHTML = "";
 	let formData = new FormData();
 
-	let nbMembers = 4;
 	fetch("ajax/family-ajax.php", {
 		method: "POST",
 		credentials: 'include',
@@ -101,21 +100,21 @@ const addMember = (member, memberHTML, container, state ,avatars) =>
 		node.querySelector(".member-nbalert").style.display = 'none';
 	}
 
-	node.querySelector(".member-nbPTS").innerHTML = member["score"] + read("users","nbPts");
-
+	
 	let count = 0;
 	for (const key in member["workshops"]) {
 		if (member["workshops"].hasOwnProperty(key)) {
 			const element = member["workshops"][key];
-			if(element["ID_STATUT"]==4)
+			if(element["id_statut"]==3)
 			{
 				count++;
 			}
 		}
 	}
-
-	node.querySelector(".member-nbWorkshops").innerHTML = count + read("users","nbWorkshops");
-
+	
+	node.querySelector(".member-nbWorkshops").innerHTML = count + " " + read("users","nbWorkshops");
+	node.querySelector(".member-nbPTS").innerHTML = member["score"] + " " + read("users","nbPts");
+	
 	container.appendChild(node);
 }
 

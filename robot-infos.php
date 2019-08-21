@@ -9,34 +9,11 @@
 
 	<div class='sheet'>
 		<?php
-
-			if($action->admin_mode)
-			{
-				loadRobotEditor($action->robot,$action);
-			}
-			else
-			{
-				if($action->exist)
-				{
-					?>
-
-					<?php
-				}
-				else
-				{
-					?>
-					<div class="error-droid">
-
-						<h2>This isn't the robot you're looking for...</h2>
-						<img src="images/error/notRobot.gif" alt="">
-					</div>
-						<?php
-				}
-			}
-			?>
-			<div class="robots-footer">
-				<a href="robots.php" class="manage-btn">Back</a>
-			</div>
+			loadRobotEditor($action->robot,$action);
+		?>
+		<div class="robots-footer">
+			<a href="robots.php" class="manage-btn"><?= $action->trans->read("all_pages","back") ?></a>
+		</div>
 	</div>
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

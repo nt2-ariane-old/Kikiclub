@@ -24,7 +24,7 @@ const onPageLoad = () =>
 				params: {
 					dir: "images/uploads/shared"
 				},
-				dictDefaultMessage: "Ajouter du contenu Media ici",
+				dictDefaultMessage: read("shared","media-content"),
 				init: function() {
 					this.on("success", function(file,infos) {
 						infos = JSON.parse(infos);
@@ -132,7 +132,7 @@ const loadPosts = (action=null,id=null) =>
 		});
 
 		let containerPages = document.getElementById('pages');
-			containerPages.innerHTML = "Pages : ";
+			containerPages.innerHTML = read("shared","pages") + " : ";
 
 		for (let i = 0; i < nbPages; i++) {
 			pageIndex = i + 1;

@@ -68,6 +68,6 @@
 		?>
 	</ul>
 
-	<a id="manage-btn" href="manage-member.php">Back</a>
+	<a id="manage-btn" href="manage-member.php"><?= $action->trans->read("all_pages","back") ?></a>
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");

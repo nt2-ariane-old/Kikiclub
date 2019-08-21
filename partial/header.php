@@ -133,7 +133,7 @@
 		$action->page_name == 'shared')
 		{
 			?>
-				<h2>Les <span class="colored-kikicode"><?= $action->complete_name?></span></h2>
+				<h2><?= $action->trans->read("all_pages","the") ?> <span class="colored-kikicode"><?= $action->complete_name?></span></h2>
 			<?php
 		}
 	?>
@@ -168,11 +168,11 @@
 				if($action->isLoggedIn())
 				{
 					?>
-					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("main","home") ?></a></li>
+					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("pages_name","users") ?></a></li>
 				<?php
 			}
 			?>
-				<li> <a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("main","workshops") ?></a>
+				<li> <a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("pages_name","workshops") ?></a>
 				<?php
 					if($action->isLoggedIn())
 					{
@@ -191,8 +191,8 @@
 						}
 					?>
 				</li>
-				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("main","robots") ?></a></li>
-				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("main","share") ?></a></li>
+				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("pages_name","robots") ?></a></li>
+				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("pages_name","shared") ?></a></li>
 				<li><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></li>
 
 				<?php
@@ -200,15 +200,15 @@
 			{
 				if($action->isAdmin()){
 					?>
-					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo "See as user"; } else {echo "See as admin";} ?></a></li>
+					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo $action->trans->read("admin","as-user") ; } else {echo $action->trans->read("admin","as-admin");} ?></a></li>
 					<?php
 						if($action->admin_mode)
 						{
 							?>
-								<li>Outils Admins : 
+								<li><?= $action->trans->read("admin","tools") ?>
 									<ul>
-										<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("main","badges") ?></a></li>
-										<li><a class="nav-item nav-link" href="console.php">Randomizer (Temp)</a></li>
+										<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("pages_name","badges") ?></a></li>
+										<li><a class="nav-item nav-link" href="console.php"><?= $action->trans->read("pages_name","console") ?></a></li>
 									</ul>
 								</li>
 							<?php
@@ -217,13 +217,13 @@
 				<?php
 				}
 				?>
-				<li><a class="nav-item nav-link" href="?logout=true"><?= $action->trans->read("main","signout") ?></a></li>
+				<li><a class="nav-item nav-link" href="?logout=true"><?= $action->trans->read("all_pages","signout") ?></a></li>
 				<?php
 			}
 			else
 			{
 				?>
-				<li><a class="nav-item nav-link" href="login.php"><?= $action->trans->read("main","signin") ?></a></li>
+				<li><a class="nav-item nav-link" href="login.php"><?= $action->trans->read("all_pages","signin") ?></a></li>
 				<?php
 			}
 			?>

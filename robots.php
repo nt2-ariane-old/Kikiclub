@@ -41,9 +41,9 @@
 			{
 				?>
 					<div class="control-bar">
-						<a data-toggle="collapse" data-target="#controls">Control</a>
+						<a data-toggle="collapse" data-target="#controls"><?= $action->trans->read("all_pages","control") ?></a>
 						<div class="collapse" id="controls">
-							<button class="submit-btn" onclick="change_page('robot-infos.php',{'robot_id':null})">Add New Robot</button>
+							<button class="submit-btn" onclick="change_page('robot-infos.php',{'robot_id':null})"><?= $action->trans->read("robots","add-robot") ?></button>
 							<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
 						</div>
 					</div>

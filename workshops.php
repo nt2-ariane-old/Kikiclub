@@ -7,12 +7,12 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
 	<div class="btn-filter" onclick="openFilters()">
-		<span>Filtrer</span>
+		<span><?= $action->trans->read("workshops","filter") ?></span>
 	</div>
 	<aside>
 		<div class="filters">
 			<span id="x-aside" onclick="closeFilters()">x</span>
-			<h2>Filtrer</h2>
+			<h2><?= $action->trans->read("workshops","filter") ?></h2>
 			<div id="workshop-menu">
 				<div class="search-form" id="difficulty-form">
 					<div class="card">
@@ -90,10 +90,10 @@
 	<main>
 		<div class="sort">
 			<select id="sort_select" onchange="sortAndSearchWorkshops()">
-				<option value="none" selected>Sort by</option>
-				<option value="recents">Most Recents</option>
-				<option value="ascName">Name A-Z</option>
-				<option value="descName">Name Z-A</option>
+				<option value="none" selected><?= $action->trans->read("workshops","sort") ?></option>
+				<option value="recents"><?= $action->trans->read("workshops","recents") ?></option>
+				<option value="ascName"><?= $action->trans->read("workshops","a-z_name") ?></option>
+				<option value="descName"><?= $action->trans->read("workshops","z-a_name") ?></option>
 			</select>
 		</div>
 		<div class='workshops-list' id="workshops-list">
@@ -112,9 +112,9 @@
 				<div class="control-bar">
 					<a data-toggle="collapse" data-target="#controls">Control</a>
 					<div class="collapse" id="controls">
-						<button class="submit-btn" onclick="change_page('workshop-infos.php',{'workshop_id':null})">Add</button>
-						<button class="submit-btn" onclick="deployed_selected()">Deployed</button>
-						<button class="delete-btn" onclick="openConfirmBox(null,{type:'function','function':deleteSelected});">Delete</button>
+						<button class="submit-btn" onclick="change_page('workshop-infos.php',{'workshop_id':null})"><?= $action->trans->read("all_pages","add") ?></button>
+						<button class="submit-btn" onclick="deployed_selected()"><?= $action->trans->read("workshops","deployed") ?></button>
+						<button class="delete-btn" onclick="openConfirmBox(null,{type:'function','function':deleteSelected});"><?= $action->trans->read("all_pages","delete") ?></button>
 					</div>
 				</div>
 			<?php

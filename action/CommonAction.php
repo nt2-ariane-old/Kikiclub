@@ -193,7 +193,7 @@
 			//translate page name
 			if(strpos($this->page_name, 'error') === false && strpos($this->page_name, 'ajax') === false)
 			{
-				$this->complete_name = $this->trans->read("page_name",$this->page_name);
+				$this->complete_name = $this->trans->read("pages_name",$this->page_name);
 			}
 
 			if($this->isLoggedIn())

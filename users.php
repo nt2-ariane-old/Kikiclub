@@ -12,32 +12,32 @@
 	<div class="sheet">
 
 		<div class="bar">
-			<h3>Search Every Feeld</h3>
+			<h3><?= $action->trans->read("admin","search-all") ?></h3>
 			<div>
 				<div class="autocomplete" style="width:300px;">
-					<input id="search-all" type="text" name="search" placeholder="All feelds">
+					<input id="search-all" type="text" name="search" placeholder="<?= $action->trans->read("admin","all-field") ?>">
 				</div>
 			</div>
-			<h3>Search User</h3>
+			<h3><?= $action->trans->read("admin","search-user") ?></h3>
 			<div>
 				<div class="autocomplete" style="width:300px;">
-					<input id="search-user-firstname" type="text" name="search" placeholder="User Firstname">
+					<input id="search-user-firstname" type="text" name="search" placeholder="<?= $action->trans->read("admin","firstname") ?>">
 				</div>
 				<div class="autocomplete" style="width:300px;">
-					<input id="search-user-lastname" type="text" name="search" placeholder="User Lastname">
+					<input id="search-user-lastname" type="text" name="search" placeholder="<?= $action->trans->read("admin","lastname") ?>">
 				</div>
 				<div class="autocomplete" style="width:300px;">
-					<input id="search-user-email" type="text" name="search" placeholder="User Email">
+					<input id="search-user-email" type="text" name="search" placeholder="<?= $action->trans->read("admin","mail") ?>">
 				</div>
 			</div>
-			<h3>Search Member</h3>
+			<h3><?= $action->trans->read("admin","search-member") ?></h3>
 			<div>
 				<div class="autocomplete" style="width:300px;">
-					<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="Member Firstname">
+					<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="<?= $action->trans->read("admin","firstname") ?>">
 				</div>
 
 				<div class="autocomplete" style="width:300px;">
-					<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="Member Lastname">
+					<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="<?= $action->trans->read("admin","lastname") ?>">
 				</div>
 			</div>
 		</div>
@@ -50,20 +50,20 @@
 							if(!empty($action->users))
 							{
 						?>
-							<h2>Users</h2>
+							<h2><?= $action->trans->read("admin","users") ?></h2>
 							<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
 								<thead>
 									<tr class="rowMember">
-										<th style="width:10%;">First Name</th>
-										<th style="width:10%;">Last Name</th>
-										<th style="width:15%;">Email</th>
+										<th style="width:10%;"><?= $action->trans->read("admin","firstname") ?></th>
+										<th style="width:10%;"><?= $action->trans->read("admin","lastname") ?></th>
+										<th style="width:15%;"><?= $action->trans->read("admin","mail") ?></th>
 									</tr>
 								</thead>
 								<tbody id="table-users">
 									<?php
 										foreach ($action->users as $user) {
 									?>
-										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['id'] ?>,'users_action':'update'})">
+										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['id'] ?>})">
 											<td><?= $user["firstname"] ?></td>
 											<td><?= $user["lastname"] ?></td>
 											<td><?= $user["email"] ?></td>
@@ -78,13 +78,13 @@
 							if (!empty($action->members))
 							{
 						?>
-							<h2>Family's Members</h2>
+							<h2><?= $action->trans->read("admin","members") ?></h2>
 							<table>
 								<thead>
 									<tr>
-										<th>Firstname</th>
-										<th>Lastname</th>
-										<th>Score</th>
+										<th><?= $action->trans->read("admin","firstname") ?></th>
+										<th><?= $action->trans->read("admin","lastname") ?></th>
+										<th><?= $action->trans->read("admin","score") ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -114,7 +114,7 @@
 	<div class="control-bar">
 		<a data-toggle="collapse" data-target="#controls">Control</a>
 		<div class="collapse" id="controls">
-			<button class="submit-btn" onclick="change_page('manage-user.php',{'users_action':'create'})">Add New User</button>
+			<button class="submit-btn" onclick="change_page('manage-user.php',{'user_id':null})"><?= $action->trans->read("admin","new-user") ?></button>
 			<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
 		</div>
 	</div>
