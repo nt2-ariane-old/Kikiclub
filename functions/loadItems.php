@@ -149,64 +149,6 @@ function loadRobotEditor($robot,$action)
 							</form>
 	<?php
 }
-$nbWorkshops = 4;
-function loadWorkshopsCarousel($workshops,$name,$action,$title)
-{
-
-	?>
-		<div id="<?= $name  ?>" class="carousel slide" >
-			<!-- Content -->
-			<div class="carousel-inner">
-			<?php
-				for ($i=0; $i < sizeof($workshops); $i++) {
-					?>
-					<div class="carousel-item <?php if($i == 0) echo 'active';?>">
-						<div class="container">
-							<div class="row">
-							<?php
-								$j = $i;
-								for($i; $i < $j + $nbWorkshops  && $i < sizeof($workshops); $i++)
-								{
-									$workshop = $workshops[$i];
-							?>
-
-									<div class="workshop col-sm-<?= 12/$nbWorkshops ?>" >
-									<?php
-										loadMedia($workshop);
-									?>
-									<h4><?= $title ?> workshop</h3>
-									<div class="title"><h2><?= $workshop["name"] ?></h4></div>
-
-									<h5>Type : <?= $action->robots[$workshop["id_ROBOT"]]["name"] ?></h5>
-									<?php
-										loadStars($workshop);
-									?>
-
-								</div>
-							<?php
-
-							}
-							?>
-							</div>
-						</div>
-					</div>
-					<?php
-				}
-
-			?>
-		   </div>
-		   <!-- Controls -->
-		   <a class="carousel-control-prev" href="#<?= $name  ?>" role="button" data-slide="prev">
-		     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		     <span class="sr-only">Previous</span>
-		   </a>
-		   <a class="carousel-control-next" href="#<?= $name  ?>" role="button" data-slide="next">
-		     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-		     <span class="sr-only">Next</span>
-		   </a>
-		</div>
-	<?php
-}
 
 function loadBadgesLine($badges,$name,$action,$title,$isMember=false)
 {
