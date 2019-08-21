@@ -5,7 +5,7 @@
 	class PostsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'posts-ajax','Posts Ajax');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'posts-ajax',);
 		}
 
 		protected function executeAction() {

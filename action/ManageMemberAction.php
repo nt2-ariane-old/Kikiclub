@@ -18,7 +18,7 @@
 
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"manage-member","Manage Member");
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,"manage-member");
 		}
 
 		protected function executeAction() {

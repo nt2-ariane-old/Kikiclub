@@ -8,11 +8,10 @@
 		public $members;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'users',"Home");
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'users');
 		}
 
 		protected function executeAction() {
-			$this->complete_name = $this->trans->read("main","home");
 
 
 			unset($_SESSION["member_id"]);

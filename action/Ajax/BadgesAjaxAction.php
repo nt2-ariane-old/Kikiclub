@@ -6,7 +6,7 @@
 
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_MODERATOR,'badges-ajax','badges ajax');
+			parent::__construct(CommonAction::$VISIBILITY_MODERATOR,'badges-ajax');
 		}
 
 		protected function executeAction() {

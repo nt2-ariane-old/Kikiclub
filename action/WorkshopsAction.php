@@ -24,7 +24,7 @@
 		public $robots;
 		public $difficulty;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshops","Workshops");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshops");
 			$this->show_workshop = false;
 			$this->completed = [];
 			$this->new = [];
@@ -47,8 +47,6 @@
 				$this->workshopStates = FilterDAO::getWorkshopStatesFR();
 				$this->grades = FilterDAO::getGradesFR();
 			}
-
-			$this->complete_name = $this->trans->read("main","workshops");
 
 			$this->workshops_list = WorkshopDAO::getWorkshops(null,"none",false,true);
 

@@ -34,11 +34,10 @@
 
 		public $previous_page;
 
-		public function __construct($page_visibility,$page_name,$complete_name)
+		public function __construct($page_visibility,$page_name)
 		{
 			$this->page_visibility = $page_visibility;
 			$this->page_name = $page_name;
-			$this->complete_name = $complete_name;
 			$this->default_visibility = 1;
 			$this->url = $_SERVER['HTTP_HOST'];
 			$this->detect = new Mobile_Detect;
@@ -129,6 +128,7 @@
 			}
 
 			//check current page
+
 			if(strpos($this->page_name, 'error') === false && strpos($this->page_name, 'ajax') === false && $this->page_name != "assign-member")
 			{
 				if(!empty( $_SESSION["current"]))
@@ -145,6 +145,7 @@
 				}
 				$_SESSION["current"] = $this->page_name;
 				$this->previous_page = $_SESSION["previous"];
+
 			}
 			else
 			{
@@ -189,6 +190,11 @@
 
 			$this->trans = new Translator($currentLang);
 
+			//translate page name
+			if(strpos($this->page_name, 'error') === false && strpos($this->page_name, 'ajax') === false)
+			{
+				$this->complete_name = $this->trans->read("page_name",$this->page_name);
+			}
 
 			if($this->isLoggedIn())
 			{

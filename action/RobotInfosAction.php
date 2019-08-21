@@ -16,7 +16,7 @@
 		public $grades;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'robot-infos','Robot Informations');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'robot-infos');
 			$this->exist = false;
 			$this->added = false;
 			$this->add = false;

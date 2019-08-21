@@ -20,7 +20,7 @@
 		public $filters;
 		public $id_types;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshop-infos", "Workshop Information");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshop-infos");
 			$this->exist = false;
 			$this->added = false;
 		}

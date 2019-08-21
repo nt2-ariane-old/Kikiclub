@@ -4,7 +4,7 @@
 	class BasicAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'basic-ajax','Basics Ajax');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'basic-ajax');
 		}
 
 		protected function executeAction() {

@@ -6,7 +6,7 @@
 
 		public $robots;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'robots','Robots');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'robots');
 		}
 
 		protected function executeAction() {

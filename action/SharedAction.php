@@ -6,11 +6,10 @@
 
 		public $nbPages;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'shared','Shared Posts');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'shared');
 		}
 
 		protected function executeAction() {
-			$this->complete_name = $this->trans->read("main","share");
 		}
 
 	}

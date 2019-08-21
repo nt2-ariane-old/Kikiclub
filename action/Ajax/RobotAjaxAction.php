@@ -6,7 +6,7 @@
 	class RobotAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'robot-ajax','Robot Ajax');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'robot-ajax');
 		}
 
 		protected function executeAction() {

@@ -6,7 +6,7 @@
 	class AssignMemberAction extends CommonAction {
 		public $workshopsDeployed;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ANIMATOR,'assign-member','Assign Member to Workshop');
+			parent::__construct(CommonAction::$VISIBILITY_ANIMATOR,'assign-member');
 		}
 
 		protected function executeAction() {

@@ -1,5 +1,89 @@
 <?php
 	$langData = [
+		"pages_name" => [
+			"users" => "Profils",
+			"workshops-infos" => "Informations sur les Ateliers",
+			"workshops" => "Ateliers",
+			"shared" => "Partages",
+			"robots" => "Robots",
+			"robot-infos" => "Informations sur les Robots",
+			"member-home" => "Page du Membre",
+			"manage-user" => "Modification de l'Utilisateur",
+			"manage-member" => "Modification du Membre",
+			"login" => "Connexion",
+			"index" => "Index",
+			"console" => "Générateur (Temp)",
+			"badges" => "Badges",
+			"assign-member" => "Assignation d'Ateliers à un membre",
+		],
+		"all_pages" => [
+			"delete" => "Supprimer",
+			"update" => "Modifier",
+			"add" => "Ajouter",
+			"back" => "Retour",
+
+			
+			
+			"welcome" => "Bienvenue",
+			"signout" => "Déconnexion",
+			"signin" => "Connexion",
+		],
+		"users" => [
+			"nbWorkshops" => " ateliers terminés",
+			"nbPts" => " points accumulés",
+			"new" => "Ajouter Membre",
+			"manage" => "Modifier les Profils",
+			"return" => "Retourner au Profils",
+			"profil" => "Profil",
+			"selectAvatar" => "Choisir Avatar",
+		],
+		"workshops-infos" => [
+			
+		],
+		"workshops" => [
+			"difficulty" => "Difficulté",
+			"scholar" => "Année Scolaire Suggérée",
+			"state" => "États de l'atelier",
+			"robots" => "Robots",
+			"deleteFilter" => "Supprimer les filtres",
+		],
+		"shared" => [
+			
+		],
+		"robots" => [
+			
+		],
+		"robot-infos" => [
+			
+		],
+		"member-home" => [
+			
+		],
+		"manage-user" => [
+			"firstname" => "Prénom",
+			"lastname" => "Nom",
+			"birth" => "Anniversaire",
+		],
+		"manage-member" => [
+			"firstname" => "Prénom",
+			"lastname" => "Nom",
+			"birth" => "Anniversaire",
+		],
+		"login" => [
+			
+		],
+		"index" => [
+
+		],
+		"console" => [
+
+		],
+		"badges" => [
+
+		],
+		"assign-member" => [
+
+		],
 		"loginpage" => [
 			"separator" => "OU",
 			"signIn-Fb" => "Se Connecter par Kikicode",
@@ -18,43 +102,8 @@
 			"errorPassword" => "Les mots de passes ne sont pas les mêmes",
 		],
 		"users" => [
-			"nbWorkshops" => " ateliers terminés",
-			"nbPts" => " points accumulés",
-			"new" => "Ajouter Membre",
-			"manage" => "Modifier les Profils",
-			"return" => "Retourner au Profils",
-			"profil" => "Profil",
-			"selectAvatar" => "Choisir Avatar",
 		],
 		"workshops" => [
-			"difficulty" => "Difficulté",
-			"scholar" => "Année Scolaire Suggérée",
-			"state" => "États de l'atelier",
-			"robots" => "Robots",
-			"deleteFilter" => "Supprimer les filtres",
-		],
-		"main" => [
-			"delete" => "Supprimer",
-			"update" => "Modifier",
-			"add" => "Ajouter",
-			"back" => "Retour",
-			"difficulty" => "Difficulté",
-
-			"firstnameInput" => "Prénom",
-			"lastnameInput" => "Nom",
-			"birthInput" => "Anniversaire",
-
-			"welcome" => "Bienvenue",
-
-			"signout" => "Déconnexion",
-			"workshops" => "Ateliers",
-			"users" => "Utilisateurs",
-			"admin" => "Administration",
-			"robots" => "Robots",
-			"home" => "Profils",
-			"signin" => "Connexion",
-			"share" => "Partages",
-			"badges" => "Badges",
 		],
 
 	];

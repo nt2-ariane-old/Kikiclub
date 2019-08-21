@@ -14,7 +14,7 @@
 
 		public $added;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'manage-user','Manage User');
+			parent::__construct(CommonAction::$VISIBILITY_CUSTOMER_USER,'manage-user');
 			$this->add = false;
 			$this->update = false;
 			$this->added = false;
@@ -27,7 +27,6 @@
 				if($_SESSION["users_action"] == "create")
 				{
 					$this->create = true;
-					$this->complete_name = "Create User";
 				}
 				else if($_SESSION["users_action"] == "update")
 				{

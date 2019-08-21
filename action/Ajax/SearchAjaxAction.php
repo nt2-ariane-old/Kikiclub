@@ -9,7 +9,7 @@
 	class SearchAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"search-ajax","Search,Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"search-ajax");
 		}
 
 		protected function executeAction() {

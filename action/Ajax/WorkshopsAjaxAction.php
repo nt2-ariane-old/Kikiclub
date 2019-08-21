@@ -7,7 +7,7 @@
 	class WorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshops-ajax","Workshops,Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshops-ajax");
 		}
 
 		protected function executeAction() {

@@ -20,7 +20,7 @@
 		public $results;
 
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console", "Randomizer");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"console");
 			$this->show_results = false;
 		}
 

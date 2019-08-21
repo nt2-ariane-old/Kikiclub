@@ -9,7 +9,7 @@
 	class MemberWorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'familyWorkshops-ajax', "Family Workshops, Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'familyWorkshops-ajax');
 			$this->results = [];
 		}
 

@@ -6,7 +6,7 @@
 
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'send-email-ajax','Send Email');
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'send-email-ajax');
 		}
 
 		protected function executeAction() {

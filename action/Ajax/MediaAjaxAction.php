@@ -5,7 +5,7 @@
 
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, 'media-ajax', 'Media Ajax');
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, 'media-ajax',);
 		}
 
 		protected function executeAction() {

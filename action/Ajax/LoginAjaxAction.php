@@ -4,7 +4,7 @@
 	class LoginAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "loginAjax", "Login","Ajax");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "loginAjax", "Login");
 			$this->results = false;
 
 		}

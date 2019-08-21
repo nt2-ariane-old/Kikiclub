@@ -8,7 +8,7 @@
 		public $error;
 		public $errorMsg;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "login","Login Page");
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC, "login");
 			$this->otherlogin = false;
 			$this->error = false;
 		}
@@ -42,7 +42,7 @@
 						}
 					} else {
 						$this->error = true;
-						$this->errorMsg =$this->trans->read("loginpage", "errorFeeld");
+						$this->errorMsg =$this->trans->read("login", "errorFeeld");
 					}
 				}
 
@@ -85,7 +85,7 @@
 					else
 					{
 						$this->error = true;
-						$this->errorMsg = $this->trans->read("loginpage", "errorFeeld");
+						$this->errorMsg = $this->trans->read("login", "errorFeeld");
 					}
 				}
 
