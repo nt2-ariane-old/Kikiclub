@@ -237,6 +237,10 @@
 
 
 			}
+			if($this->admin_mode)
+			{
+				$this->results["direct_link"] = true;
+			}
 			if(!empty($_POST["id"]))
 			{
 				$this->results["workshop"] = WorkshopDAO::getWorkshop($_POST["id"]);

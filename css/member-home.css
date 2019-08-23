@@ -110,8 +110,8 @@ main {
 
 .item div .kikiclub-badge.blured .media img {
   overflow: hidden;
-  filter: grayscale(100%) blur(1px);
-  -webkit-filter: grayscale(100%) blur(3px);
+  filter: grayscale(100%) blur(7px);
+  -webkit-filter: grayscale(100%) blur(7px);
   vertical-align: middle;
   max-height: 100%;
   max-width: 100%;

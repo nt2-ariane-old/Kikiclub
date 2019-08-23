@@ -30,21 +30,24 @@
   color: rgba(0, 0, 0, 0.678);
 }
 
-.modal_content section {
-  padding: 1em;
-  float: left;
-  width: 50%;
+.close {
+  z-index: 100;
 }
 
-.modal_content section:after {
-  clear: both;
+.modal_content {
+  height: 100vh !important;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.modal_content section {
+  padding: 1em;
 }
 
 .modal_content .media {
   background-color: #D8DF23;
-  height: 100%;
-  width: 50%;
-  float: right;
+  width: 100%;
+  height: 30vh;
 }
 
 .modal_content .media img {
@@ -53,15 +56,14 @@
   margin: auto;
 }
 
-.robot {
-  background-color: white;
-  height: 300px;
+.modal_content .media:after {
+  clear: both;
 }
 
 .robot .media {
-  margin: auto;
   width: 300px;
   height: 300px;
+  margin: auto;
   border: 1px solid #C5C5C5;
   border-radius: 100%;
   overflow: hidden;
@@ -81,22 +83,23 @@
 }
 
 main {
-  height: calc(80vh);
   position: relative;
 }
 
 main .multislider {
+  width: 80vw;
+  margin: 1em auto;
+  margin-bottom: 0;
   position: relative;
-  top: calc((80vh - 220px )/ 2);
 }
 
 main .multislider .MS-content {
-  max-width: 220px;
+  max-width: 100%;
 }
 
 main .multislider .MS-content .item {
-  width: 220px;
-  height: 220px;
+  width: 100%;
+  height: 350px;
 }
 
 main .multislider .MS-content .item .robot {
@@ -127,8 +130,46 @@ main .multislider .MS-content .item .robot a .media img {
   margin: auto;
 }
 
-@media only screen and (min-width: 450px) {
+main .multislider .MS-controls button {
+  font-size: 80px;
+}
+
+@media only screen and (min-width: 576px) {
+  .modal_content section {
+    padding: 1em;
+    float: left;
+    width: 50%;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  .modal_content section:after {
+    clear: both;
+  }
+  .modal_content .media {
+    background-color: #D8DF23;
+    height: 100vh;
+    width: 50%;
+    float: right;
+  }
+  .modal_content .media img {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+  }
+  .modal_content .media:after {
+    clear: both;
+  }
+  .robot .media {
+    width: 280px;
+    height: 280px;
+  }
+  main {
+    height: 75vh;
+  }
   main .multislider {
+    top: calc((80vh - 220px )/ 2);
+    width: 90%;
+    margin: auto;
     top: calc((80vh - 300px )/ 2);
   }
   main .multislider .MS-content {
@@ -142,6 +183,10 @@ main .multislider .MS-content .item .robot a .media img {
     width: 280px;
     height: 280px;
     margin: auto;
+  }
+  main .multislider .MS-controls button {
+    color: black;
+    font-size: 70px;
   }
 }
 /*# sourceMappingURL=robots.css.map */

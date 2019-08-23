@@ -84,13 +84,18 @@
 							{
 								if(!array_key_exists($badge["id"],$member_badges))
 								{
-									$this->results = $member["firstname"] . " just won the " . $badge["name"] . " badge";
+									$this->results[] = $member["firstname"] . " just won the " . $badge["name"] . " badge";
 									BadgeDAO::addBadgeToMember($badge["id"],$member["id"],$member["id_user"]);
 								}
 								else
 								{
-									$this->results = $member["firstname"] . " already have the " . $badge["name"] . " badge";
+									$this->results[] = $member["firstname"] . " already have the " . $badge["name"] . " badge";
 								}
+							}
+							else
+							{
+								$this->results[] = $member["firstname"] . " need to have " . $badge["value_needed"] . " to have the badge. He only have " . $member["score"] . " pts";
+
 							}
 						}
 					}

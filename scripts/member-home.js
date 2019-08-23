@@ -62,7 +62,7 @@ const openBadge = ($id) =>
 						x_btn.innerHTML = "&times;";
 
 					loadMedia(badge,badge_div);
-
+					console.log(badge);
 					let info = document.createElement('div');
 						info.setAttribute('class','infos');
 

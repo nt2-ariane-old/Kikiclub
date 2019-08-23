@@ -121,6 +121,9 @@ h1
 #setting-button /* Bouton principal pour changer de pages */
 {
 	background-size: contain;
+	-o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size:contain;
 	background-repeat: no-repeat;
 	background-position: left;
 	background-image: url("../images/user.png");
@@ -293,6 +296,9 @@ header h2{
 #hamburger{ /* Hamburger menu button */
 	background-image: url('../images/hamburger.png');
 	background-size: contain;
+	-o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size:contain;
 	width: 30px;
 	height: 30px;
 	float: left;
@@ -364,15 +370,23 @@ nav .container {
 
 /* Footer */
 footer {
+	
 	background-color: white;
 	width: 100%;
 	height: 176px;
 	text-align: center;
-	display: flex ;
+	display: none;
 	flex-direction: row;
 	justify-content: space-between;
 	text-align: center;
-
+	a
+	{
+		img
+		{
+			width: 100%;
+			height: 100%;
+		}
+	}
 }
 
 footer a ,footer p{
@@ -382,10 +396,27 @@ footer a ,footer p{
 	padding: 0;
 	margin: auto 1em;
 	background-size: contain;
+	-o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size:contain;
 	background-position: center;
 	background-repeat: no-repeat;
-	border-radius: 25%
+	border-radius: 25%;
+	i
+	{
+		width: 100%;
+		height: 100%;
+		background-size: contain;
+		-o-background-size: contain;
+		-moz-background-size: contain;
+		-webkit-background-size:contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		border: none;
+	}
+	
 }
+
 footer p
 {
 	font-size: 3vw;
@@ -397,6 +428,7 @@ footer p
 	{
 		display: inline;
 		margin: 0;
+		
 		&:hover
 		{
 			color:#D8DF23 ;
@@ -419,6 +451,9 @@ footer p
 	top: 20px;
 	background-image: url("../images/x-logo.png");
 	background-size: contain;
+	-o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size:contain;
 }
 #profile-box
 {
@@ -531,6 +566,7 @@ footer p
 
 	footer p
 	{
+		display: none;
 		font-size: 1em;
 	}
 
@@ -690,6 +726,9 @@ footer p
 		height: 300px;
 		margin: auto;
 		background-size: contain;
+		-o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size:contain;
 		background-repeat: no-repeat;
 		background-position: center;
 		img,video,audio
@@ -700,6 +739,22 @@ footer p
 	}
   }
 
+  .media
+	{		
+		
+		margin: auto;
+		background-size: contain;
+		-o-background-size: contain;
+    -moz-background-size: contain;
+    -webkit-background-size:contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		img,video,audio
+		{
+			max-width: 100%;
+			max-height: 100%;
+		}
+	}
 #slider1 {
 	margin: 0 0 20px;
     overflow: hidden;
@@ -765,6 +820,10 @@ footer p
 
 @media only screen and (min-width: 576px)
 {
+	footer
+	{
+		display: flex;
+	}
 	.modal
 	{
 		.modal_content

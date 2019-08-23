@@ -209,7 +209,8 @@ const loadStars = (object,container) => {
 	container.appendChild(stars);
 }
 const loadMedia = (object,container ) => {
-
+	
+	console.log(object["media_path"]);
 	let media = document.createElement("div");
 		media.setAttribute('class','media');
 
@@ -232,7 +233,7 @@ const loadMedia = (object,container ) => {
 		else if(object["media_type"] == "png" ||
 				object["media_type"] == "jpg")
 		{
-			media.style = "background-image:url(" + object["media_path"] +");";
+			media.style = "background-image:url('" +object['media_path'] +"');";
 			// let image = document.createElement('img');
 			// 	image.src = object["media_path"];
 

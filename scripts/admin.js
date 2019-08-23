@@ -354,7 +354,8 @@ const setWorkshopToCategory = (id_workshop, category, adding) =>
 		body: formData
 	})
 	.then(response => response.text())
-	.then(data => {
+	.then(data => {	
+		console.log(data);
 
 	})
 

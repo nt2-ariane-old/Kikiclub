@@ -121,6 +121,9 @@ h1 {
 
 #setting-button {
   background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
   background-repeat: no-repeat;
   background-position: left;
   background-image: url("../images/user.png");
@@ -293,6 +296,9 @@ header h2 {
   /* Hamburger menu button */
   background-image: url("../images/hamburger.png");
   background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
   width: 30px;
   height: 30px;
   float: left;
@@ -361,9 +367,7 @@ footer {
   width: 100%;
   height: 176px;
   text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -374,6 +378,11 @@ footer {
   text-align: center;
 }
 
+footer a img {
+  width: 100%;
+  height: 100%;
+}
+
 footer a, footer p {
   display: inline-block;
   width: 100px;
@@ -381,9 +390,24 @@ footer a, footer p {
   padding: 0;
   margin: auto 1em;
   background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 25%;
+}
+
+footer a i, footer p i {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
 }
 
 footer p {
@@ -414,6 +438,9 @@ footer p a:hover {
   top: 20px;
   background-image: url("../images/x-logo.png");
   background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
 }
 
 #profile-box {
@@ -508,6 +535,7 @@ footer p a:hover {
     font-size: 2rem;
   }
   footer p {
+    display: none;
     font-size: 1em;
   }
   .lang {
@@ -663,11 +691,29 @@ footer p a:hover {
   height: 300px;
   margin: auto;
   background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .workshop-infos .media img, .workshop-infos .media video, .workshop-infos .media audio {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.media {
+  margin: auto;
+  background-size: contain;
+  -o-background-size: contain;
+  -moz-background-size: contain;
+  -webkit-background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.media img, .media video, .media audio {
   max-width: 100%;
   max-height: 100%;
 }
@@ -736,6 +782,11 @@ footer p a:hover {
 }
 
 @media only screen and (min-width: 576px) {
+  footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
   .modal .modal_content {
     width: 80%;
     height: 80%;

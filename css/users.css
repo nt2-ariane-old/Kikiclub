@@ -14,9 +14,17 @@ main {
 
 main #family-carousel {
   background-color: transparent;
-  width: 100%;
+  width: 90vw;
+  margin: auto;
+  display: block;
+  left: 5vw;
   position: absolute;
   top: calc( (80vh - ((40px * 1.2) +  (2 * (19px * 1.2)) + (240px * 1.2))) / 2);
+}
+
+main #family-carousel #family {
+  width: 80vw;
+  margin: auto;
 }
 
 main #family-carousel .MS-controls button {
@@ -45,6 +53,7 @@ main #family-carousel .MS-controls button:hover {
 }
 
 .member {
+  width: 100%;
   text-align: center;
   height: calc((40px * 1.2) +  (2 * (19px * 1.2)) + ((240px * 1.2) + 32px));
   overflow: hidden;
@@ -72,13 +81,14 @@ main #family-carousel .MS-controls button:hover {
   border: none;
   display: block;
   margin: auto;
+  width: 100%;
 }
 
 .member .member-logo, .member .member-stateLogo {
   display: block;
   border-radius: 100%;
-  width: 240px;
-  height: 240px;
+  width: calc(80vw - 80px);
+  height: calc(80vw - 80px);
   margin: 30px auto;
   background-color: #ADB30F;
   -webkit-box-shadow: 0 0 10px 5px #ADB30F, 0 0 20px 10px #21503d, 0 0 25px 15px #333232;
@@ -97,7 +107,7 @@ main #family-carousel .MS-controls button:hover {
 }
 
 .member .member-stateLogo {
-  left: calc((100% - 240px) / 2);
+  left: calc((100% - (80vw - 80px)) / 2);
   opacity: 0.6;
   position: absolute;
   top: 0;
@@ -114,5 +124,45 @@ main #family-carousel .MS-controls button:hover {
   position: absolute;
   top: 25px;
   right: calc(50% - (240px / 2) + (45px / 4));
+}
+
+@media (min-width: 576px) {
+  .member .member-logo, .member .member-stateLogo {
+    width: 300px;
+    height: 300px;
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 300px) / 2);
+  }
+}
+
+@media (min-width: 768px) {
+  .member .member-logo, .member .member-stateLogo {
+    width: 260px;
+    height: 260px;
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 260px) / 2);
+  }
+}
+
+@media (min-width: 992px) {
+  .member .member-logo, .member .member-stateLogo {
+    width: 210px;
+    height: 210px;
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 210px) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  .member .member-logo, .member .member-stateLogo {
+    width: 260px;
+    height: 260px;
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 260px) / 2);
+  }
 }
 /*# sourceMappingURL=users.css.map */

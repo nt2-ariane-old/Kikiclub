@@ -61,9 +61,14 @@ const sortAndSearchWorkshops = () =>
 	})
 	.then(response => response.json())
 	.then(data => {
+		let direct_link = false;
+		if(data["direct_link"] != null)
+		{
+			direct_link = true;
+		}
 		if(data["workshops"].length > 0)
 		{
-			loadWorkshopsList(data["workshops"],data["nbPages"]);
+			loadWorkshopsList(data["workshops"],data["nbPages"],direct_link);
 		}
 		else
 		{
@@ -117,7 +122,7 @@ function openModal() {
   }
 
 
-const loadWorkshopsList = (workshops,nbPage) =>
+const loadWorkshopsList = (workshops,nbPage,direct_link) =>
 {
 	let divWorkshops = document.getElementById('workshops-list');
 	divWorkshops.innerHTML ="";
@@ -136,9 +141,15 @@ const loadWorkshopsList = (workshops,nbPage) =>
 
 					divWorkshop = document.createElement('div');
 					divWorkshop.setAttribute('class','workshop');
-					// divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["id"]);
+					if(direct_link)
+					{
+						divWorkshop.onmousedown = () => clicWorkshop(divCol,workshop["id"]);
+					}
+					else
+					{
+						divWorkshop.setAttribute('onclick','openModal();openWorkshop('+workshop["id"]+');');
+					}
 
-					divWorkshop.setAttribute('onclick','openModal();openWorkshop('+workshop["id"]+');')
 					if(!workshop["deployed"])
 					{
 						divWorkshop.style.backgroundColor = "red";

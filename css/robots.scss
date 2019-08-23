@@ -31,29 +31,34 @@
 	border-color: rgba(255, 255, 255, 0.678);
 	color: rgba(0, 0, 0, 0.678) ;
 }
+.close
+{
+	z-index: 100;
+}
 .modal_content
 {
+	height: 100vh !important;
+	background-color:white;
+	overflow-y: scroll;
 	section
 	{
 		padding: 1em;
-		float: left;
-		width: 50%;
-		&:after
-		{
-			clear: both;
-		}
+		
 	}
 	.media
 	{
 		background-color: #D8DF23;
-		height: 100%;
-		width: 50%;
-		float: right;
+		width: 100%;
+		height:30vh;
 		img
 		{
 			max-width: 100%;
 			max-height: 100%;
 			margin: auto;
+		}
+		&:after
+		{
+			clear: both;
 		}
 	}
 	
@@ -61,14 +66,11 @@
 .robot
 {
 
-	background-color: white;
-	height: 300px;
-
 	.media
 	{
-		margin: auto;
 		width: 300px;
 		height: 300px;
+		margin: auto;
 		border: 1px solid #C5C5C5;
 		border-radius: 100%;
 		overflow: hidden;
@@ -90,12 +92,17 @@
 
 main
 {
-	height: calc(80vh);
 	position: relative;
 	.multislider
 	{
+		width: 80vw;
+		margin: 1em auto;
+		margin-bottom: 0;
+		position: relative;
+		
 		.MS-content
 		{
+			max-width: 100%;
 			.item
 			{
 				.robot
@@ -126,22 +133,74 @@ main
 						}
 					}
 				}
-				width:220px;
-				height: 220px;
+				width:100%;
+				height: 350px;
 			}
-			max-width: 220px;
 		}
-		position: relative;
-		top: calc((80vh - 220px )/ 2)
+		.MS-controls
+		{
+			button
+			{
+				font-size: 80px;
+
+			}
+		}
+		
 	}
 }
-@media only screen and (min-width:450px){
+@media only screen and (min-width:576px){
 
-	main
+	.modal_content
+	{
+		section
+		{
+			padding: 1em;
+			float: left;
+			width: 50%;
+			height: 100vh;
+			overflow-y: scroll;
+			&:after
+			{
+				clear: both;
+			}
+		}
+		.media
+		{
+			background-color: #D8DF23;
+			height: 100vh;
+			width: 50%;
+			float: right;
+			img
+			{
+				max-width: 100%;
+				max-height: 100%;
+				margin: auto;
+			}
+			&:after
+			{
+				clear: both;
+			}
+		}
+		
+	}
+	.robot
 	{
 
+		.media
+		{
+			width: 280px;
+			height: 280px;
+		}
+	}
+	
+	main
+	{
+		height: 75vh;
 		.multislider
 		{
+			top: calc((80vh - 220px )/ 2);
+			width: 90%;
+			margin: auto;
 			.MS-content
 			{
 				max-width: 100%;
@@ -162,6 +221,14 @@ main
 							}
 						}
 					}
+				}
+			}
+			.MS-controls
+			{
+				button
+				{
+					color: black;
+					font-size: 70px;
 				}
 			}
 		top: calc((80vh - 300px )/ 2)

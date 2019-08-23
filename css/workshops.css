@@ -144,7 +144,19 @@
   overflow: hidden;
 }
 
-.workshop .media video, .workshop .media audio, .workshop .media img {
+.workshop .media video, .workshop .media audio {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  display: block;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.workshop .media img {
   max-width: 100%;
   max-height: 100%;
   margin: auto;
@@ -158,16 +170,6 @@
   background-color: black;
   width: 100%;
   margin: 0;
-}
-
-.control-bar {
-  left: 25%;
-}
-
-.control-bar a {
-  margin: 0;
-  background-color: rgba(189, 98, 98, 0.802);
-  margin-left: 0;
 }
 
 #indexes button {
