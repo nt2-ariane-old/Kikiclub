@@ -20,16 +20,13 @@
 		public $filters;
 		public $id_types;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,"workshop-infos");
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"workshop-infos");
 			$this->exist = false;
 			$this->added = false;
 		}
 
 		protected function executeAction() {
-			if(!empty($_GET["workshop_id"]))
-			{
-				$_SESSION["workshop_id"] = $_GET["workshop_id"];
-			}
+			
 			if(!empty($_SESSION["workshop_id"]))
 			{
 				$this->exist = true;
@@ -54,11 +51,11 @@
 			$this->id_types["difficulties"] = FilterDAO::getFilterTypeIdByName('difficulty');
 			$this->id_types["grades"] = FilterDAO::getFilterTypeIdByName('grade');
 
+			var_dump($_POST);
 			if($this->admin_mode)
 			{
 				if(isset($_POST['push']))
 				{
-
 					if($this->exist)
 					{
 						WorkshopDAO::updateWorkshop($id,$_POST['name'],$_POST['content'],$_POST['media_path'],$_POST['media_type']);

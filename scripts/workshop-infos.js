@@ -22,6 +22,22 @@ const setParams = (type,value) =>
 	applyParams();
 }
 
+const plusMinusSign = (node) =>
+{
+	let allSigns = document.querySelectorAll(".buttonSign");
+	allSigns.forEach(sign => {
+			sign.innerHTML = "+";
+	});
+	let sign = node.querySelector(".buttonSign");
+	let nodeParent = node.parentNode;
+		let card = nodeParent.querySelector(".collapse");		
+		let opened = card.classList.contains("show");
+		if(!opened)
+		{
+			sign.innerHTML = "-";
+		}
+}
+
 const deleteParams = () =>
 {
 	params["difficulties"] = [];

@@ -54,9 +54,13 @@
 
 						$workshop = WorkshopDAO::getWorkshop(intval($_POST["id_workshop"]));
 						$filters = FilterDAO::getWorkshopFilters(intval($_POST["id_workshop"]));
-						$difficulties = $filters[FilterDAO::getFilterTypeIdByName("difficulty")];
-						$robots = $filters[FilterDAO::getFilterTypeIdByName("robot")];
+						if(!empty($filters[FilterDAO::getFilterTypeIdByName("difficulty")]) &&
+						!empty($filters[FilterDAO::getFilterTypeIdByName("robot")]))
+						{
 
+							$difficulties = $filters[FilterDAO::getFilterTypeIdByName("difficulty")];
+							$robots = $filters[FilterDAO::getFilterTypeIdByName("robot")];
+							
 						$score = 0;
 						if(!empty($robots) || !empty($difficulties))
 						{
@@ -72,14 +76,14 @@
 
 						$this->results['added_score'] = $score;
 						MemberDAO::addScore($id_member,$score);
-
+						
 						$member = MemberDAO::selectMember($id_member);
 						$member_badges = BadgeDAO::getMemberBadge($id_member);
 						$badges = BadgeDAO::getBadges(1);
 						$this->results['score'] = $member['score'];
-
+						
 						foreach ($badges as $badge) {
-
+							
 							if($member["score"] >= $badge["value_needed"] )
 							{
 								if(!array_key_exists($badge["id"],$member_badges))
@@ -95,13 +99,14 @@
 							else
 							{
 								$this->results[] = $member["firstname"] . " need to have " . $badge["value_needed"] . " to have the badge. He only have " . $member["score"] . " pts";
-
+								
 							}
 						}
 					}
 
 
-
+				}
+					
 				}
 
 			}

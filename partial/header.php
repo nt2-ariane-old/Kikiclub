@@ -9,10 +9,6 @@
 	<title>Kikiclub</title>
 
 
-
-	<!-- PAGE CUSTOM -->
-		<link rel="stylesheet" href="./css/show-users.css" type="text/css" media="screen" />
-
 	<!-- CSS -->
 		<!-- FONTS -->
 		<link rel="stylesheet" href="css/fonts.css">
@@ -66,6 +62,7 @@
 		<link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
 		<link rel="manifest" href="images/favicon/manifest.json">
+		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
 		<meta name="msapplication-TileColor" content="#D8DF23">
 		<meta name="msapplication-TileImage" content="images/favicon/ms-icon-144x144.png">
@@ -183,10 +180,11 @@
 							foreach ($action->members as $member) {
 								?>
 									<li><a onclick="change_page('member-home.php',{'member_id':<?= $member["id"] ?>})"><?= $member["firstname"] ?></a></li>
-								<?php
+									<?php
 							}
 							?>
 					</ul>
+					<li><a href="reference.php">Reference</a></li>
 							<?php
 						}
 					?>

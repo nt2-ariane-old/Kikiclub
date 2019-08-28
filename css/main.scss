@@ -531,14 +531,6 @@ footer p
 }
 /* Version Web */
 @media only screen and (min-width: 450px) {
-	.modal
-	{
-		.modal_content
-		{
-			width: 90%;
-			height: 90%;
-		}
-	}
 	#menu {
 		position: absolute;
 		top: calc((96px - 48px) / 2);
@@ -583,11 +575,61 @@ footer p
 
 	.navbar-collapse
 	{
-		max-height: 100vh;
+		max-height: 70vh;
 		overflow-x: scroll
 
 	}
 }
+.return-btn
+{
+	background-color: transparent;
+	border: none;
+	margin: auto;
+	display: block;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	width: 200px;
+	padding: 0.5em;
+	text-align: center;
+	color: black;
+	&:hover
+	{
+		color: gray;
+		border-top: 2px solid gray;
+		border-bottom: 2px solid gray;
+
+	}
+
+}
+
+#add-logo
+{
+	background-image: url("../images/plus.png");
+}
+.submit-btn
+{
+	background-color: rgba(217, 223, 35, 0.5);
+}
+.delete-btn
+{
+	background-color: rgba(255, 0, 0, 0.5);
+}
+.submit-btn,.delete-btn
+{
+	border: none;
+	margin: 0.5em auto;
+	display: block;
+	width: 200px;
+	padding: 0.5em;
+	text-align: center;
+	color: black;
+	&:hover
+	{
+		opacity: 0.5;
+
+	}
+}
+
 /* width */
 ::-webkit-scrollbar {
 	width: 10px;
@@ -610,12 +652,26 @@ footer p
   }
 
   .modal {
+	align-items:center;
+	justify-content: center;
 
+	display: none;
+	padding: 0;
+	position: fixed;
+	z-index: 300;
+	margin: auto;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.800);
 	.modal_content
 	{
 		overflow-y: scroll;
-		position: relative;
+		position: absolute;
 		width: 100%;
+		top: 0;
 		height: auto;
 		box-shadow: 0 0 3px 3px #B5B5B5;
 		background-color:  #F5F5F5;
@@ -631,20 +687,7 @@ footer p
 		}
 		margin: auto;
 	}
-	align-items:center;
-	justify-content: center;
-
-	display: none;
-	padding: 0;
-	position: fixed;
-	z-index: 300;
-	margin: auto;
-	left: 0;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.800);
+	
 }
 
 .close {
@@ -826,8 +869,11 @@ footer p
 	}
 	.modal
 	{
+		position: fixed;
+
 		.modal_content
 		{
+			position: relative;
 			width: 80%;
 			height: 80%;
 		}

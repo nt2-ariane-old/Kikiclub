@@ -97,6 +97,103 @@
 			return $content;
 		}
 
+		public static function getMaterials()
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT * FROM material");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
+		}
+		public static function getMaterialByID($id)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT * FROM material WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+			$statement->execute();
+
+			$content = [];
+
+			if ($row = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
+		}
+		public static function insertMaterial($name)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("INSERT INTO material(name) VALUES (?)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $name);
+			$statement->execute();
+		}
+		public static function deleteMaterial($id)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("DELETE FROM material WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+			$statement->execute();
+		}
+		public static function getWorkshopsMaterial($with_name=false)
+		{
+			$connection = Connection::getConnection();
+
+			if($with_name)
+			{
+				$request = "SELECT m.name as material, wm.id_workshop as workshop FROM workshop_materials as wm INNER JOIN material as m WHERE id_workshop=? AND wm.id_material = m.id";
+			}
+			else
+			{
+				$request = "SELECT id_material as material, id_workshop as workshop FROM workshop_materials WHERE id_workshop=?";
+			}
+			$statement = $connection->prepare("SELECT * FROM material WHERE id=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id);
+			$statement->execute();
+
+			$content = [];
+
+			while ($row = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
+		}
+
+		public static function insertWorkshopMaterial($id_material,$id_workshop)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("INSERT INTO workshop_material(id_material,id_workshop) VALUES (?,?)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_material);
+			$statement->bindParam(2, $id_workshop);
+			$statement->execute();
+		}
+		public static function deleteWorkshopMaterial($id_material,$id_workshop)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("DELETE FROM material WHERE id_material=? and id_workshop=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $id_material);
+			$statement->bindParam(2, $id_workshop);
+			$statement->execute();
+		}
 		/**
 		 * Select all informations about a workshop by Name and Content (ex : when you don't have the id)
 		 *

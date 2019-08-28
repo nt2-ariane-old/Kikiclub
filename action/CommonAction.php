@@ -4,8 +4,9 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/constante.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/Tools/Translator.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/lib/Mobile_Detect.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersConnexionDAO.php");
 	abstract class CommonAction
 	{
 		public static $VISIBILITY_PUBLIC = 0;
@@ -109,6 +110,11 @@
 				exit;
 			}
 
+			if(!empty($_GET["token"]))
+			{
+				$_SESSION["referral"] = $_GET["token"];
+				header('Location:reference.php');
+			}
 			//check if they're is a connection token and test it
 			if(!empty($_GET["user_t"]))
 			{
@@ -117,15 +123,27 @@
 				//if token is working
 				if(!empty($id))
 				{
+					
 					//get user info
 					$user = UsersDAO::getUserWithID($id);
 				 	$_SESSION["visibility"] = $user["visibility"];
 					$_SESSION["id"] = $user["id"];
 
 					//delete token
-				 	UsersDAO::deleteToken($_GET["user_t"]);
+					 UsersDAO::deleteToken($_GET["user_t"]);
+					 UsersConnexionDAO::insertUserConnexion($_SESSION["id"]);
+					 $connexion = UsersConnexionDAO::getUserConnexion($_SESSION["id"]);
+					if(sizeof($connexion) <= 1)
+					{
+						header('Location:reference.php');
+					}
 				}
 			}
+
+if(!empty($_SESSION["referral"]) && $this->page_name != "reference")
+{
+	header('location:reference.php');
+}
 
 			//check current page
 
@@ -217,6 +235,8 @@
 				}
 			}
 
+			
+			
 			//execute page action
 			$this->executeAction();
 		}

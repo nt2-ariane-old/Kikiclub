@@ -19,6 +19,7 @@ const loadModules = () =>
 				limitText(editable,512);
 
 			})
+			limitText(editable,512);
 			window.editor = classicEditor;
 		} )
 		.catch( err => {

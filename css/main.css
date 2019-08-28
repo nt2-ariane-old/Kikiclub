@@ -512,10 +512,6 @@ footer p a:hover {
 
 /* Version Web */
 @media only screen and (min-width: 450px) {
-  .modal .modal_content {
-    width: 90%;
-    height: 90%;
-  }
   #menu {
     position: absolute;
     top: calc((96px - 48px) / 2);
@@ -546,9 +542,54 @@ footer p a:hover {
     min-width: 200px;
   }
   .navbar-collapse {
-    max-height: 100vh;
+    max-height: 70vh;
     overflow-x: scroll;
   }
+}
+
+.return-btn {
+  background-color: transparent;
+  border: none;
+  margin: auto;
+  display: block;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  width: 200px;
+  padding: 0.5em;
+  text-align: center;
+  color: black;
+}
+
+.return-btn:hover {
+  color: gray;
+  border-top: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+#add-logo {
+  background-image: url("../images/plus.png");
+}
+
+.submit-btn {
+  background-color: rgba(217, 223, 35, 0.5);
+}
+
+.delete-btn {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.submit-btn, .delete-btn {
+  border: none;
+  margin: 0.5em auto;
+  display: block;
+  width: 200px;
+  padding: 0.5em;
+  text-align: center;
+  color: black;
+}
+
+.submit-btn:hover, .delete-btn:hover {
+  opacity: 0.5;
 }
 
 /* width */
@@ -595,8 +636,9 @@ footer p a:hover {
 
 .modal .modal_content {
   overflow-y: scroll;
-  position: relative;
+  position: absolute;
   width: 100%;
+  top: 0;
   height: auto;
   -webkit-box-shadow: 0 0 3px 3px #B5B5B5;
           box-shadow: 0 0 3px 3px #B5B5B5;
@@ -787,7 +829,11 @@ footer p a:hover {
     display: -ms-flexbox;
     display: flex;
   }
+  .modal {
+    position: fixed;
+  }
   .modal .modal_content {
+    position: relative;
     width: 80%;
     height: 80%;
   }
