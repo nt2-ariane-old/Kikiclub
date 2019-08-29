@@ -143,7 +143,18 @@
 				<?php
 					loadMedia($action->member_avatar);
 			}
+			if($action->isLoggedIn())
+			{
+
+			}
+			else
+			{
+				?>
+					<a <?php if($action->url === "localhost") { ?> onclick="window.location = 'login.php?other'"; <?php } else { ?> onclick="window.location = 'https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5' "; <?php }?>>Se Connecter</a>
+				<?php
+			}
 		?>
+		
 	</div></a>
 </header>
 
@@ -161,15 +172,8 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-		 <?php
-				if($action->isLoggedIn())
-				{
-					?>
-					<li><a class="nav-item nav-link" href="users.php"><?= $action->trans->read("pages_name","users") ?></a></li>
-				<?php
-			}
-			?>
-				<li> <a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("pages_name","workshops") ?></a>
+		<li><a class="nav-item nav-link" href="<?php if($action->isLoggedIn()) { ?>users.php <?php } else { ?>login.php<?php } ?>"><?= $action->trans->read("pages_name","home") ?></a></li>
+		<li> <a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("pages_name","workshops") ?></a>
 				<?php
 					if($action->isLoggedIn())
 					{
@@ -190,7 +194,7 @@
 					?>
 				</li>
 				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("pages_name","robots") ?></a></li>
-				<li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("pages_name","shared") ?></a></li>
+				<!-- <li><a class="nav-item nav-link" href="shared.php"><?= $action->trans->read("pages_name","shared") ?></a></li> -->
 				<li><a href='?lang=fr'>fr</a>/<a href='?lang=en'>en</a></li>
 
 				<?php
@@ -218,12 +222,7 @@
 				<li><a class="nav-item nav-link" href="?logout=true"><?= $action->trans->read("all_pages","signout") ?></a></li>
 				<?php
 			}
-			else
-			{
-				?>
-				<li><a class="nav-item nav-link" href="login.php"><?= $action->trans->read("all_pages","signin") ?></a></li>
-				<?php
-			}
+			
 			?>
 
     </ul>

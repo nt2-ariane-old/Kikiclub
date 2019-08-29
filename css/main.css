@@ -566,7 +566,7 @@ footer p a:hover {
   border-bottom: 2px solid gray;
 }
 
-#add-logo {
+#addLogo {
   background-image: url("../images/plus.png");
 }
 
@@ -635,11 +635,14 @@ footer p a:hover {
 }
 
 .modal .modal_content {
+  max-width: 800px;
+  max-height: 400px;
   overflow-y: scroll;
   position: absolute;
   width: 100%;
   top: 0;
   height: auto;
+  min-height: 100vh;
   -webkit-box-shadow: 0 0 3px 3px #B5B5B5;
           box-shadow: 0 0 3px 3px #B5B5B5;
   background-color: #F5F5F5;
@@ -833,9 +836,13 @@ footer p a:hover {
     position: fixed;
   }
   .modal .modal_content {
+    min-height: 300px;
     position: relative;
     width: 80%;
     height: 80%;
+  }
+  .modal .media {
+    border: none;
   }
   .modal .workshop-infos .media {
     width: 50%;
@@ -851,6 +858,8 @@ footer p a:hover {
     float: left;
     width: 50%;
     height: 100%;
+    overflow-x: hidden;
+    text-overflow: clip;
   }
 }
 

@@ -14,12 +14,8 @@
 		}
 
 		protected function executeAction() {
-			if($this->url !== "localhost")
-			{
-				header('Location:https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5');
-			}
-
-			if(!empty($_GET["other"]))
+		
+			if(isset($_GET["other"]))
 			{
 				$id_type = UsersDAO::getLoginTypeIdByName("Kikiclub");
 				$this->otherlogin = true;

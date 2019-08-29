@@ -38,6 +38,71 @@ const plusMinusSign = (node) =>
 		}
 }
 
+const addMaterial = () =>
+{
+	let node = document.querySelector("#materials");
+	let contents = node.querySelectorAll('select');
+	let nb = contents.length + 1;
+
+	let titre = document.createElement('p');
+		titre.innerHTML = "Materiel " + nb + " : ";
+		
+		let select = document.createElement('select');
+			let newoption = document.createElement('option');
+				newoption.innerHTML = "Nouveau Materiel";
+				newoption.value = -1;
+
+			select.appendChild(newoption);
+			select.name = "materials[]";
+			$.ajax({
+				type: "POST",
+				url:'ajax/material-ajax.php',
+				dataType: 'json',
+				success: function( data ) {
+					console.log(data);
+					data.forEach(element => {
+						let option = document.createElement('option');
+						option.innerHTML = element["name"];
+						option.value = element["id"];
+
+						select.appendChild(option);
+					});
+					
+				},
+				error: function (request, status, error) {
+					console.log(request.responseText);
+				}
+			});
+			
+			select.onchange = () =>
+			{
+				let input = select.parentNode.querySelector('input');
+				
+				if(input != null)
+				{
+					select.parentNode.removeChild(input);
+				}
+				if(select.value == -1)
+				{
+					input = document.createElement('input');
+					input.type = "text";
+					titre.appendChild(input);
+					
+				}
+				
+			}
+			titre.appendChild(select);
+			if(select.value = -1)
+			{
+				let input = document.createElement('input');
+					input.type = "text";
+				
+					titre.appendChild(input);
+			}
+	
+	node.appendChild(titre);
+}
+
 const deleteParams = () =>
 {
 	params["difficulties"] = [];

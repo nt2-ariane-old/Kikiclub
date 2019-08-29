@@ -235,19 +235,21 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
 }
 
 #btns-zone {
-  width: 50%;
-  margin: auto;
+  width: 75%;
+  float: right;
   border: none;
+  text-align: center;
 }
 
 #btns-zone * {
-  float: left;
-  width: calc(50% - 1em);
-  display: block;
+  display: inline-block;
+  text-align: center;
+  width: calc(25% - 1em);
 }
 
 #btns-zone .return-btn {
   margin: 0.5em;
+  display: inline-block;
 }
 
 #workshop-form p {
@@ -264,6 +266,16 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
 
 #x-aside, .btn-filter {
   display: none;
+}
+
+#workshop-form .ck.ck-editor {
+  width: 80% !important;
+  margin: auto !important;
+}
+
+#workshop-form .ck.ck-editor p {
+  width: 100%;
+  text-align: left;
 }
 
 @media only screen and (max-width: 576px) {

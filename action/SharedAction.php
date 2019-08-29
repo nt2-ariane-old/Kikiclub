@@ -6,7 +6,7 @@
 
 		public $nbPages;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_PUBLIC,'shared');
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'shared');
 		}
 
 		protected function executeAction() {

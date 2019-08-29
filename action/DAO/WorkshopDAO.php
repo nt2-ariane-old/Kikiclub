@@ -101,6 +101,7 @@
 		{
 			$connection = Connection::getConnection();
 
+
 			$statement = $connection->prepare("SELECT * FROM material");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
@@ -108,7 +109,7 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content = $row;
+				$content[] = $row;
 			}
 
 			return $content;
@@ -137,7 +138,8 @@
 			$statement = $connection->prepare("INSERT INTO material(name) VALUES (?)");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $name);
-			$statement->execute();
+			$existe = $statement->execute();
+			return $existe;
 		}
 		public static function deleteMaterial($id)
 		{
@@ -148,7 +150,7 @@
 			$statement->bindParam(1, $id);
 			$statement->execute();
 		}
-		public static function getWorkshopsMaterial($with_name=false)
+		public static function getWorkshopsMaterial($id,$with_name=false)
 		{
 			$connection = Connection::getConnection();
 
@@ -177,22 +179,27 @@
 		public static function insertWorkshopMaterial($id_material,$id_workshop)
 		{
 			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("INSERT INTO workshop_material(id_material,id_workshop) VALUES (?,?)");
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			
+			$statement = $connection->prepare("INSERT INTO workshop_materials(id_material,id_workshop) VALUES (?,?)");
+			
 			$statement->bindParam(1, $id_material);
 			$statement->bindParam(2, $id_workshop);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
 		public static function deleteWorkshopMaterial($id_material,$id_workshop)
 		{
+		
+			
 			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("DELETE FROM material WHERE id_material=? and id_workshop=?");
+			
+			$statement = $connection->prepare("DELETE FROM workshop_materials WHERE id_material=? and id_workshop=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_material);
 			$statement->bindParam(2, $id_workshop);
+
 			$statement->execute();
+
 		}
 		/**
 		 * Select all informations about a workshop by Name and Content (ex : when you don't have the id)

@@ -158,6 +158,7 @@ aside
 }
 #btns-zone
 {
+
   clear: both;
   background-color: white;
   border-bottom: 5px solid black;
@@ -254,20 +255,23 @@ aside
 
 #btns-zone
 {
-	width: 50%;
-	margin: auto;
+	width: 75%;
+	float: right;
 	border: none;
+	text-align: center;
 	*
 	{
-		float: left;
-		width:  calc(50% - 1em);
-		display: block;
+		display: inline-block;
+		text-align: center;
+		width:  calc(25% - 1em);
 	}
 	.return-btn
 	{
 		margin: 0.5em;
+		display: inline-block;
 	}
 }
+
 #workshop-form p
 {
 	width: 50%;
@@ -283,6 +287,20 @@ aside
 #x-aside,.btn-filter
 {
 	display: none;
+}
+#workshop-form
+{
+
+	.ck.ck-editor
+	{
+		width: 80% !important;
+		margin: auto !important;
+		p
+		{
+			width: 100%;
+			text-align: left;
+		}
+	}
 }
 @media only screen and (max-width:576px) {
 	.btn-filter

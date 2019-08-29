@@ -19,17 +19,19 @@
 		public $added;
 		public $filters;
 		public $id_types;
+		public $materials;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"workshop-infos");
 			$this->exist = false;
 			$this->added = false;
 		}
-
+		
 		protected function executeAction() {
 			
 			if(!empty($_SESSION["workshop_id"]))
 			{
 				$this->exist = true;
+				$this->materials = WorkshopDAO::getWorkshopsMaterial($_SESSION["workshop_id"],true);
 			}
 
 			if($_SESSION["language"] == 'en')
@@ -44,14 +46,13 @@
 
 			}
 			$this->robots = RobotDAO::getRobots(true);
-
+			
 			if($this->exist) $id = $_SESSION["workshop_id"];
-
+			
 			$this->id_types["robots"] = FilterDAO::getFilterTypeIdByName('robot');
 			$this->id_types["difficulties"] = FilterDAO::getFilterTypeIdByName('difficulty');
 			$this->id_types["grades"] = FilterDAO::getFilterTypeIdByName('grade');
 
-			var_dump($_POST);
 			if($this->admin_mode)
 			{
 				if(isset($_POST['push']))
@@ -59,7 +60,6 @@
 					if($this->exist)
 					{
 						WorkshopDAO::updateWorkshop($id,$_POST['name'],$_POST['content'],$_POST['media_path'],$_POST['media_type']);
-
 					}
 					else
 					{
@@ -70,8 +70,7 @@
 						}
 						WorkshopDAO::addWorkshop($_POST['name'],$_POST['content'],	$_POST['media_path'], $_POST['media_type'],$deploy);
 						$id = WorkshopDAO::getWorkshopByNameAndContent($_POST['name'],$_POST['content'])["id"];
-						$this->added = true;
-						$this->exist = true;
+						
 					}
 
 					$this->filters = FilterDAO::getWorkshopFilters($id);
@@ -83,10 +82,7 @@
 
 
 
-					if(!empty($_POST["robots"]))
-					{
-						$filters_selected["robots"] = $_POST["robots"];
-					}
+					
 					if(!empty($_POST["difficulties"]))
 					{
 						$filters_selected["difficulties"] = $_POST["difficulties"];
@@ -95,11 +91,16 @@
 					{
 						$filters_selected["grades"] = $_POST["grades"];
 					}
+					if(!empty($_POST["robots"]))
+					{
+						$filters_selected["robots"] = $_POST["robots"];
+					}
 
 					foreach ($filters_selected as $key => $list) {
 						$id_type = $this->id_types[$key];
+						
 						foreach ($list as $value) {
-							$id_filter = $this->getFilterID($id_type,$value);
+							$id_filter = $this->getFilterID(intval($id_type),intval($value));
 							if($id_filter >= 0)
 							{
 								FilterDAO::updateWorkshopFilters($id_filter,$id,$id_type,$value);
@@ -114,8 +115,15 @@
 						$this->deleteOther($list,$id_type);
 
 					}
-
-					header('Location:workshops.php');
+					if(!empty($_POST["materials"]))
+					{
+						foreach ($_POST["materials"] as $element)
+						{							
+							WorkshopDAO::insertWorkshopMaterial($element,$id);
+						}
+						$this->deleteOtherMaterial($_POST["materials"]);
+					}
+				 	// header('Location:workshops.php');
 				}
 				if(isset($_POST['delete']))
 				{
@@ -186,6 +194,19 @@
 					{
 							FilterDAO::deleteWorkshopFilters($filter["id"]);
 					}
+				}
+			}
+
+		}
+		
+		public function deleteOtherMaterial($list)
+		{
+			$materials = WorkshopDAO::getMaterials();
+			foreach ($materials as $material)
+			{
+				if(!in_array($material["id"],$list))
+				{
+					WorkshopDAO::deleteWorkshopMaterial($material["id"],$this->workshop["id"]);
 				}
 			}
 

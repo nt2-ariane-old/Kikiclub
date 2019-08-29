@@ -602,7 +602,7 @@ footer p
 
 }
 
-#add-logo
+#addLogo
 {
 	background-image: url("../images/plus.png");
 }
@@ -668,11 +668,14 @@ footer p
 	background-color: rgba(0, 0, 0, 0.800);
 	.modal_content
 	{
+		max-width:800px;
+		max-height: 400px;
 		overflow-y: scroll;
 		position: absolute;
 		width: 100%;
 		top: 0;
 		height: auto;
+		min-height: 100vh;
 		box-shadow: 0 0 3px 3px #B5B5B5;
 		background-color:  #F5F5F5;
 		
@@ -873,9 +876,14 @@ footer p
 
 		.modal_content
 		{
+			min-height: 300px;
 			position: relative;
 			width: 80%;
 			height: 80%;
+		}
+		.media
+		{
+			border: none;
 		}
 		.workshop-infos
 		{
@@ -895,6 +903,9 @@ footer p
 				float: left;	
 				width: 50%;
 				height: 100%;
+				overflow-x: hidden;
+				text-overflow: clip;
+				
 			}
 		}
 	}

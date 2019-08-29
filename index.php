@@ -16,17 +16,8 @@
 		}
 		else
 		{
-			if($action->url === "localhost")
-			{
-				 ?>
-			 		<script>window.location = "login.php";</script>
-			 	<?php
-			}
-			else
-			{
-				?>
-					<script>window.location = "workshops.php";</script>
-			 	<?php
-			}
+			 ?>
+		 		<script>window.location = "login.php";</script>
+		 	<?php	
 		}
 	?>

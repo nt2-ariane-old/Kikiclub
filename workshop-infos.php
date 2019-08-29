@@ -16,7 +16,7 @@
 	
 	<main>
 		<div class="sheet">
-			<form id="workshop-form">
+			<form id="workshop-form" method="POST">
 			<aside>
 				<div class="filters">
 					<span id="x-aside" onclick="closeFilters()">x</span>
@@ -38,7 +38,7 @@
 													?>
 														<div>
 															<label>
-																<input type="checkbox" onclick="setSearchParams('difficulties',<?=$diff['id'] ?>)" <?php if(!empty($action->filters[$action->id_types['difficulties']])) if(!empty($action->filters[$action->id_types['difficulties']][$diff['id']])) echo 'checked'; if($i == 0 && empty($action->filters[$action->id_types["difficulties"]])) echo 'checked'; ?>>
+																<input type="checkbox" name="difficulties[]" value="<?= $diff['id'] ?>" onclick="setSearchParams('difficulties',<?=$diff['id'] ?>)" <?php if(!empty($action->filters[$action->id_types['difficulties']])) if(!empty($action->filters[$action->id_types['difficulties']][$diff['id']])) echo 'checked'; if($i == 0 && empty($action->filters[$action->id_types["difficulties"]])) echo 'checked'; ?>>
 																<span></span><li><?= $diff["name"] ?></li>
 															</label>
 														<div>
@@ -66,7 +66,7 @@
 												$i=0;
 												foreach ($action->grades as $grade) {
 													?>
-														<div><label><input type="checkbox" onclick="setSearchParams('grades',<?=$grade['id'] ?>)" <?php if(!empty($action->filters[$action->id_types['grades']])) if(!empty($action->filters[$action->id_types['grades']][$grade['id']])) echo 'checked'; if($i == 0 && empty($action->filters[$action->id_types["grades"]])) echo 'checked';?>><span></span><li><?= $grade["name"] ?></li></label></div>
+														<div><label><input type="checkbox" name="grades[]" value="<?= $grade['id'] ?>" onclick="setSearchParams('grades',<?=$grade['id'] ?>)" <?php if(!empty($action->filters[$action->id_types['grades']])) if(!empty($action->filters[$action->id_types['grades']][$grade['id']])) echo 'checked'; if($i == 0 && empty($action->filters[$action->id_types["grades"]])) echo 'checked';?>><span></span><li><?= $grade["name"] ?></li></label></div>
 													<?php
 													$i++;
 												}
@@ -89,7 +89,7 @@
 												$i = 0;
 												foreach ($action->robots as $robot) {
 													?>
-														<div><label><input type="checkbox" onclick="setSearchParams('robots',<?=$robot['id'] ?>)" <?php if(!empty($action->filters[$action->id_types['robots']])) if(!empty($action->filters[$action->id_types['robots']][$robot['id']])) echo 'checked'; if($i == 0 && empty($action->filters[$action->id_types["robots"]])) echo 'checked';?>><span></span><li><?= $robot["name"] ?></li></label></div>
+														<div><label><input type="checkbox" name="robots[]" value="<?= $robot['id'] ?>" onclick="setSearchParams('robots',<?=$robot['id'] ?>)" <?php if(!empty($action->filters[$action->id_types['robots']])) if(!empty($action->filters[$action->id_types['robots']][$robot['id']])) echo 'checked'; if($i == 0 && empty($action->filters[$action->id_types["robots"]])) echo 'checked';?>><span></span><li><?= $robot["name"] ?></li></label></div>
 													<?php
 													$i++;
 												}
@@ -124,6 +124,17 @@
 					<input type="hidden" name="deployed" value="false">
 					<p><span class="input-title">Deployed :</span> <input type="checkbox" name="deployed" id="deployed" value='true' <?php if($workshopExist) {?> onchange="this.name;openConfirmBox(this.parentElement,{type:'ajax',path:'ajax/workshops-ajax.php', params:{ id:<?=$action->workshop['id']?> , deployed:this.checked}});" <?php } ?> <?php if($action->workshop["deployed"]) echo 'checked'; ?>></p>
 					<div id="params"></div>
+					<h3>Matériel : </h3>
+					<div id="materials">
+						<?php
+							foreach ($action->materials as $material) {
+								?>
+									<h4><?= $material["material"] ?></h4>
+								<?php
+							}
+						?>
+					</div>
+					<button onclick="addMaterial()" type="button">+</button>
 					<div class="buttons">
 						<button type="submit" class="submit-btn" name="push"><?php if($workshopExist) echo 'Apply'; else echo 'Add'; ?></button>
 						<?php

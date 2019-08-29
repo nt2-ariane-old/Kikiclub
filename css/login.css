@@ -1,12 +1,14 @@
 .login-block {
   background-color: transparent;
-  padding: 50px;
-  height: 80vh;
   width: 100%;
   margin: auto;
   background-image: url("../images/textures/kikicode.png");
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.login-block section {
+  padding: 50px;
 }
 
 #spinner {
@@ -16,6 +18,88 @@
   height: 40px;
   text-align: center;
   width: 80%;
+}
+
+.story {
+  position: relative;
+  width: 100%;
+  padding: 50px 50px 75px 50px;
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+  color: black;
+}
+
+.story h2 {
+  font-size: 3.125rem;
+  display: block;
+  -webkit-margin-before: 0.67em;
+          margin-block-start: 0.67em;
+  -webkit-margin-after: 0.67em;
+          margin-block-end: 0.67em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.story h3 {
+  font-size: 1.625rem;
+  margin: 1rem 0px;
+  margin-bottom: 2.5rem;
+  display: block;
+  -webkit-margin-before: 0.83em;
+          margin-block-start: 0.83em;
+  -webkit-margin-after: 0.83em;
+          margin-block-end: 0.83em;
+  -webkit-margin-start: 0px;
+          margin-inline-start: 0px;
+  -webkit-margin-end: 0px;
+          margin-inline-end: 0px;
+  font-weight: normal;
+}
+
+.story .big-btn {
+  color: #fff;
+  border: none;
+}
+
+.story .big-btn:hover {
+  background-color: #fd0814;
+}
+
+.big-btn {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e50914), to(#db0510));
+  background-image: linear-gradient(to bottom, #e50914, #db0510);
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+          box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+  color: #fff;
+  background-color: #e50914;
+  font-size: 1em;
+  padding: 12.5px 1em;
+  min-width: 74px;
+  min-height: 50px;
+  margin: .5em .5em .5em 0;
+  cursor: pointer;
+  letter-spacing: .1px;
+  font-size: 1.625rem;
+  border: none;
+  border-radius: 2px;
+}
+
+.big-btn:hover {
+  background-color: #fd0814;
+}
+
+#guest-btn {
+  color: white;
+}
+
+#guest-btn:hover {
+  background-color: red;
+  opacity: 0.8;
 }
 
 #wix {

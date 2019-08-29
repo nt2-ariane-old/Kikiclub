@@ -15,6 +15,7 @@
 			"console" => "Générateur (Temp)",
 			"badges" => "Badges",
 			"assign-member" => "Assignation d'Ateliers à un membre",
+			"home" => "Accueil",
 		],
 		"all_pages" => [
 			"delete" => "Supprimer",
@@ -99,19 +100,23 @@
 			"assign" => "Assigner des ateliers au membre",
 		],
 		"login" => [
+			"firstname" => "Prénom",
+			"lastname" => "Nom",
 			"separator" => "OU",
-			"signIn-Fb" => "Se Connecter par Kikicode",
-			"signIn-E" => "Se connecter par courriel",
 			"signUp" => "S'inscrire",
 			"login" => "Se Connecter",
 			"loading" => "Chargement",
-			"emailInput" => "Courriel",
-			"passwordInput" => "Mot de passe",
-			"confirmPasswordInput" => "Confirmer Mot de passe",
+			"email" => "Courriel",
+			"password" => "Mot de passe",
+			"confirm-password" => "Confirmer Mot de passe",
 			"errorFeeld" => "SVP, Remplir tout les champs",
 			"errorEntry" => "Courriel ou Mot de passe invalide",
 			"errorExist" => "L'utilisateur existe déjà",
 			"errorPassword" => "Les mots de passes ne sont pas les mêmes",	
+
+			"guest" => "Regardé comme invité",
+			"title" => "Lorem ipsum, dolor sit amet consectetur.",
+			"subtitle" => "Lorem ipsum, dolor sit amet",
 		],
 		"index" => [
 
