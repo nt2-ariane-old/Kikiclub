@@ -16,6 +16,7 @@
 			"badges" => "Badges",
 			"assign-member" => "Assign workshops to member",
 			"home" => "Home",
+			"materials" => "Materials",
 		],
 		"all_pages" => [
 			"delete" => "Delete",
@@ -45,6 +46,8 @@
 		],
 		"workshops" => [
 			"difficulty" => "Difficulty",
+			"grade" => "Scholar Level",
+			"robot" => "Robot",
 			"scholar" => "Suggested Scholar Level",
 			"state" => "Workshops's states",
 			"robots" => "Robots",

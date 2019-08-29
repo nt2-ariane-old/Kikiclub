@@ -8,7 +8,6 @@ const onPageLoad = () =>
 const show = (id,link) =>
 {
 	let node = document.getElementById(id);
-	console.log(node);
 	if(node != null)
 	{
 		if(node.offsetHeight > 180)
@@ -59,7 +58,6 @@ const openBadge = ($id) =>
 				
 
 					loadMedia(badge,badge_div);
-					console.log(badge);
 					let info = document.createElement('div');
 						info.setAttribute('class','infos');
 

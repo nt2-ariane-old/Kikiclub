@@ -16,6 +16,7 @@
 			"badges" => "Badges",
 			"assign-member" => "Assignation d'Ateliers à un membre",
 			"home" => "Accueil",
+			"materials" => "Matériels",
 		],
 		"all_pages" => [
 			"delete" => "Supprimer",
@@ -46,8 +47,10 @@
 		"workshops" => [
 			"difficulty" => "Difficulté",
 			"scholar" => "Année Scolaire Suggérée",
+			"grade" => "Année Scolaire",
 			"state" => "États de l'atelier",
 			"robots" => "Robots",
+			"robot" => "Robot",
 			"deleteFilter" => "Supprimer les filtres",
 			"sort" => "Trier par",
 			"a-z_name" => "Noms (A-Z)",
@@ -55,6 +58,7 @@
 			"recents" => "Plus récents",
 			"filter" => "Filtrer",
 			"deployed" => "Deployer",
+			
 		],
 		"shared" => [
 			"social" => "Média Sociaux",

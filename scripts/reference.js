@@ -5,7 +5,6 @@ const onPageLoad = () =>
         btnCopy = document.getElementById( 'copy' );
     
         btnCopy.onclick = () => {
-        console.log(toCopy);
         toCopy.focus();
         toCopy.select();
         document.execCommand( 'copy' );

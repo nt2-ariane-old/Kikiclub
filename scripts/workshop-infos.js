@@ -48,18 +48,13 @@ const addMaterial = () =>
 		titre.innerHTML = "Materiel " + nb + " : ";
 		
 		let select = document.createElement('select');
-			let newoption = document.createElement('option');
-				newoption.innerHTML = "Nouveau Materiel";
-				newoption.value = -1;
-
-			select.appendChild(newoption);
+			
 			select.name = "materials[]";
 			$.ajax({
 				type: "POST",
 				url:'ajax/material-ajax.php',
 				dataType: 'json',
 				success: function( data ) {
-					console.log(data);
 					data.forEach(element => {
 						let option = document.createElement('option');
 						option.innerHTML = element["name"];
@@ -75,34 +70,28 @@ const addMaterial = () =>
 			});
 			
 			select.onchange = () =>
-			{
-				let input = select.parentNode.querySelector('input');
-				
-				if(input != null)
-				{
-					select.parentNode.removeChild(input);
-				}
-				if(select.value == -1)
-				{
-					input = document.createElement('input');
-					input.type = "text";
-					titre.appendChild(input);
-					
-				}
-				
+			{					
+				addNbItems(select,titre);	
 			}
 			titre.appendChild(select);
-			if(select.value = -1)
-			{
-				let input = document.createElement('input');
-					input.type = "text";
-				
-					titre.appendChild(input);
-			}
+			addNbItems(select,titre);
+			
 	
 	node.appendChild(titre);
 }
 
+const addNbItems = (select,parent) =>
+{
+
+	let input = select.parentNode.querySelector('input');
+		if(input != null)
+		{
+			select.parentNode.removeChild(input);
+		}
+		input = document.createElement('input');
+		input.type = "number";
+	parent.appendChild(input);
+}
 const deleteParams = () =>
 {
 	params["difficulties"] = [];

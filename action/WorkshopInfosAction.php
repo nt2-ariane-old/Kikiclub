@@ -20,6 +20,7 @@
 		public $filters;
 		public $id_types;
 		public $materials;
+		public $workshop_materials;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"workshop-infos");
 			$this->exist = false;
@@ -27,7 +28,7 @@
 		}
 		
 		protected function executeAction() {
-			
+			$this->materials = WorkshopDAO::getMaterials();
 			if(!empty($_GET["workshop_id"]))
 			{
 				$_SESSION["workshop_id"] = $_GET["workshop_id"];
@@ -35,7 +36,7 @@
 			if(!empty($_SESSION["workshop_id"]))
 			{
 				$this->exist = true;
-				$this->materials = WorkshopDAO::getWorkshopsMaterial($_SESSION["workshop_id"],true);
+				
 			}
 
 			if($_SESSION["language"] == 'en')
@@ -83,10 +84,7 @@
 					$filters_selected["robots"] = [];
 					$filters_selected["difficulties"] = [];
 					$filters_selected["grades"] = [];
-
-
-
-					
+		
 					if(!empty($_POST["difficulties"]))
 					{
 						$filters_selected["difficulties"] = $_POST["difficulties"];
@@ -145,6 +143,7 @@
 				$this->filters = FilterDAO::getWorkshopFilters($id);
 
 				$this->workshop = WorkshopDAO::getWorkshop($id);
+				$this->workshop_materials = WorkshopDAO::getWorkshopsMaterial($_SESSION["workshop_id"]);
 
 				if(!empty($this->filters[$this->id_types["difficulties"]]))
 				{
@@ -205,12 +204,13 @@
 		
 		public function deleteOtherMaterial($list)
 		{
-			$materials = WorkshopDAO::getMaterials();
+			$materials = WorkshopDAO::getWorkshopsMaterial(intval($_SESSION["workshop_id"]));
+	
 			foreach ($materials as $material)
 			{
-				if(!in_array($material["id"],$list))
+				if(!in_array($material["material"],$list))
 				{
-					WorkshopDAO::deleteWorkshopMaterial($material["id"],$this->workshop["id"]);
+					WorkshopDAO::deleteWorkshopMaterial($material["material"],$_SESSION["workshop_id"]);
 				}
 			}
 

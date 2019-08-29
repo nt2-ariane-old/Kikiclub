@@ -63,12 +63,15 @@ const openWorkshop = ($id) =>
 						let name = document.createElement('h3');
 							name.innerHTML = workshop['name'];
 						infos_div.appendChild(name);
-					
+						let content = document.createElement('div');
+							content.innerHTML = workshop['content'];
+						infos_div.appendChild(content);
+
 						for (const keyf in filters) {
 							if (filters.hasOwnProperty(keyf)) {
 								const filter = filters[keyf];
 								let filterB = document.createElement('b');
-									filterB.innerHTML = keyf + " : ";
+									filterB.innerHTML = read('workshops',keyf) + " : ";
 									let ul = document.createElement('ul');
 
 										for (const keyi in filter) {
@@ -84,9 +87,7 @@ const openWorkshop = ($id) =>
 							}
 						}		
 						
-						let content = document.createElement('div');
-							content.innerHTML = workshop['content'];
-						infos_div.appendChild(content);
+						
 
 					workshop_div.appendChild(infos_div);
 				node.appendChild(workshop_div);
@@ -160,7 +161,6 @@ let post = (path, params, method='post') => {
 
 const read = (page, node) => {
 	value = "TEXT_NOT_FOUND";
-	console.log(langData);
 	if(page in langData)
 	{
 		if (node in langData[page])
@@ -192,7 +192,6 @@ const loadStars = (object,container) => {
 }
 const loadMedia = (object,container ) => {
 
-	console.log(object["media_path"]);
 	let media = document.createElement("div");
 		media.setAttribute('class','media');
 

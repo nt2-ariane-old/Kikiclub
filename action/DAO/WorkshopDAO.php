@@ -131,6 +131,23 @@
 
 			return $content;
 		}
+		public static function getMaterialByValue($value)
+		{
+			$connection = Connection::getConnection();
+
+			$statement = $connection->prepare("SELECT * FROM material WHERE name=?");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->bindParam(1, $value);
+			$statement->execute();
+
+			$content = [];
+
+			if ($row = $statement->fetch()) {
+				$content = $row;
+			}
+
+			return $content;
+		}
 		public static function insertMaterial($name)
 		{
 			$connection = Connection::getConnection();
@@ -141,6 +158,16 @@
 			$existe = $statement->execute();
 			return $existe;
 		}
+		public static function updateMaterial($id_material,$value)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("UPDATE material SET name=? WHERE id = ?");
+			$statement->bindParam(1, $value);
+			$statement->bindParam(2, $id_material);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$valide = $statement->execute();
+			return $valide;
+		}
 		public static function deleteMaterial($id)
 		{
 			$connection = Connection::getConnection();
@@ -148,7 +175,8 @@
 			$statement = $connection->prepare("DELETE FROM material WHERE id=?");
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
-			$statement->execute();
+			$valide = $statement->execute();
+			return $valide;
 		}
 		public static function getWorkshopsMaterial($id,$with_name=false)
 		{
@@ -162,7 +190,7 @@
 			{
 				$request = "SELECT id_material as material, id_workshop as workshop FROM workshop_materials WHERE id_workshop=?";
 			}
-			$statement = $connection->prepare("SELECT * FROM material WHERE id=?");
+			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id);
 			$statement->execute();
@@ -170,7 +198,7 @@
 			$content = [];
 
 			while ($row = $statement->fetch()) {
-				$content = $row;
+				$content[] = $row;
 			}
 
 			return $content;
@@ -187,6 +215,7 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
+		
 		public static function deleteWorkshopMaterial($id_material,$id_workshop)
 		{
 		

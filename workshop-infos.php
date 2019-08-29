@@ -127,10 +127,25 @@
 					<h3>Matériel : </h3>
 					<div id="materials">
 						<?php
-							foreach ($action->materials as $material) {
+							$i=1;
+							foreach ($action->workshop_materials as $w_material) {
 								?>
-									<h4><?= $material["material"] ?></h4>
+									<p id="material_<?= $i?>">Materiel <?= $i ?> : 
+										<select onchange="addNbItems(this,this.parentElement)" name="materials[]" >
+										<?php
+											foreach ($action->materials as $material) {
+												
+												?>
+													<option  value="<?= $material["id"]?>" <?php if($w_material['material'] == $material['id']) echo 'selected';?>><?= $material["name"]?></option>
+												<?php
+											}
+										?>
+										<script>
+											parent = document.getElementById("material_<?= $i?>");
+											addNbItems(parent.querySelector('select'),parent)</script>
+									</select></p>							
 								<?php
+								$i++;
 							}
 						?>
 					</div>

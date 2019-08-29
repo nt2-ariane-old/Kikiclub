@@ -211,6 +211,7 @@
 									<ul>
 										<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("pages_name","badges") ?></a></li>
 										<li><a class="nav-item nav-link" href="console.php"><?= $action->trans->read("pages_name","console") ?></a></li>
+										<li><a class="nav-item nav-link" href="materials.php"><?= $action->trans->read("pages_name","materials") ?></a></li>
 									</ul>
 								</li>
 							<?php

@@ -9,7 +9,28 @@
 		}
 
 		protected function executeAction() {
-            $this->results = WorkshopDAO::getMaterials();
-
+			$this->results = WorkshopDAO::getMaterials();
+			if(!empty($_POST['type']))
+			{
+				$type = $_POST['type'];
+				if($type == 'delete')
+				{
+					$id = $_POST['id'];
+					$this->results = WorkshopDAO::deleteMaterial($id);
+				}
+				else if($type == 'update')
+				{
+					$id = $_POST['id'];
+					$value =$_POST['value'];
+					$this->results = WorkshopDAO::updateMaterial($id,$value);
+				}
+				else if($type == 'create')
+				{
+					$value =$_POST['value'];
+					WorkshopDAO::insertMaterial($value);
+					$this->results = WorkshopDAO::getMaterialByValue($value);
+				}
+			}
+			
 		}
 	}
