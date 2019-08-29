@@ -109,14 +109,7 @@
 {
 	background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">Completed</text></svg>');
 }
- .avatars-list{
-	background-color: antiquewhite;
-	width:80%;
-	overflow-y: scroll;
-	height: 130px;
-	margin:auto;
-	border: 3px solid black;
-}
+
 /* AUTO COMPLETE SEARCH BAR */
 .autocomplete {
 	/*the container must be positioned relative:*/

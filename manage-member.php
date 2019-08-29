@@ -92,15 +92,16 @@
 							?>
 							</div>
 						</form>
-						<?php
-							if($action->admin_mode && $userExist)
-							{
-								?>
-									<a class="return-btn" href="assign-member.php")><?= $action->trans->read("manage-member","assign")?></a>
-								<?php
-							}
-						?>
-						<div>
+						
+						<div id="btns-zone">
+							<?php
+								if($action->admin_mode && $userExist)
+								{
+									?>
+										<a class="return-btn" href="assign-member.php")><?= $action->trans->read("manage-member","assign")?></a>
+									<?php
+								}
+							?>
 							<a class="return-btn" href="<?= $action->previous_page ?>.php"><?= $action->trans->read("all_pages","back") ?></a>
 						</div>
 	

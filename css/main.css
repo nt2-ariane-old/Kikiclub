@@ -510,6 +510,27 @@ footer p a:hover {
   text-align: right;
 }
 
+#btns-zone {
+  clear: both;
+  background-color: white;
+  padding: 0.5em;
+  text-align: center;
+}
+
+#btns-zone .return-btn {
+  background-color: transparent;
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0.5em;
+  margin: 0.5em auto;
+}
+
+#btns-zone * {
+  display: inline-block;
+  text-align: center;
+  width: calc(50% - 1em);
+}
+
 /* Version Web */
 @media only screen and (min-width: 450px) {
   #menu {

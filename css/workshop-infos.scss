@@ -156,22 +156,7 @@ aside
 	display: none;
 	background-color: rgba(0, 0, 0, 0.592);
 }
-#btns-zone
-{
 
-  clear: both;
-  background-color: white;
-  border-bottom: 5px solid black;
-  padding: 0.5em;
-  .return-btn
-  {
-	  background-color:transparent;
-	  display: block;
-	  margin: auto;
-	  padding: 0.5em;
-	  margin: 0.5em auto;
-  }
-}
 
 .loading-bar
 {
@@ -256,20 +241,7 @@ aside
 #btns-zone
 {
 	width: 75%;
-	float: right;
-	border: none;
-	text-align: center;
-	*
-	{
-		display: inline-block;
-		text-align: center;
-		width:  calc(25% - 1em);
-	}
-	.return-btn
-	{
-		margin: 0.5em;
-		display: inline-block;
-	}
+	float: right;	
 }
 
 #workshop-form p
