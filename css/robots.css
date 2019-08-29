@@ -172,13 +172,18 @@ main .multislider .MS-controls button {
     height: 280px;
   }
   main {
-    height: 75vh;
+    position: relative;
   }
   main .multislider {
-    top: calc((80vh - 220px )/ 2);
-    width: 90%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin: auto;
-    top: calc((80vh - 300px )/ 2);
+    width: 90%;
+    height: 300px;
+    margin: auto;
   }
   main .multislider .MS-content {
     max-width: 100%;

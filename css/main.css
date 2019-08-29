@@ -531,7 +531,6 @@ footer p a:hover {
     font-size: 2rem;
   }
   footer p {
-    display: none;
     font-size: 1em;
   }
   .lang {
@@ -848,7 +847,7 @@ footer p a:hover {
 }
 
 main {
-  min-height: 60vh;
+  min-height: calc(100vh - 120px - 184px);
 }
 
 @media only screen and (min-width: 576px) {

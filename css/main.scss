@@ -558,7 +558,6 @@ footer p
 
 	footer p
 	{
-		display: none;
 		font-size: 1em;
 	}
 
@@ -887,7 +886,7 @@ footer p
 
 main
 {
-	min-height: 60vh;
+	min-height: calc(100vh - 120px - 184px);
 }
 @media only screen and (min-width: 576px)
 {

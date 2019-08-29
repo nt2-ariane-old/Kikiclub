@@ -56,10 +56,7 @@ const openBadge = ($id) =>
 				let badge_div = document.createElement('div');
 					badge_div.setAttribute('class','badges-infos');
 
-					let x_btn = document.createElement('span');
-						x_btn.setAttribute('class','close cursor');
-						x_btn.setAttribute('onclick','closeModal()');
-						x_btn.innerHTML = "&times;";
+				
 
 					loadMedia(badge,badge_div);
 					console.log(badge);
@@ -78,7 +75,6 @@ const openBadge = ($id) =>
 							info.appendChild(name);
 							info.appendChild(desc);
 						badge_div.appendChild(info);
-						badge_div.appendChild(x_btn);
 				node.appendChild(badge_div);
 		},
 

@@ -12,7 +12,6 @@
 main
 {
 	background-color: black;
-	height: 80vh;
 	position: relative;
 	#family-carousel
 	{
@@ -20,7 +19,6 @@ main
 		width: 90vw;
 		margin: auto;
 		display: block;
-		left: 5vw;
 		#family
 		{
 			width: 80vw;
@@ -47,8 +45,6 @@ main
 
 			}
 		}
-		position: absolute;
-		top:calc( (80vh - ((40px * 1.2) +  (2 * (19px * 1.2)) + (240px * 1.2))) / 2);
 
 	}
 }
@@ -72,13 +68,12 @@ main
 {
 	width: 100%;
 	text-align: center;
-	height: calc((40px * 1.2) +  (2 * (19px * 1.2)) + ((240px * 1.2) + 32px));
 	overflow: hidden;
 	position: relative;
 	.member-name
 	{
 		color:white;
-		font-size: 40px;
+		font-size: 30px;
 		text-align: center;
 		white-space: nowrap;
 		overflow: hidden;
@@ -105,8 +100,8 @@ main
 	{
 		display: block;
 		border-radius: 100%;
-		width: calc(80vw - 80px);
-		height: calc(80vw - 80px);
+		width: 180px;
+		height: 180px;
 		margin: 30px auto;
 		background-color: #ADB30F;
 
@@ -157,6 +152,10 @@ main
 @media (min-width: 576px)
 {
 	.member {
+		.member-name
+		{
+			font-size: 40px;
+		}
 		.member-logo,.member-stateLogo
 		{
 			width: 300px;
@@ -168,13 +167,30 @@ main
 		}
 	}
 }
-@media (min-width: 768px)
+@media (min-width: 767px)
 {
+	.multislider .MS-content .item
+	{
+		width: 50%;
+	}
 	.member {
 		.member-logo,.member-stateLogo
 		{
-			width: 260px;
-			height: 260px;
+			width: 230px;
+			height: 230px;
+			box-shadow:
+			0 0 5px 2.5px #ADB30F,
+			0 0 10px 5px rgb(33, 80, 61),
+			0 0 15px 10px rgb(51, 50, 50);
+			&:hover
+			{
+				border: none;
+				background-color: rgb(242, 243, 192);
+				box-shadow:
+				0 0 5px 2.5px rgb(242, 243, 192),  /* inner white */
+				0 0 10px 5px rgb(90, 247, 187), /* middle magenta */
+				0 0 15px 10px rgb(58, 226, 72); /* outer cyan */
+			}
 		}
 		.member-stateLogo
 		{
@@ -182,13 +198,27 @@ main
 		}
 	}
 }
-@media (min-width: 992px)
+@media (min-width: 1030px)
 {
+	
 	.member {
 		.member-logo,.member-stateLogo
 		{
-			width: 210px;
-			height: 210px;
+			width: 280px;
+			height: 280px;
+			box-shadow:
+			0 0 10px 5px #ADB30F,
+			0 0 20px 10px rgb(33, 80, 61),
+			0 0 25px 15px rgb(51, 50, 50);
+			&:hover
+			{
+				border: none;
+				background-color: rgb(242, 243, 192);
+				box-shadow:
+				0 0 10px 5px rgb(242, 243, 192),  /* inner white */
+				0 0 20px 10px rgb(90, 247, 187), /* middle magenta */
+				0 0 25px 15px rgb(58, 226, 72); /* outer cyan */
+			}
 		}
 		.member-stateLogo
 		{
@@ -198,15 +228,31 @@ main
 }
 @media (min-width: 1200px)
 {
+	.multislider .MS-content .item
+	{
+		width: 33%;
+	}
 	.member {
+		
 		.member-logo,.member-stateLogo
 		{
-			width: 260px;
-			height: 260px;
+			width: 240px;
+			height: 240px;
+			box-shadow:
+				0 0 6px 3px #ADB30F,
+				0 0 12px 6px rgb(33, 80, 61),
+				0 0 16px 12px rgb(51, 50, 50);
+			&:hover
+			{
+				box-shadow:
+				0 0 6px 3px rgb(242, 243, 192),  /* inner white */
+				0 0 12px 6px rgb(90, 247, 187), /* middle magenta */
+				0 0 16px 12px rgb(58, 226, 72); /* outer cyan */
+			}
 		}
 		.member-stateLogo
 		{
-			left: calc((100% - 260px) / 2);
+			left: calc((100% - 240px) / 2);
 		}
 	}
 }

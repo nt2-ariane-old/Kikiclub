@@ -103,8 +103,9 @@
 	</main>
 	
 	<div id="workshop_modal" class="modal">
-	  		<div id="modal_content" class="modal_content"></div>
-		</div>
+		<span class="close cursor" onclick="closeModal()">&times;</span>
+	  	<div id="modal_content" class="modal_content"></div>
+	</div>
 	<?php
 		if($action->admin_mode)
 		{

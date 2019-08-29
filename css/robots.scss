@@ -205,11 +205,17 @@ main
 	
 	main
 	{
-		height: 75vh;
+		position: relative;
 		.multislider
 		{
-			top: calc((80vh - 220px )/ 2);
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
 			width: 90%;
+			height: 300px;
 			margin: auto;
 			.MS-content
 			{
@@ -241,7 +247,6 @@ main
 					font-size: 70px;
 				}
 			}
-		top: calc((80vh - 300px )/ 2)
 		}
 
 	}

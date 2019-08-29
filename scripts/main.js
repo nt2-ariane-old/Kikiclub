@@ -52,14 +52,10 @@ const openWorkshop = ($id) =>
 
 			let node = document.getElementById('modal_content');
 				node.innerHTML = "";
-				let x_btn = document.createElement('span');
-					x_btn.setAttribute('class','close cursor');
-					x_btn.setAttribute('onclick','closeModal()');
-					x_btn.innerHTML = "&times;";
+				
 				let workshop_div = document.createElement('div');
 					workshop_div.setAttribute('class','workshop-infos');
 
-					workshop_div.appendChild(x_btn);
 					loadMedia(workshop,workshop_div);
 					let infos_div = document.createElement('div');
 						infos_div.setAttribute('class','infos');

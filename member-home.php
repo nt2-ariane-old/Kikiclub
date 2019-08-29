@@ -53,7 +53,8 @@
 		?>
 	</main>
 	<div id="member_modal" class="modal">
-	  <div id="modal_content" class="modal_content"></div>
+		<span class="close cursor" onclick="closeModal()">&times;</span>
+	  	<div id="modal_content" class="modal_content"></div>
 	</div>
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/footer.php");
