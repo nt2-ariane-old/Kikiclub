@@ -670,7 +670,7 @@ footer p
 	{
 		max-width:800px;
 		max-height: 400px;
-		overflow-y: scroll;
+		overflow-y: hidden;
 		position: absolute;
 		width: 100%;
 		top: 0;
@@ -745,23 +745,44 @@ footer p
 	{
 		
 		width: 100%;
-		overflow-y: scroll;
-		overflow-x: none;
-		h2
+		overflow:hidden;
+		h3
 		{
-			width: 90%;
+			width: 100%;
 			text-align: center;
 			font-weight: bolder;
-			font-size: 40px;
+			font-size: 30px;
+			padding: 3px;
+			margin: 0;
 		}
-		h4
+		b
 		{
-			font-size: 22px;
-		}
-		p
-		{
-			font-size: 1rem;
+			font-size: 1.2rem;
 			padding: 0;
+			margin: 0;
+			ul
+			{
+				padding: 0;
+				margin: 0;
+				padding-left: 1em;
+				li
+				{
+					font-size: 1rem;
+					font-weight: 100;
+					padding: 0;
+					margin: 0;
+				}
+			}
+		}
+		div
+		{
+			padding: 0;
+			p
+			{
+				font-size: 1.2rem;
+				padding: 0;
+				margin: 0;
+			}
 		}
 		
 	}
@@ -864,6 +885,10 @@ footer p
     width: calc( 100% / 3 - 20px);
 }
 
+main
+{
+	min-height: 60vh;
+}
 @media only screen and (min-width: 576px)
 {
 	footer

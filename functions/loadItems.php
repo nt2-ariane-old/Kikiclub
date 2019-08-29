@@ -4,7 +4,11 @@ function loadMedia( $workshop ){
   ?>
     <div class="media">
 			<?php
-				if($workshop["media_type"] == "mp4")
+				if($workshop["media_type"] == "mp4"
+				|| $workshop["media_type"] == "mov"
+				|| $workshop["media_type"] == "avi"
+				|| $workshop["media_type"] == "flv"
+				|| $workshop["media_type"] == "wmv")
 				{
 			?>
 				<video class="img-rounded" width="100%" height="100%" controls>
@@ -13,7 +17,11 @@ function loadMedia( $workshop ){
 					</video>
 			<?php
 				} else if ($workshop["media_type"] == "png" ||
-					        $workshop["media_type"] == "jpg")
+							$workshop["media_type"] == "jpg" ||
+							$workshop["media_type"] == "jpeg" ||
+							$workshop["media_type"] == "bmp" ||
+							$workshop["media_type"] == "tiff" ||
+							$workshop["media_type"] == "gif")
 				{
 			?>
 					<img class="img-rounded" src="<?=$workshop['media_path']?>" alt="">

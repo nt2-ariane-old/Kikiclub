@@ -637,7 +637,7 @@ footer p a:hover {
 .modal .modal_content {
   max-width: 800px;
   max-height: 400px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   position: absolute;
   width: 100%;
   top: 0;
@@ -710,24 +710,45 @@ footer p a:hover {
 
 .workshop-infos .infos {
   width: 100%;
-  overflow-y: scroll;
-  overflow-x: none;
+  overflow: hidden;
 }
 
-.workshop-infos .infos h2 {
-  width: 90%;
+.workshop-infos .infos h3 {
+  width: 100%;
   text-align: center;
   font-weight: bolder;
-  font-size: 40px;
+  font-size: 30px;
+  padding: 3px;
+  margin: 0;
 }
 
-.workshop-infos .infos h4 {
-  font-size: 22px;
-}
-
-.workshop-infos .infos p {
-  font-size: 1rem;
+.workshop-infos .infos b {
+  font-size: 1.2rem;
   padding: 0;
+  margin: 0;
+}
+
+.workshop-infos .infos b ul {
+  padding: 0;
+  margin: 0;
+  padding-left: 1em;
+}
+
+.workshop-infos .infos b ul li {
+  font-size: 1rem;
+  font-weight: 100;
+  padding: 0;
+  margin: 0;
+}
+
+.workshop-infos .infos div {
+  padding: 0;
+}
+
+.workshop-infos .infos div p {
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
 }
 
 .workshop-infos .media {
@@ -824,6 +845,10 @@ footer p a:hover {
   height: 121px;
   border: 1px solid #dcdcdc;
   width: calc( 100% / 3 - 20px);
+}
+
+main {
+  min-height: 60vh;
 }
 
 @media only screen and (min-width: 576px) {

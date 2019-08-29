@@ -63,50 +63,35 @@ const openWorkshop = ($id) =>
 					loadMedia(workshop,workshop_div);
 					let infos_div = document.createElement('div');
 						infos_div.setAttribute('class','infos');
-
-					let strings = []
-					for (const keyf in filters) {
-						if (filters.hasOwnProperty(keyf)) {
-							const filter = filters[keyf];
-							strings[keyf] = "";
-							let i = 0;
-							for (const keyi in filter) {
-								if (filter.hasOwnProperty(keyi)) {
-									const element = filter[keyi];
-									if(i > 0)
-									{
-										strings[keyf] += ", "
-									}
-									strings[keyf] += element["filter"] ;
-									i++;
-								}
-							}
-						}
-					}
-
-
-
-					let name = document.createElement('h2');
-					name.innerHTML = workshop['name'];
-
-					let botsh4 = document.createElement('h4');
-						if( strings["robot"] != null)
-							botsh4.innerHTML = "Type : " + strings["robot"];
 					
-					let diffsh4 = document.createElement('h4');
-						if( strings["difficulty"] != null)
-							diffsh4.innerHTML = "Difficulté : " + strings["difficulty"];
-					let gradesh4 = document.createElement('h4');
-						if( strings["grade"] != null)
-							gradesh4.innerHTML = "Age : " + strings["grade"];
-					let content = document.createElement('div');
-						content.innerHTML = workshop['content'];
-
+						let name = document.createElement('h3');
+							name.innerHTML = workshop['name'];
 						infos_div.appendChild(name);
-						infos_div.appendChild(botsh4);
-						infos_div.appendChild(diffsh4);
-						infos_div.appendChild(gradesh4);
+					
+						for (const keyf in filters) {
+							if (filters.hasOwnProperty(keyf)) {
+								const filter = filters[keyf];
+								let filterB = document.createElement('b');
+									filterB.innerHTML = keyf + " : ";
+									let ul = document.createElement('ul');
+
+										for (const keyi in filter) {
+											if (filter.hasOwnProperty(keyi)) {
+												const element = filter[keyi];
+												let li = document.createElement('li');
+													li.innerHTML =element["filter"];
+												ul.appendChild(li);											
+											}
+										}
+									filterB.appendChild(ul);
+								infos_div.appendChild(filterB);
+							}
+						}		
+						
+						let content = document.createElement('div');
+							content.innerHTML = workshop['content'];
 						infos_div.appendChild(content);
+
 					workshop_div.appendChild(infos_div);
 				node.appendChild(workshop_div);
 		},
@@ -210,12 +195,16 @@ const loadStars = (object,container) => {
 	container.appendChild(stars);
 }
 const loadMedia = (object,container ) => {
-	
+
 	console.log(object["media_path"]);
 	let media = document.createElement("div");
 		media.setAttribute('class','media');
 
-		if(object["media_type"] == "mp4")
+		if(object["media_type"] == "mp4" ||
+			object["media_type"] == "mov" ||
+			object["media_type"] == "flv" ||
+			object["media_type"] == "avi" ||
+			object["media_type"] == "wmv")
 		{
 			let video = document.createElement('video');
 				video.width = '100%';
@@ -232,8 +221,13 @@ const loadMedia = (object,container ) => {
 
 		}
 		else if(object["media_type"] == "png" ||
-				object["media_type"] == "jpg")
+				object["media_type"] == "jpg" ||
+				object["media_type"] == "jpeg" ||
+				object["media_type"] == "bmp" ||
+				object["media_type"] == "tiff" ||
+				object["media_type"] == "gif")
 		{
+
 			media.style = "background-image:url('" +object['media_path'] +"');";
 			// let image = document.createElement('img');
 			// 	image.src = object["media_path"];

@@ -27,7 +27,7 @@
 			$uploadfile = $uploaddir . basename($_FILES['file']['name']);
 			$webfile = $webdir . basename($_FILES['file']['name']);
 
-			$accepeted_type = ['mp4','png','jpeg','jpg','gif','mp3'];
+			$accepeted_type = ['mp4','mov','avi','flv','wmv','jpeg','bmp','tiff','png','jpeg','jpg','gif','mp3'];
 			$type = pathinfo($webfile, PATHINFO_EXTENSION);
 			if(in_array($type,$accepeted_type))
 			{

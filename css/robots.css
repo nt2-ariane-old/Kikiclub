@@ -139,15 +139,15 @@ main .multislider .MS-controls button {
     padding: 1em;
     float: left;
     width: 50%;
-    height: 100vh;
-    overflow-y: scroll;
+    height: 100%;
+    overflow: hidden;
   }
   .modal_content section:after {
     clear: both;
   }
   .modal_content .media {
     background-color: #D8DF23;
-    height: 100vh;
+    height: 100%;
     width: 50%;
     float: right;
   }
@@ -158,6 +158,14 @@ main .multislider .MS-controls button {
   }
   .modal_content .media:after {
     clear: both;
+  }
+  .modal_content h3 {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 1.7rem;
+  }
+  .modal_content h4, .modal_content p {
+    font-size: 1.2rem;
   }
   .robot .media {
     width: 280px;

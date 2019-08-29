@@ -28,8 +28,8 @@
 
 	border: 1px solid gray;
 	margin : 1em auto;
-	height: calc( (1.2em * 3) + 185px);
-	width: 185px;
+	height: calc( (1.2em * 3) + 150px);
+	width: 150px;
 	position: relative;
 	background-color: rgba(255, 255, 255, 0.801);
 	&:hover
@@ -145,8 +145,8 @@
 		background-size: cover;
 		margin: auto;
 		background-position: center;
-		height: 185px;
-		width: 185px;
+		height: 150px;
+		width: 150px;
 		border: none;
 		z-index: 0;
 		opacity: 1;
@@ -184,8 +184,10 @@
 
 #indexes
 {
+	text-align: center;
 	button
 	{
+		display: inline-block;
 		border: 1px solid grey;
 		color: gray;
 		width: calc(18px + 1em);
@@ -195,6 +197,7 @@
 		background-color: transparent;
 		border-radius: 100%;
 		padding: 0.5em;
+		margin: 3px;
 		&:hover
 		{
 			border: 1px solid black;
@@ -387,7 +390,7 @@ aside
 
 
 }
-@media only screen and (min-width:576px) and (max-width: 992px) {
+@media only screen and (min-width:576px) and (max-width: 1165px) {
 	aside
 	{
 		width: 100%;
@@ -417,40 +420,42 @@ aside
 	
 
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1165px) {
 	.workshops-list
 	{
-		width:calc((185px + 30px + 90px )* 4 );
+		width:calc((150px + 30px + 90px )* 4 );
 		margin: auto;
 	}
 	.sort
 	{
-		width:calc((185px + 30px + 90px )* 4 );
+		width:calc((150px + 30px + 90px )* 4 );
 	}
 	aside
 	{
-		width: 25%;
-		
-		float: left;
+		width: 20%;
+		position: absolute;
+		left: 0;
+		top: 128px;
 		padding:1em;
 		background-color: white;
-		#workshop-menu {
+	#workshop-menu {
 			display: block;
 			
 		}
 		.filters
 		{
-			width:240px;
+			width:200px;
 			margin: auto;
 		}
 	}
 	main
 	{
 		background-color: white;
-		width: 75%;
+		width: 100%;
 		padding: 0;
 		margin:0;
 		float: right;
+
 
 	}
 
@@ -491,7 +496,7 @@ aside
 	}
 	.workshops-list,.sort
 	{
-		width:calc((185px + 30px ) * 2 );
+		width:calc((150px + 30px ) * 2 );
 		margin: auto;
 		float: none;
 	}
@@ -508,7 +513,7 @@ aside
 {
 	.workshops-list,.sort
 	{
-		width:calc((185px + 30px ) * 3 );
+		width:calc((150px + 30px ) * 3 );
 		margin: auto;
 	}
 	.col-sm-3 {
@@ -522,7 +527,7 @@ aside
 	}
 	.workshops-list,.sort
 	{
-		width:calc((185px + 30px ) * 4 );
+		width:calc((150px + 30px ) * 4 );
 		margin: auto;
 	}
 	.sort

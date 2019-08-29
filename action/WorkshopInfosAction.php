@@ -28,6 +28,10 @@
 		
 		protected function executeAction() {
 			
+			if(!empty($_GET["workshop_id"]))
+			{
+				$_SESSION["workshop_id"] = $_GET["workshop_id"];
+			}
 			if(!empty($_SESSION["workshop_id"]))
 			{
 				$this->exist = true;
