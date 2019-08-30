@@ -1,0 +1,22 @@
+.sheet {
+  width: 75%;
+  margin: auto;
+  text-align: center;
+}
+
+.sheet input[type=text] {
+  width: 200px;
+  display: inline-block;
+}
+
+.sheet button[type=button] {
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  line-height: 1;
+  display: inline-block;
+  margin: 1em auto;
+}
+/*# sourceMappingURL=materials.css.map */
