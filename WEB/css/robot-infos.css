@@ -1,0 +1,103 @@
+.sheet {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.sheet h3 {
+  text-align: center;
+  line-height: 5rem;
+  font-size: 4.5rem;
+  margin: 0;
+}
+
+.sheet h4 {
+  text-align: center;
+  background-color: white;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
+  padding: 0.5em;
+  margin: auto;
+}
+
+.sheet .media {
+  width: 33%;
+  height: 300px;
+  display: inline-block;
+  text-align: center;
+  line-height: 300px;
+  background-color: rgba(240, 255, 255, 0.639);
+  vertical-align: top;
+  /* added */
+}
+
+.sheet .media img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+}
+
+.sheet .description {
+  padding: 1em;
+  width: 65%;
+  height: 300px;
+  display: inline-block;
+  background-color: rgba(240, 255, 255, 0.639);
+  vertical-align: top;
+  /* added */
+}
+
+.sheet .h2 {
+  text-align: center;
+  margin: 1em auto;
+  display: block;
+}
+
+.manage-btn {
+  height: 40px;
+  line-height: 30px;
+  display: block;
+  border-color: white;
+  background-color: #D8DF23;
+  color: black;
+}
+
+.error-droid {
+  border: none;
+  float: none;
+}
+
+.error-droid h2 {
+  background-color: red;
+  border: 5px solid white;
+}
+
+.error-droid img {
+  display: block;
+  margin: 1em auto;
+}
+
+#profil-form {
+  padding: 3em;
+  background-color: rgba(255, 255, 255, 0.578);
+  border: none;
+}
+
+#profil-form .media {
+  margin: 1em;
+  width: auto;
+  display: block;
+}
+
+#profil-form #imagedropzone {
+  margin: 1em;
+}
+
+#profil-form .ck.ck-editor {
+  margin: 1em;
+  width: auto;
+}
+
+.description::after {
+  clear: both;
+}
+/*# sourceMappingURL=robot-infos.css.map */

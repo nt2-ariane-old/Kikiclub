@@ -1,0 +1,27 @@
+ErrorDocument 400 /errors/error.php?400
+ErrorDocument 401 /errors/error.php?401
+ErrorDocument 403 /errors/error.php?403
+ErrorDocument 404 /errors/error.php?404
+ErrorDocument 500 /errors/error.php?500
+
+RewriteEngine on
+Options +FollowSymLinks
+
+<Files .htaccess>
+    order allow,deny
+    deny from all
+</Files>
+
+RewriteCond  %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+RewriteCond  %{REQUEST_FILENAME}.php workshop-infos.php
+RewriteRule ^([^/\\.]+)*[/]*([^/\\.]+)*[/]*([^/\\.]+)*[/]*$ workshop-infos.php?workshop=$1 [L]
+
+php_flag magic_quotes_gpc Off
+
+<FilesMatch "\.(ttf|otf|woff)$">
+<IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+</IfModule>
+</FilesMatch>

@@ -1,0 +1,25 @@
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.success, .error {
+  text-align: center;
+  border: 1px solid black;
+}
+
+input {
+  width: 70%;
+  display: block;
+}
+
+.sheet {
+  width: 50%;
+  margin: auto;
+  padding: 1em;
+  border: 3px solid black;
+}
+/*# sourceMappingURL=reference.css.map */
