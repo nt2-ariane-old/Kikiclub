@@ -165,14 +165,22 @@
 		 */
 		public static function addMemberWorkshop($id_member,$id_workshop, $id_statut)
 		{
+			echo $id_member . '<br>';
+			echo $id_workshop . '<br>';
+			echo $id_statut . '<br>';
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("INSERT INTO member_workshops(id_member, id_workshop, id_statut) VALUES (?,?,?)");
+			$request = "INSERT INTO member_workshops(id_member, id_workshop, id_statut) VALUES (?,?,?)";
+			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->bindParam(1, $id_member);
 			$statement->bindParam(2, $id_workshop);
 			$statement->bindParam(3, $id_statut);
-			$statement->execute();
+
+			$valide = $statement->execute();
+			$valide = $statement->errorInfo();
+			
+			return $valide;
 		}
 
 		/**

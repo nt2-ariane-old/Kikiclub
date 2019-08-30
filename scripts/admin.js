@@ -331,7 +331,7 @@ const activateDraggable = () => {
 	  	start: function(event, ui) {
 		},
 		over: function(event, ui) {
-			setWorkshopToCategory(parseInt(ui.item[0].id),event.target.id,true);
+			setWorkshopToCategory(parseInt(ui.item[0].id),event.target.id);
 		}
 
 
@@ -341,12 +341,11 @@ const activateDraggable = () => {
 
 }
 
-const setWorkshopToCategory = (id_workshop, category, adding) =>
+const setWorkshopToCategory = (id_workshop, category) =>
 {
 	let formData = new FormData();
 	formData.append('id_workshop', id_workshop);
 	formData.append('category',category );
-	formData.append('adding', adding);
 
 	fetch("ajax/member-workshops-ajax.php", {
 		method: "POST",
@@ -356,33 +355,7 @@ const setWorkshopToCategory = (id_workshop, category, adding) =>
 	.then(response => response.text())
 	.then(data => {	
 		console.log(data);
-
 	})
-
-	if(adding)
-	{
-		switch(category)
-		{
-			case 'in-progress':
-			break;
-			case 'not-started':
-			break;
-			case 'complete':
-			break;
-		}
-	}
-	else
-	{
-		switch(category)
-		{
-			case 'in-progress':
-			break;
-			case 'not-started':
-			break;
-			case 'complete':
-			break;
-		}
-	}
 }
 
 const addquestion = () =>
@@ -700,7 +673,6 @@ const validTab = (form) =>
 	let valide = true;
 	if(clicked=='delete')
 	{
-
 		valide = false;
 	}
 	return valide;

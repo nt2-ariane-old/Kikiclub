@@ -15,49 +15,48 @@
 
 		protected function executeAction() {
 			$id_member =$_SESSION["member_id"];
+			$this->results['member'] = $id_member;
 			if(!empty($_POST["id_workshop"]) &&
-			!empty($_POST["category"]) &&
-			!empty($_POST["adding"]))
+			!empty($_POST["category"]))
 			{
-				if($_POST["adding"] == true)
+				$this->results['workshop'] = $_POST['id_workshop'];
+				$this->results['category'] = $_POST['category'];
+
+				$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
+				switch ($_POST["category"]) {
+					case 'new':
+						$statut = 1;
+							break;
+					case 'in-progress':
+						$statut = 2;
+						break;
+					case 'complete':
+						$statut = 3;
+						break;
+					default:
+						$statut = 1;
+						break;
+				}
+				if(!empty($workshops[intval($_POST["id_workshop"])]))
 				{
-					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
-					switch ($_POST["category"]) {
-						case 'new':
-							$statut = 1;
-								break;
-						case 'in-progress':
-							$statut = 2;
-							break;
-						case 'complete':
-							$statut = 3;
-							break;
+					$this->results['state'] = "existe";
+					MemberWorkshopDAO::updateMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
+				}
+				else
+				{
+					$this->results['state'] = "nouveau";
+					$this->results['state_working'] = MemberWorkshopDAO::addMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
+				}
 
-						default:
-							$statut = 1;
-							break;
-					}
-					if(!empty($workshops[intval($_POST["id_workshop"])]))
+				$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
+				if($statut == 3)
+				{
+					$filters = FilterDAO::getWorkshopFilters(intval($_POST["id_workshop"]));
+					if(!empty($filters[FilterDAO::getFilterTypeIdByName("difficulty")]) &&
+					!empty($filters[FilterDAO::getFilterTypeIdByName("robot")]))
 					{
-						MemberWorkshopDAO::updateMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
-					}
-					else
-					{
-						MemberWorkshopDAO::addMemberWorkshop($id_member,intval($_POST["id_workshop"]), $statut);
-					}
-
-					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
-					if($statut == 3)
-					{
-
-						$workshop = WorkshopDAO::getWorkshop(intval($_POST["id_workshop"]));
-						$filters = FilterDAO::getWorkshopFilters(intval($_POST["id_workshop"]));
-						if(!empty($filters[FilterDAO::getFilterTypeIdByName("difficulty")]) &&
-						!empty($filters[FilterDAO::getFilterTypeIdByName("robot")]))
-						{
-
-							$difficulties = $filters[FilterDAO::getFilterTypeIdByName("difficulty")];
-							$robots = $filters[FilterDAO::getFilterTypeIdByName("robot")];
+						$difficulties = $filters[FilterDAO::getFilterTypeIdByName("difficulty")];
+						$robots = $filters[FilterDAO::getFilterTypeIdByName("robot")];
 							
 						$score = 0;
 						if(!empty($robots) || !empty($difficulties))
@@ -103,7 +102,7 @@
 					}
 
 
-				}
+				
 					
 				}
 
