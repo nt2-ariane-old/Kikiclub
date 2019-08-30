@@ -75,7 +75,7 @@ const sortAndSearchWorkshops = () =>
 			let divWorkshops = document.getElementById('workshops-list');
 				divWorkshops.innerHTML = "";
 				let h3error = document.createElement('h3');
-					h3error.innerHTML = "Aucun Ateliers Disponibles";
+					h3error.innerHTML = read('workshops','none');
 				divWorkshops.appendChild(h3error);
 			let indexes = document.querySelector('#indexes');
 				indexes.innerHTML = "";

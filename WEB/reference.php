@@ -23,24 +23,24 @@ if($action->error || $action->success)
         if($action->first)
 		{
     ?>
-    	<h2>Bienvenue sur le Kikiclub</h2>
-    	<p>Le Kikiclub est une plateforme pour Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, illo accusantium! Quam porro laborum officiis et fugit quibusdam placeat qui obcaecati iste perferendis totam possimus neque itaque, commodi quaerat illo.</p>
+    	<h2><?= $action->trans->read('reference','welcome_kikiclub')?></h2>
+    	<p><?= $action->trans->read('reference','what_kikiclub')?></p>
    		<form action="reference.php" method="post">
-           <h5>Si vous avez un code de référence, vous pouvez l'entrez ici :</h5>
+           <h5><?= $action->trans->read('reference','if_code')?></h5>
            <input type="text" maxlength="8" name="code">
-           <button type="submit">Envoyer</button>
+           <button type="submit"><?= $action->trans->read('reference','submit')?></button>
         </form>
     <?php
         }
     ?>
-        <h2>Recommandez à votre ami!</h2>
-        <p>Envoyez votre code à votre ami, et à sa première connexion, chacun des membres de votre famille et de la sienne recevra 50 points!</p>
+        <h2><?= $action->trans->read('reference','refered_to_friend')?></h2>
+        <p><?= $action->trans->read('reference','refered_txt')?></p>
 
-        <p><b>Votre code : </b> <?= $action->user_token ?></p>
+        <p><b><?= $action->trans->read('reference','your_code')?> : </b> <?= $action->user_token ?></p>
            
-         <h5>Partagez!</h5>
+         <h5><?= $action->trans->read('reference','share')?></h5>
          <input id="link" type="text" value="https://www.doutreguay.com/reference.php?token=<?= $action->user_token?>">
-         <button id="copy" type="button">Copy in clipboard</button>
+         <button id="copy" type="button"><?= $action->trans->read('reference','copy')?></button>
 
 </div>
 <?php

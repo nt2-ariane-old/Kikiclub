@@ -45,6 +45,8 @@
 			
 		],
 		"workshops" => [
+			"none" => "No Workshops Availible",
+
 			"difficulty" => "Difficulty",
 			"grade" => "Scholar Level",
 			"robot" => "Robot",
@@ -76,6 +78,7 @@
 			
 		],
 		"member-home" => [
+
 			"show-more" => "Show more",
 			"show-less" => "Show less",
 			"new-workshops" => "< My new challenges >",
@@ -85,6 +88,20 @@
 			"finished-workshops" => "== Yeah! I finished those workshops!",
 			"no-finished" => "No finished workshops...",
 			"badges" => "__ Badges",
+		],
+		"reference" => [
+			"welcome_kikiclub" => "Welcome on the Kikiclub",
+			"what_kikiclub" => "Le Kikiclub is a plateform to Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, illo accusantium! Quam porro laborum officiis et fugit quibusdam placeat qui obcaecati iste perferendis totam possimus neque itaque, commodi quaerat illo.",
+			"if_code" => "If you have a referral code, you can enter it here :",
+			"submit" => "Apply",
+
+			"refered_to_friend" => "Share with your friend!",
+			"refered_txt" => "Send your code to a friend and at his first connexion, you will both receive 50pts for each of your family's member!",
+			"your_code" => "Your code",
+			"share" => "Share!",
+			"copy" => "Copy in Clipboard",
+
+
 		],
 		"manage-user" => [
 			"firstname" => "Firstname",

@@ -45,6 +45,7 @@
 			
 		],
 		"workshops" => [
+			"none" => "Aucun Ateliers Disponibles",
 			"difficulty" => "Difficulté",
 			"scholar" => "Année Scolaire Suggérée",
 			"grade" => "Année Scolaire",
@@ -86,6 +87,20 @@
 			"finished-workshops" => "== Yeah! J'ai réussi ces ateliers!",
 			"no-finished" => "Aucun ateliers terminés...",
 			"badges" => "__ Badges",
+		],
+		"reference" => [
+			"welcome_kikiclub" => "Bienvenue sur le Kikiclub",
+			"what_kikiclub" => "Le Kikiclub est une plateforme pour Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, illo accusantium! Quam porro laborum officiis et fugit quibusdam placeat qui obcaecati iste perferendis totam possimus neque itaque, commodi quaerat illo.",
+			"if_code" => "Si vous avez un code de référence, vous pouvez l'entrez ici :",
+			"submit" => "Appliquer",
+
+			"refered_to_friend" => "Recommandez à votre ami!",
+			"refered_txt" => "Envoyez votre code à votre ami, et à sa première connexion, chacun des membres de votre famille et de la sienne recevra 50 points!",
+			"your_code" => "Votre code",
+			"share" => "Partagez!",
+			"copy" => "Copier dans le presse-papier",
+
+
 		],
 		"manage-user" => [
 			"firstname" => "Prénom",

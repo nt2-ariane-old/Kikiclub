@@ -33,7 +33,7 @@
 	color: black;
 	h2
 	{
-		font-size: 3.125rem;
+		font-size: 1.75rem;
 		display: block;
 		
 		margin-block-start: 0.67em;
@@ -44,7 +44,7 @@
 	}
 	h3
 	{
-		font-size: 1.625rem;
+		font-size: 1.125rem;
 		margin: 1rem 0px;
 		margin-bottom: 2.5rem;
 		display: block;
@@ -87,12 +87,14 @@
 }
 #guest-btn
 {
+	display: block;
 	&:hover
 	{
 		background-color: red;
 		opacity: 0.8;
 		
 	}
+	font-size: 1rem;
 	color: white;
 }
 
@@ -165,7 +167,19 @@
 	}
 
 }
-
+@media only screen and (min-width: 768px) {
+	.story
+	{
+		h2
+		{
+			font-size: 3.125rem;
+		}
+		h3
+		{
+			font-size: 1.625rem;
+		}
+	}
+}
 @media only screen and (min-width: 768px) {
 	.login-block{
 		*

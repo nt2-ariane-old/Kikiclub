@@ -1,6 +1,7 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersConnexionDAO.php");
 
 	class ReferenceAction extends CommonAction {
@@ -50,17 +51,14 @@
                         {
                             if(UsersConnexionDAO::addReferance($user["id"],$_SESSION["id"]))
                             {
+                                $badges = BadgeDAO::getBadges(1);
                                 
                                 $members = MemberDAO::getUserFamily($user["id"]);
-                                foreach ($members["family"] as $member) {
-                                    MemberDAO::addScore($member["id"],50);
-                                }
-                                
+                                addScoresToMembers($members,$badges);
+
                                 $members = MemberDAO::getUserFamily($_SESSION["id"]);
-                                foreach ($members["family"] as $member) {
-                                    $member["id"];
-                                    MemberDAO::addScore($member["id"],50);
-                                }
+                                addScoresToMembers($members,$badges);
+                                
                                 $this->success = true;
                                 $this->msg = "Le code à bien été appliqué.";
                             }
@@ -90,4 +88,38 @@
             }
             
 		}
-	}
+        protected function testBadges($member,$member_badges,$badges)
+        {
+            foreach ($badges as $badge) {
+                                        
+                if($member["score"] >= $badge["value_needed"] )
+                {
+                    if(!array_key_exists($badge["id"],$member_badges))
+                    {
+                        $this->results[] = $member["firstname"] . " just won the " . $badge["name"] . " badge";
+                        BadgeDAO::addBadgeToMember($badge["id"],$member["id"],$member["id_user"]);
+                    }
+                    else
+                    {
+                        $this->results[] = $member["firstname"] . " already have the " . $badge["name"] . " badge";
+                    }
+                }
+                else
+                {
+                    $this->results[] = $member["firstname"] . " need to have " . $badge["value_needed"] . " to have the badge. He only have " . $member["score"] . " pts";
+                    
+                }
+            }
+        }
+        protected function addScoresToMembers($members,$badges)
+        {
+            foreach ($members["family"] as $member) {
+                MemberDAO::addScore($member["id"],50);
+                $member = MemberDAO::selectMember($member['id']);
+                $member_badges = BadgeDAO::getMemberBadge($member['id']);
+                $this->testBadges($member,$member_badges,$badges);         
+                
+            }
+        }
+    }
+    
