@@ -131,7 +131,7 @@
 							foreach ($action->workshop_materials as $w_material) {
 								?>
 									<p id="material_<?= $i?>">Materiel <?= $i ?> : 
-										<select onchange="addNbItems(this,this.parentElement)" name="materials[]" >
+										<select onchange="addNbItems(this,this.parentElement,<?= $i ?>)" name="materials[<?= $i ?>]" >
 										<?php
 											foreach ($action->materials as $material) {
 												
@@ -142,7 +142,7 @@
 										?>
 										<script>
 											parent = document.getElementById("material_<?= $i?>");
-											addNbItems(parent.querySelector('select'),parent)</script>
+											addNbItems(parent.querySelector('select'),parent,<?= $i ?>,<?= json_encode($w_material) ?>)</script>
 									</select></p>							
 								<?php
 								$i++;

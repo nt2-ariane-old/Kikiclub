@@ -29,7 +29,7 @@ const show = (id,link) =>
 
 
 function openModal() {
-	document.getElementById("member_modal").style.display = "flex";
+	document.getElementById("member_modal").style.display = "block";
   }
   function closeModal() {
 	document.getElementById("member_modal").style.display = "none";

@@ -56,47 +56,50 @@ const openWorkshop = ($id) =>
 				let workshop_div = document.createElement('div');
 					workshop_div.setAttribute('class','workshop-infos');
 
-					loadMedia(workshop,workshop_div);
+					let name = document.createElement('h3');
+					name.innerHTML = workshop['name'];
+					workshop_div.appendChild(name);
 					let infos_div = document.createElement('div');
-						infos_div.setAttribute('class','infos');
+					infos_div.setAttribute('class','infos');
 					
-						let name = document.createElement('h3');
-							name.innerHTML = workshop['name'];
-						infos_div.appendChild(name);
 						let content = document.createElement('div');
-							content.innerHTML = workshop['content'];
+						content.innerHTML = workshop['content'];
 						infos_div.appendChild(content);
+						let filters_div = document.createElement('div');
+							filters_div.setAttribute('class','workshop-filters');
 
-						for (const keyf in filters) {
-							if (filters.hasOwnProperty(keyf)) {
-								const filter = filters[keyf];
-								let filterB = document.createElement('b');
-									filterB.innerHTML = read('workshops',keyf) + " : ";
-									let ul = document.createElement('ul');
-
-										for (const keyi in filter) {
-											if (filter.hasOwnProperty(keyi)) {
-												const element = filter[keyi];
-												let li = document.createElement('li');
+							for (const keyf in filters) {
+								if (filters.hasOwnProperty(keyf)) {
+									const filter = filters[keyf];
+									let filterB = document.createElement('b');
+										filterB.innerHTML = read('workshops',keyf) + " : ";
+										let ul = document.createElement('ul');
+										
+											for (const keyi in filter) {
+												if (filter.hasOwnProperty(keyi)) {
+													const element = filter[keyi];
+													let li = document.createElement('li');
 													li.innerHTML =element["filter"];
-												ul.appendChild(li);											
+													ul.appendChild(li);											
+												}
 											}
-										}
-									filterB.appendChild(ul);
-								infos_div.appendChild(filterB);
-							}
-						}		
+											filterB.appendChild(ul);
+									filters_div.appendChild(filterB);
+								}
+							}	
+						infos_div.appendChild(filters_div);	
+						loadMedia(workshop,infos_div);
 						
 						
-
-					workshop_div.appendChild(infos_div);
+						
+						workshop_div.appendChild(infos_div);
 				node.appendChild(workshop_div);
-		},
-
+			},
+			
 	});
 }
 const limitText = (textarea, limitNum) => {
-
+	
 	let node = document.getElementById("countdown");
 	let textValue = textarea.innerHTML;
 	if (textValue.length > limitNum) {

@@ -44,12 +44,14 @@ const addMaterial = () =>
 	let contents = node.querySelectorAll('select');
 	let nb = contents.length + 1;
 
+	console.log(nb);
 	let titre = document.createElement('p');
 		titre.innerHTML = "Materiel " + nb + " : ";
 		
 		let select = document.createElement('select');
 			
-			select.name = "materials[]";
+			select.name = "materials[" + nb + "]";
+			console.log(select.name);
 			$.ajax({
 				type: "POST",
 				url:'ajax/material-ajax.php',
@@ -71,16 +73,16 @@ const addMaterial = () =>
 			
 			select.onchange = () =>
 			{					
-				addNbItems(select,titre);	
+				addNbItems(select,titre,nb);	
 			}
 			titre.appendChild(select);
-			addNbItems(select,titre);
+			addNbItems(select,titre,nb);
 			
 	
 	node.appendChild(titre);
 }
 
-const addNbItems = (select,parent) =>
+const addNbItems = (select,parent,i,material=null) =>
 {
 
 	let input = select.parentNode.querySelector('input');
@@ -90,6 +92,11 @@ const addNbItems = (select,parent) =>
 		}
 		input = document.createElement('input');
 		input.type = "number";
+		input.name = 'values[' + i + ']';
+		if(material != null)
+		{
+			input.value = material['nb'];
+		}
 	parent.appendChild(input);
 }
 const deleteParams = () =>

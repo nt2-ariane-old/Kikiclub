@@ -54,6 +54,7 @@ html {
 }
 
 body {
+  position: relative;
   background-color: white;
 }
 
@@ -635,38 +636,27 @@ footer p a:hover {
 }
 
 .modal {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  padding: 5%;
   display: none;
-  padding: 0;
-  position: fixed;
+  position: absolute;
   z-index: 300;
   margin: auto;
   left: 0;
   top: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal .modal_content {
   max-width: 800px;
-  max-height: 400px;
-  overflow-y: hidden;
-  position: absolute;
+  margin: 0 auto;
   width: 100%;
-  top: 0;
-  height: auto;
-  min-height: 100vh;
+  min-height: 400px;
+  position: relative;
   -webkit-box-shadow: 0 0 3px 3px #B5B5B5;
           box-shadow: 0 0 3px 3px #B5B5B5;
   background-color: #F5F5F5;
-  margin: auto;
 }
 
 .modal .modal_content .close {
@@ -703,11 +693,11 @@ footer p a:hover {
 /* Tiny Carousel */
 .workshop-infos {
   width: 100%;
-  height: 100%;
   background-color: #F5F5F5;
   -webkit-box-shadow: 0 0 3px 3px #B5B5B5;
           box-shadow: 0 0 3px 3px #B5B5B5;
   margin: auto;
+  padding: 1em;
 }
 
 .workshop-infos .close {
@@ -728,33 +718,37 @@ footer p a:hover {
   background: #F5F5F5;
 }
 
+.workshop-infos h3 {
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 30px;
+  color: #D8DF23;
+  margin: 0;
+}
+
 .workshop-infos .infos {
   width: 100%;
   overflow: hidden;
 }
 
-.workshop-infos .infos h3 {
-  width: 100%;
-  text-align: center;
-  font-weight: bolder;
-  font-size: 30px;
-  padding: 3px;
-  margin: 0;
+.workshop-infos .infos .workshop-filters {
+  float: left;
 }
 
-.workshop-infos .infos b {
-  font-size: 1.2rem;
+.workshop-infos .infos .workshop-filters b {
+  font-size: 1rem;
   padding: 0;
   margin: 0;
 }
 
-.workshop-infos .infos b ul {
+.workshop-infos .infos .workshop-filters b ul {
   padding: 0;
   margin: 0;
   padding-left: 1em;
 }
 
-.workshop-infos .infos b ul li {
+.workshop-infos .infos .workshop-filters b ul li {
   font-size: 1rem;
   font-weight: 100;
   padding: 0;
@@ -771,22 +765,48 @@ footer p a:hover {
   margin: 0;
 }
 
+.workshop-infos .infos::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .workshop-infos .media {
   border: 1px solid black;
+  background-color: white;
   width: 300px;
   height: 300px;
-  margin: auto;
+  margin: 0.5em auto;
   background-size: contain;
   -o-background-size: contain;
   -moz-background-size: contain;
   -webkit-background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  float: right;
+  padding: 0;
 }
 
 .workshop-infos .media img, .workshop-infos .media video, .workshop-infos .media audio {
   max-width: 100%;
   max-height: 100%;
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.workshop-infos .media::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.workshop-infos::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .media {
@@ -878,21 +898,15 @@ main {
     display: flex;
   }
   .modal {
-    position: fixed;
+    position: absolute;
   }
   .modal .modal_content {
     min-height: 300px;
-    position: relative;
     width: 80%;
-    height: 80%;
-  }
-  .modal .media {
-    border: none;
   }
   .modal .workshop-infos .media {
-    width: 50%;
-    height: 100%;
-    float: right;
+    width: 300px;
+    height: 300px;
   }
   .modal .workshop-infos .media::after {
     content: "";
@@ -900,11 +914,14 @@ main {
     display: table;
   }
   .modal .workshop-infos .infos {
-    float: left;
-    width: 50%;
-    height: 100%;
+    width: 100%;
     overflow-x: hidden;
     text-overflow: clip;
+  }
+  .modal .workshop-infos .infos::after {
+    content: "";
+    clear: both;
+    display: table;
   }
 }
 

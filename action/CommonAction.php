@@ -45,32 +45,6 @@
 			$this->admin_mode = false;
 		}
 
-		public function generateFormToken($form) {
-			 $token = md5(uniqid(microtime(), true));
-			 $_SESSION[$form.'_token'] = $token;
-
-			 return $token;
-		}
-		public function verifyFormToken($form) {
-			$valide = true;
-
-			if(!isset($_SESSION[$form.'_token'])) {
-				$valide = false;
-			}
-
-			if(!isset($_POST['token'])) {
-				$valide = false;
-			}
-
-			if ($_SESSION[$form.'_token'] !== $_POST['token']) {
-				$valide = false;
-			}
-
-			return $valide;
-		}
-
-
-
 		public function isLoggedIn() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}
@@ -138,6 +112,7 @@
 						header('Location:reference.php');
 					}
 				}
+				UsersDAO::deleteToken($_GET["user_t"]);
 			}
 
 if(!empty($_SESSION["referral"]) && $this->page_name != "reference")

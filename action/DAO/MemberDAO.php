@@ -116,11 +116,20 @@
 
 		}
 
-		public static function getGenders()
+		public static function getGenders($french=true)
 		{
 			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT * FROM gender");
+			$request = "SELECT id, ";
+			if($french)
+			{
+				$request .= "name_fr as name ";
+			}
+			else
+			{
+				$request .= "name_en as name ";
+			}
+			$request .= "FROM gender";
+			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

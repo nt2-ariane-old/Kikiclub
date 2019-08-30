@@ -184,11 +184,11 @@
 
 			if($with_name)
 			{
-				$request = "SELECT m.name as material, wm.id_workshop as workshop FROM workshop_materials as wm INNER JOIN material as m WHERE id_workshop=? AND wm.id_material = m.id";
+				$request = "SELECT m.name as material, wm.id_workshop as workshop, wm.nb as nb FROM workshop_materials as wm INNER JOIN material as m WHERE id_workshop=? AND wm.id_material = m.id";
 			}
 			else
 			{
-				$request = "SELECT id_material as material, id_workshop as workshop FROM workshop_materials WHERE id_workshop=?";
+				$request = "SELECT id_material as material, id_workshop as workshop, nb as nb FROM workshop_materials WHERE id_workshop=?";
 			}
 			$statement = $connection->prepare($request);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -204,16 +204,30 @@
 			return $content;
 		}
 
-		public static function insertWorkshopMaterial($id_material,$id_workshop)
+		public static function insertWorkshopMaterial($id_material,$id_workshop,$value)
 		{
 			$connection = Connection::getConnection();
 			
-			$statement = $connection->prepare("INSERT INTO workshop_materials(id_material,id_workshop) VALUES (?,?)");
-			
+			$statement = $connection->prepare("INSERT INTO workshop_materials(id_material,id_workshop,nb) VALUES (?,?,?)");
 			$statement->bindParam(1, $id_material);
 			$statement->bindParam(2, $id_workshop);
+			$statement->bindParam(3, $value);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
+			$valide = $statement->execute();
+			return $valide;
+		}
+		public static function updateWorkshopMaterial($id_material,$id_workshop,$value)
+		{
+			$connection = Connection::getConnection();
+			
+			$statement = $connection->prepare("UPDATE workshop_materials SET nb=? WHERE id_material=? AND id_workshop=?");
+			
+			$statement->bindParam(1, $value);
+			$statement->bindParam(2, $id_material);
+			$statement->bindParam(3, $id_workshop);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$valide = $statement->execute();
+			return $valide;
 		}
 		
 		public static function deleteWorkshopMaterial($id_material,$id_workshop)

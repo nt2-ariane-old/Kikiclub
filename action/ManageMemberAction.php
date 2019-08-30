@@ -23,7 +23,7 @@
 
 		protected function executeAction() {
 
-			$this->genders = MemberDAO::getGenders();
+			$this->genders = MemberDAO::getGenders($_SESSION["language"] == 'fr');
 
 			if($this->admin_mode && !empty($_SESSION["user_id"]))
 			{

@@ -27,7 +27,7 @@ const onPageLoad = () =>
 	}
 }
 function openModal() {
-	document.getElementById("robot_modal").style.display = "flex";
+	document.getElementById("robot_modal").style.display = "block";
 }
 function closeModal() {
 	document.getElementById("robot_modal").style.display = "none";

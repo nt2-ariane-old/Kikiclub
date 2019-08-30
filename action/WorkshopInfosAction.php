@@ -25,6 +25,7 @@
 			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,"workshop-infos");
 			$this->exist = false;
 			$this->added = false;
+			$this->workshop_materials = [];
 		}
 		
 		protected function executeAction() {
@@ -57,7 +58,6 @@
 			$this->id_types["robots"] = FilterDAO::getFilterTypeIdByName('robot');
 			$this->id_types["difficulties"] = FilterDAO::getFilterTypeIdByName('difficulty');
 			$this->id_types["grades"] = FilterDAO::getFilterTypeIdByName('grade');
-
 			if($this->admin_mode)
 			{
 				if(isset($_POST['push']))
@@ -119,9 +119,17 @@
 					}
 					if(!empty($_POST["materials"]))
 					{
+						foreach ($_POST["materials"] as $i => $element) {
+							$value = $_POST['values'][$i];
+							$nouveau = WorkshopDAO::insertWorkshopMaterial($element,$id,$value);
+							if(!$nouveau)
+							{
+								WorkshopDAO::updateWorkshopMaterial($element,$id,$value);
+							}
+						}
 						foreach ($_POST["materials"] as $element)
 						{							
-							WorkshopDAO::insertWorkshopMaterial($element,$id);
+							
 						}
 						$this->deleteOtherMaterial($_POST["materials"]);
 					}

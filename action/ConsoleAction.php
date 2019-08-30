@@ -52,7 +52,7 @@
 		{
 			$user = UsersDAO::getAllUsers();
 			$avatar = MemberDAO::loadAvatar();
-			$genders = MemberDAO::getGenders();
+			$genders = MemberDAO::getGenders($_SESSION["language"] == 'fr');
 			for ($i=0; $i < $nb; $i++) {
 				$firstname = $this->generateString(16);
 				$lastname = $this->generateString(16);

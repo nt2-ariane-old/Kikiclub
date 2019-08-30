@@ -115,7 +115,7 @@ const closeFilters = () =>
 let nbWorkshops = 4;
 
 function openModal() {
-	document.getElementById("workshop_modal").style.display = "flex";
+	document.getElementById("workshop_modal").style.display = "block";
   }
   function closeModal() {
 	document.getElementById("workshop_modal").style.display = "none";
