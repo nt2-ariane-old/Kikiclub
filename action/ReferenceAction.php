@@ -24,7 +24,11 @@
             {
                 $this->first = true;
             }
-            $this->user_token = UsersDAO::getUserWithID($_SESSION["id"])["token"];
+            $user = UsersDAO::getUserWithID($_SESSION["id"]);
+            if(!empty($user))
+            {
+                $this->user_token = $user["token"];
+            }
             $code = null;
             if(!empty($_POST["code"]) )
             {

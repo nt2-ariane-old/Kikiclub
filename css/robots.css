@@ -35,9 +35,7 @@
 }
 
 .modal_content {
-  height: 100vh !important;
   background-color: white;
-  overflow-y: scroll;
 }
 
 .modal_content section {
@@ -138,17 +136,15 @@ main .multislider .MS-controls button {
   .modal_content section {
     padding: 1em;
     float: left;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
+    width: calc(100% - 300px);
   }
   .modal_content section:after {
     clear: both;
   }
   .modal_content .media {
     background-color: #D8DF23;
-    height: 100%;
-    width: 50%;
+    height: 300px;
+    width: 300px;
     float: right;
   }
   .modal_content .media img {
@@ -165,7 +161,7 @@ main .multislider .MS-controls button {
     font-size: 1.7rem;
   }
   .modal_content h4, .modal_content p {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .robot .media {
     width: 280px;

@@ -70,7 +70,7 @@
 		],
 		"robots" => [
 			"add-robot" => "Add a Robot",
-			
+			"grade" => "Scholar Level"
 		],
 		"robot-infos" => [
 			

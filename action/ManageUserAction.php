@@ -25,7 +25,8 @@
 				}
 				else
 				{
-					UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],CommonAction::$VISIBILITY_CUSTOMER_USER,null);
+					$token = $this->generateString(8);
+					UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],CommonAction::$VISIBILITY_CUSTOMER_USER,null,$token);
 				}
 				header('location:users.php');
 			}

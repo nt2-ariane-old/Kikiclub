@@ -37,9 +37,7 @@
 }
 .modal_content
 {
-	height: 100vh !important;
 	background-color:white;
-	overflow-y: scroll;
 	section
 	{
 		padding: 1em;
@@ -156,9 +154,7 @@ main
 		{
 			padding: 1em;
 			float: left;
-			width: 50%;
-			height: 100%;
-			overflow: hidden;
+			width: calc(100% - 300px);
 			&:after
 			{
 				clear: both;
@@ -167,8 +163,8 @@ main
 		.media
 		{
 			background-color: #D8DF23;
-			height: 100%;
-			width: 50%;
+			height: 300px;
+			width: 300px;
 			float: right;
 			img
 			{
@@ -189,7 +185,7 @@ main
 		}
 		h4,p
 		{
-			font-size: 1.2rem;
+			font-size: 1rem;
 		}
 		
 	}

@@ -71,7 +71,7 @@ const loadRobotInfos = (container,robot,robot_grade) =>
 			nameH3.innerHTML = robot["name"];
 
 		let gradeH4 = document.createElement('h4');
-			gradeH4.innerHTML = "Recommanded Grade : " + robot_grade["name"];
+			gradeH4.innerHTML = read('robots','grade') + " : " + robot_grade["name"];
 
 		let descDiv = document.createElement('div');
 			descDiv.setAttribute('class','description');

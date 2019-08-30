@@ -47,11 +47,11 @@
 					{
 						if($id_member >= 0)
 						{
-							MemberDAO::updateFamilyMember($id_member,$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+							MemberDAO::updateMember($id_member,$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
 						}
 						else
 						{
-							MemberDAO::insertFamilyMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+							MemberDAO::insertMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
 						}
 						header('Location:'.$this->previous_page);
 					}
@@ -66,7 +66,7 @@
 			{
 				if(isset($_POST["delete"]))
 				{
-					MemberDAO::deleteFamilyMember($id_member);
+					MemberDAO::deleteMember($id_member);
 					unset($_SESSION["member_id"]);
 					header('location:' . $this->previous_page . '.php');
 				}

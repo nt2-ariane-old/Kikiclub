@@ -133,7 +133,7 @@
 						}
 						$this->deleteOtherMaterial($_POST["materials"]);
 					}
-				 	// header('Location:workshops.php');
+				 	header('Location:workshops.php');
 				}
 				if(isset($_POST['delete']))
 				{

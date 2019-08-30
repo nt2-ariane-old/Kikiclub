@@ -45,6 +45,22 @@
 			$this->admin_mode = false;
 		}
 
+		protected function generateString($nb)
+		{
+		  $final_string = "";
+
+		  $range = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		  $length = strlen($range);
+
+		  for ($i = 0; $i < $nb; $i++)
+		  {
+			$index = rand(0, $length - 1);
+			$final_string.=$range[$index];
+		  }
+
+		  return $final_string;
+		}
+
 		public function isLoggedIn() {
 			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}

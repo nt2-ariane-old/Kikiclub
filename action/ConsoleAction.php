@@ -30,8 +30,8 @@
 				$firstname = $this->generateString(16);
 				$lastname = $this->generateString(16);
 				$email = $this->generateString(10) . "@test.com";
-
-				UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null);
+				$token = $this->generateString(8);
+				UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null,$token);
 			}
 		}
 
@@ -60,7 +60,7 @@
 				$gender = $genders[rand(0,sizeof($genders) -1)]["id"];
 				$id_avatar = $avatar[rand(0,sizeof($avatar) -1)]["id"];
 				$id_parent = $user[rand(0,sizeof($user) -1)]["id"];
-				MemberDAO::insertFamilyMember($firstname,$lastname,$birthday,$gender,$id_avatar,$id_parent);
+				MemberDAO::insertMember($firstname,$lastname,$birthday,$gender,$id_avatar,$id_parent);
 			}
 		}
 
@@ -86,7 +86,7 @@
 				 $name = $this->generateString(8);
 
 				 $grade = $this->grades[rand(0,sizeof($this->grades) -1)]["id"];
-				 RobotDAO::insertRobot($name,$grade);
+				//  RobotDAO::insertRobot($name,$grade);
 				 $id = RobotDAO::getRobotByName($name)["id"];
 					$score = rand(1,20);
 				 foreach ($this->difficulties as $diff) {

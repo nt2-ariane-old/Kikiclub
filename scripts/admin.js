@@ -348,7 +348,7 @@ const setWorkshopToCategory = (id_workshop, category, adding) =>
 	formData.append('category',category );
 	formData.append('adding', adding);
 
-	fetch("ajax/familyWorkshops-ajax.php", {
+	fetch("ajax/member-workshops-ajax.php", {
 		method: "POST",
 		credentials: 'include',
 		body: formData

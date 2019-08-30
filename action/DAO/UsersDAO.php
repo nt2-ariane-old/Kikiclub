@@ -264,20 +264,21 @@
 			return $contents;
 		}
 
-		public static function addUser($email,$firstname,$lastname,$visibility)
+		public static function addUser($email,$firstname,$lastname,$visibility,$token)
 		{
 			$connection = Connection::getConnection();
 
-			$statement = $connection->prepare("INSERT INTO users(email,firstname,lastname,visibility) VALUES(?,?,?,?)");
+			$statement = $connection->prepare("INSERT INTO users(email,firstname,lastname,visibility,token) VALUES(?,?,?,?,?)");
 			$statement->bindParam(1, $email);
 			$statement->bindParam(2, $firstname);
 			$statement->bindParam(3, $lastname);
 			$statement->bindParam(4, $visibility);
+			$statement->bindParam(5, $token);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 		}
 
-		public static function registerUser($email,$password, $password_confirm,$firstname,$lastname,$visibility,$id_type)
+		public static function registerUser($email,$password, $password_confirm,$firstname,$lastname,$visibility,$id_type,$token)
 		{
 
 			$connection = Connection::getConnection();
@@ -286,7 +287,7 @@
 			if(empty(UsersDAO::getUserWithEmail($email)))
 			{
 				$valide = true;
-				UsersDAO::addUser($email,$firstname,$lastname,$visibility);
+				UsersDAO::addUser($email,$firstname,$lastname,$visibility,$token);
 			}
 			else
 			{

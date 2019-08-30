@@ -71,7 +71,7 @@
 		],
 		"robots" => [
 			"add-robot" => "Ajouter un robot",
-			
+			"grade" => "Niveau Scolaire"
 		],
 		"robot-infos" => [
 			

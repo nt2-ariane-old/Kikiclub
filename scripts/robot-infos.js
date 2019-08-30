@@ -6,7 +6,7 @@ const onPageLoad = () =>
 			dropzone = new Dropzone("div#imagedropzone",
 				{ url: "ajax/media-ajax.php",
 					params: {
-						dir: "images/robots"
+						dir: "images/uploads/robots"
 					 }
 				});
 			dropzone.on("success", function(file,infos) {

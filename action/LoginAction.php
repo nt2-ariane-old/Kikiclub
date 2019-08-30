@@ -57,7 +57,8 @@
 					!empty($_POST["firstname"])  &&
 					!empty($_POST["lastname"]))
 					{
-						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["psswd2"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type))
+						$token = $this->generateString(8);
+						if(UsersDAO::RegisterUser($_POST["email"],$_POST["psswd1"],$_POST["psswd2"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type,$token))
 						{
 							$infos = UsersDAO::loginUserWithEmail($_POST["email"],$_POST["psswd1"],$id_type);
 							if(!is_string($infos))

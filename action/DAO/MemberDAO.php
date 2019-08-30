@@ -9,7 +9,7 @@
 	 */
 	class MemberDAO {
 
-		public static function insertFamilyMember($firstname,$lastname,$birthday,$gender,$id_avatar,$id_parent)
+		public static function insertMember($firstname,$lastname,$birthday,$gender,$id_avatar,$id_parent)
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("INSERT INTO member(firstname,lastname,birthday,id_gender,id_avatar,id_user) VALUES(?,?,STR_TO_DATE(?, '%d/%m/%Y') ,?,?,?)");
@@ -96,7 +96,7 @@
 
 			}
 		}
-		public static function deleteFamilyMember($id)
+		public static function deleteMember($id)
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("DELETE FROM member WHERE id = ?");
@@ -141,7 +141,7 @@
 			return $content;
 		}
 
-		public static function updateFamilyMember($id,$firstname,$lastname,$birthday,$gender,$id_avatar)
+		public static function updateMember($id,$firstname,$lastname,$birthday,$gender,$id_avatar)
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("UPDATE member SET firstname=?,lastname=?,birthday=STR_TO_DATE(?, '%d/%m/%Y'),id_gender=?,id_avatar=? WHERE id=?");
@@ -198,7 +198,7 @@
 
 			return $contents;
 		}
-		public static function getFamilyLikeType($name,$type)
+		public static function getMemberLikeType($name,$type)
 		{
 			$connection = Connection::getConnection();
 			$name = $name . '%';
@@ -290,7 +290,7 @@
 			$connection = Connection::getConnection();
 
 			$request = "SELECT * FROM member WHERE id IN (?)";
-			$statement = $connection->prepare();
+			$statement = $connection->prepare($request);
 
 			$statement->bindParam(1, $ids);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -358,11 +358,11 @@
 				$statement2->setFetchMode(PDO::FETCH_ASSOC);
 				$statement2->execute();
 
-				$member = [];
+				$members = [];
 				while ($rowFam = $statement2->fetch()) {
-					$member[] = $rowFam;
+					$members[] = $rowFam;
 				}
-				$temp["family"] = $member;
+				$temp["family"] = $members;
 				$contents = $temp;
 			}
 			return $contents;

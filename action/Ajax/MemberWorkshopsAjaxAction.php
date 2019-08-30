@@ -9,7 +9,7 @@
 	class MemberWorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {
-			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'familyWorkshops-ajax');
+			parent::__construct(CommonAction::$VISIBILITY_ADMIN_USER,'member-workshops-ajax');
 			$this->results = [];
 		}
 
@@ -22,8 +22,6 @@
 				if($_POST["adding"] == true)
 				{
 					$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
-
-					$statut;
 					switch ($_POST["category"]) {
 						case 'new':
 							$statut = 1;

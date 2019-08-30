@@ -30,7 +30,7 @@
 				}
 				if(isset($_POST["search-member"]))
 				{
-					$this->results = MemberDAO::getFamilyLikeType($name,$_POST["type"]);
+					$this->results = MemberDAO::getMemberLikeType($name,$_POST["type"]);
 				}
 				if(isset($_POST["robots"]))
 				{

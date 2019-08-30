@@ -8,7 +8,7 @@
 			$this->results = false;
 
 		}
-
+		
 		protected function executeAction() {
 
 			if(!empty($_POST["isLoggedIn"]))
@@ -19,7 +19,8 @@
 
 					if($id_type != -1)
 					{
-						UsersDAO::RegisterUser($_POST["email"],$_POST["password"],$_POST["password_confirm"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type);
+						$token = $this->generateString(8);
+						UsersDAO::RegisterUser($_POST["email"],$_POST["password"],$_POST["password_confirm"],$_POST["firstname"],$_POST["lastname"],$this->default_visibility,$id_type,$token);
 
 						$infos = UsersDAO::loginUserWithEmail($_POST["email"],null,$id_type);
 						if(!is_string($infos))
