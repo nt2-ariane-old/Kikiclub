@@ -2,6 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-146765768-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-146765768-1');
+	</script>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -177,20 +187,25 @@
 				<?php
 					if($action->isLoggedIn())
 					{
-						?>
+						if($action->members != null)
+						{
 
-					<ul>
-						<?php
-							foreach ($action->members as $member) {
-								?>
-									<li><a onclick="change_page('member-home.php',{'member_id':<?= $member["id"] ?>})"><?= $member["firstname"] ?></a></li>
-									<?php
-							}
 							?>
-					</ul>
-					<li><a href="reference.php">Reference</a></li>
+								<ul>
+									<?php
+										foreach ($action->members as $member) {
+											?>
+												<li><a onclick="change_page('member-home.php',{'member_id':<?= $member["id"] ?>})"><?= $member["firstname"] ?></a></li>
+												<?php
+										}
+									?>
+								</ul>
 							<?php
 						}
+						?>
+							<li><a href="reference.php">Reference</a></li>
+						<?php
+					}
 					?>
 				</li>
 				<li><a class="nav-item nav-link" href="robots.php"><?= $action->trans->read("pages_name","robots") ?></a></li>

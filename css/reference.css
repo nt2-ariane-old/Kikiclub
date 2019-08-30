@@ -17,9 +17,36 @@ input {
 }
 
 .sheet {
-  width: 50%;
+  width: 100%;
   margin: auto;
   padding: 1em;
-  border: 3px solid black;
+  -webkit-transition: width 0.5s;
+  /* Safari prior 6.1 */
+  transition: width 0.5s;
+}
+
+@media (min-width: 576px) {
+  .sheet {
+    width: 576px;
+    border: 3px solid black;
+  }
+}
+
+@media (min-width: 768px) {
+  .sheet {
+    width: 700px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sheet {
+    width: 900px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sheet {
+    width: 1000px;
+  }
 }
 /*# sourceMappingURL=reference.css.map */

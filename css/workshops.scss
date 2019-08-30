@@ -19,6 +19,15 @@
 }
 .workshops-list
 {
+	h3
+	{
+		text-align: center;
+		display: block;
+		width: 185px;
+		font-size: 1.1rem;
+		margin: auto;
+
+	}
 	.row
 	{
 		display: block;
@@ -310,10 +319,9 @@ aside
 }
 .sort
 {
-	width:calc((185px + 30px + 90px )* 1 );
+	width:calc(185px);
 	margin: auto;
 	background-color: white;
-	padding: 0 75px 0 0;
 	height: 30px;
 	#sort_select
 	{
@@ -499,7 +507,13 @@ aside
 		width:calc((150px + 30px ) * 2 );
 		margin: auto;
 		float: none;
+		h3
+		{
+			font-size: 1.75rem;
+			width: 100%;
+		}
 	}
+	
 	.sort
 	{
 		padding: 0 45px;

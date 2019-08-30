@@ -323,7 +323,7 @@ function loadMemberWorkshops($workshops,$name,$action)
 			?>
 		</div>
 		<?php
-			if(sizeof($workshops) > 1)
+			if(sizeof($workshops) > 6)
 			{
 				?>
 					<a  class="link-collapse" onclick="show('<?= $name ?>',this)"><?= $action->trans->read("member-home","show-more") ?></a>
