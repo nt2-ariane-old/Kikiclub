@@ -6,13 +6,22 @@
   color: white;
 }
 
+.form-workshops tr {
+  cursor: pointer;
+}
+
 main {
   background-color: black;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 main #family-carousel {
-  background-color: transparent;
   width: 90vw;
   margin: auto;
   display: block;
@@ -135,6 +144,11 @@ main #family-carousel .MS-controls button:hover {
 }
 
 @media (min-width: 767px) {
+  .part {
+    width: 50%;
+    float: left;
+    height: 500px;
+  }
   .multislider .MS-content .item {
     width: 50%;
   }

@@ -322,14 +322,15 @@
 
 			return $valide;
 		}
-		public static function updateUser($id,$email,$firstname,$lastname)
+		public static function updateUser($id,$email,$firstname,$lastname,$visibility)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("UPDATE users SET email=?,firstname=?,lastname=? WHERE id=?");
+			$statement = $connection->prepare("UPDATE users SET email=?,firstname=?,lastname=?,visibility=? WHERE id=?");
 			$statement->bindParam(1, $email);
 			$statement->bindParam(2, $firstname);
 			$statement->bindParam(3, $lastname);
-			$statement->bindParam(4, $id);
+			$statement->bindParam(4, $visibility);
+			$statement->bindParam(5, $id);
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();

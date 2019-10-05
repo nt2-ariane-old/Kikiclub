@@ -90,7 +90,7 @@ const plusMinusSign = (node) =>
 	});
 	let sign = node.querySelector(".buttonSign");
 	let nodeParent = node.parentNode;
-		let card = nodeParent.querySelector(".collapse");		
+		let card = nodeParent.querySelector(".collapse");
 		let opened = card.classList.contains("show");
 		if(!opened)
 		{
@@ -157,7 +157,7 @@ const loadWorkshopsList = (workshops,nbPage,direct_link) =>
 					let link = document.createElement('a');
 
 					link.setAttribute('class','link normal');
-					
+
 
 						let divTitle = document.createElement('div');
 							divTitle.setAttribute('class','title');

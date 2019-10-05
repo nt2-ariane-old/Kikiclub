@@ -5,6 +5,7 @@
 
 
 		public $users;
+		public $admin_members;
 		public $members;
 
 		public function __construct() {
@@ -33,7 +34,7 @@
 					$searchMembers =json_decode($_POST["members_list"],true);
 					foreach ($searchMembers as $member) {
 						$id = $member["value"];
-						$this->members[] = MemberDAO::selectMember($id);
+						$this->admin_members[] = MemberDAO::selectMember($id);
 					}
 
 				}
@@ -45,7 +46,7 @@
 
 						if($result["type"] == "member")
 						{
-							$this->members[] = MemberDAO::selectMember($id);
+							$this->admin_members[] = MemberDAO::selectMember($id);
 						}
 						if($result["type"] == "user")
 						{

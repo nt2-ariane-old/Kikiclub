@@ -19,7 +19,7 @@
 			{
 				$this->results["states"] = FilterDAO::getWorkshopStatesFR();
 			}
-			if(!empty($_SESSION["id"]))
+			if(!empty($_COOKIE["id"]))
 			{
 				if(!empty($_SESSION["member_id"]))
 				{
@@ -289,9 +289,9 @@
 				$members = MemberDAO::getAllMemberWithAges($ages);
 				$this->results = [];
 
-				$headers = "Reply-To: Kikiclub <do-not-reply@doutreguay.com>\r\n";
-				$headers .= "Return-Path: Kikiclub <do-not-reply@doutreguay.com>\r\n";
-				$headers .= "From: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+				$headers = "Reply-To: Kikiclub <do-not-reply@kikicode.club>\r\n";
+				$headers .= "Return-Path: Kikiclub <do-not-reply@kikicode.club>\r\n";
+				$headers .= "From: Kikiclub <do-not-reply@kikicode.club>\r\n";
 
 				$headers .= "Organization: Code & Café\r\n";
 				$headers .= "MIME-Version: 1.0\r\n";

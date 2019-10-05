@@ -13,6 +13,7 @@
 		}
 
 		protected function executeAction() {
+			echo 'hello';
 			if(isset($_POST["name"]))
 			{
 				$name = $_POST["name"];

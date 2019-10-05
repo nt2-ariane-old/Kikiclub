@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	$langData = [
 		"pages_name" => [
 			"users" => "Profils",
@@ -17,6 +17,7 @@
 			"assign-member" => "Assign workshops to member",
 			"home" => "Home",
 			"materials" => "Materials",
+			"reference" => "Reference",
 		],
 		"all_pages" => [
 			"delete" => "Delete",

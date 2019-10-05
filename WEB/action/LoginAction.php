@@ -33,8 +33,8 @@
 						}
 						else
 						{
-							$_SESSION["visibility"] = $infos["visibility"];
-							$_SESSION["id"] = $infos["id"];
+							$_COOKIE["visibility"] = $infos["visibility"];
+							$_COOKIE["id"] = $infos["id"];
 						}
 					} else {
 						$this->error = true;
@@ -63,8 +63,8 @@
 							$infos = UsersDAO::loginUserWithEmail($_POST["email"],$_POST["psswd1"],$id_type);
 							if(!is_string($infos))
 							{
-								$_SESSION["id"] = $infos["id"];
-								$_SESSION["visibility"] =$infos["visibility"];
+								$_COOKIE["id"] = $infos["id"];
+								$_COOKIE["visibility"] =$infos["visibility"];
 							}
 							else
 							{
@@ -88,10 +88,7 @@
 
 
 			}
-			if($this->isLoggedIn())
-			{
-				header("location:users.php");
-			}
+			
 
 		}
 	}

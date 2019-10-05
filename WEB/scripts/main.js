@@ -38,6 +38,8 @@ const loadModules = () =>
 
 const openWorkshop = ($id) =>
 {
+	let node = document.getElementById('modal_content');
+				node.innerHTML = "";
 	$.ajax({
 		type: "POST",
 		url:'ajax/workshops-ajax.php',
@@ -50,9 +52,7 @@ const openWorkshop = ($id) =>
 			workshop = data["workshop"];
 			filters = data["filters"];
 
-			let node = document.getElementById('modal_content');
-				node.innerHTML = "";
-				
+			
 				let workshop_div = document.createElement('div');
 					workshop_div.setAttribute('class','workshop-infos');
 
@@ -61,10 +61,8 @@ const openWorkshop = ($id) =>
 					workshop_div.appendChild(name);
 					let infos_div = document.createElement('div');
 					infos_div.setAttribute('class','infos');
-					
-						let content = document.createElement('div');
-						content.innerHTML = workshop['content'];
-						infos_div.appendChild(content);
+
+
 						let filters_div = document.createElement('div');
 							filters_div.setAttribute('class','workshop-filters');
 
@@ -72,34 +70,37 @@ const openWorkshop = ($id) =>
 								if (filters.hasOwnProperty(keyf)) {
 									const filter = filters[keyf];
 									let filterB = document.createElement('b');
-										filterB.innerHTML = read('workshops',keyf) + " : ";
-										let ul = document.createElement('ul');
-										
-											for (const keyi in filter) {
-												if (filter.hasOwnProperty(keyi)) {
-													const element = filter[keyi];
-													let li = document.createElement('li');
-													li.innerHTML =element["filter"];
-													ul.appendChild(li);											
-												}
+										let spanType = document.createElement('span');
+											spanType.innerHTML = read('workshops',keyf) + ": ";
+										filterB.appendChild(spanType);
+										let content = "";
+
+										for (const keyi in filter) {
+											if (filter.hasOwnProperty(keyi)) {
+												const element = filter[keyi];
+												content+=element["filter"] + " ";
 											}
-											filterB.appendChild(ul);
+										}
+										filterB.innerHTML +=  content;
 									filters_div.appendChild(filterB);
 								}
-							}	
-						infos_div.appendChild(filters_div);	
-						loadMedia(workshop,infos_div);
-						
-						
-						
+							}
+						infos_div.appendChild(filters_div);
+						let content = document.createElement('div');
+						content.innerHTML = workshop['content'];
+						infos_div.appendChild(content);
+
+
+
 						workshop_div.appendChild(infos_div);
+						loadMedia(workshop,workshop_div);
 				node.appendChild(workshop_div);
 			},
-			
+
 	});
 }
 const limitText = (textarea, limitNum) => {
-	
+
 	let node = document.getElementById("countdown");
 	let textValue = textarea.innerHTML;
 	if (textValue.length > limitNum) {

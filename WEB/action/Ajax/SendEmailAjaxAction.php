@@ -13,9 +13,9 @@
 
 			$users = UsersDAO::getAllUsers();
 
-			$headers = "Reply-To: Kikiclub <do-not-reply@doutreguay.com>\r\n";
-			$headers .= "Return-Path: Kikiclub <do-not-reply@doutreguay.com>\r\n";
-			$headers .= "From: Kikiclub <do-not-reply@doutreguay.com>\r\n";
+			$headers = "Reply-To: Kikiclub <do-not-reply@kikicode.club>\r\n";
+			$headers .= "Return-Path: Kikiclub <do-not-reply@kikicode.club>\r\n";
+			$headers .= "From: Kikiclub <do-not-reply@kikicode.club>\r\n";
 
 			$headers .= "Organization: Code & Café\r\n";
 			$headers .= "MIME-Version: 1.0\r\n";

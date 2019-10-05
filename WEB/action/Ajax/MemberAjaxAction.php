@@ -11,8 +11,8 @@
 		}
 
 		protected function executeAction() {
-			if(!empty($_SESSION["id"]))
-				$this->results["family"] = MemberDAO::selectFamily($_SESSION["id"]);
+			if(!empty($_COOKIE["id"]))
+				$this->results["family"] = MemberDAO::selectFamily($_COOKIE["id"]);
 				$this->results["avatars"] = MemberDAO::loadAvatar();
 				if(!empty($this->results["family"]))
 				{

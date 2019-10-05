@@ -37,9 +37,9 @@ if($action->error || $action->success)
         <p><?= $action->trans->read('reference','refered_txt')?></p>
 
         <p><b><?= $action->trans->read('reference','your_code')?> : </b> <?= $action->user_token ?></p>
-           
+
          <h5><?= $action->trans->read('reference','share')?></h5>
-         <input id="link" type="text" value="https://www.doutreguay.com/reference.php?token=<?= $action->user_token?>">
+         <input id="link" type="text" value="https://www.kikicode.club/reference.php?token=<?= $action->user_token?>">
          <button id="copy" type="button"><?= $action->trans->read('reference','copy')?></button>
 
 </div>

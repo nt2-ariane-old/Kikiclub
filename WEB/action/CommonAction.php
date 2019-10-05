@@ -21,6 +21,7 @@
 		public $page_name;
 		public $complete_name;
 
+		public $user_name;
 		public $member_name;
 		public $member_avatar;
 
@@ -62,14 +63,23 @@
 		}
 
 		public function isLoggedIn() {
-			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
+			return $_COOKIE["visibility"] > CommonAction::$VISIBILITY_PUBLIC;
 		}
 		public function isMember()
 		{
 			return !empty($_SESSION["member_id"]);
 		}
+		public function isAnim() {
+			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_ANIMATOR;
+		}
+		public function isModo() {
+			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_MODERATOR;
+		}
 		public function isAdmin() {
-			return $_SESSION["visibility"] > CommonAction::$VISIBILITY_CUSTOMER_USER;
+			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_ADMIN_USER;
+		}
+		public function isOwner() {
+			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_OWNER;
 		}
 
 		public function execute()
@@ -82,6 +92,13 @@
 				session_unset();
 				session_destroy();
 				session_start();
+				setcookie('id', NULL, 1);
+				setcookie('visibility', NULL, 1);
+
+				foreach ($_COOKIE as $c_id => $c_value)
+				{
+					setcookie($c_id, NULL, 1, "/", ".domain.name");
+				}
 				header("location:index.php");
 				exit;
 			}
@@ -89,12 +106,12 @@
 
 			//check what is the current visibility and
 			// if the page visibility is greater than the user visibility redirect to home page
-			if(empty($_SESSION["visibility"]))
+			if(empty($_COOKIE["visibility"]))
 			{
-				$_SESSION["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
+				$_COOKIE["visibility"] = CommonAction::$VISIBILITY_PUBLIC;
 			}
 
-			if($_SESSION["visibility"] < $this->page_visibility)
+			if($_COOKIE["visibility"] < $this->page_visibility)
 			{
 				header("location:index.php");
 				exit;
@@ -113,28 +130,23 @@
 				//if token is working
 				if(!empty($id))
 				{
-					
+
 					//get user info
 					$user = UsersDAO::getUserWithID($id);
-				 	$_SESSION["visibility"] = $user["visibility"];
-					$_SESSION["id"] = $user["id"];
-
+					setcookie('visibility',intval($user['visibility']),time() + 60*60*24*30);
+					setcookie('id',intval($user['id']),time() + 60*60*24*30);
 					//delete token
-					 UsersDAO::deleteToken($_GET["user_t"]);
-					 UsersConnexionDAO::insertUserConnexion($_SESSION["id"]);
-					 $connexion = UsersConnexionDAO::getUserConnexion($_SESSION["id"]);
-					if(sizeof($connexion) <= 1)
-					{
-						header('Location:reference.php');
-					}
+					UsersDAO::deleteToken($_GET["user_t"]);
+					UsersConnexionDAO::insertUserConnexion($user["id"]);
+					header('location:users.php');
 				}
 				UsersDAO::deleteToken($_GET["user_t"]);
 			}
 
-if(!empty($_SESSION["referral"]) && $this->page_name != "reference")
-{
-	header('location:reference.php');
-}
+			if(!empty($_SESSION["referral"]) && $this->page_name != "reference")
+			{
+				header('location:reference.php');
+			}
 
 			//check current page
 
@@ -207,7 +219,8 @@ if(!empty($_SESSION["referral"]) && $this->page_name != "reference")
 
 			if($this->isLoggedIn())
 			{
-				$this->members = MemberDAO::selectFamily($_SESSION["id"]);
+				$this->user_name = UsersDAO::getUserWithID($_COOKIE["id"])['firstname'];
+				$this->members = MemberDAO::selectFamily($_COOKIE["id"]);
 			}
 
 			$this->avatars = MemberDAO::loadAvatar();;
@@ -226,8 +239,8 @@ if(!empty($_SESSION["referral"]) && $this->page_name != "reference")
 				}
 			}
 
-			
-			
+
+
 			//execute page action
 			$this->executeAction();
 		}

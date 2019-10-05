@@ -120,6 +120,10 @@ h1 {
   padding: 1em;
 }
 
+.sheet {
+  min-height: calc(100vh - 96px - 176px - 2em);
+}
+
 #setting-button {
   background-size: contain;
   -o-background-size: contain;
@@ -206,7 +210,8 @@ header {
   color: black;
   background-color: white;
   position: static;
-  z-index: 1;
+  position: relative;
+  z-index: 2;
   margin: 0;
 }
 
@@ -460,12 +465,6 @@ footer p a:hover {
   border-color: rgba(222, 184, 135, 0.35);
 }
 
-#profile-box #family-carousel {
-  position: absolute;
-  top: calc((100% - 500px) / 2);
-  width: 100%;
-}
-
 #profile-box .users-footer {
   position: absolute;
   bottom: 1em;
@@ -638,7 +637,7 @@ footer p a:hover {
 .modal {
   padding: 5%;
   display: none;
-  position: absolute;
+  position: fixed;
   z-index: 300;
   margin: auto;
   left: 0;
@@ -693,9 +692,6 @@ footer p a:hover {
 /* Tiny Carousel */
 .workshop-infos {
   width: 100%;
-  background-color: #F5F5F5;
-  -webkit-box-shadow: 0 0 3px 3px #B5B5B5;
-          box-shadow: 0 0 3px 3px #B5B5B5;
   margin: auto;
   padding: 1em;
 }
@@ -722,22 +718,37 @@ footer p a:hover {
   width: 100%;
   text-align: center;
   font-weight: bolder;
-  font-size: 30px;
-  color: #D8DF23;
+  font-size: 40px;
   margin: 0;
 }
 
 .workshop-infos .infos {
+  padding: 1em 0;
+  float: left;
   width: 100%;
   overflow: hidden;
 }
 
+.workshop-infos .infos p {
+  font-size: 1rem;
+}
+
 .workshop-infos .infos .workshop-filters {
-  float: left;
+  padding: 0.5em 0;
 }
 
 .workshop-infos .infos .workshop-filters b {
+  line-height: 1.8;
+  display: block;
   font-size: 1rem;
+  font-weight: 100;
+  padding: 0;
+  margin: 0;
+}
+
+.workshop-infos .infos .workshop-filters b span {
+  display: inline-block;
+  width: 50%;
   padding: 0;
   margin: 0;
 }
@@ -749,8 +760,6 @@ footer p a:hover {
 }
 
 .workshop-infos .infos .workshop-filters b ul li {
-  font-size: 1rem;
-  font-weight: 100;
   padding: 0;
   margin: 0;
 }
@@ -760,7 +769,7 @@ footer p a:hover {
 }
 
 .workshop-infos .infos div p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 0;
   margin: 0;
 }
@@ -772,8 +781,6 @@ footer p a:hover {
 }
 
 .workshop-infos .media {
-  border: 1px solid black;
-  background-color: white;
   width: 300px;
   height: 300px;
   margin: 0.5em auto;
@@ -898,11 +905,11 @@ main {
     display: flex;
   }
   .modal {
-    position: absolute;
+    position: fixed;
   }
   .modal .modal_content {
-    min-height: 300px;
-    width: 80%;
+    min-height: 460px;
+    width: 500px;
   }
   .modal .workshop-infos .media {
     width: 300px;
@@ -914,7 +921,7 @@ main {
     display: table;
   }
   .modal .workshop-infos .infos {
-    width: 100%;
+    width: calc(100% - 300px - 1em);
     overflow-x: hidden;
     text-overflow: clip;
   }
@@ -925,7 +932,16 @@ main {
   }
 }
 
+@media (min-width: 768px) {
+  .modal .modal_content {
+    width: 700px;
+  }
+}
+
 @media (min-width: 992px) {
+  .modal .modal_content {
+    width: 900px;
+  }
   #header-infos {
     background-color: transparent;
     width: 30%;

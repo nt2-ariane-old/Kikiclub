@@ -118,7 +118,11 @@ h1
 	text-align: center;
 	padding:1em;
 }
-
+.sheet
+{
+	min-height: calc(100vh - 96px - 176px - 2em);
+	
+}
 #setting-button /* Bouton principal pour changer de pages */
 {
 	background-size: contain;
@@ -206,7 +210,8 @@ header {
 	color: black;
 	background-color: white;
 	position: static;
-	z-index: 1;
+	position: relative;
+	z-index: 2;
 	margin: 0;
 }
 header *
@@ -371,7 +376,7 @@ nav .container {
 
 /* Footer */
 footer {
-	
+
 	background-color: white;
 	width: 100%;
 	height: 176px;
@@ -415,7 +420,7 @@ footer a ,footer p{
 		background-repeat: no-repeat;
 		border: none;
 	}
-	
+
 }
 
 footer p
@@ -429,7 +434,7 @@ footer p
 	{
 		display: inline;
 		margin: 0;
-		
+
 		&:hover
 		{
 			color:#D8DF23 ;
@@ -475,12 +480,8 @@ footer p
 
 }
 
-#profile-box #family-carousel
-{
-	position: absolute;
-	top: calc((100% - 500px) / 2);
-	width:100%;
-}
+
+
 #profile-box .users-footer
 {
 	position: absolute;
@@ -544,14 +545,14 @@ footer p
 	  	padding: 0.5em;
 		margin: 0.5em auto;
 	}
- 
+
 	*
 	{
 		display: inline-block;
 		text-align: center;
 		width:  calc(50% - 1em);
 	}
-	
+
 }
 
 /* Version Web */
@@ -676,10 +677,10 @@ footer p
   }
 
   .modal {
-	
+
 	padding: 5%;
 	display: none;
-	position: absolute;
+	position: fixed;
 	z-index: 300;
 	margin: auto;
 	left: 0;
@@ -692,12 +693,12 @@ footer p
 		max-width:800px;
 		margin: 0 auto;
 		width: 100%;
-		
+
 		min-height: 400px;
 		position: relative;
 		box-shadow: 0 0 3px 3px #B5B5B5;
 		background-color:  #F5F5F5;
-		
+
 		.close {
 			color: black;
 			top: 4px;
@@ -708,7 +709,7 @@ footer p
 			}
 		}
 	}
-	
+
 }
 
 .close {
@@ -738,8 +739,6 @@ footer p
 .workshop-infos
 {
 	width: 100%;
-	background-color: #F5F5F5;
-	box-shadow: 0 0 3px 3px #B5B5B5;
 	margin: auto;
 	padding: 1em;
 	.close {
@@ -756,30 +755,43 @@ footer p
 		padding: 0 1rem;
 	}
 	::-webkit-scrollbar-track {
-		background: #F5F5F5; 
+		background: #F5F5F5;
 	  }
 	h3
 	{
 		width: 100%;
 	  	text-align: center;
 	  	font-weight: bolder;
-	  	font-size: 30px;
-	  	color: #D8DF23;
-	  	margin: 0;
+	  	font-size: 40px;
+			margin: 0;
+
 	}
 	.infos
 	{
-		
+		padding: 1em 0;
+		float: left;
 		width: 100%;
 		overflow:hidden;
-		
+		p
+		{
+			font-size: 1rem;
+		}
 		.workshop-filters
 		{
-			float: left;
+			padding: 0.5em 0;
 			b
 			{
-				
+				line-height: 1.8;
+				span
+				{
+					display: inline-block;
+					width: 50%;
+					padding: 0;
+					margin: 0;
+				}
+				display: block;
 				font-size: 1rem;
+				font-weight: 100;
 				padding: 0;
 				margin: 0;
 				ul
@@ -789,21 +801,20 @@ footer p
 					padding-left: 1em;
 					li
 					{
-						font-size: 1rem;
-						font-weight: 100;
+
 						padding: 0;
 						margin: 0;
 					}
 				}
 			}
 		}
-		
+
 		div
 		{
 			padding: 0;
 			p
 			{
-				font-size: 1.2rem;
+				font-size: 1rem;
 				padding: 0;
 				margin: 0;
 			}
@@ -815,9 +826,7 @@ footer p
 		}
 	}
 	.media
-	{		
-		border: 1px solid black;
-		background-color: white;
+	{
 		width: 300px;
 		height: 300px;
 		margin: 0.5em auto;
@@ -853,8 +862,8 @@ footer p
 }
 
   .media
-	{		
-		
+	{
+
 		margin: auto;
 		background-size: contain;
 		-o-background-size: contain;
@@ -943,16 +952,14 @@ main
 	}
 	.modal
 	{
-		position: absolute;
+		position: fixed;
 
 		.modal_content
 		{
-			min-height: 300px;
-			
-			width: 80%;
-		}
-		.media
-		{
+			min-height: 460px;
+
+
+			width: 500px;
 		}
 		.workshop-infos
 		{
@@ -968,7 +975,7 @@ main
 			}
 			.infos
 			{
-				width: 100%;
+				width: calc(100% - 300px - 1em);
 				overflow-x: hidden;
 				text-overflow: clip;
 				&::after {
@@ -982,10 +989,23 @@ main
 }
 @media (min-width: 768px)
 {
-	
+	.modal
+	{
+		.modal_content
+		{
+			width: 700px;
+		}
+	}
 }
 @media (min-width: 992px)
 {
+	.modal
+	{
+		.modal_content
+		{
+			width: 900px;
+		}
+	}
 	#header-infos
 	{
 		background-color: transparent;

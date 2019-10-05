@@ -21,14 +21,19 @@
 			{
 				if($this->id_user != null)
 				{
-					UsersDAO::updateUser($this->id_user,$_POST['email'],$_POST['firstname'],$_POST['lastname']);
+					
+					UsersDAO::updateUser($this->id_user,$_POST['email'],$_POST['firstname'],$_POST['lastname'],intval($_POST['admin']));
+					header('location:users.php');
 				}
 				else
 				{
 					$token = $this->generateString(8);
-					UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],CommonAction::$VISIBILITY_CUSTOMER_USER,null,$token);
+					UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],intval($_POST['admin']),null,$token);
+					$this->user = UsersDAO::getUserWithEmail($_POST['email']);
+					$this->id_user = $this->user['id'];
+					$_SESSION["user_id"] = $this->id_user;
+					$this->user = MemberDAO::getUserFamily($this->id_user);
 				}
-				header('location:users.php');
 			}
 			if(isset($_POST['delete']))
 			{

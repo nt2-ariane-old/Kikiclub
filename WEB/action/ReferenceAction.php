@@ -16,16 +16,16 @@
 		}
 
 		protected function executeAction() {
-            if($_SESSION["visibility"] == CommonAction::$VISIBILITY_PUBLIC)
+            if($_COOKIE["visibility"] == CommonAction::$VISIBILITY_PUBLIC)
             {
-                header('Location:https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5');
+                header('Location:http://kikicode.ca/login-kikiclub-do-not-delete');
             }
-            $connexion = UsersConnexionDAO::getUserConnexion($_SESSION["id"]);
+            $connexion = UsersConnexionDAO::getUserConnexion($_COOKIE["id"]);
             if(sizeof($connexion) <= 1)
             {
                 $this->first = true;
             }
-            $user = UsersDAO::getUserWithID($_SESSION["id"]);
+            $user = UsersDAO::getUserWithID($_COOKIE["id"]);
             if(!empty($user))
             {
                 $this->user_token = $user["token"];
@@ -47,18 +47,18 @@
                     $user = UsersConnexionDAO::testRegisterToken(strtoupper($code));
                     if(!empty($user))
                     {
-                        if($user["id"] != $_SESSION["id"])
+                        if($user["id"] != $_COOKIE["id"])
                         {
-                            if(UsersConnexionDAO::addReferance($user["id"],$_SESSION["id"]))
+                            if(UsersConnexionDAO::addReferance($user["id"],$_COOKIE["id"]))
                             {
                                 $badges = BadgeDAO::getBadges(1);
-                                
+
                                 $members = MemberDAO::getUserFamily($user["id"]);
                                 addScoresToMembers($members,$badges);
 
-                                $members = MemberDAO::getUserFamily($_SESSION["id"]);
+                                $members = MemberDAO::getUserFamily($_COOKIE["id"]);
                                 addScoresToMembers($members,$badges);
-                                
+
                                 $this->success = true;
                                 $this->msg = "Le code à bien été appliqué.";
                             }
@@ -86,12 +86,12 @@
                     $this->msg = "Désolé, vous n'êtes pas un nouveau membre...";
                 }
             }
-            
+
 		}
         protected function testBadges($member,$member_badges,$badges)
         {
             foreach ($badges as $badge) {
-                                        
+
                 if($member["score"] >= $badge["value_needed"] )
                 {
                     if(!array_key_exists($badge["id"],$member_badges))
@@ -107,19 +107,18 @@
                 else
                 {
                     $this->results[] = $member["firstname"] . " need to have " . $badge["value_needed"] . " to have the badge. He only have " . $member["score"] . " pts";
-                    
+
                 }
             }
         }
         protected function addScoresToMembers($members,$badges)
         {
             foreach ($members["family"] as $member) {
-                MemberDAO::addScore($member["id"],50);
+                MemberDAO::addScore($member["id"],1);
                 $member = MemberDAO::selectMember($member['id']);
                 $member_badges = BadgeDAO::getMemberBadge($member['id']);
-                $this->testBadges($member,$member_badges,$badges);         
-                
+                $this->testBadges($member,$member_badges,$badges);
+
             }
         }
     }
-    

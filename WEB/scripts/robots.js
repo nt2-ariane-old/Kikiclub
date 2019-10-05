@@ -27,7 +27,7 @@ const onPageLoad = () =>
 	}
 }
 function openModal() {
-	document.getElementById("robot_modal").style.display = "block";
+	document.getElementById("robot_modal").style.display = "flex";
 }
 function closeModal() {
 	document.getElementById("robot_modal").style.display = "none";
@@ -66,7 +66,7 @@ const loadRobotInfos = (container,robot,robot_grade) =>
 		mediaDiv.appendChild(mediaImg);
 
 	let secInfos = document.createElement('section');
-		
+
 		let nameH3 = document.createElement('h3');
 			nameH3.innerHTML = robot["name"];
 

@@ -31,7 +31,7 @@
 			}
 			else
 			{
-				$id = $_SESSION["id"];
+				$id = $_COOKIE["id"];
 			}
 			$id_member = -1;
 			if(!empty($_SESSION["member_id"]))

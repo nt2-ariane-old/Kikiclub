@@ -3,14 +3,26 @@
 	background-color: transparent;
 	width:100%;
 	margin: auto;
-	background-image: url("../images/textures/kikicode.png");
 	background-repeat: no-repeat;
 	background-size: cover;
+	min-height: calc(100vh - 96px - 176px);
+	display: flex;
+	align-items: center;
+	position: relative;
+	
 	section
 	{
 		padding: 50px;
 	}
-
+	#story_bg
+	{
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		min-width: 100%;
+		min-height: calc(100vh - 96px - 176px);
+		z-index: 0;
+	}
 }
 #spinner{
 	background: #4267b2;
@@ -24,52 +36,61 @@
 {
 	position: relative;
     width: 100%;
-    padding: 50px 50px 75px 50px;
+    padding: 50px;
     max-width: 640px;
-    margin: 0 auto;
+	margin: 0 auto;
     text-align: center;
 	z-index: 1;
+	
 	// color: #D8DF23;
 	color: black;
-	h2
+	background-color: rgba(255, 255, 255, 0.5);
+	.story_content
 	{
-		font-size: 1.75rem;
-		display: block;
-		
-		margin-block-start: 0.67em;
-		margin-block-end: 0.67em;
-		margin-inline-start: 0px;
-		margin-inline-end: 0px;
-		font-weight: bold;
-	}
-	h3
-	{
-		font-size: 1.125rem;
-		margin: 1rem 0px;
-		margin-bottom: 2.5rem;
-		display: block;
-		margin-block-start: 0.83em;
-		margin-block-end: 0.83em;
-		margin-inline-start: 0px;
-		margin-inline-end: 0px;
-		font-weight: normal;
-	}
-	.big-btn
-	{
-		color: #fff;
-		border: none;
-		&:hover
+		position: relative;
+		z-index: 2;
+		h2
 		{
-			background-color: #fd0814;
+			font-size: 1.75rem;
+			display: block;
+
+			margin-block-start: 0.67em;
+			margin-block-end: 0.67em;
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+			font-weight: bold;
+		}
+		h3
+		{
+			font-size: 1.125rem;
+			margin: 1rem 0px;
+			margin-bottom: 2.5rem;
+			display: block;
+			margin-block-start: 0.83em;
+			margin-block-end: 0.83em;
+			margin-inline-start: 0px;
+			margin-inline-end: 0px;
+			font-weight: normal;
+		}
+		.big-btn
+		{
+			color: #fff;
+			border: none;
+			&:hover
+			{
+				background-color: #fd0814;
+			}
 		}
 	}
+
 }
 .big-btn
 {
-	background-image: linear-gradient(to bottom, #e50914, #db0510);
+	
+	background-image: linear-gradient(to bottom, #D8DF23, rgb(185, 190, 15));
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
 	color: #fff;
-	background-color: #e50914;
+	background-color: #D8DF23;
 	font-size: 1em;
     padding: 12.5px 1em;
     min-width: 74px;
@@ -82,7 +103,7 @@
 	border-radius: 2px;
 	&:hover
 	{
-		background-color: #fd0814;
+		background-color: rgb(233, 238, 101);
 	}
 }
 #guest-btn
@@ -92,7 +113,7 @@
 	{
 		background-color: red;
 		opacity: 0.8;
-		
+
 	}
 	font-size: 1rem;
 	color: white;
@@ -141,7 +162,6 @@
 .login-block button
 {
 	border: 3px solid #ADB30F;
-	background-color: transparent;
 	display: block;
 	margin : auto;
 

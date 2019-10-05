@@ -26,6 +26,22 @@
 
 		}
 
+		public static function insertMemberPresence($id_member)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("INSERT INTO member(firstname,lastname,birthday,id_gender,id_avatar,id_user) VALUES(?,?,STR_TO_DATE(?, '%d/%m/%Y') ,?,?,?)");
+
+			$statement->bindParam(1, $firstname);
+			$statement->bindParam(2, $lastname);
+			$statement->bindParam(3, $birthday);
+			$statement->bindParam(4, $gender);
+			$statement->bindParam(5, $id_avatar);
+			$statement->bindParam(6, $id_parent);
+
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+		}
 		public static function searchAllUsersAndMembers($value)
 		{
 			$connection = Connection::getConnection();

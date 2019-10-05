@@ -114,38 +114,16 @@
 
 		  return $final_string;
 		}
+		public $users;
 		protected function executeAction()
 		{
-			$this->grades = FilterDAO::getGradesFR();
-			$this->difficulties = FilterDAO::getDifficultiesFR();
-			$this->robots = RobotDAO::getRobots();
-
-			if(!empty($_POST["value"]))
-			{
-				$nb = intval($_POST["value"]);
-				if(isset($_POST["robot"]))
+			$all_users = UsersDAO::getAllUsers();
+			foreach ($all_users as $value) {
+				if(empty(UsersDAO::getLoginInfosForUserByType($value['id'],UsersDAO::getLoginTypeIdByName('Wix'))))
 				{
-					$this->auto_generate_robots($nb);
-					$this->results = $nb . " robots ont été créers aléatoirement";
+					$this->users[] = $value;
 				}
-				if(isset($_POST["user"]))
-				{
-					$this->auto_generate_users($nb);
-					$this->results = $nb . " utilisateurs ont été créers aléatoirement";
-				}
-				if(isset($_POST["member"]))
-				{
-					$this->auto_generate_members($nb);
-					$this->results = $nb . " membres ont été créers aléatoirement";
-				}
-				if(isset($_POST["workshop"]))
-				{
-					$this->auto_generate_workshops($nb);
-					$this->results = $nb . " Ateliers ont été créers aléatoirement";
-				}
-				$this->show_results = true;
 			}
-
 		}
 
 	}

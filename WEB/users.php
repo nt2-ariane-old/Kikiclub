@@ -9,12 +9,19 @@
 	if($action->admin_mode)
 	{
 		?>
-	<div class="sheet">
+	
+	
 
-		<div class="bar">
-			<h3><?= $action->trans->read("admin","search-all") ?></h3>
-			<div>
-				<div class="autocomplete" style="width:300px;">
+
+	
+	<div class="sheet">
+		
+		<div class="part">
+
+			<div class="bar">
+				<h3><?= $action->trans->read("admin","search-all") ?></h3>
+				<div>
+					<div class="autocomplete" style="width:300px;">
 					<input id="search-all" type="text" name="search" placeholder="<?= $action->trans->read("admin","all-field") ?>">
 				</div>
 			</div>
@@ -35,49 +42,54 @@
 				<div class="autocomplete" style="width:300px;">
 					<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="<?= $action->trans->read("admin","firstname") ?>">
 				</div>
-
 				<div class="autocomplete" style="width:300px;">
 					<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="<?= $action->trans->read("admin","lastname") ?>">
 				</div>
 			</div>
 		</div>
-		<?php
-			if(!empty($action->users) || !empty($action->members))
+		
+	</div>
+	<div class='part'>
+			<button class="submit-btn" onclick="change_page('manage-user.php',{'user_id':null})"><?= $action->trans->read("admin","new-user") ?></button>
+			<a class="submit-btn" href="today-members.php"><?= $action->trans->read("pages_name","today") ?></a>
+		</div>
+							<?php
+			if(!empty($action->users) || !empty($action->admin_members))
 			{
 				?>
 					<div class='form-workshops'>
 						<?php
 							if(!empty($action->users))
 							{
-						?>
+								?>
 							<h2><?= $action->trans->read("admin","users") ?></h2>
 							<table  class='table table-striped table-hover' style="width:100%" id="usersTable">
-								<thead>
-									<tr class="rowMember">
-										<th style="width:10%;"><?= $action->trans->read("admin","firstname") ?></th>
-										<th style="width:10%;"><?= $action->trans->read("admin","lastname") ?></th>
-										<th style="width:15%;"><?= $action->trans->read("admin","mail") ?></th>
-									</tr>
-								</thead>
-								<tbody id="table-users">
-									<?php
+									<thead>
+										<tr class="rowMember">
+											<th style="width:10%;"><?= $action->trans->read("admin","firstname") ?></th>
+											<th style="width:10%;"><?= $action->trans->read("admin","lastname") ?></th>
+											<th style="width:15%;"><?= $action->trans->read("admin","mail") ?></th>
+										</tr>
+									</thead>
+									<tbody id="table-users">
+										<?php
 										foreach ($action->users as $user) {
-									?>
+											?>
 										<tr onclick="change_page('manage-user.php',{'user_id':<?= $user['id'] ?>})">
-											<td><?= $user["firstname"] ?></td>
-											<td><?= $user["lastname"] ?></td>
-											<td><?= $user["email"] ?></td>
-										</tr></a>
-									<?php
+												<td><?= $user["firstname"] ?></td>
+												<td><?= $user["lastname"] ?></td>
+												<td><?= $user["email"] ?></td>
+											</tr></a>
+											<?php
 										}
-									?>
+										?>
 								</tbody>
 							</table>
-						<?php
+							<?php
 							}
-							if (!empty($action->members))
+							if (!empty($action->admin_members))
 							{
-						?>
+								?>
 							<h2><?= $action->trans->read("admin","members") ?></h2>
 							<table>
 								<thead>
@@ -89,7 +101,7 @@
 								</thead>
 								<tbody>
 									<?php
-										foreach ($action->members as $member) {
+										foreach ($action->admin_members as $member) {
 									?>
 										<tr onclick="change_page('manage-member.php',{'member_id':<?= $member['id'] ?>,'members_action':'update'})">
 											<td><?= $member["firstname"] ?></td>
@@ -109,14 +121,6 @@
 			<?php
 			}
 		?>
-	</div>
-
-	<div class="control-bar">
-		<a data-toggle="collapse" data-target="#controls">Control</a>
-		<div class="collapse" id="controls">
-			<button class="submit-btn" onclick="change_page('manage-user.php',{'user_id':null})"><?= $action->trans->read("admin","new-user") ?></button>
-			<!-- <button type="submit" class="delete-btn" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement.parentElement,{type:'form'})">Delete</button> -->
-		</div>
 	</div>
 	<?php
 		}

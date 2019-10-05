@@ -21,6 +21,39 @@
   margin: 1em auto;
 }
 
+.sheet
+{
+  max-width: 600px;
+  margin: 1em auto;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  padding: 1em;
+
+}
+
+ul {
+  margin: 0.75em 0;
+  padding: 0 1em;
+  list-style: none;
+}
+li:before { 
+  content: "";
+  border-color: transparent red;
+  border-style: solid;
+  border-width: 0.35em 0 0.35em 0.45em;
+  display: block;
+  height: 0;
+  width: 0;
+  left: -1em;
+  top: 0.9em;
+  position: relative;
+}
+
+.sheet h2
+{
+  font-size: 1.2rem;
+  font-weight: bolder
+}
 .form-workshops p {
   text-align: left;
 }

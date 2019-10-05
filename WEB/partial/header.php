@@ -71,7 +71,6 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-		<link rel="manifest" href="images/favicon/manifest.json">
 		<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
 		<meta name="msapplication-TileColor" content="#D8DF23">
@@ -146,6 +145,20 @@
 	?>
 	<a href="manage-member.php"><div id="header-infos">
 		<?php
+			
+			if($action->isLoggedIn())
+			{
+				?>
+					<a href="index.php?logout=true">Déconnecter <?= $action->user_name ?></a>
+				<?php
+
+			}
+			else
+			{
+				?>
+					<a href=<?php if($action->url === "localhost") { echo 'index.php?other'; } else { echo 'http://kikicode.ca/login-kikiclub-do-not-delete'; }?>>Se Connecter</a>
+				<?php
+			}
 			if($action->isMember())
 			{
 				?>
@@ -153,18 +166,8 @@
 				<?php
 					loadMedia($action->member_avatar);
 			}
-			if($action->isLoggedIn())
-			{
-
-			}
-			else
-			{
-				?>
-					<a <?php if($action->url === "localhost") { ?> onclick="window.location = 'login.php?other'"; <?php } else { ?> onclick="window.location = 'https://kikinumerique.wixsite.com/kikiclubsandbox/blank-5' "; <?php }?>>Se Connecter</a>
-				<?php
-			}
 		?>
-		
+
 	</div></a>
 </header>
 
@@ -182,11 +185,14 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-		<li><a class="nav-item nav-link" href="<?php if($action->isLoggedIn()) { ?>users.php <?php } else { ?>login.php<?php } ?>"><?= $action->trans->read("pages_name","home") ?></a></li>
+		<li><a class="nav-item nav-link" href="index.php"><?= $action->trans->read("pages_name","home") ?></a></li>
 		<li> <a class="nav-item nav-link" href="workshops.php"><?= $action->trans->read("pages_name","workshops") ?></a>
 				<?php
 					if($action->isLoggedIn())
 					{
+						?>
+							<li><a href="users.php"><?= $action->trans->read("pages_name","users") ?></a></li>
+						<?php
 						if($action->members != null)
 						{
 
@@ -202,8 +208,9 @@
 								</ul>
 							<?php
 						}
+
 						?>
-							<li><a href="reference.php">Reference</a></li>
+							<li><a href="reference.php"><?= $action->trans->read("pages_name","reference") ?></a></li>
 						<?php
 					}
 					?>
@@ -234,11 +241,20 @@
 					?>
 				<?php
 				}
+				if($action->isAdmin()){
+					?>
+					<li><?= $action->trans->read("anim","tools") ?>
+						<ul>
+							<li><a class="nav-item nav-link" href="today-members.php"><?= $action->trans->read("pages_name","today") ?></a></li>
+						</ul>
+					</li>
+				<?php
+				}
 				?>
 				<li><a class="nav-item nav-link" href="?logout=true"><?= $action->trans->read("all_pages","signout") ?></a></li>
 				<?php
 			}
-			
+
 			?>
 
     </ul>

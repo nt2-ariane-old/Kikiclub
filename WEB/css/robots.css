@@ -11,6 +11,17 @@
   background-color: red;
 }
 
+#robot_modal {
+  position: fixed;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#robot_modal .modal_content {
+  position: static;
+}
+
 .manage-btn {
   height: 40px;
   line-height: 30px;
@@ -133,18 +144,30 @@ main .multislider .MS-controls button {
 }
 
 @media only screen and (min-width: 576px) {
+  .modal_content {
+    position: fixed;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    min-height: 0;
+    height: 300px;
+    overflow: hidden;
+  }
   .modal_content section {
     padding: 1em;
     float: left;
-    width: calc(100% - 300px);
+    width: calc(100% - 400px);
   }
   .modal_content section:after {
     clear: both;
   }
   .modal_content .media {
-    background-color: #D8DF23;
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
+    background-color: transparent;
     float: right;
   }
   .modal_content .media img {

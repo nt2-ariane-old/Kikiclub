@@ -27,7 +27,7 @@
 				if(!empty($_POST["media_type"]))
 					$type=$_POST["media_type"];
 
-				PostDAO::insertPost($_SESSION["id"],$_POST["title"],$content,$path,$type);
+				PostDAO::insertPost($_COOKIE["id"],$_POST["title"],$content,$path,$type);
 			}
 
 			$nbPostByPage = 4;
@@ -43,16 +43,16 @@
 
 			$this->results["nbPages"] = ceil(sizeof(PostDAO::getPosts()) / $nbPostByPage);
 
-			if(!empty($_SESSION["id"]))
+			if(!empty($_COOKIE["id"]))
 			{
-				$this->results["id_user"] = $_SESSION["id"];
+				$this->results["id_user"] = $_COOKIE["id"];
 			}
 			else
 			{
 				$this->results["id_user"] = -1;
 			}
 
-			$this->results["visibility"] = $_SESSION["visibility"];
+			$this->results["visibility"] = $_COOKIE["visibility"];
 
 		}
 	}

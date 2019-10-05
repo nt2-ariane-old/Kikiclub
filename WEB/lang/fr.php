@@ -12,14 +12,17 @@
 			"manage-member" => "Modification du membre",
 			"login" => "Connexion",
 			"index" => "Index",
-			"console" => "Générateur (Temp)",
+			"console" => "Les Non-Wix",
 			"badges" => "Badges",
 			"assign-member" => "Assignation d'Ateliers à un membre",
 			"home" => "Accueil",
 			"materials" => "Matériels",
+			"reference" => "Référez un(e) ami(e)",
+			"today" => "Membres d'Aujourd'hui",
 		],
 		"all_pages" => [
 			"delete" => "Supprimer",
+			"create" => "Créer",
 			"the" => "Les",
 			"update" => "Modifier",
 			"add" => "Ajouter",
@@ -90,14 +93,14 @@
 		],
 		"reference" => [
 			"welcome_kikiclub" => "Bienvenue sur le Kikiclub",
-			"what_kikiclub" => "Le Kikiclub est une plateforme pour Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, illo accusantium! Quam porro laborum officiis et fugit quibusdam placeat qui obcaecati iste perferendis totam possimus neque itaque, commodi quaerat illo.",
+			"what_kikiclub" => "Le Kikiclub est une plateforme pour Lorem ipsum dolor.",
 			"if_code" => "Si vous avez un code de référence, vous pouvez l'entrez ici :",
 			"submit" => "Appliquer",
 
-			"refered_to_friend" => "Recommandez à votre ami!",
-			"refered_txt" => "Envoyez votre code à votre ami, et à sa première connexion, chacun des membres de votre famille et de la sienne recevra 50 points!",
-			"your_code" => "Votre code",
-			"share" => "Partagez!",
+			"refered_to_friend" => "Recommandez à vos ami(es)!",
+			"refered_txt" => "Envoyez votre code à votre ami(e), et à sa première connexion, chacun des membres de votre famille et de la sienne recevra 1 point!",
+			"your_code" => "Voice votre code",
+			"share" => "Partagez ce lien!",
 			"copy" => "Copier dans le presse-papier",
 
 
@@ -109,6 +112,7 @@
 			"score" => "Score",
 			"modification" => "Modifier un utilisateur",
 			"adding" => "Ajouter un utilisateur",
+			"admin" => "Administrateur?",
 		],
 		"manage-member" => [
 			"profil" => "Profil",
@@ -133,9 +137,9 @@
 			"errorExist" => "L'utilisateur existe déjà",
 			"errorPassword" => "Les mots de passes ne sont pas les mêmes",	
 
-			"guest" => "Regardé comme invité",
-			"title" => "Lorem ipsum, dolor sit amet consectetur.",
-			"subtitle" => "Lorem ipsum, dolor sit amet",
+			"guest" => "Naviguer comme invité",
+			"title" => "Bienvenue dans la communauté Kikiclub",
+			"subtitle" => "Votre espace membre: Visionnez votre avancement. Accumulez des points et des badges",
 		],
 		"index" => [
 
@@ -150,6 +154,11 @@
 
 		],
 		"assign-member" => [
+
+		],
+		"anim" =>
+		[
+			"tools" => "Outils Animateurs",
 
 		],
 		"admin" => [
