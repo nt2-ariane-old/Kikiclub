@@ -4,12 +4,6 @@
 {
 	display: flex;
 	.workshop-boxes{
-		display: block;
-		background-color: #D8DF23;
-		border: 1px solid black;
-
-		width:100vw;
-		min-width: 220px;
 		*{
 			position: relative;
 			z-index: 5;
@@ -23,14 +17,21 @@
 		
 		}
 		
+		display: block;
+		background-color: #D8DF23;
+		width:100vw;
+		min-width: 220px;
+		min-height: calc(120px * 4);
+		border: 1px solid black;
+		position: relative;
 		.workshop-object{
 			width:150px;
 			height: 150px;
 			float: left;
-			overflow: hidden;
 			background-color:white;
 			border:3px solid black;
 			position: relative;
+			overflow: hidden;
 			h5{
 				text-align: center;
 			}
@@ -45,8 +46,7 @@
 			border:3px solid black;
 		
 		}
-		height: calc(100% - 64px);
-		
+		height: 100%;
 		&::after {
 			content: "";
 			clear: both;
@@ -54,32 +54,11 @@
 		  }
 		
 	}
-	h2
-	{
-		height: 64px;
-		text-align: center;
-		margin: 0;
-	}
 	&::after {
 		content: "";
 		clear: both;
 		display: table;
-	}
-}
-
-#manage-btn
-{
-	border: 1px solid black;
-	background-color: #D8DF23;
-	margin : 1rem auto;
-	display: block;
-	width :200px;
-	padding:1em;
-	text-align: center;
-	&:hover
-	{
-		background-color: rgba(217, 223, 35, 0.5);
-	}
+	  }
 }
 
 @media only screen and (min-width:480px)

@@ -16,6 +16,7 @@
 		protected function executeAction() {
 			$id_member =$_SESSION["member_id"];
 			$this->results['member'] = $id_member;
+			$this->results['post'] = $_POST;
 			if(!empty($_POST["id_workshop"]) &&
 			!empty($_POST["category"]))
 			{
@@ -23,20 +24,7 @@
 				$this->results['category'] = $_POST['category'];
 
 				$workshops = MemberWorkshopDAO::selectMemberWorkshop($id_member);
-				switch ($_POST["category"]) {
-					case 'new':
-						$statut = 1;
-							break;
-					case 'in-progress':
-						$statut = 2;
-						break;
-					case 'complete':
-						$statut = 3;
-						break;
-					default:
-						$statut = 1;
-						break;
-				}
+				$statut = intval($_POST["category"]); 
 				if(!empty($workshops[intval($_POST["id_workshop"])]))
 				{
 					$this->results['state'] = "existe";

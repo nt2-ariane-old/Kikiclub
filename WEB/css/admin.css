@@ -34,72 +34,11 @@
   border: 2px solid black;
 }
 
-.workshop-object {
-  width: 150px;
-  height: 150px;
-  float: left;
-  background-color: white;
-  border: 3px solid black;
-  position: relative;
-  overflow: hidden;
-}
-
-.workshop-object-hover {
-  width: 15vw;
-  height: 15vw;
-  float: left;
-  background-color: red;
-  border: 3px solid black;
-}
-
-.workshop-object h5 {
-  text-align: center;
-}
-
-.Workshop-boxes {
-  display: inline-block;
-  background-color: bisque;
-  width: 100%;
-  min-width: 220px;
-  min-height: calc(120px * 4);
-  border: 1px solid black;
-  position: relative;
-}
-
 #input-h1 {
   width: 80%;
   margin: 1em;
   font-size: 1.5em;
   text-align: center;
-}
-
-.Workshop-boxes * {
-  position: relative;
-  z-index: 5;
-}
-
-.Workshop-boxes .media {
-  position: absolute;
-  opacity: 0.5;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
-
-#new {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">New</text></svg>');
-}
-
-#in-progress {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">In Progress</text></svg>');
-}
-
-#not-started {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">Not Started</text></svg>');
-}
-
-#complete {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><text style="transform: rotate(90deg) translateY(-180px) translateX(100px);text-align:center" x="0" y="0" font-size="30" fill="black">Completed</text></svg>');
 }
 
 /* AUTO COMPLETE SEARCH BAR */
@@ -241,18 +180,5 @@ table {
   background-color: black;
   width: 100%;
   margin: auto;
-}
-
-@media only screen and (min-width: 480px) {
-  .Workshop-boxes {
-    width: calc((100% - 2 * 1.5em) / 2);
-    margin: 0.5em;
-  }
-}
-
-@media only screen and (min-width: 960px) {
-  .Workshop-boxes {
-    width: calc((100% - 4 * 1.5em) / 4);
-  }
 }
 /*# sourceMappingURL=admin.css.map */

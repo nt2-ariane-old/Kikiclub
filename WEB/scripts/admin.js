@@ -51,8 +51,6 @@ const adminLoad = () =>
 		}
 	)
 
-	activateDraggable();
-
 	let nodeAll = document.getElementById('search-all');
 		if(nodeAll != null)
 		{
@@ -320,42 +318,6 @@ const searchRobots = () =>
 			table.appendChild(line);
 		});
 	});
-}
-
-const activateDraggable = () => {
-	let dropped = false;
-	let draggable_sibling;
-
-	$( "ul.droppable" ).sortable({
-	  	connectWith: "ul",
-	  	start: function(event, ui) {
-		},
-		over: function(event, ui) {
-			setWorkshopToCategory(parseInt(ui.item[0].id),event.target.id);
-		}
-
-
-	});
-
-	$( "#new,#complete, #not-started, #in-progress" ).disableSelection();
-
-}
-
-const setWorkshopToCategory = (id_workshop, category) =>
-{
-	let formData = new FormData();
-	formData.append('id_workshop', id_workshop);
-	formData.append('category',category );
-
-	fetch("ajax/member-workshops-ajax.php", {
-		method: "POST",
-		credentials: 'include',
-		body: formData
-	})
-	.then(response => response.text())
-	.then(data => {	
-		console.log(data);
-	})
 }
 
 const addquestion = () =>

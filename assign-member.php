@@ -14,7 +14,8 @@
 			<div>
 				<h2><?= $action->titles[$i]?></h2>
 				
-				<ul class='droppable workshop-boxes' id='<?= $i ?>'>
+				<ul class='droppable workshop-boxes' id=<?= $i ?>>
+				
 				<?php
 						foreach ($action->workshops_deployed as $workshop)
 						{

@@ -87,6 +87,9 @@
 		<script type="text/javascript" src="scripts/jquery-migrate.min.js"></script>
 		<script type="text/javascript" src="scripts/jquery-ui.js"></script>
 
+		<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
+		<script type="text/javascript" src="scripts/jquery.ui.touch-punch.min.js"></script>
+
 		<!-- CKEDITOR -->
 		<script src="scripts/ckeditor.js"></script>
 
@@ -201,7 +204,7 @@
 									<?php
 										foreach ($action->members as $member) {
 											?>
-												<li><a onclick="change_page('member-home.php',{'member_id':<?= $member["id"] ?>})"><?= $member["firstname"] ?></a></li>
+												<li><a onclick="change_page('member-home.php',{'member_id':<?= $member['id'] ?>})"><?= $member["firstname"] ?></a></li>
 												<?php
 										}
 									?>

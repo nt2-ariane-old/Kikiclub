@@ -5,8 +5,12 @@
 
 	class AssignMemberAction extends CommonAction {
 		public $workshopsDeployed;
+		public $titles;
 		public function __construct() {
 			parent::__construct(CommonAction::$VISIBILITY_ANIMATOR,'assign-member');
+			$this->titles[1] = 'Nouveau';
+			$this->titles[2] = 'En Cours';
+			$this->titles[3] = 'Terminé';
 		}
 
 		protected function executeAction() {

@@ -1,7 +1,7 @@
 <?php
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/LoginAction.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/IndexAction.php");
 
-	$action = new LoginAction();
+	$action = new IndexAction();
 	$action->execute();
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
