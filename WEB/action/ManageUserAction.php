@@ -32,6 +32,7 @@
 					$this->user = UsersDAO::getUserWithEmail($_POST['email']);
 					$this->id_user = $this->user['id'];
 					$_SESSION["user_id"] = $this->id_user;
+					var_dump($_POST['user_id']);
 					$this->user = MemberDAO::getUserFamily($this->id_user);
 				}
 			}

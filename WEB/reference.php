@@ -40,7 +40,9 @@ if($action->error || $action->success)
 
          <h5><?= $action->trans->read('reference','share')?></h5>
          <input id="link" type="text" value="https://www.kikicode.club/reference.php?token=<?= $action->user_token?>">
-         <button id="copy" type="button"><?= $action->trans->read('reference','copy')?></button>
+
+         <!-- <button id="copy" type="button"><?= ''//$action->trans->read('reference','copy')?></button> -->
+         <a id="send-button" href='mailto:?subject=Rejoins%20Kikiclub!&amp;body=https://www.kikicode.club/reference.php?token=<?= $action->user_token?>' ><?= $action->trans->read('reference','send')?></a>
 
 </div>
 <?php

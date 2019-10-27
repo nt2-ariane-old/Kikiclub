@@ -17,9 +17,17 @@ const activateDraggable = () => {
 
 	});
 
-	$( "#new,#complete, #not-started, #in-progress" ).disableSelection();
+
 
 }
+$( function() {
+	$( "ul.droppable" ).sortable({
+	  connectWith: ".ul.droppable",
+	  over: function(event, ui) {
+		setWorkshopToCategory(parseInt(ui.item[0].id),event.target.id);
+	  }
+	}).disableSelection();
+} );
 
 const setWorkshopToCategory = (id_workshop, index) =>
 {
@@ -34,7 +42,7 @@ const setWorkshopToCategory = (id_workshop, index) =>
 		body: formData
 	})
 	.then(response => response.text())
-	.then(data => {	
+	.then(data => {
 		console.log(data);
 	})
 }

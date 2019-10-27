@@ -6,16 +6,16 @@
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 
-	if($action->admin_mode)
+	if($action->anim_mode)
 	{
 		?>
-	
-	
 
 
-	
+
+
+
 	<div class="sheet">
-		
+
 		<div class="part">
 
 			<div class="bar">
@@ -25,7 +25,7 @@
 					<input id="search-all" type="text" name="search" placeholder="<?= $action->trans->read("admin","all-field") ?>">
 				</div>
 			</div>
-			<h3><?= $action->trans->read("admin","search-user") ?></h3>
+			<!-- <h3><?= '' //$action->trans->read("admin","search-user") ?></h3>
 			<div>
 				<div class="autocomplete" style="width:300px;">
 					<input id="search-user-firstname" type="text" name="search" placeholder="<?= $action->trans->read("admin","firstname") ?>">
@@ -37,7 +37,7 @@
 					<input id="search-user-email" type="text" name="search" placeholder="<?= $action->trans->read("admin","mail") ?>">
 				</div>
 			</div>
-			<h3><?= $action->trans->read("admin","search-member") ?></h3>
+			<h3><?= '' //$action->trans->read("admin","search-member")?></h3>
 			<div>
 				<div class="autocomplete" style="width:300px;">
 					<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="<?= $action->trans->read("admin","firstname") ?>">
@@ -45,13 +45,15 @@
 				<div class="autocomplete" style="width:300px;">
 					<input id="search-member-lastname" type="text" name="search" onkeyup="searchMember(this,'lastname')" placeholder="<?= $action->trans->read("admin","lastname") ?>">
 				</div>
-			</div>
+			</div> -->
 		</div>
-		
+
 	</div>
 	<div class='part'>
 			<button class="submit-btn" onclick="change_page('manage-user.php',{'user_id':null})"><?= $action->trans->read("admin","new-user") ?></button>
 			<a class="submit-btn" href="today-members.php"><?= $action->trans->read("pages_name","today") ?></a>
+			<a class="submit-btn" href="all-users.php">Tous les utilisateurs</a>
+			<a class="submit-btn" href="all-members.php">Tous les membres</a>
 		</div>
 							<?php
 			if(!empty($action->users) || !empty($action->admin_members))

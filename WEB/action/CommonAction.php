@@ -33,7 +33,7 @@
 		public $detect;
 
 		public $admin_mode;
-
+		public $anim_mode;
 		public $previous_page;
 
 		public function __construct($page_visibility,$page_name)
@@ -44,6 +44,7 @@
 			$this->url = $_SERVER['HTTP_HOST'];
 			$this->detect = new Mobile_Detect;
 			$this->admin_mode = false;
+			$this->anim_mode = false;
 		}
 
 		protected function generateString($nb)
@@ -92,12 +93,12 @@
 				session_unset();
 				session_destroy();
 				session_start();
-				setcookie('id', NULL, 1);
-				setcookie('visibility', NULL, 1);
+				setcookie('id', NULL,time() + 60*60*24*30);
+				setcookie('visibility', NULL,time() + 60*60*24*30);
 
 				foreach ($_COOKIE as $c_id => $c_value)
 				{
-					setcookie($c_id, NULL, 1, "/", ".domain.name");
+					setcookie($c_id, NULL,time() + 60*60*24*30, "/", ".domain.name");
 				}
 				header("location:index.php");
 				exit;
@@ -133,15 +134,23 @@
 
 					//get user info
 					$user = UsersDAO::getUserWithID($id);
-					setcookie('visibility',intval($user['visibility']),time() + 60*60*24*30);
-					setcookie('id',intval($user['id']),time() + 60*60*24*30);
+					if(count($_COOKIE) > 0) {
+						setcookie('visibility',intval($user['visibility']), time()+60*60*24*365,'/');
+						setcookie('id',intval($user['id']), time()+60*60*24*365,'/');
+					} else {
+						?>
+							<script>alert("Veuillez activez les cookies... Le Kikiclub n''est pas fonctionnel sinon...")</script>
+						<?php
+					}
 					//delete token
 					UsersDAO::deleteToken($_GET["user_t"]);
 					UsersConnexionDAO::insertUserConnexion($user["id"]);
 					header('location:users.php');
 				}
 				UsersDAO::deleteToken($_GET["user_t"]);
+
 			}
+
 
 			if(!empty($_SESSION["referral"]) && $this->page_name != "reference")
 			{
@@ -174,8 +183,12 @@
 			}
 
 			//Check if admin want to be in admin mode
-			if($this->isAdmin())
+			if($this->isAnim() )
 			{
+				if(!isset($_SESSION["anim_mode"]))
+				{
+					$_SESSION["anim_mode"] = false;
+				}
 				if(!isset($_SESSION["admin_mode"]))
 				{
 					$_SESSION["admin_mode"] = false;
@@ -186,16 +199,26 @@
 					if($_GET["admin"] === "true")
 					{
 
-						$_SESSION["admin_mode"] = true;
+						if($this->isAnim())
+						{
+							$_SESSION["anim_mode"] = true;
+						}
+						if($this->isAdmin())
+						{
+							$_SESSION["admin_mode"] = true;
+						}
 					}
 					else
 					{
 						$_SESSION["admin_mode"] = false;
+						$_SESSION["anim_mode"] = false;
+
 					}
 
 				}
-				$this->admin_mode = $_SESSION['admin_mode'];
 
+				$this->anim_mode = $_SESSION['anim_mode'];
+				$this->admin_mode = $_SESSION['admin_mode'];
 			}
 			//check language and translate
 			if(empty($_SESSION["language"]))

@@ -9,6 +9,8 @@
 			"robot-infos" => "Informations sur les Robots",
 			"member-home" => "Page du Membre",
 			"manage-user" => "Modification de l'utilisateur",
+			"all-users" => "Tous les utilisateurs",
+			"all-members" => "Tous les membres",
 			"manage-member" => "Modification du membre",
 			"login" => "Connexion",
 			"index" => "Index",
@@ -17,8 +19,8 @@
 			"assign-member" => "Assignation d'Ateliers à un membre",
 			"home" => "Accueil",
 			"materials" => "Matériels",
-			"reference" => "Référez un(e) ami(e)",
-			"today" => "Membres d'Aujourd'hui",
+			"reference" => "Invitez un(e) ami(e)",
+			"today" => "Membres d'aujourd'hui",
 		],
 		"all_pages" => [
 			"delete" => "Supprimer",
@@ -100,8 +102,8 @@
 			"refered_to_friend" => "Recommandez à vos ami(es)!",
 			"refered_txt" => "Envoyez votre code à votre ami(e), et à sa première connexion, chacun des membres de votre famille et de la sienne recevra 1 point!",
 			"your_code" => "Voice votre code",
-			"share" => "Partagez ce lien!",
-			"copy" => "Copier dans le presse-papier",
+			"share" => "Inviter un(e) ami(e)",
+			"send" => "Envoyer a un(e) ami(e)",
 
 
 		],

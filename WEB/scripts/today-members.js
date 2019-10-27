@@ -1,10 +1,6 @@
 let members;
 const searchMember = (node,type,keycode) =>
 {
-	if(keycode === 13)
-	{
-		post("today-members.php",{"list":null,"members_list":members});
-    }
 	$( function() {
 		id = "#" + node.id;
 		$( id).autocomplete({
@@ -28,7 +24,7 @@ const searchMember = (node,type,keycode) =>
 			minLength: 0,
 			select: function( event, ui ) {
 				node.value = ui.item.label;
-				change_page("member-home.php",{"member_id":ui.item.value});
+				post("today-members.php",{"member_id":ui.item.value});
 			},
 			response: function (event, ui) {
 				members = JSON.stringify(ui.content)

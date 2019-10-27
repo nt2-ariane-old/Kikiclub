@@ -17,6 +17,22 @@
 			}
 			return $contents;
 		}
+	
+		public static function getLastConnection($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT * FROM users WHERE id_user=? ORDER BY date DESC LIMIT 1");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$contents = null;
+
+			if ($row = $statement->fetch()) {
+				$contents = $row;
+			}
+			return $contents;
+		}
 
 		public static function getUsersLikeType($value,$type)
 		{

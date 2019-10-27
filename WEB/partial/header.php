@@ -148,7 +148,7 @@
 	?>
 	<a href="manage-member.php"><div id="header-infos">
 		<?php
-			
+
 			if($action->isLoggedIn())
 			{
 				?>
@@ -196,7 +196,28 @@
 						?>
 							<li><a href="users.php"><?= $action->trans->read("pages_name","users") ?></a></li>
 						<?php
-						if($action->members != null)
+						if($action->anim_mode)
+						{
+							?>
+							<li><ul>
+								<li><a class="nav-item nav-link" href="today-members.php"><?= $action->trans->read("pages_name","today") ?></a></li>
+								<li><a class="nav-item nav-link" href="all-users.php"><?= $action->trans->read("pages_name","all-users") ?></a></li>
+								<li><a class="nav-item nav-link" href="all-members.php"><?= $action->trans->read("pages_name","all-members") ?></a></li>
+
+							<?php
+							if($action->admin_mode)
+							{
+								?>
+									<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("pages_name","badges") ?></a></li>
+									<li><a class="nav-item nav-link" href="console.php"><?= $action->trans->read("pages_name","console") ?></a></li>
+									<li><a class="nav-item nav-link" href="materials.php"><?= $action->trans->read("pages_name","materials") ?></a></li>
+								<?php
+							}
+							?>
+							</ul></li>
+							<?php
+						}
+						else if($action->members != null)
 						{
 
 							?>
@@ -225,34 +246,12 @@
 				<?php
 			if($action->isLoggedIn())
 			{
-				if($action->isAdmin()){
+				if($action->isAnim()){
 					?>
-					<li><a class="nav-item nav-link" href="?admin=<?php if($action->admin_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->admin_mode) { echo $action->trans->read("admin","as-user") ; } else {echo $action->trans->read("admin","as-admin");} ?></a></li>
+					<li><a class="nav-item nav-link" href="?admin=<?php if($action->anim_mode) echo 'false'; else echo 'true'; ?>"><?php if($action->anim_mode) { echo $action->trans->read("admin","as-user") ; } else {echo $action->trans->read("admin","as-admin");} ?></a></li>
 					<?php
-						if($action->admin_mode)
-						{
-							?>
-								<li><?= $action->trans->read("admin","tools") ?>
-									<ul>
-										<li><a class="nav-item nav-link" href="badges.php"><?= $action->trans->read("pages_name","badges") ?></a></li>
-										<li><a class="nav-item nav-link" href="console.php"><?= $action->trans->read("pages_name","console") ?></a></li>
-										<li><a class="nav-item nav-link" href="materials.php"><?= $action->trans->read("pages_name","materials") ?></a></li>
-									</ul>
-								</li>
-							<?php
-						}
-					?>
-				<?php
 				}
-				if($action->isAdmin()){
-					?>
-					<li><?= $action->trans->read("anim","tools") ?>
-						<ul>
-							<li><a class="nav-item nav-link" href="today-members.php"><?= $action->trans->read("pages_name","today") ?></a></li>
-						</ul>
-					</li>
-				<?php
-				}
+				
 				?>
 				<li><a class="nav-item nav-link" href="?logout=true"><?= $action->trans->read("all_pages","signout") ?></a></li>
 				<?php

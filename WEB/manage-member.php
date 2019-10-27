@@ -8,7 +8,7 @@
 
 	?>
 	<div id="profil">
-		<?php 
+		<?php
 			$userExist = false;
 			if($action->member != null)
 			{
@@ -28,10 +28,10 @@
 					<h3><?= $action->trans->read("manage-member","profil")?></h3>
 					<form id="profil-form" action="manage-member.php" method="post">
 						<div class="infos">
-							<p><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("manage-member","firstname") ?>" value="<?php if($userExist) echo $action->member["firstname"]  ?>"></p>
-							<p><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("manage-member","lastname") ?>"  value="<?php if($userExist) echo $action->member["lastname"]  ?>"></p>
-							<p><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("manage-member","birth") ?>"  value="<?php if($userExist) echo $action->member["birthday"]  ?>"></p>
-	
+							<p><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("manage-member","firstname") ?>" value="<?php if($userExist) echo $action->member["firstname"]; else if ($_POST['firstname']) echo $_POST['firstname'];  ?>"></p>
+							<p><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("manage-member","lastname") ?>"  value="<?php if($userExist) echo $action->member["lastname"] ; else if ($_POST['lastname']) echo $_POST['lastname']; ?>"></p>
+							<p><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("manage-member","birth") ?> (Optional)"  value="<?php if($userExist) echo $action->member["birthday"]; else if ($_POST['firstname']) echo $_POST['birth'];  ?>"></p>
+
 							<p><span class="input-title">Gender : </span>
 									<select name="gender" id="">
 										<?php
@@ -43,9 +43,9 @@
 										?>
 									</select></p>
 							</div>
-	
+
 							<h3><?= $action->trans->read("manage-member","select-avatar") ?></h3>
-	
+
 							<div id="mixedSlider_avatars" class="multislider avatars-list">
 								<div class="MS-content">
 									<?php
@@ -78,7 +78,7 @@
 									<button type="button" id="btn-right" class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 								</div>
 							</div>
-	
+
 							<div class="forms-btns">
 								<button type="submit" class="submit-btn"><?php if($userExist){echo $action->trans->read("all_pages","update");} else{echo $action->trans->read("all_pages","add");} ?></button>
 								<?php
@@ -86,16 +86,16 @@
 								{
 									?>
 										<a class="delete-btn" style="cursor:pointer;" name="delete" onclick="clicked=this.name;openConfirmBox(this.parentElement.parentElement,{type:'post',path:'manage-member.php',params:{ 'delete':true}})"><?= $action->trans->read("all_pages","delete")?></a>
-	
+
 									<?php
 								}
 							?>
 							</div>
 						</form>
-						
+
 						<div id="btns-zone">
 							<?php
-								if($action->admin_mode && $userExist)
+								if($action->anim_mode && $userExist)
 								{
 									?>
 										<a class="return-btn" href="assign-member.php")><?= $action->trans->read("manage-member","assign")?></a>
@@ -104,10 +104,10 @@
 							?>
 							<a class="return-btn" href="<?= $action->previous_page ?>.php"><?= $action->trans->read("all_pages","back") ?></a>
 						</div>
-	
-	
+
+
 					</div>
-	
+
 				</div>
 	</div>
 	<?php

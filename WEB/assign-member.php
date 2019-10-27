@@ -8,13 +8,13 @@
 ?>
 	<div class="workshops-sheet">
 	<?php
-		for ($i=1; $i < 4; $i++) { 
-			
+		for ($i=1; $i < 4; $i++) {
+
 			?>
 			<div>
 				<h2><?= $action->titles[$i]?></h2>
-				
-				<ul class='droppable workshop-boxes' id='<?= $i ?>'>
+
+				<ul class='droppable workshop-boxes' id='box-<?= $i?>'>
 				<?php
 						foreach ($action->workshops_deployed as $workshop)
 						{
@@ -23,11 +23,17 @@
 								if($famWork["id_workshop"] == $workshop["id"] && $famWork["id_statut"] == $i )
 								{
 									?>
-										<li class="workshop-object" id="<?= $workshop["id"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["name"] ?></h5></li>
+										<li class="workshop-object draggable" id="<?= $workshop["id"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["name"] ?></h5></li>
 									<?php
 								}
 							}
-							
+							if($i == 1 && !array_key_exists($workshop['id'],$action->member_workshops))
+							{
+								?>
+									<li class="workshop-object draggable" id="<?= $workshop["id"] ?>"><?php loadMedia($workshop) ?><h5><?= $workshop["name"] ?></h5></li>
+								<?php
+							}
+
 						}
 					?>
 				</ul>

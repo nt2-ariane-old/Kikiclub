@@ -25,6 +25,19 @@ input
     -webkit-transition: width 0.5s; /* Safari prior 6.1 */
     transition: width 0.5s;
 }
+#send-button
+{
+    background-color: #D8DF23;
+    padding:0.5em;
+    display: block;
+    width: 350px;
+    text-align: center;
+    margin: 0.5em 0;
+    &:hover
+    {
+        opacity: 0.7;
+    }
+}
 @media (min-width: 576px)
 {
     .sheet

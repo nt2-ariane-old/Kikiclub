@@ -25,7 +25,7 @@
 
 			$this->genders = MemberDAO::getGenders($_SESSION["language"] == 'fr');
 
-			if($this->admin_mode && !empty($_SESSION["user_id"]))
+			if($this->anim_mode && !empty($_SESSION["user_id"]))
 			{
 				$id = $_SESSION["user_id"];
 			}
@@ -42,16 +42,20 @@
 			if(!empty($_POST))
 			{
 				if( !empty($_POST["firstname"]) &&
-					!empty($_POST["lastname"]) &&
-					!empty($_POST["birth"]))
+					!empty($_POST["lastname"]))
 					{
+						$birth = null;
+						if(!empty($_POST['birth']))
+						{
+							$birth = $_POST['birth'];
+						}
 						if($id_member >= 0)
 						{
-							MemberDAO::updateMember($id_member,$_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"]);
+							MemberDAO::updateMember($id_member,$_POST["firstname"],$_POST["lastname"],$birth,$_POST["gender"],$_POST["avatar"]);
 						}
 						else
 						{
-							MemberDAO::insertMember($_POST["firstname"],$_POST["lastname"],$_POST["birth"],$_POST["gender"],$_POST["avatar"],$id);
+							MemberDAO::insertMember($_POST["firstname"],$_POST["lastname"],$birth,$_POST["gender"],$_POST["avatar"],$id);
 						}
 						header('Location:'.$this->previous_page);
 					}

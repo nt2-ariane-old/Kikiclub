@@ -29,17 +29,29 @@
 		public static function insertMemberPresence($id_member)
 		{
 			$connection = Connection::getConnection();
-			$statement = $connection->prepare("INSERT INTO member(firstname,lastname,birthday,id_gender,id_avatar,id_user) VALUES(?,?,STR_TO_DATE(?, '%d/%m/%Y') ,?,?,?)");
+			$statement = $connection->prepare("INSERT INTO member_presence(id_member) VALUES(?)");
 
-			$statement->bindParam(1, $firstname);
-			$statement->bindParam(2, $lastname);
-			$statement->bindParam(3, $birthday);
-			$statement->bindParam(4, $gender);
-			$statement->bindParam(5, $id_avatar);
-			$statement->bindParam(6, $id_parent);
+			$statement->bindParam(1, $id_member);
 
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
+
+		}
+		public static function selectTodayMembers()
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT m.firstname as firstname, m.lastname as lastname, m.id as id FROM member_presence as mp JOIN member as m WHERE mp.id_member = m.id AND mp.presence_date >= NOW() - (60 * 60 * 24)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+
+			while($row = $statement->fetch())
+			{
+				$content[] = $row;
+			}
+
+			return $content;
 
 		}
 		public static function searchAllUsersAndMembers($value)
@@ -91,26 +103,14 @@
 
 		}
 
-		public static function addScore($id,$newPts)
+		public static function setScore($id,$score)
 		{
 			$connection = Connection::getConnection();
-			$statementMember = $connection->prepare("SELECT SCORE FROM member WHERE ID=?");
+			$statement = $connection->prepare("UPDATE member SET score=? WHERE id=?");
+			$statement->bindParam(1, $score);
+			$statement->bindParam(2, $id);
+			$statement->execute();
 
-			$statementMember->bindParam(1, $id);
-
-			$statementMember->setFetchMode(PDO::FETCH_ASSOC);
-			$statementMember->execute();
-
-			if($row = $statementMember->fetch())
-			{
-				$score = $row["SCORE"] + $newPts;
-
-				$statementScore = $connection->prepare("UPDATE member SET score=? WHERE id=?");
-				$statementScore->bindParam(1, $score);
-				$statementScore->bindParam(2, $id);
-				$statementScore->execute();
-
-			}
 		}
 		public static function deleteMember($id)
 		{
@@ -239,7 +239,7 @@
 
 			while ($row = $statement->fetch()) {
 				$temp = [];
-				$temp["label"] = $row[$type];
+				$temp["label"] = $row['firstname'] . ' ' . $row['lastname'];
 				$temp["value"] = $row["id"];
 				$content[] = $temp;
 			}
@@ -254,7 +254,7 @@
 			$connection = Connection::getConnection();
 
 
-			$request = "SELECT id FROM member ";
+			$request = "SELECT * FROM member ";
 
 			$statement = $connection->prepare($request);
 
@@ -266,8 +266,6 @@
 			while ($row = $statement->fetch()) {
 				$content[] = $row;
 			}
-
-
 
 			return $content;
 		}
