@@ -165,9 +165,6 @@
 		 */
 		public static function addMemberWorkshop($id_member,$id_workshop, $id_statut)
 		{
-			echo $id_member . '<br>';
-			echo $id_workshop . '<br>';
-			echo $id_statut . '<br>';
 			$connection = Connection::getConnection();
 
 			$request = "INSERT INTO member_workshops(id_member, id_workshop, id_statut) VALUES (?,?,?)";

@@ -37,12 +37,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/Connection.php");
         public static function insertUserConnexion($id_user)
 		{
 			$request = "INSERT INTO users_connexion(id_user) VALUES (?)";
-            
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare($request);
             $statement->bindParam(1, $id_user);
-
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
         }
         public static function testRegisterToken($token)

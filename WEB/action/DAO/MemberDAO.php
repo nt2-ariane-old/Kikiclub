@@ -54,6 +54,24 @@
 			return $content;
 
 		}
+		public static function IsMemberToday($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT * FROM member_presence WHERE presence_date >= NOW() - (60 * 60 * 24) AND id_member = ?");
+			$statement->bindParam(1, $id);
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = null;
+
+			while($row = $statement->fetch())
+			{
+				$content[] = $row;
+			}
+
+			return $content;
+
+		}
 		public static function searchAllUsersAndMembers($value)
 		{
 			$connection = Connection::getConnection();

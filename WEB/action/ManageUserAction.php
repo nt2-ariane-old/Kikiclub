@@ -28,7 +28,7 @@
 				else
 				{
 					$token = $this->generateString(8);
-					UsersDAO::registerUser($_POST['email'],null,null,$_POST['firstname'],$_POST['lastname'],intval($_POST['admin']),null,$token);
+					UsersDAO::registerUser($_POST['email'],$_POST['firstname'],$_POST['lastname'],intval($_POST['admin']),$token);
 					$this->user = UsersDAO::getUserWithEmail($_POST['email']);
 					$this->id_user = $this->user['id'];
 					$_SESSION["user_id"] = $this->id_user;

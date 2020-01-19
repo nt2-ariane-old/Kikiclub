@@ -1,5 +1,6 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/Connection.php");
+	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/UsersConnexionDAO.php");
 
 	class UsersDAO {
 
@@ -77,7 +78,7 @@
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 
-			$contents = [];
+			$contents = null;
 
 			if ($row = $statement->fetch()) {
 				$contents = $row;
@@ -100,59 +101,6 @@
 				$contents = $row;
 			}
 			return $contents;
-		}
-
-		public static function loginUserWithEmail($email, $password, $id_type)
-		{
-			$connection = Connection::getConnection();
-
-			$statementUser = $connection->prepare("SELECT * FROM users WHERE email = ?");
-			$statementUser->bindParam(1, $email);
-			$statementUser->setFetchMode(PDO::FETCH_ASSOC);
-			$statementUser->execute();
-
-			$infos = null;
-
-			if ($rowUser = $statementUser->fetch()) {
-				$rowLogin = UsersDAO::getLoginInfosForUserByType($rowUser["id"],$id_type);
-				if (!empty($rowLogin)) {
-					$rowLoginType = UsersDAO::getLoginTypeById($rowLogin["id_login_type"]);
-					if(!empty($rowLoginType))
-					{
-						switch ($rowLoginType["name"]) {
-							case 'Facebook':
-								$infos = $rowUser;
-								break;
-							case 'Google':
-								$infos = $rowUser;
-								break;
-							case 'Wix':
-								$infos = $rowUser;
-								break;
-							case 'Kikiclub':
-								if (password_verify($password,$rowLogin["password"]))
-								{
-									$infos = $rowUser;
-								}
-								else {
-									$infos = "Invalid Password";
-								}
-								break;
-						}
-					}
-
-				}
-				else
-				{
-					$infos = "Invalid Method of Connection.";
-				}
-			}
-			else
-			{
-				$infos = "Invalid Email. Please Register";
-			}
-
-			return $infos;
 		}
 
 		public static function getAllLoginType()
@@ -233,24 +181,6 @@
 			return $id;
 		}
 
-		public static function getLoginTypeById($id)
-		{
-			$connection = Connection::getConnection();
-
-			$statement = $connection->prepare("SELECT * FROM login_type WHERE id=?");
-			$statement->bindParam(1, $id);
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-			$statement->execute();
-
-			$contents = [];
-
-			if ($row = $statement->fetch()) {
-				$contents = $row;
-			}
-
-			return $contents;
-		}
-
 		public static function addLoginInfosForUser($id_user,$id_type,$password)
 		{
 			$connection = Connection::getConnection();
@@ -262,25 +192,9 @@
 			$statementLogin->setFetchMode(PDO::FETCH_ASSOC);
 			$statementLogin->execute();
 		}
-		public static function getLoginInfosForUserByType($id_user,$id_type)
-		{
-			$connection = Connection::getConnection();
 
-			$statementLogin = $connection->prepare("SELECT * FROM users_login WHERE id_user=? AND id_login_type =?");
-			$statementLogin->bindParam(1, $id_user);
-			$statementLogin->bindParam(2, $id_type);
-			$statementLogin->setFetchMode(PDO::FETCH_ASSOC);
-			$statementLogin->execute();
 
-			$contents = [];
-			if($row = $statementLogin->fetch())
-			{
-				$contents = $row;
-			}
-			return $contents;
-		}
-
-		public static function addUser($email,$firstname,$lastname,$visibility,$token)
+		public static function registerUser($email,$firstname,$lastname,$visibility,$token)
 		{
 			$connection = Connection::getConnection();
 
@@ -294,49 +208,23 @@
 			$statement->execute();
 		}
 
-		public static function registerUser($email,$password, $password_confirm,$firstname,$lastname,$visibility,$id_type,$token)
+		public static function ConnectUser($email,$firstname,$lastname,$visibility,$token)
 		{
 
 			$connection = Connection::getConnection();
+			$user = null;
 
-			$valide = false;
 			if(empty(UsersDAO::getUserWithEmail($email)))
 			{
-				$valide = true;
-				UsersDAO::addUser($email,$firstname,$lastname,$visibility,$token);
+				UsersDAO::registerUser($email,$firstname,$lastname,$visibility,$token);
+				$user = UsersDAO::getUserWithEmail($email);				
 			}
 			else
 			{
 				$user = UsersDAO::getUserWithEmail($email);
-				if(empty(UsersDAO::getLoginInfosForUserByType($user["id"],$id_type)))
-				{
-					$valide = true;
-				}
 			}
 
-			if($id_type == UsersDAO::getLoginTypeIdByName("Kikiclub"))
-			{
-				if(!empty($password))
-				{
-					if($password === $password_confirm)
-					{
-						$password = password_hash($password, PASSWORD_BCRYPT);
-					}
-					else
-					{
-						$password = null;
-						$valide = false;
-					}
-				}
-			}
-
-			if(!empty($id_type) && $valide)
-			{
-				$user = UsersDAO::getUserWithEmail($email);
-				UsersDAO::addLoginInfosForUser($user["id"],$id_type,$password);
-			}
-
-			return $valide;
+			return $user;
 		}
 		public static function updateUser($id,$email,$firstname,$lastname,$visibility)
 		{

@@ -12,9 +12,7 @@
 		public static $VISIBILITY_PUBLIC = 0;
 		public static $VISIBILITY_CUSTOMER_USER = 1;
 		public static $VISIBILITY_ANIMATOR = 2;
-		public static $VISIBILITY_MODERATOR = 3;
-		public static $VISIBILITY_ADMIN_USER = 4;
-		public static $VISIBILITY_OWNER = 5;
+		public static $VISIBILITY_ADMIN_USER = 3;
 
 		public $default_visibility;
 		public $page_visibility;
@@ -73,14 +71,9 @@
 		public function isAnim() {
 			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_ANIMATOR;
 		}
-		public function isModo() {
-			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_MODERATOR;
-		}
+
 		public function isAdmin() {
 			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_ADMIN_USER;
-		}
-		public function isOwner() {
-			return $_COOKIE["visibility"] >= CommonAction::$VISIBILITY_OWNER;
 		}
 
 		public function execute()

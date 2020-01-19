@@ -31,7 +31,7 @@
 				$lastname = $this->generateString(16);
 				$email = $this->generateString(10) . "@test.com";
 				$token = $this->generateString(8);
-				UsersDAO::registerUser($email,null,null,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null,$token);
+				UsersDAO::registerUser($email,$firstname,$lastname,CommonAction::$VISIBILITY_CUSTOMER_USER,null,$token);
 			}
 		}
 

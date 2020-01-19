@@ -72,6 +72,10 @@
 			{
 				MemberWorkshopDAO::addMemberWorkshop($id_member,$id_workshop, $statut);
 			}
+			if(!MemberDAO::IsMemberToday($id_member))
+			{
+				MemberDAO::insertMemberPresence($id_member);
+			}
 		}
 		protected function executeAction() {
 			$id_member =$_SESSION["member_id"];
