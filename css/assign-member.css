@@ -7,10 +7,19 @@
 .workshops-sheet .workshop-boxes {
   display: block;
   background-color: #D8DF23;
+<<<<<<< HEAD
   border: 1px solid black;
   width: 100vw;
   min-width: 220px;
   height: calc(100% - 64px);
+=======
+  width: 100vw;
+  min-width: 220px;
+  min-height: calc(120px * 4);
+  border: 1px solid black;
+  position: relative;
+  height: 100%;
+>>>>>>> 6adc56d24667d7ecdfcf4cb4ce880232e9776d9b
 }
 
 .workshops-sheet .workshop-boxes * {
@@ -30,10 +39,17 @@
   width: 150px;
   height: 150px;
   float: left;
+<<<<<<< HEAD
   overflow: hidden;
   background-color: white;
   border: 3px solid black;
   position: relative;
+=======
+  background-color: white;
+  border: 3px solid black;
+  position: relative;
+  overflow: hidden;
+>>>>>>> 6adc56d24667d7ecdfcf4cb4ce880232e9776d9b
 }
 
 .workshops-sheet .workshop-boxes .workshop-object h5 {
@@ -54,18 +70,22 @@
   display: table;
 }
 
+<<<<<<< HEAD
 .workshops-sheet h2 {
   height: 64px;
   text-align: center;
   margin: 0;
 }
 
+=======
+>>>>>>> 6adc56d24667d7ecdfcf4cb4ce880232e9776d9b
 .workshops-sheet::after {
   content: "";
   clear: both;
   display: table;
 }
 
+<<<<<<< HEAD
 #manage-btn {
   border: 1px solid black;
   background-color: #D8DF23;
@@ -80,6 +100,8 @@
   background-color: rgba(217, 223, 35, 0.5);
 }
 
+=======
+>>>>>>> 6adc56d24667d7ecdfcf4cb4ce880232e9776d9b
 @media only screen and (min-width: 480px) {
   .workshops-sheet .workshop-boxes {
     width: 33vw;
