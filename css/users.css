@@ -1,0 +1,216 @@
+.manage-btn {
+  height: 40px;
+  line-height: 30px;
+  display: block;
+  border-color: white;
+  color: white;
+}
+
+.form-workshops tr {
+  cursor: pointer;
+}
+
+main {
+  background-color: black;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main #family-carousel {
+  width: 90vw;
+  margin: auto;
+  display: block;
+}
+
+main #family-carousel #family {
+  width: 80vw;
+  margin: auto;
+}
+
+main #family-carousel .MS-controls button {
+  color: white;
+  font-size: 60px;
+  text-shadow: -1px -1px 8px #D4D4D4, -1px 1px 8px #D4D4D4, 1px -1px 8px #D4D4D4, 1px 1px 8px #D4D4D4;
+}
+
+main #family-carousel .MS-controls button:hover {
+  text-shadow: -1px -1px 8px #6a6a6a, -1px 1px 8px #6a6a6a, 1px -1px 8px #6a6a6a, 1px 1px 8px #6a6a6a;
+}
+
+.users-footer {
+  background-color: black;
+  padding: 1em 0;
+}
+
+.users-footer a {
+  border-color: white;
+  color: white;
+}
+
+.users-footer a:hover {
+  border-color: rgba(255, 255, 255, 0.678);
+  color: white;
+}
+
+.ui-widget-content {
+  background-color: white;
+  border: 1px solid #ADB30F;
+}
+
+.member {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.member .member-name {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.member .member-nbWorkshops, .member .member-nbPTS {
+  color: #68B04D;
+}
+
+.member .member-nbWorkshops, .member .member-nbPTS {
+  font-size: 19px;
+}
+
+.member button {
+  background-color: transparent;
+  border: none;
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+
+.member .member-logo, .member .member-stateLogo {
+  display: block;
+  border-radius: 100%;
+  width: 180px;
+  height: 180px;
+  margin: 30px auto;
+  background-color: #ADB30F;
+  -webkit-box-shadow: 0 0 10px 5px #ADB30F, 0 0 20px 10px #21503d, 0 0 25px 15px #333232;
+          box-shadow: 0 0 10px 5px #ADB30F, 0 0 20px 10px #21503d, 0 0 25px 15px #333232;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.member .member-logo:hover, .member .member-stateLogo:hover {
+  border: none;
+  background-color: #f2f3c0;
+  -webkit-box-shadow: 0 0 10px 5px #f2f3c0, 0 0 20px 10px #5af7bb, 0 0 25px 15px #3ae248;
+          box-shadow: 0 0 10px 5px #f2f3c0, 0 0 20px 10px #5af7bb, 0 0 25px 15px #3ae248;
+  /* outer cyan */
+}
+
+.member .member-stateLogo {
+  left: calc((100% - (80vw - 80px)) / 2);
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  display: none;
+  background-image: url(../images/tool.png);
+}
+
+.member .member-nbalert {
+  background-color: #d30a57;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  font-size: 30px;
+  position: absolute;
+  top: 25px;
+  right: calc(50% - (240px / 2) + (45px / 4));
+}
+
+@media (min-width: 576px) {
+  .member .member-name {
+    font-size: 35px;
+  }
+  .member .member-logo, .member .member-stateLogo {
+    width: 300px;
+    height: 300px;
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 300px) / 2);
+  }
+}
+
+@media (min-width: 767px) {
+  .part {
+    width: 50%;
+    float: left;
+    height: 500px;
+  }
+  .multislider .MS-content .item {
+    width: 50%;
+  }
+  .member .member-logo, .member .member-stateLogo {
+    width: 230px;
+    height: 230px;
+    -webkit-box-shadow: 0 0 5px 2.5px #ADB30F, 0 0 10px 5px #21503d, 0 0 15px 10px #333232;
+            box-shadow: 0 0 5px 2.5px #ADB30F, 0 0 10px 5px #21503d, 0 0 15px 10px #333232;
+  }
+  .member .member-logo:hover, .member .member-stateLogo:hover {
+    border: none;
+    background-color: #f2f3c0;
+    -webkit-box-shadow: 0 0 5px 2.5px #f2f3c0, 0 0 10px 5px #5af7bb, 0 0 15px 10px #3ae248;
+            box-shadow: 0 0 5px 2.5px #f2f3c0, 0 0 10px 5px #5af7bb, 0 0 15px 10px #3ae248;
+    /* outer cyan */
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 260px) / 2);
+  }
+}
+
+@media (min-width: 1030px) {
+  .member .member-logo, .member .member-stateLogo {
+    width: 280px;
+    height: 280px;
+    -webkit-box-shadow: 0 0 10px 5px #ADB30F, 0 0 20px 10px #21503d, 0 0 25px 15px #333232;
+            box-shadow: 0 0 10px 5px #ADB30F, 0 0 20px 10px #21503d, 0 0 25px 15px #333232;
+  }
+  .member .member-logo:hover, .member .member-stateLogo:hover {
+    border: none;
+    background-color: #f2f3c0;
+    -webkit-box-shadow: 0 0 10px 5px #f2f3c0, 0 0 20px 10px #5af7bb, 0 0 25px 15px #3ae248;
+            box-shadow: 0 0 10px 5px #f2f3c0, 0 0 20px 10px #5af7bb, 0 0 25px 15px #3ae248;
+    /* outer cyan */
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 210px) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  .multislider .MS-content .item {
+    width: 33%;
+  }
+  .member .member-logo, .member .member-stateLogo {
+    width: 240px;
+    height: 240px;
+    -webkit-box-shadow: 0 0 6px 3px #ADB30F, 0 0 12px 6px #21503d, 0 0 16px 12px #333232;
+            box-shadow: 0 0 6px 3px #ADB30F, 0 0 12px 6px #21503d, 0 0 16px 12px #333232;
+  }
+  .member .member-logo:hover, .member .member-stateLogo:hover {
+    -webkit-box-shadow: 0 0 6px 3px #f2f3c0, 0 0 12px 6px #5af7bb, 0 0 16px 12px #3ae248;
+            box-shadow: 0 0 6px 3px #f2f3c0, 0 0 12px 6px #5af7bb, 0 0 16px 12px #3ae248;
+    /* outer cyan */
+  }
+  .member .member-stateLogo {
+    left: calc((100% - 240px) / 2);
+  }
+}
+/*# sourceMappingURL=users.css.map */

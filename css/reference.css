@@ -1,0 +1,65 @@
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.success, .error {
+  text-align: center;
+  border: 1px solid black;
+}
+
+input {
+  width: 70%;
+  display: block;
+}
+
+.sheet {
+  width: 100%;
+  margin: auto;
+  padding: 1em;
+  -webkit-transition: width 0.5s;
+  /* Safari prior 6.1 */
+  transition: width 0.5s;
+}
+
+#send-button {
+  background-color: #D8DF23;
+  padding: 0.5em;
+  display: block;
+  width: 350px;
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+#send-button:hover {
+  opacity: 0.7;
+}
+
+@media (min-width: 576px) {
+  .sheet {
+    width: 576px;
+    border: 3px solid black;
+  }
+}
+
+@media (min-width: 768px) {
+  .sheet {
+    width: 700px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sheet {
+    width: 900px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sheet {
+    width: 1000px;
+  }
+}
+/*# sourceMappingURL=reference.css.map */
