@@ -1,0 +1,277 @@
+.manage-btn
+{
+	height: 40px;
+	line-height: 30px;
+
+	display: block;
+	border-color: white;
+	color:white;
+
+}
+.form-workshops
+{
+	tr
+	{
+		cursor: pointer;
+	}
+}
+
+main
+{
+	background-color: black;
+	position: relative;
+	display: flex;
+	align-items: center;
+	#family-carousel
+	{
+		width: 90vw;
+		margin: auto;
+		display: block;
+		#family
+		{
+			width: 80vw;
+			margin: auto;
+		}
+		.MS-controls
+		{
+			button
+			{
+				color: white;
+				font-size: 60px;
+
+				text-shadow: -1px -1px 8px #D4D4D4,
+							-1px 1px 8px #D4D4D4,
+							1px -1px 8px #D4D4D4,
+							1px 1px 8px #D4D4D4;
+				&:hover
+				{
+					text-shadow: -1px -1px 8px rgb(106, 106, 106),
+								-1px 1px 8px rgb(106, 106, 106),
+								1px -1px 8px rgb(106, 106, 106),
+								1px 1px 8px rgb(106, 106, 106);
+				}
+
+			}
+		}
+
+	}
+}
+.users-footer
+{
+	background-color: black;
+	padding: 1em 0;
+	a
+	{
+		&:hover
+		{
+			border-color: rgba(255, 255, 255, 0.678);
+			color:white ;
+		}
+		border-color: white;
+		color:white ;
+	}
+}
+.ui-widget-content
+{
+	background-color: white;
+	border: 1px solid #ADB30F;
+}
+.member
+{
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+	.member-name
+	{
+		color:white;
+		font-size: 30px;
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	.member-nbWorkshops, .member-nbPTS
+	{
+		color:#68B04D;
+	}
+
+	.member-nbWorkshops, .member-nbPTS
+	{
+		font-size: 19px;
+	}
+ 	button
+	{
+		background-color: transparent;
+		border: none;
+		display: block;
+		margin: auto;
+		width: 100%;
+	}
+
+	.member-logo,.member-stateLogo
+	{
+		display: block;
+		border-radius: 100%;
+		width: 180px;
+		height: 180px;
+		margin: 30px auto;
+		background-color: #ADB30F;
+
+		box-shadow:
+		0 0 10px 5px #ADB30F,
+		0 0 20px 10px rgb(33, 80, 61),
+		0 0 25px 15px rgb(51, 50, 50);
+
+		background-size: 100%;
+		background-repeat: no-repeat;
+		background-position: center;
+		&:hover
+		{
+			border: none;
+			background-color: rgb(242, 243, 192);
+			box-shadow:
+			0 0 10px 5px rgb(242, 243, 192),  /* inner white */
+			0 0 20px 10px rgb(90, 247, 187), /* middle magenta */
+			0 0 25px 15px rgb(58, 226, 72); /* outer cyan */
+		}
+	}
+
+	.member-stateLogo
+	{
+		left: calc((100% - (80vw - 80px)) / 2);
+		opacity: 0.6;
+		position: absolute;
+		top:0;
+		display:none;
+		background-image: url(../images/tool.png);
+
+	}
+
+	.member-nbalert
+	{
+		background-color: rgb(211, 10, 87);
+		border-radius: 100%;
+		width: 45px;
+		height: 45px;
+		font-size: 30px;
+		position: absolute;
+		top:25px;
+		right: calc(50% - (240px / 2) + (45px / 4));
+
+	}
+}
+
+@media (min-width: 576px)
+{
+	.member {
+		.member-name
+		{
+			font-size: 35px;
+		}
+		.member-logo,.member-stateLogo
+		{
+			width: 300px;
+			height: 300px;
+		}
+		.member-stateLogo
+		{
+			left: calc((100% - 300px) / 2);
+		}
+	}
+}
+@media (min-width: 767px)
+{
+	.part
+	{
+		width: 50%;
+		float: left;
+		height: 500px;
+
+	}
+	.multislider .MS-content .item
+	{
+		width: 50%;
+	}
+	.member {
+		.member-logo,.member-stateLogo
+		{
+			width: 230px;
+			height: 230px;
+			box-shadow:
+			0 0 5px 2.5px #ADB30F,
+			0 0 10px 5px rgb(33, 80, 61),
+			0 0 15px 10px rgb(51, 50, 50);
+			&:hover
+			{
+				border: none;
+				background-color: rgb(242, 243, 192);
+				box-shadow:
+				0 0 5px 2.5px rgb(242, 243, 192),  /* inner white */
+				0 0 10px 5px rgb(90, 247, 187), /* middle magenta */
+				0 0 15px 10px rgb(58, 226, 72); /* outer cyan */
+			}
+		}
+		.member-stateLogo
+		{
+			left: calc((100% - 260px) / 2);
+		}
+	}
+}
+@media (min-width: 1030px)
+{
+
+	.member {
+		.member-logo,.member-stateLogo
+		{
+			width: 280px;
+			height: 280px;
+			box-shadow:
+			0 0 10px 5px #ADB30F,
+			0 0 20px 10px rgb(33, 80, 61),
+			0 0 25px 15px rgb(51, 50, 50);
+			&:hover
+			{
+				border: none;
+				background-color: rgb(242, 243, 192);
+				box-shadow:
+				0 0 10px 5px rgb(242, 243, 192),  /* inner white */
+				0 0 20px 10px rgb(90, 247, 187), /* middle magenta */
+				0 0 25px 15px rgb(58, 226, 72); /* outer cyan */
+			}
+		}
+		.member-stateLogo
+		{
+			left: calc((100% - 210px) / 2);
+		}
+	}
+}
+@media (min-width: 1200px)
+{
+	.multislider .MS-content .item
+	{
+		width: 33%;
+	}
+	.member {
+
+		.member-logo,.member-stateLogo
+		{
+			width: 240px;
+			height: 240px;
+			box-shadow:
+				0 0 6px 3px #ADB30F,
+				0 0 12px 6px rgb(33, 80, 61),
+				0 0 16px 12px rgb(51, 50, 50);
+			&:hover
+			{
+				box-shadow:
+				0 0 6px 3px rgb(242, 243, 192),  /* inner white */
+				0 0 12px 6px rgb(90, 247, 187), /* middle magenta */
+				0 0 16px 12px rgb(58, 226, 72); /* outer cyan */
+			}
+		}
+		.member-stateLogo
+		{
+			left: calc((100% - 240px) / 2);
+		}
+	}
+}
