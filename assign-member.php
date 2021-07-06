@@ -15,6 +15,7 @@
 				<h2><?= $action->titles[$i]?></h2>
 
 				<ul class='droppable workshop-boxes' id='box-<?= $i?>'>
+
 				<?php
 						foreach ($action->workshops_deployed as $workshop)
 						{
@@ -34,6 +35,10 @@
 								<?php
 							}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 137c0cb64bf9cb2060a055787eddfe1256f18093
 						}
 					?>
 				</ul>
