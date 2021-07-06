@@ -27,7 +27,7 @@
 							<td><?= $user["firstname"] ?></td>
 							<td><?= $user["lastname"] ?></td>
 							<td><?= $user["email"] ?></td>
-							<td><?= $user["last_connected"] - (5*3600) ?></td>
+							<td><?= $user["last_connected"] ?></td>
 							<td><?= $user["date_creation"] ?></td>
 						</tr></a>
 					<?php

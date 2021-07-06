@@ -7,7 +7,6 @@
 	class WorkshopsAction extends CommonAction {
 		public $workshops_list;
 
-		private $member_workshops;
 		public $completed;
 		public $new;
 		public $Inprogress;

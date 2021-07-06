@@ -4,7 +4,7 @@
 	/**
 	 * Access to all filter related informations in the database
 	 *
-	 * @link       https://doutreguay.com/action/DAO/FilterDAO
+	 * @link       https://kikicode.club/action/DAO/FilterDAO
 	 * @since      Class available since Alpha 1.0.0
 	 */
 	class MemberDAO {
@@ -41,6 +41,23 @@
 		{
 			$connection = Connection::getConnection();
 			$statement = $connection->prepare("SELECT m.firstname as firstname, m.lastname as lastname, m.id as id FROM member_presence as mp JOIN member as m WHERE mp.id_member = m.id AND mp.presence_date >= NOW() - (60 * 60 * 24)");
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$statement->execute();
+
+			$content = [];
+
+			while($row = $statement->fetch())
+			{
+				$content[] = $row;
+			}
+			return $content;
+
+		}
+		public static function IsMemberToday($id)
+		{
+			$connection = Connection::getConnection();
+			$statement = $connection->prepare("SELECT * FROM member_presence WHERE presence_date >= NOW() - (60 * 60 * 24) AND id_member = ?");
+			$statement->bindParam(1, $id);
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$statement->execute();
 

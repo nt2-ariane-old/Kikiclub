@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 
 .workshops-sheet
@@ -97,83 +96,4 @@
 		width: 80%;
 	
 	}
-=======
-
-
-.workshops-sheet
-{
-	display: flex;
-	.workshop-boxes{
-		*{
-			position: relative;
-			z-index: 5;
-		}
-		.media{
-			position: absolute;
-			opacity: 0.5;
-			top:0;
-			left:0;
-			z-index: 0;
-		
-		}
-		
-		display: block;
-		background-color: #D8DF23;
-		width:100vw;
-		min-width: 220px;
-		min-height: calc(120px * 4);
-		border: 1px solid black;
-		position: relative;
-		.workshop-object{
-			width:150px;
-			height: 150px;
-			float: left;
-			background-color:white;
-			border:3px solid black;
-			position: relative;
-			overflow: hidden;
-			h5{
-				text-align: center;
-			}
-			
-		
-		}
-		.workshop-object-hover{
-			width:15vw;
-			height: 15vw;
-			float: left;
-			background-color:red;
-			border:3px solid black;
-		
-		}
-		height: 100%;
-		&::after {
-			content: "";
-			clear: both;
-			display: table;
-		  }
-		
-	}
-	&::after {
-		content: "";
-		clear: both;
-		display: table;
-	  }
-}
-
-@media only screen and (min-width:480px)
-{
-	.workshops-sheet{
-		.workshop-boxes{
-			width: 33vw;
-		}
-	}
-}
-@media only screen and (min-width:960px)
-{
-	.workshops-sheet{
-		width: 80%;
-	
-	}
->>>>>>> 6adc56d24667d7ecdfcf4cb4ce880232e9776d9b
 }

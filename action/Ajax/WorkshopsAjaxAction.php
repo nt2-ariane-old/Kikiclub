@@ -3,7 +3,6 @@
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/RobotDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 	class WorkshopsAjaxAction extends CommonAction {
 		public $results;
 		public function __construct() {

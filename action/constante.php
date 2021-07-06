@@ -1,14 +1,14 @@
 <?php
 	define("DB_NAME", "kikiclub");
-	define("DB_USER", "admin");
+	define("DB_USER", "kikiclub");
 
 	// LOCALHOST
-	define("DB_HOST", "127.0.0.1");
+	 define("DB_HOST", "localhost");
 	// define("DB_PASS", "");
 
 	// SITE
 	// define("DB_HOST", "159.203.60.237");
-	 define("DB_PASS", "AAAaaa111");
+	define("DB_PASS", "mors.crai-woox5GROM");
 
 
 

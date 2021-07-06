@@ -1,7 +1,5 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberWorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/FilterDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/WorkshopDAO.php");
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/BadgeDAO.php");

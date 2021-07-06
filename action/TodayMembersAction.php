@@ -1,6 +1,5 @@
 <?php
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/CommonAction.php");
-	require_once($_SERVER['DOCUMENT_ROOT'] . "/action/DAO/MemberDAO.php");
 
 	class TodayMembersAction extends CommonAction {
 

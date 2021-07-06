@@ -4,7 +4,7 @@
 	/**
 	 * Access to all the member's workshops related informations in the database
 	 *
-	 * @link       https://doutreguay.com/action/DAO/MemberWorkshopDAO
+	 * @link       https://kikicode.club/action/DAO/MemberWorkshopDAO
 	 * @since      Class available since Alpha 1.0.0
 	 */
 	class MemberWorkshopDAO {

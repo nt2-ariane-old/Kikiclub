@@ -6,10 +6,12 @@
 
 	require_once($_SERVER['DOCUMENT_ROOT'] . "/partial/header.php");
 ?>
+	<a href="https://www.kikicode.ca/reservation-ateliers-libres" class="reserve-btn" >Réserver des Ateliers</a>
 	<div class="btn-filter" onclick="openFilters()">
 		<span><?= $action->trans->read("workshops","filter") ?></span>
 	</div>
 	<aside>
+	
 		<div class="filters">
 			<span id="x-aside" onclick="closeFilters()">x</span>
 			<h2><?= $action->trans->read("workshops","filter") ?></h2>

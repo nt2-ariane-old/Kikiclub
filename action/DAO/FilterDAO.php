@@ -4,7 +4,7 @@
 	/**
 	 * Access to all filter related informations in the database
 	 *
-	 * @link       https://doutreguay.com/action/DAO/FilterDAO
+	 * @link       https://kikicode.club/action/DAO/FilterDAO
 	 * @since      Class available since Alpha 1.0.0
 	 */
 	class FilterDAO {

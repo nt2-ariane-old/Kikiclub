@@ -94,7 +94,7 @@
 }
 
 .workshop .type {
-  top: calc((300px / 100 * 70 ) - 0.5em);
+  top: calc((300px / 100 * 70) - 0.5em);
   background-color: white;
   display: block;
   text-align: center;
@@ -172,7 +172,8 @@
   overflow: hidden;
 }
 
-.workshop .media video, .workshop .media audio {
+.workshop .media video,
+.workshop .media audio {
   max-width: 100%;
   max-height: 100%;
   width: 100%;
@@ -233,7 +234,8 @@ aside #workshop-menu {
   border-top: 1px solid gray;
 }
 
-aside #workshop-menu input, aside #workshop-menu li {
+aside #workshop-menu input,
+aside #workshop-menu li {
   display: inline-block;
 }
 
@@ -414,11 +416,11 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
 
 @media only screen and (min-width: 1165px) {
   .workshops-list {
-    width: calc((150px + 30px + 90px )* 4);
+    width: calc((150px + 30px + 90px)* 4);
     margin: auto;
   }
   .sort {
-    width: calc((150px + 30px + 90px )* 4);
+    width: calc((150px + 30px + 90px)* 4);
   }
   aside {
     width: 20%;
@@ -466,12 +468,14 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
     display: -ms-flexbox;
     display: flex;
   }
-  .workshops-list, .sort {
-    width: calc((150px + 30px ) * 2);
+  .workshops-list,
+  .sort {
+    width: calc((150px + 30px) * 2);
     margin: auto;
     float: none;
   }
-  .workshops-list h3, .sort h3 {
+  .workshops-list h3,
+  .sort h3 {
     font-size: 1.75rem;
     width: 100%;
   }
@@ -484,8 +488,9 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
 }
 
 @media (min-width: 768px) {
-  .workshops-list, .sort {
-    width: calc((150px + 30px ) * 3);
+  .workshops-list,
+  .sort {
+    width: calc((150px + 30px) * 3);
     margin: auto;
   }
   .col-sm-3 {
@@ -501,8 +506,9 @@ aside #workshop-menu .card label [type=checkbox]:checked + span {
   .col-sm-3 {
     max-width: 25%;
   }
-  .workshops-list, .sort {
-    width: calc((150px + 30px ) * 4);
+  .workshops-list,
+  .sort {
+    width: calc((150px + 30px) * 4);
     margin: auto;
   }
   .sort {

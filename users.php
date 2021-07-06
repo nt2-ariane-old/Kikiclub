@@ -9,11 +9,6 @@
 	if($action->anim_mode)
 	{
 		?>
-
-
-
-
-
 	<div class="sheet">
 
 		<div class="part">
@@ -38,7 +33,7 @@
 				</div>
 			</div>
 			<h3><?= '' //$action->trans->read("admin","search-member")?></h3>
-			<div>
+			<div>s
 				<div class="autocomplete" style="width:300px;">
 					<input id="search-member-firstname" type="text" name="search" onkeyup="searchMember(this,'firstname')" placeholder="<?= $action->trans->read("admin","firstname") ?>">
 				</div>

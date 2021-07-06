@@ -28,9 +28,9 @@
 					<h3><?= $action->trans->read("manage-member","profil")?></h3>
 					<form id="profil-form" action="manage-member.php" method="post">
 						<div class="infos">
-							<p><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("manage-member","firstname") ?>" value="<?php if($userExist) echo $action->member["firstname"]; else if ($_POST['firstname']) echo $_POST['firstname'];  ?>"></p>
-							<p><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("manage-member","lastname") ?>"  value="<?php if($userExist) echo $action->member["lastname"] ; else if ($_POST['lastname']) echo $_POST['lastname']; ?>"></p>
-							<p><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("manage-member","birth") ?> (Optional)"  value="<?php if($userExist) echo $action->member["birthday"]; else if ($_POST['firstname']) echo $_POST['birth'];  ?>"></p>
+							<p><input type="text" name="firstname" id="firstname" placeholder="<?= $action->trans->read("manage-member","firstname") ?>" value="<?php if($userExist) echo $action->member["firstname"]; else if (!empty($_POST['firstname'])) echo $_POST['firstname'];  ?>"></p>
+							<p><input type="text" name="lastname" id="lasttname" placeholder="<?= $action->trans->read("manage-member","lastname") ?>"  value="<?php if($userExist) echo $action->member["lastname"] ; else if (!empty($_POST['lastname'])) echo $_POST['lastname']; ?>"></p>
+							<p><input type="text" name="birth" id="datepicker" placeholder="<?= $action->trans->read("manage-member","birth") ?> (Optional)"  value="<?php if($userExist) echo $action->member["birthday"]; else if (!empty($_POST['firstname'])) echo $_POST['birth'];  ?>"></p>
 
 							<p><span class="input-title">Gender : </span>
 									<select name="gender" id="">

@@ -26,9 +26,7 @@
 							<select name="admin" id="">
 								<option value="1" <?php if($action->user['user']['visibility'] == 1) echo 'selected';?>>Client</option>
 								<option value="2" <?php if($action->user['user']['visibility'] == 2) echo 'selected';?>>Animateur</option>
-								<option value="3" <?php if($action->user['user']['visibility'] == 3) echo 'selected';?>>Moderateur</option>
-								<option value="4" <?php if($action->user['user']['visibility'] == 4) echo 'selected';?>>Administrateur</option>
-								<option value="5" <?php if($action->user['user']['visibility'] == 5) echo 'selected';?>>Propriétaire</option>		
+								<option value="3" <?php if($action->user['user']['visibility'] == 3) echo 'selected';?>>Administrateur</option>	
 							</select>
 						</p>
 					</div>
